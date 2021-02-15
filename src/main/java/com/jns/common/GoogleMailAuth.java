@@ -13,7 +13,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class GoogleMailSend {
+public class GoogleMailAuth {
 
 	public boolean googleMailSend( String mailSubject
 								  ,String sendMail
