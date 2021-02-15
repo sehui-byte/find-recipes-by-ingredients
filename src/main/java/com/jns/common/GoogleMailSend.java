@@ -15,13 +15,12 @@ import javax.mail.internet.MimeMessage;
 
 public class GoogleMailSend {
 
-	public boolean googleMailSend( String mailSubject
+	public void googleMailSend( String mailSubject
 								  ,String sendMail
 								  ,String sendPw
 								  ,String receiveMail
 								  ,String sendMsg) {
-	
-		boolean bool = true;
+		
 		System.out.println("googleMailSend mailSubject >>> : " + mailSubject);
 		System.out.println("googleMailSend sendMail >>> : " + sendMail);
 		System.out.println("googleMailSend sendPw >>> : " + sendPw);
@@ -29,34 +28,36 @@ public class GoogleMailSend {
 		System.out.println("googleMailSend sendMsg >>>> : " + sendMsg);
 		
 		Properties prop = System.getProperties();
-		prop.out("mail.smtp.starttls.enable","true");
-		prop.out("mail.smtp.host","stmp.gmail.com");
-		prop.out("mail.smtp.auth","true");
-		prop.out("mail.smtp.port","537");
+		prop.put("mail.smtp.starttls.enable","true");
+		// 로그인시 TLS를 사용할 것인지 설정
+		prop.put("mail.smtp.host","smtp.gmail.com");
+		// 이메일 방솔을 처리해줄 SMTP서버
+		prop.put("mail.smtp.auth","true");
+		// SMTP 서버의 인증을 사용한다는 의미
+		prop.put("mail.smtp.port","587");
+		// TLS의 포트번호는 587이며 SSL의 포트번호는 465이다.
 		
 		//gmail password 
-		Authenticator auth = new GoogleMailAuth(sendMail, sendPw);
+		Authenticator auth = new GoogleMailAuth();
 		Session session = Session.getDefaultInstance(prop, auth);
 		MimeMessage msg = new MimeMessage(session);
 		
-		try(){
+		try{
 			
 			msg.setSentDate(new Date());
-			msg.setFrom(new InternetAddress(sendMail, mailSubject));
+			msg.setFrom(new InternetAddress("fullsleeeep@gmail.com", "MvcMemberAdmin"));
 			InternetAddress to = new InternetAddress(receiveMail);
-			msg.setRecepient(Message.RecipientType.TO, to);
-			msg.setText(sendMsg, "UTP-8");
+			msg.setRecipient(Message.RecipientType.TO, to);
+			msg.setText(sendMsg, "UTF-8");
 			Transport.send(msg);
 			
-			bool true;
 		}catch(AddressException ae) {
 			System.out.println("AddressException : " + ae.getMessage());
-		}catch(MessageException me) {
+		}catch(MessagingException me) {
 			System.out.println("MessageException : " + me.getMessage());
 		}catch(UnsupportedEncodingException e) {
 			System.out.println("UnsupportedEncodingException : " + e.getMessage());
 		}
-		return bool;
 	}
 	
 }
