@@ -1,10 +1,10 @@
 package com.jns.member.service;
 
-import com.jns.member.vo.MemberDetailsVO;
+import com.jns.member.vo.MemberVO;
 
 public interface MemberService {
 	
-	public MemberDetailsVO memberLogin() ;
+	public MemberVO memberLogin() ;
 	
 
 }

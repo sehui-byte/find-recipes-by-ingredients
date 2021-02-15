@@ -78,13 +78,6 @@
 			<version>1.4</version>
 		</dependency>
 
-		<!-- javax.mail -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>javax.mail-api</artifactId>
-			<version>1.6.2</version>
-		</dependency>
-
 		<!-- mybatis 3.2.4 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>

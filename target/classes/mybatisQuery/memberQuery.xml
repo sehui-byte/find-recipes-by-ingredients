@@ -3,8 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jns.member.dao.MemberDAO">
 
-	<select id="memberLogin" resultType="com.jns.member.vo.MemberDetailsVO">
-		SELECT * FROM TEST_MEMBER	
+	<select id="memberLogin"  parameterType="com.jns.member.vo.MemberVO" resultType="com.jns.member.vo.MemberVO">
+		SELECT 
+			* 
+		FROM MEMBER A	
+		WHERE A.MID = #{mid, jdbcType=VARCHAR}
 	</select>
 
 </mapper>

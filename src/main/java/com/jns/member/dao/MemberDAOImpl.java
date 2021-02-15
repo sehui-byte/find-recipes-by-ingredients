@@ -1,21 +1,27 @@
 package com.jns.member.dao;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.jns.member.vo.MemberDetailsVO;
+import com.jns.member.vo.MemberVO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
-	
-	@Autowired(required=false)
+
+	Logger logger = Logger.getLogger(MemberDAOImpl.class);
+
+	@Autowired(required = false)
 	private SqlSession sqlSession;
 
 	@Override
-	public MemberDetailsVO memberLogin(MemberDetailsVO mvo) {
+	public MemberVO memberLogin(MemberVO mvo) {
 		
-		return sqlSession.selectOne("memgerLogin", mvo);
+		logger.info(mvo.getMid());
+		
+
+		return sqlSession.selectOne("memberLogin", mvo);
 	}
 
 }
