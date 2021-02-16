@@ -13,7 +13,47 @@ public class ChefBoardVO {
 	private String bview;
 	private String bdeleteyn;
 	private String bhits;
+
+	//**************************
+	//검색 설정
+	private String keyfilter;
+	private String keyword;
+	private String startdate;
+	private String enddate;	
 	
+	public String getKeyfilter() {
+		return keyfilter;
+	}
+
+	public void setKeyfilter(String keyfilter) {
+		this.keyfilter = keyfilter;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getStartdate() {
+		return startdate;
+	}
+
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+
+	public String getEnddate() {
+		return enddate;
+	}
+
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+	//**************************	
+
 	public ChefBoardVO() {}
 	
 	public ChefBoardVO(String bno, String btype, String btitle, String bcontent
