@@ -2,6 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse,windows
 
 ### Maven ###
+target/
 */target
 pom.xml.tag
 pom.xml.releaseBackup
