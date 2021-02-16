@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jns.recipe.dao.RecipeDAO">
+	
+	<select id="recipeSelectAll" resultType="rvo">
+		
+	</select>
+	
+	<select id="recipeSelect" parameterType="rvo" resultType="rvo">
+		
+	</select>
+	
+	<insert id="recipeInsert" parameterType="rvo">
+	
+	</insert>
+	
+	<update id="recipeUpdate" parameterType="rvo">
+	
+	</update>
+	
+	<update id="recipeDelete" parameterType="rvo">
+		
+	</update>
+	
+</mapper>

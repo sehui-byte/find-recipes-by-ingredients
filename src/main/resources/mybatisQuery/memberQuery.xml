@@ -6,5 +6,5 @@
 	<select id="memberLogin" resultType="com.jns.member.vo.MemberDetailsVO">
 		SELECT * FROM TEST_MEMBER	
 	</select>
-
+	
 </mapper>
