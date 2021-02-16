@@ -13,5 +13,6 @@
 <a href="/kosmoJns/admin/main.do">admin 접속</a>
 
 <a href="cheftest.do">chefboardtest</a><br>
+<a href = "search.do">product search test</a><br>
 </body>
 </html>
