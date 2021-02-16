@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.jns.chabun.ChabunDAO">
+
+	<select id="getMemChabun" resultType="com.jns.member.vo.MemberVO">
+		SELECT NVL(MAX(SUBSTR(A.MNO, -4)), 0) + 1  MNO FROM MEMBER A
+	</select>
+
+</mapper>

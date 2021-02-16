@@ -41,5 +41,5 @@
 	</bean>
 
 	<!-- password 암호화 -->	
-	<bean id="bcryptPasswordEncoder" class="org.springframwork.security.crypto.bcrypt.BcryptPasswordEncoder" />
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 </beans>
