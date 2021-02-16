@@ -1,6 +1,6 @@
-package com.jns.chabun;
+package com.jns.chabun.service;
 
-import com.jns.mem.vo.MemberVO;
+import com.jns.member.vo.MemberVO;
 
 public interface ChabunService {
 	

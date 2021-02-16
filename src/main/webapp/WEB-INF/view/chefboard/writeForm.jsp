@@ -62,7 +62,6 @@
 <body>
 <div id="boardTit"><h3>글쓰기</h3></div>
 <form id="f_writeForm" name="f_writeForm" enctype="multipart/form-data">
-	<s:csrfInput/>
 	<table id="boardWrite">
 		<tr>
 			<td>작성자</td>
@@ -81,6 +80,7 @@
 			<td><input type="file" name="bfile" id="bfile"></td>
 		</tr>
 	</table>
+	<s:csrfInput/>
 </form>
 <div id="boardBut">
 	<input type="button" value="저장" class="but" id="boardInsert">
