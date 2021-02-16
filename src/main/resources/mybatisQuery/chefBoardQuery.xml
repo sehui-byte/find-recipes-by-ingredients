@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jns.chefboard.dao.ChefBoardDAO">
+
+	<resultMap type="com.jns.chefboard.vo.ChefBoardVO" id="cbvo">
+		<result property="bno" column="BNO"/>
+		<result property="btype" column="BTYPE"/>
+		<result property="btitle" column="BTITLE"/>
+		<result property="bcontent" column="BCONTENT"/>
+		<result property="bnick" column="BNICK"/>
+		<result property="bfile" column="BFILE"/>
+		<result property="binsertdate" column="BINSERTDATE"/>
+		<result property="bupdatedate" column="BUPDATEDATE"/>
+		<result property="bview" column="BVIEW"/>
+		<result property="bdeleteyn" column="BDELETEYN"/>
+		<result property="bhits" column="BHITS"/>
+	</resultMap>
+
+	<insert id="boardInsert" parameterType="cbvo">
+		INSERT INTO BOARD(
+						  BNO
+						 ,BTYPE
+						 ,BTITLE
+						 ,BCONTENT
+						 ,BNICK
+						 ,BFILE
+						 ,BINSERTDATE
+						 ,BUPDATEDATE
+						 ,BVIEW
+						 ,BDELETEYN
+						 ,BHITS
+						 )
+		VALUES			 (
+						  #{bno, jdbcType=VARCHAR}
+						 ,'C'
+						 ,#{btitle, jdbcType=VARCHAR}
+						 ,#{bcontent, jdbcType=VARCHAR}
+						 ,#{bnick, jdbcType=VARCHAR}
+						 ,#{bfile, jdbcType=VARCHAR}
+						 ,SYSDATE
+						 ,SYSDATE
+						 ,#{bview, jdbcType=VARCHAR}
+						 ,'Y'
+						 ,#{bhits, jdbcType=VARCHAR} 
+						 )
+	</insert>
+	
+</mapper>
