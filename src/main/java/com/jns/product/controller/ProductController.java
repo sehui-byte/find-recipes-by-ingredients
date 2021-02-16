@@ -19,6 +19,11 @@ private ProductService service;
 		this.service = service;
 	}
 	
+	@RequestMapping("searchPage.do")
+	public String search() {
+		return "product/searchProduct";
+	}
+	
 	@RequestMapping(value="search.do",method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String getApi(@RequestParam(defaultValue="") String keyword) {
