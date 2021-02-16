@@ -14,10 +14,10 @@
 						http://www.springframework.org/schema/lang/spring-lang.xsd
 						http://www.springframework.org/schema/mvc 
 						http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-						
+
 	<!-- @ResponseBody로 String 처리할때 한글처리 -->
 	<mvc:annotation-driven>
-		<mvc:message-converters> 
+		<mvc:message-converters>
 			<bean
 				class="org.springframework.http.converter.StringHttpMessageConverter">
 				<property name="supportedMediaTypes">
@@ -27,8 +27,8 @@
 				</property>
 			</bean>
 		</mvc:message-converters>
-	</mvc:annotation-driven>	
-						
+	</mvc:annotation-driven>
+
 	<context:annotation-config />
 
 	<!-- View Resolver -->

@@ -21,17 +21,12 @@
 			password-parameter="mpw"
 			login-processing-url="/j_spring_security_check"
 			login-page="/login.do"
-			default-target-url="/main.do"
-		/>
-		<s:csrf/>
+			default-target-url="/main.do"/>
+		<s:csrf />
 	</s:http>
 
 	<!--  db로 접속할 수 있도록 -->
 	<s:authentication-manager>
-		<s:authentication-provider user-service-ref="memberServiceImpl">
-		</s:authentication-provider>	
 	</s:authentication-manager>
 	
-	<bean id="memberServiceImpl" class="com.jns.member.service.MemberServiceImpl">
-	</bean>
 </beans>
