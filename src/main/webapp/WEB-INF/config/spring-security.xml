@@ -33,9 +33,13 @@
 	<!--  db로 접속할 수 있도록 -->
 	<s:authentication-manager>
 		<s:authentication-provider user-service-ref="memberSecurityServiceImpl">
+			<s:password-encoder ref="bcryptPasswordEncoder" />
 		</s:authentication-provider>	
 	</s:authentication-manager>
 	
 	<bean id="memberSecurityServiceImpl" class="com.jns.member.security.service.MemberSecurityServiceImpl">
 	</bean>
+
+	<!-- password 암호화 -->	
+	<bean id="bcryptPasswordEncoder" class="org.springframwork.security.crypto.bcrypt.BcryptPasswordEncoder" />
 </beans>

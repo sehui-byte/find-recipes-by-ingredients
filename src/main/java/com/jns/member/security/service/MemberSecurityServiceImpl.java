@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jns.member.dao.MemberDAO;
@@ -19,6 +20,7 @@ public class MemberSecurityServiceImpl implements UserDetailsService {
 	private Logger logger = Logger.getLogger(MemberServiceImpl.class);
 	
 	private MemberDAO memberdao;
+	//private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired(required=false)
 	public MemberSecurityServiceImpl(MemberDAO memberdao) {
@@ -33,7 +35,6 @@ public class MemberSecurityServiceImpl implements UserDetailsService {
 		MemberVO mvo = null;
 		mvo = new MemberVO();
 		
-
 		mvo.setMid(username);
 		
 		logger.info("mid >>> "+mvo.getMid());
@@ -41,16 +42,12 @@ public class MemberSecurityServiceImpl implements UserDetailsService {
 		MemberVO mvo2 = null;
 		mvo2 = new MemberVO();
 
-		// 여기서 값을 못가져옴
 		mvo2 = memberdao.memberLogin(mvo);
-		logger.info(mvo2.getMid());
-		logger.info(mvo2.getMlevel());
+		
 
-		// 해당 테이블에서 권한 찾아서 List로 변환
 		List<String> authList = new ArrayList<String>();
 		authList.add(mvo2.getMlevel());
 
-		// setAUthorities로 객체 변환
 		mvo2.setAuthorities(authList);
 
 		if (mvo2 == null) {
