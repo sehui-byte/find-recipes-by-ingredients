@@ -37,19 +37,19 @@ public class ChefBoardServiceImpl implements ChefBoardService {
 	@Override
 	public ChefBoardVO boardDetail(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
-		return null;
+		return chefBoardDAO.boardDetail(cbvo);
 	}
 
 	@Override
 	public int boardUpdate(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return chefBoardDAO.boardUpdate(cbvo);
 	}
 
 	@Override
 	public int boardDelete(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return chefBoardDAO.boardDelete(cbvo);
 	}
 
 }
