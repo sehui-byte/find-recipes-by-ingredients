@@ -2,6 +2,7 @@ package com.jns.recipe.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import com.jns.recipe.vo.RecipeVO;
 public class RecipeServiceImpl implements RecipeService 
 {
 	private RecipeDAO recipeDAO;
+	private Logger logger = Logger.getLogger(RecipeServiceImpl.class);
 	
 	public RecipeServiceImpl() 
 	{
@@ -27,9 +29,11 @@ public class RecipeServiceImpl implements RecipeService
 	}
 	
 	@Override
-	public List<RecipeVO> recipeSelectAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RecipeVO> recipeSelectAll() 
+	{
+		System.out.println("[RecipeController] recipeSelectAll() >>> : 진입");
+		logger.info("[RecipeController] recipeSelectAll() >>> : 진입");
+		return recipeDAO.recipeSelectAll();
 	}
 
 	@Override
