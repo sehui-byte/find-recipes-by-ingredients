@@ -3,23 +3,23 @@
 <mapper namespace="com.jns.recipe.dao.RecipeDAO">
 	
 	<select id="recipeSelectAll" resultType="rvo">
-		
+		SELECT 
+			*
+		FROM 
+			RECIPE
+		WHERE
+			RCP_DELETEYN = #{rcp_deleteyn}
 	</select>
 	
 	<select id="recipeSelect" parameterType="rvo" resultType="rvo">
-		
+		SELECT 
+			* 
+		FROM 
+			RECIPE
+		WHERE 
+			RCP_SEQ = #{rcp_seq} 
+			AND RCP_DELETEYN = #{rcp_deleteyn}
 	</select>
-	
-	<insert id="recipeInsert" parameterType="rvo">
-	
-	</insert>
-	
-	<update id="recipeUpdate" parameterType="rvo">
-	
-	</update>
-	
-	<update id="recipeDelete" parameterType="rvo">
-		
-	</update>
+
 	
 </mapper>
