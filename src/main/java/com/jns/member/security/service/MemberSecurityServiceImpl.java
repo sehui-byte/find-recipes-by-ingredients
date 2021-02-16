@@ -8,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import com.jns.member.dao.MemberDAO;
+import com.jns.member.security.password.PasswordEncoder;
 import com.jns.member.service.MemberServiceImpl;
 import com.jns.member.vo.MemberVO;
 
@@ -20,7 +19,6 @@ public class MemberSecurityServiceImpl implements UserDetailsService {
 	private Logger logger = Logger.getLogger(MemberServiceImpl.class);
 	
 	private MemberDAO memberdao;
-	//private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired(required=false)
 	public MemberSecurityServiceImpl(MemberDAO memberdao) {
@@ -43,7 +41,6 @@ public class MemberSecurityServiceImpl implements UserDetailsService {
 		mvo2 = new MemberVO();
 
 		mvo2 = memberdao.memberLogin(mvo);
-		
 
 		List<String> authList = new ArrayList<String>();
 		authList.add(mvo2.getMlevel());

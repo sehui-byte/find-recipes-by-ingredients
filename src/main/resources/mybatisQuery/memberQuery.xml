@@ -10,4 +10,43 @@
 		WHERE A.MID = #{mid, jdbcType=VARCHAR}
 	</select>
 	
+	<insert id="memberInsert" parameterType="com.jns.member.vo.MemberVO" >
+
+		INSERT INTO MEMBER(
+					 MNO               
+					,MLEVEL           
+					,MID               
+					,MPW              
+					,MNAME              
+					,MNICK             
+					,MHP                
+					,MEMAIL             
+					,MADDR             
+					,MZIPCODE         
+					,MADDRDETAIL       
+					,MPHOTO            
+					,MINSERTDATE        
+					,MUPDATEDATE       
+					,MDELETEYN         
+					)
+				values(
+					 #{mno, jdbcType=VARCHAR}        
+					,#{mlevel, jdbcType=VARCHAR}        
+					,#{mid, jdbcType=VARCHAR}        
+					,#{mpw, jdbcType=VARCHAR}        
+					,#{mname, jdbcType=VARCHAR}       
+					,#{mnick, jdbcType=VARCHAR}        
+					,#{mhp, jdbcType=VARCHAR}        
+					,#{memail, jdbcType=VARCHAR}        
+					,#{maddr, jdbcType=VARCHAR}        
+					,#{mzipcode, jdbcType=VARCHAR}        
+					,#{maddrdetail, jdbcType=VARCHAR}        
+					,#{mphoto, jdbcType=VARCHAR}        
+					,SYSDATE        
+					,SYSDATE       
+					,'Y'    
+					)	
+	
+	</insert>
+	
 </mapper>
