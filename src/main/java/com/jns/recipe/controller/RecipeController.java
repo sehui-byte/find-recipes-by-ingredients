@@ -34,6 +34,7 @@ public class RecipeController
 	@ResponseBody
 	public List<RecipeVO> recipeSelectAll()
 	{
+		System.out.println("[RecipeController] recipeSelectAll() >>> : 진입");
 		logger.info("[RecipeController] recipeSelectAll() >>> : 진입");
 		return recipeService.recipeSelectAll();
 	}
