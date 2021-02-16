@@ -31,7 +31,75 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		this.memberdao = memberdao;
 
 	}
+	//회원 전체 목록 조회 
+	@Override
+	public List<MemberVO> MemberSelectAll(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("서비스 시작");
+		
+		logger.info("MemberServiceImpl >>>> :  SelectAll 함수 시작 ");
+		logger.info("mvo >>> : "+ mvo);
+		
+		return memberDAO.MemberSelectAll(mvo);
+	}
+	// 회원 선택 조회 
+	@Override
+	public List<MemberVO> MemberSelect(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		
+		logger.info("MemberServiceImpl >>>> :  Select 함수 시작 ");
+		logger.info("mvo >>> : "+ mvo);
+		
+		return memberDAO.MemberSelect(mvo);
+	}
+	// 회원 등록 
+	@Override
+	public int MemberInsert(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		
+		logger.info("MemberServiceImpl >>>> :  Insert 함수 시작 ");
+		logger.info("mvo >>> : "+ mvo);
+		logger.info("채번 호출");
+		
+		int nCnt = memberDAO.MemberInsert(mvo);
+		
+		return nCnt;
+	}
+	// 회원 정보 수정 
+	@Override
+	public int MemberUpdate(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		logger.info("MemberServiceImpl >>>> :  Update 함수 시작 ");
+		logger.info("mvo >>> : "+ mvo);
+		
+		return memberDAO.MemberUpdate(mvo);
+	}
+	// 회원 정보 삭제 
+	@Override
+	public int MemberDelete(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		logger.info("MemberServiceImpl >>>> :  Delete 함수 시작 ");
+		logger.info("mvo >>> : "+ mvo);
+		
+		
+		return memberDAO.MemberDelete(mvo);
+	}
 
+	// 아이디 중복 체크 
+	@Override
+	public List<MemberVO> CheckID(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		logger.info("MemberServiceImpl >>>> :  CheckID 함수 시작 ");
+		logger.info("mvo >>> : "+ mvo);
+		
+		return memberDAO.CheckID(mvo);
+	}
+	
+	
+	
+	
+	
 	@Override
 	public MemberDetailsVO memberLogin() {
 
