@@ -12,18 +12,11 @@
 
 <a href="/kosmoJns/main.do">일반 접속</a><br>
 
-<<<<<<< HEAD
 <a href="/kosmoJns/admin/main.do">admin 접속</a> <br>
 
 <a href="chefboard/writeForm.do">chefboard writeForm</a><br>
 <a href="chefboard/boardList.do">chefboard boardList</a><br>
 <a href = "searchPage.do">product search test</a><br>
-=======
-<a href="/kosmoJns/memberInsert.do">생성 가즈앗</a><br>
 
-<a href="cheftest.do">chefboardtest</a><br>
-
-<a href = "search.do">product search test</a><br>
->>>>>>> member
 </body>
 </html>
