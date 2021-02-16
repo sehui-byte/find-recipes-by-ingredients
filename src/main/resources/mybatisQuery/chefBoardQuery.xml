@@ -16,6 +16,7 @@
 		<result property="bhits" column="BHITS"/>
 	</resultMap>
 
+	<!-- 게시물 등록 -->
 	<insert id="boardInsert" parameterType="cbvo">
 		INSERT INTO BOARD(
 						  BNO
@@ -45,6 +46,7 @@
 						 )
 	</insert>
 	
+	<!-- 게시물 전체 조회 -->
 	<select id="boardList" parameterType="cbvo" resultType="cbvo">
 		SELECT *
 		FROM BOARD A
@@ -71,5 +73,49 @@
 		</if>
 		ORDER BY 1
 	</select>
+	
+	<!-- 게시물 상세 조회 -->
+	<select id="boardDetail" parameterType="cbvo" resultType="cbvo">
+		/* Board - boardDetail */
+		SELECT
+				 A.BNO
+				,A.BTYPE
+				,A.BTITLE
+				,A.BCONTENT
+				,A.BNICK
+				,A.BFILE
+				,TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD HH24:MI:SS') BINSERTDATE
+				,TO_CHAR(A.BUPDATEDATE, 'YYYY-MM-DD HH24:MI:SS') BUPDATEDATE
+				,A.BVIEW
+				,A.BDELETEYN
+				,A.BHITS
+		FROM 	 BOARD A
+		WHERE 	 A.BNO = #{bno, jdbcType=VARCHAR}
+		AND		 A.BDELETEYN = 'Y'
+	</select>
+	
+	<!-- 게시물 수정 -->
+	<update id="boardUpdate" parameterType="cbvo">
+		/* Board - boardUpdate */
+		UPDATE	 BOARD
+		SET		 BTITLE = #{btitle, jdbcType=VARCHAR}
+				,BCONTENT = #{bcontent, jdbcType=VARCHAR}
+				,BUPDATEDATE = SYSDATE
+				<if test="bfile != ''">
+				,BFILE = #{bfile, jdbcType=VARCHAR}
+				</if>
+		WHERE	 BNO = #{bno, jdbcType=VARCHAR}
+		AND		 BDELETEYN = 'Y'
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<update id="boardDelete" parameterType="cbvo">
+		/* Board - boardDelete */
+		UPDATE	 BOARD
+		SET		 BDELETEYN = 'N'
+				,BUPDATEDATE = SYSDATE
+		WHERE	 BNO = #{bno, jdbcType=VARCHAR}
+		AND		 BDELETEYN = 'Y'
+	</update>
 	
 </mapper>

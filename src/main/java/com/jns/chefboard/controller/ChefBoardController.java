@@ -37,7 +37,7 @@ public class ChefBoardController {
 	// 글쓰기 Form 출력하기
 	@RequestMapping(value="chefboard/writeForm", method=RequestMethod.GET)
 	public String writeForm() {
-		logger.info("chef >> writeForm 호출 성공");
+		logger.info("chefC >> writeForm 호출 성공");
 		
 		return "chefboard/writeForm";
 	}
@@ -46,7 +46,7 @@ public class ChefBoardController {
 	@RequestMapping(value="chefboard/boardInsert", method=RequestMethod.POST)
 	public String boardInsert(@ModelAttribute ChefBoardVO cbvo, HttpServletRequest request)
 							throws IllegalStateException, IOException{
-		logger.info("chef >> boardInsert 호출 성공");
+		logger.info("chefC >> boardInsert 호출 성공");
 		
 		int result = 0;
 		String url = "";
@@ -69,16 +69,41 @@ public class ChefBoardController {
 	// 글 전체 목록
 	@RequestMapping(value="/chefboard/boardList", method=RequestMethod.GET)
 	public String boardList(ChefBoardVO cbvo, Model model) {
-		logger.info("chef >> boardList 호출 성공");
+		logger.info("chefC >> boardList 호출 성공");
 		
 		// 페이지 세팅
 		
 		
 		List<ChefBoardVO> listAll = chefBoardService.boardList(cbvo);
-		logger.info("chef >> boardList >> listAll.size() >>> : " + listAll.size());	
+		logger.info("chefC >> boardList >> listAll.size() >>> : " + listAll.size());	
 		
 		model.addAttribute("listAll", listAll);
 		
 		return "chefboard/boardList";
+	}
+	
+	// 수정 폼 출력하기
+	public String updateForm(ChefBoardVO cbvo, Model model) {
+		logger.info("chefC >> updateForm 호출 성공");
+		
+		return null;
+	}
+	
+	// 수정
+	public String boardUpdate(@ModelAttribute ChefBoardVO cbvo, HttpServletRequest request)
+							throws IllegalStateException, IOException{
+		logger.info("chefC >> boardUpdate 호출 성공");
+		
+		return null;
+	}
+	
+	// 삭제
+	public String boardDelete(@ModelAttribute ChefBoardVO cbvo, HttpServletRequest request)
+								throws IOException{
+		logger.info("chefC >> boardDelete 호출 성공");
+		
+		// 파일 삭제
+		
+		return null;
 	}
 }
