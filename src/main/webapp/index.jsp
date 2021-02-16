@@ -7,6 +7,7 @@
 
 <h2>main test 페이지</h2>
 
+<a href="/QnA/QnAForm.do">QnA 글쓰기</a>
 
 <a href="/kosmoJns/main.do">일반 접속</a><br>
 

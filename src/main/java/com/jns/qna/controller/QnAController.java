@@ -1,6 +1,6 @@
 package com.jns.qna.controller;
 
-import java.util.HashMap;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +18,9 @@ import com.jns.qna.service.QnAService;
 import com.jns.qna.vo.QnAVO;
 import com.jns.common.ChabunUtil;
 
-
 import oracle.net.aso.e;
 
+@Controller
 public class QnAController {
 
 	Logger logger = Logger.getLogger(QnAController.class);
@@ -37,6 +37,12 @@ public class QnAController {
 		//this.chabunService = chabunService;
 		
 	}	
+	
+	//±Û ÀÔ·Â Æû 
+	@RequestMapping(value="QnAForm", method=RequestMethod.GET)
+	public String boardForm() {
+		return "QnA/QnAForm";
+	}
 	
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public String QnASelectPaging(QnAVO qvo, Model model) {
