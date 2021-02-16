@@ -3,7 +3,6 @@ package com.jns.common;
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
-
 public class GoogleMailAuth extends Authenticator {
 
 	/* 

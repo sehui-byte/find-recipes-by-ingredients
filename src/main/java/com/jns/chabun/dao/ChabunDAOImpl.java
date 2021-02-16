@@ -1,11 +1,11 @@
-package com.jns.chabun;
+package com.jns.chabun.dao;
 
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.jns.mem.vo.MemberVO;
+import com.jns.member.vo.MemberVO;
 
 @Repository
 public class ChabunDAOImpl implements ChabunDAO {
