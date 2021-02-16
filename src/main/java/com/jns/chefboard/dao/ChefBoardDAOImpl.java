@@ -2,6 +2,7 @@ package com.jns.chefboard.dao;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.jns.chefboard.vo.ChefBoardVO;
@@ -9,6 +10,8 @@ import com.jns.chefboard.vo.ChefBoardVO;
 @Repository
 public class ChefBoardDAOImpl implements ChefBoardDAO {
 
+	public SqlSessionTemplate sqlSession;
+	
 	@Override
 	public List<ChefBoardVO> boardList(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
@@ -18,7 +21,7 @@ public class ChefBoardDAOImpl implements ChefBoardDAO {
 	@Override
 	public int boardInsert(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return (Integer)sqlSession.insert("boardInsert", cbvo);
 	}
 
 	@Override
