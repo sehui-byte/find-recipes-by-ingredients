@@ -3,6 +3,7 @@ package com.jns.recipe.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.jns.recipe.vo.RecipeVO;
 public class RecipeController 
 {
 	private RecipeService recipeService;
+	private Logger logger = Logger.getLogger(RecipeController.class);
 	
 	public RecipeController() 
 	{
@@ -31,27 +33,31 @@ public class RecipeController
 	@RequestMapping(method = RequestMethod.GET, value = "recipeSelectAll")
 	@ResponseBody
 	public List<RecipeVO> recipeSelectAll()
-	{	
-		return null;
+	{
+		logger.info("[RecipeController] recipeSelectAll() >>> : 진입");
+		return recipeService.recipeSelectAll();
 	}
 	
-	public String recipeSelect(RecipeVO rvo)
+	@RequestMapping(method = RequestMethod.GET, value = "recipeSelect")
+	@ResponseBody
+	public RecipeVO recipeSelect(RecipeVO rvo)
 	{
-		return null;
+		logger.info("[RecipeController] recipeSelect() rvo >>> : " + rvo.toString());
+		return recipeService.recipeSelect(rvo);
 	}
 	
-	public String recipeInsert(RecipeVO rvo)
-	{
-		return null;
-	}
-	
-	public String recipeUpdate(RecipeVO rvo)
-	{
-		return null;
-	}
-	
-	public String recipeDelete(RecipeVO rvo)
-	{
-		return null;
-	}
+//	public String recipeInsert(RecipeVO rvo)
+//	{
+//		return null;
+//	}
+//	
+//	public String recipeUpdate(RecipeVO rvo)
+//	{
+//		return null;
+//	}
+//	
+//	public String recipeDelete(RecipeVO rvo)
+//	{
+//		return null;
+//	}
 }

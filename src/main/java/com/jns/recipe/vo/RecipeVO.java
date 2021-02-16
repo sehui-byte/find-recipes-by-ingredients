@@ -708,4 +708,27 @@ public class RecipeVO
 	public void setRcp_deleteyn(String rcp_deleteyn) {
 		this.rcp_deleteyn = rcp_deleteyn;
 	}
+	
+	@Override
+	public String toString() {
+		return "RecipeVO [rcp_seq=" + rcp_seq + ", rcp_nm=" + rcp_nm + ", rcp_way2=" + rcp_way2 + ", rcp_pat2="
+				+ rcp_pat2 + ", info_wgt2=" + info_wgt2 + ", info_eng=" + info_eng + ", info_car=" + info_car
+				+ ", info_pro=" + info_pro + ", info_fat=" + info_fat + ", info_na=" + info_na + ", hash_tag="
+				+ hash_tag + ", att_file_no_main=" + att_file_no_main + ", att_file_no_mk=" + att_file_no_mk
+				+ ", rcp_parts_dtls=" + rcp_parts_dtls + ", manual01=" + manual01 + ", manual_img01=" + manual_img01
+				+ ", manual02=" + manual02 + ", manual_img02=" + manual_img02 + ", manual03=" + manual03
+				+ ", manual_img03=" + manual_img03 + ", manual04=" + manual04 + ", manual_img04=" + manual_img04
+				+ ", manual05=" + manual05 + ", manual_img05=" + manual_img05 + ", manual06=" + manual06
+				+ ", manual_img06=" + manual_img06 + ", manual07=" + manual07 + ", manual_img07=" + manual_img07
+				+ ", manual08=" + manual08 + ", manual_img08=" + manual_img08 + ", manual09=" + manual09
+				+ ", manual_img09=" + manual_img09 + ", manual10=" + manual10 + ", manual_img10=" + manual_img10
+				+ ", manual11=" + manual11 + ", manual_img11=" + manual_img11 + ", manual12=" + manual12
+				+ ", manual_img12=" + manual_img12 + ", manual13=" + manual13 + ", manual_img13=" + manual_img13
+				+ ", manual14=" + manual14 + ", manual_img14=" + manual_img14 + ", manual15=" + manual15
+				+ ", manual_img15=" + manual_img15 + ", manual16=" + manual16 + ", manual_img16=" + manual_img16
+				+ ", manual17=" + manual17 + ", manual_img17=" + manual_img17 + ", manual18=" + manual18
+				+ ", manual_img18=" + manual_img18 + ", manual19=" + manual19 + ", manual_img19=" + manual_img19
+				+ ", manual20=" + manual20 + ", manual_img20=" + manual_img20 + ", rcp_insertdate=" + rcp_insertdate
+				+ ", rcp_updatedate=" + rcp_updatedate + ", rcp_deleteyn=" + rcp_deleteyn + "]";
+	}
 }
