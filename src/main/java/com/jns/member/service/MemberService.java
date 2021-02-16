@@ -1,6 +1,8 @@
 package com.jns.member.service;
 
-import com.jns.member.vo.MemberDetailsVO;
+import java.util.List;
+
+import com.jns.member.vo.MemberVO;
 
 public interface MemberService {
 	
@@ -25,7 +27,7 @@ public interface MemberService {
 	public List<MemberVO> CheckID(MemberVO mvo);
 	
 	
-	public MemberDetailsVO memberLogin() ;
+	public MemberVO memberLogin() ;
 	
 
 }

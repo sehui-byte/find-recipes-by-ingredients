@@ -1,6 +1,8 @@
 package com.jns.member.dao;
 
-import com.jns.member.vo.MemberDetailsVO;
+import java.util.List;
+
+import com.jns.member.vo.MemberVO;
 
 public interface MemberDAO {
 	
@@ -24,6 +26,6 @@ public interface MemberDAO {
 	public List<MemberVO> CheckID(MemberVO mvo);
 	
 	
-	public MemberDetailsVO memberLogin(MemberDetailsVO mvo);
+	public MemberVO memberLogin(MemberVO mvo);
 
 }

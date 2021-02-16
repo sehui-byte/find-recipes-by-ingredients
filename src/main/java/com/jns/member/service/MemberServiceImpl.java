@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jns.member.dao.MemberDAO;
-import com.jns.member.vo.MemberDetailsVO;
+import com.jns.member.vo.MemberVO;
 
 @Service
 @Transactional
@@ -41,7 +41,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		logger.info("MemberServiceImpl >>>> :  SelectAll 함수 시작 ");
 		logger.info("mvo >>> : "+ mvo);
 		
-		return memberDAO.MemberSelectAll(mvo);
+		return memberdao.MemberSelectAll(mvo);
 	}
 	// 회원 선택 조회 
 	@Override
@@ -51,7 +51,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		logger.info("MemberServiceImpl >>>> :  Select 함수 시작 ");
 		logger.info("mvo >>> : "+ mvo);
 		
-		return memberDAO.MemberSelect(mvo);
+		return memberdao.MemberSelect(mvo);
 	}
 	// 회원 등록 
 	@Override
@@ -62,7 +62,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		logger.info("mvo >>> : "+ mvo);
 		logger.info("채번 호출");
 		
-		int nCnt = memberDAO.MemberInsert(mvo);
+		int nCnt = memberdao.MemberInsert(mvo);
 		
 		return nCnt;
 	}
@@ -73,7 +73,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		logger.info("MemberServiceImpl >>>> :  Update 함수 시작 ");
 		logger.info("mvo >>> : "+ mvo);
 		
-		return memberDAO.MemberUpdate(mvo);
+		return memberdao.MemberUpdate(mvo);
 	}
 	// 회원 정보 삭제 
 	@Override
@@ -83,7 +83,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		logger.info("mvo >>> : "+ mvo);
 		
 		
-		return memberDAO.MemberDelete(mvo);
+		return memberdao.MemberDelete(mvo);
 	}
 
 	// 아이디 중복 체크 
@@ -93,7 +93,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		logger.info("MemberServiceImpl >>>> :  CheckID 함수 시작 ");
 		logger.info("mvo >>> : "+ mvo);
 		
-		return memberDAO.CheckID(mvo);
+		return memberdao.CheckID(mvo);
 	}
 	
 	
@@ -101,7 +101,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	
 	
 	@Override
-	public MemberDetailsVO memberLogin() {
+	public MemberVO memberLogin() {
 
 		return null;
 	}
@@ -112,9 +112,9 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
 		logger.info("security service 함수 진입 >>>");
 
-		MemberDetailsVO mvo = null;
+		MemberVO mvo = null;
 
-		mvo = new MemberDetailsVO();
+		mvo = new MemberVO();
 
 		mvo.setMid(username);
 
