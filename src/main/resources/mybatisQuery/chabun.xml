@@ -4,7 +4,7 @@
 
 <mapper namespace="com.jns.chabun.dao.ChabunDAO">
 
-	<select id="getMemberChabun" resultType="memberVO">
+	<select id="getMemberChabun" resultType="mvo">
 		SELECT NVL(MAX(SUBSTR(A.MNO, -4)), 0) + 1  MNO FROM MEMBER A
 	</select>
 
