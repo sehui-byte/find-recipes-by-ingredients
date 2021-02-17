@@ -24,5 +24,7 @@
 <a href="/mem/MemberForm.do">회원가입</a> <br>
 
 
+<a href="reply/reply.do">댓글 테스트</a><br>
+
 </body>
 </html>

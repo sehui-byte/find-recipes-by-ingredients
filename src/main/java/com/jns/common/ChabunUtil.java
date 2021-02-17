@@ -19,7 +19,7 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_O	= "O"; // 구매내역 번호
 	public static final String BIZ_GUBUN_CA	= "CA"; // 장바구니 번호
 	
-//	public static final String BIZ_GUBUN_RB = "RB"; // 게시판 댓글: REPLY 
+	public static final String BIZ_GUBUN_RB = "R"; // 게시판 댓글: REPLY 
 //	public static final String BIZ_GUBUN_BUY = "P"; // 구매게시판
 	
 
@@ -144,13 +144,13 @@ public abstract class ChabunUtil {
 		
 		return BIZ_GUBUN_B.concat(ChabunUtil.numPad2(type, memNum));
 	}
-/**	
+	
 	// 게시판 댓글 글 번호  
-	public static String getRboardChabun(String type, String memNum) {
+	public static String getReplyChabun(String type, String memNum) {
 		
 		return BIZ_GUBUN_RB.concat(ChabunUtil.numPad(type, memNum));
 	}
-**/	
+
 	// 공지사항  번호  
 	public static String getNoticeChabun(String type, String memNum) {
 		

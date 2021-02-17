@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.member.vo.MemberVO;
+import com.jns.reply.vo.ReplyVO;
 
 @Repository
 public class ChabunDAOImpl implements ChabunDAO {
@@ -31,6 +32,13 @@ public class ChabunDAOImpl implements ChabunDAO {
 	public ChefBoardVO getBoardChabun() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getBoardChabun");
+	}
+
+
+	@Override
+	public ReplyVO getReplyChabun() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("getReplyChabun");
 	}
 
 	
