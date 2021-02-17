@@ -8,4 +8,8 @@
 		SELECT NVL(MAX(SUBSTR(A.MNO, -4)), 0) + 1  MNO FROM MEMBER A
 	</select>
 
+	<select id="getBoardChabun" resultType="com.jns.chefboard.vo.ChefBoardVO">
+		SELECT NVL(MAX(SUBSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
+	</select>
+
 </mapper>
