@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jns.chabun.dao.ChabunDAO;
+import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.member.vo.MemberVO;
+import com.jns.reply.vo.ReplyVO;
 
 @Service
 @Transactional
@@ -28,4 +30,20 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getMemberChabun();
 	}
 
+	@Override
+	public ChefBoardVO getBoardChabun() {
+		// TODO Auto-generated method stub
+		logger.info("ChefBoard 채번호출 ");
+		return chabunDAO.getBoardChabun();
+	}
+
+	@Override
+	public ReplyVO getReplyChabun() {
+		// TODO Auto-generated method stub
+		logger.info("Reply 채번호출 ");
+		return chabunDAO.getReplyChabun();
+	}
+
+	
+	
 }

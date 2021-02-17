@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+		 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		 
+<mapper namespace="com.jns.reply.dao.replyDAO">
+
+	<!-- 댓글 기본 조회 -->
+	<select id="replyList" parameterType="reply" resultType="reply">
+		SELECT
+				 A.RNO
+				,A.RCONTENT
+				,A.BNO
+				,A.MNICK
+				,TO_CHAR(A.RINSERTDATE, 'YYYY-MM-DD HH24:MI:SS') AS RINSERTDATE
+				,TO_CHAR(A.RUPDATEDATE, 'YYYY-MM-DD HH24:MI:SS') AS RUPDATEDATE
+				,A.RDELETEYN
+		FROM	 REPLY A		 
+		WHERE	 A.BNO = #{bno, jdbcType=VARCHAR}
+		AND		 A.RDELETEYN = 'Y'
+		ORDER BY RNO DESC
+	</select>
+	
+	
+	<!-- 댓글 등록 -->
+	<insert id="replyInsert" parameterType="reply">
+		INSERT INTO REPLY(
+						  RNO
+						 ,RCONTENT
+						 ,BNO
+						 ,MNICK
+						 ,RINSERTDATE
+						 ,RUPDATEDATE
+						 ,RDELETEYN
+						 )
+		VALUES			 (
+						  #{rno, jdbcType=VARCHAR}
+						 ,#{rcontent, jdbcType=VARCHAR}
+						 ,#{bno, jdbcType=VARCHAR}
+						 ,#{mnick, jdbcType=VARCHAR}
+						 ,SYSDATE
+						 ,SYSDATE
+						 ,'Y' 
+						 )
+	</insert>
+	
+	
+	<!-- 댓글 수정 -->	
+	<update id="replyUpdate" parameterType="reply">
+		UPDATE   REPLY
+		SET		 RCONTENT = #{rcontent, jdbcType=VARCHAR}
+				,RUPDATEDATE = SYSDATE
+		WHERE	 RNO = #{rno, jdbcType=VARCHAR}
+		AND		 RDELETEYN = 'Y'		 
+	</update>
+	
+	
+	<!-- 댓글 삭제 -->	
+	<update id="replyDelete" parameterType="reply">
+		UPDATE   REPLY
+		SET		 RDELETEYN = 'Y'
+				,RUPDATEDATE = SYSDATE
+		WHERE	 RNO = #{rno, jdbcType=VARCHAR}
+		AND		 RDELETEYN = 'Y'		 
+	</update>
+	
+</mapper>
