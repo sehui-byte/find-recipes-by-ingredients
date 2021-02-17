@@ -3,6 +3,7 @@ package com.jns.member.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,10 +17,12 @@ public class MemberDAOImpl implements MemberDAO {
 	@Autowired(required = false)
 	private SqlSession sqlSession;
 
+
 	// 회원 전체 목록 조회
 	@Override
 	public List<MemberVO> memberSelectAll(MemberVO mvo) {
 		// TODO Auto-generated method stub
+
 
 		System.out.println("목록 조회 시작");
 
@@ -83,6 +86,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+
 	public MemberVO memberLogin(MemberVO mvo) {
 		
 		logger.info("memberDAOIMpl >>> : memberLogin 함수 시작");
