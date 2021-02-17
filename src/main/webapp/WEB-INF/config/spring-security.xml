@@ -15,6 +15,7 @@
 		<s:intercept-url pattern="/admin/**" access="hasRole('ROLE_A')"/>
 		<s:intercept-url pattern="/login.do" access="isAnonymous()"/>
 		<s:intercept-url pattern="/main.do" access="permitAll"/>
+		<s:intercept-url pattern="/join.do" access="permitAll"/>
 		<s:intercept-url pattern="/**" access="permitAll"/>
 		<s:form-login
 			username-parameter="mid"	

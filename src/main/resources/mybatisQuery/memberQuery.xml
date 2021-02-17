@@ -3,7 +3,94 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jns.member.dao.MemberDAO">
 
-	<select id="memberLogin"  parameterType="com.jns.member.vo.MemberVO" resultType="com.jns.member.vo.MemberVO">
+<insert id="MemberInsert" parameterType="memberVO">
+		INSERT INTO
+		MEMBER(
+				MNO
+			   ,MID
+			   ,MPW
+			   ,MNAME
+			   ,MNICK
+			   ,MHP
+			   ,MEMAIL
+			   ,MADDR
+			   ,MZIPCODE
+			   ,MADDRDETAIL
+			   ,MPHOTO
+			   ,MIREGDATE
+			   ,MUPDATEDATE
+			   ,MDELETEYN
+				
+		)
+		VALUES(
+			#{mno,jdbcType=VARCHAR}
+		   ,#{mid,jdbcType=VARCHAR}
+		   ,#{mpw, jdbcType=VARCHAR}
+	       ,#{mname, jdbcType=VARCHAR}
+	       ,#{mnick, jdbcType=VARCHAR}
+	       ,#{mhp, jdbcType=VARCHAR}
+	       ,#{memail,jdbcType=VARCHAR}
+	       ,#{maddr, jdbcType=VARCHAR}
+	       ,#{mzipcode,jdbcType=VARCHAR}
+	       ,#{maddrdetail,jdbcType=VARCHAR}
+	       ,#{mphoto, jdbcType=VARCHAR}
+	       ,SYSDATE
+	       ,SYSDATE
+	       ,'Y'		)
+	       
+</insert>	
+
+<select id="MemberSelectAll" resultType="memberVO">
+	SELECT 
+			A.MNO 	 MNO
+		   ,A.MLEVEL MLEVEL
+		   ,A.MID	 MID
+		   ,A.MPW    MPW
+		   ,A.MNAME	 MNAME
+		   ,A.MNICK	 MNICK
+		   ,A.MHP	 MHP
+		   ,A.MEMAIL MEMAIL
+		   ,A.MADDR	 MADDR
+		   ,A.MZIPCODE MZIPCODE
+		   ,A.MADDRDETAIL MADDRDETAIL
+		   ,A.MPHOTO	MPHOTO
+		   ,TO_CHAR(A.MIREGDATE,'YYYY-MM-DD') MIREGDATE
+		   ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') MUPDATEDATE
+	FROM  MEMBER A
+	WHERE A.MDELYN='Y'
+	AND	  A.MNO = #{mno,jdbcType=VARCHAR}
+	
+</select>
+
+<update id="MemberUpdate" parameterType="memberVO">
+	UPDATE	MEMBER
+		SET MNICK = #{mnick,jdbcType=VARCHAR}
+			MADDR = #{maddr,jdbcType=VARCHAR}
+		   ,MPHOTO = #{mphoto,jdbcType=VARCHAR}
+	WHERE MDELYN = 'Y'
+	AND   MNO = #{mno,jdbcType=VARCHAR}
+
+</update>
+
+<update id="MemberDelete" parameterType="memberVO">
+	UPDATE MEMBER
+		SET MUPDATEDATE = SYSDATE
+			MDELYN = 'N'
+	WHERE	MDELYN = 'Y'
+	AMD 	MNO = {mno,jdbcType=VARCHAR}
+</update>
+
+<select id="CheckID" parameterType ="memberVO" resultType="memberVO">
+
+	SELECT A.MID MID 
+	FROM 	MEMBER A 
+	WHERE	A.MDELYN = 'Y'
+	AND 	A.MID = #{mid, jdbcType=VARCHAR}
+</select>      
+
+
+
+	<select id="memberLogin"  parameterType="memberVO" resultType="memberVO">
 		SELECT 
 			* 
 		FROM MEMBER A	

@@ -34,12 +34,12 @@ public class MemberController {
 	this.chabunService=chabunService;}
 	
 	//회원 가입 화면
-	@RequestMapping(value="MemberForm", method=RequestMethod.GET)
+	@RequestMapping(value="join", method=RequestMethod.GET)
 	public String member() {
 	
 		logger.info("MemberController member 함수 시작 >>> : ");
 
-		return "/MemberForm";
+		return "/join";
 	}
 	
 	// 회원 등록 
@@ -50,6 +50,9 @@ public class MemberController {
 		
 		//MemberVO mvo = null;
 		mvo = new MemberVO();
+		
+		
+		// 현재 널값나오는 거 수정 중  
 		
 //		//mvo.getMlevel();
 //		mvo.getMid();
