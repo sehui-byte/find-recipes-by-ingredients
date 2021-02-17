@@ -206,35 +206,68 @@ public class MemberController {
 	}
 
 	// id 찾기 페이지
-	@RequestMapping(value = "memberFindID", method =RequestMethod.GET)
+	@RequestMapping(value = "memberFindID", method = RequestMethod.GET)
 	public String memberFindID(MemberVO mvo) {
 
 		logger.info("memberFindID 진입 >>> ");
 
 		return "/login/findID";
 	}
-	
+
 	// id 찾기 >> db 구현
-	@RequestMapping(value = "memberFindIDOK", method =RequestMethod.POST)
+	@RequestMapping(value = "memberFindIDOK", method = RequestMethod.POST)
 	@ResponseBody
 	public String memberFindIDOK(MemberVO mvo) {
-		
+
 		logger.info("memberFindIDOK 진입 >>> ");
-		
+
 		logger.info(mvo.getMname());
 		logger.info(mvo.getMemail());
-		
-		
-		
-		return "ok";
+
+		List<MemberVO> aList = memberService.memberFindIDOK(mvo);
+
+		if (aList.size() == 1) {
+			return "OK";
+		} else {
+			return "ERROR";
+		}
 	}
 
 	// 임시 비밀번호 발급 페이지
 	@RequestMapping(value = "memberTempPW", method = RequestMethod.GET)
-
 	public String memberTempPW() {
 		logger.info("memberTempPW 진입 >>> ");
 
 		return "/login/tempPW";
+	}
+
+	// 임시 비밀번호 발급 >> db 구현
+	@RequestMapping(value = "memberFindPWOK", method = RequestMethod.POST)
+	@ResponseBody
+	public String memberTempPWOK(MemberVO _mvo) {
+
+		logger.info("memberTempPWOK 진입 >>> ");
+
+		logger.info(_mvo.getMid());
+		logger.info(_mvo.getMemail());
+
+		List<MemberVO> aList = memberService.memberTempPW(_mvo);
+
+		// 입력된 회원 정보 부합 여부
+		if (aList.size() == 1) {
+
+			MemberVO mvo = null;
+			mvo = aList.get(0);
+			int result = memberService.memberTempPWOK(mvo);
+
+			// 임시 비밀번호가 비밀번호에 정상 발급 되었는지?
+			if (result == 1) {
+				return "OK";
+			} else {
+				return "ERROR_TEMPPW";
+			}
+		} else {
+			return "ERROR_INFO";
+		}
 	}
 }

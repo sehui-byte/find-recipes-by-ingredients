@@ -24,5 +24,14 @@ public interface MemberService {
 	// 아이디 중복 체크
 	public List<MemberVO> checkID(MemberVO mvo);
 	
+	// 아이디 찾기
+	public List<MemberVO> memberFindIDOK(MemberVO mvo);
+	
+	// 임시 비밀번호 발급용 회원 정보 조회
+	public List<MemberVO> memberTempPW(MemberVO mvo);
+
+	// 임시 비밀번호 발급
+	public int memberTempPWOK(MemberVO mvo);
+	
 
 }
