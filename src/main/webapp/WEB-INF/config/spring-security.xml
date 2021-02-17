@@ -34,7 +34,7 @@
 	<!--  db로 접속할 수 있도록 -->
 	<s:authentication-manager>
 		<s:authentication-provider user-service-ref="memberSecurityServiceImpl">
-			
+			<s:password-encoder ref="bcryptPasswordEncoder" />	
 		</s:authentication-provider>	
 	</s:authentication-manager>
 	
