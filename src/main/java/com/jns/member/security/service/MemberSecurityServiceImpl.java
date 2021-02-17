@@ -11,16 +11,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.jns.member.dao.MemberDAO;
 import com.jns.member.security.password.PasswordEncoder;
+
+import org.springframework.stereotype.Service;
+
 import com.jns.member.service.MemberServiceImpl;
 import com.jns.member.vo.MemberVO;
 
 public class MemberSecurityServiceImpl implements UserDetailsService {
 
 	private Logger logger = Logger.getLogger(MemberServiceImpl.class);
-	
+
 	private MemberDAO memberdao;
 
-	@Autowired(required=false)
+	@Autowired(required = false)
 	public MemberSecurityServiceImpl(MemberDAO memberdao) {
 		this.memberdao = memberdao;
 	}
@@ -32,10 +35,10 @@ public class MemberSecurityServiceImpl implements UserDetailsService {
 
 		MemberVO mvo = null;
 		mvo = new MemberVO();
-		
+
 		mvo.setMid(username);
-		
-		logger.info("mid >>> "+mvo.getMid());
+
+		logger.info("mid >>> " + mvo.getMid());
 
 		MemberVO mvo2 = null;
 		mvo2 = new MemberVO();
@@ -45,12 +48,14 @@ public class MemberSecurityServiceImpl implements UserDetailsService {
 		List<String> authList = new ArrayList<String>();
 		authList.add(mvo2.getMlevel());
 
+		// setAUthorities로 객체 변환
+
 		mvo2.setAuthorities(authList);
 
 		if (mvo2 == null) {
 			throw new UsernameNotFoundException("User Not Found");
-		} 
-			return mvo2;
+		}
+		return mvo2;
 
 	}
 

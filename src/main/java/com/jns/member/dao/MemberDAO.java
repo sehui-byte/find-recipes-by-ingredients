@@ -1,6 +1,7 @@
 package com.jns.member.dao;
 
 import java.util.List;
+
 import com.jns.member.vo.MemberVO;
 
 public interface MemberDAO {
