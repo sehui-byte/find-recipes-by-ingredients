@@ -1,6 +1,7 @@
 package com.jns.recipe.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -46,6 +47,16 @@ public class RecipeController
 		logger.info("[RecipeController] recipeSelect() rvo >>> : " + rvo.toString());
 		return recipeService.recipeSelect(rvo);
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "recipeJsonInsert")
+	@ResponseBody
+	public HashMap<String, Integer> recipeJsonInsert()
+	{
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
+		result.put("cnt", recipeService.recipeJsonInsert());
+		return result;
+	}
+
 	
 //	public String recipeInsert(RecipeVO rvo)
 //	{
