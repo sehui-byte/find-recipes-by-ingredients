@@ -6,8 +6,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
@@ -204,12 +206,27 @@ public class MemberController {
 	}
 
 	// id 찾기 페이지
-	@RequestMapping(value = "memberFindID", method = RequestMethod.GET)
-	public String memberFindID() {
+	@RequestMapping(value = "memberFindID", method =RequestMethod.GET)
+	public String memberFindID(MemberVO mvo) {
 
 		logger.info("memberFindID 진입 >>> ");
 
 		return "/login/findID";
+	}
+	
+	// id 찾기 >> db 구현
+	@RequestMapping(value = "memberFindIDOK", method =RequestMethod.POST)
+	@ResponseBody
+	public String memberFindIDOK(MemberVO mvo) {
+		
+		logger.info("memberFindIDOK 진입 >>> ");
+		
+		logger.info(mvo.getMname());
+		logger.info(mvo.getMemail());
+		
+		
+		
+		return "ok";
 	}
 
 	// 임시 비밀번호 발급 페이지
