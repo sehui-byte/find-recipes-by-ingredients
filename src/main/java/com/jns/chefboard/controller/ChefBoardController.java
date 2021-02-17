@@ -60,7 +60,7 @@ public class ChefBoardController {
 	
 	// 글쓰기
 	@RequestMapping(value="chefboard/boardInsert", method=RequestMethod.POST)
-	public String boardInsert(ChefBoardVO cbvo, MultipartHttpServletRequest request) {
+	public String boardInsert(ChefBoardVO cbvo) {
 		logger.info("chefC >> boardInsert 호출 성공");
 		
 		int result = 0;
@@ -75,6 +75,7 @@ public class ChefBoardController {
 		
 		// 파일 업로드 세팅		
 		//매개변수 MultipartHttpServletRequest request
+		/*
 		MultipartFile mf = request.getFile("bfile");
 		String originalFileName = mf.getOriginalFilename();
         long fileSize = mf.getSize();
@@ -90,11 +91,11 @@ public class ChefBoardController {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-		
+		*/
 		result = chefBoardService.boardInsert(cbvo);
 		
 		if (result == 1) {
-			url = "chefboard/boardList.do";
+			url = "boardList.do";
 		}
 		
 		return "redirect:"+url;
