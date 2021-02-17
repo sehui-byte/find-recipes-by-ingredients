@@ -9,11 +9,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.jns.member.dao.MemberDAO;
-import com.jns.member.security.password.PasswordEncoder;
-
 import org.springframework.stereotype.Service;
 
+import com.jns.member.dao.MemberDAO;
+import com.jns.member.security.password.PasswordEncoder;
 import com.jns.member.service.MemberServiceImpl;
 import com.jns.member.vo.MemberVO;
 
@@ -23,6 +22,8 @@ public class MemberSecurityServiceImpl implements UserDetailsService {
 
 	private MemberDAO memberdao;
 
+	public MemberSecurityServiceImpl() {}
+	
 	@Autowired(required = false)
 	public MemberSecurityServiceImpl(MemberDAO memberdao) {
 		this.memberdao = memberdao;
