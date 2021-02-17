@@ -7,6 +7,7 @@
 <title>관심상품 페이지</title>
 </head>
 <body>
+<h3>관심상품 목록</h3>
 
 </body>
 </html>

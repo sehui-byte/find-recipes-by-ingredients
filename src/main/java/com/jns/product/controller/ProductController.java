@@ -19,15 +19,21 @@ private ProductService service;
 		this.service = service;
 	}
 	
+	//상품 검색 페이지로 이동
 	@RequestMapping("searchPage.do")
 	public String search() {
 		return "product/searchProduct";
+	}
+	
+	//관심상품 페이지로 이동
+	@RequestMapping("likeProduct.do")
+	public String likePage() {
+		return "product/likeProduct";
 	}
 	
 	@RequestMapping(value="search.do",method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String getApi(@RequestParam(defaultValue="") String keyword) {
 		return service.naverSearchApi(keyword);
-		
 	}
 }
