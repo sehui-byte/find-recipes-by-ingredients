@@ -91,6 +91,8 @@
 						html += '<h5 class="card-title">' + title
 								+ '</h5>'
 						html += '<ul class="list-group list-group-flush">';
+						//상품코드는 테스트용으로 적어둔 것 (추후 삭제)
+						html += '<li class="list-group-item"> 상품코드 : ' + productId + '</li>';
 						html += '<li class="list-group-item"> 최저가 : '
 								+ lprice + '원</li>';
 						html += '<li class="list-group-item"> 제조사 : '
@@ -100,7 +102,7 @@
 						html += '</ul>';
 						html += '<a href="' + link +'" class="btn btn-primary">구매하기</a>';
 						//관심 상품 버튼 추가
-						html += '<input type="button" value="&#xf004" id="heartBtn" onclick="saveProductId()" style="font-family:FontAwesome; border: none; background: transparent;"/>';
+						html += '<input type="button" value="&#xf004" id="heartBtn" onclick="saveProductId('+productId+')" style="font-family:FontAwesome; border: none; background: transparent;"/>';
 						html += '</div></div></div>';
 
 						//비워주기
@@ -132,13 +134,67 @@
 			}
 		});
 		}
-
-		//동적 태그에 이벤트 주기
-		function saveProductId(){
-			alert("관심 상품을 저장했습니다!");
-			//쿠키 생성해서 저장하기
 		
+		//쿠키 새로 생성
+		function setCookie(cookie_name, value, days){
+			var exdate = new Date();//만료날짜
+			exdate.setDate(exdate.getDate() + days);
+			
+			 var cookie_value = escape(value) + ((days == null) ? '' : '; expires=' + exdate.toUTCString());
+			 document.cookie = cookie_name + '=' + cookie_value;
 		}
+		
+		//쿠키 값 가져오기
+		function getCookie(cookie_name){
+			var val = document.cookie.split(';');
+			var x,y;
+			
+			for(var i = 0; i<val.length; i++){
+				x = val[i].substr(0, val[i].indexOf('='));
+				y = val[i].substr(val[i].indexOf('=') + 1);
+				x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+				if (x == cookie_name) {
+					return unescape(y); // unescape로 디코딩 후 값 리턴
+				}
+			}
+		}
+		
+		//기존 쿠키에 value 더하기
+		function addCookie(productId) {
+			  var items = getCookie('like'); // 이미 저장된 값을 쿠키에서 가져오기
+			  var maxItemNum = 30; // 최대 저장 가능한 아이템개수
+			  var expire = 1; // 쿠키값을 저장할 기간
+			  if (items) {//쿠키가 이미 존재하면
+			    var itemArray = items.split(',');
+			    if (itemArray.indexOf(productId) != -1) {
+			      // 이미 존재하는 경우 종료
+			      console.log('Already exists.');
+			    }
+			    else {
+			      // 새로운 값 저장 및 최대 개수 유지하기
+			      itemArray.unshift(productId);
+			      if (itemArray.length > maxItemNum ) itemArray.length = 30;
+			      items = itemArray.join(',');
+			      setCookie('like', items, expire);
+			    }
+			  }
+			  else {//쿠키가 존재하지 않으면
+			    setCookie('like', productId, expire);//쿠키생성
+			  }
+			}
+
+		//관심상품 하트모양 버튼 이벤트 //동적 태그에 이벤트 주기
+		function saveProductId(productId){	
+			var button = document.getElementById("heartBtn");
+			//빨강색으로 버튼 컬러 변경
+			//이후에도 관심상품으로 기존에 저장했던건 여전히 빨강색으로 보여야 한다(이점 보완하기)
+			button.style.color = "#FF0000";
+			alert("관심 상품을 저장했습니다!");
+			//쿠키 추가
+			addCookie(productId);
+		}
+		
+		
 	</script>
 
 	<!-- bootstrap -->
