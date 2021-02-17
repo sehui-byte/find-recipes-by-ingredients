@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/jsp/jspinclude.jsp" %>
- 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +9,7 @@
 <title>전냉시 로그인 페이지</title>
 <script type="text/javascript">
 $(document).ready(function(){
+	// login btn click
 	$("#loginbtn").click(function(){
 		alert("click");
 		if($("#mid").val() == ""){
@@ -22,31 +23,63 @@ $(document).ready(function(){
 			$("#loginForm").submit();
 		}
 	});
+	
+	// memberInsert btn click
+	$("#memberInsertBtn").click(function(){
+		alert("insertclick");
+		location.href="/kosmoJns/join.do";
+	})
 })
 </script>
 </head>
 <body>
-	<form id="loginForm" name="loginForm">
-		<table border="1">
-			<tr>
-				<td>아이디</td>	
-				<td>
-					<input type="text" id="mid" name="mid" value="">	
-				</td>	
-			</tr>	
-			<tr>
-				<td>비밀번호</td>	
-				<td>
-					<input type="text" id="mpw" name="mpw" value="">	
-				</td>	
-			</tr>	
-			<tr>
-				<td colspan="2">
-					<input type="button" id="loginbtn" value="Login">	
-				</td>
-			</tr>
-		</table>	
-		<s:csrfInput/>
-	</form>
+	<div>
+		<form id="loginForm" name="loginForm">
+			<table border="1">
+				<tr>
+					<td>아이디</td>	
+					<td>
+						<input type="text" id="mid" name="mid" value="">	
+					</td>	
+					<td rowspan="2">
+						<input type="button" id="loginbtn" value="Login">	
+					</td>
+				</tr>	
+				<tr>
+					<td>비밀번호</td>	
+					<td>
+						<input type="text" id="mpw" name="mpw" value="">	
+					</td>	
+				</tr>	
+				<tr>
+					<td colspan="3">
+						<input type="button" id="memberInsertBtn" name="memberInsertBtn" value="회원가입 하러 가기">
+						<input type="button" id="findidpw" name="findidpw" value="아이디/비밀번호 찾기">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<input type="button" id="snsLogin_naver" name="snsLogin_naver" value="네이버 아이디로 로그인">	
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<input type="button" id="snsLogin_kakao" name="snsLogin_kakao" value="카카오 아이디로 로그인">	
+					</td>	
+				</tr>
+				<tr>
+					<td colspan="3">
+						<input type="button" id="snsLogin_google" name="snsLogin_google" value="구글 아이디로 로그인">	
+					</td>	
+				</tr>
+				<tr>
+					<td colspan="3">
+						<input type="button" id="snsLogin_facebook" name="snsLogin_facebook" value="페이스북 아이디로 로그인">	
+					</td>	
+				</tr>
+			</table>	
+			<s:csrfInput/>
+		</form>
+	</div>
 </body>
 </html>
