@@ -10,8 +10,8 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$("#idFind").click(function(){
-			alert("idFind 클릭");
+		$("#findID").click(function(){
+			alert("findID 클릭");
 			var mname = $("#mname").val();
 			var memail = $("#memail1").val() + "@" + $("#memail2").val();
 			var url = "/kosmoJns/memberFindIDOK.do";
@@ -26,10 +26,13 @@
 			});
 			
 			function whenSuccess(data){
-				alert("good");	
+				if (data == "OK"){
+					alert("아이디가 이메일로 발송되었습니다. 이메일을 확인해주시기 바랍니다.");
+					window.close();
+				}
 			}
 			function whenFail(data){
-				alert("bad");
+				alert("아이디 찾기에 문제가 발생했습니다. 관리자에게 문의주시기 바랍니다.");
 			}
 
 		})		
@@ -48,7 +51,7 @@
 </script>
 </head>
 <body>
-	<form id="findID">
+	<form id="findIDForm">
 		<table border="1" id="findIDtable" style='text-align:center;'>
 			<tr>
 				<td>
@@ -75,7 +78,7 @@
 			</tr>	
 			<tr>
 				<td colspan="2">
-					<input type="button" name="idFind" id="idFind" value="아이디 찾기">
+					<input type="button" name="findID" id="findID" value="아이디 찾기">
 					<input type="reset" name="reset" id="reset" value="reset">
 				</td>	
 			</tr>
