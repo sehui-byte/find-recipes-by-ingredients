@@ -14,7 +14,7 @@
 		$("#boardInsert").click(function(){
 			
 			//입력값 체크
-			if(!chkSubmit($('#bnick'),"이름을")) return;
+			if(!chkSubmit($('#mnick'),"이름을")) return;
 			else if(!chkSubmit($('#btitle'),"제목을")) return;
 			else if(!chkSubmit($('#bcontent'),"작성할 내용을")) return;
 			else{
@@ -65,7 +65,7 @@
 	<table id="boardWrite">
 		<tr>
 			<td>작성자</td>
-			<td><input type="text" name="bnick" id="bnick"></td>
+			<td><input type="text" name="mnick" id="mnick"></td>
 		</tr>
 		<tr>
 			<td>글제목</td>
@@ -81,6 +81,8 @@
 		</tr>
 	</table>
 	<!--<s:csrfInput/> -->
+	<input type="hidden" name="bview" id="bview" value=0>
+	<input type="hidden" name="bhit" id="bhit" value=0>
 </form>
 <div id="boardBut">
 	<input type="button" value="저장" class="but" id="boardInsert">
