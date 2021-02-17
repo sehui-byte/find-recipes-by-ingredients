@@ -9,6 +9,7 @@
 
 <h3>나중에 이 페이지는 바로 main page로 연결하게 하면 될 것 같습니다.</h3>
 
+<a href="/QnA/QnAForm.do">QnA 글쓰기</a>
 
 <a href="/kosmoJns/main.do">일반 접속</a><br>
 
