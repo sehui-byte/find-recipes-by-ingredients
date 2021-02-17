@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +30,14 @@ public class RecipeController
 	public RecipeController(RecipeService recipeServce) 
 	{
 		this.recipeService = recipeServce;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "recipeList")
+	public String recipeList(Model model)
+	{
+		logger.info("[RecipeController] recipeList() 호출");
+		model.addAttribute("list", recipeService.recipeSelectAll());
+		return "recipe/recipeList";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "recipeSelectAll")
