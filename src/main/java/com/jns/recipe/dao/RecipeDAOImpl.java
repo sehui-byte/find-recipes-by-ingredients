@@ -30,7 +30,7 @@ public class RecipeDAOImpl implements RecipeDAO
 	}
 
 	@Override
-	public RecipeVO recipeSelect(RecipeVO rvo) 
+	public RecipeVO recipeSelect(RecipeVO rvo)
 	{
 		return sqlSession.selectOne("recipeSelect", rvo);
 	}

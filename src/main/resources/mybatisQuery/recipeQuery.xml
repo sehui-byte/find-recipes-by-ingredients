@@ -9,6 +9,8 @@
 			RECIPE
 		WHERE
 			RCP_DELETEYN = 'N'
+		ORDER BY
+			RCP_SEQ
 	</select>
 	
 	<select id="recipeSelect" parameterType="rvo" resultType="rvo">
@@ -19,6 +21,8 @@
 		WHERE 
 			RCP_SEQ = #{rcp_seq} 
 			AND RCP_DELETEYN = #{rcp_deleteyn}
+		ORDER BY
+			RCP_SEQ
 	</select>
 
 	<insert id="recipeJsonInsert" parameterType="rvo">

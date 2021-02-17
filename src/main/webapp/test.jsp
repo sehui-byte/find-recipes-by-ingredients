@@ -16,7 +16,7 @@
 			data : "json",
 			success : function(data)
 			{
-				console.log("asdasd")
+				console.log("done");
 				console.log(data);
 			},
 			error : function()
