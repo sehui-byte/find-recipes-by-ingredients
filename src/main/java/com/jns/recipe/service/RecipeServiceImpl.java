@@ -46,9 +46,9 @@ public class RecipeServiceImpl implements RecipeService
 	}
 
 	@Override
-	public RecipeVO recipeSelect(RecipeVO rvo) {
-		// TODO Auto-generated method stub
-		return null;
+	public RecipeVO recipeSelect(RecipeVO rvo) 
+	{
+		return recipeDAO.recipeSelect(rvo);
 	}
 	
 	@Override

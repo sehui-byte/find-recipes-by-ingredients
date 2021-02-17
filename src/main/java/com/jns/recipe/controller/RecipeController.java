@@ -40,6 +40,17 @@ public class RecipeController
 		return "recipe/recipeList";
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, value = "recipeDetail")
+	public String recipeDetail(RecipeVO rvo, Model model)
+	{
+		logger.info("[RecipeController] recipeDetail() 호출");
+		logger.info("rcp_seq >>> : " + rvo.getRcp_seq());
+		logger.info("recipeService.recipeSelect(rvo) >>> : " + recipeService.recipeSelect(rvo));
+		model.addAttribute("data", recipeService.recipeSelect(rvo));
+		
+		return "recipe/recipeDetail";
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, value = "recipeSelectAll")
 	@ResponseBody
 	public List<RecipeVO> recipeSelectAll()

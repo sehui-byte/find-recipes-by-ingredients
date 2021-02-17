@@ -19,8 +19,8 @@
 		FROM 
 			RECIPE
 		WHERE 
-			RCP_SEQ = #{rcp_seq} 
-			AND RCP_DELETEYN = #{rcp_deleteyn}
+			RCP_SEQ = #{rcp_seq, jdbcType=VARCHAR} 
+			AND RCP_DELETEYN = 'N'
 		ORDER BY
 			RCP_SEQ
 	</select>
