@@ -17,12 +17,10 @@ public class MemberDAOImpl implements MemberDAO {
 	@Autowired(required = false)
 	private SqlSession sqlSession;
 
-
 	// 회원 전체 목록 조회
 	@Override
 	public List<MemberVO> memberSelectAll(MemberVO mvo) {
 		// TODO Auto-generated method stub
-
 
 		System.out.println("목록 조회 시작");
 
@@ -85,13 +83,36 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectList("CheckID", mvo);
 	}
 
+	// 로그인
 	@Override
-
 	public MemberVO memberLogin(MemberVO mvo) {
-		
+
 		logger.info("memberDAOIMpl >>> : memberLogin 함수 시작");
-	
+
 		return sqlSession.selectOne("memberLogin", mvo);
 	}
 
+	// 아이디 찾기
+	@Override
+	public List<MemberVO> memberFindIDOK(MemberVO mvo) {
+		logger.info("memberDAOIMpl >>> : memberFindIDOK 함수 시작");
+
+		return sqlSession.selectOne("memberFindIDOK", mvo);
+	}
+
+	// 임시 비밀번호 발급 전 회원 정보 체크
+	@Override
+	public List<MemberVO> memberTempPW(MemberVO mvo) {
+		logger.info("memberDAOIMpl >>> : memberFindPWOK 함수 시작");
+
+		return sqlSession.selectOne("memberTempPW", mvo);
+	}
+
+	// 임시 비밀번호 발급
+	@Override
+	public int memberTempPWOK(MemberVO mvo) {
+		logger.info("memberDAOIMpl >>> : memberTempPWOK 함수 시작");
+
+		return sqlSession.selectOne("memberTempPWOK", mvo);
+	}
 }
