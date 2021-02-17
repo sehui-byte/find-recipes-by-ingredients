@@ -178,15 +178,15 @@ public class MemberController {
 		}
 	}
 
-	// login page 보여주는 함수
-	// spring security의 검증이 확인되면 이쪽 함수를 탄다
+	// 로그인 페이지
 	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String memberlogin() {
-		System.out.println("login 입니다 >>>> ");
+	public String memberLogin() {
+		logger.info("memberLogin page 진입 >>> ");
 
 		return "/login/login";
 	}
 
+	// main 페이지
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String main() {
 		logger.info("main page 진입 >>> ");
@@ -194,4 +194,30 @@ public class MemberController {
 		return "main";
 	}
 
+	// id & pw 찾기 페이지
+	@RequestMapping(value = "memberFindIDnPW", method = RequestMethod.GET)
+	public String memberFindIDnPW() {
+
+		logger.info("memberFindIDnPW 진입 >>> ");
+
+		return "/login/findIDnPW";
+	}
+
+	// id 찾기 페이지
+	@RequestMapping(value = "memberFindID", method = RequestMethod.GET)
+	public String memberFindID() {
+
+		logger.info("memberFindID 진입 >>> ");
+
+		return "/login/findID";
+	}
+
+	// 임시 비밀번호 발급 페이지
+	@RequestMapping(value = "memberTempPW", method = RequestMethod.GET)
+
+	public String memberTempPW() {
+		logger.info("memberTempPW 진입 >>> ");
+
+		return "/login/tempPW";
+	}
 }

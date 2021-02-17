@@ -26,8 +26,26 @@ $(document).ready(function(){
 	
 	// memberInsert btn click
 	$("#memberInsertBtn").click(function(){
-		alert("insertclick");
+		alert("회원가입 페이지로 이동합니다 >>> ");
 		location.href="/kosmoJns/join.do";
+	})
+	
+	// findidpw btn click
+	$('#findidpw').click(function(){
+		alert("아이디/비밀번호 찾기 페이지로 이동합니다 >>> ")
+		var url = "/kosmoJns/memberFindIDnPW.do";
+		var title = "아이디/비밀번호 찾기";
+		var _width = "500";
+		var _height = "300";
+		
+		var popupX = (document.body.offsetWidth /2) - (_width/2);		
+		var popupY = (window.screen.height /2) - (_height/2);		
+		
+		// 가운데로 구하고 싶은데 잘 안된다.
+		//var _left = Math.ceil((window.screen.width - _width)/2);
+		//var _top = Math.ceil((window.screen.width - _height)/2);
+		var option = "width ="+_width+", height ="+_height+", top ="+popupX+", left ="+popupY;//+", location = no";
+		window.open(url, title, option)	
 	})
 })
 </script>
