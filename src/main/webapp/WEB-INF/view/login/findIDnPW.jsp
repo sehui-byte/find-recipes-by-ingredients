@@ -7,10 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>admin 페이지</h3>
-
-<li>
-	
-</li>
+	<a href="/kosmoJns/memberFindID.do">아이디 찾기</a><br>
+	<a href="/kosmoJns/memberTempPW.do">임시 비밀번호 발급받기</a>
 </body>
 </html>

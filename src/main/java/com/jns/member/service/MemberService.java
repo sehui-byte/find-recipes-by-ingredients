@@ -23,6 +23,6 @@ public interface MemberService {
 
 	// 아이디 중복 체크
 	public List<MemberVO> checkID(MemberVO mvo);
-
+	
 
 }

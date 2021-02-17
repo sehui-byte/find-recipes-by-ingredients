@@ -7,10 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>admin 페이지</h3>
 
-<li>
-	
-</li>
+find pw
+
 </body>
 </html>

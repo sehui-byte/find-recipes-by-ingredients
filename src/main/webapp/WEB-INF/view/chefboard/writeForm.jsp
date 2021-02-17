@@ -80,7 +80,7 @@
 			<td><input type="file" name="bfile" id="bfile"></td>
 		</tr>
 	</table>
-	<s:csrfInput/>
+	<!--<s:csrfInput/> -->
 </form>
 <div id="boardBut">
 	<input type="button" value="저장" class="but" id="boardInsert">
