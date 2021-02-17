@@ -10,9 +10,9 @@ public class ChefBoardVO {
 	private String bfile;
 	private String binsertdate;
 	private String bupdatedate;
-	private String bview;
+	private int bview;
 	private String bdeleteyn;
-	private String bhits;
+	private int bhits;
 
 	//**************************
 	//검색 설정
@@ -58,7 +58,7 @@ public class ChefBoardVO {
 	
 	public ChefBoardVO(String bno, String btype, String btitle, String bcontent
 					  ,String bnick, String bfile, String binsertdate, String bupdatedate
-					  ,String bview, String bdeleteyn, String bhits) {
+					  ,int bview, String bdeleteyn, int bhits) {
 		this.bno = bno;
 		this.btype = btype;
 		this.btitle = btitle;
@@ -122,10 +122,10 @@ public class ChefBoardVO {
 	public void setBupdatedate(String bupdatedate) {
 		this.bupdatedate = bupdatedate;
 	}
-	public String getBview() {
+	public int getBview() {
 		return bview;
 	}
-	public void setBview(String bview) {
+	public void setBview(int bview) {
 		this.bview = bview;
 	}
 	public String getBdeleteyn() {
@@ -134,10 +134,10 @@ public class ChefBoardVO {
 	public void setBdeleteyn(String bdeleteyn) {
 		this.bdeleteyn = bdeleteyn;
 	}
-	public String getBhits() {
+	public int getBhits() {
 		return bhits;
 	}
-	public void setBhits(String bhits) {
+	public void setBhits(int bhits) {
 		this.bhits = bhits;
 	}
 }
