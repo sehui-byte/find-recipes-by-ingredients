@@ -134,7 +134,7 @@ public abstract class ChabunUtil {
 	
 	
 	// 회원 번호 
-	public static String getMemChabun(String type, String memNum) {
+	public static String getMemberChabun(String type, String memNum) {
 		
 		return BIZ_GUBUN_M.concat(ChabunUtil.numPad(type, memNum));
 	}
@@ -212,7 +212,7 @@ public abstract class ChabunUtil {
 		// TODO Auto-generated method stub
 		
 		String c = "1";
-		System.out.println("회원번호 >>> : " + ChabunUtil.getMemChabun("D", c));
+		System.out.println("회원번호 >>> : " + ChabunUtil.getMemberChabun("D", c));
 		System.out.println("일반레시피게시판>>> : " + ChabunUtil.getBoardChabun("D", c));
 		//System.out.println(">>> : " + ChabunUtil.getRboardChabun("N", c));
 		System.out.println("공지사항>>> : " + ChabunUtil.getNoticeChabun("D", c));

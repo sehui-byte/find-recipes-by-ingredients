@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jns.member.dao.MemberDAO;
 import com.jns.member.security.password.PasswordEncoder;
+
 import com.jns.member.vo.MemberVO;
 
 @Service
@@ -36,9 +37,11 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("서비스 시작");
 
 		logger.info("MemberServiceImpl >>>> :  SelectAll 함수 시작 ");
+
 		logger.info("mvo >>> : " + mvo);
 
 		return memberDAO.memberSelectAll(mvo);
+
 	}
 
 	// 회원 선택 조회
@@ -47,9 +50,11 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 
 		logger.info("MemberServiceImpl >>>> :  Select 함수 시작 ");
+
 		logger.info("mvo >>> : " + mvo);
 
 		return memberDAO.memberSelect(mvo);
+
 	}
 
 	// 회원 등록
@@ -60,7 +65,7 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("MemberServiceImpl >>>> :  Insert 함수 시작 ");
 		logger.info("mvo >>> : " + mvo);
 		logger.info("채번 호출");
-		
+
 		// 비밀번호 암호화 Bcrypt
 		String mpw = PasswordEncoder.pwEncoder(mvo.getMpw());
 		mvo.setMpw(mpw);
@@ -75,6 +80,7 @@ public class MemberServiceImpl implements MemberService {
 	public int memberUpdate(MemberVO mvo) {
 		// TODO Auto-generated method stub
 		logger.info("MemberServiceImpl >>>> :  Update 함수 시작 ");
+
 		logger.info("mvo >>> : " + mvo);
 
 		// 비밀번호 암호화 Bcrypt
@@ -82,6 +88,7 @@ public class MemberServiceImpl implements MemberService {
 		mvo.setMpw(mpw);
 
 		return memberDAO.memberUpdate(mvo);
+
 	}
 
 	// 회원 정보 삭제
@@ -100,6 +107,7 @@ public class MemberServiceImpl implements MemberService {
 
 	// 아이디 중복 체크
 	@Override
+
 	public List<MemberVO> checkID(MemberVO mvo) {
 		// TODO Auto-generated method stub
 		logger.info("MemberServiceImpl >>>> :  CheckID 함수 시작 ");

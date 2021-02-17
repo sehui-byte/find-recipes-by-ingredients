@@ -1,5 +1,6 @@
 package com.jns.member.security.password;
 
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class PasswordEncoder {

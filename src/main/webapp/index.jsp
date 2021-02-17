@@ -19,5 +19,8 @@
 <a href="chefboard/boardList.do">chefboard boardList</a><br>
 <a href = "searchPage.do">product search test</a><br>
 
+<a href="join.do">회원가입</a> <br>
+
+
 </body>
 </html>
