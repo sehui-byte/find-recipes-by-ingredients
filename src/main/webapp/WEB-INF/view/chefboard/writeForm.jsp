@@ -30,10 +30,20 @@
 					}
 				}
 				*/
+				/*
+				mnick = document.getElementById("mnick").value
+				btitle = document.getElementById("btitle").value
+				bcontent = document.getElementById("bcontent").value
+				
+				alert("mnick >>> : " + mnick);
+				alert("btitle >>> : " + btitle);
+				alert("bcontent >>> : " + bcontent);
+				*/
 				
 				$("#f_writeForm").attr({
 					"method": "POST",
-					"action": "/kosmoJns/chefboard/boardInsert.do"
+					"action": "/kosmoJns/chefboard/boardInsert.do",
+					//"enctype": "multipart/form-data"
 				});
 				$("#f_writeForm").submit();
 			}		
@@ -61,7 +71,7 @@
 </head>
 <body>
 <div id="boardTit"><h3>글쓰기</h3></div>
-<form id="f_writeForm" name="f_writeForm" enctype="multipart/form-data">
+<form id="f_writeForm" name="f_writeForm">
 	<table id="boardWrite">
 		<tr>
 			<td>작성자</td>
@@ -81,8 +91,6 @@
 		</tr>
 	</table>
 	<!--<s:csrfInput/> -->
-	<input type="hidden" name="bview" id="bview" value=0>
-	<input type="hidden" name="bhit" id="bhit" value=0>
 </form>
 <div id="boardBut">
 	<input type="button" value="저장" class="but" id="boardInsert">

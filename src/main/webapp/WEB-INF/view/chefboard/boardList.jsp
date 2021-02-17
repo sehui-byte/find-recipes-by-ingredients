@@ -68,7 +68,7 @@
 				   value=<%= cbvo.getBno() %>></td>
 		<td class="tt"><%= cbvo.getBno() %> </td>
 		<td class="tt"><%= cbvo.getBtitle() %> </td>
-		<td class="tt"><%= cbvo.getBnick() %> </td>
+		<td class="tt"><%= cbvo.getMnick() %> </td>
 		<!-- <td class="tt"> </td>  -->
 		<td class="tt"><%= cbvo.getBupdatedate() %> </td>
 		<td class="tt"><img src="/kosmoJns/imgupload/c_<%= cbvo.getBfile() %>"> </td>
