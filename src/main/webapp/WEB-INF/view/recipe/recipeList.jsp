@@ -13,7 +13,7 @@
 			<tr>
 				<td>레시피 번호</td>
 				<td>레시피 이름</td>
-				<td>이미지</td>
+				<td>썸네일</td>
 			</tr>
 			<%
 				List<RecipeVO> list = (List<RecipeVO>)request.getAttribute("list");
@@ -23,7 +23,7 @@
 			%>
 			<tr>
 				<td style="text-align: center;"><%=list.get(i).getRcp_seq()%></td>
-				<td><%=list.get(i).getRcp_nm()%></td>
+				<td><a href="recipeDetail.do?rcp_seq=<%=list.get(i).getRcp_seq()%>"><%=list.get(i).getRcp_nm()%></a></td>
 				<td><img alt="" src="<%=list.get(i).getAtt_file_no_mk()%>" width="60" height="60"></td>
 			</tr>
 			<%
