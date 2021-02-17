@@ -102,7 +102,21 @@
 						html += '</ul>';
 						html += '<a href="' + link +'" class="btn btn-primary">구매하기</a>';
 						//관심 상품 버튼 추가
-						html += '<input type="button" value="&#xf004" id="heartBtn" onclick="saveProductId('+productId+')" style="font-family:FontAwesome; border: none; background: transparent;"/>';
+						html += '<input type="checkbox" class="heartBtn" id='+ productId +' onclick="clickProductId('+productId+')"';
+						var cookieString = getCookie('like');
+						console.log(cookieString);
+						if(cookieString != undefined){
+							var cookie = cookieString.split(',');
+							for(var i in cookie){
+								//기존 저장되어있는 쿠키랑 현재 상품id가 같으면 checkbox 체크해준다
+								if(cookie[i] == productId){
+									html += 'checked />';
+									break;
+								}
+							}
+						}
+						
+						
 						html += '</div></div></div>';
 
 						//비워주기
@@ -113,7 +127,6 @@
 
 						//검색결과값 증가
 						count++;
-						
 					}
 
 					else {//식품이 아닐 경우
@@ -182,18 +195,59 @@
 			    setCookie('like', productId, expire);//쿠키생성
 			  }
 			}
+		
+			
+		//기존 쿠키에 value 제거하기
+		function removeCookie(productId) {
+			  var items = getCookie('like'); // 이미 저장된 값을 쿠키에서 가져오기
+			  var maxItemNum = 30; // 최대 저장 가능한 아이템개수
+			  var expire = 1; // 쿠키값을 저장할 기간
+			  
+			  if (items) {//쿠키가 이미 존재하면
+			    var itemArray = items.split(',');
+			   	for(var i in itemArray){
+			   		if(productId == itemArray[i]){
+			   			console.log("찾았다");
+			   			itemArray.splice(i,1);//특정 인덱스 원소 삭제
+			   		}
+			   	}
+			   	
+			   	if(itemArray.length > 0){
+					  items = itemArray.join(',');
+					  
+					  setCookie('like', items, expire);
+					  console.log("관심상품 해제 결과 쿠키 >> " + items);
+				  }
+				  	
+				  else{
+					  console.log("쿠키 아예 다 삭제");
+					 setCookie('like', items,0);//쿠키 삭제
+				  }
+			  }
+			  
+			  
+			}
 
 		//관심상품 하트모양 버튼 이벤트 //동적 태그에 이벤트 주기
-		function saveProductId(productId){	
-			var button = document.getElementById("heartBtn");
-			//빨강색으로 버튼 컬러 변경
-			//이후에도 관심상품으로 기존에 저장했던건 여전히 빨강색으로 보여야 한다(이점 보완하기)
-			button.style.color = "#FF0000";
-			alert("관심 상품을 저장했습니다!");
-			//쿠키 추가
-			addCookie(productId);
+		function clickProductId(productId){	
+			var btn = document.getElementById(productId);
+			var isChecked = btn.checked; 
+			console.log("isChecked >> " + isChecked);
+			
+			if(isChecked){
+				alert("관심 상품을 저장했습니다!");
+				addCookie(productId);
+				var str = getCookie('like');
+				console.log("관심상품 저장 후 쿠키>> " + str);
+			}
+			else{
+				var str = getCookie('like');
+				console.log("기존 쿠키 >> " + str);
+				alert("관심상품을 해제했습니다");
+				//쿠키 삭제하기 (쿠키에서 그 상품 productId만 삭제)
+				removeCookie(productId);
+			}
 		}
-		
 		
 	</script>
 
