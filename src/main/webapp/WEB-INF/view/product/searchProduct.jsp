@@ -260,7 +260,7 @@
 				var param = {"productId" : productId , "title": title, "image" : image, "link":link, "lprice":lprice, "hprice":hprice};
 				
 				$.ajax({
-					url : 'likeProduct.do',
+					url : 'likeProductInsert.do',
 					type : 'post',
 					contentType :"application/json", //전달한 string데이터는 json형태로 이루어진 데이터임을 알려준다
 					data: JSON.stringify(param),//string으로 전달

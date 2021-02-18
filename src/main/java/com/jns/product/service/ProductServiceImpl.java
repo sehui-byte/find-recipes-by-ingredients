@@ -10,13 +10,28 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jns.product.dao.ProductDAO;
+import com.jns.product.vo.ProductVO;
+
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService{
+	
+	private Logger logger = Logger.getLogger(ProductServiceImpl.class);
+	private ProductDAO pdao;
+	
+	@Autowired(required=false)
+	public ProductServiceImpl(ProductDAO pdao) {
+		this.pdao = pdao;
+	}
 
 	@Override
 	public String naverSearchApi(String keyword) {
@@ -88,5 +103,20 @@ public class ProductServiceImpl implements ProductService{
 		} catch (IOException e) {
 			throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
 		}
+	}
+
+	//관심상품 전체조회
+	@Override
+	public List<ProductVO> likeProductSelectAll() {
+		List<ProductVO> result = pdao.LikeProductSelectAll();
+		return result;
+	}
+
+	//관심상품 등록
+	@Override
+	public int likeProductInsert(ProductVO pvo) {
+		int nCnt = pdao.likeProductInsert(pvo);
+		System.out.println("nCnt >> " + nCnt);
+		return nCnt;
 	}
 }

@@ -2,12 +2,12 @@ package com.jns.product.vo;
 
 public class ProductVO {
 	
-	String productId;
-	String link;
-	String image;
-	String lprice;
-	String hprice;
-	String title;
+	private String productId;
+	private String link;
+	private String image;
+	private String lprice;
+	private String hprice;
+	private String title;
 	
 	public String getTitle() {
 		return title;

@@ -7,4 +7,24 @@ SELECT *
 FROM LIKEPRODUCT
 ORDER BY INSERTDATE
 </select>
+
+<insert id="likeProductInsert" parameterType="pvo">
+INSERT INTO LIKEPRODUCT(
+	PRODUCTID,
+	TITLE,
+	IMAGE,
+	LINK,
+	LPRICE,
+	HPRICE,
+	INSERTDATE
+)VALUES(
+	#{productId, jdbcType=VARCHAR},
+	#{title, jdbcType=VARCHAR},
+	#{image, jdbcType=VARCHAR},
+	#{link, jdbcType=VARCHAR},
+	#{lprice, jdbcType=INTEGER},
+	#{hprice, jdbcType=INTEGER},
+	SYSDATE
+)
+</insert>
 </mapper>
