@@ -33,7 +33,7 @@ public class RecipeController
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "recipelist")
-	public String recipeList(Model model)
+	public String recipelist(Model model)
 	{
 		logger.info("[RecipeController] recipeList() 호출");
 		model.addAttribute("list", recipeService.recipeSelectAll());
@@ -41,7 +41,7 @@ public class RecipeController
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "recipedetail")
-	public String recipeDetail(RecipeVO rvo, Model model)
+	public String recipedetail(RecipeVO rvo, Model model)
 	{
 		logger.info("[RecipeController] recipeDetail() 호출");
 		logger.info("rcp_seq >>> : " + rvo.getRcp_seq());
