@@ -37,20 +37,38 @@ public class RecipeBoardController
 		return "recipeboard/recipeboard";
 	}
 	
-	@RequestMapping(value = "recipeboardSelectAll")
+	@RequestMapping(value = "recipeBoardSelectAll", method = RequestMethod.GET)
 	@ResponseBody
 	public List<RecipeBoardVO> recipeBoardSelectAll()
 	{
 		return recipeBoardService.recipeBoardSelectAll();
 	}
 	
-	@RequestMapping(value = "recipeboardSelect")
+	@RequestMapping(value = "recipeBoardSelect", method = RequestMethod.GET)
 	@ResponseBody
 	public RecipeBoardVO recipeBoardSelect(RecipeBoardVO rbvo)
 	{
 		return recipeBoardService.recipeBoardSelect(rbvo);
 	}
-//	public boolean recipeBoardInsert();
-//	public boolean recipeBoardUpdate();
-//	public boolean recipeBoardDelete();
+	
+	@RequestMapping(value = "recipeBoardInsert", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean recipeBoardInsert(RecipeBoardVO rbvo)
+	{
+		return recipeBoardService.recipeBoardInsert(rbvo);
+	}
+	
+	@RequestMapping(value = "recipeBoardUpdate", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean recipeBoardUpdate(RecipeBoardVO rbvo)
+	{
+		return recipeBoardService.recipeBoardUpdate(rbvo);
+	}
+		
+	@RequestMapping(value = "recipeBoardDelete", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean recipeBoardDelete(RecipeBoardVO rbvo)
+	{
+		return recipeBoardService.recipeBoardDelete(rbvo);
+	}
 }
