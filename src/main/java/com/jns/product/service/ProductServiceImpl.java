@@ -22,6 +22,7 @@ public class ProductServiceImpl implements ProductService{
 	public String naverSearchApi(String keyword) {
 		String clientId = "4nUbUv8Xsm1NJhFkpJXO"; //애플리케이션 클라이언트 아이디값"
 		String clientSecret = "puxx2OuGzl"; //애플리케이션 클라이언트 시크릿값"
+		String display = "&display=100";//출력검색 결과 (최대:100)
 		String text = null;
 
 		try {
@@ -30,7 +31,7 @@ public class ProductServiceImpl implements ProductService{
 			throw new RuntimeException("검색어 인코딩 실패",e);
 		}
 
-		String apiURL = "https://openapi.naver.com/v1/search/shop?query=" + text;    // json 결과
+		String apiURL = "https://openapi.naver.com/v1/search/shop?query=" + text + display;    // json 결과
 
 		Map<String, String> requestHeaders = new HashMap<>();
 		requestHeaders.put("X-Naver-Client-Id", clientId);
