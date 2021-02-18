@@ -2,11 +2,14 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>레시피 게시판</title>
+	</head>
+	<body>
+		<table border="1">
+			
+			
+		</table>
+	</body>
 </html>
