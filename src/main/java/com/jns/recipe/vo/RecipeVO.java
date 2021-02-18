@@ -7,7 +7,7 @@ public class RecipeVO
 	private String rcp_nm;
 	private String rcp_way2;
 	private String rcp_pat2;
-	private String info_wgt2;
+	private String info_wgt;
 	private String info_eng;
 	private String info_car;
 	private String info_pro;
@@ -68,7 +68,7 @@ public class RecipeVO
 	}//Default Constructor
 
 
-	public RecipeVO(String rcp_seq, String rcp_nm, String rcp_way2, String rcp_pat2, String info_wgt2, String info_eng,
+	public RecipeVO(String rcp_seq, String rcp_nm, String rcp_way2, String rcp_pat2, String info_wgt, String info_eng,
 			String info_car, String info_pro, String info_fat, String info_na, String hash_tag, String att_file_no_main,
 			String att_file_no_mk, String rcp_parts_dtls, String manual01, String manual_img01, String manual02,
 			String manual_img02, String manual03, String manual_img03, String manual04, String manual_img04,
@@ -84,7 +84,7 @@ public class RecipeVO
 		this.rcp_nm = rcp_nm;
 		this.rcp_way2 = rcp_way2;
 		this.rcp_pat2 = rcp_pat2;
-		this.info_wgt2 = info_wgt2;
+		this.info_wgt = info_wgt;
 		this.info_eng = info_eng;
 		this.info_car = info_car;
 		this.info_pro = info_pro;
@@ -160,8 +160,8 @@ public class RecipeVO
 	}
 
 
-	public String getInfo_wgt2() {
-		return info_wgt2;
+	public String getInfo_wgt() {
+		return info_wgt;
 	}
 
 
@@ -445,8 +445,8 @@ public class RecipeVO
 	}
 
 
-	public void setInfo_wgt2(String info_wgt2) {
-		this.info_wgt2 = info_wgt2;
+	public void setInfo_wgt(String info_wgt) {
+		this.info_wgt = info_wgt;
 	}
 
 
@@ -712,7 +712,7 @@ public class RecipeVO
 	@Override
 	public String toString() {
 		return "RecipeVO [rcp_seq=" + rcp_seq + ", rcp_nm=" + rcp_nm + ", rcp_way2=" + rcp_way2 + ", rcp_pat2="
-				+ rcp_pat2 + ", info_wgt2=" + info_wgt2 + ", info_eng=" + info_eng + ", info_car=" + info_car
+				+ rcp_pat2 + ", info_wgt=" + info_wgt + ", info_eng=" + info_eng + ", info_car=" + info_car
 				+ ", info_pro=" + info_pro + ", info_fat=" + info_fat + ", info_na=" + info_na + ", hash_tag="
 				+ hash_tag + ", att_file_no_main=" + att_file_no_main + ", att_file_no_mk=" + att_file_no_mk
 				+ ", rcp_parts_dtls=" + rcp_parts_dtls + ", manual01=" + manual01 + ", manual_img01=" + manual_img01

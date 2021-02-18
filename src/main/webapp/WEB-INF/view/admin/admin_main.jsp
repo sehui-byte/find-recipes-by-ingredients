@@ -8,5 +8,9 @@
 </head>
 <body>
 <h3>admin 페이지</h3>
+
+<li>
+	
+</li>
 </body>
 </html>

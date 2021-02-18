@@ -2,15 +2,97 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jns.member.dao.MemberDAO">
+	<resultMap type="com.jns.member.vo.MemberVO" id="mvo">
+		<result property="mno" column="MNO"/>
+		<result property="mlevel" column="MLEVEL"/>
+		<result property="mid" column="MID"/>
+		<result property="mpw" column="MPW"/>
+		<result property="mname" column="MNAME"/>
+		<result property="mnick" column="MNICK"/>
+		<result property="mhp" column="MHP"/>
+		<result property="memail" column="MEMAIL"/>
+		<result property="maddr" column="MADDR"/>
+		<result property="mzipcode" column="MZIPCODE"/>
+		<result property="maddrdetail" column="MADDRDETAIL"/>
+		<result property="mphoto" column="MPHOTO"/>
+		<result property="minsertdate" column="MINSERTDATE"/>
+		<result property="mupdatedate" column="MUPDATEDATE"/>
+		<result property="mdeleteyn" column="MDELETEYN"/>
+	</resultMap>
 
-	<select id="memberLogin"  parameterType="com.jns.member.vo.MemberVO" resultType="com.jns.member.vo.MemberVO">
+
+	<!-- 조회 -->
+	<select id="memberLogin"  parameterType="mvo" resultMap="mvo">
 		SELECT 
-			* 
+			 MNO               
+			,MLEVEL           
+			,MID               
+			,MPW              
+			,MNAME              
+			,MNICK             
+			,MHP                
+			,MEMAIL             
+			,MADDR             
+			,MZIPCODE         
+			,MADDRDETAIL       
+			,MPHOTO            
+			,MINSERTDATE        
+			,MUPDATEDATE       
+			,MDELETEYN         
 		FROM MEMBER A	
 		WHERE A.MID = #{mid, jdbcType=VARCHAR}
 	</select>
 	
-	<insert id="memberInsert" parameterType="com.jns.member.vo.MemberVO" >
+	<!--  아이디 조회(이름 / 이메일) -->
+	<select id="memberFindIDOK" parameterType="mvo" resultMap="mvo">
+		SELECT 
+			 MNO               
+			,MLEVEL           
+			,MID               
+			,MPW              
+			,MNAME              
+			,MNICK             
+			,MHP                
+			,MEMAIL             
+			,MADDR             
+			,MZIPCODE         
+			,MADDRDETAIL       
+			,MPHOTO            
+			,MINSERTDATE        
+			,MUPDATEDATE       
+			,MDELETEYN         
+		FROM MEMBER A	
+		WHERE MNAME = #{mname, jdbcType=VARCHAR}
+		AND MEMAIL = #{memail, jdbcType=VARCHAR}
+	
+	</select>
+
+	<!--  회원 정보 조회(아이디 / 이메일) >> 임시 비밀번호 발급용 -->
+	<select id="memberTempPW" parameterType="mvo" resultMap="mvo">
+		SELECT 
+			 MNO               
+			,MLEVEL           
+			,MID               
+			,MPW              
+			,MNAME              
+			,MNICK             
+			,MHP                
+			,MEMAIL             
+			,MADDR             
+			,MZIPCODE         
+			,MADDRDETAIL       
+			,MPHOTO            
+			,MINSERTDATE        
+			,MUPDATEDATE       
+			,MDELETEYN         
+		FROM MEMBER A	
+		WHERE MID = #{mid, jdbcType=VARCHAR}
+		AND MEMAIL = #{memail, jdbcType=VARCHAR}
+	
+	</select>
+
+	<!-- 회원 가입 -->
+	<insert id="memberInsert" parameterType="mvo">
 
 		INSERT INTO MEMBER(
 					 MNO               
@@ -48,5 +130,18 @@
 					)	
 	
 	</insert>
+	
+	<!-- 임시 비밀번호 발급 -->
+	<update id="memberTempPWOK" parameterType="mvo">
+		
+		UPDATE MEMBER
+		SET
+			MPW = #{mpw, jdbcType=VARCHAR}	
+		WHERE
+			MID = #{mid, jdbcType=VARCHAR}	
+		AND MEMAIL = #{memail, jdbcType=VARCHAR}
+	
+	</update>
+	
 	
 </mapper>

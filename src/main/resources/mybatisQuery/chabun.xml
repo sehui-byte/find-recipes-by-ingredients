@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.jns.chabun.ChabunDAO">
+<mapper namespace="com.jns.chabun.dao.ChabunDAO">
 
-	<select id="getMemChabun" resultType="com.jns.member.vo.MemberVO">
+	<select id="getMemberChabun" resultType="mvo">
 		SELECT NVL(MAX(SUBSTR(A.MNO, -4)), 0) + 1  MNO FROM MEMBER A
 	</select>
+
 	
 	<select id="getQnABoardChabun" resultType="com.jns.qna.vo.QnAVO">
 		SELECT NVL(MAX(SUBSTR(A.SNO, -4)), 0) + 1 SNO FROM QNA A
@@ -14,6 +15,15 @@
 	
 	<select id="getNoticeChabun" resultType="com.jns.notice.vo.NoticeVO">
 		SELECT NVL(MAX(SUBSTR(A.NNO, -4)), 0 ) + 1 NNO FROM NOTICE A
+
+
+	<select id="getBoardChabun" resultType="cbvo">
+		SELECT NVL(MAX(SUBSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
+	</select>
+
+	<select id="getReplyChabun" resultType="reply">
+		SELECT NVL(MAX(SUBSTR(A.RNO, -4)), 0) + 1  BNO FROM REPLY A
+
 	</select>
 	
 </mapper>

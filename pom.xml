@@ -14,7 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
-		<org.springframework-version>4.2.4.RELEASE</org.springframework-version>
+		<org.springsecurity-version>4.2.4.RELEASE</org.springsecurity-version>
 	</properties>
 
 
@@ -122,21 +122,21 @@
 			<version>1.1.2</version>
 		</dependency>
 
-		<!-- Spring Security 4.2.3.RELEASE -->
+		<!-- Spring Security 4.2.4.RELEASE -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>${org.springsecurity-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>${org.springsecurity-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>${org.springsecurity-version}</version>
 		</dependency>
 	
 		<!-- 메일 -->
@@ -155,6 +155,11 @@
 		    <groupId>com.googlecode.json-simple</groupId>
 		    <artifactId>json-simple</artifactId>
 		    <version>1.1.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.2</version>
 		</dependency>
         
         

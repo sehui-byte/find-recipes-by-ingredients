@@ -20,8 +20,11 @@
 		<param-value>/src/main/resources/log4j.properties</param-value>
 	</context-param>
 
+
 	<!-- Spring Security filter -->
 	<!--
+
+
 	<filter>
 		<filter-name>springMultipartFilter</filter-name>
 		<display-name>springMultipartFilter</display-name>
