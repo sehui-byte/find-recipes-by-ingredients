@@ -18,6 +18,6 @@
 	<li><a href="/mem/MemberForm.do">회원가입</a></li>
 	<li><a href="reply/reply.do">댓글 테스트</a></li>
 	<li><a href="recipeList.do">레시피 리스트</a></li>
-</ul>
+	<li><a href="recipeBoard.do">레시피 게시판</a></ul>
 </body>
 </html>
