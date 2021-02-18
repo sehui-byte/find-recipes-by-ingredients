@@ -51,6 +51,7 @@
 		SELECT *
 		FROM BOARD A
 		WHERE A.BDELETEYN = 'Y'
+		AND A.BTYPE = 'C'
 		<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
 		<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
 		<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>

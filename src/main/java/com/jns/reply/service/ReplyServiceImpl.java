@@ -23,11 +23,12 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 	
 	@Override
-	public List<ReplyVO> replyList(String bno) {
+	public List<ReplyVO> replyList(ReplyVO rvo) {
 		// TODO Auto-generated method stub
-		List<ReplyVO> reList = null;
-		reList = replyDAO.replyList(bno);
-		return reList;
+		logger.info("ReplyServiceImpl >> replyList 호출 성공");
+		logger.info("rvo.getBno() >>> : " + rvo.getBno());
+
+		return replyDAO.replyList(rvo);
 	}
 
 	@Override
@@ -47,10 +48,10 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public int replyDelete(String rno) {
+	public int replyDelete(ReplyVO rvo) {
 		// TODO Auto-generated method stub
 		int result = 0;
-		result = replyDAO.replyDelete(rno);
+		result = replyDAO.replyDelete(rvo);
 		return result;
 	}
 

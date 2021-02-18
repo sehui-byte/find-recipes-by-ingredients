@@ -35,7 +35,7 @@ public class ChefBoardServiceImpl implements ChefBoardService {
 	}
 
 	@Override
-	public ChefBoardVO boardDetail(ChefBoardVO cbvo) {
+	public List<ChefBoardVO> boardDetail(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
 		return chefBoardDAO.boardDetail(cbvo);
 	}

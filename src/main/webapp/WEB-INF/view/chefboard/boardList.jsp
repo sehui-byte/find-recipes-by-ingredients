@@ -15,6 +15,44 @@
 		font-weight: bole;
 	}
 </style>
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		
+		//검색버튼
+		$(document).on("click", "#searchBtn", function(){
+			console.log("searchBtn >>> : ");
+			$("#boardList").attr({"method":"GET"
+								 ,"action":"/kosmoJns/chefboard/boardList.do"}).submit();
+		});
+		
+		
+		//datepicker
+		
+		
+		// 입력
+		$(document).on("click", "#I", function(){
+				location.href="/kosmoJns/chefboard/writeForm.do";
+			});	
+		
+		
+		// 제목 클릭시 상세 페이지 이동
+		/*
+		$(".goDetail").click(function(){
+			var bno = $(this).parents("tr").attr("data-num");
+			alert(bno);
+			$("#bno").val(bno);
+			// 상세 페이지로 이동하기 위해 form 추가(id: detailForm)
+			$("#detailForm").attr({
+				"method": "get",
+				"action": "/kosmoJns/chefboard/boardDetail.do"
+			});
+			$("#detailForm").submit();
+		});
+		*/
+	});	
+	
+</script>
 </head>
 <body>
 <% request.setCharacterEncoding("UTF-8");%> 
@@ -25,6 +63,9 @@
 	int nCnt = list.size();
 	System.out.println("boardList.jsp nCnt >>> : " + nCnt);
 %>
+<form name="detailForm" id="detailForm">
+	<input type="hidden" name="bno" id="bno">
+</form>
 <form name="boardList" id="boardList">
 <table border="1">
 	<thead>
@@ -47,7 +88,6 @@
 		</td>	
 	</tr>
 	<tr>
-		<td class="tt">선택</td>
 		<td class="tt">글번호</td>
 		<td class="tt">제목</td>
 		<td class="tt">이름</td>
@@ -63,11 +103,12 @@
 %>
 	<tbody>
 	<tr>
-		<td align="center">
-			<input type="checkbox" name="bno" id="bno" class="bno"
-				   value=<%= cbvo.getBno() %>></td>
 		<td class="tt"><%= cbvo.getBno() %> </td>
-		<td class="tt"><%= cbvo.getBtitle() %> </td>
+		<td class="left">
+			<a href="/kosmoJns/chefboard/boardDetail.do?bno=<%= cbvo.getBno() %>">
+			<%= cbvo.getBtitle() %>
+			</a>
+		</td>
 		<td class="tt"><%= cbvo.getMnick() %> </td>
 		<!-- <td class="tt"> </td>  -->
 		<td class="tt"><%= cbvo.getBupdatedate() %> </td>
@@ -88,8 +129,6 @@
 	<tr>
 		<td colspan="10" align="right">
 			<input type="button" value="글쓰기" id="I">
-			<input type="button" value="글수정" id="U">
-			<input type="button" value="글삭제" id="D">
 		</td>
 	</tr>
 	</tbody>
