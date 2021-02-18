@@ -2,8 +2,6 @@ package com.jns.notice.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,60 +11,63 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jns.chabun.service.*;
 import com.jns.notice.vo.NoticeVO;
 import com.jns.common.ChabunUtil;
 import com.jns.notice.service.NoticeService;
 
+@Controller
 public class NoticeController {
 
 	Logger logger = Logger.getLogger(NoticeController.class);
 	
 	private NoticeService noticeService;
-	// private ChabunService chabunService; 
+	private ChabunService chabunService; 
 	
-	// »ý¼ºÀÚ Autowired 
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Autowired 
 		@Autowired(required=false)	
-		public NoticeController( NoticeService noticeService
-					          //ChabunService chabunService
+		public NoticeController( NoticeService noticeService,
+					          	 ChabunService chabunService
 					           ) {
 			this.noticeService = noticeService;
-			//this.chabunService = chabunService;
+			this.chabunService = chabunService;
 			
 		}
 	
-	//°Ô½ÃÆÇ ±Û ÀÔ·Â Æû 
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ 
 	@RequestMapping(value="noticeForm", method=RequestMethod.GET)
 	public String boardForm() {
-		return "notice/NoticeForm";
+		return "notice/noticeForm";
 	}	
 		
-	@RequestMapping(value="", method=RequestMethod.POST)
+	@RequestMapping(value="noticeSelectAll", method=RequestMethod.POST)
 	public String NoticeSelectPaging(NoticeVO nvo, Model model) {
-		logger.info("NoticeController NoticeSelectPaging ½ÃÀÛ ::");	
-		logger.info("NoticeController NoticeSelectPaging nvo.getSbnum() " + nvo.getPage());
+		logger.info("NoticeController NoticeSelectPaging ï¿½ï¿½ï¿½ï¿½ ::");	
+		logger.info("NoticeController NoticeSelectPaging nvo.getPage() " + nvo.getPage());
 		
 		List<NoticeVO> listS = noticeService.NoticeSelectPaging(nvo);
 		logger.info("NoticeController NoticeSelectPaging listS.size >>>:: " + listS.size());
 		
 		if(listS.size() == 1) {
 			model.addAttribute("listS", listS);
-			return "notice/NoticeList.do";
+			return "notice/noticeInsert";
 		}
 		
-		return "Notice/NoticeList.do";
+		return "notice/noticeForm";
 	}
 	
-	@RequestMapping(value="NoticeInsert", method=RequestMethod.POST)
+	@RequestMapping(value="noticeInsert", method=RequestMethod.POST)
 	public String NoticeInsert(NoticeVO nvo, Model model) {
-		logger.info("NoticeController NoticeInsert  ½ÃÀÛ ::");
+		logger.info("NoticeController NoticeInsert  ï¿½ï¿½ï¿½ï¿½ ::");
 		
-		// Ã¤¹ø
-		
-		// vo ¼¼ÆÃ
+		// vo instance
 		NoticeVO _nvo = null;
 		_nvo = new NoticeVO();
 		
-		_nvo.setNno(nvo.getNno());
+		// chabun setting
+		String nno = ChabunUtil.getNoticeChabun("N", chabunService.getNoticeChabun().getNno());
+		
+		_nvo.setNno(nno);
 		_nvo.setNtitle(nvo.getNtitle());
 		_nvo.setNcontent(nvo.getNcontent());
 		_nvo.setNwriter(nvo.getNwriter());
@@ -85,15 +86,15 @@ public class NoticeController {
 		 String url = "";
 		 
 		 if(nCnt > 0) {
-			 url = "notice/NoticeList.do";
+			 return  "notice/noticeInsert";
 		 }
 		 
-		return "redirect:"+url;
+		return "notice/noticeForm";
 	}
 	
-	@RequestMapping(value="NoticeSelectAll",method=RequestMethod.GET)
+	@RequestMapping(value="NoticeSelectAll",method=RequestMethod.POST)
 	public String boardSelectAll(NoticeVO nvo, Model model) {
-		logger.info("NoticeController NoticeSelectAll ÇÔ¼ö ½ÃÀÛ >>>: ");
+		logger.info("NoticeController NoticeSelectAll ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ >>>: ");
 		
 		
 		logger.info("NoticeController NoticeSelectAll nvo.getNno() >>> : " + nvo.getNno());
@@ -106,40 +107,40 @@ public class NoticeController {
 		logger.info("NoticeController NoticeSelectAll listAll.size() >>> : " + listAll.size());
 		
 		try {
-		// ÀüÃ¼ ¸ñ·ÏÀÇ Å©±â°¡ 0 º¸´Ù Å©´Ù¸é ¸ñ·ÏÀ» ºÒ·¯¿Â´Ù.
 	
 		if(listAll.size() > 0) {
 
 			model.addAttribute("listAll",listAll);
 
-			return "notice/NoticeSelectAll";}
+			return "notice/noticeSelectAll";}
 		}catch(Exception e) {System.out.println("test"+e.getMessage());}
 		
-		return "notice/NoticeForm";
+		return "notice/noticeForm";
 	}
 	
-	@RequestMapping(value="NoticeSelect",method=RequestMethod.POST)
+	// NoticeList : list selection
+	@RequestMapping(value="noticeSelect",method=RequestMethod.POST)
 	public String NoticeSelect(NoticeVO nvo, Model model) {
 		
-		logger.info("NoticeController NoticeSelect ÇÔ¼ö ½ÃÀÛ :::: ");
+		logger.info("NoticeController NoticeSelect ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ :::: ");
 		logger.info("NoticeController NoticeSelect nvo.getNno() " + nvo.getNno());
 		
 		List<NoticeVO> listS = noticeService.NoticeSelect(nvo);
 		logger.info("NoticeController NoticeSelect listS.size >>>:: " + listS.size());
 		
-		// ¼±ÅÃÇÑ °Ô½Ã¹°ÀÌ ÀÖ´Ù¸é °Ô½Ã¹°À» ºÒ·¯¿Â´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½Â´ï¿½.
 		if(listS.size() == 1) {
 			model.addAttribute("listS", listS);
-			return "notice/NoticeSelect";
+			return "notice/noticeSelect";
 		}
 		
-		return "notice/NoticeSelectAll";
+		return "notice/noticeSelectAll";
 		
 	}
 	
-	@RequestMapping(value="NoticeUpdate",method=RequestMethod.POST)
+	@RequestMapping(value="noticeUpdate",method=RequestMethod.POST)
 	public String NoticeUpdate(NoticeVO nvo ,Model model) {
-		logger.info("NoticeController NoticeUpdate ÇÔ¼ö ½ÃÀÛ >> ");
+		logger.info("NoticeController NoticeUpdate ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ >> ");
 		
 		logger.info("NoticeController NoticeUpdate nvo.getNtitle() " + nvo.getNtitle());
 		logger.info("NoticeController NoticeUpdate nvo.getNcontent() " + nvo.getNcontent());
@@ -147,25 +148,25 @@ public class NoticeController {
 		
 		logger.info("NoticeController NoticeUpdate nCnt" + nCnt);
 		
-		//¼±ÅÃÇÑ °Ô½Ã¹°ÀÌ 1º¸´Ù Å©´Ù¸é ¼öÁ¤  Ã¢À¸·Î ÀÌµ¿ 
-		if(nCnt > 0) {return "notice/NoticeUpdate";}
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ Å©ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½  Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ 
+		if(nCnt > 0) {return "notice/noticeUpdate";}
 		
 		
-		return "notice/NoticeSelectAll";
+		return "notice/noticeSelectAll";
 				
 	}	
 	
-	///±Û »èÁ¦ÇÏ±â 
-	@RequestMapping(value="NoticeDelete", method=RequestMethod.POST)
+	///ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ 
+	@RequestMapping(value="noticeDelete", method=RequestMethod.POST)
 	public String NoticeDelete(NoticeVO nvo, Model model) {
-		logger.info("NoticeController NoticeDelete ÇÔ¼ö ÁøÀÔ >>> :");
+		logger.info("NoticeController NoticeDelete ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ >>> :");
 		
 		logger.info("NoticeController NoticeDelete nvo.getNno() >>> : " + nvo.getNno());		
 		int nCnt = noticeService.NoticeDelete(nvo);
 		logger.info("NoticeController NoticeDelete nCnt >>> : " + nCnt);
 		
-		if (nCnt > 0) { return "notice/NoticeDelete";}
+		if (nCnt > 0) { return "notice/noticeDelete";}
 		
-		return "notice/NoticeSelectAll";
+		return "notice/noticeSelectAll";
 	}
 }

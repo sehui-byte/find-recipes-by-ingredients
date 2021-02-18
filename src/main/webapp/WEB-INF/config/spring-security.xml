@@ -27,7 +27,7 @@
 			logout-success-url="/main.do"	
 			delete-cookies="JSESSIONID"
 			invalidate-session="true"/>
-		<s:csrf/>
+		<s:csrf disabled="true"/>
 	</s:http>
 
 	<!--  db로 접속할 수 있도록 -->

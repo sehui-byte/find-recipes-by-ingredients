@@ -7,5 +7,13 @@
 	<select id="getMemChabun" resultType="com.jns.member.vo.MemberVO">
 		SELECT NVL(MAX(SUBSTR(A.MNO, -4)), 0) + 1  MNO FROM MEMBER A
 	</select>
-
+	
+	<select id="getQnABoardChabun" resultType="com.jns.qna.vo.QnAVO">
+		SELECT NVL(MAX(SUBSTR(A.SNO, -4)), 0) + 1 SNO FROM QNA A
+	</select>
+	
+	<select id="getNoticeChabun" resultType="com.jns.notice.vo.NoticeVO">
+		SELECT NVL(MAX(SUBSTR(A.NNO, -4)), 0 ) + 1 NNO FROM NOTICE A
+	</select>
+	
 </mapper>
