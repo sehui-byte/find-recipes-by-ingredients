@@ -22,8 +22,7 @@
 	</select>
 
 	<select id="getReplyChabun" resultType="reply">
-		SELECT NVL(MAX(SUBSTR(A.RNO, -4)), 0) + 1  BNO FROM REPLY A
-
+		SELECT NVL(MAX(SUBSTR(A.RNO, -4)), 0) + 1  RNO FROM REPLY A
 	</select>
 	
 </mapper>

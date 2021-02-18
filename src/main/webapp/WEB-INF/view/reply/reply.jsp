@@ -13,35 +13,31 @@
 		listAll(bno)
 		
 		/* 댓글 내용 저장 이벤트 */
-		$("#replyInsert").click(function(){
+		$(document).on("click", "#replyInsert", function(){
 			//작성자 이름에 대한 입력여부 검사
 			if(!chkSubmit($("#mnick"),"이름을")) return;
 			else if(!chkSubmit($("#rcontent"),"내용을")) return;
 			else{
-				var insertUrl = "/reply/replyInsert.do";
+				var insertUrl = "/kosmoJns/reply/replyInsert.do";
 				console.log("insertUrl >>> : " + insertUrl);
-				var dataParam = JSON.stringify({
-					bno:bno,
-					mnick:$("#mnick").val(),
-					rcontent:$("#rcontent").val()
-				});
+				var method = "POST";
+				var dataParam = {
+						"bno": $("#bno").val(),
+						"mnick": $("#rmnick").val(),
+						"rcontent": $("#rcontent").val()
+				};
 				console.log("dataParam >>> : " + dataParam);
 				/* 글 저장을 위한 POST 방삭의 Ajax 연동 처리 */
 				$.ajax({
 					url : insertUrl,
-					type : "POST",
-					headers : {
-						"Content-Type":"application/json",
-						"X-HTTP-Method-Override":"POST"
-					},
-					dataType:"text",
+					type : method,
 					data:dataParam,
 					success: whenSuccess,
 					error: whenError					
 				});
 				
 				function whenSuccess(resultData){
-					if(resultData=="SUCCESS"){
+					if(resultData=="GOOD"){
 						alert("댓글 등록이 완료되었습니다.");
 						dataReset();
 						listAll(bno);
@@ -83,16 +79,16 @@
 			var rcontent = $("#content").val();
 			if(!chkSubmit($("#content"),"댓글 내용을")) return;
 			else{
-				var updateUrl = "/replies/" + rno + ".do";
+				var updateUrl = "/kosmoJns/reply/"+ rno + ".do";
 				console.log("updateUrl >>> : " + updateUrl);
-				var type = "PUT";
+				var method = "PUT";
 				var dataParam = JSON.stringify({
 					rcontent: rcontent});
 				console.log("dataParam >>> : " + dataParam);
 				
 				$.ajax({
 					url: updateUrl,
-					type: type,
+					type: method,
 					headers: {
 						"Content-Type":"application/json",
 						"X-HTTP-Method-Override":"PUT"
@@ -114,11 +110,42 @@
 		
 		/* 글 삭제를 위한 Ajax 연동 처리 */
 		$(document).on("click", ".delete_btn", function(){
-			var r_num = $(this).parents("li").attr("data-num");
+			var rno = $(this).parents("li").attr("data-num");
+			var target = $(this).parents(".comment_item");
 			console.log("rno >>> : " + rno);
+			console.log("target >>> : " + target);
 			
 			if(confirm("선택하신 댓글을 삭제하시겠습니까?")){
-				var deleteUrl = "/replies/replyDelete/" + rno + ".do";
+				
+				var deleteUrl = "/kosmoJns/reply/replyDelete.do";
+				var method = "POST";
+				var dataParam = {
+						"rno": rno
+				};
+				
+				$.ajax({
+					url: deleteUrl,
+					type: method,
+					data: dataParam,
+					success: whenSuccess,
+					error: whenError
+				});
+				
+				function whenSuccess(resData){
+					console.log("resData >>> : " + resData);
+					alert("댓글이 삭제되었습니다.");
+					if ("GOOD" == resData){
+						target.remove();
+					}	
+				}
+				
+				function whenError(e){
+					alert("댓글을 삭제할 수 없습니다." + e.responseText);
+				}
+				
+		
+				/*
+				var deleteUrl = "/kosmoJns/reply/replyDelete/" + rno + ".do";
 				console.log("deleteUrl >>> : " + deleteUrl);
 				var type = "DELETE";
 				
@@ -140,6 +167,7 @@
 						listAll(bno);
 					}
 				}
+				*/
 			}
 		});
 	});
@@ -148,27 +176,57 @@
 	// 리스트 요청 함수
 	function listAll(){
 		$("#comment_list").html("");
+		console.log("reply.jsp >> listAll()");
+		var listAllURL = "/kosmoJns/reply/listAll.do";
+		var method = "POST";
 		var bno = $("#bno").val();
-		var url = "/reply/all/" + bno + ".kjm";
-		console.log("replylist url >>> : " + url);
-		$.getJSON(url, function(data){
-			console.log(data.length);
-			
-			$(data).each(function(){
-				var rno = this.rno;
-				var mnick = this.mnick;
-				var rcontent = this.rcontent;
-				var rinsertdate = this.rinsertdate;
-				var rupdatedate = this.rupdatedate;
-				addNewItem(rno, mnick, rcontent, rinsertdate, rupdatedate);
-			});
-		}).fail(function(){
-			alert("댓글 목록을 불러오는데 실패했습니다. 잠시 후 다시 시도해 주세요.");
+		var dataParam = {
+				"bno": bno
+		};
+		console.log("dataParam >>> : " + dataParam);
+		
+		$.ajax({
+			url: listAllURL,
+			type: method,
+			data: dataParam,
+			success: whenSuccess,
+			error: whenError
 		});
+		
+		function whenSuccess(resData){
+			console.log("whenSuccess reply listAll resData >>> : " + resData);
+			
+			if(isEmpty(resData)){
+				return false;
+			}
+			
+			let v = resData.split("&");
+			for(let i = 0; i< v.length; i++){
+				console.log(v[i]);
+				let vv = v[i].split(",");
+				let j = 0;
+				for(; j < vv.length-1; j++){
+					//console.log("vv[0] >>> : " + vv[0]);
+					console.log("vv[1] >>> : " + vv[1]);
+					//console.log("vv[2] >>> : " + vv[2]);
+					//console.log("vv[3] >>> : " + vv[3]);
+					//console.log("vv[4] >>> : " + vv[4]);
+				}
+				addNewItem(vv[0], vv[1], vv[2], vv[3], vv[4]);
+			}
+		}
+		function whenError(e){
+			alert("오류 >>> : " + e.responseText);
+		}
 	}
+
 
 	/* 새로운 글을 화면에 추가하기 위한 함수 */
 	function addNewItem(rno, mnick, rcontent, rinsertdate, rupdatedate){
+		
+		//데이터 체크
+		if(isEmpty(rno)) return false;
+		
 		// 새로운 글이 추가될 li 태그 객체
 		var new_li = $("<li>");
 		new_li.attr("data-num", rno);
@@ -200,7 +258,7 @@
 		// 내용
 		var content_p = $("<p>");
 		content_p.addClass("con");
-		content_p.html(r_content);
+		content_p.html(rcontent);
 		
 		// 조립하기
 		writer_p.append(name_span).append(date_span).append(up_input).append(del_input)
@@ -208,15 +266,13 @@
 		$("#comment_list").append(new_li);
 	}
 	
-	/* INPUT 태그들에 대한 초기화 함수 */
+	// INPUT 태그들에 대한 초기화 함수 
 	function dataReset(){
 		$("#rno").val("");
 		$("#rcontent").val("");
 	}
 	
-	/**
-	 * chkSubmit(유효성 검사 대상, 메시지 내용)
-	 */
+	// chkSubmit(유효성 검사 대상, 메시지 내용)
 	function chkSubmit(v_item, v_msg){
 		if(v_item.val().replace(/\s/g,"")==""){
 			alert(v_msg+" 확인해 주세요.");
@@ -227,6 +283,16 @@
 			return true;
 		}
 	}
+	
+	//데이터 체크
+	function isEmpty(val){
+		if(typeof val == "undefined" || val == null || val == ""){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 </script>
 <title>REPLY</title>
 </head>
@@ -235,21 +301,28 @@
 <%
 	String bno = request.getParameter("bno");
 	System.out.println("reply >> bno >>> : " + bno);
+	
 %>
 <div id="replyContainer">
 <h1></h1>
 	<div id="comment_write">
 	<form id="comment_form">
-		<div>
-			<label for="mnick">작성자</label>
-			<input type="text" name="mnick" id="mnick">
-			<input type="hidden" name="bno" id="bno" value="<%=bno%>">
-			<input type="button" id="replyInsert" value="저장하기">
-		</div>
-		<div>
-			<label for="rcontent">댓글 내용</label>
-			<textarea name="rcontent" id="rcontent"></textarea>
-		</div>
+	<table>
+		<tr>
+			<td>작성자</td>
+			<td>
+				<input type="text" name="rmnick" id="rmnick">
+				<input type="hidden" name="bno" id="bno" value="<%=bno%>">
+				<input type="button" id="replyInsert" value="저장하기">
+			</td>
+		</tr>
+		<tr>
+			<td>댓글 내용</td>
+			<td>
+			<textarea name="rcontent" id="rcontent" rows="5" cols="50" style="resize:none"></textarea>
+			</td>
+		</tr>
+	</table>
 	</form>
 	</div>
 	<ul id="comment_list">
