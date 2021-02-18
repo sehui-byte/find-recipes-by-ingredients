@@ -44,12 +44,13 @@ private ProductService service;
 	@RequestMapping(value="likeProduct.do", method=RequestMethod.POST)
 	public String likeList(@RequestBody ProductVO pvo) {
 		
-		System.out.println(pvo.getProductId());
-		System.out.println(pvo.getTitle());
-		System.out.println(pvo.getImage());
-		System.out.println(pvo.getLink());
-		System.out.println(pvo.getLprice());
-		System.out.println(pvo.getHprice());
+//		System.out.println(pvo.getProductId());
+//		System.out.println(pvo.getTitle());
+//		System.out.println(pvo.getImage());
+//		System.out.println(pvo.getLink());
+//		System.out.println(pvo.getLprice());
+//		System.out.println(pvo.getHprice());
+		
 		return null;
 	}
 	
