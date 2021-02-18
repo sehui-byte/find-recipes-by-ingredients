@@ -38,7 +38,8 @@ public class ChabunDAOImpl implements ChabunDAO {
 	public NoticeVO getNoticeChabun() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getNoticeChabun");
-
+	}
+	
 	public ChefBoardVO getBoardChabun() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getBoardChabun");

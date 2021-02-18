@@ -15,7 +15,7 @@
 	
 	<select id="getNoticeChabun" resultType="com.jns.notice.vo.NoticeVO">
 		SELECT NVL(MAX(SUBSTR(A.NNO, -4)), 0 ) + 1 NNO FROM NOTICE A
-
+	</select>
 
 	<select id="getBoardChabun" resultType="cbvo">
 		SELECT NVL(MAX(SUBSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
