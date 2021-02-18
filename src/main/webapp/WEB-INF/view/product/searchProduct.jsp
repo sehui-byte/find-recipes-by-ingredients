@@ -249,35 +249,38 @@
 			var btn = document.getElementById(productId);
 			var isChecked = btn.checked;//버튼 체크 여부 확인
 			console.log("isChecked >> " + isChecked);
-
+			//json형태로 만들어준다
+			var param = {"productId" : productId , "title": title, "image" : image, "link":link, "lprice":lprice, "hprice":hprice};
+			var moveUrl = '';
+			
 			if (isChecked) {
+				moveUrl = 'likeProductInsert.do';
 				alert("관심 상품을 저장했습니다!");
 				addCookie(productId);
 				var str = getCookie('like');
 				console.log("관심상품 저장 후 쿠키>> " + str);
 
-				//json형태로 만들어준다
-				var param = {"productId" : productId , "title": title, "image" : image, "link":link, "lprice":lprice, "hprice":hprice};
-				
-				$.ajax({
-					url : 'likeProductInsert.do',
-					type : 'post',
-					contentType :"application/json", //전달한 string데이터는 json형태로 이루어진 데이터임을 알려준다
-					data: JSON.stringify(param),//string으로 전달
-					success : function(data) {
-						alert("전송성공");
-					},
-					error : function() {
-						console.log("error!");
-					}
-				});
 			} else {
 				var str = getCookie('like');
+				moveUrl = 'likeProductDelete.do';
 				console.log("기존 쿠키 >> " + str);
 				alert("관심상품을 해제했습니다");
 				//쿠키 삭제하기 (쿠키에서 그 상품 productId 값만 삭제)
 				removeCookie(productId);
 			}
+			
+			$.ajax({
+				url : moveUrl,
+				type : 'post',
+				contentType :"application/json", //전달한 string데이터는 json형태로 이루어진 데이터임을 알려준다
+				data: JSON.stringify(param),//string으로 전달
+				success : function(data) {
+					alert("전송성공");
+				},
+				error : function() {
+					console.log("error!");
+				}
+			});
 		}
 	</script>
 

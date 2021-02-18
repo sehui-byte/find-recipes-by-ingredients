@@ -27,4 +27,8 @@ INSERT INTO LIKEPRODUCT(
 	SYSDATE
 )
 </insert>
+
+<delete id="likeProductDelete" parameterType="pvo">
+DELETE FROM LIKEPRODUCT WHERE PRODUCTID = #{productId}
+</delete>
 </mapper>

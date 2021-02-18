@@ -116,7 +116,15 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public int likeProductInsert(ProductVO pvo) {
 		int nCnt = pdao.likeProductInsert(pvo);
-		System.out.println("nCnt >> " + nCnt);
+		System.out.println("삽입된 컬럼 수 >> " + nCnt);
+		return nCnt;
+	}
+
+	//관심상품 삭제
+	@Override
+	public int likeProductDelete(ProductVO pvo) {
+		int nCnt = pdao.likeProductDelete(pvo);
+		System.out.println("삭제된 컬럼 수 >> " + nCnt);
 		return nCnt;
 	}
 }

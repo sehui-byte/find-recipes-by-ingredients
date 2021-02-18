@@ -9,4 +9,5 @@ public interface ProductService {
 	public String naverSearchApi(String keyword);
 	public List<ProductVO> likeProductSelectAll();
 	public int likeProductInsert(ProductVO pvo);
+	public int likeProductDelete(ProductVO pvo);
 }

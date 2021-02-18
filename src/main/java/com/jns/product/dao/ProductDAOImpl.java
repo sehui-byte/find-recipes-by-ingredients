@@ -15,13 +15,21 @@ public class ProductDAOImpl implements ProductDAO {
 	@Autowired(required=false)
 	private SqlSession sqlSession;
 
+	//관심상품 목록조회
 	@Override
 	public List<ProductVO> LikeProductSelectAll() {
 		return sqlSession.selectList("LikeProductSelectAll");
 	}
 
+	//관심상품 등록
 	@Override
 	public int likeProductInsert(ProductVO pvo) {
 		return (Integer)sqlSession.insert("likeProductInsert",pvo);
+	}
+
+	//관심상품 삭제
+	@Override
+	public int likeProductDelete(ProductVO pvo) {
+		return (Integer)sqlSession.delete("likeProductDelete",pvo);
 	}
 }

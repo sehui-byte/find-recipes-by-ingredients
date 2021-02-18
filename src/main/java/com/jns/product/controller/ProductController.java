@@ -34,13 +34,6 @@ public class ProductController {
 		return service.naverSearchApi(keyword);
 	}
 
-
-//	//관심상품 페이지로 이동
-//	@RequestMapping("likeProduct.do")
-//	public String likePage() {
-//		return "product/likeProduct";
-//	}
-
 	//관심상품 정보 조회
 	@RequestMapping(value="likeProduct.do", method=RequestMethod.GET)
 	public String likeList(Model model) {
@@ -52,8 +45,13 @@ public class ProductController {
 
 	//관심상품 정보 db저장하기
 	@RequestMapping(value="likeProductInsert.do", method=RequestMethod.POST)
-	public String likeList(@RequestBody ProductVO pvo) {
+	public void likeProductInsert(@RequestBody ProductVO pvo) {
 		service.likeProductInsert(pvo);
-		return null;
+	}
+
+	//관심상품 정보 삭제
+	@RequestMapping(value="likeProductDelete.do", method=RequestMethod.POST)
+	public void likeProductInsertDelete(@RequestBody ProductVO pvo) {
+		service.likeProductDelete(pvo);
 	}
 }
