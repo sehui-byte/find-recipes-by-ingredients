@@ -29,6 +29,11 @@
 				if (data == "OK"){
 					alert("임시 비밀번호가 발송되었습니다. 이메일을 확인해주시기 바랍니다.");
 					window.close();
+				}else if(data == "ERROR_TEMPPW"){
+					alert("작업이 정상적으로 진행되지 않았습니다. 다시 진행해주시기 바랍니다");
+					
+				}else if(data == "ERROR_INFO"){
+					alert("회원 정보 조회에 실패하였습니다. 아이디와 이메일을 다시 확인해주시기 바랍니다.");
 				}
 			}
 			function whenFail(data){

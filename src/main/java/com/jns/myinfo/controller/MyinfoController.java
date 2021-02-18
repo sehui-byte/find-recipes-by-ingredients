@@ -14,6 +14,6 @@ public class MyinfoController {
 	public String myinfoPage() {
 		logger.info("myinfoPage() 진입 >>> ");
 
-		return "myinfo/main";
+		return "myinfo/myinfo_main";
 	}
 }

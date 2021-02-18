@@ -188,7 +188,7 @@ public class MemberController {
 		return "/login/login";
 	}
 
-	// main 페이지
+	// main 페이지 >> 나중에 없애기
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String main() {
 		logger.info("main page 진입 >>> ");
@@ -270,4 +270,5 @@ public class MemberController {
 			return "ERROR_INFO";
 		}
 	}
+
 }

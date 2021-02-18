@@ -29,6 +29,8 @@
 				if (data == "OK"){
 					alert("아이디가 이메일로 발송되었습니다. 이메일을 확인해주시기 바랍니다.");
 					window.close();
+				}else(data == 'ERROR'){
+					alert("회원 정보 확인에 실패하였습니다. 이름과 이메일을 다시 확인해주시기 바랍니다.")	
 				}
 			}
 			function whenFail(data){

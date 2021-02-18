@@ -43,9 +43,9 @@ public class GoogleMailSend {
 		MimeMessage msg = new MimeMessage(session);
 		
 		try{
-			
+			msg.setSubject(mailSubject);
 			msg.setSentDate(new Date());
-			msg.setFrom(new InternetAddress("fullsleeeep@gmail.com", "MvcMemberAdmin"));
+			msg.setFrom(new InternetAddress("fullsleeeep@gmail.com", "전냉시 운영진"));
 			InternetAddress to = new InternetAddress(receiveMail);
 			msg.setRecipient(Message.RecipientType.TO, to);
 			msg.setText(sendMsg, "UTF-8");
