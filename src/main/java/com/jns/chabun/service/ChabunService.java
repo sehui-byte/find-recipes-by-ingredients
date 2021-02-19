@@ -21,7 +21,6 @@ public interface ChabunService {
 
 	public BoardVO getQnABoardChabun();
 
-	
 	public ChefBoardVO getBoardChabun();
 	public ReplyVO getReplyChabun();
 
