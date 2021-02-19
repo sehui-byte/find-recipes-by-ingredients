@@ -170,5 +170,6 @@ public class QnAController {
 		}
 		
 		return "QnA/qnaInsert";
-	}	
+	}
+	
 }

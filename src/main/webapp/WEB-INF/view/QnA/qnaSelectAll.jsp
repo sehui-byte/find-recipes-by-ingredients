@@ -28,6 +28,7 @@
 			$("#QnAList").attr({
 				"method":"POST",
 				"action":"qnaSelect.do"}).submit();	
+			
 		}); // end of Updatebutton
 	
 	

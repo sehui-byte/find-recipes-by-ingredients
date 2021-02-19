@@ -31,6 +31,7 @@
 			$("#QnAUpdateForm").attr({ "method":"POST"
 				                        ,"action":"qnaDelete.do"}).submit();
 		});	
+		
 	});
 </script>
 </head>
