@@ -1,14 +1,13 @@
 package com.jns.chabun.dao;
 
 import com.jns.member.vo.MemberVO;
-import com.jns.notice.vo.NoticeVO;
-import com.jns.qna.vo.QnAVO;
+import com.jns.board.vo.BoardVO;
 
 public interface ChabunDAO {
 
 	public MemberVO getMemberChabun();
 
-	public NoticeVO getNoticeChabun();
+	public BoardVO getNoticeChabun();
 
-	public QnAVO getQnABoardChabun();
+	public BoardVO getQnABoardChabun();
 }

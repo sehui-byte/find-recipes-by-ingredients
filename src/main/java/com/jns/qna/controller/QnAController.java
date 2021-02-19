@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jns.qna.service.QnAService;
-import com.jns.common.vo.BoardVO;
+import com.jns.board.vo.BoardVO;
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
 
@@ -67,12 +67,12 @@ public class QnAController {
 		logger.info("QnAController QnAInsert  ���� ::");
 		
 		//채번
-		String sno = ChabunUtil.getQnaBoardChabun("Q", chabunService.getQnABoardChabun().getSno());
+		String bno = ChabunUtil.getQnaBoardChabun("Q", chabunService.getQnABoardChabun().getBno());
 		
 		BoardVO _bvo = null;
 		_bvo = new BoardVO();
 		
-		_bvo.setBno(sno);
+		_bvo.setBno(bno);
 		_bvo.setBtitle(bvo.getBtitle());
 		_bvo.setBcontent(bvo.getBcontent());
 		_bvo.setMnick(bvo.getMnick());
@@ -89,8 +89,6 @@ public class QnAController {
 		 
 		 int nCnt = qnaService.QnAInsert(_bvo);
 		 logger.info("QnAController QnAInsert nCnt >>> : " + nCnt);
-		 
-		 String url = "";
 		 
 		 if(nCnt > 0) {
 			 return "QnA/qnaInsert";
@@ -132,7 +130,7 @@ public class QnAController {
 	public String QnASelect(BoardVO bvo,Model model) {
 		
 		logger.info("QnAController QnASelect �Լ� ���� :::: ");
-		logger.info("QnAController QnASelect bvo.getSno() " + bvo.getBno());
+		logger.info("QnAController QnASelect bvo.getBno() " + bvo.getBno());
 		
 		List<BoardVO> listS = qnaService.QnASelect(bvo);
 		logger.info("QnAController boardSelect listS.size >>>:: " + listS.size());

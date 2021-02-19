@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jns.member.vo.MemberVO;
-import com.jns.notice.vo.NoticeVO;
-import com.jns.qna.vo.QnAVO;
+import com.jns.board.vo.BoardVO;
 
 @Repository
 public class ChabunDAOImpl implements ChabunDAO {
@@ -29,14 +28,14 @@ public class ChabunDAOImpl implements ChabunDAO {
 
 
 	@Override
-	public NoticeVO getNoticeChabun() {
+	public BoardVO getNoticeChabun() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getNoticeChabun");
 	}
 
 
 	@Override
-	public QnAVO getQnABoardChabun() {
+	public BoardVO getQnABoardChabun() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getQnaBoardChabun");
 	}
