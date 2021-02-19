@@ -30,7 +30,7 @@
 	<!-- 검색 -->
 	<form>
 		<input class="form-control" list="datalistOptions" name="keyword"
-			onkeydown="return captureReturnKey(event)" onKeyUp="find()"
+			onkeydown="return captureReturnKey(event)"
 			id="keyword" placeholder="Type to search..." " style="width: 300px"/>
 		<button type="button" class="btn btn-outline-primary" onclick="find()">검색</button>
 	</form>

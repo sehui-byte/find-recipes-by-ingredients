@@ -109,6 +109,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<ProductVO> likeProductSelectAll() {
 		List<ProductVO> result = pdao.LikeProductSelectAll();
+		System.out.println("관심상품 개수 >> " + result.size());
 		return result;
 	}
 

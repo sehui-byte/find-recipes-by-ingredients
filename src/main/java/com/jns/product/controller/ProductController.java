@@ -1,5 +1,7 @@
 package com.jns.product.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,21 +39,21 @@ public class ProductController {
 	//관심상품 정보 조회
 	@RequestMapping(value="likeProduct.do", method=RequestMethod.GET)
 	public String likeList(Model model) {
-		model.addAttribute("list",service.likeProductSelectAll());
-		//System.out.println("service.likeProductSelectAll() >> " + service.likeProductSelectAll());
-		//System.out.println(service.likeProductSelectAll().get(0).getTitle());
+		List<ProductVO> list = service.likeProductSelectAll();
+		model.addAttribute("list",list);
+		model.addAttribute("size", list.size());
 		return "product/likeProduct";
 	}
 
 	//관심상품 정보 db저장하기
 	@RequestMapping(value="likeProductInsert.do", method=RequestMethod.POST)
-	public void likeProductInsert(@RequestBody ProductVO pvo) {
-		service.likeProductInsert(pvo);
+	public int likeProductInsert(@RequestBody ProductVO pvo) {
+		return service.likeProductInsert(pvo);
 	}
 
 	//관심상품 정보 삭제
 	@RequestMapping(value="likeProductDelete.do", method=RequestMethod.POST)
-	public void likeProductInsertDelete(@RequestBody ProductVO pvo) {
-		service.likeProductDelete(pvo);
+	public int likeProductInsertDelete(@RequestBody ProductVO pvo) {
+		return service.likeProductDelete(pvo);
 	}
 }
