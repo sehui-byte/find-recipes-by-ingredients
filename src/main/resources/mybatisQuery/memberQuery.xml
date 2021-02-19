@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jns.member.dao.MemberDAO">
-
-
+	
 	<resultMap type="com.jns.member.vo.MemberVO" id="mvo">
 		<result property="mno" column="MNO"/>
 		<result property="mlevel" column="MLEVEL"/>
@@ -21,7 +20,6 @@
 		<result property="mupdatedate" column="MUPDATEDATE"/>
 		<result property="mdeleteyn" column="MDELETEYN"/>
 	</resultMap>
-
 
 	<!-- 조회 -->
 	<select id="memberLogin"  parameterType="mvo" resultMap="mvo">

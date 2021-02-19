@@ -48,7 +48,7 @@ public class MemberDAOImpl implements MemberDAO {
 		logger.info("memberDAOIMpl >>> : Insert  함수 시작 ");
 		logger.info("mvo >>> : " + mvo);
 
-		return sqlSession.insert("MemberInsert", mvo);
+		return sqlSession.insert("memberInsert", mvo);
 	}
 
 	// 회원 정보 수정
@@ -59,7 +59,7 @@ public class MemberDAOImpl implements MemberDAO {
 		logger.info("memberDAOIMpl >>> : Update  함수 시작 ");
 		logger.info("mvo >>> : " + mvo);
 
-		return (Integer) sqlSession.update("MemberUpdate", mvo);
+		return (Integer) sqlSession.update("memberUpdate", mvo);
 	}
 
 	// 회원 정보 삭제
@@ -70,17 +70,17 @@ public class MemberDAOImpl implements MemberDAO {
 		logger.info("memberDAOIMpl >>> : Delete  함수 시작 ");
 		logger.info("mvo >>> : " + mvo);
 
-		return (Integer) sqlSession.update("MemberDelete", mvo);
+		return (Integer) sqlSession.update("memberDelete", mvo);
 	}
 
 	// 아이디 중복 체크
 	@Override
 	public List<MemberVO> checkID(MemberVO mvo) {
 		// TODO Auto-generated method stub
-		logger.info("memberDAOIMpl >>> : CheckID  함수 시작 ");
+		logger.info("memberDAOIMpl >>> : checkID  함수 시작 ");
 		logger.info("mvo >>> : " + mvo);
 
-		return sqlSession.selectList("CheckID", mvo);
+		return sqlSession.selectList("checkID", mvo);
 	}
 
 	// 로그인

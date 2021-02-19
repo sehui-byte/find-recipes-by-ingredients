@@ -35,7 +35,7 @@ public class MemberController {
 	}
 
 	// 회원 가입 화면
-	@RequestMapping(value = "join", method = RequestMethod.GET)
+	@RequestMapping(value = "memberForm", method = RequestMethod.GET)
 	public String member() {
 
 		logger.info("MemberController member 함수 시작 >>> : ");
@@ -44,7 +44,7 @@ public class MemberController {
 	}
 
 	// 회원 등록
-	@RequestMapping(value = "memInsert", method = RequestMethod.POST)
+	@RequestMapping(value = "memberInsert", method = RequestMethod.POST)
 	public String memInsert(MemberVO mvo, Model model) {
 		// public String memInsert(HttpServletRequest req)
 		logger.info("MemberController memInsert 함수 시작 >>> : ");
@@ -89,13 +89,13 @@ public class MemberController {
 
 		// memInsert 함수에서 서비스 호출하기
 		int nCnt = memberService.memberInsert(mvo);
-		logger.info("MemberController memInsert >>> : " + nCnt + " 건 입력 되었습니다.");
+		logger.info("MemberController memberInsert >>> : " + nCnt + " 건 입력 되었습니다.");
 
 		if (nCnt == 1) {
-			return "/memInsert";
+			return "/memberInsert";
 		}
 
-		return "/main";
+		return "login/login";
 
 	}
 
