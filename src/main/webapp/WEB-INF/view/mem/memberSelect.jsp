@@ -46,6 +46,7 @@ $(document).ready(function(){
 <%
 	Object obj = request.getAttribute("listS");
 
+
 	List<MemberVO> aList = (List)obj;
 	int nCnt = aList.size();
 	out.println( "nCnt >>> : " +nCnt );

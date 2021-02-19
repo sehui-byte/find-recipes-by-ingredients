@@ -71,10 +71,7 @@ public class MemberController {
 		int nCnt = memberService.memberInsert(mvo);
 		logger.info("MemberController memberInsert >>> : " + nCnt + " 건 입력 되었습니다.");
 
-		//MemberVO _mvo = null;
-		//_mvo = new MemberVO();
-
-	
+		
 		if (nCnt == 1) {
 			return "mem/memberSelectAll";
 		}

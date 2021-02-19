@@ -25,6 +25,7 @@
 	
 		$(document).ready(function(){
 			
+
 			//버튼 클릭시 회원가입 처리 
 			$(document).on("click","#membtn",function(){
 				console.log("membtn >>> : ");

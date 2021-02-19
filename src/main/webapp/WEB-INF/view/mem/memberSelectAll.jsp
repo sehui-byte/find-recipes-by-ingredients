@@ -39,7 +39,6 @@
 			$('#memFormAll').attr('method', 'GET');
 			$('#memFormAll').submit();
 		});
-		
 		$("#U").click(function(){
 			console.log("U >>> : ");			
 			$('#chkInMnum').val();					

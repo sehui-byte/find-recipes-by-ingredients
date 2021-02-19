@@ -39,7 +39,6 @@ public class MemberDAOImpl implements MemberDAO {
 		logger.info("mvo >>> : " + mvo);
 		return sqlSession.selectOne("memberSelect", mvo);
 	}
-
 	// 회원 등록
 	@Override
 	public int memberInsert(MemberVO mvo) {

@@ -20,7 +20,6 @@
 		<result property="mupdatedate" column="MUPDATEDATE"/>
 		<result property="mdeleteyn" column="MDELETEYN"/>
 	</resultMap>
-
 	<!-- 로그인-->
 	<select id="memberLogin"  parameterType="mvo" resultMap="mvo">
 		SELECT 
