@@ -1,20 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/include/jsp/jspinclude.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>QnA : Áú¹®°Ô½ÃÆÇ : ±Û¾²±â</title>
+<meta charset="UTF-8">
+<title>QnA : ì§ˆë¬¸ê²Œì‹œíŒ : ê¸€ì“°ê¸°</title>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
+
 		
-		$(document).on("click", "sbtn", function(){
-			console.log("sbtn >>> : ");
+		$(document).on("click", "#sbtn", function(){
+			console.log("sbtn >>> : ");	
 			$("#QnAForm").attr({
-				'action':'QnAInsert.do',
+				'action':'qnaInsert.do',
 				'method':'POST',
 				'enctype':'multipart/form-data'
 			}).submit();
@@ -24,38 +27,39 @@
 </head>
 <body>
 <form name="QnAForm" id="QnAForm">
+<s:csrfInput/>
 <table border="1" align="center">
 	<tr>
-		<td colspan="2" align="center">Áú¹® ±Û¾²±â</td>
+		<td colspan="2" align="center">ì§ˆë¬¸ ê¸€ì“°ê¸°</td>
 	</tr>
 	<tr>
-		<td align="center">±Û¹øÈ£</td>
+		<td align="center">ê¸€ë²ˆí˜¸</td>
 		<td><input type="text" name="sno" id="sno" size="20" readonly></td>
 	</tr>
 	<tr>
-		<td align="center">±ÛÁ¦¸ñ</td>
+		<td align="center">ê¸€ì œëª©</td>
 		<td><input type="text" name="stitle" id="stitle" size="53"></td>
 	</tr>
 	<tr>
-		<td align="center">±Û³»¿ë</td>
+		<td align="center">ê¸€ë‚´ìš©</td>
 		<td>
 		<textarea name="scontent" id="scontent" cols="50" rows="10">
 		</textarea>
 		</td>
 	</tr>
 	<tr>
-		<td align="center">±Û ÀÛ¼ºÀÚ</td>
+		<td align="center">ê¸€ ìž‘ì„±ìž</td>
 		<td><input type="text" name="swriter" id="swriter" size="20"></td>
 	</tr>
 	<tr>
-		<td align="center">Ã·ºÎÆÄÀÏ</td>
+		<td align="center">ì²¨ë¶€íŒŒì¼</td>
 		<td>
 		<input type="file" name="sfile" id="sfile">
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2" align="right">
-		<input type="button" value="±Û¾²±â" id="sbtn">
+		<input type="button" value="ê¸€ì“°ê¸°" id="sbtn">
 		</td>
 	</tr>
 </table>

@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jns.member.dao.MemberDAO">
+
+
 	<resultMap type="com.jns.member.vo.MemberVO" id="mvo">
 		<result property="mno" column="MNO"/>
 		<result property="mlevel" column="MLEVEL"/>
@@ -143,5 +145,40 @@
 	
 	</update>
 	
+	<!-- 회원 전체 조회  -->
 	
+	<select id="MemberSelectAll" resultType="mvo">
+	SELECT *
+	FROM  MEMBER A
+	WHERE A.MDELETEYN='Y'
+	AND	  A.MNO = #{mno,jdbcType=VARCHAR}
+	
+	</select>
+	
+	<!-- 회원 정보 수정  -->
+	<update id="MemberUpdate" parameterType="mvo">
+	UPDATE	MEMBER
+		SET MNICK = #{mnick,jdbcType=VARCHAR}
+			MADDR = #{maddr,jdbcType=VARCHAR}
+		   ,MPHOTO = #{mphoto,jdbcType=VARCHAR}
+	WHERE MDELETEYN = 'Y'
+	AND   MNO = #{mno,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 회원 삭제 -->
+	<update id="MemberDelete" parameterType="memberVO">
+	UPDATE MEMBER
+		SET MUPDATEDATE = SYSDATE
+			MDELETEYN = 'N'
+	WHERE	MDELETEYN = 'Y'
+	AMD 	MNO = {mno,jdbcType=VARCHAR}
+	</update>
+	<!-- 아이디 중복 확인   -->
+	<select id="CheckID" parameterType ="memberVO" resultType="memberVO">
+
+	SELECT A.MID MID 
+	FROM 	MEMBER A 
+	WHERE	A.MDELETEYN = 'Y'
+	AND 	A.MID = #{mid, jdbcType=VARCHAR}
+	</select>
 </mapper>

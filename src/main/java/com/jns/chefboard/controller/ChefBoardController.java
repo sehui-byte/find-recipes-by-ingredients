@@ -45,7 +45,10 @@ public class ChefBoardController {
 		return "test";
 	}
 	
-	// 글쓰기 Form 출력하기
+	
+	/********************************************************************************************
+	* 글쓰기 Form
+	********************************************************************************************/
 	@RequestMapping(value="chefboard/writeForm", method=RequestMethod.GET)
 	public String writeForm(ChefBoardVO cbvo, Model model, HttpServletRequest request) {
 		logger.info("chefC >> writeForm 호출 성공");
@@ -58,7 +61,10 @@ public class ChefBoardController {
 		return "chefboard/writeForm";
 	}
 	
-	// 글쓰기
+	
+	/********************************************************************************************
+	* 글쓰기
+	********************************************************************************************/
 	@RequestMapping(value="chefboard/boardInsert", method=RequestMethod.POST)
 	public String boardInsert(ChefBoardVO cbvo) {
 		logger.info("chefC >> boardInsert 호출 성공");
@@ -101,7 +107,10 @@ public class ChefBoardController {
 		return "redirect:"+url;
 	}
 	
-	// 글 전체 목록
+	
+	/********************************************************************************************
+	* 글 전체 조회
+	********************************************************************************************/
 	@RequestMapping(value="/chefboard/boardList", method=RequestMethod.GET)
 	public String boardList(ChefBoardVO cbvo, Model model) {
 		logger.info("chefC >> boardList 호출 성공");
@@ -117,14 +126,38 @@ public class ChefBoardController {
 		return "chefboard/boardList";
 	}
 	
-	// 수정 폼 출력하기
+	
+	/********************************************************************************************
+	* 글 상세 조회
+	********************************************************************************************/
+	@RequestMapping(value="/chefboard/boardDetail", method=RequestMethod.GET)
+	public String boardDetail(ChefBoardVO cbvo, Model model) {
+		logger.info("chefC >> boardDetail 호출 성공");
+		logger.info("chefC >> bno >>> : " + cbvo.getBno());
+		
+		List<ChefBoardVO> listD = chefBoardService.boardDetail(cbvo);
+		
+		if(listD.size() == 1) {
+			model.addAttribute("listD", listD);
+		}
+		
+		return "chefboard/boardDetail";
+	}
+	
+	
+	/********************************************************************************************
+	* 글 수정 Form
+	********************************************************************************************/
 	public String updateForm(ChefBoardVO cbvo, Model model) {
-		logger.info("chefC >> updateForm 호출 성공");
+		logger.info("chefC >> updateform 호출 성공");
 		
 		return null;
 	}
 	
-	// 수정
+	
+	/********************************************************************************************
+	* 글 수정
+	********************************************************************************************/
 	public String boardUpdate(@ModelAttribute ChefBoardVO cbvo, HttpServletRequest request)
 							throws IllegalStateException, IOException{
 		logger.info("chefC >> boardUpdate 호출 성공");
@@ -132,7 +165,10 @@ public class ChefBoardController {
 		return null;
 	}
 	
-	// 삭제
+
+	/********************************************************************************************
+	* 글 삭제
+	********************************************************************************************/
 	public String boardDelete(@ModelAttribute ChefBoardVO cbvo, HttpServletRequest request)
 								throws IOException{
 		logger.info("chefC >> boardDelete 호출 성공");

@@ -2,18 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 		 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		 
-<mapper namespace="com.jns.reply.dao.replyDAO">
+<mapper namespace="com.jns.reply.dao.ReplyDAO">
+
+	<resultMap type="com.jns.reply.vo.ReplyVO" id="reply">
+		<result property="rno" column="RNO"/>
+		<result property="rcontent" column="RCONTENT"/>
+		<result property="bno" column="BNO"/>
+		<result property="mnick" column="MNICK"/>
+		<result property="rinsertdate" column="RINSERTDATE"/>
+		<result property="rupdatedate" column="RUPDATEDATE"/>
+		<result property="rdeleteyn" column="RDELETEYN"/>
+	</resultMap>
+
 
 	<!-- 댓글 기본 조회 -->
 	<select id="replyList" parameterType="reply" resultType="reply">
 		SELECT
-				 A.RNO
-				,A.RCONTENT
-				,A.BNO
-				,A.MNICK
-				,TO_CHAR(A.RINSERTDATE, 'YYYY-MM-DD HH24:MI:SS') AS RINSERTDATE
-				,TO_CHAR(A.RUPDATEDATE, 'YYYY-MM-DD HH24:MI:SS') AS RUPDATEDATE
-				,A.RDELETEYN
+				*
 		FROM	 REPLY A		 
 		WHERE	 A.BNO = #{bno, jdbcType=VARCHAR}
 		AND		 A.RDELETEYN = 'Y'
@@ -57,7 +62,7 @@
 	<!-- 댓글 삭제 -->	
 	<update id="replyDelete" parameterType="reply">
 		UPDATE   REPLY
-		SET		 RDELETEYN = 'Y'
+		SET		 RDELETEYN = 'N'
 				,RUPDATEDATE = SYSDATE
 		WHERE	 RNO = #{rno, jdbcType=VARCHAR}
 		AND		 RDELETEYN = 'Y'		 

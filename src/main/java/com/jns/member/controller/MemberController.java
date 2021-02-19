@@ -40,7 +40,7 @@ public class MemberController {
 
 		logger.info("MemberController member 함수 시작 >>> : ");
 
-		return "/join";
+		return "mem/memberForm";
 	}
 
 	// 회원 등록
@@ -54,19 +54,31 @@ public class MemberController {
 
 		// 현재 널값나오는 거 수정 중
 
-//		//mvo.getMlevel();
-//		mvo.getMid();
-//		mvo.getMpw();
-//		mvo.getMnick();
-//		mvo.getMhp();
-//		mvo.getMemail();
-//		mvo.getMaddr();
-//		mvo.getMzipcode();
-//		mvo.getMaddrdetail();
-//		mvo.getMphoto();
+		//MemberVO _mvo = null;
+		mvo = new MemberVO();
 
-		String maddr = "";
-		mvo.setMaddr(maddr);
+		// 현재 널값나오는 거 수정 중
+	
+		mvo.setMlevel(mvo.getMlevel());
+		logger.info("mvo.getMlevel >>>> "+mvo.getMlevel());
+		mvo.setMid(mvo.getMid());
+		logger.info("_mvo.getMid >>>> "+mvo.getMid());
+		mvo.setMlevel(mvo.getMlevel());
+		logger.info("_mvo.getMpw >>> " +mvo.getMpw());		
+		
+		
+		mvo.setMpw(mvo.getMpw());
+		mvo.setMnick(mvo.getMnick());
+		mvo.setMhp(mvo.getMhp());
+		mvo.setMemail(mvo.getMemail());
+		mvo.setMaddr(mvo.getMaddr());
+		logger.info(" mvo.getMaddr() >>> "+mvo.getMaddr());
+//		mvo.setMzipcode(mzipcode);
+//		mvo.setMaddrdetail(maddrdetail);
+//		mvo.setMphoto(mphoto);
+
+
+
 
 		// 회원번호 채번 가져오기
 		String mno = ChabunUtil.getMemberChabun("M", chabunService.getMemberChabun().getMno());
@@ -83,7 +95,7 @@ public class MemberController {
 			return "/memInsert";
 		}
 
-		return "/MemberForm";
+		return "/main";
 
 	}
 
@@ -145,7 +157,7 @@ public class MemberController {
 		if (nCnt == 1) {
 			return "mem/memUpdate";
 		}
-		return "MemberForm";
+		return "/main";
 	}
 
 	// 회원 삭제
@@ -161,7 +173,7 @@ public class MemberController {
 		if (nCnt == 1) {
 			return "mem/memDelete";
 		}
-		return "MemberForm";
+		return "/main";
 	}
 
 	// 아이디 중복 체크

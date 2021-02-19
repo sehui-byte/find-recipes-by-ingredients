@@ -23,7 +23,7 @@
 			%>
 			<tr>
 				<td style="text-align: center;"><%=list.get(i).getRcp_seq()%></td>
-				<td><a href="recipeDetail.do?rcp_seq=<%=list.get(i).getRcp_seq()%>"><%=list.get(i).getRcp_nm()%></a></td>
+				<td><a href="recipedetail.do?rcp_seq=<%=list.get(i).getRcp_seq()%>"><%=list.get(i).getRcp_nm()%></a></td>
 				<td><img alt="" src="<%=list.get(i).getAtt_file_no_mk()%>" width="60" height="60"></td>
 			</tr>
 			<%

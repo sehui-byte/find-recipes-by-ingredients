@@ -1,6 +1,5 @@
 package com.jns.recipe.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,16 +31,16 @@ public class RecipeController
 		this.recipeService = recipeServce;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "recipeList")
-	public String recipeList(Model model)
+	@RequestMapping(method = RequestMethod.GET, value = "recipelist")
+	public String recipelist(Model model)
 	{
 		logger.info("[RecipeController] recipeList() 호출");
 		model.addAttribute("list", recipeService.recipeSelectAll());
 		return "recipe/recipeList";
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "recipeDetail")
-	public String recipeDetail(RecipeVO rvo, Model model)
+	@RequestMapping(method = RequestMethod.GET, value = "recipedetail")
+	public String recipedetail(RecipeVO rvo, Model model)
 	{
 		logger.info("[RecipeController] recipeDetail() 호출");
 		logger.info("rcp_seq >>> : " + rvo.getRcp_seq());

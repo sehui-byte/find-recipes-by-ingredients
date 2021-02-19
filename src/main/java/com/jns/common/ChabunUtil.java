@@ -131,6 +131,16 @@ public abstract class ChabunUtil {
 		return ymd.concat(c);
 	}
 	
+	//댓글
+		public static String numPad11(String t, String c){
+			
+			for (int i=c.length(); i < 4; i++) {
+				c = "0" + c;
+			}				
+			String ymd = DateFormatUtil.ymdFormats(t);
+			
+			return ymd.concat(c);
+		}
 	
 	
 	// 회원 번호 
@@ -148,7 +158,7 @@ public abstract class ChabunUtil {
 	// 게시판 댓글 글 번호  
 	public static String getReplyChabun(String type, String memNum) {
 		
-		return BIZ_GUBUN_RB.concat(ChabunUtil.numPad(type, memNum));
+		return BIZ_GUBUN_RB.concat(ChabunUtil.numPad11(type, memNum));
 	}
 
 	// 공지사항  번호  

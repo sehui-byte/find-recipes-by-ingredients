@@ -25,9 +25,9 @@ public class ChefBoardDAOImpl implements ChefBoardDAO {
 	}
 
 	@Override
-	public ChefBoardVO boardDetail(ChefBoardVO cbvo) {
+	public List<ChefBoardVO> boardDetail(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
-		return (ChefBoardVO)sqlSession.selectOne("boardDetail");
+		return sqlSession.selectOne("boardDetail");
 	}
 
 	@Override
