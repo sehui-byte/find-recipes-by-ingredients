@@ -6,7 +6,7 @@ public class ChefBoardVO {
 	private String btype;
 	private String btitle;
 	private String bcontent;
-	private String bnick;
+	private String mnick;
 	private String bfile;
 	private String binsertdate;
 	private String bupdatedate;
@@ -57,13 +57,13 @@ public class ChefBoardVO {
 	public ChefBoardVO() {}
 	
 	public ChefBoardVO(String bno, String btype, String btitle, String bcontent
-					  ,String bnick, String bfile, String binsertdate, String bupdatedate
+					  ,String mnick, String bfile, String binsertdate, String bupdatedate
 					  ,String bview, String bdeleteyn, String bhits) {
 		this.bno = bno;
 		this.btype = btype;
 		this.btitle = btitle;
 		this.bcontent = bcontent;
-		this.bnick = bnick;
+		this.mnick = mnick;
 		this.bfile = bfile;
 		this.binsertdate = binsertdate;
 		this.bupdatedate = bupdatedate;
@@ -98,11 +98,11 @@ public class ChefBoardVO {
 	public void setBcontent(String bcontent) {
 		this.bcontent = bcontent;
 	}
-	public String getBnick() {
-		return bnick;
+	public String getMnick() {
+		return mnick;
 	}
-	public void setBnick(String bnick) {
-		this.bnick = bnick;
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
 	}
 	public String getBfile() {
 		return bfile;

@@ -19,7 +19,7 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_O	= "O"; // 구매내역 번호
 	public static final String BIZ_GUBUN_CA	= "CA"; // 장바구니 번호
 	
-//	public static final String BIZ_GUBUN_RB = "RB"; // 게시판 댓글: REPLY 
+	public static final String BIZ_GUBUN_RB = "R"; // 게시판 댓글: REPLY 
 //	public static final String BIZ_GUBUN_BUY = "P"; // 구매게시판
 	
 
@@ -131,10 +131,20 @@ public abstract class ChabunUtil {
 		return ymd.concat(c);
 	}
 	
+	//댓글
+		public static String numPad11(String t, String c){
+			
+			for (int i=c.length(); i < 4; i++) {
+				c = "0" + c;
+			}				
+			String ymd = DateFormatUtil.ymdFormats(t);
+			
+			return ymd.concat(c);
+		}
 	
 	
 	// 회원 번호 
-	public static String getMemChabun(String type, String memNum) {
+	public static String getMemberChabun(String type, String memNum) {
 		
 		return BIZ_GUBUN_M.concat(ChabunUtil.numPad(type, memNum));
 	}
@@ -144,13 +154,13 @@ public abstract class ChabunUtil {
 		
 		return BIZ_GUBUN_B.concat(ChabunUtil.numPad2(type, memNum));
 	}
-/**	
+	
 	// 게시판 댓글 글 번호  
-	public static String getRboardChabun(String type, String memNum) {
+	public static String getReplyChabun(String type, String memNum) {
 		
-		return BIZ_GUBUN_RB.concat(ChabunUtil.numPad(type, memNum));
+		return BIZ_GUBUN_RB.concat(ChabunUtil.numPad11(type, memNum));
 	}
-**/	
+
 	// 공지사항  번호  
 	public static String getNoticeChabun(String type, String memNum) {
 		
@@ -212,7 +222,7 @@ public abstract class ChabunUtil {
 		// TODO Auto-generated method stub
 		
 		String c = "1";
-		System.out.println("회원번호 >>> : " + ChabunUtil.getMemChabun("D", c));
+		System.out.println("회원번호 >>> : " + ChabunUtil.getMemberChabun("D", c));
 		System.out.println("일반레시피게시판>>> : " + ChabunUtil.getBoardChabun("D", c));
 		//System.out.println(">>> : " + ChabunUtil.getRboardChabun("N", c));
 		System.out.println("공지사항>>> : " + ChabunUtil.getNoticeChabun("D", c));

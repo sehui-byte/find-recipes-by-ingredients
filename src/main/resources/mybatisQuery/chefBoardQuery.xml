@@ -7,7 +7,7 @@
 		<result property="btype" column="BTYPE"/>
 		<result property="btitle" column="BTITLE"/>
 		<result property="bcontent" column="BCONTENT"/>
-		<result property="bnick" column="BNICK"/>
+		<result property="mnick" column="MNICK"/>
 		<result property="bfile" column="BFILE"/>
 		<result property="binsertdate" column="BINSERTDATE"/>
 		<result property="bupdatedate" column="BUPDATEDATE"/>
@@ -23,7 +23,7 @@
 						 ,BTYPE
 						 ,BTITLE
 						 ,BCONTENT
-						 ,BNICK
+						 ,MNICK
 						 ,BFILE
 						 ,BINSERTDATE
 						 ,BUPDATEDATE
@@ -36,7 +36,7 @@
 						 ,'C'
 						 ,#{btitle, jdbcType=VARCHAR}
 						 ,#{bcontent, jdbcType=VARCHAR}
-						 ,#{bnick, jdbcType=VARCHAR}
+						 ,#{mnick, jdbcType=VARCHAR}
 						 ,#{bfile, jdbcType=VARCHAR}
 						 ,SYSDATE
 						 ,SYSDATE
@@ -51,6 +51,7 @@
 		SELECT *
 		FROM BOARD A
 		WHERE A.BDELETEYN = 'Y'
+		AND A.BTYPE = 'C'
 		<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
 		<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
 		<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
@@ -66,7 +67,7 @@
 			<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 		</if>
 		<if test="keyfilter=='key4'">
-			<![CDATA[AND A.BNICK LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND A.MNICK LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 		</if>
 		<if test="keyfilter=='key5'">
 			<![CDATA[AND A.BNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
@@ -82,7 +83,7 @@
 				,A.BTYPE
 				,A.BTITLE
 				,A.BCONTENT
-				,A.BNICK
+				,A.MNICK
 				,A.BFILE
 				,TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD HH24:MI:SS') BINSERTDATE
 				,TO_CHAR(A.BUPDATEDATE, 'YYYY-MM-DD HH24:MI:SS') BUPDATEDATE
