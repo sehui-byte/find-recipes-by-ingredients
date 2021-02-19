@@ -40,7 +40,7 @@ public class MemberController {
 
 		logger.info("MemberController member 함수 시작 >>> : ");
 
-		return "/join";
+		return "mem/memberForm";
 	}
 
 	// 회원 등록
@@ -95,7 +95,7 @@ public class MemberController {
 			return "/memInsert";
 		}
 
-		return "/MemberForm";
+		return "/main";
 
 	}
 
@@ -157,7 +157,7 @@ public class MemberController {
 		if (nCnt == 1) {
 			return "mem/memUpdate";
 		}
-		return "MemberForm";
+		return "/main";
 	}
 
 	// 회원 삭제
@@ -173,7 +173,7 @@ public class MemberController {
 		if (nCnt == 1) {
 			return "mem/memDelete";
 		}
-		return "MemberForm";
+		return "/main";
 	}
 
 	// 아이디 중복 체크
