@@ -9,6 +9,8 @@
 			RECIPE_BOARD
 		WHERE
 			RB_DELETEYN = 'N'
+		ORDER BY
+			RBNO
 	</select>
 	
 	<select id="recipeBoardSelect" parameterType="rbvo" resultType="rbvo">
@@ -19,6 +21,8 @@
 		WHERE
 			RB_DELETEYN = 'N',
 			AND RBNO = #{rbno}
+		ORDER BY
+			RBNO
 	</select>
 	
 	<insert id="recipeBoardInsert" parameterType="rbvo">
@@ -27,6 +31,8 @@
 			RBNO,
 			MNO,
 			RCP_NM,
+			RB_VIEWCNT,
+			RB_LIKECNT,
 			RCP_WAY2,
 			RCP_PAT2,
 			HASH_TAG,
@@ -80,6 +86,8 @@
 			#{rbno, jdbcType=VARCHAR},
 			#{mno, jdbcType=VARCHAR},
 			#{rcp_nm, jdbcType=VARCHAR},
+			#{rb_viewcnt, jdbcType=NUMERIC},
+			#{rb_likecnt, jdbcType=NUMERIC},
 			#{rcp_way2, jdbcType=VARCHAR},
 			#{rcp_pat2, jdbcType=VARCHAR},
 			#{hash_tag, jdbcType=VARCHAR},
@@ -135,6 +143,8 @@
 			RECIPE_BOARD
 		SET
 			RCP_NM = #{rcp_nm, jdbcType=VARCHAR},
+			RB_VIEWCNT = #{rb_viewcnt, jdbcType=NUMERIC},
+			RB_LIKECNT = #{rb_likecnt, jdbcType=NUMERIC},
 			RCP_WAY2 = #{rcp_way2, jdbcType=VARCHAR},
 			RCP_PAT2 = #{rcp_pat2, jdbcType=VARCHAR},
 			HASH_TAG = #{hash_tag, jdbcType=VARCHAR},

@@ -5,6 +5,8 @@ public class RecipeBoardVO
 	private String rbno;
 	private String mno;
 	private String rcp_nm;
+	private String rb_viewcnt;
+	private String rb_likecnt;
 	private String rcp_way2;
 	private String rcp_pat2;
 	private String hash_tag;
@@ -58,20 +60,24 @@ public class RecipeBoardVO
 	{
 		
 	}//Default Constructor
-	
-	public RecipeBoardVO(String rbno, String mno, String rcp_nm, String rcp_way2, String rcp_pat2, String hash_tag,
-			String main_img, String rcp_parts_dtls, String manual01, String manual_img01, String manual02,
-			String manual_img02, String manual03, String manual_img03, String manual04, String manual_img04,
-			String manual05, String manual_img05, String manual06, String manual_img06, String manual07,
-			String manual_img07, String manual08, String manual_img08, String manual09, String manual_img09,
-			String manual10, String manual_img10, String manual11, String manual_img11, String manual12,
-			String manual_img12, String manual13, String manual_img13, String manual14, String manual_img14,
-			String manual15, String manual_img15, String manual16, String manual_img16, String manual17,
-			String manual_img17, String manual18, String manual_img18, String manual19, String manual_img19,
-			String manual20, String manual_img20, String rb_insertdate, String rb_updatedate, String rb_deleteyn) {
+
+	public RecipeBoardVO(String rbno, String mno, String rcp_nm, String rb_viewcnt, String rb_likecnt, String rcp_way2,
+			String rcp_pat2, String hash_tag, String main_img, String rcp_parts_dtls, String manual01,
+			String manual_img01, String manual02, String manual_img02, String manual03, String manual_img03,
+			String manual04, String manual_img04, String manual05, String manual_img05, String manual06,
+			String manual_img06, String manual07, String manual_img07, String manual08, String manual_img08,
+			String manual09, String manual_img09, String manual10, String manual_img10, String manual11,
+			String manual_img11, String manual12, String manual_img12, String manual13, String manual_img13,
+			String manual14, String manual_img14, String manual15, String manual_img15, String manual16,
+			String manual_img16, String manual17, String manual_img17, String manual18, String manual_img18,
+			String manual19, String manual_img19, String manual20, String manual_img20, String rb_insertdate,
+			String rb_updatedate, String rb_deleteyn) 
+	{
 		this.rbno = rbno;
 		this.mno = mno;
 		this.rcp_nm = rcp_nm;
+		this.rb_viewcnt = rb_viewcnt;
+		this.rb_likecnt = rb_likecnt;
 		this.rcp_way2 = rcp_way2;
 		this.rcp_pat2 = rcp_pat2;
 		this.hash_tag = hash_tag;
@@ -132,6 +138,14 @@ public class RecipeBoardVO
 
 	public String getRcp_nm() {
 		return rcp_nm;
+	}
+
+	public String getRb_viewcnt() {
+		return rb_viewcnt;
+	}
+
+	public String getRb_likecnt() {
+		return rb_likecnt;
 	}
 
 	public String getRcp_way2() {
@@ -338,6 +352,14 @@ public class RecipeBoardVO
 		this.rcp_nm = rcp_nm;
 	}
 
+	public void setRb_viewcnt(String rb_viewcnt) {
+		this.rb_viewcnt = rb_viewcnt;
+	}
+
+	public void setRb_likecnt(String rb_likecnt) {
+		this.rb_likecnt = rb_likecnt;
+	}
+
 	public void setRcp_way2(String rcp_way2) {
 		this.rcp_way2 = rcp_way2;
 	}
@@ -531,26 +553,27 @@ public class RecipeBoardVO
 	}
 
 	@Override
-	public String toString() {
-		return "RecipeBoardVO [rbno=" + rbno + ", mno=" + mno + ", rcp_nm=" + rcp_nm + ", rcp_way2=" + rcp_way2
-				+ ", rcp_pat2=" + rcp_pat2 + ", hash_tag=" + hash_tag + ", main_img=" + main_img + ", rcp_parts_dtls="
-				+ rcp_parts_dtls + ", manual01=" + manual01 + ", manual_img01=" + manual_img01 + ", manual02="
-				+ manual02 + ", manual_img02=" + manual_img02 + ", manual03=" + manual03 + ", manual_img03="
-				+ manual_img03 + ", manual04=" + manual04 + ", manual_img04=" + manual_img04 + ", manual05=" + manual05
-				+ ", manual_img05=" + manual_img05 + ", manual06=" + manual06 + ", manual_img06=" + manual_img06
-				+ ", manual07=" + manual07 + ", manual_img07=" + manual_img07 + ", manual08=" + manual08
-				+ ", manual_img08=" + manual_img08 + ", manual09=" + manual09 + ", manual_img09=" + manual_img09
-				+ ", manual10=" + manual10 + ", manual_img10=" + manual_img10 + ", manual11=" + manual11
-				+ ", manual_img11=" + manual_img11 + ", manual12=" + manual12 + ", manual_img12=" + manual_img12
-				+ ", manual13=" + manual13 + ", manual_img13=" + manual_img13 + ", manual14=" + manual14
-				+ ", manual_img14=" + manual_img14 + ", manual15=" + manual15 + ", manual_img15=" + manual_img15
-				+ ", manual16=" + manual16 + ", manual_img16=" + manual_img16 + ", manual17=" + manual17
-				+ ", manual_img17=" + manual_img17 + ", manual18=" + manual18 + ", manual_img18=" + manual_img18
-				+ ", manual19=" + manual19 + ", manual_img19=" + manual_img19 + ", manual20=" + manual20
-				+ ", manual_img20=" + manual_img20 + ", rb_insertdate=" + rb_insertdate + ", rb_updatedate="
-				+ rb_updatedate + ", rb_deleteyn=" + rb_deleteyn + "]";
+	public String toString() 
+	{
+		return "RecipeBoardVO [rbno=" + rbno + ", mno=" + mno + ", rcp_nm=" + rcp_nm + ", rb_viewcnt=" + rb_viewcnt
+				+ ", rb_likecnt=" + rb_likecnt + ", rcp_way2=" + rcp_way2 + ", rcp_pat2=" + rcp_pat2 + ", hash_tag="
+				+ hash_tag + ", main_img=" + main_img + ", rcp_parts_dtls=" + rcp_parts_dtls + ", manual01=" + manual01
+				+ ", manual_img01=" + manual_img01 + ", manual02=" + manual02 + ", manual_img02=" + manual_img02
+				+ ", manual03=" + manual03 + ", manual_img03=" + manual_img03 + ", manual04=" + manual04
+				+ ", manual_img04=" + manual_img04 + ", manual05=" + manual05 + ", manual_img05=" + manual_img05
+				+ ", manual06=" + manual06 + ", manual_img06=" + manual_img06 + ", manual07=" + manual07
+				+ ", manual_img07=" + manual_img07 + ", manual08=" + manual08 + ", manual_img08=" + manual_img08
+				+ ", manual09=" + manual09 + ", manual_img09=" + manual_img09 + ", manual10=" + manual10
+				+ ", manual_img10=" + manual_img10 + ", manual11=" + manual11 + ", manual_img11=" + manual_img11
+				+ ", manual12=" + manual12 + ", manual_img12=" + manual_img12 + ", manual13=" + manual13
+				+ ", manual_img13=" + manual_img13 + ", manual14=" + manual14 + ", manual_img14=" + manual_img14
+				+ ", manual15=" + manual15 + ", manual_img15=" + manual_img15 + ", manual16=" + manual16
+				+ ", manual_img16=" + manual_img16 + ", manual17=" + manual17 + ", manual_img17=" + manual_img17
+				+ ", manual18=" + manual18 + ", manual_img18=" + manual_img18 + ", manual19=" + manual19
+				+ ", manual_img19=" + manual_img19 + ", manual20=" + manual20 + ", manual_img20=" + manual_img20
+				+ ", rb_insertdate=" + rb_insertdate + ", rb_updatedate=" + rb_updatedate + ", rb_deleteyn="
+				+ rb_deleteyn + "]";
 	}
-	
 	
 	
 	
