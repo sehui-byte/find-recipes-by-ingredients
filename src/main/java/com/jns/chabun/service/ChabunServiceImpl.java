@@ -41,9 +41,6 @@ public class ChabunServiceImpl implements ChabunService {
 	@Override
 
 	public BoardVO getNoticeChabun() {
-=======
-
-	public NoticeVO getNoticeChabun() {
 
 		// TODO Auto-generated method stub
 		return chabunDAO.getNoticeChabun();

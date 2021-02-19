@@ -41,9 +41,6 @@ public class ChabunDAOImpl implements ChabunDAO {
 
 	public BoardVO getNoticeChabun() {
 
-
-	public NoticeVO getNoticeChabun() {
-
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getNoticeChabun");
 	}
@@ -60,10 +57,8 @@ public class ChabunDAOImpl implements ChabunDAO {
 	public BoardVO getQnABoardChabun() {
 
 
-	public QnAVO getQnABoardChabun() {
-
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("getQnaBoardChabun");
+		return sqlSession.selectOne("getQnABoardChabun");
 	}
 
 
