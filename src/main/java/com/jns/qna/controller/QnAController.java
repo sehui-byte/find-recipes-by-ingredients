@@ -3,23 +3,17 @@ package com.jns.qna.controller;
 
 import java.util.List;
 
-
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jns.qna.service.QnAService;
-import com.jns.common.vo.BoardVO;
+import com.jns.board.vo.BoardVO;
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
-
-import oracle.net.aso.e;
+import com.jns.qna.service.QnAService;
 
 @Controller
 public class QnAController {

@@ -2,7 +2,7 @@ package com.jns.notice.dao;
 
 import java.util.List;
 
-import com.jns.common.vo.BoardVO;
+import com.jns.board.vo.BoardVO;
 
 public interface NoticeDAO {
 	

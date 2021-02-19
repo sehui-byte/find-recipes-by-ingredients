@@ -8,8 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jns.common.vo.BoardVO;
+import com.jns.board.vo.BoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.service.MyinfoService;
 import com.jns.recipeboard.vo.RecipeBoardVO;
@@ -39,6 +40,10 @@ public class MyinfoController {
 		logger.info("myRecipeList() 진입 >>> ");
 
 		logger.info("mno >>> " + mvo.getMno());
+		logger.info("name >>> " + mvo.getKeyword());
+		logger.info("keyfilter >>> " + mvo.getKeyfilter());
+		logger.info("startdate >>> " + mvo.getStartdate());
+		logger.info("enddate >>> " + mvo.getEnddate());
 
 		List<RecipeBoardVO> list = myinfoService.myRecipeList(mvo);
 		int result = list.size();
@@ -50,10 +55,30 @@ public class MyinfoController {
 			model.addAttribute("myRecipeList", list);
 
 		} else {
-			
+
 		}
 
 		return "myinfo/myRecipeList";
+
+	}
+
+	@RequestMapping(value = "myinfo/myRecipeDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public String myRecipeDelete(RecipeBoardVO rbvo) {
+
+		logger.info("myRecipeDelete() 진입 >>> ");
+
+		logger.info("rbno >>> " + rbvo.getRbno());
+
+		int result = myinfoService.myRecipeDelete(rbvo);
+
+		logger.info(result);
+		
+		if (result == 1) {
+			return "OK";
+		} else {
+			return "ERROR";
+		}
 
 	}
 
@@ -63,18 +88,36 @@ public class MyinfoController {
 		logger.info("myQnAList() 진입 >>> ");
 
 		logger.info("mno >>> " + mvo.getMno());
-		
+
 		List<BoardVO> list = myinfoService.myQnAList(mvo);
-		
+
 		int result = list.size();
-	
+
 		logger.info(result);
-		
+
 		if (result > 0) {
 			model.addAttribute("myQnAList", list);
 		}
 
 		return "myinfo/myQnAList";
+
+	}
+
+	@RequestMapping(value = "myinfo/myQnADelete", method = RequestMethod.POST)
+	@ResponseBody
+	public String myQnADelete(BoardVO bvo) {
+
+		logger.info("myQnADelete() 진입 >>> ");
+
+		logger.info("bno >>> " + bvo.getBno());
+
+		int result = myinfoService.myQnADelete(bvo);
+		logger.info(result);
+		if (result == 1) {
+			return "OK";
+		} else {
+			return "ERROR";
+		}
 
 	}
 }

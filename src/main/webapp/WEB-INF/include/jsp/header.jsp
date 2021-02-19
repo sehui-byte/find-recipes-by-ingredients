@@ -4,7 +4,7 @@
 <%-- java 파일 정의 --%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.jns.member.vo.MemberVO" %>
-<%@ page import="com.jns.common.vo.BoardVO" %>
+<%@ page import="com.jns.board.vo.BoardVO" %>
 <%@ page import="com.jns.recipeboard.vo.RecipeBoardVO" %>
 <%@ page import="com.jns.reply.vo.ReplyVO" %>
 

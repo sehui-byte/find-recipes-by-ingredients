@@ -28,9 +28,11 @@
 			var nCnt = $(".checkbox:checked").length;
 			if (nCnt == 1){
 				var checkedbox = $(".checkbox:checked").val();
-				var url = "/kosmoJns/qnaDelete.do";
-				var data = {bno : checkedbox};
-				
+				var url = "/kosmoJns/myinfo/myQnADelete.do";
+				var data = {
+						bno : checkedbox
+				};
+
 				$.ajax({
 					url : url,
 					data : data,
@@ -40,16 +42,28 @@
 				});
 				
 				function whenSuccess(data){
-					alert("1111");	
+					if (data == "OK"){
+						alert("삭제되었습니다.");
+						location.reload();
+					}else{
+						alert("삭제에 실패하였습니다. ");
+					}
 				}	
 				
 				function whenError(data){
-					alert("2222");	
+					alert("댓글 삭제에 문제가 발생하였습니다. 관리자에게 문의하시기 바랍니다.");
 				}
 			}else{
 				// 2개 이상일 경우에는 어떻게 통신을 하는지 ?
 			}
-		})
+		});
+		
+		//검색버튼
+		$(document).on("click", "#searchBtn", function(){
+			console.log("searchBtn >>> : ");
+			$("#myQnAList").attr({"method":"GET"
+								 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
+		});
 	})
 </script>
 </head>
@@ -66,8 +80,6 @@
 						<option value="key1">제목</option>
 						<option value="key2">내용</option>
 						<option value="key3">제목+내용</option>
-						<option value="key4">작성자</option>
-						<option value="key5">글번호</option>
 					</select>
 					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
 					<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
@@ -118,6 +130,7 @@
 			</td>
 		</tr>	
 	</table>
+	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 </form>
 </body>
 </html>
