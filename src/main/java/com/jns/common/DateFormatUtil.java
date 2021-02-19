@@ -13,7 +13,7 @@ public abstract class DateFormatUtil {
 
 		return sd;
 	}
-/**	
+
 	public static String ymFormat(){
 		
 		Date d = new Date();
@@ -31,7 +31,7 @@ public abstract class DateFormatUtil {
 		
 		return sd;
 	}
-**/	
+
 	public static String ymdFormats(String ymdFlag){
 		
 		String sd = "";		
@@ -45,13 +45,13 @@ public abstract class DateFormatUtil {
 	
 			sd = new SimpleDateFormat("yyyyMM").format(d);
 		}
-//		if ("Y".equals(ymdFlag.toUpperCase())){
-//			sd = new SimpleDateFormat("yyyy").format(d);
-	//	}
+		if ("Y".equals(ymdFlag.toUpperCase())){
+			sd = new SimpleDateFormat("yyyy").format(d);
+		}
 	
-//		if ("N".equals(ymdFlag.toUpperCase())){
-//			sd = "";
-//		}
+		if ("N".equals(ymdFlag.toUpperCase())){
+			sd = "";
+		}
 		
 		return sd;
 	}
