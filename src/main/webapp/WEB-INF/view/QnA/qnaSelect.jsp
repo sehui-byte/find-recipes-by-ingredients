@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.jns.common.vo.BoardVO" %>
+<%@ page import="com.jns.board.vo.BoardVO" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
@@ -108,7 +108,7 @@ QnA Select
 </tr>
 <tr>
 <td class="mem">좋아요 수</td>
-<td><input type="text" name="bhits" id="bhits" value="<%= bvo.getBhit() %>" readonly></td>
+<td><input type="text" name="bhits" id="bhits" value="<%= bvo.getBhits() %>" readonly></td>
 </tr>
 <tr>
 <td colspan="2" align="right">

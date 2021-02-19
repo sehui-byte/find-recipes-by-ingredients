@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.jns.common.vo.BoardVO;
+import com.jns.board.vo.BoardVO;
 
 public class NoticeDAOImpl implements NoticeDAO {
 
