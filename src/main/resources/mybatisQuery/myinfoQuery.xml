@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jns.myinfo.dao.MyinfoDAO">
+
+	<select id="myRecipeList" parameterType="mvo" resultType="rvo">
+	
+		SELECT 
+			* 
+		FROM
+			RECIPE_BOARD
+		WHERE MNO = #{mno, jdbcType=VARCHAR}
+	
+	</select>
+	
+	<select id="myQnAList" parameterType="mvo" resultType="com.jns.common.vo.BoardVO">
+	
+		SELECT
+			*
+		FROM
+			BOARD
+		WHERE MNO = #{mno, jdbcType=VARCHAR}
+	
+	
+	
+	</select>
+
+
+</mapper>

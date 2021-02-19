@@ -123,8 +123,6 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("MemberServiceImpl >>>> :  memberFindIDOK 함수 시작 ");
 		logger.info("mvo >>> : " + _mvo);
 
-		_mvo.setMemail("wjddn0316@naver.com");
-
 		List<MemberVO> aList = memberDAO.memberFindIDOK(_mvo);
 
 		if (aList.size() == 1) {
@@ -132,8 +130,10 @@ public class MemberServiceImpl implements MemberService {
 			mvo = aList.get(0);
 			// 이메일 발송하기 ?? 현재 사용법을 몰라서 미완
 			GoogleMailSend gm = new GoogleMailSend();
-			gm.googleMailSend("전냉시 운영진", "fullsleeeep@gmail.com", "rlawoals!", mvo.getMemail(),
-					"문의하신 아이디는 " + mvo.getMid() + " 입니다");
+			gm.googleMailSend("전냉시 - ID 발송 메일", "fullsleeeep@gmail.com", "rlawoals!", mvo.getMemail(),
+					"안녕하세요. 전냉시 운영진입니다. \n "
+					+ "항상 저의 전냉시를 사랑해주셔서 대단히 감사합니다. \n"
+					+ "문의하신 아이디는 " + mvo.getMid() + " 입니다");
 		} else {
 			logger.info("조회된 계정 정보 단일건이 아닙니다. 디비를 확인하세요. -  0 혹은 1보다 큽니다.");
 		}
@@ -163,12 +163,12 @@ public class MemberServiceImpl implements MemberService {
 	public int memberTempPWOK(MemberVO mvo) {
 
 		// 임시 비밀번호 생성
-		String pw = PasswordUtil.tempPW(14);
+		String tempPw = PasswordUtil.tempPW(14);
 
 		// 비밀번호 암호화
-		String mpw = PasswordEncoder.pwEncoder(pw);
+		String encodeTempPw = PasswordEncoder.pwEncoder(tempPw);
 
-		mvo.setMpw(mpw);
+		mvo.setMpw(encodeTempPw);
 
 		// 비밀번호 수정 -> 일단 단독 구현 -> 나중에 회원 정보 수정에 포함시켜야 하나?
 		int result = memberDAO.memberTempPWOK(mvo);
@@ -178,10 +178,19 @@ public class MemberServiceImpl implements MemberService {
 			logger.info("회원 비밀번호가 임시 비밀번호로 변경되었습니다.");
 			// 이메일 발송
 			// google email class 사용
+			GoogleMailSend gm = new GoogleMailSend();
+			String memail = mvo.getMemail();
+
+			gm.googleMailSend("전냉시 - 임시 비밀번호 발송 메일", "fullsleeeep@gmail.com", "rlawoals!", memail,
+					"안녕하세요. 전냉시 운영진입니다. \n"
+					+ "항상 저희 전냉시를 사랑해주셔서 대단히 감사드립니다. \n "
+					+ "현재 임시 비밀번호 " + tempPw + " 로 변경되었습니다. \n 꼭 로그인 후 비밀번호를"
+							+ " 변경해주시기 바랍니다. 감사합니다.");
 
 		} else {
 
 			logger.info("임시 비밀번호가 발급되었으나 데이터베이스에 반영되지 않았습니다. 임시 비밀번호 생성 로직을 확인해주세요.");
+			result = 0;
 
 		}
 
