@@ -8,7 +8,7 @@
 		SELECT NVL(MAX(SUBSTR(A.MNO, -4)), 0) + 1  MNO FROM MEMBER A
 	</select>
 
-	
+	<!-- 
 	<select id="getQnABoardChabun" resultType="com.jns.qna.vo.QnAVO">
 		SELECT NVL(MAX(SUBSTR(A.SNO, -4)), 0) + 1 SNO FROM QNA A
 	</select>
@@ -16,9 +16,14 @@
 	<select id="getNoticeChabun" resultType="com.jns.notice.vo.NoticeVO">
 		SELECT NVL(MAX(SUBSTR(A.NNO, -4)), 0 ) + 1 NNO FROM NOTICE A
 	</select>
-
-	<select id="getBoardChabun" resultType="cbvo">
+	 -->
+	 
+	<select id="getQnABoardChabun" resultType="bvo">
 		SELECT NVL(MAX(SUBSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
+	</select>
+	
+	<select id="getNoticeChabun" resultType="bvo">
+		SELECT NVL(MAX(SUBSTR(A.BNO, -4)), 0) + 1 BNO FROM BOARD A
 	</select>
 
 	<select id="getReplyChabun" resultType="reply">

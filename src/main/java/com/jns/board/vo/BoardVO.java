@@ -13,6 +13,7 @@ public class BoardVO {
 	private String bupdatedate;
 	private String bdeleteyn;
 	private String bview;
+	private String bhits;
 	
 	private String page;
 	private String pagesize;
@@ -26,7 +27,7 @@ public class BoardVO {
 
 	public BoardVO(String mno, String bno, String btype, String btitle, String bcontent, String mnick, String bfile,
 			String binsertdate, String bupdatedate, String bdeleteyn, String bview, String page, String pagesize,
-			String groupsize, String curpage, String totalcount) {
+			String groupsize, String curpage, String totalcount, String bhits) {
 		
 		this.mno = mno;
 		this.bno = bno;
@@ -39,11 +40,22 @@ public class BoardVO {
 		this.bupdatedate = bupdatedate;
 		this.bdeleteyn = bdeleteyn;
 		this.bview = bview;
+		this.bhits = bhits;
+		
 		this.page = page;
 		this.pagesize = pagesize;
 		this.groupsize = groupsize;
 		this.curpage = curpage;
 		this.totalcount = totalcount;
+		
+	}
+
+	public String getBhits() {
+		return bhits;
+	}
+
+	public void setBhits(String bhits) {
+		this.bhits = bhits;
 	}
 
 	public String getMno() {
