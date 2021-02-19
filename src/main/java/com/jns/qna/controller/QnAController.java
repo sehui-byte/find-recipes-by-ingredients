@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jns.qna.service.QnAService;
-import com.jns.board.vo.BoardVO;
+import com.jns.common.vo.BoardVO;
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
 
@@ -45,7 +45,7 @@ public class QnAController {
 		
 		logger.info("QnA form >>>");
 
-		return "qna/qnaForm";
+		return "QnA/qnaForm";
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.GET)

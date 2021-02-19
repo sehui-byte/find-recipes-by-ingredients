@@ -3,7 +3,7 @@ package com.jns.qna.service;
 import java.util.List;
 
 import com.jns.qna.dao.QnADAO;
-import com.jns.board.vo.BoardVO;
+import com.jns.common.vo.BoardVO;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

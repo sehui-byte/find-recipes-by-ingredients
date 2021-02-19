@@ -1,10 +1,12 @@
 package com.jns.qna.dao;
 
 import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.jns.board.vo.BoardVO;
+
+import com.jns.common.vo.BoardVO;
 
 public class QnADAOImpl implements QnADAO {
 
