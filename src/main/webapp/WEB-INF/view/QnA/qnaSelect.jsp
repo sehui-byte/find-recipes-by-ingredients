@@ -21,16 +21,22 @@
 		// U
 		$(document).on("click", "#U", function(){
 			alert("U >>> ");
-			$("#QnAUpdateForm").attr({ "method":"POST"
+			$("#QnAUpdateForm").attr({ "method":"GET"
 				                        ,"action":"qnaUpdate.do"}).submit();
 		});
 		
 		// D
 		$(document).on("click", "#D", function(){
 			alert("D >>> : ");
-			$("#QnAUpdateForm").attr({ "method":"POST"
+			$("#QnAUpdateForm").attr({ "method":"GET"
 				                        ,"action":"qnaDelete.do"}).submit();
 		});	
+		
+		//C
+		$(document).on("click", "#C", function(){
+			alert("C >>> :");
+			location.href="qnaSelectAll.do";
+		});
 		
 	});
 </script>
@@ -97,21 +103,18 @@ QnA Select
 <td><input type="text" name="bupdatedate" id="bupdatedate" value="<%= bvo.getBupdatedate() %>" readonly></td>
 </tr>
 <tr>
-<td class="mem">글 조회수</td>
+<td class="mem">조회수</td>
 <td><input type="text" name="bview" id="bview" value="<%= bvo.getBview() %>" readonly></td>
 </tr>
 <tr>
-<td class="mem">삭제여부</td>
-<td><input type="text" name="bdeleteyn" id="bdeleteyn" value="<%= bvo.getBdeleteyn() %>" readonly></td>
-</tr>
-<tr>
-<td>
-<input type="text" name="bhits" id="bhits" value="<%= bvo.getBhits() %>" readonly></td>
+<td class="mem">좋아요 수</td>
+<td><input type="text" name="bhits" id="bhits" value="<%= bvo.getBhits() %>" readonly></td>
 </tr>
 <tr>
 <td colspan="2" align="right">
 <button type="button" id="U">수정</button>
 <button type="button" id="D">삭제</button>
+<button type="button" id="C">돌아가기</button>
 </td>
 </tr>
 </table>

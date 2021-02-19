@@ -23,7 +23,7 @@
 			console.log("sbtn >>> : ");	
 			$("#QnAForm").attr({
 				'action':'qnaInsert.do',
-				'method':'POST',
+				'method':'GET',
 				'enctype':'multipart/form-data'
 			}).submit();
 		});
