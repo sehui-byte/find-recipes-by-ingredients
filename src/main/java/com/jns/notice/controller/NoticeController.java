@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jns.chabun.service.*;
-import com.jns.board.vo.BoardVO;
+import com.jns.common.vo.BoardVO;
 import com.jns.common.ChabunUtil;
 import com.jns.notice.service.NoticeService;
 

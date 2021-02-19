@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jns.common.vo.BoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.service.MyinfoService;
-import com.jns.recipe.vo.RecipeVO;
+import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Controller
 public class MyinfoController {
@@ -40,7 +40,7 @@ public class MyinfoController {
 
 		logger.info("mno >>> " + mvo.getMno());
 
-		List<RecipeVO> list = myinfoService.myRecipeList(mvo);
+		List<RecipeBoardVO> list = myinfoService.myRecipeList(mvo);
 		int result = list.size();
 
 		logger.info("result >>> " + result);
@@ -50,7 +50,7 @@ public class MyinfoController {
 			model.addAttribute("myRecipeList", list);
 
 		} else {
-
+			
 		}
 
 		return "myinfo/myRecipeList";
@@ -65,8 +65,16 @@ public class MyinfoController {
 		logger.info("mno >>> " + mvo.getMno());
 		
 		List<BoardVO> list = myinfoService.myQnAList(mvo);
+		
+		int result = list.size();
+	
+		logger.info(result);
+		
+		if (result > 0) {
+			model.addAttribute("myQnAList", list);
+		}
 
-		return "";
+		return "myinfo/myQnAList";
 
 	}
 }

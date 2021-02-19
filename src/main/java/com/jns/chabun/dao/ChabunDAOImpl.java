@@ -6,15 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jns.chefboard.vo.ChefBoardVO;
+import com.jns.common.vo.BoardVO;
 import com.jns.member.vo.MemberVO;
-
-import com.jns.board.vo.BoardVO;
-
-
-import com.jns.notice.vo.NoticeVO;
-import com.jns.qna.vo.QnAVO;
-
-
 import com.jns.reply.vo.ReplyVO;
 
 

@@ -1,7 +1,8 @@
 package com.jns.qna.service;
 
-import com.jns.board.vo.BoardVO;
 import java.util.List;
+
+import com.jns.common.vo.BoardVO;
 
 public interface QnAService {
 
