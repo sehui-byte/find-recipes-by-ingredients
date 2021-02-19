@@ -9,27 +9,36 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.dao.MyinfoDAO;
+import com.jns.qna.vo.QnAVO;
 import com.jns.recipe.vo.RecipeVO;
 
 @Service
 @Transactional
 public class MyinfoServiceImpl implements MyinfoService {
-	
+
 	Logger logger = Logger.getLogger(MyinfoServiceImpl.class);
-	
+
 	private MyinfoDAO myinfoDAO;
-	
-	@Autowired(required=false)
+
+	@Autowired(required = false)
 	public MyinfoServiceImpl(MyinfoDAO myinfoDAO) {
 		this.myinfoDAO = myinfoDAO;
-	
+
 	}
 
 	@Override
 	public List<RecipeVO> myRecipeList(MemberVO mvo) {
-		
+
 		logger.info("myRecipeList() 진입 >>> ");
-		
+
 		return myinfoDAO.myRecipeList(mvo);
 	}
+
+	@Override
+	public List<QnAVO> myQnAList(MemberVO mvo) {
+		logger.info("myQnAList() 진입 >>> ");
+
+		return myinfoDAO.myQnAList(mvo);
+	}
+
 }

@@ -17,13 +17,13 @@ import com.jns.recipe.vo.RecipeVO;
 public class MyinfoController {
 
 	Logger logger = Logger.getLogger(MyinfoController.class);
-	
+
 	private MyinfoService myinfoService;
-	
-	@Autowired(required=false)
+
+	@Autowired(required = false)
 	public MyinfoController(MyinfoService myinfoService) {
 		this.myinfoService = myinfoService;
-	
+
 	}
 
 	@RequestMapping(value = "myinfo", method = RequestMethod.GET)
@@ -34,19 +34,38 @@ public class MyinfoController {
 	}
 
 	@RequestMapping(value = "myinfo/myRecipeList", method = RequestMethod.GET)
-	public String myRecipeList(MemberVO mvo ,Model model) {
+	public String myRecipeList(MemberVO mvo, Model model) {
 		logger.info("myRecipeList() 진입 >>> ");
-		
-		List<RecipeVO> aList = myinfoService.myRecipeList(mvo);
-		int result = aList.size();
-		
+
+		logger.info("mno >>> " + mvo.getMno());
+
+		List<RecipeVO> list = myinfoService.myRecipeList(mvo);
+		int result = list.size();
+
+		logger.info("result >>> " + result);
+
 		if (result > 0) {
 
-			model.addAttribute("myRecipeList", aList);
-		}else {
+			model.addAttribute("myRecipeList", list);
+
+		} else {
 
 		}
 
 		return "myinfo/myRecipeList";
+
+	}
+
+	@RequestMapping(value = "myinfo/myQnAList", method = RequestMethod.GET)
+	public String myQnAList(MemberVO mvo, Model model) {
+
+		logger.info("myQnAList() 진입 >>> ");
+
+		logger.info("mno >>> " + mvo.getMno());
+		
+		List<BoardVO> list = myinfoService.myQnAList(mvo);
+
+		return "";
+
 	}
 }

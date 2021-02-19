@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/include/jsp/header.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,8 +18,7 @@
 			아래 데이터들을 시각화해서 그래프로 보여주면 좋을 듯	
 		</li>
 		<li>
-			<a href="myinfo/myRecipeList.do">내가 쓴 레시피 조회하기</a>
-			
+			<a href="myinfo/myRecipeList.do?mno=<%= mno %>">내가 쓴 레시피 조회하기</a>
 		</li>
 		<li>
 			내가 구독한 세프 조회하기
@@ -26,7 +27,7 @@
 			내가 추천한 레시피 조회하기
 		</li>
 		<li>
-			내가 QA 조회하기
+			<a href="myinfo/myQnAList.do?mno<%= mno %>">내 Q&A 조회하기</a>
 		</li>
 		<li>
 			내 댓글??	

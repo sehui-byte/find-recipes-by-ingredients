@@ -13,6 +13,18 @@
 		WHERE MNO = #{mno, jdbcType=VARCHAR}
 	
 	</select>
+	
+	<select id="myQnAList" parameterType="mvo" resultType="com.jns.common.vo.BoardVO">
+	
+		SELECT
+			*
+		FROM
+			BOARD
+		WHERE MNO = #{mno, jdbcType=VARCHAR}
+	
+	
+	
+	</select>
 
 
 </mapper>
