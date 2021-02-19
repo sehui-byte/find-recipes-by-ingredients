@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jns.chefboard.dao.ChefBoardDAO">
+
+
+<select id="chefBoardSelectAll" resultType="cbvo">
+
 	
 	<select id="chefBoardSelectAll" resultType="cbvo">
+
 		SELECT
 			*
 		FROM
@@ -30,7 +35,11 @@
 				<![CDATA[AND A.BNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 			</if>
 	</select>
+
+
+
 	
+
 	<select id="chefBoardSelect" parameterType="cbvo" resultType="cbvo">
 		SELECT
 			*
@@ -40,10 +49,15 @@
 			RB_DELETEYN = 'N',
 			AND RBNO = #{rbno}
 	</select>
+
+
+	<!-- 게시물 등록 -->
+
 	
 	
 	
 <!-- 
+
 	<insert id="boardInsert" parameterType="cbvo">
 		INSERT INTO BOARD(
 						  BNO

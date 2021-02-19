@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.jns.qna.vo.QnAVO" %>
+<%@ page import="com.jns.board.vo.BoardVO" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
@@ -46,7 +46,7 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
 	Object obj = request.getAttribute("listAll");
-	List<QnAVO> list = (List)obj;
+	List<BoardVO> list = (List)obj;
 	
 	int nCnt = list.size();
 %>
@@ -61,17 +61,17 @@
 </thead>
 <%
 for(int i=0; i<nCnt; i++){
-	QnAVO qvo = list.get(i);
+	BoardVO bvo = list.get(i);
 %>
 <tbody>
 <tr>
 	<td align="center">
-		<input type="checkbox" name="sno" id="sno" class="sno" value=<%= qvo.getSno() %>>
+		<input type="checkbox" name="bno" id="bno" class="bno" value=<%= bvo.getBno() %>>
 	</td>
-	<td class="tt"><%=qvo.getStitle() %></td>
-	<td class="tt"><%=qvo.getScontent() %></td>
-	<td class="tt"><%=qvo.getSwriter() %></td>
-	<td class="tt"><img src="/imgupload/sm_<%= qvo.getSfile() %>"></td>
+	<td class="tt"><%=bvo.getBtitle() %></td>
+	<td class="tt"><%=bvo.getBcontent() %></td>
+	<td class="tt"><%=bvo.getMnick() %></td>
+	<td class="tt"><img src="/imgupload/sm_<%= bvo.getBfile() %>"></td>
 	
 </tr>
 <%

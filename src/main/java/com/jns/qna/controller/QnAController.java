@@ -45,7 +45,7 @@ public class QnAController {
 		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="qnaSelectAll", method=RequestMethod.POST)
+	@RequestMapping(value="qnaSelectAll", method=RequestMethod.GET)
 	public String QnASelectPaging(BoardVO bvo, Model model) {
 		logger.info("QnAController QnASelectPaging ���� ::");	
 		logger.info("QnAController boardSelect bvo.getSbnum() " + bvo.getPage());
@@ -69,25 +69,17 @@ public class QnAController {
 		//채번
 		String bno = ChabunUtil.getQnaBoardChabun("Q", chabunService.getQnABoardChabun().getBno());
 		
-		BoardVO _bvo = null;
-		_bvo = new BoardVO();
 		
-		_bvo.setBno(bno);
-		_bvo.setBtitle(bvo.getBtitle());
-		_bvo.setBcontent(bvo.getBcontent());
-		_bvo.setMnick(bvo.getMnick());
-		_bvo.setBfile(bvo.getBfile());
-		
-		
+		 bvo.setBno(bno);
 		
 		 logger.info("QnAController QnAInsert _bvo.getBno() >>> : "
-			 		+ _bvo.getBno());
+			 		+ bvo.getBno());
 		 logger.info("QnAController QnAInsert _bvo.getBcontent() >>> : "
-				 	+ _bvo.getBcontent());
+				 	+ bvo.getBcontent());
 		 logger.info("QnAController QnAInsert _bvo.getMnick() >>> : "
-				 	+ _bvo.getMnick());
+				 	+ bvo.getMnick());
 		 
-		 int nCnt = qnaService.QnAInsert(_bvo);
+		 int nCnt = qnaService.QnAInsert(bvo);
 		 logger.info("QnAController QnAInsert nCnt >>> : " + nCnt);
 		 
 		 if(nCnt > 0) {
@@ -97,7 +89,7 @@ public class QnAController {
 		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="qnaSelectAll",method=RequestMethod.GET)
+	@RequestMapping(value="qnaSelectAll",method=RequestMethod.POST)
 	public String QnASelectAll(BoardVO bvo, Model model) {
 		logger.info("QnAController QnASelectAll �Լ� ���� >>>: ");
 		
