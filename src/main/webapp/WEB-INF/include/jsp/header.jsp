@@ -6,7 +6,8 @@
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	Object principal = auth.getPrincipal();
 	String mnick = "";
-	if(principal != null && principal instanceof MemberVO){
+	if(principal != null && principal instanceof MemberVO)
+	{
 		mnick = ((MemberVO)principal).getMnick();	
 	}
 %>
