@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.jns.common.vo.BoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.service.MyinfoService;
 import com.jns.recipe.vo.RecipeVO;

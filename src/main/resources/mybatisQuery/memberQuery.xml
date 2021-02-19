@@ -147,7 +147,7 @@
 	
 	<!-- 회원 전체 조회  -->
 	
-	<select id="MemberSelectAll" resultType="mvo">
+	<select id="memberSelectAll" resultType="mvo">
 	SELECT *
 	FROM  MEMBER A
 	WHERE A.MDELETEYN='Y'
@@ -156,7 +156,7 @@
 	</select>
 	
 	<!-- 회원 정보 수정  -->
-	<update id="MemberUpdate" parameterType="mvo">
+	<update id="memberUpdate" parameterType="mvo">
 	UPDATE	MEMBER
 		SET MNICK = #{mnick,jdbcType=VARCHAR}
 			MADDR = #{maddr,jdbcType=VARCHAR}
@@ -166,7 +166,7 @@
 	</update>
 	
 	<!-- 회원 삭제 -->
-	<update id="MemberDelete" parameterType="memberVO">
+	<update id="memberDelete" parameterType="mvo">
 	UPDATE MEMBER
 		SET MUPDATEDATE = SYSDATE
 			MDELETEYN = 'N'
@@ -174,7 +174,7 @@
 	AMD 	MNO = {mno,jdbcType=VARCHAR}
 	</update>
 	<!-- 아이디 중복 확인   -->
-	<select id="CheckID" parameterType ="memberVO" resultType="memberVO">
+	<select id="checkID" parameterType ="mvo" resultType="mvo">
 
 	SELECT A.MID MID 
 	FROM 	MEMBER A 

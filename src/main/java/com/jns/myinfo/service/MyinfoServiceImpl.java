@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jns.common.vo.BoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.dao.MyinfoDAO;
-import com.jns.qna.vo.QnAVO;
 import com.jns.recipe.vo.RecipeVO;
 
 @Service
@@ -35,7 +35,7 @@ public class MyinfoServiceImpl implements MyinfoService {
 	}
 
 	@Override
-	public List<QnAVO> myQnAList(MemberVO mvo) {
+	public List<BoardVO> myQnAList(MemberVO mvo) {
 		logger.info("myQnAList() 진입 >>> ");
 
 		return myinfoDAO.myQnAList(mvo);
