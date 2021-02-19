@@ -45,7 +45,7 @@ public class QnAController {
 		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="qnaSelectAll", method=RequestMethod.GET)
+	@RequestMapping(value="", method=RequestMethod.GET)
 	public String QnASelectPaging(BoardVO bvo, Model model) {
 		logger.info("QnAController QnASelectPaging ���� ::");	
 		logger.info("QnAController boardSelect bvo.getSbnum() " + bvo.getPage());
@@ -62,21 +62,21 @@ public class QnAController {
 		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="qnaInsert", method=RequestMethod.POST)
+	@RequestMapping(value="qnaInsert", method=RequestMethod.GET)
 	public String QnAInsert(BoardVO bvo, Model model) {
 		logger.info("QnAController QnAInsert  ���� ::");
 		
 		//채번
-		String bno = ChabunUtil.getQnaBoardChabun("Q", chabunService.getQnABoardChabun().getBno());
+		String bno = ChabunUtil.getQnaBoardChabun("D", chabunService.getQnABoardChabun().getBno());
 		
 		
 		 bvo.setBno(bno);
 		
-		 logger.info("QnAController QnAInsert _bvo.getBno() >>> : "
+		 logger.info("QnAController QnAInsert bvo.getBno() >>> : "
 			 		+ bvo.getBno());
-		 logger.info("QnAController QnAInsert _bvo.getBcontent() >>> : "
+		 logger.info("QnAController QnAInsert bvo.getBcontent() >>> : "
 				 	+ bvo.getBcontent());
-		 logger.info("QnAController QnAInsert _bvo.getMnick() >>> : "
+		 logger.info("QnAController QnAInsert bvo.getMnick() >>> : "
 				 	+ bvo.getMnick());
 		 
 		 int nCnt = qnaService.QnAInsert(bvo);
@@ -89,7 +89,7 @@ public class QnAController {
 		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="qnaSelectAll",method=RequestMethod.POST)
+	@RequestMapping(value="qnaSelectAll",method=RequestMethod.GET)
 	public String QnASelectAll(BoardVO bvo, Model model) {
 		logger.info("QnAController QnASelectAll �Լ� ���� >>>: ");
 		
@@ -118,7 +118,7 @@ public class QnAController {
 		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="qnaSelect",method=RequestMethod.POST)
+	@RequestMapping(value="qnaSelect",method=RequestMethod.GET)
 	public String QnASelect(BoardVO bvo,Model model) {
 		
 		logger.info("QnAController QnASelect �Լ� ���� :::: ");
@@ -137,7 +137,7 @@ public class QnAController {
 		
 	}
 	
-	@RequestMapping(value="qnaUpdate",method=RequestMethod.POST)
+	@RequestMapping(value="qnaUpdate",method=RequestMethod.GET)
 	public String BoardUpdate(BoardVO bvo ,Model model) {
 		logger.info("QnAController QnAUpdate 함수 시작 >> ");
 		
@@ -157,7 +157,7 @@ public class QnAController {
 	}	
 	
 	///�� �����ϱ� 
-	@RequestMapping(value="qnaDelete", method=RequestMethod.POST)
+	@RequestMapping(value="qnaDelete", method=RequestMethod.GET)
 	public String QnADelete(BoardVO bvo, Model model) {
 		logger.info("QnAController QnADelete �Լ� ���� >>> :");
 		

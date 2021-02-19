@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jns.chefboard.dao.ChefBoardDAO">
+<mapper namespace="com.jns.qna.dao.QnADAO">
 
-	<select id="chefBoardSelectAll" resultType="cbvo">
+	<select id="QnASelectAll" resultType="bvo">
 
 		SELECT
 			*
 		FROM
-			RECIPE_BOARD
+			BOARD
 		WHERE
-			RB_DELETEYN = 'Y'
+			BDELETEYN = 'Y'
 			<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
 			<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
 			<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
@@ -31,30 +31,8 @@
 				<![CDATA[AND A.BNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 			</if>
 	</select>
-
-
-
 	
-
-	<select id="chefBoardSelect" parameterType="cbvo" resultType="cbvo">
-		SELECT
-			*
-		FROM
-			RECIPE_BOARD
-		WHERE
-			RB_DELETEYN = 'N',
-			AND RBNO = #{rbno}
-	</select>
-
-
-	<!-- 게시물 등록 -->
-
-	
-	
-	
-<!-- 
-
-	<insert id="boardInsert" parameterType="cbvo">
+	<insert id="QnAInsert" parameterType="bvo">
 		INSERT INTO BOARD(
 						  BNO
 						 ,BTYPE
@@ -83,36 +61,8 @@
 						 )
 	</insert>
 	
-	<select id="boardList" parameterType="cbvo" resultType="cbvo">
-		SELECT *
-		FROM BOARD A
-		WHERE A.BDELETEYN = 'Y'
-		AND A.BTYPE = 'C'
-		<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
-		<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-		<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-		</if>
-		<if test="keyfilter=='key1'">
-			<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-		</if>
-		<if test="keyfilter=='key2'">
-			<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-		</if>
-		<if test="keyfilter=='key3'">
-			<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-		</if>
-		<if test="keyfilter=='key4'">
-			<![CDATA[AND A.MNICK LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-		</if>
-		<if test="keyfilter=='key5'">
-			<![CDATA[AND A.BNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-		</if>
-		ORDER BY 1
-	</select>
 	
-	<select id="boardDetail" parameterType="cbvo" resultType="cbvo">
-		/* Board - boardDetail */
+	<select id="QnASelect" parameterType="bvo" resultType="bvo">
 		SELECT
 				 A.BNO
 				,A.BTYPE
@@ -130,7 +80,7 @@
 		AND		 A.BDELETEYN = 'Y'
 	</select>
 	
-	<update id="boardUpdate" parameterType="cbvo">
+	<update id="QnAUpdate" parameterType="bvo">
 		/* Board - boardUpdate */
 		UPDATE	 BOARD
 		SET		 BTITLE = #{btitle, jdbcType=VARCHAR}
@@ -143,13 +93,12 @@
 		AND		 BDELETEYN = 'Y'
 	</update>
 	
-	<update id="boardDelete" parameterType="cbvo">
-		/* Board - boardDelete */
+	<delete id="QnADelete" parameterType="bvo">
 		UPDATE	 BOARD
 		SET		 BDELETEYN = 'N'
 				,BUPDATEDATE = SYSDATE
 		WHERE	 BNO = #{bno, jdbcType=VARCHAR}
 		AND		 BDELETEYN = 'Y'
-	</update>
- -->	
+	</delete>
+	
 </mapper>

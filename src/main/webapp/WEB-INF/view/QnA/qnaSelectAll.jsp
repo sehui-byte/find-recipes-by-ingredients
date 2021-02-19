@@ -26,7 +26,7 @@
 		$(document).on("click","#U",function(){
 		
 			$("#QnAList").attr({
-				"method":"POST",
+				"method":"GET",
 				"action":"qnaSelect.do"}).submit();	
 			
 		}); // end of Updatebutton
@@ -35,9 +35,17 @@
 		$(document).on("click","#D",function(){
 			
 			$("#QnAList").attr({
-				"method":"POST",
+				"method":"GET",
 				"action":"qnaSelect.do"}).submit();
 		}); // end of Deletebutton
+		
+		$(document).on("click", "#searchBtn", function(){
+			console.log("searchBtn >>> : ");
+			$("#QnAList").attr({
+				"method":"GET",
+				"action":"qnaSelectAll.do"
+			}).submit();
+		});
 		
 	});
 </script>
@@ -58,21 +66,49 @@
 		<h2>QnA 게시판</h2>
 	</td>
 </tr>
+<tr>
+		<td colspan="10" align="left">
+			<select id="keyfilter" name="keyfilter">
+				<option value="key1">제목</option>
+				<option value="key2">내용</option>
+				<option value="key3">제목+내용</option>
+				<option value="key4">작성자</option>
+				<option value="key5">글번호</option>
+			</select>
+			<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
+			<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
+			~<input type="text" id="enddate" name="enddate" size="12" placeholder="종료일">
+			<button type="button" id="searchBtn">검색</button>
+		</td>	
+	</tr>
+<tr>
+	<td class="tt">글번호</td>
+	<td class="tt">글유형</td>
+	<td class="tt">글제목</td>
+	<td class="tt">글내용</td>
+	<td class="tt">작성자</td>
+	<td class="tt">사진</td>
+	<td class="tt">입력날짜</td>
+	<td class="tt">조회수</td>
+	<td class="tt">좋아요 수</td>
+</tr>
 </thead>
+
 <%
 for(int i=0; i<nCnt; i++){
 	BoardVO bvo = list.get(i);
 %>
 <tbody>
 <tr>
-	<td align="center">
-		<input type="checkbox" name="bno" id="bno" class="bno" value=<%= bvo.getBno() %>>
-	</td>
+	<td class="tt"><%=bvo.getBno()%></td>
+	<td class="tt"><%=bvo.getBtype() %></td>
 	<td class="tt"><%=bvo.getBtitle() %></td>
 	<td class="tt"><%=bvo.getBcontent() %></td>
 	<td class="tt"><%=bvo.getMnick() %></td>
 	<td class="tt"><img src="/imgupload/sm_<%= bvo.getBfile() %>"></td>
-	
+	<td class="tt"><%=bvo.getBinsertdate() %></td>
+	<td class="tt"><%=bvo.getBview() %></td>
+	<td class="tt"><%=bvo.getBhits() %></td>
 </tr>
 <%
 }// end of for

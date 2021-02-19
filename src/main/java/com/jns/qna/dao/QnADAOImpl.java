@@ -16,37 +16,37 @@ public class QnADAOImpl implements QnADAO {
 	@Override
 	public List<BoardVO> QnASelectPaging(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("qnaSelectPaging", bvo);
+		return sqlSession.selectList("QnASelectPaging", bvo);
 	}
 
 	@Override
 	public List<BoardVO> QnASelectAll(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("qnaSelectAll", bvo);
+		return sqlSession.selectList("QnASelectAll", bvo);
 	}
 
 	@Override
 	public List<BoardVO> QnASelect(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("qnaSelect", bvo);
+		return sqlSession.selectList("QnASelect", bvo);
 	}
 
 	@Override
 	public int QnAInsert(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.insert("qnaInsert", bvo);
+		return (Integer)sqlSession.insert("QnAInsert", bvo);
 	}
 
 	@Override
 	public int QnAUpdate(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.update("qnaUpdate", bvo);
+		return (Integer)sqlSession.update("QnAUpdate", bvo);
 	}
 
 	@Override
 	public int QnADelete(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.delete("qnaDelete", bvo);
+		return (Integer)sqlSession.delete("QnADelete", bvo);
 	}
 
 }
