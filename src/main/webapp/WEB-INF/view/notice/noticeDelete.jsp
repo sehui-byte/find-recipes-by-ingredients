@@ -4,11 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>NOTICE DELETE</title>
 </head>
 <body>
-
-find pw
-
+NOTICE DELETE
+<hr>
+<script>
+	location.href="noticeDelte.do";
+</script>
 </body>
 </html>

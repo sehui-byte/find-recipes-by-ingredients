@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jns.chefboard.dao.ChefBoardDAO;
 import com.jns.chefboard.vo.ChefBoardVO;
+import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Service
 @Transactional
@@ -20,24 +21,23 @@ public class ChefBoardServiceImpl implements ChefBoardService {
 	public ChefBoardServiceImpl(ChefBoardDAO chefBoardDAO) {
 		this.chefBoardDAO = chefBoardDAO;
 	}
-	
-	
+
 	@Override
-	public List<ChefBoardVO> boardList(ChefBoardVO cbvo) {
+	public List<ChefBoardVO> chefBoardSelectAll(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
-		return chefBoardDAO.boardList(cbvo);
+		return chefBoardDAO.chefBoardSelectAll(cbvo);
+	}
+
+	@Override
+	public List<ChefBoardVO> chefBoardSelect(ChefBoardVO cbvo) {
+		// TODO Auto-generated method stub
+		return chefBoardDAO.chefBoardSelect(cbvo);
 	}
 
 	@Override
 	public int boardInsert(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
 		return chefBoardDAO.boardInsert(cbvo);
-	}
-
-	@Override
-	public ChefBoardVO boardDetail(ChefBoardVO cbvo) {
-		// TODO Auto-generated method stub
-		return chefBoardDAO.boardDetail(cbvo);
 	}
 
 	@Override
@@ -51,5 +51,8 @@ public class ChefBoardServiceImpl implements ChefBoardService {
 		// TODO Auto-generated method stub
 		return chefBoardDAO.boardDelete(cbvo);
 	}
+	
+	
+
 
 }

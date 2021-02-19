@@ -14,31 +14,9 @@
 		$("#boardInsert").click(function(){
 			
 			//입력값 체크
-			if(!chkSubmit($('#mnick'),"이름을")) return;
-			else if(!chkSubmit($('#btitle'),"제목을")) return;
-			else if(!chkSubmit($('#bcontent'),"작성할 내용을")) return;
+			if(!chkSubmit($('#rcp_nm'),"제목을")) return;
+			else if(!chkSubmit($('#manual01'),"작성할 내용을")) return;
 			else{
-				/* 배열내의 값을 찾아서 인덱스를 반환(요소가 없을 경우-1반환)
-				 jQuery.inArray(찾을 값, 검색 대상의 배열)*/
-				/*
-				var ext = $('#bfile').val().split('.').pop().toLowerCase();
-				
-				if (ext != null && ext != undefined) {
-					if(jQuery.inArray(ext, ['gif','png','jpg','jpeg']) == -1){
-						alert("gif, pag, jpg, jpeg 파일만 업로드 할 수 있습니다.");
-						return;
-					}
-				}
-				*/
-				/*
-				mnick = document.getElementById("mnick").value
-				btitle = document.getElementById("btitle").value
-				bcontent = document.getElementById("bcontent").value
-				
-				alert("mnick >>> : " + mnick);
-				alert("btitle >>> : " + btitle);
-				alert("bcontent >>> : " + bcontent);
-				*/
 				
 				$("#f_writeForm").attr({
 					"method": "POST",
@@ -71,7 +49,202 @@
 </head>
 <body>
 <div id="boardTit"><h3>글쓰기</h3></div>
-<form id="f_writeForm" name="f_writeForm">
+	<form id="f_writeForm" name="f_writeForm">
+		<table border="1">
+			<tr>
+				<td colspan="2"><p style="text-align: center;">상세정보</p></td>
+			</tr>
+			<tr>
+				<td>일련번호</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>메뉴명</td>
+				<td><input type="text" name="rcp_nm" id="rcp_nm"></td>
+			</tr>
+			<tr>
+				<td>조리방법</td>
+				<td><input type="text" name="rcp_way2" id="rcp_way2"></td>
+			</tr>
+			<tr>
+				<td>요리종류</td>
+				<td><input type="text" name="rcp_pat2" id="rcp_pat2"></td>
+			</tr>
+			<tr>
+				<td>해쉬태그</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>이미지</td>
+				<td><img src=""></td>
+			</tr>
+			<tr>
+				<td>재료정보</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>만드는법 1</td>
+				<td><textarea name="manual01" id="manual01" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법1_이미지</td>
+				<td><input type="file" name="manual_img01" id="manual_img01"></td>
+			</tr>
+			<tr>
+				<td>만드는법 2</td>
+				<td><textarea name="manual02" id="manual02" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법2_이미지</td>
+				<td><input type="file" name="manual_img02" id="manual_img02"></td>
+			</tr>
+			<tr>
+				<td>만드는법 3</td>
+				<td><textarea name="manual03" id="manual03" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법3_이미지</td>
+				<td><input type="file" name="manual_img03" id="manual_img03"></td>
+			</tr>
+			<tr>
+				<td>만드는법 4</td>
+				<td><textarea name="manual04" id="manual04" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법4_이미지</td>
+				<td><input type="file" name="manual_img04" id="manual_img04"></td>
+			</tr>
+			<tr>
+				<td>만드는법 5</td>
+				<td><textarea name="manual05" id="manual05" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법5_이미지</td>
+				<td><input type="file" name="manual_img05" id="manual_img05"></td>
+			</tr>
+			<tr>
+				<td>만드는법 6</td>
+				<td><textarea name="manual06" id="manual06" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법6_이미지</td>
+				<td><input type="file" name="manual_img06" id="manual_img06"></td>
+			</tr>
+			<tr>
+				<td>만드는법 7</td>
+				<td><textarea name="manual07" id="manual07" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법7_이미지</td>
+				<td><input type="file" name="manual_img07" id="manual_img07"></td>
+			</tr>
+			<tr>
+				<td>만드는법 8</td>
+				<td><textarea name="manual08" id="manual08" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법8_이미지</td>
+				<td><input type="file" name="manual_img08" id="manual_img08"></td>
+			</tr>
+			<tr>
+				<td>만드는법 9</td>
+				<td><textarea name="manual09" id="manual09" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법9_이미지</td>
+				<td><input type="file" name="manual_img09" id="manual_img09"></td>
+			</tr>
+			<tr>
+				<td>만드는법 10</td>
+				<td><textarea name="manual10" id="manual10" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법10_이미지</td>
+				<td><input type="file" name="manual_img10" id="manual_img10"></td>
+			</tr>
+			<tr>
+				<td>만드는법 11</td>
+				<td><textarea name="manual11" id="manual11" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법11_이미지</td>
+				<td><input type="file" name="manual_img11" id="manual_img11"></td>
+			</tr>
+			<tr>
+				<td>만드는법 12</td>
+				<td><textarea name="manual12" id="manual12" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법12_이미지</td>
+				<td><input type="file" name="manual_img12" id="manual_img12"></td>
+			</tr>
+			<tr>
+				<td>만드는법 13</td>
+				<td><textarea name="manual13" id="manual13" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법13_이미지</td>
+				<td><input type="file" name="manual_img13" id="manual_img13"></td>
+			</tr>
+			<tr>
+				<td>만드는법 14</td>
+				<td><textarea name="manual14" id="manual14" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법14_이미지</td>
+				<td><input type="file" name="manual_img14" id="manual_img14"></td>
+			</tr>
+			<tr>
+				<td>만드는법 15</td>
+				<td><textarea name="manual15" id="manual15" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법15_이미지</td>
+				<td><input type="file" name="manual_img15" id="manual_img15"></td>
+			</tr>
+			<tr>
+				<td>만드는법 16</td>
+				<td><textarea name="manual16" id="manual16" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법16_이미지</td>
+				<td><input type="file" name="manual_img16" id="manual_img16"></td>
+			</tr>
+			<tr>
+				<td>만드는법 17</td>
+				<td><textarea name="manual17" id="manual17" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법17_이미지</td>
+				<td><input type="file" name="manual_img17" id="manual_img17"></td>
+			</tr>
+			<tr>
+				<td>만드는법 18</td>
+				<td><textarea name="manual18" id="manual18" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법18_이미지</td>
+				<td><input type="file" name="manual_img18" id="manual_img18"></td>
+			</tr>
+			<tr>
+				<td>만드는법 19</td>
+				<td><textarea name="manual19" id="manual19" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법19_이미지</td>
+				<td><input type="file" name="manual_img19" id="manual_img19"></td>
+			</tr>
+			<tr>
+				<td>만드는법 20</td>
+				<td><textarea name="manual20" id="manual20" rows="10" cols="70"></textarea></td>
+			</tr>
+			<tr>
+				<td>만드는법20_이미지</td>
+				<td><input type="file" name="manual_img20" id="manual_img20"></td>
+			</tr>
+		</table>
+
+<!-- 
 	<table id="boardWrite">
 		<tr>
 			<td>작성자</td>
@@ -90,6 +263,7 @@
 			<td><input type="file" name="bfile" id="bfile"></td>
 		</tr>
 	</table>
+ -->	
 	<!--<s:csrfInput/> -->
 </form>
 <div id="boardBut">

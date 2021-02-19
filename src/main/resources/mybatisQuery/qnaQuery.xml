@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jns.qna.dao.QnADAO">
+
+	<select id="QnASelectAll" resultType="bvo">
+
+		SELECT
+			*
+		FROM
+			BOARD
+		WHERE
+			BDELETEYN = 'Y'
+			<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+			<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			</if>
+			<if test="keyfilter=='key1'">
+				<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key2'">
+				<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key3'">
+				<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key4'">
+				<![CDATA[AND A.MNICK LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key5'">
+				<![CDATA[AND A.BNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+	</select>
+	
+	<insert id="QnAInsert" parameterType="bvo">
+		INSERT INTO BOARD(
+						  BNO
+						 ,BTYPE
+						 ,BTITLE
+						 ,BCONTENT
+						 ,MNICK
+						 ,BFILE
+						 ,BINSERTDATE
+						 ,BUPDATEDATE
+						 ,BVIEW
+						 ,BDELETEYN
+						 ,BHITS
+						 )
+		VALUES			 (
+						  #{bno, jdbcType=VARCHAR}
+						 ,'C'
+						 ,#{btitle, jdbcType=VARCHAR}
+						 ,#{bcontent, jdbcType=VARCHAR}
+						 ,#{mnick, jdbcType=VARCHAR}
+						 ,#{bfile, jdbcType=VARCHAR}
+						 ,SYSDATE
+						 ,SYSDATE
+						 ,0
+						 ,'Y'
+						 ,0
+						 )
+	</insert>
+	
+	
+	<select id="QnASelect" parameterType="bvo" resultType="bvo">
+		SELECT
+				 A.BNO
+				,A.BTYPE
+				,A.BTITLE
+				,A.BCONTENT
+				,A.MNICK
+				,A.BFILE
+				,TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD HH24:MI:SS') BINSERTDATE
+				,TO_CHAR(A.BUPDATEDATE, 'YYYY-MM-DD HH24:MI:SS') BUPDATEDATE
+				,A.BVIEW
+				,A.BDELETEYN
+				,A.BHITS
+		FROM 	 BOARD A
+		WHERE 	 A.BNO = #{bno, jdbcType=VARCHAR}
+		AND		 A.BDELETEYN = 'Y'
+	</select>
+	
+	<update id="QnAUpdate" parameterType="bvo">
+		/* Board - boardUpdate */
+		UPDATE	 BOARD
+		SET		 BTITLE = #{btitle, jdbcType=VARCHAR}
+				,BCONTENT = #{bcontent, jdbcType=VARCHAR}
+				,BUPDATEDATE = SYSDATE
+				<if test="bfile != ''">
+				,BFILE = #{bfile, jdbcType=VARCHAR}
+				</if>
+		WHERE	 BNO = #{bno, jdbcType=VARCHAR}
+		AND		 BDELETEYN = 'Y'
+	</update>
+	
+	<delete id="QnADelete" parameterType="bvo">
+		UPDATE	 BOARD
+		SET		 BDELETEYN = 'N'
+				,BUPDATEDATE = SYSDATE
+		WHERE	 BNO = #{bno, jdbcType=VARCHAR}
+		AND		 BDELETEYN = 'Y'
+	</delete>
+	
+</mapper>

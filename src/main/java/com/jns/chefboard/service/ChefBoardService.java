@@ -3,12 +3,13 @@ package com.jns.chefboard.service;
 import java.util.List;
 
 import com.jns.chefboard.vo.ChefBoardVO;
+import com.jns.recipeboard.vo.RecipeBoardVO;
 
 public interface ChefBoardService {
 
-	public List<ChefBoardVO> boardList(ChefBoardVO cbvo);
+	public List<ChefBoardVO> chefBoardSelectAll(ChefBoardVO cbvo);
+	public List<ChefBoardVO> chefBoardSelect(ChefBoardVO cbvo);
 	public int boardInsert(ChefBoardVO cbvo);
-	public ChefBoardVO boardDetail(ChefBoardVO cbvo);
 	public int boardUpdate(ChefBoardVO cbvo);
 	public int boardDelete(ChefBoardVO cbvo);
 }

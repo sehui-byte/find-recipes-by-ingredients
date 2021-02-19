@@ -4,7 +4,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.jns.qna.vo.QnAVO;
+import com.jns.board.vo.BoardVO;
 
 public class QnADAOImpl implements QnADAO {
 
@@ -14,39 +14,39 @@ public class QnADAOImpl implements QnADAO {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<QnAVO> QnASelectPaging(QnAVO qvo) {
+	public List<BoardVO> QnASelectPaging(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("qnaSelectPaging", qvo);
+		return sqlSession.selectList("QnASelectPaging", bvo);
 	}
 
 	@Override
-	public List<QnAVO> QnAselectAll(QnAVO qvo) {
+	public List<BoardVO> QnASelectAll(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("qnaSelectAll", qvo);
+		return sqlSession.selectList("QnASelectAll", bvo);
 	}
 
 	@Override
-	public List<QnAVO> QnASelect(QnAVO qvo) {
+	public List<BoardVO> QnASelect(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("qnaSelect", qvo);
+		return sqlSession.selectList("QnASelect", bvo);
 	}
 
 	@Override
-	public int QnAInsert(QnAVO qvo) {
+	public int QnAInsert(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.insert("qnaInsert", qvo);
+		return (Integer)sqlSession.insert("QnAInsert", bvo);
 	}
 
 	@Override
-	public int QnAUpdate(QnAVO qvo) {
+	public int QnAUpdate(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.update("qnaUpdate", qvo);
+		return (Integer)sqlSession.update("QnAUpdate", bvo);
 	}
 
 	@Override
-	public int QnADelete(QnAVO qvo) {
+	public int QnADelete(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.delete("qnaDelete", qvo);
+		return (Integer)sqlSession.delete("QnADelete", bvo);
 	}
 
 }

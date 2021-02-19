@@ -35,76 +35,67 @@ public class MemberController {
 	}
 
 	// 회원 가입 화면
-	@RequestMapping(value = "join", method = RequestMethod.GET)
+	@RequestMapping(value = "memberForm", method = RequestMethod.GET)
 	public String member() {
 
 		logger.info("MemberController member 함수 시작 >>> : ");
 
-		return "/join";
+		return "mem/memberForm";
 	}
 
 	// 회원 등록
-	@RequestMapping(value = "memInsert", method = RequestMethod.POST)
+	@RequestMapping(value = "mem/memberInsert", method = RequestMethod.GET)
 	public String memInsert(MemberVO mvo, Model model) {
 		// public String memInsert(HttpServletRequest req)
 		logger.info("MemberController memInsert 함수 시작 >>> : ");
 
-		// MemberVO mvo = null;
-		mvo = new MemberVO();
-
-		// 현재 널값나오는 거 수정 중
-
-//		//mvo.getMlevel();
-//		mvo.getMid();
-//		mvo.getMpw();
-//		mvo.getMnick();
-//		mvo.getMhp();
-//		mvo.getMemail();
-//		mvo.getMaddr();
-//		mvo.getMzipcode();
-//		mvo.getMaddrdetail();
-//		mvo.getMphoto();
-
-		String maddr = "";
-		mvo.setMaddr(maddr);
-
 		// 회원번호 채번 가져오기
-		String mno = ChabunUtil.getMemberChabun("M", chabunService.getMemberChabun().getMno());
+		String mno = ChabunUtil.getMemberChabun("D", chabunService.getMemberChabun().getMno());
 		mvo.setMno(mno);
-
-		logger.info("MemberController MemberInsert mno >>> : " + mno);
-		System.out.println(mno);
-
+	
+		logger.info("MemberController MemberInsert mno  회원번호 >>> : " + mno);
+		logger.info("mvo.getMlevel() 회원 등급 >>>> :"+mvo.getMlevel());
+		logger.info("mvo.getMaddr() 주소 >>>>:"+mvo.getMaddr());
+		logger.info("mvo.getMaddrdetail() 상세주소 >>>>>:"+mvo.getMaddrdetail());
+		logger.info("mvo.getMzipcode() 우편번호 >>>>:"+mvo.getMzipcode());
+		logger.info("mvo.getMnick() 닉네임 >>>> :"+mvo.getMnick());
+		logger.info("mvo.getMpw() 비밀번호  >>>> :"+mvo.getMpw());
+		logger.info("mvo.getMid() 아이디 >>>  :"+mvo.getMid());
+		logger.info("mvo.getMname() 이름 >>>> :"+mvo.getMname());
+		logger.info("mvo.getMphoto() 사진 >>>>  :"+mvo.getMphoto());
+		logger.info("mvo.getMtel() 핸드폰 >>>>  :"+mvo.getMhp());
+		logger.info("mvo.getMemail() 이메일 >>>:"+mvo.getMemail());
+	
+	
 		// memInsert 함수에서 서비스 호출하기
 		int nCnt = memberService.memberInsert(mvo);
-		logger.info("MemberController memInsert >>> : " + nCnt + " 건 입력 되었습니다.");
+		logger.info("MemberController memberInsert >>> : " + nCnt + " 건 입력 되었습니다.");
 
+		
 		if (nCnt == 1) {
-			return "/memInsert";
+			return "mem/memberSelectAll";
 		}
 
-		return "/MemberForm";
+		return "login/login";
 
 	}
 
 	// 회원전체 조회
-	@RequestMapping(value = "memSelectAll", method = RequestMethod.GET)
+	@RequestMapping(value = "memberSelectAll", method = RequestMethod.GET)
 	public String MemberSelectAll(MemberVO mvo, Model model) {
 
 		logger.info("MemberController MemberSelectAll 함수 시작 >>> :: ");
 		logger.info("mvo >>> :: " + mvo);
 
 		List<MemberVO> listAll = memberService.memberSelectAll(mvo);
+		logger.info("MemberController MemberSelectAll >>>> ::: " + listAll.size());
 
-		int nCnt = listAll.size();
-		logger.info("MemberController MemberSelectAll nCnt >>>> ::: " + nCnt);
-
-		if (nCnt > 0) {
+		if (listAll.size() > 0) {
 			model.addAttribute("listAll", listAll);
 			return "mem/memSelectAll";
 		}
 
-		return "MemberForm";
+		return "mem/memberForm";
 	}
 
 	// 회원 조회 : 선택 조회
@@ -124,7 +115,7 @@ public class MemberController {
 			return "mem/memSelect";
 		}
 
-		return "MemberForm";
+		return "memberForm";
 	}
 
 	// 회원 수정
@@ -145,7 +136,7 @@ public class MemberController {
 		if (nCnt == 1) {
 			return "mem/memUpdate";
 		}
-		return "MemberForm";
+		return "/main";
 	}
 
 	// 회원 삭제
@@ -161,7 +152,7 @@ public class MemberController {
 		if (nCnt == 1) {
 			return "mem/memDelete";
 		}
-		return "MemberForm";
+		return "/main";
 	}
 
 	// 아이디 중복 체크
@@ -185,10 +176,10 @@ public class MemberController {
 	public String memberLogin() {
 		logger.info("memberLogin page 진입 >>> ");
 
-		return "/login/login";
+		return "mem/login/login";
 	}
 
-	// main 페이지
+	// main 페이지 >> 나중에 없애기
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String main() {
 		logger.info("main page 진입 >>> ");
@@ -202,39 +193,73 @@ public class MemberController {
 
 		logger.info("memberFindIDnPW 진입 >>> ");
 
-		return "/login/findIDnPW";
+		return "mem/login/findIDnPW";
 	}
 
 	// id 찾기 페이지
-	@RequestMapping(value = "memberFindID", method =RequestMethod.GET)
+	@RequestMapping(value = "memberFindID", method = RequestMethod.GET)
 	public String memberFindID(MemberVO mvo) {
 
 		logger.info("memberFindID 진입 >>> ");
 
-		return "/login/findID";
+		return "mem/login/findID";
 	}
-	
+
 	// id 찾기 >> db 구현
-	@RequestMapping(value = "memberFindIDOK", method =RequestMethod.POST)
+	@RequestMapping(value = "memberFindIDOK", method = RequestMethod.POST)
 	@ResponseBody
 	public String memberFindIDOK(MemberVO mvo) {
-		
+
 		logger.info("memberFindIDOK 진입 >>> ");
-		
+
 		logger.info(mvo.getMname());
 		logger.info(mvo.getMemail());
-		
-		
-		
-		return "ok";
+
+		List<MemberVO> aList = memberService.memberFindIDOK(mvo);
+
+		if (aList.size() == 1) {
+			return "OK";
+		} else {
+			return "ERROR";
+		}
 	}
 
 	// 임시 비밀번호 발급 페이지
 	@RequestMapping(value = "memberTempPW", method = RequestMethod.GET)
-
 	public String memberTempPW() {
 		logger.info("memberTempPW 진입 >>> ");
 
-		return "/login/tempPW";
+		return "mem/login/tempPW";
 	}
+
+	// 임시 비밀번호 발급 >> db 구현
+	@RequestMapping(value = "memberFindPWOK", method = RequestMethod.POST)
+	@ResponseBody
+	public String memberTempPWOK(MemberVO _mvo) {
+
+		logger.info("memberTempPWOK 진입 >>> ");
+
+		logger.info(_mvo.getMid());
+		logger.info(_mvo.getMemail());
+
+		List<MemberVO> aList = memberService.memberTempPW(_mvo);
+
+		// 입력된 회원 정보 부합 여부
+		if (aList.size() == 1) {
+
+			MemberVO mvo = null;
+			mvo = aList.get(0);
+			int result = memberService.memberTempPWOK(mvo);
+
+			// 임시 비밀번호가 비밀번호에 정상 발급 되었는지?
+			if (result == 1) {
+				return "OK";
+			} else {
+				return "ERROR_TEMPPW";
+			}
+		} else {
+			return "ERROR_INFO";
+		}
+	}
+
 }

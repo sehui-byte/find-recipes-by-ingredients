@@ -1,6 +1,5 @@
 package com.jns.recipe.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class RecipeController
 	{
 		logger.info("[RecipeController] recipeList() 호출");
 		model.addAttribute("list", recipeService.recipeSelectAll());
-		return "recipe/recipelist";
+		return "recipe/recipeList";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "recipedetail")
@@ -48,7 +47,7 @@ public class RecipeController
 		logger.info("recipeService.recipeSelect(rvo) >>> : " + recipeService.recipeSelect(rvo));
 		model.addAttribute("data", recipeService.recipeSelect(rvo));
 		
-		return "recipe/recipedetail";
+		return "recipe/recipeDetail";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "recipeSelectAll")

@@ -15,6 +15,29 @@
 		font-weight: bole;
 	}
 </style>
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		
+		//검색버튼
+		$(document).on("click", "#searchBtn", function(){
+			console.log("searchBtn >>> : ");
+			$("#boardList").attr({"method":"GET"
+								 ,"action":"/kosmoJns/chefboard/boardselectall.do"}).submit();
+		});
+		
+		
+		//datepicker
+		
+		
+		// 입력
+		$(document).on("click", "#I", function(){
+				location.href="/kosmoJns/chefboard/writeForm.do";
+			});	
+		
+	});	
+	
+</script>
 </head>
 <body>
 <% request.setCharacterEncoding("UTF-8");%> 
@@ -23,7 +46,7 @@
 	List<ChefBoardVO> list = (List)obj;
 	
 	int nCnt = list.size();
-	System.out.println("boardList.jsp nCnt >>> : " + nCnt);
+	System.out.println("boardselectall.jsp nCnt >>> : " + nCnt);
 %>
 <form name="boardList" id="boardList">
 <table border="1">
@@ -35,10 +58,7 @@
 		<td colspan="10" align="left">
 			<select id="keyfilter" name="keyfilter">
 				<option value="key1">제목</option>
-				<option value="key2">내용</option>
-				<option value="key3">제목+내용</option>
-				<option value="key4">작성자</option>
-				<option value="key5">글번호</option>
+				<option value="key2">글번호</option>
 			</select>
 			<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
 			<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
@@ -47,12 +67,12 @@
 		</td>	
 	</tr>
 	<tr>
-		<td class="tt">선택</td>
 		<td class="tt">글번호</td>
 		<td class="tt">제목</td>
 		<td class="tt">이름</td>
 		<!-- <td class="tt">내용</td>  -->
-		<td class="tt">최종작성일</td>
+		<td class="tt">작성일</td>
+		<td class="tt">수정일</td>
 		<td class="tt">사진</td>
 	</tr>
 	</thead>
@@ -63,15 +83,16 @@
 %>
 	<tbody>
 	<tr>
-		<td align="center">
-			<input type="checkbox" name="bno" id="bno" class="bno"
-				   value=<%= cbvo.getBno() %>></td>
-		<td class="tt"><%= cbvo.getBno() %> </td>
-		<td class="tt"><%= cbvo.getBtitle() %> </td>
-		<td class="tt"><%= cbvo.getMnick() %> </td>
-		<!-- <td class="tt"> </td>  -->
-		<td class="tt"><%= cbvo.getBupdatedate() %> </td>
-		<td class="tt"><img src="/kosmoJns/imgupload/c_<%= cbvo.getBfile() %>"> </td>
+		<td class="tt"><%= cbvo.getRbno() %> </td>
+		<td class="left">
+			<a href="/kosmoJns/chefboard/boardselect.do?rbno=<%= cbvo.getRbno() %>">
+			<%= cbvo.getRcp_nm() %>
+			</a>
+		</td>
+		<td class="tt"> 작성자 </td>
+		<td class="tt"><%= cbvo.getRb_insertdate() %> </td>
+		<td class="tt"><%= cbvo.getRb_updatedate() %> </td>
+		<td class="tt"> 메인이미지 </td>
 	</tr>
 <%
 		} // end of for
@@ -88,8 +109,6 @@
 	<tr>
 		<td colspan="10" align="right">
 			<input type="button" value="글쓰기" id="I">
-			<input type="button" value="글수정" id="U">
-			<input type="button" value="글삭제" id="D">
 		</td>
 	</tr>
 	</tbody>

@@ -3,7 +3,7 @@ package com.jns.qna.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jns.qna.service.QnAService;
-import com.jns.qna.vo.QnAVO;
+import com.jns.board.vo.BoardVO;
+import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
 
 import oracle.net.aso.e;
@@ -26,163 +27,149 @@ public class QnAController {
 	Logger logger = Logger.getLogger(QnAController.class);
 	
 	private QnAService qnaService;
-	// private ChabunService chabunService; 
+	private ChabunService chabunService; 
 	
-	// »ý¼ºÀÚ Autowired 
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Autowired 
 	@Autowired(required=false)	
-	public QnAController( QnAService qnaService
-				          //ChabunService chabunService
+	public QnAController( QnAService qnaService,
+				          ChabunService chabunService
 				           ) {
 		this.qnaService = qnaService;
-		//this.chabunService = chabunService;
+		this.chabunService = chabunService;
 		
 	}	
 	
-	//±Û ÀÔ·Â Æû 
-	@RequestMapping(value="QnAForm", method=RequestMethod.GET)
+	//ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ 
+	@RequestMapping(value="qnaForm", method=RequestMethod.GET)
 	public String boardForm() {
-		return "QnA/QnAForm";
+		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="", method=RequestMethod.POST)
-	public String QnASelectPaging(QnAVO qvo, Model model) {
-		logger.info("QnAController QnASelectPaging ½ÃÀÛ ::");	
-		logger.info("QnAController boardSelect bvo.getSbnum() " + qvo.getPage());
+	@RequestMapping(value="", method=RequestMethod.GET)
+	public String QnASelectPaging(BoardVO bvo, Model model) {
+		logger.info("QnAController QnASelectPaging ï¿½ï¿½ï¿½ï¿½ ::");	
+		logger.info("QnAController boardSelect bvo.getSbnum() " + bvo.getPage());
 		
-		List<QnAVO> listS = qnaService.QnASelectPaging(qvo);
+		List<BoardVO> listS = qnaService.QnASelectPaging(bvo);
 		logger.info("QnAController QnASelectPaging listS.size >>>:: " + listS.size());
 		
 		
 		if(listS.size() == 1) {
 			model.addAttribute("listS", listS);
-			return "QnA/QnAList.do";
+			return "QnA/qnaSelectAll";
 		}
 		
-		return "QnA/QnAList.do";
+		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="QnAInsert", method=RequestMethod.POST)
-	public String QnAInsert(HttpServletRequest req) {
-		logger.info("QnAController QnAInsert  ½ÃÀÛ ::");
+	@RequestMapping(value="qnaInsert", method=RequestMethod.GET)
+	public String QnAInsert(BoardVO bvo, Model model) {
+		logger.info("QnAController QnAInsert  ï¿½ï¿½ï¿½ï¿½ ::");
 		
-		// Ã¤¹ø
+		//ì±„ë²ˆ
+		String bno = ChabunUtil.getQnaBoardChabun("D", chabunService.getQnABoardChabun().getBno());
 		
-		// ÆÄÀÏ¾÷·Îµå Ãß°¡½Ã ÇØÁ¦
-		//FileUploadUtil fu = new FileUploadUtil();
 		
-		QnAVO _qvo = null;
-		_qvo = new QnAVO();
+		 bvo.setBno(bno);
 		
-		// ÆÄÀÏ ¾÷·Îµå µé¾î¿À¸é ÁÖ¼®ÇØÁ¦
-		/*
-		_qvo.setSno(fu.getParameter("sno"));
-		_qvo.setStitle(fu.getParameter("stitle"));
-		_qvo.setScontent(fu.getParameter("scontent"));
-		_qvo.setSwriter(fu.getParameter("swriter"));
-		_qvo.setSfile(fu.getParameter("sfile"));
-		_qvo.setSview(fu.getParameter("sview"));
-		*/ 
-		
-		 logger.info("QnAController QnAInsert _qvo.getSno() >>> : "
-			 		+ _qvo.getSno());
-		 logger.info("QnAController QnAInsert _qvo.sbcontent() >>> : "
-				 	+ _qvo.getScontent());
-		 logger.info("QnAController QnAInsert _qvo.sbfile() >>> : "
-				 	+ _qvo.getSfile());
+		 logger.info("QnAController QnAInsert bvo.getBno() >>> : "
+			 		+ bvo.getBno());
+		 logger.info("QnAController QnAInsert bvo.getBcontent() >>> : "
+				 	+ bvo.getBcontent());
+		 logger.info("QnAController QnAInsert bvo.getMnick() >>> : "
+				 	+ bvo.getMnick());
 		 
-		 int nCnt = qnaService.QnAInsert(_qvo);
+		 int nCnt = qnaService.QnAInsert(bvo);
 		 logger.info("QnAController QnAInsert nCnt >>> : " + nCnt);
 		 
-		 String url = "";
-		 
 		 if(nCnt > 0) {
-			 url = "QnA/QnAList.do";
+			 return "QnA/qnaInsert";
 		 }
 		 
-		return "redirect:"+url;
+		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="QnASelectAll",method=RequestMethod.GET)
-	public String QnASelectAll(QnAVO qvo, Model model) {
-		logger.info("QnAController QnASelectAll ÇÔ¼ö ½ÃÀÛ >>>: ");
+	@RequestMapping(value="qnaSelectAll",method=RequestMethod.GET)
+	public String QnASelectAll(BoardVO bvo, Model model) {
+		logger.info("QnAController QnASelectAll ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ >>>: ");
 		
 		
-		logger.info("QnAController QnASelectAll qvo.getSno() >>> : " + qvo.getSno());
-		logger.info("QnAController QnASelectAll qvo.getStitle() >>> : " + qvo.getStitle());
-		logger.info("QnAController QnASelectAll qvo.getScontent() >>> : " + qvo.getScontent());
-		logger.info("QnAController QnASelectAll qvo.getSwriter() >>> : " + qvo.getSwriter());
-		logger.info("QnAController QnASelectAll qvo.getSinsertdate() >>> : " + qvo.getSinsertdate());
+		logger.info("QnAController QnASelectAll bvo.getBno() >>> : " + bvo.getBno());
+		logger.info("QnAController QnASelectAll bvo.getBtitle() >>> : " + bvo.getBtitle());
+		logger.info("QnAController QnASelectAll bvo.getBcontent() >>> : " + bvo.getBcontent());
+		logger.info("QnAController QnASelectAll bvo.getMnick() >>> : " + bvo.getMnick());
+		logger.info("QnAController QnASelectAll bvo.getBinsertdate() >>> : " + bvo.getBinsertdate());
 		
-		List<QnAVO> listAll = qnaService.QnASelectAll(qvo);
+		List<BoardVO> listAll = qnaService.QnASelectAll(bvo);
 		logger.info("QnAController QnASelectAll listAll.size() >>> : " + listAll.size());
 		
 		try {
-		// ÀüÃ¼ ¸ñ·ÏÀÇ Å©±â°¡ 0 º¸´Ù Å©´Ù¸é ¸ñ·ÏÀ» ºÒ·¯¿Â´Ù.
+		// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â°¡ 0 ï¿½ï¿½ï¿½ï¿½ Å©ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½Â´ï¿½.
 	
 		if(listAll.size() > 0) {
 
 			model.addAttribute("listAll",listAll);
 
-				return "QnA/QnAList.do";
+				return "QnA/qnaSelectAll";
 			}
 		}catch(Exception e) {
 			System.out.println("test"+e.getMessage());
 			}
-		return "QnA/QnAInsert.do";
+		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="QnASelect",method=RequestMethod.POST)
-	public String QnASelect(QnAVO qvo,Model model) {
+	@RequestMapping(value="qnaSelect",method=RequestMethod.GET)
+	public String QnASelect(BoardVO bvo,Model model) {
 		
-		logger.info("QnAController QnASelect ÇÔ¼ö ½ÃÀÛ :::: ");
-		logger.info("QnAController QnASelect qvo.getSno() " + qvo.getSno());
+		logger.info("QnAController QnASelect ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ :::: ");
+		logger.info("QnAController QnASelect bvo.getBno() " + bvo.getBno());
 		
-		List<QnAVO> listS = qnaService.QnASelect(qvo);
+		List<BoardVO> listS = qnaService.QnASelect(bvo);
 		logger.info("QnAController boardSelect listS.size >>>:: " + listS.size());
 		
-		// ¼±ÅÃÇÑ °Ô½Ã¹°ÀÌ ÀÖ´Ù¸é °Ô½Ã¹°À» ºÒ·¯¿Â´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½Â´ï¿½.
 		if(listS.size() == 1) {
 			model.addAttribute("listS", listS);
-			return "QnA/QnASelect.do";
+			return "QnA/qnaSelect";
 		}
 		
-		return "QnA/QnASelectAll.do";
+		return "QnA/qnaSelectAll";
 		
 	}
 	
-	@RequestMapping(value="QnAUpdate",method=RequestMethod.POST)
-	public String BoardUpdate(QnAVO qvo ,Model model) {
-		logger.info("QnAController boardUpdate ÇÔ¼ö ½ÃÀÛ >> ");
+	@RequestMapping(value="qnaUpdate",method=RequestMethod.GET)
+	public String BoardUpdate(BoardVO bvo ,Model model) {
+		logger.info("QnAController QnAUpdate í•¨ìˆ˜ ì‹œìž‘ >> ");
 		
-		logger.info("QnAController boardUpdate qvo.getStitle() " + qvo.getStitle());
-		logger.info("QnAController boardUpdate qvo.getScontent() " + qvo.getScontent());
-		int nCnt = qnaService.QnAUpdate(qvo);
+		logger.info("QnAController QnAUpdate bvo.getBtitle() " + bvo.getBtitle());
+		logger.info("QnAController QnAUpdate bvo.getBcontent() " + bvo.getBcontent());
+		int nCnt = qnaService.QnAUpdate(bvo);
 		
 		logger.info("QnAController QnAUpdate nCnt" + nCnt);
 		
-		//¼±ÅÃÇÑ °Ô½Ã¹°ÀÌ 1º¸´Ù Å©´Ù¸é ¼öÁ¤  Ã¢À¸·Î ÀÌµ¿ 
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ Å©ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½  Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ 
 		if(nCnt > 0) {
-			return "QnA/QnAUpdate";
+			return "QnA/qnaUpdate";
 		}
 		
-		return "QnA/QnAInsert";
+		return "QnA/qnaInsert";
 				
 	}	
 	
-	///±Û »èÁ¦ÇÏ±â 
-	@RequestMapping(value="QnADelete", method=RequestMethod.POST)
-	public String QnADelete(QnAVO qvo, Model model) {
-		logger.info("QnAController QnADelete ÇÔ¼ö ÁøÀÔ >>> :");
+	///ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ 
+	@RequestMapping(value="qnaDelete", method=RequestMethod.GET)
+	public String QnADelete(BoardVO bvo, Model model) {
+		logger.info("QnAController QnADelete ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ >>> :");
 		
-		logger.info("QnAController QnADelete qvo.getSno() >>> : " + qvo.getSno());		
-		int nCnt = qnaService.QnADelete(qvo);
+		logger.info("QnAController QnADelete bvo.getSno() >>> : " + bvo.getBno());		
+		int nCnt = qnaService.QnADelete(bvo);
 		logger.info("QnAController QnADelete nCnt >>> : " + nCnt);
 		
 		if (nCnt > 0) {
-			return "QnA/QnADelete";
+			return "QnA/qnaDelete";
 		}
 		
-		return "QnA/QnAInsert";
+		return "QnA/qnaInsert";
 	}
 	
 }

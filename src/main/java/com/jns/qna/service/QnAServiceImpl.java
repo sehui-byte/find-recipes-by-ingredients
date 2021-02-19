@@ -3,7 +3,7 @@ package com.jns.qna.service;
 import java.util.List;
 
 import com.jns.qna.dao.QnADAO;
-import com.jns.qna.vo.QnAVO;
+import com.jns.board.vo.BoardVO;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,39 +24,39 @@ public class QnAServiceImpl implements QnAService {
 	}
 	
 	@Override
-	public List<QnAVO> QnASelectPaging(QnAVO qvo) {
+	public List<BoardVO> QnASelectPaging(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return qnaDAO.QnASelectPaging(qvo);
+		return qnaDAO.QnASelectPaging(bvo);
 	}
 
 	@Override
-	public List<QnAVO> QnASelectAll(QnAVO qvo) {
+	public List<BoardVO> QnASelectAll(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return qnaDAO.QnAselectAll(qvo);
+		return qnaDAO.QnASelectAll(bvo);
 	}
 
 	@Override
-	public List<QnAVO> QnASelect(QnAVO qvo) {
+	public List<BoardVO> QnASelect(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return qnaDAO.QnASelect(qvo);
+		return qnaDAO.QnASelect(bvo);
 	}
 
 	@Override
-	public int QnAInsert(QnAVO qvo) {
+	public int QnAInsert(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return qnaDAO.QnAInsert(qvo);
+		return qnaDAO.QnAInsert(bvo);
 	}
 
 	@Override
-	public int QnAUpdate(QnAVO qvo) {
+	public int QnAUpdate(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return qnaDAO.QnAUpdate(qvo);
+		return qnaDAO.QnAUpdate(bvo);
 	}
 
 	@Override
-	public int QnADelete(QnAVO qvo) {
+	public int QnADelete(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return qnaDAO.QnADelete(qvo);
+		return qnaDAO.QnADelete(bvo);
 	}
 
 }
