@@ -42,7 +42,10 @@ public class QnAController {
 	//�� �Է� �� 
 	@RequestMapping(value="qnaForm", method=RequestMethod.GET)
 	public String boardForm() {
-		return "QnA/qnaForm";
+		
+		logger.info("QnA form >>>");
+
+		return "qna/qnaForm";
 	}
 	
 	@RequestMapping(value="qnaSelectAll", method=RequestMethod.POST)
