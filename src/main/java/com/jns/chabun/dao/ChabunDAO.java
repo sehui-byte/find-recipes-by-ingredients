@@ -22,7 +22,6 @@ public interface ChabunDAO {
 
 	public BoardVO getQnABoardChabun();
 
-
 	public ChefBoardVO getBoardChabun();
 	public ReplyVO getReplyChabun();
 

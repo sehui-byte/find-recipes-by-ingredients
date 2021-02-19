@@ -38,7 +38,6 @@ public class ChabunDAOImpl implements ChabunDAO {
 
 
 	@Override
-
 	public BoardVO getNoticeChabun() {
 
 		// TODO Auto-generated method stub
@@ -53,7 +52,6 @@ public class ChabunDAOImpl implements ChabunDAO {
 
 
 	@Override
-
 	public BoardVO getQnABoardChabun() {
 
 
@@ -61,7 +59,7 @@ public class ChabunDAOImpl implements ChabunDAO {
 		return sqlSession.selectOne("getQnABoardChabun");
 	}
 
-
+	@Override
 	public ReplyVO getReplyChabun() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getReplyChabun");

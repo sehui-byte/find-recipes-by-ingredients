@@ -66,6 +66,5 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getReplyChabun();
 	}
 
-	
 
 }
