@@ -44,53 +44,38 @@ public class MemberController {
 	}
 
 	// 회원 등록
-	@RequestMapping(value = "memberInsert", method = RequestMethod.POST)
+	@RequestMapping(value = "/memberInsert", method = RequestMethod.GET)
 	public String memInsert(MemberVO mvo, Model model) {
 		// public String memInsert(HttpServletRequest req)
 		logger.info("MemberController memInsert 함수 시작 >>> : ");
 
-		// MemberVO mvo = null;
-		mvo = new MemberVO();
-
-		// 현재 널값나오는 거 수정 중
-
-		//MemberVO _mvo = null;
-		mvo = new MemberVO();
-
-		// 현재 널값나오는 거 수정 중
-	
-		mvo.setMlevel(mvo.getMlevel());
-		logger.info("mvo.getMlevel >>>> "+mvo.getMlevel());
-		mvo.setMid(mvo.getMid());
-		logger.info("_mvo.getMid >>>> "+mvo.getMid());
-		mvo.setMlevel(mvo.getMlevel());
-		logger.info("_mvo.getMpw >>> " +mvo.getMpw());		
-		
-		
-		mvo.setMpw(mvo.getMpw());
-		mvo.setMnick(mvo.getMnick());
-		mvo.setMhp(mvo.getMhp());
-		mvo.setMemail(mvo.getMemail());
-		mvo.setMaddr(mvo.getMaddr());
-		logger.info(" mvo.getMaddr() >>> "+mvo.getMaddr());
-//		mvo.setMzipcode(mzipcode);
-//		mvo.setMaddrdetail(maddrdetail);
-//		mvo.setMphoto(mphoto);
-
-
-
-
 		// 회원번호 채번 가져오기
 		String mno = ChabunUtil.getMemberChabun("M", chabunService.getMemberChabun().getMno());
 		mvo.setMno(mno);
-
+		logger.info("mvo.getMlevel() 회원 등급 >>>> :"+mvo.getMlevel());
+		logger.info("mvo.getMlevel() 주소 >>>>:"+mvo.getMaddr());
+		logger.info("mvo.getMlevel() 상세주소 >>>>>:"+mvo.getMaddrdetail());
+		logger.info("mvo.getMlevel() 우편번호 >>>>:"+mvo.getMzipcode());
+		logger.info("mvo.getMlevel() 닉네임 >>>> :"+mvo.getMnick());
+		logger.info("mvo.getMlevel() 비밀번호  >>>> :"+mvo.getMpw());
+		logger.info("mvo.getMlevel() 아이디 >>>  :"+mvo.getMid());
+		logger.info("mvo.getMlevel() 이름 >>>> :"+mvo.getMname());
+		logger.info("mvo.getMlevel() 사진 >>>>  :"+mvo.getMphoto());
+		logger.info("mvo.getMlevel() 핸드폰 >>>>  :"+mvo.getMhp());
+		logger.info("mvo.getMlevel() 이메일 >>>:"+mvo.getMemail());
 		logger.info("MemberController MemberInsert mno >>> : " + mno);
+		
 		System.out.println(mno);
 
 		// memInsert 함수에서 서비스 호출하기
 		int nCnt = memberService.memberInsert(mvo);
 		logger.info("MemberController memberInsert >>> : " + nCnt + " 건 입력 되었습니다.");
 
+		//MemberVO _mvo = null;
+		//_mvo = new MemberVO();
+		
+
+	
 		if (nCnt == 1) {
 			return "/memberInsert";
 		}

@@ -22,7 +22,6 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
-
 	
 		$(document).ready(function(){
 			
@@ -31,7 +30,7 @@
 				console.log("membtn >>> : ");
 				
 				$('#memberForm').attr('action','memberInsert.do');
-				$('#memberForm').attr('method','POST');
+				$('#memberForm').attr('method','GET');
 				$('#memberForm').attr('enctype','multipart/form-data');
 				$('#memberForm').submit();
 			});
@@ -94,9 +93,9 @@
 	<tr>
 		<td class="mem">회원등급</td>
 		<td>
-		<input type="text" name="mlevel" id="mlevel" placeholder="회원등급을 선택하세요" style="width:150px" readonly/>
-		<select name=mlevel id=mlevel >
-			<option>M</option>
+		<select name=mlevel id=mlevel style="width:150px" >
+			<option>회원등급을 선택하세요</option>
+			<option>U</option>
 			<option>C</option>
 		</select>
 		

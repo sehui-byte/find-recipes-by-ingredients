@@ -27,7 +27,7 @@ public class MemberDAOImpl implements MemberDAO {
 		logger.info("memberDAOIMpl >>> : SelectAll  함수 시작 ");
 		logger.info("mvo >>> : " + mvo);
 
-		return sqlSession.selectList("MemberSelectAll", mvo);
+		return sqlSession.selectList("memberSelectAll", mvo);
 	}
 
 	// 회원 선택 조회
@@ -37,7 +37,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 		logger.info("memberDAOIMpl >>> : Select  함수 시작 ");
 		logger.info("mvo >>> : " + mvo);
-		return sqlSession.selectList("MemberSelect", mvo);
+		return sqlSession.selectList("memberSelect", mvo);
 	}
 
 	// 회원 등록
@@ -58,7 +58,6 @@ public class MemberDAOImpl implements MemberDAO {
 
 		logger.info("memberDAOIMpl >>> : Update  함수 시작 ");
 		logger.info("mvo >>> : " + mvo);
-
 		return (Integer) sqlSession.update("memberUpdate", mvo);
 	}
 
