@@ -21,7 +21,7 @@
 		<result property="mdeleteyn" column="MDELETEYN"/>
 	</resultMap>
 
-	<!-- 조회 -->
+	<!-- 로그인-->
 	<select id="memberLogin"  parameterType="mvo" resultMap="mvo">
 		SELECT 
 			 MNO               
@@ -66,7 +66,6 @@
 		AND MEMAIL = #{memail, jdbcType=VARCHAR}
 	
 	</select>
-
 	<!--  회원 정보 조회(아이디 / 이메일) >> 임시 비밀번호 발급용 -->
 	<select id="memberTempPW" parameterType="mvo" resultMap="mvo">
 		SELECT 
