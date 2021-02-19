@@ -10,7 +10,8 @@
 JNS :전지적 냉장고 시점 회원등록 
 <hr>
 <script>
-	location.href="/login/login.do";
+	location.href="mem/memberSelectAll.do";
 </script>
 </body>
 </html>
+
