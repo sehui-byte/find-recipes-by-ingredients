@@ -16,10 +16,17 @@ public class ReplyDAOImpl implements ReplyDAO {
 	private SqlSession sqlsession;
 	
 	@Override
-	public List<ReplyVO> replyList(ReplyVO rvo) {
+	public List<ReplyVO> breplyList(ReplyVO rvo) {
 		// TODO Auto-generated method stub
-		System.out.println("ReplyDAOImpl >> replyList 호출 성공");
-		return sqlsession.selectList("replyList", rvo);
+		System.out.println("ReplyDAOImpl >> breplyList 호출 성공");
+		return sqlsession.selectList("breplyList", rvo);
+	}
+	
+	@Override
+	public List<ReplyVO> rbreplyList(ReplyVO rvo) {
+		// TODO Auto-generated method stub
+		System.out.println("ReplyDAOImpl >> rbreplyList 호출 성공");
+		return sqlsession.selectList("rbreplyList", rvo);
 	}
 
 	@Override

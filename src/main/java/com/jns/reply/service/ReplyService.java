@@ -6,7 +6,8 @@ import com.jns.reply.vo.ReplyVO;
 
 public interface ReplyService {
 
-	public List<ReplyVO> replyList(ReplyVO rvo);
+	public List<ReplyVO> breplyList(ReplyVO rvo);
+	public List<ReplyVO> rbreplyList(ReplyVO rvo);
 	public int replyInsert(ReplyVO rvo);
 	public int replyUpdate(ReplyVO rvo);
 	public int replyDelete(ReplyVO rvo);

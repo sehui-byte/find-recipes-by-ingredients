@@ -4,58 +4,75 @@
 		 
 <mapper namespace="com.jns.reply.dao.ReplyDAO">
 
-	<resultMap type="com.jns.reply.vo.ReplyVO" id="reply">
-		<result property="rno" column="RNO"/>
-		<result property="rcontent" column="RCONTENT"/>
-		<result property="bno" column="BNO"/>
-		<result property="mnick" column="MNICK"/>
-		<result property="rinsertdate" column="RINSERTDATE"/>
-		<result property="rupdatedate" column="RUPDATEDATE"/>
-		<result property="rdeleteyn" column="RDELETEYN"/>
-	</resultMap>
+	<!-- 공지, Q&A 댓글 기본 조회 -->
+	<select id="breplyList" parameterType="reply" resultType="reply">
+		SELECT 
+         RNO
+        ,MNO
+        ,BNO
+        ,RBNO
+        ,RWRITER
+        ,RCONTENT
+        ,RINSERTDATE
+        ,RUPDATEDATE
+        ,RDELETEYN
+		FROM REPLY
+		WHERE BNO = #{bno, jdbcType=VARCHAR}
+		AND   RDELETEYN = 'Y'
+	</select>
 
-
-	<!-- 댓글 기본 조회 -->
-	<select id="replyList" parameterType="reply" resultType="reply">
-		SELECT
-				*
-		FROM	 REPLY A		 
-		WHERE	 A.BNO = #{bno, jdbcType=VARCHAR}
-		AND		 A.RDELETEYN = 'Y'
-		ORDER BY RNO DESC
+	<!-- 일반, 세프 댓글 기본 조회 -->
+	<select id="rbreplyList" parameterType="reply" resultType="reply">
+		SELECT 
+         RNO
+        ,MNO
+        ,BNO
+        ,RBNO
+        ,RWRITER
+        ,RCONTENT
+        ,RINSERTDATE
+        ,RUPDATEDATE
+        ,RDELETEYN
+		FROM REPLY
+		WHERE RBNO = #{rbno, jdbcType=VARCHAR}
+		AND   RDELETEYN = 'Y'
 	</select>
 	
 	
-	<!-- 댓글 등록 -->
 	<insert id="replyInsert" parameterType="reply">
 		INSERT INTO REPLY(
 						  RNO
-						 ,RCONTENT
+						 ,MNO
 						 ,BNO
-						 ,MNICK
+						 ,RBNO
+						 ,RWRITER
+						 ,RCONTENT
 						 ,RINSERTDATE
 						 ,RUPDATEDATE
 						 ,RDELETEYN
 						 )
 		VALUES			 (
 						  #{rno, jdbcType=VARCHAR}
+						  #{mno, jdbcType=VARCHAR}
+						  #{bno, jdbcType=VARCHAR}
+						  #{rbno, jdbcType=VARCHAR}
+						  #{rwriter, jdbcType=VARCHAR}
 						 ,#{rcontent, jdbcType=VARCHAR}
-						 ,#{bno, jdbcType=VARCHAR}
-						 ,#{mnick, jdbcType=VARCHAR}
 						 ,SYSDATE
 						 ,SYSDATE
 						 ,'Y' 
 						 )
 	</insert>
-	
-	
+
+
 	<!-- 댓글 수정 -->	
 	<update id="replyUpdate" parameterType="reply">
 		UPDATE   REPLY
 		SET		 RCONTENT = #{rcontent, jdbcType=VARCHAR}
 				,RUPDATEDATE = SYSDATE
 		WHERE	 RNO = #{rno, jdbcType=VARCHAR}
-		AND		 RDELETEYN = 'Y'		 
+		AND		 RDELETEYN = 'Y'		
+		AND		 MNO = #{mno, jdbcType=VARCHAR}
 	</update>
 	
 	

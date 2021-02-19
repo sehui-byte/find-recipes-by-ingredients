@@ -1,6 +1,8 @@
 package com.jns.reply.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +27,17 @@ public class ReplyController {
 	private ReplyService replyService;
 	private ChabunService chabunService;
 	
+	
+	// 기본 생성자 주입
 	@Autowired(required=false)
 	public ReplyController(ReplyService replyService, ChabunService chabunService) {
 		this.replyService = replyService;
 		this.chabunService = chabunService;
 	}
 	
+	/********************************************************************************************
+	* 공지, Q&A 댓글 호출 
+	********************************************************************************************/
 	@RequestMapping(value="reply/reply")
 	public String replyReady() {
 		logger.info("ReplyC >> replyReady 호출 성공 ");
@@ -39,25 +46,42 @@ public class ReplyController {
 	}
 	
 	/********************************************************************************************
-	* 댓글 목록 
+	* 일반, 세프 댓글 호출
+	********************************************************************************************/
+	@RequestMapping(value="reply/rbreply")
+	public String rbreplyReady() {
+		logger.info("ReplyC >> rbreplyReady 호출 성공 ");
+		
+		return "reply/rbreply";
+	}
+	
+	/********************************************************************************************
+	* 공지, Q&A 댓글 목록 
 	********************************************************************************************/
 	@ResponseBody
-	@RequestMapping(value="/reply/listAll", method=RequestMethod.POST, produces="application/text; charset=UTF-8")
-	public String list(ReplyVO rvo){
-		logger.info("ReplyC >> list 호출 성공");
-		logger.info("ReplyC >> list >> bno >>> : " + rvo.getBno());
+	@RequestMapping(value="/reply/blistAll", method=RequestMethod.POST)
+	public Map<String, Object> breplylist(ReplyVO rvo){
+		logger.info("ReplyC >> breplylist 호출 성공");
+		logger.info("bno >>> : " + rvo.getBno());
 		
 		rvo.setBno(rvo.getBno());
 		
-		List<ReplyVO> listR = replyService.replyList(rvo);
-		System.out.println("ReplyC >> list >> listR.size() >>> : " + listR.size());
+		List<ReplyVO> breplyList = replyService.breplyList(rvo);
+		System.out.println("ReplyC >> list >> breplyList.size() >>> : " + breplyList.size());
 		
+		Map<String, Object> m = new HashMap<String, Object>();
+		
+		m.put("breplyList", breplyList);
+		
+		return m;
+		
+		/*
 		String ss = "";
 		String listStr = "";
 		for(int i=0; i < listR.size(); i++) {
 			ReplyVO _rvo = listR.get(i);
 			String s0 = _rvo.getRno();
-			String s1 = _rvo.getMnick();
+			String s1 = _rvo.getRwriter();
 			String s2 = _rvo.getRcontent();
 			String s3 = _rvo.getRinsertdate();
 			String s4 = _rvo.getRupdatedate();
@@ -66,8 +90,29 @@ public class ReplyController {
 		}
 		//System.out.println("ReplyC >> listStr >>> : " + listStr);
 		return listStr;
+		*/
 	}
 	
+	/********************************************************************************************
+	* 일반, 세프 게시판 댓글 목록 
+	********************************************************************************************/
+	@ResponseBody
+	@RequestMapping(value="/reply/rblistAll")
+	public Map<String, Object> rbreplylist(ReplyVO rvo){
+		logger.info("ReplyC >> rbreplylist 호출 성공");
+		logger.info("bno >>> : " + rvo.getRbno());
+		
+		rvo.setRbno(rvo.getRbno());
+		
+		List<ReplyVO> rbreplyList = replyService.rbreplyList(rvo);
+		System.out.println("ReplyC >> list >> rbreplyList.size() >>> : " + rbreplyList.size());
+		
+		Map<String, Object> m = new HashMap<String, Object>();
+		
+		m.put("rbreplyList", rbreplyList);
+		
+		return m;
+	}
 	
 	/********************************************************************************************
 	* 댓글 글쓰기
@@ -76,7 +121,7 @@ public class ReplyController {
 	@RequestMapping(value="reply/replyInsert", method=RequestMethod.POST)
 	public String replyInsert(ReplyVO rvo){
 		logger.info("ReplyC >> replyInsert 호출 성공");
-		logger.info("ReplyC >> list >> mnick >>> : " + rvo.getMnick());
+		logger.info("ReplyC >> list >> mnick >>> : " + rvo.getRwriter());
 		
 		// 채번 setting
 		String rno = ChabunUtil.getReplyChabun("D", chabunService.getReplyChabun().getRno());
@@ -119,10 +164,22 @@ public class ReplyController {
 	* 댓글 삭제 
 	********************************************************************************************/
 	@ResponseBody
-	@RequestMapping(value="/reply/rboardDelete", method=RequestMethod.POST)
+	@RequestMapping(value="/reply/replyDelete", method=RequestMethod.POST)
 	public String rboardDelete(ReplyVO rvo) {
 		logger.info("ReplyC >> replyDelete 호출 성공");
 		logger.info("ReplyC >> replyDelete result >>> : " + rvo.getRno());
+		
+		//세션 확인
+		/*
+		MemberVO mvo = null;
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+			mno = mvo.getMno();
+			
+		}
+		log.info("mno  >>>>>>>>  " + mno);
+		rvo.setMno(mno);
+		*/
 		
 		int result = replyService.replyDelete(rvo);
 		logger.info("RboardController rboardDelete result >>> : " + result);
