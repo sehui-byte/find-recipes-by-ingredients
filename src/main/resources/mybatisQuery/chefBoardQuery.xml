@@ -1,22 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jns.chefboard.dao.ChefBoardDAO">
-
-	<resultMap type="com.jns.chefboard.vo.ChefBoardVO" id="cbvo">
-		<result property="bno" column="BNO"/>
-		<result property="btype" column="BTYPE"/>
-		<result property="btitle" column="BTITLE"/>
-		<result property="bcontent" column="BCONTENT"/>
-		<result property="mnick" column="MNICK"/>
-		<result property="bfile" column="BFILE"/>
-		<result property="binsertdate" column="BINSERTDATE"/>
-		<result property="bupdatedate" column="BUPDATEDATE"/>
-		<result property="bview" column="BVIEW"/>
-		<result property="bdeleteyn" column="BDELETEYN"/>
-		<result property="bhits" column="BHITS"/>
-	</resultMap>
-
-	<!-- 게시물 등록 -->
+	
+	<select id="chefBoardSelectAll" resultType="cbvo">
+		SELECT
+			*
+		FROM
+			RECIPE_BOARD
+		WHERE
+			RB_DELETEYN = 'Y'
+			<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+			<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			</if>
+			<if test="keyfilter=='key1'">
+				<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key2'">
+				<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key3'">
+				<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key4'">
+				<![CDATA[AND A.MNICK LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key5'">
+				<![CDATA[AND A.BNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+	</select>
+	
+	<select id="chefBoardSelect" parameterType="cbvo" resultType="cbvo">
+		SELECT
+			*
+		FROM
+			RECIPE_BOARD
+		WHERE
+			RB_DELETEYN = 'N',
+			AND RBNO = #{rbno}
+	</select>
+	
+	
+	
+<!-- 
 	<insert id="boardInsert" parameterType="cbvo">
 		INSERT INTO BOARD(
 						  BNO
@@ -46,7 +73,6 @@
 						 )
 	</insert>
 	
-	<!-- 게시물 전체 조회 -->
 	<select id="boardList" parameterType="cbvo" resultType="cbvo">
 		SELECT *
 		FROM BOARD A
@@ -75,7 +101,6 @@
 		ORDER BY 1
 	</select>
 	
-	<!-- 게시물 상세 조회 -->
 	<select id="boardDetail" parameterType="cbvo" resultType="cbvo">
 		/* Board - boardDetail */
 		SELECT
@@ -95,7 +120,6 @@
 		AND		 A.BDELETEYN = 'Y'
 	</select>
 	
-	<!-- 게시물 수정 -->
 	<update id="boardUpdate" parameterType="cbvo">
 		/* Board - boardUpdate */
 		UPDATE	 BOARD
@@ -109,7 +133,6 @@
 		AND		 BDELETEYN = 'Y'
 	</update>
 	
-	<!-- 게시물 삭제 -->
 	<update id="boardDelete" parameterType="cbvo">
 		/* Board - boardDelete */
 		UPDATE	 BOARD
@@ -118,5 +141,5 @@
 		WHERE	 BNO = #{bno, jdbcType=VARCHAR}
 		AND		 BDELETEYN = 'Y'
 	</update>
-	
+ -->	
 </mapper>

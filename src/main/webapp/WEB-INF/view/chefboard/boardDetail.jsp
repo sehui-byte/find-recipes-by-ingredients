@@ -55,46 +55,46 @@
 		<td class="board">글번호</td>
 		<td>
 			<input type="text" name="bno" id="bno" 
-				   value="<%=cbvo.getBno()%>" readonly>
+				   value="<%=cbvo.getRbno()%>" readonly>
 		</td>
 	</tr>
 	<tr>
 		<td class="board">제목</td>
 		<td>
 			<input type="text" name="btitle" id="btitle" 
-				   value="<%=cbvo.getBtitle()%>" readonly>
+				   value="<%=cbvo.getRcp_nm()%>" readonly>
 		</td>
 	</tr>
 	<tr>
 		<td class="board">이름</td>
 		<td>
 			<input type="text" name="mnick" id="mnick" 
-				   value="<%=cbvo.getMnick()%>" readonly>
+				   value="" readonly>
 		</td>
 	</tr>
 		<tr>
 		<td class="board">등록일</td>
 		<td>
 			<input type="text" name="binsertdate" id="binsertdate"
-				   value="<%=cbvo.getBinsertdate()%>" readonly>
+				   value="<%=cbvo.getRb_insertdate()%>" readonly>
 		</td>
 	</tr>
 	<tr>
 		<td class="board">수정일</td>
 		<td>
 			<input type="text" name="bupdatedate" id="bupdatedate"
-	   			   value="<%=cbvo.getBupdatedate()%>" readonly>
+	   			   value="<%=cbvo.getRb_updatedate()%>" readonly>
 		</td>	
 	</tr>
 	<tr>
 		<td colspan="2">
-			<textarea name="bcontent" id="bcontent" cols="50" rows="10"><%=cbvo.getBcontent()%></textarea>
+			<textarea name="bcontent" id="bcontent" cols="50" rows="10"></textarea>
 		</td>
 	</tr>
 	<tr>
 		<td class="board">사진</td>
 		<td>
-			<img src="/c_<%=cbvo.getBfile()%>" 
+			<img src="/c_" 
 				 border="1" width="40" height="50" alt="image">
 		</td>
 	</tr>

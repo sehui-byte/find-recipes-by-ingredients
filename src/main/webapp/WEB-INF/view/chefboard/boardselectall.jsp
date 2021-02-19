@@ -23,7 +23,7 @@
 		$(document).on("click", "#searchBtn", function(){
 			console.log("searchBtn >>> : ");
 			$("#boardList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/chefboard/boardList.do"}).submit();
+								 ,"action":"/kosmoJns/chefboard/boardselectall.do"}).submit();
 		});
 		
 		
@@ -106,7 +106,7 @@
 	<tr>
 		<td class="tt"><%= cbvo.getRbno() %> </td>
 		<td class="left">
-			<a href="/kosmoJns/chefboard/boardSelect.do?rbno=<%= cbvo.getRbno() %>">
+			<a href="/kosmoJns/chefboard/boardselect.do?rbno=<%= cbvo.getRbno() %>">
 			<%= cbvo.getRcp_nm() %>
 			</a>
 		</td>

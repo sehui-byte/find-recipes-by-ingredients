@@ -6,40 +6,43 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.jns.chefboard.vo.ChefBoardVO;
+import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Repository
 public class ChefBoardDAOImpl implements ChefBoardDAO {
 
 	public SqlSessionTemplate sqlSession;
-	
+
 	@Override
-	public List<ChefBoardVO> boardList(ChefBoardVO cbvo) {
+	public List<ChefBoardVO> chefBoardSelectAll(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("boardList", cbvo);
+		return sqlSession.selectList("chefBoardSelectAll");
+	}
+
+	@Override
+	public List<ChefBoardVO> chefBoardSelect(ChefBoardVO cbvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("chefBoardSelect");
 	}
 
 	@Override
 	public int boardInsert(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.insert("boardInsert", cbvo);
+		return 0;
 	}
 
 	@Override
-	public List<ChefBoardVO> boardDetail(ChefBoardVO cbvo) {
+	public int boardUpdate(ChefBoardVO rbvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("boardDetail");
-	}
-
-	@Override
-	public int boardUpdate(ChefBoardVO cbvo) {
-		// TODO Auto-generated method stub
-		return sqlSession.update("boardUpdate");
+		return 0;
 	}
 
 	@Override
 	public int boardDelete(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("boardDelete");
+		return 0;
 	}
+	
+	
 
 }

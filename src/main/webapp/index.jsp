@@ -20,7 +20,7 @@
 <a href="/kosmoJns/admin/main.do">admin 접속</a> <br>
 
 <a href="chefboard/writeForm.do">chefboard writeForm</a><br>
-<a href="chefboard/boardList.do">chefboard boardList</a><br>
+<a href="chefboard/boardselectall.do">chefboard boardList</a><br>
 <a href = "searchPage.do">product search test</a><br>
 
 
@@ -28,7 +28,7 @@
 	<li><a href="/QnA/QnAForm.do">QnA 글쓰기</a></li>
 	<li><a href="/kosmoJns/main.do">일반 접속</a></li>
 	<li><a href="chefboard/writeForm.do">chefboard writeForm</a></li>
-	<li><a href="chefboard/boardList.do">chefboard boardList</a></li>
+	<li><a href="chefboard/boardselectall.do">chefboard boardList</a></li>
 	<li><a href = "searchPage.do">상품 검색 페이지</a></li>
 	<li><a href = "likeProduct.do">관심상품 목록 보기(테스트)</a></li>
 	<li><a href="memberForm.do">회원가입</a></li>
