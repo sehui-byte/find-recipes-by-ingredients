@@ -28,19 +28,19 @@ public class ChefBoardDAOImpl implements ChefBoardDAO {
 	@Override
 	public int boardInsert(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("boardInsert");
 	}
 
 	@Override
 	public int boardUpdate(ChefBoardVO rbvo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("boardUpdate");
 	}
 
 	@Override
 	public int boardDelete(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("boardDelete");
 	}
 	
 	

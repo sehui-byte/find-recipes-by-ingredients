@@ -35,21 +35,6 @@
 				location.href="/kosmoJns/chefboard/writeForm.do";
 			});	
 		
-		
-		// 제목 클릭시 상세 페이지 이동
-		/*
-		$(".goDetail").click(function(){
-			var bno = $(this).parents("tr").attr("data-num");
-			alert(bno);
-			$("#bno").val(bno);
-			// 상세 페이지로 이동하기 위해 form 추가(id: detailForm)
-			$("#detailForm").attr({
-				"method": "get",
-				"action": "/kosmoJns/chefboard/boardDetail.do"
-			});
-			$("#detailForm").submit();
-		});
-		*/
 	});	
 	
 </script>
@@ -61,11 +46,8 @@
 	List<ChefBoardVO> list = (List)obj;
 	
 	int nCnt = list.size();
-	System.out.println("boardList.jsp nCnt >>> : " + nCnt);
+	System.out.println("boardselectall.jsp nCnt >>> : " + nCnt);
 %>
-<form name="detailForm" id="detailForm">
-	<input type="hidden" name="bno" id="bno">
-</form>
 <form name="boardList" id="boardList">
 <table border="1">
 	<thead>
@@ -76,10 +58,7 @@
 		<td colspan="10" align="left">
 			<select id="keyfilter" name="keyfilter">
 				<option value="key1">제목</option>
-				<option value="key2">내용</option>
-				<option value="key3">제목+내용</option>
-				<option value="key4">작성자</option>
-				<option value="key5">글번호</option>
+				<option value="key2">글번호</option>
 			</select>
 			<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
 			<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">

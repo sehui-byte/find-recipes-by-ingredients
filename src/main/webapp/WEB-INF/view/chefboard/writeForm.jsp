@@ -50,7 +50,7 @@
 <body>
 <div id="boardTit"><h3>글쓰기</h3></div>
 	<form id="f_writeForm" name="f_writeForm">
-		<table border="1" style="margin: auto;">
+		<table border="1">
 			<tr>
 				<td colspan="2"><p style="text-align: center;">상세정보</p></td>
 			</tr>
