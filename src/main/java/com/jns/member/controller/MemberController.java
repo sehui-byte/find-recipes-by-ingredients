@@ -197,10 +197,10 @@ public class MemberController {
 	public String memberLogin() {
 		logger.info("memberLogin page 진입 >>> ");
 
-		return "/login/login";
+		return "mem/login/login";
 	}
 
-	// main 페이지
+	// main 페이지 >> 나중에 없애기
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String main() {
 		logger.info("main page 진입 >>> ");
@@ -214,7 +214,7 @@ public class MemberController {
 
 		logger.info("memberFindIDnPW 진입 >>> ");
 
-		return "/login/findIDnPW";
+		return "mem/login/findIDnPW";
 	}
 
 	// id 찾기 페이지
@@ -223,7 +223,7 @@ public class MemberController {
 
 		logger.info("memberFindID 진입 >>> ");
 
-		return "/login/findID";
+		return "mem/login/findID";
 	}
 
 	// id 찾기 >> db 구현
@@ -250,7 +250,7 @@ public class MemberController {
 	public String memberTempPW() {
 		logger.info("memberTempPW 진입 >>> ");
 
-		return "/login/tempPW";
+		return "mem/login/tempPW";
 	}
 
 	// 임시 비밀번호 발급 >> db 구현
@@ -282,4 +282,5 @@ public class MemberController {
 			return "ERROR_INFO";
 		}
 	}
+
 }

@@ -29,13 +29,23 @@
 				if (data == "OK"){
 					alert("임시 비밀번호가 발송되었습니다. 이메일을 확인해주시기 바랍니다.");
 					window.close();
+				}else if(data == "ERROR_TEMPPW"){
+					alert("작업이 정상적으로 진행되지 않았습니다. 다시 진행해주시기 바랍니다");
+					
+				}else if(data == "ERROR_INFO"){
+					alert("회원 정보 조회에 실패하였습니다. 아이디와 이메일을 다시 확인해주시기 바랍니다.");
 				}
 			}
+			
 			function whenFail(data){
 				alert("임시 비밀번호 발급에 문제가 생겼습니다. 관리자에게 문의하시기 바랍니다.");
 			}
 
 		})		
+
+		$("#back").click(function(){
+			history.go(-1);
+		})
 		
 		$("#memail2").on('change', function(){
 			var memail = $("#memail2").val();
@@ -78,7 +88,8 @@
 			<tr>
 				<td colspan="2">
 					<input type="button" name="TempPW" id="TempPW" value="임시 비밀번호 발급받기">
-					<input type="reset" name="reset" id="reset" value="reset">
+					<input type="reset" name="reset" id="reset" value="다시 입력하기">
+					<input type="button" name="back" id="back" value="뒤로가기">
 				</td>	
 			</tr>
 		</table>
