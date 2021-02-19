@@ -37,7 +37,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 		logger.info("memberDAOIMpl >>> : Select  함수 시작 ");
 		logger.info("mvo >>> : " + mvo);
-		return sqlSession.selectList("memberSelect", mvo);
+		return sqlSession.selectOne("memberSelect", mvo);
 	}
 
 	// 회원 등록

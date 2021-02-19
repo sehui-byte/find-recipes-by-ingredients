@@ -44,7 +44,7 @@ public class MemberController {
 	}
 
 	// 회원 등록
-	@RequestMapping(value = "/memberInsert", method = RequestMethod.GET)
+	@RequestMapping(value = "mem/memberInsert", method = RequestMethod.GET)
 	public String memInsert(MemberVO mvo, Model model) {
 		// public String memInsert(HttpServletRequest req)
 		logger.info("MemberController memInsert 함수 시작 >>> : ");
@@ -76,7 +76,7 @@ public class MemberController {
 
 	
 		if (nCnt == 1) {
-			return "/memberInsert";
+			return "mem/memberSelectAll";
 		}
 
 		return "login/login";
@@ -84,23 +84,21 @@ public class MemberController {
 	}
 
 	// 회원전체 조회
-	@RequestMapping(value = "memSelectAll", method = RequestMethod.GET)
+	@RequestMapping(value = "memberSelectAll", method = RequestMethod.GET)
 	public String MemberSelectAll(MemberVO mvo, Model model) {
 
 		logger.info("MemberController MemberSelectAll 함수 시작 >>> :: ");
 		logger.info("mvo >>> :: " + mvo);
 
 		List<MemberVO> listAll = memberService.memberSelectAll(mvo);
+		logger.info("MemberController MemberSelectAll >>>> ::: " + listAll.size());
 
-		int nCnt = listAll.size();
-		logger.info("MemberController MemberSelectAll nCnt >>>> ::: " + nCnt);
-
-		if (nCnt > 0) {
+		if (listAll.size() > 0) {
 			model.addAttribute("listAll", listAll);
 			return "mem/memSelectAll";
 		}
 
-		return "MemberForm";
+		return "mem/memberForm";
 	}
 
 	// 회원 조회 : 선택 조회
@@ -120,7 +118,7 @@ public class MemberController {
 			return "mem/memSelect";
 		}
 
-		return "MemberForm";
+		return "memberForm";
 	}
 
 	// 회원 수정

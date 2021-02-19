@@ -141,9 +141,29 @@
 		AND MEMAIL = #{memail, jdbcType=VARCHAR}
 	
 	</update>
+	<!-- 회원 조회-->
+	<select id="memberSelect" resultType="mvo">
+		SELECT 
+				A.MNO	 MNO               
+			   ,A.MLEVEL MLEVEL           
+			   ,A.MID 	 MID               
+			   ,A.MPW    MPW       
+			   ,A.MNAME  MNAME         
+			   ,A.MNICK  MNICK      
+			   ,A.MHP    MHP       
+			   ,A.MEMAIL    MEMAIL         
+			   ,A.MADDR     MADDR  
+			   ,A.MZIPCODE  MZIPCODE       
+			   ,A.MADDRDETAIL     MADDRDETAIL 
+			   ,A.MPHOTO            MPHOTO
+			   ,TO_CHAR(A.MINSERTDATE, 'YYYY-MM-DD') MINSREDATE        
+			   ,TO_CHAR(A.MUPDATEDATE, 'YYYY-MM-DD') MUPDATEDATE     
+	  FROM		MEMBER A
+	  WHERE 	A.MDELETEYN = 'Y'
+		  AND	A.MNO = #{mno,jdbcType=VARCHAR}      
+	</select>
 	
-	<!-- 회원 전체 조회  -->
-	
+	<!-- 회원 전체 조회  -->	
 	<select id="memberSelectAll" resultType="mvo">
 	SELECT *
 	FROM  MEMBER A

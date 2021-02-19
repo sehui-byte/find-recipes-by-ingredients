@@ -21,9 +21,6 @@
 <!-- 다음 주소록 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-
-
-
 <script type="text/javascript">
 	
 		$(document).ready(function(){
@@ -32,7 +29,7 @@
 			$(document).on("click","#membtn",function(){
 				console.log("membtn >>> : ");
 				
-				$('#memberForm').attr('action','memberInsert.do');
+				$('#memberForm').attr('action','mem/memberInsert.do');
 				$('#memberForm').attr('method','GET');
 				$('#memberForm').attr('enctype','multipart/form-data');
 				$('#memberForm').submit();
