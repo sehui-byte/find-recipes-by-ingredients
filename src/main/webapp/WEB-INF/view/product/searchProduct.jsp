@@ -30,7 +30,7 @@
 	<!-- 검색 -->
 	<form>
 		<input class="form-control" list="datalistOptions" name="keyword"
-			onkeydown="return captureReturnKey(event)"
+			onkeydown="return captureReturnKey(event)" onkeyup="enterKey();"
 			id="keyword" placeholder="Type to search..." " style="width: 300px"/>
 		<button type="button" class="btn btn-outline-primary" onclick="find()">검색</button>
 	</form>
@@ -42,6 +42,12 @@
 		function captureReturnKey(e) {
 			if (e.keyCode == 13 && e.srcElement.type != 'textarea')
 				return false;
+		}
+		
+		//input에서 엔터키 눌렀을 때도 검색 실행
+		function enterKey(){
+			if(window.event.keyCode == 13)
+				find();
 		}
 		//ajax코드 넣기
 		function find() {
