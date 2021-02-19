@@ -50,30 +50,29 @@ public class MemberController {
 		logger.info("MemberController memInsert 함수 시작 >>> : ");
 
 		// 회원번호 채번 가져오기
-		String mno = ChabunUtil.getMemberChabun("M", chabunService.getMemberChabun().getMno());
+		String mno = ChabunUtil.getMemberChabun("D", chabunService.getMemberChabun().getMno());
 		mvo.setMno(mno);
+	
+		logger.info("MemberController MemberInsert mno  회원번호 >>> : " + mno);
 		logger.info("mvo.getMlevel() 회원 등급 >>>> :"+mvo.getMlevel());
-		logger.info("mvo.getMlevel() 주소 >>>>:"+mvo.getMaddr());
-		logger.info("mvo.getMlevel() 상세주소 >>>>>:"+mvo.getMaddrdetail());
-		logger.info("mvo.getMlevel() 우편번호 >>>>:"+mvo.getMzipcode());
-		logger.info("mvo.getMlevel() 닉네임 >>>> :"+mvo.getMnick());
-		logger.info("mvo.getMlevel() 비밀번호  >>>> :"+mvo.getMpw());
-		logger.info("mvo.getMlevel() 아이디 >>>  :"+mvo.getMid());
-		logger.info("mvo.getMlevel() 이름 >>>> :"+mvo.getMname());
-		logger.info("mvo.getMlevel() 사진 >>>>  :"+mvo.getMphoto());
-		logger.info("mvo.getMlevel() 핸드폰 >>>>  :"+mvo.getMhp());
-		logger.info("mvo.getMlevel() 이메일 >>>:"+mvo.getMemail());
-		logger.info("MemberController MemberInsert mno >>> : " + mno);
-		
-		System.out.println(mno);
-
+		logger.info("mvo.getMaddr() 주소 >>>>:"+mvo.getMaddr());
+		logger.info("mvo.getMaddrdetail() 상세주소 >>>>>:"+mvo.getMaddrdetail());
+		logger.info("mvo.getMzipcode() 우편번호 >>>>:"+mvo.getMzipcode());
+		logger.info("mvo.getMnick() 닉네임 >>>> :"+mvo.getMnick());
+		logger.info("mvo.getMpw() 비밀번호  >>>> :"+mvo.getMpw());
+		logger.info("mvo.getMid() 아이디 >>>  :"+mvo.getMid());
+		logger.info("mvo.getMname() 이름 >>>> :"+mvo.getMname());
+		logger.info("mvo.getMphoto() 사진 >>>>  :"+mvo.getMphoto());
+		logger.info("mvo.getMtel() 핸드폰 >>>>  :"+mvo.getMhp());
+		logger.info("mvo.getMemail() 이메일 >>>:"+mvo.getMemail());
+	
+	
 		// memInsert 함수에서 서비스 호출하기
 		int nCnt = memberService.memberInsert(mvo);
 		logger.info("MemberController memberInsert >>> : " + nCnt + " 건 입력 되었습니다.");
 
 		//MemberVO _mvo = null;
 		//_mvo = new MemberVO();
-		
 
 	
 		if (nCnt == 1) {

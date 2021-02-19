@@ -5,6 +5,8 @@ public class ChefBoardVO {
 	private String rbno;
 	private String mno;
 	private String rcp_nm;
+	private int rb_viewcnt;
+	private int rb_likecnt;
 	private String rcp_way2;
 	private String rcp_pat2;
 	private String hash_tag;
@@ -96,19 +98,23 @@ public class ChefBoardVO {
 
 	public ChefBoardVO() {}
 
-	public ChefBoardVO(String rbno, String mno, String rcp_nm, String rcp_way2, String rcp_pat2, String hash_tag,
-			String main_img, String rcp_parts_dtls, String manual01, String manual_img01, String manual02,
-			String manual_img02, String manual03, String manual_img03, String manual04, String manual_img04,
-			String manual05, String manual_img05, String manual06, String manual_img06, String manual07,
-			String manual_img07, String manual08, String manual_img08, String manual09, String manual_img09,
-			String manual10, String manual_img10, String manual11, String manual_img11, String manual12,
-			String manual_img12, String manual13, String manual_img13, String manual14, String manual_img14,
-			String manual15, String manual_img15, String manual16, String manual_img16, String manual17,
-			String manual_img17, String manual18, String manual_img18, String manual19, String manual_img19,
-			String manual20, String manual_img20, String rb_insertdate, String rb_updatedate, String rb_deleteyn) {
+	public ChefBoardVO(String rbno, String mno, String rcp_nm, int rb_viewcnt, int rb_likecnt, String rcp_way2,
+			String rcp_pat2, String hash_tag, String main_img, String rcp_parts_dtls, String manual01,
+			String manual_img01, String manual02, String manual_img02, String manual03, String manual_img03,
+			String manual04, String manual_img04, String manual05, String manual_img05, String manual06,
+			String manual_img06, String manual07, String manual_img07, String manual08, String manual_img08,
+			String manual09, String manual_img09, String manual10, String manual_img10, String manual11,
+			String manual_img11, String manual12, String manual_img12, String manual13, String manual_img13,
+			String manual14, String manual_img14, String manual15, String manual_img15, String manual16,
+			String manual_img16, String manual17, String manual_img17, String manual18, String manual_img18,
+			String manual19, String manual_img19, String manual20, String manual_img20, String rb_insertdate,
+			String rb_updatedate, String rb_deleteyn) 
+	{
 		this.rbno = rbno;
 		this.mno = mno;
 		this.rcp_nm = rcp_nm;
+		this.rb_viewcnt = rb_viewcnt;
+		this.rb_likecnt = rb_likecnt;
 		this.rcp_way2 = rcp_way2;
 		this.rcp_pat2 = rcp_pat2;
 		this.hash_tag = hash_tag;
@@ -173,6 +179,22 @@ public class ChefBoardVO {
 
 	public void setMno(String mno) {
 		this.mno = mno;
+	}
+	
+	public int getRb_viewcnt() {
+		return rb_viewcnt;
+	}
+
+	public void setRb_viewcnt(int rb_viewcnt) {
+		this.rb_viewcnt = rb_viewcnt;
+	}
+
+	public int getRb_likecnt() {
+		return rb_likecnt;
+	}
+
+	public void setRb_likecnt(int rb_likecnt) {
+		this.rb_likecnt = rb_likecnt;
 	}
 
 	public String getRcp_nm() {

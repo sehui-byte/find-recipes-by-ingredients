@@ -21,6 +21,9 @@
 <!-- 다음 주소록 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+
+
+
 <script type="text/javascript">
 	
 		$(document).ready(function(){
@@ -34,44 +37,38 @@
 				$('#memberForm').attr('enctype','multipart/form-data');
 				$('#memberForm').submit();
 			});
+		// 이메일 
+			$('#memail2').change(function(){	
+			$("#memail2 option:selected").each(function () {
+				if($(this).val()== '1'){ //직접입력일 경우 
+						var aa = $("#memail1").val();
+						//alert("aa >>> : " + aa);
+						$("#memail1").val(''); //값 초기화 
+						$("#memail1").attr("readonly",false); //활성화 				
+				}else{ //직접입력이 아닐경우 
+						$("#memail1").val($(this).text()); //선택값 입력 
+						$("#memail1").attr("readonly",true); //비활성화 
+				}}); 
+			}); 
+		
+
+			// 우편번호
+			$("#mzipcode").prop('readonly', true);
+			$("#maddr").prop('readonly', true);
+			$("#maddrdetail").prop(true);
+			$("#zipcode").click(function(){
+				console.log("zipcode >>> : ");
+				new daum.Postcode({
+					oncomplete: function(data) {
+					    $("#mzipcode").val(data.zonecode); //5자리 새우편번호 사용
+					    $("#maddr").val(data.roadAddress); //도로명 주소
+					    $("#maddrdetail").val(data.Adddetail); //상세주소			
+					}
+				}).open();
+		
+			});
 		});
 
-/*		
-		// 아이디 중복체크 
-		$(document).on("click","#midbtn",function(){
-			console.log("idbtn >>> : ");
-			alert("idcheck >>> ");
-			
-			Let checkIDURL = "checkID.do";
-			Let method = "POST";
-			Let midVal = $('#mid').val();
-			
-			Let dataParam = {"mid" : midVal};
-			
-			$.ajax({
-				url:CheckIDURL,
-				type:method,
-				data:dataParam,
-				success:whenSuccess,
-				error:whenError
-			});
-			
-			function whenSuccess(resData){
-				alert(resData);
-				val sVal = resData;
-				if('ID_GOOD'==sVal){
-					alert("사용 가능한 아이디 입니다.");
-				}else{
-					alert("이미 사용중인 아이디 입니다.");
-					$("#mid").val('');
-					$("#mid").focus();
-				}
-			}
-			function whenError(){
-				
-			}
-		});
-*/
 </script>
 </head>
 <body>
@@ -79,11 +76,13 @@
 <form name="memberForm" id="memberForm">
 	<h2><font size="4" style="color:Blue;">전지적 냉장고 시점 회원가입 </font></h2>
 	<hr>
-	<table border="1">
+	<table width="50%" height="80" border="1" align="center"
+		cellpadding="5" cellspacing="0" bordercolor="gray">
+
 	<tr>
 		<td colspan="2" align="center">
 			<font size="4" style="color:Blue;">전.냉.시</font>
-			<img src="/testfinal/img/ban.gif" width="25" height="25" alt="image">
+			<img src="/kosmoJns/img/ban.gif" width="25" height="25" alt="image">
 		</td>
 	</tr>
 	<tr>
@@ -94,7 +93,7 @@
 		<td class="mem">회원등급</td>
 		<td>
 		<select name=mlevel id=mlevel style="width:150px" >
-			<option>회원등급을 선택하세요</option>
+			<option >회원등급을 선택하세요</option>
 			<option>U</option>
 			<option>C</option>
 		</select>
@@ -103,13 +102,20 @@
 	</tr>
 	<tr>
 		<td class="mem">아이디</td>
-		<td><input type="text" name="mid" id="mid" placeholder="아이디중복체크"  style="width:150px"/>
-			<button type="button" id="midbtn">아이디중복체크</button>
+		<td>
+	
+		<input type="text" name="mid" id="mid" size="30"placeholder="아이디중복체크"  style="width:150px"/>
+		<button type="button" id="midbtn">아이디중복체크</button>
+		<br>&nbsp영문,숫자,영문숫자 조합만 가능 (6자 이상 30자 이하)	&nbsp
 		</td>
 	</tr>
 	<tr>
 		<td class="mem">비밀번호</td>
-		<td><input type="text" name="mpw" id="mpw" style="width:150px" /><br/>
+		<br>
+		<td>
+			<input type="text" name="mpw" id="mpw" style="width:150px" />
+			<br>&nbsp영문, 숫자, 특수문자 조합 (8자 이상 12자 이하)&nbsp
+		
 	<!-- 
 			<input type="text" name="mpw_r" id="mpw_r" />
 			<input type="button" value="비밀번호확인" onclick="mpwCheck()" /><br/>
