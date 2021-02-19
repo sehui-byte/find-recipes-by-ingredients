@@ -8,7 +8,6 @@ public interface MemberDAO {
 
 	// 회원 전체 조회
 	public List<MemberVO> memberSelectAll(MemberVO mvo);
-
 	// 회원 조회
 	public List<MemberVO> memberSelect(MemberVO mvo);
 
