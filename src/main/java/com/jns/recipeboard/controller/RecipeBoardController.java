@@ -34,6 +34,7 @@ public class RecipeBoardController
 	@RequestMapping(value = "recipeboard", method = RequestMethod.GET)
 	public String recipeboard(Model model)
 	{
+		model.addAttribute("list", recipeBoardService.recipeBoardSelectAll());
 		return "recipeboard/recipeboard";
 	}
 	
