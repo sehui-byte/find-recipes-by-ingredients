@@ -9,6 +9,9 @@ import com.jns.chabun.dao.ChabunDAO;
 import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.member.vo.MemberVO;
 
+import com.jns.board.vo.BoardVO;
+
+
 import com.jns.notice.vo.NoticeVO;
 import com.jns.qna.vo.QnAVO;
 
@@ -37,13 +40,17 @@ public class ChabunServiceImpl implements ChabunService {
 
 	@Override
 
+	public BoardVO getNoticeChabun() {
+=======
+
 	public NoticeVO getNoticeChabun() {
+
 		// TODO Auto-generated method stub
 		return chabunDAO.getNoticeChabun();
 	}
 
 	@Override
-	public QnAVO getQnABoardChabun() {
+	public BoardVO getQnABoardChabun() {
 		// TODO Auto-generated method stub
 		return chabunDAO.getQnABoardChabun();
 	}

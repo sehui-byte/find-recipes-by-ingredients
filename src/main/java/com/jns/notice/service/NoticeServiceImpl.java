@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jns.notice.dao.NoticeDAO;
-import com.jns.notice.vo.NoticeVO;
+import com.jns.board.vo.BoardVO;
 
 @Service
 @Transactional
@@ -24,39 +24,39 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public List<NoticeVO> NoticeSelectPaging(NoticeVO nvo) {
+	public List<BoardVO> NoticeSelectPaging(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return noticeDAO.NoticeSelectPaging(nvo);
+		return noticeDAO.NoticeSelectPaging(bvo);
 	}
 
 	@Override
-	public List<NoticeVO> NoticeSelectAll(NoticeVO nvo) {
+	public List<BoardVO> NoticeSelectAll(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return noticeDAO.NoticeSelectAll(nvo);
+		return noticeDAO.NoticeSelectAll(bvo);
 	}
 
 	@Override
-	public List<NoticeVO> NoticeSelect(NoticeVO nvo) {
+	public List<BoardVO> NoticeSelect(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return noticeDAO.NoticeSelect(nvo);
+		return noticeDAO.NoticeSelect(bvo);
 	}
 
 	@Override
-	public int NoticeInsert(NoticeVO nvo) {
+	public int NoticeInsert(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return noticeDAO.NoticeInsert(nvo);
+		return noticeDAO.NoticeInsert(bvo);
 	}
 
 	@Override
-	public int NoticeUpdate(NoticeVO nvo) {
+	public int NoticeUpdate(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return noticeDAO.NoticeUpdate(nvo);
+		return noticeDAO.NoticeUpdate(bvo);
 	}
 
 	@Override
-	public int NoticeDelete(NoticeVO nvo) {
+	public int NoticeDelete(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return noticeDAO.NoticeDelete(nvo);
+		return noticeDAO.NoticeDelete(bvo);
 	}
 
 }

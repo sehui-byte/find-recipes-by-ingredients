@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.jns.notice.vo.NoticeVO;
+import com.jns.board.vo.BoardVO;
 
 public class NoticeDAOImpl implements NoticeDAO {
 
@@ -15,39 +15,39 @@ public class NoticeDAOImpl implements NoticeDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<NoticeVO> NoticeSelectPaging(NoticeVO nvo) {
+	public List<BoardVO> NoticeSelectPaging(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("NoticeSelectPaging", nvo);
+		return sqlSession.selectList("NoticeSelectPaging", bvo);
 	}
 
 	@Override
-	public List<NoticeVO> NoticeSelectAll(NoticeVO nvo) {
+	public List<BoardVO> NoticeSelectAll(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("NoticeSelectAll", nvo);
+		return sqlSession.selectList("NoticeSelectAll", bvo);
 	}
 
 	@Override
-	public List<NoticeVO> NoticeSelect(NoticeVO nvo) {
+	public List<BoardVO> NoticeSelect(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("NoticeSelect", nvo);
+		return sqlSession.selectList("NoticeSelect", bvo);
 	}
 
 	@Override
-	public int NoticeInsert(NoticeVO nvo) {
+	public int NoticeInsert(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.insert("NoticeInsert", nvo);
+		return (Integer)sqlSession.insert("NoticeInsert", bvo);
 	}
 
 	@Override
-	public int NoticeUpdate(NoticeVO nvo) {
+	public int NoticeUpdate(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.update("NoticeUpdate", nvo);
+		return (Integer)sqlSession.update("NoticeUpdate", bvo);
 	}
 
 	@Override
-	public int NoticeDelete(NoticeVO nvo) {
+	public int NoticeDelete(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.delete("NoticeDelete", nvo);
+		return (Integer)sqlSession.delete("NoticeDelete", bvo);
 	}
 
 }

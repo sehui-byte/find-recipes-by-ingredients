@@ -1,6 +1,6 @@
 package com.jns.qna.dao;
 
-import com.jns.common.vo.BoardVO;
+import com.jns.board.vo.BoardVO;
 import java.util.List;
 
 public interface QnADAO {
