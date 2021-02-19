@@ -76,10 +76,10 @@ public class ChefBoardController {
 		String resultStr = "";
 		
 		// 테스트용 데이터(mno, rb_viewcnt, rb_likecnt)
-		cbvo.setRbno("kjmTest2");
-		cbvo.setMno("kjmTest2");
-		//cbvo.setRb_viewcnt(0);
-		//cbvo.setRb_likecnt(0);
+		cbvo.setRbno("kjmTest1");
+		cbvo.setMno("kjmTest1");
+		cbvo.setRb_viewcnt(0);
+		cbvo.setRb_likecnt(0);
 		
 		//채번 구하기
 		
