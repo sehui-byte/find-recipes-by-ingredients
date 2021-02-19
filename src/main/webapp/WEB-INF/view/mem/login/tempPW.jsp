@@ -12,6 +12,17 @@
 	$(document).ready(function(){
 		$("#TempPW").click(function(){
 			alert("TempPW 클릭");
+
+			if(!chkSubmit($("#mid"), "아이디를 ")){
+				return;
+			};
+			if(!chkSubmit($("#memail1"), "이메일을 ")){
+				return;
+			};
+			if(!chkSubmit($("#memail2"), "이메일을 ")){
+				return;
+			};
+
 			var mid = $("#mid").val();
 			var memail = $("#memail1").val() + "@" + $("#memail2").val();
 			var url = "/kosmoJns/memberFindPWOK.do";
@@ -22,7 +33,7 @@
 				type : 'POST',
 				data : data,
 				success : whenSuccess,
-				fail : whenFail
+				error : whenError,
 			});
 			
 			function whenSuccess(data){
@@ -37,26 +48,34 @@
 				}
 			}
 			
-			function whenFail(data){
+			function whenError(data){
 				alert("임시 비밀번호 발급에 문제가 생겼습니다. 관리자에게 문의하시기 바랍니다.");
 			}
 
 		})		
 
-		$("#back").click(function(){
-			history.go(-1);
-		})
-		
 		$("#memail2").on('change', function(){
 			var memail = $("#memail2").val();
 			if (memail == "custom"){
 				$("#memail2").replaceWith("<input type='text' name='memail2' id='memail2'>");
 			}
 		})
+		
+		$("#back").click(function(){
+			history.go(-1);
+		})
+		
+		function chkSubmit(v_item, v_msg){
+			if(v_item.val().replace(/\s/g,"")==""){
+				alert(v_msg+" 확인해 주세요.");
+				v_item.val("");
+				v_item.focus();
+				return false;
+			}else{
+				return true;
+			}
+		}
 	})
-	
-
-
 </script>
 </head>
 <body>

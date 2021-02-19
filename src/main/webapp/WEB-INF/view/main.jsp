@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/jsp/jspinclude.jsp" %>
 <%@ include file="/WEB-INF/include/jsp/header.jsp" %>
-<%@ page import="com.jns.member.vo.MemberVO" %>
 
 
 <!DOCTYPE html>
@@ -10,18 +9,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	$(document).ready(function(){
-
-		// Spring Scurity logout >> post 요청만 가능
-		$("#logoutbtn").click(function(){
-			$("#logoutForm").attr("action", "<c:url value='/j_spring_security_logout' />");
-			$("#logoutForm").attr("method", "POST");
-			$("#logoutForm").attr("enctype", "application/x-www-form-urlencoded");
-			$("#logoutForm").submit();
-		})
-	})
-</script>
 </head>
 <body>
 <h3>main 페이지</h3>
@@ -32,6 +19,18 @@
 익명은 조회만 가능<br>
 입력/수정/삭제는 회원만 가능<br>
 <div>
+<h3>로그인 유지한 상태로 사이트 접속</h3>
+	<ul>
+		<li><a href="qnaForm.do">QnA 글쓰기</a></li>
+		<li><a href="/kosmoJns/main.do">일반 접속</a></li>
+		<li><a href="chefboard/writeForm.do">chefboard writeForm</a></li>
+		<li><a href="chefboard/boardList.do">chefboard boardList</a></li>
+		<li><a href = "searchPage.do">상품 검색 페이지</a></li>
+		<li><a href = "likeProduct.do">관심상품 목록 보기(테스트)</a></li>
+		<li><a href="join.do">회원가입</a></li>
+		<li><a href="reply/reply.do">댓글 테스트</a></li>
+		<li><a href="recipelist.do">레시피 리스트</a></li>
+	</ul>
 </div>
 
 </body>

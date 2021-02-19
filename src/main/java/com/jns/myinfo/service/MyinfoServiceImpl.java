@@ -11,6 +11,7 @@ import com.jns.common.vo.BoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.dao.MyinfoDAO;
 import com.jns.recipe.vo.RecipeVO;
+import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Service
 @Transactional
@@ -27,7 +28,7 @@ public class MyinfoServiceImpl implements MyinfoService {
 	}
 
 	@Override
-	public List<RecipeVO> myRecipeList(MemberVO mvo) {
+	public List<RecipeBoardVO> myRecipeList(MemberVO mvo) {
 
 		logger.info("myRecipeList() 진입 >>> ");
 
