@@ -29,14 +29,33 @@ public class RecipeBoardController
 	public RecipeBoardController(RecipeBoardService recipeBoardService) 
 	{
 		this.recipeBoardService = recipeBoardService;
-	}
+	}//생성자
 	
+	//================================= move =================================//
 	@RequestMapping(value = "recipeboard", method = RequestMethod.GET)
 	public String recipeboard(Model model)
 	{
+		logger.info("[RecipeBoardController] recipeboard.do 호출됨");
 		model.addAttribute("list", recipeBoardService.recipeBoardSelectAll());
 		return "recipeboard/recipeboard";
+	}//레시피 게시판으로 이동
+	
+	@RequestMapping(value = "rbwriteform", method = RequestMethod.GET)
+	public String rbwriteform()
+	{
+		logger.info("[RecipeBoardController] rbwriteform.do 호출됨");
+		return "recipeboard/recipeboard_writeform";
+	}//레시피 게시판 글쓰기 폼으로 이동
+	
+	@RequestMapping(value = "rbupdateform", method = RequestMethod.GET)
+	public String rbupdateform(RecipeBoardVO rbvo, Model model)
+	{
+		model.addAttribute("rbvo", recipeBoardService.recipeBoardSelect(rbvo));
+		return "recipeboard/recipeboard_updateform";
 	}
+	
+	
+	//================================= Ajax =================================//
 	
 	@RequestMapping(value = "recipeBoardSelectAll", method = RequestMethod.GET)
 	@ResponseBody
