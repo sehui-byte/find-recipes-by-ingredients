@@ -10,7 +10,7 @@
 
 	$(function(){
 		/* 기본 댓글 목록 불러오기 */
-		listAll(bno)
+		listAll(rbno)
 		
 		/* 댓글 내용 저장 이벤트 */
 		$(document).on("click", "#replyInsert", function(){
@@ -23,6 +23,7 @@
 				var method = "POST";
 				var dataParam = {
 						"bno": $("#bno").val(),
+						"rbno": $("#rbno").val(),
 						"rwriter": $("#rwriter").val(),
 						"rcontent": $("#rcontent").val()
 				};
@@ -176,12 +177,12 @@
 	// 리스트 요청 함수
 	function listAll(){
 		$("#comment_list").html("");
-		console.log("reply.jsp >> blistAll()");
-		var listAllURL = "/kosmoJns/reply/blistAll.do";
+		console.log("rbreply.jsp >> listAll()");
+		var listAllURL = "/kosmoJns/reply/rblistAll.do";
 		var method = "POST";
-		var bno = $("#bno").val();
+		var rbno = $("#rbno").val();
 		var dataParam = {
-				"bno": bno
+				"rbno": rbno
 		};
 		console.log("dataParam >>> : " + dataParam);
 		
@@ -194,7 +195,7 @@
 		});
 		
 		function whenSuccess(resData){
-			console.log("whenSuccess reply listAll resData >>> : " + resData);
+			console.log("whenSuccess rbreply listAll resData >>> : " + resData);
 			
 			if(isEmpty(resData)){
 				return false;
@@ -315,8 +316,8 @@
 <body>
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
-	String bno = request.getParameter("bno");
-	System.out.println("reply >> bno >>> : " + bno);
+	String rbno = request.getParameter("rbno");
+	System.out.println("reply >> rbno >>> : " + rbno);
 	
 %>
 <div id="replyContainer">
@@ -332,7 +333,7 @@
 			<td>작성자</td>
 			<td>
 				<input type="text" name="rwriter" id="rwriter">
-				<input type="hidden" name="bno" id="bno" value="<%=bno%>">
+				<input type="hidden" name="rbno" id="rbno" value="<%=rbno%>">
 				<input type="button" id="replyInsert" value="저장하기">
 			</td>
 		</tr>

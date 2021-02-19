@@ -33,6 +33,7 @@
 	<li><a href = "likeProduct.do">관심상품 목록 보기(테스트)</a></li>
 	<li><a href="join.do">회원가입</a></li>
 	<li><a href="reply/reply.do">댓글 테스트</a></li>
+	<li><a href="reply/rbreply.do">레시피 댓글 테스트</a></li>
 	<li><a href="recipelist.do">레시피 리스트</a></li>
 </ul>
 
