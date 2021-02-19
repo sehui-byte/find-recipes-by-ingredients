@@ -18,6 +18,7 @@
 	</select>
 	 -->
 	 
+	 
 	<select id="getQnABoardChabun" resultType="bvo">
 		SELECT NVL(MAX(SUBSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
 	</select>

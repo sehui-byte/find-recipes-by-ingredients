@@ -19,7 +19,6 @@
 
 	$(document).ready(function(){
 
-		
 		$(document).on("click", "#sbtn", function(){
 			console.log("sbtn >>> : ");	
 			$("#QnAForm").attr({

@@ -30,8 +30,7 @@
 			alert("D >>> : ");
 			$("#QnAUpdateForm").attr({ "method":"POST"
 				                        ,"action":"qnaDelete.do"}).submit();
-		});
-		
+		});	
 	});
 </script>
 </head>
@@ -75,7 +74,7 @@ QnA Select
 <tr>
 <td class="mem">글 내용</td>
 <td>
-<textarea name="bcontent" id="bcontent" rows="10" cols="50"><%= bvo.getBcontent() %></textarea>
+<textarea name="bcontent" id="bcontent" rows="5" cols="50"><%= bvo.getBcontent() %></textarea>
 </td>
 </tr>
 <tr>

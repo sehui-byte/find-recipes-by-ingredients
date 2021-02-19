@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jns.board.dao.BoardDAO">
+<mapper namespace="com.jns.chefboard.dao.ChefBoardDAO">
 
-	<resultMap type="com.jns.board.vo.BoardVO" id="bvo">
+	<resultMap type="com.jns.chefboard.vo.ChefBoardVO" id="cbvo">
 		<result property="bno" column="BNO"/>
 		<result property="btype" column="BTYPE"/>
 		<result property="btitle" column="BTITLE"/>
@@ -17,7 +17,7 @@
 	</resultMap>
 
 	<!-- 게시물 등록 -->
-	<insert id="boardInsert" parameterType="bvo">
+	<insert id="boardInsert" parameterType="cbvo">
 		INSERT INTO BOARD(
 						  BNO
 						 ,BTYPE
@@ -47,7 +47,7 @@
 	</insert>
 	
 	<!-- 게시물 전체 조회 -->
-	<select id="boardList" parameterType="bvo" resultType="bvo">
+	<select id="boardList" parameterType="cbvo" resultType="cbvo">
 		SELECT *
 		FROM BOARD A
 		WHERE A.BDELETEYN = 'Y'
@@ -76,7 +76,7 @@
 	</select>
 	
 	<!-- 게시물 상세 조회 -->
-	<select id="boardDetail" parameterType="bvo" resultType="bvo">
+	<select id="boardDetail" parameterType="cbvo" resultType="cbvo">
 		/* Board - boardDetail */
 		SELECT
 				 A.BNO
@@ -96,7 +96,7 @@
 	</select>
 	
 	<!-- 게시물 수정 -->
-	<update id="boardUpdate" parameterType="bvo">
+	<update id="boardUpdate" parameterType="cbvo">
 		/* Board - boardUpdate */
 		UPDATE	 BOARD
 		SET		 BTITLE = #{btitle, jdbcType=VARCHAR}
@@ -110,7 +110,7 @@
 	</update>
 	
 	<!-- 게시물 삭제 -->
-	<update id="boardDelete" parameterType="bvo">
+	<update id="boardDelete" parameterType="cbvo">
 		/* Board - boardDelete */
 		UPDATE	 BOARD
 		SET		 BDELETEYN = 'N'

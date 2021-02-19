@@ -15,6 +15,7 @@ public class BoardVO {
 	private String bview;
 	private String bhits;
 	
+	
 	private String page;
 	private String pagesize;
 	private String groupsize;
