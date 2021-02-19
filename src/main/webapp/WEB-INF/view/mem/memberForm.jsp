@@ -17,48 +17,33 @@
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<!-- 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script type="text/javascript" src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
--->
 
-<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 <!-- 다음 주소록 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
 
-	$(document).ready(function(){
-		
-		
-		//버튼 클릭시 회원가입 처리 
-		$(document).on("click","#membtn",function(){
-			console.log("membtn >>> : ");
+	
+		$(document).ready(function(){
 			
-			$('#MemberForm').attr('action','memInsert.jsw');
-			$('#MemberForm').attr('method','POST');
-			$('#MemberForm').attr('enctype','multipart/form-data');
-			$('#MemberForm').submit();
+			//버튼 클릭시 회원가입 처리 
+			$(document).on("click","#membtn",function(){
+				console.log("membtn >>> : ");
+				
+				$('#memberForm').attr('action','memberInsert.do');
+				$('#memberForm').attr('method','POST');
+				$('#memberForm').attr('enctype','multipart/form-data');
+				$('#memberForm').submit();
+			});
 		});
-		
-		
-		// 아이디 체크 
-		function CheckID(){
-			console.log("idCheck 함수 진입");
-			alert(" idCheck 함수 진입");
-			var idVal = document.getElementById("mid").value
-	 
-			window.open("/testfinal/mem/CheckID.jsp?mid="+idVal, "" 
-					    ,"left=500 top=400, width=300,height=300", false);
-		}
-		
-		/*
+
+/*		
 		// 아이디 중복체크 
 		$(document).on("click","#midbtn",function(){
 			console.log("idbtn >>> : ");
 			alert("idcheck >>> ");
 			
-			Let CheckIDURL = "CheckID.jsw";
+			Let checkIDURL = "checkID.do";
 			Let method = "POST";
 			Let midVal = $('#mid').val();
 			
@@ -87,19 +72,12 @@
 				
 			}
 		});
-
-		*/
-
-
-
-	});
-	
-
+*/
 </script>
 </head>
 <body>
 <div>
-<form name="MemberForm" id="MemberForm">
+<form name="memberForm" id="memberForm">
 	<h2><font size="4" style="color:Blue;">전지적 냉장고 시점 회원가입 </font></h2>
 	<hr>
 	<table border="1">
@@ -112,6 +90,17 @@
 	<tr>
 		<td class="mem">회원번호</td>
 		<td><input type="text" name="mno" id="mno" style="width:150px" readonly/></td>
+	</tr>
+	<tr>
+		<td class="mem">회원등급</td>
+		<td>
+		<input type="text" name="mlevel" id="mlevel" placeholder="회원등급을 선택하세요" style="width:150px" readonly/>
+		<select name=mlevel id=mlevel >
+			<option>M</option>
+			<option>C</option>
+		</select>
+		
+		</td>
 	</tr>
 	<tr>
 		<td class="mem">아이디</td>

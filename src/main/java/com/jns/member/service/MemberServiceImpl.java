@@ -111,7 +111,7 @@ public class MemberServiceImpl implements MemberService {
 
 	public List<MemberVO> checkID(MemberVO mvo) {
 		// TODO Auto-generated method stub
-		logger.info("MemberServiceImpl >>>> :  CheckID 함수 시작 ");
+		logger.info("MemberServiceImpl >>>> :  checkID 함수 시작 ");
 		logger.info("mvo >>> : " + mvo);
 
 		return memberDAO.checkID(mvo);
