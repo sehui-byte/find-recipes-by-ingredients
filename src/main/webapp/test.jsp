@@ -3,33 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript">
-	
-	$(document).ready(()=>
-	{
-		alert("document is ready")
-		$.ajax
-		({
-			url : "recipeSelectAll.do",
-			type : "GET",
-			data : "json",
-			success : function(data)
-			{
-				console.log("done");
-				console.log(data);
-			},
-			error : function()
-			{
-				console.log("error");
-			}
-		});
-		
-	});
-</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+	<form action="filetest.do" method="post" enctype="multipart/form-data">
+		test_string1<input type="text" name="rbno"><br>
+		test_string2<input type="text" name="mno"><br>
+		test_file1<input type="file" name="img1"><br>
+		test_file2<input type="file" name="img2"><br>
+		
+		<input type="submit" value="submit">
+	</form>
 </body>
 </html>
