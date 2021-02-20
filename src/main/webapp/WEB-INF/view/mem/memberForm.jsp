@@ -1,8 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+   
 <!DOCTYPE html>
 <html>
 <head>
+   <style>
+        #wrap{
+            width:530px;
+            margin-left:auto; 
+            margin-right:auto;
+            text-align:center;
+        }
+        
+        table{
+            border:3px solid skyblue
+        }
+        
+        td{
+            border:1px solid skyblue
+        }
+        
+        #title{
+            background-color:yellow
+        }
+    </style>
+
+
+
 <meta charset="EUC-KR">
 <title>JNS MEMBER : 전지적 냉장고 시점  회원 가입 </title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,50 +47,55 @@
 
 <script type="text/javascript">
 	
-		$(document).ready(function(){
-			
-
+	$(document).ready(function(){
+				
 			//버튼 클릭시 회원가입 처리 
 			$(document).on("click","#membtn",function(){
 				console.log("membtn >>> : ");
-				
+				alert("회원가입이 완료 되었습니다");
+		
 				$('#memberForm').attr('action','mem/memberInsert.do');
-				$('#memberForm').attr('method','GET');
+				$('#memberForm').attr('method','POST');
 				$('#memberForm').attr('enctype','multipart/form-data');
 				$('#memberForm').submit();
 			});
-		// 이메일 
-			$('#memail2').change(function(){	
-			$("#memail2 option:selected").each(function () {
-				if($(this).val()== '1'){ //직접입력일 경우 
-						var aa = $("#memail1").val();
-						//alert("aa >>> : " + aa);
-						$("#memail1").val(''); //값 초기화 
-						$("#memail1").attr("readonly",false); //활성화 				
-				}else{ //직접입력이 아닐경우 
-						$("#memail1").val($(this).text()); //선택값 입력 
-						$("#memail1").attr("readonly",true); //비활성화 
-				}}); 
-			}); 
-		
+			
 
-			// 우편번호
-			$("#mzipcode").prop('readonly', true);
-			$("#maddr").prop('readonly', true);
-			$("#maddrdetail").prop(true);
-			$("#zipcode").click(function(){
-				console.log("zipcode >>> : ");
-				new daum.Postcode({
+
+			
+				// 이메일 
+				$('#memail2').change(function(){	
+				$("#memail2 option:selected").each(function () {
+					if($(this).val()== '1'){ //직접입력일 경우 
+							var aa = $("#memail1").val();
+							//alert("aa >>> : " + aa);
+							$("#memail1").val(''); //값 초기화 
+							$("#memail1").attr("readonly",false); //활성화 				
+					}else{ //직접입력이 아닐경우 
+							$("#memail1").val($(this).text()); //선택값 입력 
+							$("#memail1").attr("readonly",true); //비활성화 
+					}}); 
+				}); 
+			
+		
+				// 우편번호
+				$("#mzipcode").prop('readonly', true);
+				$("#maddr").prop('readonly', true);
+				$("#maddrdetail").prop(true);
+				$("#zipcode").click(function(){
+					console.log("zipcode >>> : ");
+					new daum.Postcode({
 					oncomplete: function(data) {
 					    $("#mzipcode").val(data.zonecode); //5자리 새우편번호 사용
 					    $("#maddr").val(data.roadAddress); //도로명 주소
 					    $("#maddrdetail").val(data.Adddetail); //상세주소			
 					}
 				}).open();
-		
 			});
-		});
-
+		});		
+					
+		
+	
 </script>
 </head>
 <body>
@@ -74,8 +103,8 @@
 <form name="memberForm" id="memberForm">
 	<h2><font size="4" style="color:Blue;">전지적 냉장고 시점 회원가입 </font></h2>
 	<hr>
-	<table width="50%" height="80" border="1" align="center"
-		cellpadding="5" cellspacing="0" bordercolor="gray">
+	<table  border="1" align="center"
+		bordercolor="gray">
 
 	<tr>
 		<td colspan="2" align="center">

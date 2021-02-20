@@ -30,7 +30,7 @@ public abstract class ChabunUtil {
 	public static String numPad(String t, String c){
 	
 		for (int i=c.length(); i < 4; i++) {
-			c = "0" + c;
+			c = "9" + c;
 		}				
 		String ymd = DateFormatUtil.ymdFormats(t);
 		

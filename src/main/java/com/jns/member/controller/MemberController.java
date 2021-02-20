@@ -44,7 +44,7 @@ public class MemberController {
 	}
 
 	// 회원 등록
-	@RequestMapping(value = "mem/memberInsert", method = RequestMethod.GET)
+	@RequestMapping(value = "mem/memberInsert", method = RequestMethod.POST)
 	public String memInsert(MemberVO mvo, Model model) {
 		// public String memInsert(HttpServletRequest req)
 		logger.info("MemberController memInsert 함수 시작 >>> : ");
@@ -55,6 +55,13 @@ public class MemberController {
 	
 		logger.info("MemberController MemberInsert mno  회원번호 >>> : " + mno);
 		logger.info("mvo.getMlevel() 회원 등급 >>>> :"+mvo.getMlevel());
+		
+		String mzipcode = mvo.getMzipcode();
+		mvo.setMzipcode(mzipcode);
+		String Maddr = mvo.getMaddr();
+		mvo.setMaddr(Maddr);
+		logger.info("Maddr");
+		
 		logger.info("mvo.getMaddr() 주소 >>>>:"+mvo.getMaddr());
 		logger.info("mvo.getMaddrdetail() 상세주소 >>>>>:"+mvo.getMaddrdetail());
 		logger.info("mvo.getMzipcode() 우편번호 >>>>:"+mvo.getMzipcode());
@@ -73,10 +80,10 @@ public class MemberController {
 
 		
 		if (nCnt == 1) {
-			return "mem/memberSelectAll";
+			return "main";
 		}
 
-		return "login/login";
+		return "/memberForm";
 
 	}
 
@@ -156,7 +163,7 @@ public class MemberController {
 	}
 
 	// 아이디 중복 체크
-	@RequestMapping(value = "/CheckID", method = RequestMethod.POST)
+	@RequestMapping(value = "/checkID", method = RequestMethod.POST)
 	public String CheckID(MemberVO mvo) {
 		logger.info("MemberController CheckID 함수 진입 >>> : ");
 		logger.info("MemberController CheckID mvo.getMid()  >>> : " + mvo.getMid());
