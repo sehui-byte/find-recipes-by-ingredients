@@ -36,6 +36,11 @@
 			}).submit();
 		});
 		
+		// C
+		$(document).on("click", "#C", function(){
+			location.href="noticeSelectAll.do";
+		});
+		
 	});
 </script>
 </head>
@@ -94,11 +99,11 @@
 </tr>
 <tr>
 <td class="mem">조회수</td>
-<td><input type="text" name="bview" id="bview" value="<%= nvo.getBview() %>" readonly></td>
+<td><input type="text" name="bviews" id="bviews" value="<%= nvo.getBviews() %>" readonly></td>
 </tr>
 <tr>
 <td class="mem">좋아요 수</td>
-<td><input type="text" name="bhits" id="bhits" value="<%= nvo.getBdeleteyn() %>" readonly></td>
+<td><input type="text" name="bhits" id="bhits" value="<%= nvo.getBhits() %>" readonly></td>
 </tr>
 <tr>
 	<td colspan="7" align="right">

@@ -36,6 +36,10 @@
 			}).submit();
 		});	
 		
+		// C
+		$(document).on("click", "#C", function(){
+			location.href="qnaSelectAll.do";
+		});
 	});
 </script>
 </head>
@@ -95,7 +99,7 @@ QnA Select
 </tr>
 <tr>
 <td class="mem">조회수</td>
-<td><input type="text" name="bview" id="bview" value="<%= bvo.getBview() %>" readonly></td>
+<td><input type="text" name="bviews" id="bviews" value="<%= bvo.getBviews() %>" readonly></td>
 </tr>
 <tr>
 <td class="mem">좋아요 수</td>
