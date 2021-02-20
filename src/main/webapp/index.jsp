@@ -25,6 +25,7 @@
 
 
 
+
 <ul>
 	<li><a href="/QnA/QnAForm.do">QnA 글쓰기</a></li>
 	<li><a href="/kosmoJns/main.do">일반 접속</a></li>

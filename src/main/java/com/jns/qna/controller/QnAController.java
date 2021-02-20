@@ -141,18 +141,20 @@ public class QnAController {
 	public String BoardUpdate(BoardVO bvo ,Model model) {
 		logger.info("QnAController QnAUpdate 함수 시작 >> ");
 		
-		logger.info("QnAController QnAUpdate bvo.getBtitle() " + bvo.getBtitle());
-		logger.info("QnAController QnAUpdate bvo.getBcontent() " + bvo.getBcontent());
 		int nCnt = qnaService.QnAUpdate(bvo);
 		
-		logger.info("QnAController QnAUpdate nCnt" + nCnt);
+		logger.info("QnAController QnAUpdate bvo.getBtitle() >>> : " + bvo.getBtitle());
+		logger.info("QnAController QnAUpdate bvo.getBcontent() >>> : " + bvo.getBcontent());
+		logger.info("QnAController QnAUpdate bvo.getMnick() >>> : " + bvo.getMnick());
+		
+		logger.info("QnAController QnAUpdate nCnt >>> " + nCnt);
 		
 		//������ �Խù��� 1���� ũ�ٸ� ����  â���� �̵� 
 		if(nCnt > 0) {
 			return "QnA/qnaUpdate";
 		}
 		
-		return "QnA/qnaInsert";
+		return "QnA/qnaSelectAll";
 				
 	}	
 	
@@ -169,7 +171,7 @@ public class QnAController {
 			return "QnA/qnaDelete";
 		}
 		
-		return "QnA/qnaInsert";
+		return "QnA/qnaSelectAll";
 	}
 	
 }

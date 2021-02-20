@@ -13,8 +13,8 @@
 		$(document).on("click", "#nbtn", function(){
 			console.log("nbbtn >>> : ");					
 			$('#NoticeForm').attr({
-				'action':'noticeInsert',
-				'method':'POST',
+				'action':'noticeInsert.do',
+				'method':'GET',
 				'enctype':'multipart/form-data'
 			}).submit();
 		});
@@ -25,30 +25,40 @@
 <form name="NoticeForm" id="NoticeForm">
 <table border="1" align="center">
 	<tr>
-		<td colspan="2" align="center">게시판 글쓰기</td>
+		<td colspan="2" align="center">공지 게시판 글쓰기</td>
 	</tr>
 	<tr>
 		<td align="center">글번호</td>
-		<td><input type="text" name="nno" id="nno" size="20" readonly></td>
+		<td><input type="text" name="bno" id="bno" size="20" readonly></td>
 	</tr>
 	<tr>
-		<td align="center">제목</td>
-		<td><input type="text" name="ntitle" id="ntitle" size="53"></td>
+      <td align="center">글 유형</td>
+      <td>
+      <select name=btype id=btype style="width:150px" >
+         <option>글 유형을 선택하세요</option>
+         <option>공지사항</option>
+         <option>QnA</option>
+      </select>
+      </td>
+	</tr>
+	<tr>
+		<td align="center">글제목</td>
+		<td><input type="text" name="btitle" id="btitle" size="53"></td>
 	</tr>
 	<tr>
 		<td align="center">글 내용</td>
 		<td>
-			<textarea name="ntitle" id="ntitle" cols="50" rows="10"></textarea>
+			<textarea name="bcontent" id="bcontent" cols="50" rows="10"></textarea>
 		</td>
 	</tr>
 	<tr>
 	<tr>
 		<td align="center">글 작성자</td>
-		<td><input type="text" name="nwriter" id="nwriter" size="20"></td>
+		<td><input type="text" name="mnick" id="mnick" size="20"></td>
 	</tr>
 	<tr>
 		<td align="center">첨부파일</td>
-		<td><input type="file" name="nfile" id="nfile">
+		<td><input type="file" name="bfile" id="bfile">
 		</td>
 	</tr>
 	<tr>
