@@ -42,7 +42,7 @@ public class QnAController {
 		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="", method=RequestMethod.GET)
+	@RequestMapping(value="11", method=RequestMethod.GET)
 	public String QnASelectPaging(BoardVO bvo, Model model) {
 		logger.info("QnAController QnASelectPaging ���� ::");	
 		logger.info("QnAController boardSelect bvo.getSbnum() " + bvo.getPage());
