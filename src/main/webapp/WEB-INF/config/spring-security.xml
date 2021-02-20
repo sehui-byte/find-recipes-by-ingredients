@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:s="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security 
+						http://www.springframework.org/schema/security/spring-security.xsd">
+						
+	<!--  security 적용 제외 요청 패턴 -->
+	<s:http pattern="/**/*.js" security="none" />
+	<s:http pattern="/**/*.css" security="none" />
+	<s:http pattern="/images/*" security="none" />
+	<s:http auto-config="true" use-expressions="true">
+		<s:intercept-url pattern="/admin/**" access="hasRole('ROLE_A')"/>
+		<s:intercept-url pattern="/login.do" access="isAnonymous()"/>
+		<s:intercept-url pattern="/join.do" access="isAnonymous()"/>
+		<s:intercept-url pattern="/main.do" access="permitAll"/>
+		<s:intercept-url pattern="/**" access="permitAll"/>
+		<s:form-login
+			username-parameter="mid"	
+			password-parameter="mpw"
+			login-processing-url="/j_spring_security_check"
+			login-page="/login.do"
+			default-target-url="/main.do"/>
+		<s:logout
+			logout-url="/j_spring_security_logout"
+			logout-success-url="/main.do"	
+			delete-cookies="JSESSIONID"
+			invalidate-session="true"/>
+		<s:csrf disabled="true"/>
+	</s:http>
+
+	<!--  db로 접속할 수 있도록 -->
+	<s:authentication-manager>
+		<s:authentication-provider user-service-ref="memberSecurityServiceImpl">
+			<s:password-encoder ref="bcryptPasswordEncoder" />	
+		</s:authentication-provider>	
+	</s:authentication-manager>
+	
+	<bean id="memberSecurityServiceImpl" class="com.jns.member.security.service.MemberSecurityServiceImpl">
+	</bean>
+
+	<!-- password 암호화 -->	
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+</beans>
