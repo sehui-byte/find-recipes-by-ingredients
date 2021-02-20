@@ -47,8 +47,8 @@
 				<tr>
 					<td><%=list.get(i).getRcp_nm()%> </td>
 					<td><%=list.get(i).getMno() %></td>
-					<td><%=list.get(i).getRb_viewcnt() %></td>
-					<td><%=list.get(i).getRb_likecnt() %></td>
+					<td><%=list.get(i).getViews() %></td>
+					<td><%=list.get(i).getHits() %></td>
 					<td><%=list.get(i).getRb_insertdate() %></td>
 					<td><input type="button" value="글수정"></td>
 				</tr>
