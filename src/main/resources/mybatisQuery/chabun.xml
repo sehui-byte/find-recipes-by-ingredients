@@ -5,7 +5,7 @@
 <mapper namespace="com.jns.chabun.dao.ChabunDAO">
 
 	<select id="getMemberChabun" resultType="mvo">
-		SELECT NVL(MAX(SUBSTR(A.MNO, -4)), 0) + 1  MNO FROM MEMBER A
+		SELECT NVL(MAX(INSTR(A.MNO, -4)), 0) + 1  MNO FROM MEMBER A
 	</select>
 
 	<!-- 
@@ -20,15 +20,15 @@
 	 
 	 
 	<select id="getQnABoardChabun" resultType="bvo">
-		SELECT NVL(MAX(SUBSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
+		SELECT NVL(MAX(INSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
 	</select>
 	
 	<select id="getNoticeChabun" resultType="bvo">
-		SELECT NVL(MAX(SUBSTR(A.BNO, -4)), 0) + 1 BNO FROM BOARD A
+		SELECT NVL(MAX(INSTR(A.BNO, -4)), 0) + 1 BNO FROM BOARD A
 	</select>
 
 	<select id="getReplyChabun" resultType="reply">
-		SELECT NVL(MAX(SUBSTR(A.RNO, -4)), 0) + 1  RNO FROM REPLY A
+		SELECT NVL(MAX(INSTR(A.RNO, -4)), 0) + 1  RNO FROM REPLY A
 	</select>
 	
 </mapper>

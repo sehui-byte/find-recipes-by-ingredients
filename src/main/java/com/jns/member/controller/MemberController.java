@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
@@ -45,7 +46,7 @@ public class MemberController {
 
 	// 회원 등록
 	@RequestMapping(value = "mem/memberInsert", method = RequestMethod.POST)
-	public String memInsert(MemberVO mvo, Model model) {
+	public String memInsert(MemberVO mvo, MultipartHttpServletRequest requset) {
 		// public String memInsert(HttpServletRequest req)
 		logger.info("MemberController memInsert 함수 시작 >>> : ");
 
@@ -163,8 +164,9 @@ public class MemberController {
 	}
 
 	// 아이디 중복 체크
-	@RequestMapping(value = "/checkID", method = RequestMethod.POST)
-	public String CheckID(MemberVO mvo) {
+	@RequestMapping(value = "mem/checkID", method = RequestMethod.GET)
+	@ResponseBody
+	public String checkID(MemberVO mvo) {
 		logger.info("MemberController CheckID 함수 진입 >>> : ");
 		logger.info("MemberController CheckID mvo.getMid()  >>> : " + mvo.getMid());
 
