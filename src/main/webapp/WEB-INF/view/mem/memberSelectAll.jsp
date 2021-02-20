@@ -28,33 +28,7 @@
 			}
 		}	
 	
-	
-	$(document).ready(function(){
-		
-		$("#I").click(function(){			
-			location.href='/kosmoJns/MemberForm.do';			
-		});
-		$("#SALL").click(function(){			
-			$('#memFormAll').attr('action', '/kosmoJns/memberSelectAll.do');
-			$('#memFormAll').attr('method', 'GET');
-			$('#memFormAll').submit();
-		});
-		$("#U").click(function(){
-			console.log("U >>> : ");			
-			$('#chkInMnum').val();					
-			$('#memFormAll').attr('action', '/kosmoJns/memSelect.do');
-			$('#memFormAll').attr('method', 'GET');
-			$('#memFormAll').submit();
-		});	
-		
-		$("#D").click(function(){
-			console.log("D >>> : ");			
-			$('#chkInMnum').val();
-			$('#memFormAll').attr('action', '/kosmoJns/memSelect.do');
-			$('#memFormAll').attr('method', 'GET');
-			$('#memFormAll').submit();
-		});	
-	
+
 	});
 
 	

@@ -3,6 +3,8 @@ package com.jns.product.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jns.member.vo.MemberVO;
 import com.jns.product.service.ProductService;
 import com.jns.product.vo.ProductVO;
 
@@ -40,7 +43,14 @@ public class ProductController {
 	//관심상품 정보 조회
 	@RequestMapping(value="likeProduct.do", method=RequestMethod.GET)
 	public String likeList(Model model) {
-		List<ProductVO> list = service.likeProductSelectAll();
+		ProductVO pvo = new ProductVO();
+		//로그인 사용자 mno 가져오기
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Object principal = auth.getPrincipal();
+		String mno = ((MemberVO)principal).getMno();
+		System.out.println("현재 로그인한 사용자 mno >> " + mno);
+		pvo.setMno(mno);
+		List<ProductVO> list = service.likeProductSelectAll(pvo);
 		model.addAttribute("list",list);
 		model.addAttribute("size", list.size());
 		return "product/likeProduct";
@@ -49,13 +59,26 @@ public class ProductController {
 	//관심상품 정보 db저장하기
 	@RequestMapping(value="likeProductInsert.do", method=RequestMethod.POST)
 	public int likeProductInsert(@RequestBody ProductVO pvo) {
-		//세션값 가져와서 로그인한 사람의 pid넣어줘야 한다
+		//로그인 사용자 mno 가져오기
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Object principal = auth.getPrincipal();
+		String mno = ((MemberVO)principal).getMno();
+		System.out.println("현재 로그인한 사용자 mno >> " + mno);
+		pvo.setMno(mno);
+
 		return service.likeProductInsert(pvo);
 	}
 
 	//관심상품 정보 삭제
 	@RequestMapping(value="likeProductDelete.do", method=RequestMethod.POST)
 	public int likeProductInsertDelete(@RequestBody ProductVO pvo) {
+		//로그인 사용자 mno 가져오기
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Object principal = auth.getPrincipal();
+		String mno = ((MemberVO)principal).getMno();
+		System.out.println("현재 로그인한 사용자 mno >> " + mno);
+		pvo.setMno(mno);
+
 		return service.likeProductDelete(pvo);
 	}
 }

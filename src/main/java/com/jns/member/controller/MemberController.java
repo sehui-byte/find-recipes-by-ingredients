@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
@@ -44,8 +45,8 @@ public class MemberController {
 	}
 
 	// 회원 등록
-	@RequestMapping(value = "mem/memberInsert", method = RequestMethod.GET)
-	public String memInsert(MemberVO mvo, Model model) {
+	@RequestMapping(value = "mem/memberInsert", method = RequestMethod.POST)
+	public String memInsert(MemberVO mvo, MultipartHttpServletRequest requset) {
 		// public String memInsert(HttpServletRequest req)
 		logger.info("MemberController memInsert 함수 시작 >>> : ");
 
@@ -55,6 +56,13 @@ public class MemberController {
 	
 		logger.info("MemberController MemberInsert mno  회원번호 >>> : " + mno);
 		logger.info("mvo.getMlevel() 회원 등급 >>>> :"+mvo.getMlevel());
+		
+		String mzipcode = mvo.getMzipcode();
+		mvo.setMzipcode(mzipcode);
+		String Maddr = mvo.getMaddr();
+		mvo.setMaddr(Maddr);
+		logger.info("Maddr");
+		
 		logger.info("mvo.getMaddr() 주소 >>>>:"+mvo.getMaddr());
 		logger.info("mvo.getMaddrdetail() 상세주소 >>>>>:"+mvo.getMaddrdetail());
 		logger.info("mvo.getMzipcode() 우편번호 >>>>:"+mvo.getMzipcode());
@@ -73,10 +81,10 @@ public class MemberController {
 
 		
 		if (nCnt == 1) {
-			return "mem/memberSelectAll";
+			return "main";
 		}
 
-		return "login/login";
+		return "/memberForm";
 
 	}
 
@@ -156,8 +164,9 @@ public class MemberController {
 	}
 
 	// 아이디 중복 체크
-	@RequestMapping(value = "/CheckID", method = RequestMethod.POST)
-	public String CheckID(MemberVO mvo) {
+	@RequestMapping(value = "mem/checkID", method = RequestMethod.GET)
+	@ResponseBody
+	public String checkID(MemberVO mvo) {
 		logger.info("MemberController CheckID 함수 진입 >>> : ");
 		logger.info("MemberController CheckID mvo.getMid()  >>> : " + mvo.getMid());
 

@@ -493,7 +493,7 @@
 			<td colspan="2" align="right">
 				<button type="button" id="U" >수정</button>
 				<button type="button" id="D" >삭제</button>
-				<button type="button" id="C">취소</button>
+				<button type="button" id="C">목록</button>
 			</td>
 		</tr>
 	</table>

@@ -112,8 +112,8 @@ public class ProductServiceImpl implements ProductService{
 
 	//관심상품 전체조회
 	@Override
-	public List<ProductVO> likeProductSelectAll() {
-		List<ProductVO> result = pdao.LikeProductSelectAll();
+	public List<ProductVO> likeProductSelectAll(ProductVO pvo) {
+		List<ProductVO> result = pdao.LikeProductSelectAll(pvo);
 		System.out.println("관심상품 개수 >> " + result.size());
 		return result;
 	}
@@ -136,9 +136,9 @@ public class ProductServiceImpl implements ProductService{
 
 	//최저가 변동  확인
 	@Override
-	public void lpriceChk() {
+	public void lpriceChk(ProductVO pvo) {
 		//로그인한 사용자의 관심상품 목록을 가져온다
-		List<ProductVO> list = likeProductSelectAll();
+		List<ProductVO> list = likeProductSelectAll(pvo);
 		JSONParser parser = new JSONParser();
 
 		for(int i = 0; i<list.size(); i++) {

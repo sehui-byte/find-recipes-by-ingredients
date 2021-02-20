@@ -10,7 +10,7 @@
 NOTICE UPDATE
 <hr>
 <script>
-	location.href="noticeUpdate.do";
+	location.href="noticeSelectAll.do";
 </script>
 </body>
 </html>

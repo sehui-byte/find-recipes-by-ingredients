@@ -10,7 +10,7 @@
 QnA DELETE
 <hr>
 <script>
-	location.href="qnaDelete.do";
+	location.href="qnaSelectAll.do";
 </script>
 </body>
 </html>

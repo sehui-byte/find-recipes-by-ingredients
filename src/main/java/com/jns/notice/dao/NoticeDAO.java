@@ -6,11 +6,11 @@ import com.jns.board.vo.BoardVO;
 
 public interface NoticeDAO {
 	
-	public List<BoardVO> NoticeSelectPaging(BoardVO bvo);
-	public List<BoardVO> NoticeSelectAll(BoardVO bvo);
-	public List<BoardVO> NoticeSelect(BoardVO bvo);
+	public List<BoardVO> NoticeSelectPaging(BoardVO nvo);
+	public List<BoardVO> NoticeSelectAll(BoardVO nvo);
+	public List<BoardVO> NoticeSelect(BoardVO nvo);
 	
-	public int NoticeInsert(BoardVO bvo);
-	public int NoticeUpdate(BoardVO bvo);
-	public int NoticeDelete(BoardVO bvo);
+	public int NoticeInsert(BoardVO nvo);
+	public int NoticeUpdate(BoardVO nvo);
+	public int NoticeDelete(BoardVO nvo);
 }

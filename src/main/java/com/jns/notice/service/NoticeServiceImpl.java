@@ -24,39 +24,39 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public List<BoardVO> NoticeSelectPaging(BoardVO bvo) {
+	public List<BoardVO> NoticeSelectPaging(BoardVO nvo) {
 		// TODO Auto-generated method stub
-		return noticeDAO.NoticeSelectPaging(bvo);
+		return noticeDAO.NoticeSelectPaging(nvo);
 	}
 
 	@Override
-	public List<BoardVO> NoticeSelectAll(BoardVO bvo) {
+	public List<BoardVO> NoticeSelectAll(BoardVO nvo) {
 		// TODO Auto-generated method stub
-		return noticeDAO.NoticeSelectAll(bvo);
+		return noticeDAO.NoticeSelectAll(nvo);
 	}
 
 	@Override
-	public List<BoardVO> NoticeSelect(BoardVO bvo) {
+	public List<BoardVO> NoticeSelect(BoardVO nvo) {
 		// TODO Auto-generated method stub
-		return noticeDAO.NoticeSelect(bvo);
+		return noticeDAO.NoticeSelect(nvo);
 	}
 
 	@Override
-	public int NoticeInsert(BoardVO bvo) {
+	public int NoticeInsert(BoardVO nvo) {
 		// TODO Auto-generated method stub
-		return noticeDAO.NoticeInsert(bvo);
+		return noticeDAO.NoticeInsert(nvo);
 	}
 
 	@Override
-	public int NoticeUpdate(BoardVO bvo) {
+	public int NoticeUpdate(BoardVO nvo) {
 		// TODO Auto-generated method stub
-		return noticeDAO.NoticeUpdate(bvo);
+		return noticeDAO.NoticeUpdate(nvo);
 	}
 
 	@Override
-	public int NoticeDelete(BoardVO bvo) {
+	public int NoticeDelete(BoardVO nvo) {
 		// TODO Auto-generated method stub
-		return noticeDAO.NoticeDelete(bvo);
+		return noticeDAO.NoticeDelete(nvo);
 	}
 
 }
