@@ -192,9 +192,8 @@
 	<!-- 아이디 중복 확인   -->
 	<select id="checkID" parameterType ="mvo" resultType="mvo">
 
-	SELECT A.MID MID 
+	SELECT A.MID MID
 	FROM 	MEMBER A 
-	WHERE	A.MDELETEYN = 'Y'
-	AND 	A.MID = #{mid, jdbcType=VARCHAR}
+	WHERE	A.MID = #{mid, jdbcType=VARCHAR}
 	</select>
 </mapper>

@@ -12,7 +12,7 @@ public class BoardVO {
 	private String binsertdate;
 	private String bupdatedate;
 	private String bdeleteyn;
-	private String bview;
+	private String bviews;
 	private String bhits;
 	
 	
@@ -33,7 +33,7 @@ public class BoardVO {
 	}
 
 	public BoardVO(String mno, String bno, String btype, String btitle, String bcontent, String mnick, String bfile,
-			String binsertdate, String bupdatedate, String bdeleteyn, String bview, String page, String pagesize,
+			String binsertdate, String bupdatedate, String bdeleteyn, String bviews, String page, String pagesize,
 			String groupsize, String curpage, String totalcount, String bhits
 		   ,String keyfilter
 		   ,String keyword
@@ -50,7 +50,7 @@ public class BoardVO {
 		this.binsertdate = binsertdate;
 		this.bupdatedate = bupdatedate;
 		this.bdeleteyn = bdeleteyn;
-		this.bview = bview;
+		this.bviews = bviews;
 		this.bhits = bhits;
 		
 		this.page = page;
@@ -63,16 +63,7 @@ public class BoardVO {
 		this.keyword = keyword;
 		this.startdate = startdate;
 		this.enddate = enddate;
-		
-		
-	}
-
-	public String getBhits() {
-		return bhits;
-	}
-
-	public void setBhits(String bhits) {
-		this.bhits = bhits;
+				
 	}
 
 	public String getMno() {
@@ -155,12 +146,20 @@ public class BoardVO {
 		this.bdeleteyn = bdeleteyn;
 	}
 
-	public String getBview() {
-		return bview;
+	public String getBviews() {
+		return bviews;
 	}
 
-	public void setBview(String bview) {
-		this.bview = bview;
+	public void setBviews(String bviews) {
+		this.bviews = bviews;
+	}
+
+	public String getBhits() {
+		return bhits;
+	}
+
+	public void setBhits(String bhits) {
+		this.bhits = bhits;
 	}
 
 	public String getPage() {
@@ -234,5 +233,6 @@ public class BoardVO {
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
 	}
+
 
 }

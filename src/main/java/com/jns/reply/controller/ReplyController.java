@@ -60,7 +60,7 @@ public class ReplyController {
 	********************************************************************************************/
 	@ResponseBody
 	@RequestMapping(value="/reply/blistAll", method=RequestMethod.POST)
-	public Map<String, Object> breplylist(ReplyVO rvo){
+	public String breplylist(ReplyVO rvo){
 		logger.info("ReplyC >> breplylist 호출 성공");
 		logger.info("bno >>> : " + rvo.getBno());
 		
@@ -69,17 +69,10 @@ public class ReplyController {
 		List<ReplyVO> breplyList = replyService.breplyList(rvo);
 		System.out.println("ReplyC >> list >> breplyList.size() >>> : " + breplyList.size());
 		
-		Map<String, Object> m = new HashMap<String, Object>();
-		
-		m.put("breplyList", breplyList);
-		
-		return m;
-		
-		/*
 		String ss = "";
 		String listStr = "";
-		for(int i=0; i < listR.size(); i++) {
-			ReplyVO _rvo = listR.get(i);
+		for(int i=0; i < breplyList.size(); i++) {
+			ReplyVO _rvo = breplyList.get(i);
 			String s0 = _rvo.getRno();
 			String s1 = _rvo.getRwriter();
 			String s2 = _rvo.getRcontent();
@@ -90,7 +83,6 @@ public class ReplyController {
 		}
 		//System.out.println("ReplyC >> listStr >>> : " + listStr);
 		return listStr;
-		*/
 	}
 	
 	/********************************************************************************************
@@ -98,20 +90,30 @@ public class ReplyController {
 	********************************************************************************************/
 	@ResponseBody
 	@RequestMapping(value="/reply/rblistAll")
-	public Map<String, Object> rbreplylist(ReplyVO rvo){
+	public String rbreplylist(ReplyVO rvo){
 		logger.info("ReplyC >> rbreplylist 호출 성공");
 		logger.info("bno >>> : " + rvo.getRbno());
 		
 		rvo.setRbno(rvo.getRbno());
 		
 		List<ReplyVO> rbreplyList = replyService.rbreplyList(rvo);
-		System.out.println("ReplyC >> list >> rbreplyList.size() >>> : " + rbreplyList.size());
+		System.out.println("ReplyC >> list >> rbreplyList.size() >>> : " + rbreplyList.size());		
 		
-		Map<String, Object> m = new HashMap<String, Object>();
-		
-		m.put("rbreplyList", rbreplyList);
-		
-		return m;
+		String ss = "";
+		String listStr = "";
+		for(int i=0; i < rbreplyList.size(); i++) {
+			ReplyVO _rvo = rbreplyList.get(i);
+			String s0 = _rvo.getRno();
+			String s1 = _rvo.getRwriter();
+			String s2 = _rvo.getRcontent();
+			String s3 = _rvo.getRinsertdate();
+			String s4 = _rvo.getRupdatedate();
+			ss = s0 + "," + s1 + "," + s2 + "," + s3 + "," + s4;
+			listStr += ss + "&";
+		}
+		//System.out.println("ReplyC >> listStr >>> : " + listStr);
+		return listStr;
+
 	}
 	
 	/********************************************************************************************
@@ -121,7 +123,10 @@ public class ReplyController {
 	@RequestMapping(value="reply/replyInsert", method=RequestMethod.POST)
 	public String replyInsert(ReplyVO rvo){
 		logger.info("ReplyC >> replyInsert 호출 성공");
-		logger.info("ReplyC >> list >> mnick >>> : " + rvo.getRwriter());
+		logger.info("ReplyC >> list >> bno >>> : " + rvo.getBno());
+		logger.info("ReplyC >> list >> rbno >>> : " + rvo.getRbno());
+		logger.info("ReplyC >> list >> rwriter >>> : " + rvo.getRwriter());
+		
 		
 		// 채번 setting
 		String rno = ChabunUtil.getReplyChabun("D", chabunService.getReplyChabun().getRno());
@@ -139,27 +144,23 @@ public class ReplyController {
 	/********************************************************************************************
 	* 댓글 수정
 	********************************************************************************************/
-	@RequestMapping(value="/reply/{rno}.do", method= {RequestMethod.PUT, RequestMethod.PATCH})
-	public ResponseEntity<String> replyUpdate(@PathVariable("rno") String rno
-											 ,@RequestBody ReplyVO rvo){
+	@ResponseBody
+	@RequestMapping(value="reply/replyUpdate", method=RequestMethod.POST)
+	public String replyUpdate(ReplyVO rvo) {
 		logger.info("ReplyC >> replyUpdate 호출 성공");
 		logger.info("ReplyC >> replyUpdate rcontent >>> : " + rvo.getRcontent());
-		logger.info("ReplyC >> replyUpdate rno >>> : " + rno);
+		logger.info("ReplyC >> replyUpdate rno >>> : " + rvo.getRno());
 		
-		ResponseEntity<String> entity = null;
+		rvo.setRno(rvo.getRno());
+		rvo.setRcontent(rvo.getRcontent());
 		
-		try {
-			rvo.setRno(rno);
-			replyService.replyUpdate(rvo);
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-		}catch(Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		return entity;
+		int result = replyService.replyUpdate(rvo);
+		logger.info("ReplyC >> replyUpdate >> result >>> : " + result);
+		
+		if (1 == result) { return "GOOD"; }
+		else{ return "BAD"; }
 	}
-	
-	
+
 	/********************************************************************************************
 	* 댓글 삭제 
 	********************************************************************************************/
@@ -182,28 +183,9 @@ public class ReplyController {
 		*/
 		
 		int result = replyService.replyDelete(rvo);
-		logger.info("RboardController rboardDelete result >>> : " + result);
+		logger.info("ReplyC >> replyDelete >> result >>> : " + result);
 		
 		if (1 == result) { return "GOOD"; }
 		else{ return "BAD"; }
 	}
-	
-	/*
-	@RequestMapping(value = "/reply/replyDelete/{rno}.do", method=RequestMethod.DELETE)
-	 public ResponseEntity<String> replyDelete(@PathVariable("rno") String rno) {
-		 logger.info("ReplyC >> replyDelete 호출 성공");
-		 logger.info("ReplyC >> replyDelete rno >>> : " + rno);
-		 
-		 ResponseEntity<String> entity = null;
-		 
-		 try {
-			replyService.replyDelete(rno);
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-		 } catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		 }
-		 return entity;
-	}	
-	*/
 }

@@ -53,10 +53,10 @@
 						 )
 		VALUES			 (
 						  #{rno, jdbcType=VARCHAR}
-						  #{mno, jdbcType=VARCHAR}
-						  #{bno, jdbcType=VARCHAR}
-						  #{rbno, jdbcType=VARCHAR}
-						  #{rwriter, jdbcType=VARCHAR}
+						 ,#{mno, jdbcType=VARCHAR}
+						 ,#{bno, jdbcType=VARCHAR}
+						 ,#{rbno, jdbcType=VARCHAR}
+						 ,#{rwriter, jdbcType=VARCHAR}
 						 ,#{rcontent, jdbcType=VARCHAR}
 						 ,SYSDATE
 						 ,SYSDATE
@@ -71,8 +71,7 @@
 		SET		 RCONTENT = #{rcontent, jdbcType=VARCHAR}
 				,RUPDATEDATE = SYSDATE
 		WHERE	 RNO = #{rno, jdbcType=VARCHAR}
-		AND		 RDELETEYN = 'Y'		
-		AND		 MNO = #{mno, jdbcType=VARCHAR}
+		AND		 RDELETEYN = 'Y'
 	</update>
 	
 	

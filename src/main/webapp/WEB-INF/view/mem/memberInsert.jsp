@@ -4,13 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+
 <title>JNS :전지적 냉장고 시점 회원등록 </title>
 </head>
 <body>
-JNS :전지적 냉장고 시점 회원등록 
-<hr>
+		
 <script>
-	location.href="mem/memberSelectAll.do";
+	location.href="main.do";
 </script>
 </body>
 </html>

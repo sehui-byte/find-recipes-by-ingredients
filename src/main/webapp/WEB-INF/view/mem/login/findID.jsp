@@ -12,8 +12,21 @@
 	$(document).ready(function(){
 		$("#findID").click(function(){
 			alert("findID 클릭");
+
+			if(!chkSubmit($("#mname"), "이름을 ")){
+				return;
+			};
+			if(!chkSubmit($("#memail1"), "이메일을 ")){
+				return;
+			};
+			if(!chkSubmit($("#memail2"), "이메일을 ")){
+				return;
+			};
+
 			var mname = $("#mname").val();
 			var memail = $("#memail1").val() + "@" + $("#memail2").val();
+			
+			
 			var url = "/kosmoJns/memberFindIDOK.do";
 			var data = {"mname" : mname, "memail" : memail};
 			
@@ -50,10 +63,18 @@
 				$("#memail2").replaceWith("<input type='text' name='memail2' id='memail2'>");
 			}
 		})
-	})
-	
-
-
+		
+	function chkSubmit(v_item, v_msg){
+		if(v_item.val().replace(/\s/g,"")==""){
+			alert(v_msg+" 확인해 주세요.");
+			v_item.val("");
+			v_item.focus();
+			return false;
+		}else{
+			return true;
+		}
+	}
+})
 </script>
 </head>
 <body>

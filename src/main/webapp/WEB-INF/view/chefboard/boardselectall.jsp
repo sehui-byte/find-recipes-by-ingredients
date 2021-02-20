@@ -23,7 +23,7 @@
 		$(document).on("click", "#searchBtn", function(){
 			console.log("searchBtn >>> : ");
 			$("#boardList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/chefboard/boardselectall.do"}).submit();
+								 ,"action":"/kosmoJns/myinfo/myRecipeList.do"}).submit();
 		});
 		
 		

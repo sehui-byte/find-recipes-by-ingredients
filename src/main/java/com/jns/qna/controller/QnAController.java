@@ -3,23 +3,17 @@ package com.jns.qna.controller;
 
 import java.util.List;
 
-
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jns.qna.service.QnAService;
 import com.jns.board.vo.BoardVO;
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
-
-import oracle.net.aso.e;
+import com.jns.qna.service.QnAService;
 
 @Controller
 public class QnAController {
@@ -42,6 +36,9 @@ public class QnAController {
 	//�� �Է� �� 
 	@RequestMapping(value="qnaForm", method=RequestMethod.GET)
 	public String boardForm() {
+		
+		logger.info("QnA form >>>");
+
 		return "QnA/qnaForm";
 	}
 	
@@ -141,18 +138,20 @@ public class QnAController {
 	public String BoardUpdate(BoardVO bvo ,Model model) {
 		logger.info("QnAController QnAUpdate 함수 시작 >> ");
 		
-		logger.info("QnAController QnAUpdate bvo.getBtitle() " + bvo.getBtitle());
-		logger.info("QnAController QnAUpdate bvo.getBcontent() " + bvo.getBcontent());
 		int nCnt = qnaService.QnAUpdate(bvo);
 		
-		logger.info("QnAController QnAUpdate nCnt" + nCnt);
+		logger.info("QnAController QnAUpdate bvo.getBtitle() >>> : " + bvo.getBtitle());
+		logger.info("QnAController QnAUpdate bvo.getBcontent() >>> : " + bvo.getBcontent());
+		logger.info("QnAController QnAUpdate bvo.getMnick() >>> : " + bvo.getMnick());
+		
+		logger.info("QnAController QnAUpdate nCnt >>> " + nCnt);
 		
 		//������ �Խù��� 1���� ũ�ٸ� ����  â���� �̵� 
 		if(nCnt > 0) {
 			return "QnA/qnaUpdate";
 		}
 		
-		return "QnA/qnaInsert";
+		return "QnA/qnaSelectAll";
 				
 	}	
 	
@@ -169,7 +168,7 @@ public class QnAController {
 			return "QnA/qnaDelete";
 		}
 		
-		return "QnA/qnaInsert";
+		return "QnA/qnaSelectAll";
 	}
 	
 }

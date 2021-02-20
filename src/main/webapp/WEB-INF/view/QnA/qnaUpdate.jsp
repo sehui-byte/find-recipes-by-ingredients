@@ -10,7 +10,7 @@
 QnA UPDATE
 <hr>
 <script>
-	location.href="qnaUpdate.do";
+	location.href="qnaSelectAll.do";
 </script>
 </body>
 </html>

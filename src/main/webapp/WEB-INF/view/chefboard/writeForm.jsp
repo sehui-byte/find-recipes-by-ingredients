@@ -10,7 +10,8 @@
 <script type="text/javascript">
 	
 	$(function(){
-		/*저장 버튼 클릭 시 처리 이벤트 */
+		
+		//저장
 		$("#boardInsert").click(function(){
 			
 			//입력값 체크

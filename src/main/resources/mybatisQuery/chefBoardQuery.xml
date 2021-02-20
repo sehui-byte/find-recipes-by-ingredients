@@ -8,7 +8,7 @@
 		FROM
 			RECIPE_BOARD
 		WHERE
-			RB_DELETEYN = 'N'
+			RB_DELETEYN = 'Y'
 			<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
 			<![CDATA[AND TO_CHAR(RB_INSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
 			<![CDATA[AND TO_CHAR(RB_INSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
@@ -27,7 +27,7 @@
 		FROM
 			RECIPE_BOARD
 		WHERE
-			RB_DELETEYN = 'N'
+			RB_DELETEYN = 'Y'
 			AND RBNO = #{rbno}
 	</select>
 	
@@ -37,8 +37,8 @@
 			RBNO,
 			MNO,
 			RCP_NM,
-			RB_VIEWCNT,
-			RB_LIKECNT,
+			VIEWS,
+			HITS,
 			RCP_WAY2,
 			RCP_PAT2,
 			HASH_TAG,
@@ -93,8 +93,8 @@
 			#{rbno, jdbcType=VARCHAR},
 			#{mno, jdbcType=VARCHAR},
 			#{rcp_nm, jdbcType=VARCHAR},
-			#{rb_viewcnt, jdbcType=NUMERIC},
-			#{rb_likecnt, jdbcType=NUMERIC},
+			#{views, jdbcType=NUMERIC},
+			#{hits, jdbcType=NUMERIC},
 			#{rcp_way2, jdbcType=VARCHAR},
 			#{rcp_pat2, jdbcType=VARCHAR},
 			#{hash_tag, jdbcType=VARCHAR},
@@ -142,7 +142,7 @@
 			#{manual_img20, jdbcType=VARCHAR},			
 			SYSDATE,
 			SYSDATE,
-			'N'
+			'Y'
 		)
 	</insert>
 
@@ -199,11 +199,17 @@
 			RB_UPDATEDATE = SYSDATE
 		WHERE
 			RBNO = #{rbno, jdbcType=VARCHAR}
-			AND RB_DELETEYN = 'N'
+			AND RB_DELETEYN = 'Y'
 	</update>
 
 	<update id="boardDelete">
-	
+		UPDATE
+			 RECIPE_BOARD
+		SET
+			 RB_DELETEYN = 'N'
+			,RB_UPDATEDATE = SYSDATE
+		WHERE
+			 RBNO = #{rbno, jdbcType=VARCHAR}
 	</update>
 	
 </mapper>

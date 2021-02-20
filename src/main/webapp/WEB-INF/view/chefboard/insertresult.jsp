@@ -17,7 +17,7 @@
 		if(result.indexOf("문제") > -1){
 %>
 			<script>
-				alert("죄송합니다, 글 등록에 문제가 발생하였습니다.");
+				alert(result);
 				history.go(-1);
 			</script>
 <%

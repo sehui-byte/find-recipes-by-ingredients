@@ -5,6 +5,7 @@
 <select id="LikeProductSelectAll" resultType="pvo">
 SELECT *
 FROM LIKEPRODUCT
+WHERE MNO = #{mno}
 ORDER BY INSERTDATE
 </select>
 
@@ -16,7 +17,8 @@ INSERT INTO LIKEPRODUCT(
 	LINK,
 	LPRICE,
 	HPRICE,
-	INSERTDATE
+	INSERTDATE,
+	MNO
 )VALUES(
 	#{productId, jdbcType=VARCHAR},
 	#{title, jdbcType=VARCHAR},
@@ -24,11 +26,12 @@ INSERT INTO LIKEPRODUCT(
 	#{link, jdbcType=VARCHAR},
 	#{lprice, jdbcType=INTEGER},
 	#{hprice, jdbcType=INTEGER},
-	SYSDATE
+	SYSDATE,
+	#{mno, jdbcType=VARCHAR}
 )
 </insert>
 
 <delete id="likeProductDelete" parameterType="pvo">
-DELETE FROM LIKEPRODUCT WHERE PRODUCTID = #{productId}
+DELETE FROM LIKEPRODUCT WHERE PRODUCTID = #{productId} AND MNO = #{mno}
 </delete>
 </mapper>

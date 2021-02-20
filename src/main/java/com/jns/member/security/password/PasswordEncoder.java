@@ -1,6 +1,7 @@
 package com.jns.member.security.password;
 
 
+//import org.apache.log4j.Logger;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class PasswordEncoder {
@@ -27,5 +28,20 @@ public class PasswordEncoder {
 		
 		return bool;
 	}
+
+	/*
+	// 암호화  할떄만
+	public static void main(String args[]) {
+		
+		Logger logger = Logger.getLogger(PasswordEncoder.class);
+		
+		String pw = "user0001";
+		String encode_pw = PasswordEncoder.pwEncoder(pw);
+		System.out.println(encode_pw);
+		
+		logger.info(encode_pw);
+		
+		
+	}*/
 
 }
