@@ -28,11 +28,46 @@ public class MemberVO implements UserDetails {
 	private String mupdatedate;
 	private String mdeleteyn;
 
+	// 검색 설정
+	private String keyfilter;
+	private String keyword;
+	private String startdate;
+	private String enddate;
+
 	// spring security 권한 관련 변수
 	private List<GrantedAuthority> authorities;
+	
+	public MemberVO() {
+	
+	}
+	
+	public MemberVO(String mno, String mlevel, String mid, String mpw, String mname, String mnick, String mhp,
+			String memail, String maddr, String mzipcode, String maddrdetail, String mphoto, String minsertdate,
+			String mupdatedate, String mdeleteyn, String keyfilter, String keyword, String startdate, String enddate,
+			List<GrantedAuthority> authorities) {
+		this.mno = mno;
+		this.mlevel = mlevel;
+		this.mid = mid;
+		this.mpw = mpw;
+		this.mname = mname;
+		this.mnick = mnick;
+		this.mhp = mhp;
+		this.memail = memail;
+		this.maddr = maddr;
+		this.mzipcode = mzipcode;
+		this.maddrdetail = maddrdetail;
+		this.mphoto = mphoto;
+		this.minsertdate = minsertdate;
+		this.mupdatedate = mupdatedate;
+		this.mdeleteyn = mdeleteyn;
+		this.keyfilter = keyfilter;
+		this.keyword = keyword;
+		this.startdate = startdate;
+		this.enddate = enddate;
+		this.authorities = authorities;
+	}
 
 	// setter
-
 	public void setMno(String mno) {
 		this.mno = mno;
 	}
@@ -91,6 +126,22 @@ public class MemberVO implements UserDetails {
 
 	public void setMdeleteyn(String mdeleteyn) {
 		this.mdeleteyn = mdeleteyn;
+	}
+
+	public void setKeyfilter(String keyfilter) {
+		this.keyfilter = keyfilter;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
 	}
 
 	public void setAuthorities(List<String> authList) {
@@ -164,6 +215,22 @@ public class MemberVO implements UserDetails {
 
 	public String getMdeleteyn() {
 		return mdeleteyn;
+	}
+
+	public String getKeyfilter() {
+		return keyfilter;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public String getStartdate() {
+		return startdate;
+	}
+
+	public String getEnddate() {
+		return enddate;
 	}
 
 	// Spring Security UserDetails 구현 함수

@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jns.notice.dao.NoticeDAO;
 import com.jns.board.vo.BoardVO;
+import com.jns.notice.dao.NoticeDAO;
 
 @Service
 @Transactional
