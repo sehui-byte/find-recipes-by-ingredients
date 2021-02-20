@@ -10,14 +10,6 @@
 
 	$(function(){
 		
-		/* Vue 세팅 */
-		var vm = new Vue({
-			el: "#comment_write",
-			data: {
-				rwriter: "<%=mnick%>"
-			}
-		});
-		
 		/* rcontent 길이 제한 */
 		$("#rcontent").keyup(function(){
 			cut_200(this);
@@ -81,7 +73,7 @@
 		
 		/* 초기화 버튼 */
 		$(document).on("click", ".reset_btn", function(){
-			var conText = $(this).parents("li").fint("textarea").html();
+			var conText = $(this).parents("li").find("textarea").html();
 			$(this).parents("li").find("input[type='button']").show();
 			var conArea = $(this).parents("li").children().eq(1);
 			conArea.html(conText);
@@ -213,6 +205,7 @@
 
 	/* 새로운 글을 화면에 추가하기 위한 함수 */
 	function addNewItem(rno, rwriter, rcontent, rinsertdate, rupdatedate){	
+		var sessionWriter = "<%=mnick%>";
 		
 		//데이터 체크
 		if(isEmpty(rno)) return false;
@@ -250,17 +243,25 @@
 		content_p.addClass("con");
 		content_p.html(rcontent);
 		
-		// 조립하기
-		writer_p.append(name_span).append(date_span).append(up_input).append(del_input)
-		new_li.append(writer_p).append(content_p);
-		$("#comment_list").append(new_li);
+		// 조립하기 (로그인 유저의 닉네임일 경우 수정/삭제 버튼 생성)
+		if(rwriter == sessionWriter){
+			writer_p.append(name_span).append(date_span).append(up_input).append(del_input)
+			new_li.append(writer_p).append(content_p);
+			$("#comment_list").append(new_li);
+		}else{
+			writer_p.append(name_span).append(date_span)
+			new_li.append(writer_p).append(content_p);
+			$("#comment_list").append(new_li);
+		}
 
 	}
 	
-	// INPUT 태그들에 대한 초기화 함수 
+	// 초기화 함수 
 	function dataReset(){
+		var len = 0;
 		$("#rno").val("");
 		$("#rcontent").val("");
+		$(".bytes").text(len);
 	}
 	
 	// chkSubmit(유효성 검사 대상, 메시지 내용)
@@ -327,7 +328,7 @@
 			<tr>
 				<td>작성자</td>
 				<td>
-					<input type="text" name="rwriter" id="rwriter" v-model="rwriter">
+					<input type="text" name="rwriter" id="rwriter" value="<%=mnick%>">
 					<input type="hidden" name="bno" id="bno" value="<%=bno%>">
 					<input type="hidden" name="mno" id="mno" value="<%=mno%>">
 					<input type="button" id="replyInsert" value="저장하기">
