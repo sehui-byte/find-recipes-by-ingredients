@@ -10,7 +10,7 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_Q = "Q"; // Q&A 게시판 
 
 	public static final String BIZ_GUBUN_CB	= "CB"; // 쉐프 게시판 
-	public static final String BIZ_GUBUN_CO = "CO"; // 신고게시판 
+//	public static final String BIZ_GUBUN_CO = "CO"; // 신고게시판 
 	public static final String BIZ_GUBUN_F	= "F"; // 즐겨찾기
 	
 	
@@ -26,7 +26,7 @@ public abstract class ChabunUtil {
 
 	
 	
-	// type : D : 20210001, M : YYYYMM, Y : YYYY, N :  회원번호
+	// type : D : 20210001, M : YYYYMM, Y : YYYY, 
 	public static String numPad(String t, String c){
 	
 		for (int i=c.length(); i < 4; i++) {

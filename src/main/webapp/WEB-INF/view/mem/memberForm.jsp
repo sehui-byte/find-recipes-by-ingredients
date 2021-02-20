@@ -1,12 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+   
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>JNS MEMBER : ÀüÁöÀû ³ÃÀå°í ½ÃÁ¡  È¸¿ø °¡ÀÔ </title>
+   <style>
+        #wrap{
+            width:530px;
+            margin-left:auto; 
+            margin-right:auto;
+            text-align:center;
+        }
+        
+        table{
+            border:3px solid skyblue
+        }
+        
+        td{
+            border:1px solid skyblue
+        }
+        
+        #title{
+            background-color:yellow
+        }
+    </style>
+
+
+
+<meta charset="UTF-8">
+<title>JNS MEMBER : ì „ì§€ì  ëƒ‰ì¥ê³  ì‹œì   íšŒì› ê°€ì… </title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!--  µğ¹ÙÀÌ½º¿¡ ÃÖÀûÈ­µÈ Å©±â·Î Ãâ·Â -->
+<!--  ë””ë°”ì´ìŠ¤ì— ìµœì í™”ëœ í¬ê¸°ë¡œ ì¶œë ¥ -->
 <meta name ="viewport" content="width=device-width, initial-scale=1.0
 		maxinum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 <style type="text/css">
@@ -18,80 +42,105 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-<!-- ´ÙÀ½ ÁÖ¼Ò·Ï -->
+<!-- ë‹¤ìŒ ì£¼ì†Œë¡ -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
 	
-		$(document).ready(function(){
-			
-
-			//¹öÆ° Å¬¸¯½Ã È¸¿ø°¡ÀÔ Ã³¸® 
+	$(document).ready(function(){
+				
+			//ë²„íŠ¼ í´ë¦­ì‹œ íšŒì›ê°€ì… ì²˜ë¦¬ 
 			$(document).on("click","#membtn",function(){
 				console.log("membtn >>> : ");
+				alert("íšŒì›ê°€ì…ì´ ì™„ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤");
 				
 				$('#memberForm').attr('action','mem/memberInsert.do');
-				$('#memberForm').attr('method','GET');
+				$('#memberForm').attr('method','POST');
 				$('#memberForm').attr('enctype','multipart/form-data');
 				$('#memberForm').submit();
+				
+				
 			});
-		// ÀÌ¸ŞÀÏ 
-			$('#memail2').change(function(){	
-			$("#memail2 option:selected").each(function () {
-				if($(this).val()== '1'){ //Á÷Á¢ÀÔ·ÂÀÏ °æ¿ì 
-						var aa = $("#memail1").val();
-						//alert("aa >>> : " + aa);
-						$("#memail1").val(''); //°ª ÃÊ±âÈ­ 
-						$("#memail1").attr("readonly",false); //È°¼ºÈ­ 				
-				}else{ //Á÷Á¢ÀÔ·ÂÀÌ ¾Æ´Ò°æ¿ì 
-						$("#memail1").val($(this).text()); //¼±ÅÃ°ª ÀÔ·Â 
-						$("#memail1").attr("readonly",true); //ºñÈ°¼ºÈ­ 
-				}}); 
-			}); 
-		
-
-			// ¿ìÆí¹øÈ£
-			$("#mzipcode").prop('readonly', true);
-			$("#maddr").prop('readonly', true);
-			$("#maddrdetail").prop(true);
-			$("#zipcode").click(function(){
-				console.log("zipcode >>> : ");
-				new daum.Postcode({
+			
+			// ì•„ì´ë”” ì²´í¬ 
+			$(document).on("click","#midbtn",function(){
+				console.log("midbtn >>  : ");
+				alert("ì•„ì´ë”” ì¤‘ë³µ í™•ì¸ì¤‘ ...");
+				
+				let idcheckURL = "mem/checkID.do";
+				let method = "GET";
+				let midVal = $('mid').val();
+				
+				let dataParam = {"mid":midVal};
+				
+				$.ajax({
+					url : idcheckURL,
+					type : method,
+					data: dataParam,
+					success : whenSuccess,
+					error : whenError
+				});
+				
+				function whenSuccess(resData){
+					alert(resData);
+					var sVal = resData;
+					if('ID_GOOD'==sVal){
+						alert("ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ì•„ì´ë”” ì…ë‹ˆë‹¤");
+					}else{
+						alert("ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ ì•„ì´ë”” ì…ë‹ˆë‹¤ ")
+						$("#mid").val('');
+						$("#mid").focus();
+					}
+				}
+				
+				function whenError(resData){
+					
+				}
+			});
+				// ìš°í¸ë²ˆí˜¸
+				$("#mzipcode").prop('readonly', true);
+				$("#maddr").prop('readonly', true);
+				$("#maddrdetail").prop(true);
+				$("#zipcode").click(function(){
+					console.log("zipcode >>> : ");
+					new daum.Postcode({
 					oncomplete: function(data) {
-					    $("#mzipcode").val(data.zonecode); //5ÀÚ¸® »õ¿ìÆí¹øÈ£ »ç¿ë
-					    $("#maddr").val(data.roadAddress); //µµ·Î¸í ÁÖ¼Ò
-					    $("#maddrdetail").val(data.Adddetail); //»ó¼¼ÁÖ¼Ò			
+					    $("#mzipcode").val(data.zonecode); //5ìë¦¬ ìƒˆìš°í¸ë²ˆí˜¸ ì‚¬ìš©
+					    $("#maddr").val(data.roadAddress); //ë„ë¡œëª… ì£¼ì†Œ
+					    $("#maddrdetail").val(data.Adddetail); //ìƒì„¸ì£¼ì†Œ			
 					}
 				}).open();
-		
 			});
-		});
-
+		});		
+					
+	
+				
+	
 </script>
 </head>
 <body>
 <div>
 <form name="memberForm" id="memberForm">
-	<h2><font size="4" style="color:Blue;">ÀüÁöÀû ³ÃÀå°í ½ÃÁ¡ È¸¿ø°¡ÀÔ </font></h2>
+	<h2><font size="4" style="color:Blue;">ì „ì§€ì  ëƒ‰ì¥ê³  ì‹œì  íšŒì›ê°€ì… </font></h2>
 	<hr>
-	<table width="50%" height="80" border="1" align="center"
-		cellpadding="5" cellspacing="0" bordercolor="gray">
+	<table  border="1" align="center"
+		bordercolor="gray">
 
 	<tr>
 		<td colspan="2" align="center">
-			<font size="4" style="color:Blue;">Àü.³Ã.½Ã</font>
+			<font size="4" style="color:Blue;">ì „.ëƒ‰.ì‹œ</font>
 			<img src="/kosmoJns/img/ban.gif" width="25" height="25" alt="image">
 		</td>
 	</tr>
 	<tr>
-		<td class="mem">È¸¿ø¹øÈ£</td>
+		<td class="mem">íšŒì›ë²ˆí˜¸</td>
 		<td><input type="text" name="mno" id="mno" style="width:150px" readonly/></td>
 	</tr>
 	<tr>
-		<td class="mem">È¸¿øµî±Ş</td>
+		<td class="mem">íšŒì›ë“±ê¸‰</td>
 		<td>
 		<select name=mlevel id=mlevel style="width:150px" >
-			<option >È¸¿øµî±ŞÀ» ¼±ÅÃÇÏ¼¼¿ä</option>
+			<option >íšŒì›ë“±ê¸‰ì„ ì„ íƒí•˜ì„¸ìš”</option>
 			<option>U</option>
 			<option>C</option>
 		</select>
@@ -99,37 +148,37 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="mem">¾ÆÀÌµğ</td>
+		<td class="mem">ì•„ì´ë””</td>
 		<td>
 	
-		<input type="text" name="mid" id="mid" size="30"placeholder="¾ÆÀÌµğÁßº¹Ã¼Å©"  style="width:150px"/>
-		<button type="button" id="midbtn">¾ÆÀÌµğÁßº¹Ã¼Å©</button>
-		<br>&nbsp¿µ¹®,¼ıÀÚ,¿µ¹®¼ıÀÚ Á¶ÇÕ¸¸ °¡´É (6ÀÚ ÀÌ»ó 30ÀÚ ÀÌÇÏ)	&nbsp
+		<input type="text" name="mid" id="mid" size="30"placeholder="ì•„ì´ë””ì¤‘ë³µì²´í¬"  style="width:150px"/>
+		<button type="button" id="midbtn">ì•„ì´ë””ì¤‘ë³µì²´í¬</button>
+		<br>&nbspì˜ë¬¸,ìˆ«ì,ì˜ë¬¸ìˆ«ì ì¡°í•©ë§Œ ê°€ëŠ¥ (6ì ì´ìƒ 30ì ì´í•˜)	&nbsp
 		</td>
 	</tr>
 	<tr>
-		<td class="mem">ºñ¹Ğ¹øÈ£</td>
+		<td class="mem">ë¹„ë°€ë²ˆí˜¸</td>
 		<br>
 		<td>
 			<input type="text" name="mpw" id="mpw" style="width:150px" />
-			<br>&nbsp¿µ¹®, ¼ıÀÚ, Æ¯¼ö¹®ÀÚ Á¶ÇÕ (8ÀÚ ÀÌ»ó 12ÀÚ ÀÌÇÏ)&nbsp
+			<br>&nbspì˜ë¬¸, ìˆ«ì, íŠ¹ìˆ˜ë¬¸ì ì¡°í•© (8ì ì´ìƒ 12ì ì´í•˜)&nbsp
 		
 	<!-- 
 			<input type="text" name="mpw_r" id="mpw_r" />
-			<input type="button" value="ºñ¹Ğ¹øÈ£È®ÀÎ" onclick="mpwCheck()" /><br/>
+			<input type="button" value="ë¹„ë°€ë²ˆí˜¸í™•ì¸" onclick="mpwCheck()" /><br/>
 	 --> 
 		</td>
 	</tr>
 	<tr>
-		<td class="mem">ÀÌ¸§</td>
+		<td class="mem">ì´ë¦„</td>
 		<td><input type="text" name="mname" id="mname" style="width:150px"/></td>
 	</tr>
 	<tr>
-		<td class="mem">´Ğ³×ÀÓ</td>
+		<td class="mem">ë‹‰ë„¤ì„</td>
 		<td><input type="text" name="mnick" id="mnick" style="width:150px"/></td>
 	</tr>
 	<tr>
-		<td class="mem">ÀüÈ­¹øÈ£</td>	
+		<td class="mem">ì „í™”ë²ˆí˜¸</td>	
 		<td>
 			<select name="mhp" id="mhp">
 				<option value="010">010</option>
@@ -141,12 +190,12 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="mem">ÀÌ¸ŞÀÏ</td>
+		<td class="mem">ì´ë©”ì¼</td>
 		<td>		
 			<input type="text" name="memail" id=memail style="width:100px" />
-			@ <input type="text" name="memail1" id=memail1 style="width:100px" placeholder="Á÷Á¢ÀÔ·Â" />
+			@ <input type="text" name="memail1" id=memail1 style="width:100px" placeholder="ì§ì ‘ì…ë ¥" />
 			<select name="memail2" id="memail2" style="width:100px;margin-right:10px">
-	        	 <option value="1" selected>Á÷Á¢ÀÔ·Â</option>
+	        	 <option value="1" selected>ì§ì ‘ì…ë ¥</option>
 	       		 <option value="naver.com">naver.com</option>	       	   
 	      		 <option value="gmail.com">gmail.com</option>
 	      		 <option value="daum.net">daum.net</option>	       	   
@@ -154,23 +203,23 @@
 		</td>
 	</tr>
 	 <tr>
-	 	<td class="mem">ÁÖ¼Ò</td>
+	 	<td class="mem">ì£¼ì†Œ</td>
 	 	<td>
-	 		<input type="text" name="mzipcode" id="mzipcode" placeholder="¿ìÆí¹øÈ£" style="width:50px">
-	 		<input type="button" name="zipcode" id="zipcode" value="¿ìÆí¹øÈ£ Ã£±â"><br>	 	
-	 		<input type="text" name="maddr" id="maddr" placeholder="µµ·Î¸íÁÖ¼Ò" style="width:250px"><br>	 	
-	 		<input type="text" name="maddrdetail" id="maddrdetail" placeholder="µµ·Î¸íÁÖ¼Ò »ó¼¼ÁÖ¼Ò" style="width:250px"><br>	 	
+	 		<input type="text" name="mzipcode" id="mzipcode" placeholder="ìš°í¸ë²ˆí˜¸" style="width:50px">
+	 		<input type="button" name="zipcode" id="zipcode" value="ìš°í¸ë²ˆí˜¸ ì°¾ê¸°"><br>	 	
+	 		<input type="text" name="maddr" id="maddr" placeholder="ë„ë¡œëª…ì£¼ì†Œ" style="width:250px"><br>	 	
+	 		<input type="text" name="maddrdetail" id="maddrdetail" placeholder="ë„ë¡œëª…ì£¼ì†Œ ìƒì„¸ì£¼ì†Œ" style="width:250px"><br>	 	
 	 		
 	 	</td>
 	 </tr>	
 	<tr>
-		<td class="mem">ÇÁ·ÎÇÊ»çÁø</td>
-		<td><input type="file" name="mphoto"  /></td>
+		<td class="mem">í”„ë¡œí•„ì‚¬ì§„</td>
+		<td><input type="file" name="file"  /></td>
 	</tr>
 	<tr> 
 		<td colspan="2">
-			<button type="button" id="membtn">°¡ÀÔÇÏ±â</button>
-			<button type="reset">´Ù½Ã ÀÔ·ÂÇÏ±â</button>
+			<button type="button" id="membtn">ê°€ì…í•˜ê¸°</button>
+			<button type="reset">ë‹¤ì‹œ ì…ë ¥í•˜ê¸°</button>
 	</table>
 </form>
 </div>
