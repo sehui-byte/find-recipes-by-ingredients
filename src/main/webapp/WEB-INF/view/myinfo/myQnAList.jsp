@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+<%@ include file="/WEB-INF/include/jsp/header.jsp" %>
 
 <%
-	Object obj = request.getAttribute("myRecipeList");
-	List<RecipeBoardVO> list = (List)obj;
+	Object obj = request.getAttribute("myQnAList");
+	List<BoardVO> list = (List)obj;	
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Recipe List</title>
+<title>Insert title here</title>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#checkAll").click(function(){
@@ -21,22 +22,17 @@
 				$(".checkbox").prop("checked",false)	
 			}
 		})	
-		
-		//검색버튼
-		$(document).on("click", "#searchBtn", function(){
-			console.log("searchBtn >>> : ");
-			$("#myRecipeList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/myinfo/myRecipeList.do"}).submit();
-		});
-		
-		// 단일 레시피 삭제
+	
+		// 단일 QnA 삭제
 		$("#deleteQnA").click(function(){
 			var nCnt = $(".checkbox:checked").length;
 			if (nCnt == 1){
 				var checkedbox = $(".checkbox:checked").val();
-				var url = "/kosmoJns/myinfo/myRecipeDelete.do";
-				var data = {rbno : checkedbox};
-				
+				var url = "/kosmoJns/myinfo/myQnADelete.do";
+				var data = {
+						bno : checkedbox
+				};
+
 				$.ajax({
 					url : url,
 					data : data,
@@ -60,16 +56,23 @@
 			}else{
 				// 2개 이상일 경우에는 어떻게 통신을 하는지 ?
 			}
-		})
+		});
+		
+		//검색버튼
+		$(document).on("click", "#searchBtn", function(){
+			console.log("searchBtn >>> : ");
+			$("#myQnAList").attr({"method":"GET"
+								 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
+		});
 	})
 </script>
 </head>
 <body>
-<form id="myRecipeList" name="myRecipeList">
+<form id="myQnAList" name="myQnAList" >
 	<table border="1" style="text-align:center; margin-left:auto; margin-right:auto;">
 		<thead>
 			<tr>
-				<td colspan="10" align="center"><h2>나의 레시피</h2></td>
+				<td colspan="10" align="center"><h2>내 문의 내역</h2></td>
 			</tr>
 			<tr>
 				<td colspan="10" align="left">
@@ -89,43 +92,40 @@
 			<td>
 				<input type="checkbox" id="checkAll">	
 			</td>	
-			<td>제목</td>	
-			<td>댓글수</td>	
-			<td>조회수</td>	
-			<td>추천</td>	
-			<td>최종 수정 날짜</td>	
+			<td>Q&A 내용 </td>	
+			<td>질의날짜</td>	
+			<td>게시글 답변 댓글</td>	
 		</tr>
-<%
+
+<% 
 	if (list != null){
 		int nCnt = list.size();
-		for (int i = 0; i < nCnt ; i++){
-				RecipeBoardVO rbvo = list.get(i);
+			for (int i = 0; i < nCnt; i++){
+				BoardVO bvo = null;
+				bvo = list.get(i);
 %>
 		<tr>
 			<td>
-				<input type="checkbox" name="rbno" value="<%= rbvo.getRbno()%>" class="checkbox">	
+				<input type="checkbox" name="bno" value="<%= bvo.getBno()%>" class="checkbox">	
 			</td>	
 			<td>
-				<a href="/kosmoJns/boardController.do?<%= rbvo.getRbno()%>"><%= rbvo.getRcp_nm() %></a>
+				<a href="qnaSelect?mno=<%= bvo.getMno() %>"><%= bvo.getBcontent() %></a>
 			</td>	
-			<!-- 댓글을 가져오려면 어떻게 해야 하지?? -->
-			<td>댓글</td>	
-			<td>조회수</td>	
-			<td>추천</td>	
-			<td><%= rbvo.getRb_updatedate() %></td>	
+			<td><%= bvo.getBinsertdate() %></td>	
+			<td>해당 게시글 관련 답변 개수 보여주기</td>	
 		</tr>
 <%
-		}
+		} // end of for
 	}else{
-%>
+ %>		
 		<tr>
-			<td colspan="6">현재 게시한 레시피 게시글이 존재하지 않습니다.</td>	
+			<td colspan="4">현재 문의하신 게시글이 존재하지 않습니다.</td>	
 		</tr>
-<%
-	}
+<% 
+	}	
 %>
 		<tr>
-			<td colspan="6">
+			<td colspan="4">
 				<input type="button" name="deleteQnA" id="deleteQnA" value="게시글 삭제">
 			</td>
 		</tr>	

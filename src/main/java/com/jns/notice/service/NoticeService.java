@@ -1,7 +1,8 @@
 package com.jns.notice.service;
 
-import com.jns.board.vo.BoardVO;
 import java.util.List;
+
+import com.jns.board.vo.BoardVO;
 
 public interface NoticeService {
 

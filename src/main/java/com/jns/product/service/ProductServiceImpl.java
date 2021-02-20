@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -14,6 +15,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,10 +29,10 @@ import com.jns.product.vo.ProductVO;
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService{
-	
+
 	private Logger logger = Logger.getLogger(ProductServiceImpl.class);
 	private ProductDAO pdao;
-	
+
 	@Autowired(required=false)
 	public ProductServiceImpl(ProductDAO pdao) {
 		this.pdao = pdao;
@@ -127,5 +132,58 @@ public class ProductServiceImpl implements ProductService{
 		int nCnt = pdao.likeProductDelete(pvo);
 		System.out.println("삭제된 컬럼 수 >> " + nCnt);
 		return nCnt;
+	}
+
+	//최저가 변동  확인
+	@Override
+	public void lpriceChk() {
+		//로그인한 사용자의 관심상품 목록을 가져온다
+		List<ProductVO> list = likeProductSelectAll();
+		JSONParser parser = new JSONParser();
+
+		for(int i = 0; i<list.size(); i++) {
+			//관심상품 목록의 title로 keyword설정하여 open api에서 json데이터 받아온다
+			String jsonData = "";
+			String productId = list.get(i).getProductId();
+			String likeLprice = list.get(i).getLprice();
+			//관심상품의 상품명으로 네이버 쇼핑에서 검색
+			jsonData = naverSearchApi(list.get(i).getTitle());
+			JSONObject obj = null;
+			try {
+				obj = (JSONObject)parser.parse(new StringReader(jsonData));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			JSONArray result = (JSONArray)obj.get("items");
+			//json데이터가 0개 이상일때
+			System.out.println(list.get(i).getTitle() + " 검색결과 개수 >> " + result.size());
+			if(result.size() > 0) {
+				for(int j = 0; j<result.size(); j++) {
+					JSONObject tmp = (JSONObject)result.get(j);
+					//json데이터의 productId와 사용자 관심상품의 productId 비교하여
+					if(productId.equals(tmp.get("productId"))) {
+						//일치하는 상품이 있다면 최저가 비교
+						if(!tmp.get("lprice").equals(likeLprice)) {
+							//변동이 있을 경우 알람을 보낸다
+							//알람 보내는 코드 작성///////////
+							System.out.println("관심상품 원래 최저가 >> " + likeLprice + ", 최신 최저가 >> " + tmp.get("lprice"));
+							System.out.println("알람 보내기!");
+							break;
+						}
+						//추후에 지우기
+						System.out.println("관심상품 원래 최저가 >> " + likeLprice + ", 최신 최저가 >> " + tmp.get("lprice"));
+					}
+				}
+			}
+			else {
+				System.out.println("검색결과가 없다!");
+			}
+
+		}
 	}
 }

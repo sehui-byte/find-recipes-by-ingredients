@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jns.common.vo.BoardVO;
+import com.jns.board.vo.BoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.dao.MyinfoDAO;
-import com.jns.recipe.vo.RecipeVO;
+import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Service
 @Transactional
@@ -27,7 +27,7 @@ public class MyinfoServiceImpl implements MyinfoService {
 	}
 
 	@Override
-	public List<RecipeVO> myRecipeList(MemberVO mvo) {
+	public List<RecipeBoardVO> myRecipeList(MemberVO mvo) {
 
 		logger.info("myRecipeList() 진입 >>> ");
 
@@ -41,4 +41,17 @@ public class MyinfoServiceImpl implements MyinfoService {
 		return myinfoDAO.myQnAList(mvo);
 	}
 
+	@Override
+	public int myQnADelete(BoardVO bvo) {
+		logger.info("myQnADelete() 진입 >>> ");
+
+		return myinfoDAO.myQnADelete(bvo);
+	}
+
+	@Override
+	public int myRecipeDelete(RecipeBoardVO rbvo) {
+		logger.info("myRecipeDelete() 진입 >>> ");
+
+		return myinfoDAO.myRecipeDelete(rbvo);
+	}
 }

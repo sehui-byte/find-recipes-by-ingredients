@@ -76,10 +76,10 @@ public class ChefBoardController {
 		String resultStr = "";
 		
 		// 테스트용 데이터(mno, rb_viewcnt, rb_likecnt)
-		cbvo.setRbno("kjmTest1");
-		cbvo.setMno("kjmTest1");
-		cbvo.setRb_viewcnt(0);
-		cbvo.setRb_likecnt(0);
+		cbvo.setRbno("kjmTest0001");
+		cbvo.setMno("kjmTest0001");
+		cbvo.setViews(0);
+		cbvo.setHits(0);
 		
 		//채번 구하기
 		
@@ -144,8 +144,10 @@ public class ChefBoardController {
 	/********************************************************************************************
 	* 글 수정 Form
 	********************************************************************************************/
+	@RequestMapping(value="/chefboard/updateform", method=RequestMethod.POST)
 	public String updateForm(ChefBoardVO cbvo, Model model) {
 		logger.info("[chefC] >> updateform 호출 성공");
+		logger.info("[chefC] >> updateform >> cbvo.getRbno() >>> : " + cbvo.getRbno());
 		
 		List<ChefBoardVO> listS = chefBoardService.chefBoardSelect(cbvo);
 		logger.info("[chefC] >> boardSelect listS.size() >>> : " + listS.size());
@@ -159,23 +161,50 @@ public class ChefBoardController {
 	/********************************************************************************************
 	* 글 수정
 	********************************************************************************************/
+	@RequestMapping(value="/chefboard/boardupdate", method=RequestMethod.POST)
 	public String boardUpdate(@ModelAttribute ChefBoardVO cbvo, HttpServletRequest request)
-							throws IllegalStateException, IOException{
+							throws IllegalStateException, IOException{		
 		logger.info("[chefC] >> boardUpdate 호출 성공");
+		logger.info("[chefC] >> boardUpdate >> cbvo.getRbno() >>> : " + cbvo.getRbno());
 		
-		return null;
+		int nCnt = 0;
+		String url = "";
+		
+		// 이미지 업로드
+		
+		nCnt = chefBoardService.boardUpdate(cbvo);
+		logger.info("[chefC] >> boardUpdate >> nCnt >>> : " + nCnt);
+		
+		if(nCnt == 1) {
+			url = "/kosmoJns/chefboard/boardselect?rbno=" + cbvo.getRbno();
+		}
+		
+		return "redirect:" + url;
 	}
 	
 
 	/********************************************************************************************
 	* 글 삭제
 	********************************************************************************************/
+	@RequestMapping(value="/chefboard/boarddelete", method=RequestMethod.POST)
 	public String boardDelete(@ModelAttribute ChefBoardVO cbvo, HttpServletRequest request)
 								throws IOException{
 		logger.info("[chefC] >> boardDelete 호출 성공");
+		logger.info("[chefC] >> boardDelete >> cbvo.getRbno() >>> : " + cbvo.getRbno());
 		
-		// 파일 삭제
+		int nCnt = 0;
+		String url = "";
 		
-		return null;
+		// 이미지 삭제
+		
+		
+		nCnt = chefBoardService.boardDelete(cbvo);
+		logger.info("[chefC] >> boardDelete >> nCnt >>> : " + nCnt);
+		
+		if (nCnt ==1 ) {
+			url = "/kosmoJns/chefboard/boardselectall";
+		}
+		
+		return "redirect:" + url;
 	}
 }

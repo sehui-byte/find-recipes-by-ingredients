@@ -5,6 +5,7 @@
 						http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- DB Connection -->
+
 	<!-- DataSource -->
 		<bean id="dataSource"
 		class="org.springframework.jndi.JndiObjectFactoryBean">

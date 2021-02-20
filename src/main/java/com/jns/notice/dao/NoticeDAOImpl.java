@@ -1,6 +1,7 @@
 package com.jns.notice.dao;
 
 import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

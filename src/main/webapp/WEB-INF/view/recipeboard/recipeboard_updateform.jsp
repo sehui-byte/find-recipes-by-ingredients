@@ -4,13 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JNS :전지적 냉장고 시점 회원등록 </title>
+<title>Insert title here</title>
 </head>
 <body>
-JNS :전지적 냉장고 시점 회원등록 
-<hr>
-<script>
-	location.href="/kosmoJns/login.do";
-</script>
+
 </body>
 </html>

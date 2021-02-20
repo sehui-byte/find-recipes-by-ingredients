@@ -8,7 +8,7 @@
 		FROM 
 			RECIPE
 		WHERE
-			RCP_DELETEYN = 'N'
+			RCP_DELETEYN = 'Y'
 		ORDER BY
 			RCP_SEQ
 	</select>
@@ -20,7 +20,7 @@
 			RECIPE
 		WHERE 
 			RCP_SEQ = #{rcp_seq, jdbcType=VARCHAR} 
-			AND RCP_DELETEYN = 'N'
+			AND RCP_DELETEYN = 'Y'
 		ORDER BY
 			RCP_SEQ
 	</select>
@@ -142,7 +142,7 @@
 			#{manual20, jdbcType=VARCHAR},
 			#{manual_img20, jdbcType=VARCHAR},
 			SYSDATE,
-			'N'
+			'Y'
 		)
 
 	</insert>

@@ -8,7 +8,7 @@
 		FROM
 			RECIPE_BOARD
 		WHERE
-			RB_DELETEYN = 'N'
+			RB_DELETEYN = 'Y'
 		ORDER BY
 			RBNO
 	</select>
@@ -19,7 +19,7 @@
 		FROM
 			RECIPE_BOARD
 		WHERE
-			RB_DELETEYN = 'N',
+			RB_DELETEYN = 'Y',
 			AND RBNO = #{rbno}
 		ORDER BY
 			RBNO
@@ -86,8 +86,8 @@
 			#{rbno, jdbcType=VARCHAR},
 			#{mno, jdbcType=VARCHAR},
 			#{rcp_nm, jdbcType=VARCHAR},
-			#{rb_viewcnt, jdbcType=NUMERIC},
-			#{rb_likecnt, jdbcType=NUMERIC},
+			0,
+			0,
 			#{rcp_way2, jdbcType=VARCHAR},
 			#{rcp_pat2, jdbcType=VARCHAR},
 			#{hash_tag, jdbcType=VARCHAR},
@@ -134,7 +134,7 @@
 			#{manual20, jdbcType=VARCHAR},
 			#{manual_img20, jdbcType=VARCHAR},
 			SYSDATE,
-			'N'
+			'Y'
 		)
 	</insert>
 	
@@ -193,16 +193,16 @@
 			RB_UPDATEDATE = SYSDATE
 		WHERE
 			RBNO = #{rbno, jdbcType=VARCHAR}
-			AND RB_DELETEYN = 'N'
+			AND RB_DELETEYN = 'Y'
 	</update>
 	
 	<update id="recipeBoardDelete" parameterType="rbvo">
 		UPDATE
 			RECIPE_BOARD
 		SET
-			RB_DELETEYN = 'Y'
-		WHERE
 			RB_DELETEYN = 'N'
+		WHERE
+			RB_DELETEYN = 'Y'
 	</update>
 	
 </mapper>

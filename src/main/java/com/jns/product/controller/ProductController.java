@@ -30,6 +30,7 @@ public class ProductController {
 		return "product/searchProduct";
 	}
 
+	//네이버 open api 이용해서 json데이터 받아서 @responsebody로 jsp페이지에 데이터 보내준다
 	@RequestMapping(value="search.do",method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String getApi(@RequestParam(defaultValue="") String keyword) {
@@ -48,6 +49,7 @@ public class ProductController {
 	//관심상품 정보 db저장하기
 	@RequestMapping(value="likeProductInsert.do", method=RequestMethod.POST)
 	public int likeProductInsert(@RequestBody ProductVO pvo) {
+		//세션값 가져와서 로그인한 사람의 pid넣어줘야 한다
 		return service.likeProductInsert(pvo);
 	}
 

@@ -27,7 +27,7 @@
 			내가 추천한 레시피 조회하기
 		</li>
 		<li>
-			<a href="myinfo/myQnAList.do?mno<%= mno %>">내 Q&A 조회하기</a>
+			<a href="myinfo/myQnAList.do?mno=<%= mno %>">내 Q&A 조회하기</a>
 		</li>
 		<li>
 			내 댓글??	
