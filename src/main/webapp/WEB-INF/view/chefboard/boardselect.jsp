@@ -17,20 +17,20 @@
 		// 수정
 		$(document).on("click", "#U", function(){
 			$("#b_data").attr({"method":"POST"
-									   ,"action":"/kosmoJns/chefboard/updateForm.do"}).submit();
+									   ,"action":"/kosmoJns/chefboard/updateform.do"}).submit();
 		});
 		
 		
 		// 삭제
 		$(document).on("click", "#D", function(){
 			$("#b_data").attr({"method":"POST"
-									   ,"action":"/kosmoJns/chefboard/boardDelete.do"}).submit();
+									   ,"action":"/kosmoJns/chefboard/boarddelete.do"}).submit();
 		});
 		
 		
 		// 취소
 		$(document).on("click", "#C", function(){
-			location.href="/kosmoJns/chefboard/boardList.do";
+			location.href="/kosmoJns/chefboard/boardselectall.do";
 		});
 	});
 </script>
@@ -53,7 +53,9 @@
 		</tr>
 		<tr>
 			<td>글번호</td>
-			<td><%=cbvo.getRbno()%></td>
+			<td><%=cbvo.getRbno()%>
+				<input type="hidden" id="rbno" name="rbno" value="<%=cbvo.getRbno()%>">
+			</td>		
 		</tr>
 		<tr>
 			<td>메뉴명</td>
@@ -497,7 +499,7 @@
 	</table>
 </form>
 </div>
-	<c:import url="/reply/reply.do">
+	<c:import url="/reply/rbreply.do">
 	</c:import>
 </body>
 </html>
