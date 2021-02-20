@@ -23,22 +23,21 @@
 		});
 	
 
-		$(document).on("click","#U",function(){
-		
+		$(document).on("click", "#U", function(){
+			alert("U >>> :");
 			$("#QnAList").attr({
 				"method":"GET",
-				"action":"qnaSelect.do"}).submit();	
-			
-		}); // end of Updatebutton
+				"action":"qnaSelect.do"}).submit();			
+		}); 
 	
-	
-		$(document).on("click","#D",function(){
-			
+		$(document).on("click", "#D", function(){
+			alert("D >>> : ");
 			$("#QnAList").attr({
 				"method":"GET",
 				"action":"qnaSelect.do"}).submit();
-		}); // end of Deletebutton
+		}); 
 		
+		/*
 		$(document).on("click", "#searchBtn", function(){
 			console.log("searchBtn >>> : ");
 			$("#QnAList").attr({
@@ -46,6 +45,7 @@
 				"action":"qnaSelectAll.do"
 			}).submit();
 		});
+		*/
 		
 	});
 </script>
@@ -58,7 +58,7 @@
 	
 	int nCnt = list.size();
 %>
-<form name="QnAlist" id="QnAlist">
+<form name="QnAList" id="QnAList">
 <table border="1" align="center">
 <thead>
 <tr>
@@ -82,6 +82,7 @@
 		</td>	
 	</tr>
 <tr>
+	<td class="tt"><input type="checkbox" name="chkAll" id="chkAll"></td>
 	<td class="tt">글번호</td>
 	<td class="tt">글유형</td>
 	<td class="tt">글제목</td>
@@ -100,6 +101,10 @@ for(int i=0; i<nCnt; i++){
 %>
 <tbody>
 <tr>
+	<td>
+		<input type="checkbox" name="bno" id="chkInMnum"
+				value=<%= bvo.getBno() %> onclick="checkOnly(this)">
+	</td>	
 	<td class="tt"><%=bvo.getBno()%></td>
 	<td class="tt"><%=bvo.getBtype() %></td>
 	<td class="tt"><%=bvo.getBtitle() %></td>
@@ -115,9 +120,9 @@ for(int i=0; i<nCnt; i++){
 %>
 <tr>
 	<td colspan="7" align="right">
-	<input type="button" value="글쓰기" id="I">
-	<input type="button" value="글수정" id="U">
-	<input type="button" value="글삭제" id="D">
+		<input type="button" value="글쓰기" id="I">
+		<input type="button" value="글수정" id="U">
+		<input type="button" value="글삭제" id="D">
 	</td>
 </tr>
 </tbody>

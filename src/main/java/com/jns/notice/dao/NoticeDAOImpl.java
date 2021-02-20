@@ -16,39 +16,39 @@ public class NoticeDAOImpl implements NoticeDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<BoardVO> NoticeSelectPaging(BoardVO bvo) {
+	public List<BoardVO> NoticeSelectPaging(BoardVO nvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("NoticeSelectPaging", bvo);
+		return sqlSession.selectList("NoticeSelectPaging", nvo);
 	}
 
 	@Override
-	public List<BoardVO> NoticeSelectAll(BoardVO bvo) {
+	public List<BoardVO> NoticeSelectAll(BoardVO nvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("NoticeSelectAll", bvo);
+		return sqlSession.selectList("NoticeSelectAll", nvo);
 	}
 
 	@Override
-	public List<BoardVO> NoticeSelect(BoardVO bvo) {
+	public List<BoardVO> NoticeSelect(BoardVO nvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("NoticeSelect", bvo);
+		return sqlSession.selectList("NoticeSelect", nvo);
 	}
 
 	@Override
-	public int NoticeInsert(BoardVO bvo) {
+	public int NoticeInsert(BoardVO nvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.insert("NoticeInsert", bvo);
+		return (Integer)sqlSession.insert("NoticeInsert", nvo);
 	}
 
 	@Override
-	public int NoticeUpdate(BoardVO bvo) {
+	public int NoticeUpdate(BoardVO nvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.update("NoticeUpdate", bvo);
+		return (Integer)sqlSession.update("NoticeUpdate", nvo);
 	}
 
 	@Override
-	public int NoticeDelete(BoardVO bvo) {
+	public int NoticeDelete(BoardVO nvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.delete("NoticeDelete", bvo);
+		return (Integer)sqlSession.delete("NoticeDelete", nvo);
 	}
 
 }

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>QnA Select</title>
 <style type="text/css">
-	div{
+	div {
 			margin: 50px 0px 0px 100ox;
 		}
 	.mem{ text-align: center;}
@@ -21,22 +21,20 @@
 		// U
 		$(document).on("click", "#U", function(){
 			alert("U >>> ");
-			$("#QnAUpdateForm").attr({ "method":"GET"
-				                        ,"action":"qnaUpdate.do"}).submit();
+			$("#QnAUpdateForm").attr({
+				"method":"GET",
+				"action":"qnaUpdate.do"
+			}).submit();
 		});
 		
 		// D
 		$(document).on("click", "#D", function(){
 			alert("D >>> : ");
-			$("#QnAUpdateForm").attr({ "method":"GET"
-				                        ,"action":"qnaDelete.do"}).submit();
+			$("#QnAUpdateForm").attr({
+				"method":"GET",
+				"action":"qnaDelete.do"
+			}).submit();
 		});	
-		
-		//C
-		$(document).on("click", "#C", function(){
-			alert("C >>> :");
-			location.href="qnaSelectAll.do";
-		});
 		
 	});
 </script>
@@ -58,35 +56,28 @@ QnA Select
 <form name="QnAUpdateForm" id="QnAUpdateForm">
 <table>
 <tr>
-<td colspan="2" align="center">게시판 글 수정하기</td>
+<td colspan="2" align="center">QnA 글 수정하기</td>
 </tr>
 <tr>
 <td class="mem">글 번호</td>
-<td><input type="text" name="sno" id="sno" value="<%= bvo.getBno() %>" readonly></td>
+<td><input type="text" name="bno" id="bno" value="<%= bvo.getBno() %>" readonly></td>
 </tr>
 <tr>
-<td align="center">글 유형</td>
-<td>
-<select name=btype id=btype style="width:150px" >
-<option>글 유형을 선택하세요</option>
-<option>공지사항</option>
-<option>QnA</option>
-</select>
-</td>
+<td class="mem">글 유형</td>
+<td><input type="text" name="btype" id="btype" value="<%= bvo.getBtype() %>" readonly></td>
 </tr>
 <tr>
-<td class="mem">글 제목</td>
+<td class="mem">글제목</td>
 <td><input type="text" name="btitle" id="btitle" value="<%= bvo.getBtitle() %>"></td>
 </tr>
 <tr>
-<td class="mem">글 내용</td>
-<td>
-<textarea name="bcontent" id="bcontent" rows="5" cols="50"><%= bvo.getBcontent() %></textarea>
+<td class="mem">글내용</td>
+<td><textarea name="bcontent" id="bcontent" rows="5" cols="50"><%= bvo.getBcontent() %></textarea>
 </td>
 </tr>
 <tr>
 <td class="mem">글 작성자</td>
-<td><input type="text" name="btitle" id="btitle" value="<%= bvo.getMnick() %>"></td>
+<td><input type="text" name="mnick" id="mnick" value="<%= bvo.getMnick() %>"></td>
 </tr>
 <tr>
 <td class="mem">사진</td>
@@ -111,11 +102,11 @@ QnA Select
 <td><input type="text" name="bhits" id="bhits" value="<%= bvo.getBhits() %>" readonly></td>
 </tr>
 <tr>
-<td colspan="2" align="right">
-<button type="button" id="U">수정</button>
-<button type="button" id="D">삭제</button>
-<button type="button" id="C">돌아가기</button>
-</td>
+	<td colspan="7" align="right">
+		<input type="button" value="수정하기" id="U">
+		<input type="button" value="삭제하기" id="D">
+		<input type="button" value="돌아가기" id="C">
+	</td>
 </tr>
 </table>
 </form>

@@ -10,7 +10,7 @@
 NOTICE INSERT
 <hr>
 <script>
-	location.href="qnaSelectAll.do";
+	location.href="noticeSelectAll.do";
 </script>
 </body>
 </html>
