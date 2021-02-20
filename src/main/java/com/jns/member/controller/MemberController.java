@@ -53,26 +53,17 @@ public class MemberController {
 		// 회원번호 채번 가져오기
 		String mno = ChabunUtil.getMemberChabun("D", chabunService.getMemberChabun().getMno());
 		mvo.setMno(mno);
-	
-		logger.info("MemberController MemberInsert mno  회원번호 >>> : " + mno);
-		logger.info("mvo.getMlevel() 회원 등급 >>>> :"+mvo.getMlevel());
 		
-		String mzipcode = mvo.getMzipcode();
-		mvo.setMzipcode(mzipcode);
-		String Maddr = mvo.getMaddr();
-		mvo.setMaddr(Maddr);
-		logger.info("Maddr");
-		
-		logger.info("mvo.getMaddr() 주소 >>>>:"+mvo.getMaddr());
-		logger.info("mvo.getMaddrdetail() 상세주소 >>>>>:"+mvo.getMaddrdetail());
-		logger.info("mvo.getMzipcode() 우편번호 >>>>:"+mvo.getMzipcode());
-		logger.info("mvo.getMnick() 닉네임 >>>> :"+mvo.getMnick());
-		logger.info("mvo.getMpw() 비밀번호  >>>> :"+mvo.getMpw());
-		logger.info("mvo.getMid() 아이디 >>>  :"+mvo.getMid());
-		logger.info("mvo.getMname() 이름 >>>> :"+mvo.getMname());
-		logger.info("mvo.getMphoto() 사진 >>>>  :"+mvo.getMphoto());
-		logger.info("mvo.getMtel() 핸드폰 >>>>  :"+mvo.getMhp());
-		logger.info("mvo.getMemail() 이메일 >>>:"+mvo.getMemail());
+		logger.info("회원번호 >>> : " + mno);
+		logger.info("회원 등급 >>>> :"+mvo.getMlevel());	
+		logger.info("우편번호 , 주소  , 상세주소>>>>:"+mvo.getMzipcode()+mvo.getMaddr()+mvo.getMaddrdetail());
+		logger.info("닉네임 >>>> :"+mvo.getMnick());
+		logger.info("비밀번호  >>>> :"+mvo.getMpw());
+		logger.info("아이디 >>>  :"+mvo.getMid());
+		logger.info("이름 >>>> :"+mvo.getMname());
+		logger.info("사진 >>>>  :"+mvo.getMphoto());
+		logger.info("핸드폰 >>>>  :"+mvo.getMhp());
+		logger.info("이메일 >>> = "+mvo.getMemail());
 	
 	
 		// memInsert 함수에서 서비스 호출하기
@@ -90,7 +81,7 @@ public class MemberController {
 
 	// 회원전체 조회
 	@RequestMapping(value = "memberSelectAll", method = RequestMethod.GET)
-	public String MemberSelectAll(MemberVO mvo, Model model) {
+	public String memberSelectAll(MemberVO mvo, Model model) {
 
 		logger.info("MemberController MemberSelectAll 함수 시작 >>> :: ");
 		logger.info("mvo >>> :: " + mvo);
@@ -98,9 +89,9 @@ public class MemberController {
 		List<MemberVO> listAll = memberService.memberSelectAll(mvo);
 		logger.info("MemberController MemberSelectAll >>>> ::: " + listAll.size());
 
-		if (listAll.size() > 0) {
+		if (listAll.size() >= 0) {
 			model.addAttribute("listAll", listAll);
-			return "mem/memSelectAll";
+			return "mem/memberSelectAll";
 		}
 
 		return "mem/memberForm";
@@ -108,7 +99,7 @@ public class MemberController {
 
 	// 회원 조회 : 선택 조회
 	@RequestMapping(value = "memSelect", method = RequestMethod.GET)
-	public String MemberSelect(MemberVO mvo, Model model) {
+	public String memberSelect(MemberVO mvo, Model model) {
 
 		logger.info("MemberController MemberSelect 함수 시작 >>> :: ");
 		logger.info("mvo >>> :: " + mvo);
@@ -128,7 +119,7 @@ public class MemberController {
 
 	// 회원 수정
 	@RequestMapping(value = "memUpdate", method = RequestMethod.GET)
-	public String MemberUpdate(MemberVO mvo, Model model) {
+	public String memberUpdate(MemberVO mvo, Model model) {
 
 		logger.info("MemberController MemberUpdate 함수 시작 >>> :: ");
 		logger.info("mvo >>> :: " + mvo);
