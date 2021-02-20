@@ -35,6 +35,9 @@
 		<li>
 			내 댓글??	
 		</li>
+		<li>
+			<a href="index.jsp">인덱스 페이지로</a>
+		</li>
 	</ul>
 </body>
 </html>
