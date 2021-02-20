@@ -31,4 +31,8 @@
 		SELECT NVL(MAX(SUBSTR(A.RNO, -4)), 0) + 1  RNO FROM REPLY A
 	</select>
 	
+	<select id="getRecipeBoardChabun" resultType="rbvo">
+		SELECT NVL(MAX(SUBSTR(RB.RBNO, -4)), 0) + 1  RBNO FROM RECIPE_BOARD RB
+	</select>
+	
 </mapper>

@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.jns.board.vo.BoardVO;
 import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.member.vo.MemberVO;
+import com.jns.board.vo.BoardVO;
+import com.jns.notice.vo.NoticeVO;
+import com.jns.qna.vo.QnAVO;
+import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
 
 
@@ -58,7 +62,11 @@ public class ChabunDAOImpl implements ChabunDAO {
 		return sqlSession.selectOne("getReplyChabun");
 	}
 
-	
+	@Override
+	public RecipeBoardVO getRecipeBoardChabun() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("getRecipeBoardChabun");
+	}
 	
 
 }
