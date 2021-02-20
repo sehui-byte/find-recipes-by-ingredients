@@ -2,18 +2,19 @@ package com.jns.chefboard.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jns.chefboard.dao.ChefBoardDAO;
 import com.jns.chefboard.vo.ChefBoardVO;
-import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Service
 @Transactional
 public class ChefBoardServiceImpl implements ChefBoardService {
-
+	Logger logger = Logger.getLogger(ChefBoardServiceImpl.class);
+	
 	private ChefBoardDAO chefBoardDAO;
 	
 	//기본생성자 주입

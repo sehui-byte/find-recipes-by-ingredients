@@ -71,17 +71,21 @@ public class ChefBoardController {
 	@RequestMapping(value="chefboard/boardInsert", method=RequestMethod.POST)
 	public ModelAndView boardInsert(ChefBoardVO cbvo, HttpServletRequest request) {
 		logger.info("[chefC] >> boardInsert 호출 성공");
+		logger.info("[chefC] >> boardInsert >> cbvo.getMno >>> : " + cbvo.getMno());
 		
 		int result = 0;
 		String resultStr = "";
 		
-		// 테스트용 데이터(mno, rb_viewcnt, rb_likecnt)
-		cbvo.setRbno("kjmTest0001");
-		cbvo.setMno("kjmTest0001");
+		// 테스트용 데이터(mno, views, hits)
+		//cbvo.setRbno("kjmTest0001");
+		//cbvo.setMno("kjmTest0001");
 		cbvo.setViews(0);
 		cbvo.setHits(0);
 		
-		//채번 구하기
+		//채번 setting
+		String rbno = ChabunUtil.getChiefBoardChabun("D", chabunService.getRecipeBoardChabun().getRbno());
+		logger.info("[chefC] >> boardInsert >> rbno >>> : " + rbno);
+		cbvo.setRbno(rbno);
 		
 		
 		//이미지 업로드
@@ -176,7 +180,7 @@ public class ChefBoardController {
 		logger.info("[chefC] >> boardUpdate >> nCnt >>> : " + nCnt);
 		
 		if(nCnt == 1) {
-			url = "/kosmoJns/chefboard/boardselect?rbno=" + cbvo.getRbno();
+			url = "/chefboard/boardselect.do?rbno=" + cbvo.getRbno();
 		}
 		
 		return "redirect:" + url;
@@ -202,7 +206,7 @@ public class ChefBoardController {
 		logger.info("[chefC] >> boardDelete >> nCnt >>> : " + nCnt);
 		
 		if (nCnt ==1 ) {
-			url = "/kosmoJns/chefboard/boardselectall";
+			url = "/chefboard/boardselectall.do";
 		}
 		
 		return "redirect:" + url;

@@ -9,8 +9,8 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_N 	= "N"; // 공지사항 : NOTICE BOARD
 	public static final String BIZ_GUBUN_Q = "Q"; // Q&A 게시판 
 
-	public static final String BIZ_GUBUN_CB	= "CB"; // 쉐프 게시판 
-//	public static final String BIZ_GUBUN_CO = "CO"; // 신고게시판 
+	public static final String BIZ_GUBUN_RB	= "RB"; // 레시피(일반/세프) 게시판 
+	public static final String BIZ_GUBUN_CO = "CO"; // 신고게시판 
 	public static final String BIZ_GUBUN_F	= "F"; // 즐겨찾기
 	
 	
@@ -19,7 +19,7 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_O	= "O"; // 구매내역 번호
 	public static final String BIZ_GUBUN_CA	= "CA"; // 장바구니 번호
 	
-	public static final String BIZ_GUBUN_RB = "R"; // 게시판 댓글: REPLY 
+	public static final String BIZ_GUBUN_R = "R"; // 게시판 댓글: REPLY 
 //	public static final String BIZ_GUBUN_BUY = "P"; // 구매게시판
 	
 
@@ -54,7 +54,7 @@ public abstract class ChabunUtil {
 	// 게시판 댓글 글 번호  
 	public static String getReplyChabun(String type, String memNum) {
 		
-		return BIZ_GUBUN_RB.concat(ChabunUtil.numPad(type, memNum));
+		return BIZ_GUBUN_R.concat(ChabunUtil.numPad(type, memNum));
 	}
 
 	// 공지사항  번호  
@@ -73,7 +73,7 @@ public abstract class ChabunUtil {
 	// 쉐프게시판  번호  
 	public static String getChiefBoardChabun(String type, String memNum) {
 		
-		return BIZ_GUBUN_CB.concat(ChabunUtil.numPad(type, memNum));
+		return BIZ_GUBUN_RB.concat(ChabunUtil.numPad(type, memNum));
 	}
 	
 	// 구매게시판  번호  
@@ -91,7 +91,7 @@ public abstract class ChabunUtil {
 	// 신고 게시판  번호  
 	public static String getComplBoardChabun(String type, String memNum) {
 		
-		return BIZ_GUBUN_CB.concat(ChabunUtil.numPad(type, memNum));
+		return BIZ_GUBUN_CO.concat(ChabunUtil.numPad(type, memNum));
 	}
 	
 	// 구독 번호  

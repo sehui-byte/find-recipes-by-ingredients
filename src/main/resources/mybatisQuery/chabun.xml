@@ -40,4 +40,8 @@
 		SELECT NVL(MAX(SUBSTR(RB.RBNO, -4)), 0) + 1  RBNO FROM RECIPE_BOARD RB
 	</select>
 	
+	<select id="getChefChabun" resultType="cvo">
+		SELECT NVL(MAX(SUBSTR(A.INO, -4)), 0) + 1  INO FROM CHEF_INFO A
+	</select>
+	
 </mapper>
