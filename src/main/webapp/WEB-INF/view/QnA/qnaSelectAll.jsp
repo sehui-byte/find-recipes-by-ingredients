@@ -30,14 +30,10 @@
 				"action":"qnaSelect.do"}).submit();			
 		}); 
 	
-		$(document).on("click", "#D", function(){
-			alert("D >>> : ");
-			$("#QnAList").attr({
-				"method":"GET",
-				"action":"qnaSelect.do"}).submit();
-		}); 
+		$(document).on("click", "#A", function(){
+			location.href="qnaSelectAll.do";
+		});
 		
-		/*
 		$(document).on("click", "#searchBtn", function(){
 			console.log("searchBtn >>> : ");
 			$("#QnAList").attr({
@@ -45,7 +41,7 @@
 				"action":"qnaSelectAll.do"
 			}).submit();
 		});
-		*/
+		
 		
 	});
 </script>
@@ -110,19 +106,19 @@ for(int i=0; i<nCnt; i++){
 	<td class="tt"><%=bvo.getBtitle() %></td>
 	<td class="tt"><%=bvo.getBcontent() %></td>
 	<td class="tt"><%=bvo.getMnick() %></td>
-	<td class="tt"><img src="/imgupload/sm_<%= bvo.getBfile() %>"></td>
+	<td class="tt"><img src="find-recipes-by-ingredients/imgupload/<%= bvo.getBfile() %>"></td>
 	<td class="tt"><%=bvo.getBinsertdate() %></td>
-	<td class="tt"><%=bvo.getBview() %></td>
+	<td class="tt"><%=bvo.getBviews() %></td>
 	<td class="tt"><%=bvo.getBhits() %></td>
 </tr>
 <%
 }// end of for
 %>
 <tr>
-	<td colspan="7" align="right">
+	<td colspan="10" align="right">
 		<input type="button" value="글쓰기" id="I">
 		<input type="button" value="글수정" id="U">
-		<input type="button" value="글삭제" id="D">
+		<input type="button" value="전체목록" id="A">
 	</td>
 </tr>
 </tbody>

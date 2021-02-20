@@ -1,5 +1,8 @@
 package com.jns.recipeboard.controller;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -9,9 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.DateFormatUtil;
+import com.jns.common.FileUploadUtil;
 import com.jns.recipe.service.RecipeService;
 import com.jns.recipeboard.service.RecipeBoardService;
 import com.jns.recipeboard.vo.RecipeBoardVO;
@@ -59,11 +65,12 @@ public class RecipeBoardController
 	
 	//================================= ISUD =================================//
 	@RequestMapping(value = "rbwrite", method = RequestMethod.POST)
-	public String rbwrite(RecipeBoardVO rbvo, Model model)
+	public String rbwrite(RecipeBoardVO rbvo, MultipartHttpServletRequest request, Model model)
 	{
 		logger.info("[RecipeBoardController] rbwrite.do 호출됨");
 		String no = chabunService.getRecipeBoardChabun().getRbno();
 		String rbno = "RB" + DateFormatUtil.ymdFormat() + no;
+		logger.info("rbno >>> : " + rbno);
 		rbvo.setRbno(rbno);
 		logger.info("rbvo >>> : " + rbvo.toString());
 		
@@ -80,6 +87,23 @@ public class RecipeBoardController
 		
 		model.addAttribute("list", recipeBoardService.recipeBoardSelectAll());
 		return "recipeboard/recipeboard";
+	}
+	
+	@RequestMapping(value = "filetest", method = RequestMethod.POST)
+	public String filetest(RecipeBoardVO rbvo, MultipartHttpServletRequest request)
+	{
+		//단일파일 업로드
+		String key = new FileUploadUtil().uploadFile(request, "recipeboard"); // 업로드 할 폴더 이름 (\WEB-INF\files\recipeboard)
+		logger.info("key >>> : " + key);
+		
+		//다중 파일 업로드
+		List<String> keyList = new FileUploadUtil().uploadFiles(request, "recipeboard");
+		logger.info("keyList >>> : " + keyList.toString());
+		
+		rbvo.setManual_img01(keyList.get(0));
+		rbvo.setManual_img02(keyList.get(1));
+		
+		return "";
 	}
 	
 	//================================= Ajax =================================//

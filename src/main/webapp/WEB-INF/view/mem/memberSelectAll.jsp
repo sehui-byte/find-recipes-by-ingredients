@@ -15,7 +15,7 @@
 </style>
 <script src="http://code/jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
-	
+$(document).ready(function(){
 		//체크박스 체크 확인하기 
 		function checkOnly(chk){
 			// alert(">>> : " + chk);
@@ -27,10 +27,27 @@
 				}
 			}
 		}	
+		
+			
+			$(document).on("click", "#I", function(){
+				location.href="memberInsert.do";
+			});
+			
+			$(document).on("click", "#U", function(){
+				alert("U >>>");
+				$("#memberList").attr({
+					"method":"GET",
+					"action":"memberSelect.do"}).submit();	
+			});
+			
+			$(document).on("click", "#D", function(){
+				alert("D >>>");
+				$("#memberList").attr({
+					"method":"GET",
+					"action":"memberSelect.do"}).submit();
+			});
+		});
 	
-
-	});
-
 	
 </script>
 </head>
@@ -41,10 +58,8 @@ SELECT ALL
 	Object obj = request.getAttribute("listAll");
 	List<MemberVO> list = (List)obj;
 	int nCnt = list.size();
-	out.println("nCnt >>" +nCnt);
-
 %>
-<form name = "memFormAll" id="memFormAll">
+<form name = "memberList" id="memberList">
 <table border="1" align="center">
 <thead>
 <tr>

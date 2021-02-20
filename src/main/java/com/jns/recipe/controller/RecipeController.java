@@ -36,7 +36,7 @@ public class RecipeController
 	{
 		logger.info("[RecipeController] recipeList() 호출");
 		model.addAttribute("list", recipeService.recipeSelectAll());
-		return "recipe/recipeList";
+		return "recipe/recipelist";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "recipedetail")
@@ -47,7 +47,7 @@ public class RecipeController
 		logger.info("recipeService.recipeSelect(rvo) >>> : " + recipeService.recipeSelect(rvo));
 		model.addAttribute("data", recipeService.recipeSelect(rvo));
 		
-		return "recipe/recipeDetail";
+		return "recipe/recipedetail";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "recipeSelectAll")

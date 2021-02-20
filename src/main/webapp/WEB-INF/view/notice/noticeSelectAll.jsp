@@ -22,29 +22,23 @@
 			location.href="noticeForm.do";
 		});
 		
+		$(document).on("click", "#A", function(){
+			location.href="noticeSelectAll.do";
+		});
+		
 		$(document).on("click", "#U", function(){
 			alert("U >>>");
 			$("#NoticeList").attr({
 				"method":"GET",
 				"action":"noticeSelect.do"}).submit();	
 		});
-		
-		$(document).on("click", "#D", function(){
-			alert("D >>>");
-			$("#NoticeList").attr({
-				"method":"GET",
-				"action":"noticeSelect.do"}).submit();
-		});
-		
-		/*
+			
 		$(document).on("click", "#searchBtn", function(){
 			console.log("searchBtn >>> : ");
 			$("#NoticeList").attr({
 				"method":"GET",
-				"action":"noticeSelectAll.do"
-			}).submit();
+				"action":"noticeSelectAll.do"}).submit();
 		});
-		*/
 		
 	});
 </script>
@@ -69,9 +63,9 @@
 	<tr>
 		<td colspan="10" align="left">
 			<select id="keyfilter" name="keyfilter">
-				<option value="key1">제목</option>
-				<option value="key2">내용</option>
-				<option value="key3">제목+내용</option>
+				<option value="key1">글제목</option>
+				<option value="key2">글내용</option>
+				<option value="key3">글제목+글내용</option>
 				<option value="key4">작성자</option>
 				<option value="key5">글번호</option>
 			</select>
@@ -112,17 +106,17 @@ for(int i=0; i<nCnt; i++){
 	<td class="tt"><%=nvo.getMnick() %></td>
 	<td class="tt"><img src="/imgupload/sm_<%= nvo.getBfile() %>"></td>
 	<td class="tt"><%=nvo.getBinsertdate() %></td>
-	<td class="tt"><%=nvo.getBview() %></td>
+	<td class="tt"><%=nvo.getBviews() %></td>
 	<td class="tt"><%=nvo.getBhits() %></td>
 </tr>
 <%
 } // end of for
 %>
 <tr>
-	<td colspan="7" align="right">
+	<td colspan="10" align="right">
 		<input type="button" value="글쓰기" id="I">
 		<input type="button" value="글수정" id="U">
-		<input type="button" value="글삭제" id="D">
+		<input type="button" value="전체목록" id="A">
 	</td>
 </tr>	
 </tbody>

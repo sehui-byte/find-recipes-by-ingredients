@@ -12,24 +12,24 @@
 		WHERE BTYPE ='N'
 		 AND BDELETEYN = 'Y'
 			<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
-			<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-			<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			<![CDATA[AND TO_CHAR(BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			<![CDATA[AND TO_CHAR(BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
 			</if>
 			<if test="keyfilter=='key1'">
-				<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 			</if>
 			<if test="keyfilter=='key2'">
-				<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 			</if>
 			<if test="keyfilter=='key3'">
-				<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-				<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 			</if>
 			<if test="keyfilter=='key4'">
-				<![CDATA[AND A.MNICK LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND MNICK LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 			</if>
 			<if test="keyfilter=='key5'">
-				<![CDATA[AND A.BNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND BNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 			</if>
 	</select>
 
@@ -43,7 +43,7 @@
 						 ,BFILE
 						 ,BINSERTDATE
 						 ,BUPDATEDATE
-						 ,BVIEW
+						 ,BVIEWS
 						 ,BDELETEYN
 						 ,BHITS
 						 )
@@ -56,28 +56,28 @@
 						 ,#{bfile, jdbcType=VARCHAR}
 						 ,SYSDATE
 						 ,SYSDATE
-						 ,0
+						 ,#{bviews, jdbcType=NUMERIC}
 						 ,'Y'
-						 ,0
+						 ,#{bhits, jdbcType=NUMERIC}
 						 )
 	</insert>
 	
 	<select id="NoticeSelect" parameterType="nvo" resultType="nvo">
 		SELECT
-				 A.BNO
-				,A.BTYPE
-				,A.BTITLE
-				,A.BCONTENT
-				,A.MNICK
-				,A.BFILE
-				,TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD HH24:MI:SS') BINSERTDATE
-				,TO_CHAR(A.BUPDATEDATE, 'YYYY-MM-DD HH24:MI:SS') BUPDATEDATE
-				,A.BVIEW
-				,A.BDELETEYN
-				,A.BHITS
+				 BNO
+				,BTYPE
+				,BTITLE
+				,BCONTENT
+				,MNICK
+				,BFILE
+				,TO_CHAR(BINSERTDATE, 'YYYY-MM-DD HH24:MI:SS') BINSERTDATE
+				,TO_CHAR(BUPDATEDATE, 'YYYY-MM-DD HH24:MI:SS') BUPDATEDATE
+				,BVIEWS
+				,BDELETEYN
+				,BHITS
 		FROM 	 BOARD A
-		WHERE 	 A.BNO = #{bno, jdbcType=VARCHAR}
-		AND		 A.BDELETEYN = 'Y'
+		WHERE 	 BNO = #{bno, jdbcType=VARCHAR}
+		AND		 BDELETEYN = 'Y'
 	</select>
 	
 	<update id="NoticeUpdate" parameterType="nvo">

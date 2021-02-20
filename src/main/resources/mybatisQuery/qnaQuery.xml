@@ -11,24 +11,24 @@
 		WHERE BTYPE='Q'
 		AND	BDELETEYN = 'Y'
 			<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
-			<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-			<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			<![CDATA[AND TO_CHAR(BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			<![CDATA[AND TO_CHAR(BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
 			</if>
 			<if test="keyfilter=='key1'">
-				<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 			</if>
 			<if test="keyfilter=='key2'">
-				<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 			</if>
 			<if test="keyfilter=='key3'">
-				<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-				<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 			</if>
 			<if test="keyfilter=='key4'">
-				<![CDATA[AND A.MNICK LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND MNICK LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 			</if>
 			<if test="keyfilter=='key5'">
-				<![CDATA[AND A.BNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND BNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 			</if>
 	</select>
 	
@@ -42,7 +42,7 @@
 						 ,BFILE
 						 ,BINSERTDATE
 						 ,BUPDATEDATE
-						 ,BVIEW
+						 ,BVIEWS
 						 ,BDELETEYN
 						 ,BHITS
 						 )
@@ -55,9 +55,9 @@
 						 ,#{bfile, jdbcType=VARCHAR}
 						 ,SYSDATE
 						 ,SYSDATE
-						 ,0
+						 ,#{bviews, jdbcType=NUMERIC}
 						 ,'Y'
-						 ,0
+						 ,#{bhits, jdbcType=NUMERIC}
 						 )
 	</insert>
 	
@@ -72,7 +72,7 @@
 				,A.BFILE
 				,TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD HH24:MI:SS') BINSERTDATE
 				,TO_CHAR(A.BUPDATEDATE, 'YYYY-MM-DD HH24:MI:SS') BUPDATEDATE
-				,A.BVIEW
+				,A.BVIEWS
 				,A.BDELETEYN
 				,A.BHITS
 		FROM 	 BOARD A

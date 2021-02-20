@@ -36,6 +36,10 @@
 			}).submit();
 		});	
 		
+		// C
+		$(document).on("click", "#C", function(){
+			location.href="qnaSelectAll.do";
+		});
 	});
 </script>
 </head>
@@ -54,7 +58,7 @@ QnA Select
 %>
 <div>
 <form name="QnAUpdateForm" id="QnAUpdateForm">
-<table>
+<table border="1">
 <tr>
 <td colspan="2" align="center">QnA 글 수정하기</td>
 </tr>
@@ -63,7 +67,7 @@ QnA Select
 <td><input type="text" name="bno" id="bno" value="<%= bvo.getBno() %>" readonly></td>
 </tr>
 <tr>
-<td class="mem">글 유형</td>
+<td class="mem">글유형</td>
 <td><input type="text" name="btype" id="btype" value="<%= bvo.getBtype() %>" readonly></td>
 </tr>
 <tr>
@@ -95,7 +99,7 @@ QnA Select
 </tr>
 <tr>
 <td class="mem">조회수</td>
-<td><input type="text" name="bview" id="bview" value="<%= bvo.getBview() %>" readonly></td>
+<td><input type="text" name="bviews" id="bviews" value="<%= bvo.getBviews() %>" readonly></td>
 </tr>
 <tr>
 <td class="mem">좋아요 수</td>

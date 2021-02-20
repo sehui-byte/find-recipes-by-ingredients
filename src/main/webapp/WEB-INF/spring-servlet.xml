@@ -29,8 +29,10 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
-	<context:annotation-config />
-
+	<context:annotation-config />  
+	
+	<mvc:resources mapping="/WEB-INF/files/**" location="/WEB-INF/files/"></mvc:resources>
+	
 	<!-- View Resolver -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
