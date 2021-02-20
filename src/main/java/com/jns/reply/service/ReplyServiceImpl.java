@@ -25,7 +25,7 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public List<ReplyVO> breplyList(ReplyVO rvo) {
 		// TODO Auto-generated method stub
-		logger.info("ReplyServiceImpl >> replyList 호출 성공");
+		logger.info("ReplyServiceImpl >> breplyList 호출 성공");
 		logger.info("rvo.getBno() >>> : " + rvo.getBno());
 
 		return replyDAO.breplyList(rvo);
@@ -34,8 +34,8 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public List<ReplyVO> rbreplyList(ReplyVO rvo) {
 		// TODO Auto-generated method stub
-		logger.info("ReplyServiceImpl >> replyList 호출 성공");
-		logger.info("rvo.getBno() >>> : " + rvo.getBno());
+		logger.info("ReplyServiceImpl >> rbreplyList 호출 성공");
+		logger.info("rvo.getRbno() >>> : " + rvo.getRbno());
 
 		return replyDAO.rbreplyList(rvo);
 	}
@@ -51,6 +51,7 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public int replyUpdate(ReplyVO rvo) {
 		// TODO Auto-generated method stub
+		logger.info("ReplyServiceImpl >> replyUpdate 호출 성공");
 		int result = 0;
 		result = replyDAO.replyUpdate(rvo);
 		return result;
