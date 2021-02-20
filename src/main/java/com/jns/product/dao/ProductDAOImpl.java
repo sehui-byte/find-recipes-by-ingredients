@@ -17,8 +17,8 @@ public class ProductDAOImpl implements ProductDAO {
 
 	//관심상품 목록조회
 	@Override
-	public List<ProductVO> LikeProductSelectAll() {
-		return sqlSession.selectList("LikeProductSelectAll");
+	public List<ProductVO> LikeProductSelectAll(ProductVO pvo) {
+		return sqlSession.selectList("LikeProductSelectAll",pvo);
 	}
 
 	//관심상품 등록

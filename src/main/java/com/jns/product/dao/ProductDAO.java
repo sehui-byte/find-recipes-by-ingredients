@@ -6,7 +6,7 @@ import com.jns.product.vo.ProductVO;
 
 public interface ProductDAO {
 
-	public List<ProductVO> LikeProductSelectAll();
+	public List<ProductVO> LikeProductSelectAll(ProductVO pvo);
 	public int likeProductInsert(ProductVO pvo);
 	public int likeProductDelete(ProductVO pvo);
 }

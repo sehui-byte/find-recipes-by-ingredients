@@ -8,7 +8,14 @@ public class ProductVO {
 	private String lprice;
 	private String hprice;
 	private String title;
+	private String mno;
 	
+	public String getMno() {
+		return mno;
+	}
+	public void setMno(String mno) {
+		this.mno = mno;
+	}
 	public String getTitle() {
 		return title;
 	}
