@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/include/jsp/jspinclude.jsp" %>
+<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
     
 <!DOCTYPE html>
 <html>
@@ -53,7 +53,14 @@
 	<form id="f_writeForm" name="f_writeForm">
 		<table border="1">
 			<tr>
-				<td colspan="2"><p style="text-align: center;">상세정보</p></td>
+				<td colspan="2"><p style="text-align: center;">레시피 작성하기</p></td>
+			</tr>
+			<tr>
+				<td colspan="2"><p style="text-align: center;">작성자</p></td>
+				<td>
+					<input type="text" name="mnick" id="mnick" value="<%=mnick%>">
+					<input type="hidden" name="mno" id="mno" value="<%=mno%>">
+				</td>
 			</tr>
 			<tr>
 				<td>일련번호</td>
