@@ -88,8 +88,7 @@
 					if('ID_GOOD'==sVal){
 						alert("사용할 수 있는 아이디 입니다");
 					}else{
-						alert("이미 사용중인 아이디 입니다 ")
-						$("#mid").val('');
+						alert("이미 사용중인 아이디입니다");
 						$("#mid").focus();
 					}
 				}
@@ -98,10 +97,22 @@
 					
 				}
 			});
+			
+			function mhp(obj) {
+			  
+			  var number = obj.value.replace(/[^0-9]/g, "");
+			  var mhp = ""; if(number.length < 4) { return number; } 
+			  else if(number.length < 7) { mhp += number.substr(0, 3);
+			  mhp += "-"; mhp += number.substr(3); } 
+			  else if(number.length < 11) { mhp += number.substr(0, 3);
+			  mhp += "-"; mhp += number.substr(3, 3); mhp += "-";
+			  mhp += number.substr(6); } else { mhp += number.substr(0, 3); 
+			  mhp += "-"; mhp += number.substr(3, 4); mhp += "-"; mhp += number.substr(7); }
+			  obj.value = mhp; 
+			  }
 
-			 
 			
-			
+
 				// 우편번호
 				$("#mzipcode").prop('readonly', true);
 				$("#maddr").prop('readonly', true);
@@ -117,7 +128,7 @@
 				}).open();
 			});
 				
-				
+
 
 	
 	});				
@@ -194,13 +205,7 @@
 	<tr>
 		<td class="mem">전화번호</td>	
 		<td>
-			<select name="mhp" id="mhp">
-				<option value="010">010</option>
-				<option value="011">011</option>
-				<option value="017">017</option>
-			</select>
-			-<input type="text" name="mhp1" id="mhp1" size="2"/>
-			-<input type="text" name="mhp2" id="mhp2" size="2"/>	
+					<input type="tel" id="mhp" name="mhp">
 		</td>
 	</tr>
 	<tr>
