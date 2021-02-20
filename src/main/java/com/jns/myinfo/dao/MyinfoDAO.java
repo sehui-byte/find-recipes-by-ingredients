@@ -12,4 +12,5 @@ public interface MyinfoDAO {
 	public List<BoardVO> myQnAList(MemberVO mvo);
 	public int myQnADelete(BoardVO bvo);
 	public int myRecipeDelete(RecipeBoardVO rbvo);
+	public int myRankUpdate(BoardVO bvo);
 }
