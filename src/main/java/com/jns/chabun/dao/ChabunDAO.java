@@ -8,8 +8,7 @@ import com.jns.board.vo.BoardVO;
 
 import com.jns.notice.vo.NoticeVO;
 import com.jns.qna.vo.QnAVO;
-
-
+import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
 
 
@@ -23,7 +22,8 @@ public interface ChabunDAO {
 	public BoardVO getQnABoardChabun();
 
 	public ChefBoardVO getBoardChabun();
+	
 	public ReplyVO getReplyChabun();
 
-
+	public RecipeBoardVO getRecipeBoardChabun();
 }

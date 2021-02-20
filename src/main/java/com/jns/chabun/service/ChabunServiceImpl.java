@@ -14,7 +14,7 @@ import com.jns.board.vo.BoardVO;
 
 import com.jns.notice.vo.NoticeVO;
 import com.jns.qna.vo.QnAVO;
-
+import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
 
 
@@ -66,5 +66,13 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getReplyChabun();
 	}
 
+	@Override
+	public RecipeBoardVO getRecipeBoardChabun() 
+	{
+		// TODO Auto-generated method stub
+		logger.info("RecipeBoard 채번호출");
+		return chabunDAO.getRecipeBoardChabun();
+	}
+	
 
 }
