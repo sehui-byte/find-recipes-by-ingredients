@@ -47,6 +47,22 @@ $(document).ready(function(){
 		var option = "width ="+_width+", height ="+_height+", top ="+popupX+", left ="+popupY;//+", location = no";
 		window.open(url, title, option)	
 	})
+	
+	
+	//////////////////////////////////////// >> 질의하기
+	//enter키 눌렀을 때 페이지 재로딩 되는 것 방지
+	function captureReturnKey(e) {
+		if (e.keyCode == 13 && e.srcElement.type != 'textarea')
+			return false;
+	}
+	
+	//input에서 엔터키 눌렀을 때도 검색 실행
+	function enterKey(){
+		if(window.event.keyCode == 13){
+			$("#loginForm").submit();	
+		}
+	}
+	
 })
 </script>
 </head>
@@ -60,7 +76,8 @@ $(document).ready(function(){
 						<input type="text" id="mid" name="mid" value="">	
 					</td>	
 					<td rowspan="2">
-						<input type="button" id="loginbtn" value="Login">	
+						<input type="button" id="loginbtn" value="Login"
+						onkeydown="return captureReturnKey(event)" onkeyup="enterKey();">
 					</td>
 				</tr>	
 				<tr>

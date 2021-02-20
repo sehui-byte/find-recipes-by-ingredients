@@ -73,7 +73,7 @@ public class MyinfoController {
 		int result = myinfoService.myRecipeDelete(rbvo);
 
 		logger.info(result);
-		
+
 		if (result == 1) {
 			return "OK";
 		} else {
@@ -120,4 +120,14 @@ public class MyinfoController {
 		}
 
 	}
+
+	@RequestMapping(value="myinfo/myRankUpdate", method=RequestMethod.GET)
+	public String myRankUpdate(BoardVO bvo) {
+
+		logger.info("myRankUpdate() 진입 >>> ");
+	
+		return "";
+	}
+	
+	
 }
