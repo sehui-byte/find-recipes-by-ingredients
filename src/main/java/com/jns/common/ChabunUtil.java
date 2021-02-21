@@ -21,7 +21,6 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_O	= "O"; // 구매내역 번호
 	public static final String BIZ_GUBUN_CA	= "CA"; // 장바구니 번호
 
-	public static final String BIZ_GUBUN_RB = "R"; // 게시판 댓글: REPLY 
 	//	public static final String BIZ_GUBUN_BUY = "P"; // 구매게시판
 	
 	public static final String BIZ_GUBUN_R = "R"; // 게시판 댓글: REPLY 

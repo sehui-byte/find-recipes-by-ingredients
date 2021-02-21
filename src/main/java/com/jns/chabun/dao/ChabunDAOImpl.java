@@ -71,21 +71,6 @@ public class ChabunDAOImpl implements ChabunDAO {
 		return sqlSession.selectOne("getChefChabun");
 	}
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public ProductVO getLikeProductChabun() {
 		// TODO Auto-generated method stub
