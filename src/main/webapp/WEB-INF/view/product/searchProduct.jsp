@@ -9,7 +9,6 @@
 <!-- font awesome -->
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <!-- bootstrap -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
@@ -114,10 +113,8 @@
 										+ hprice;
 							
  							// 최근 본 상품 목록 필요한 매개변수 문자열
-							var recentPro = prdouctId + ',' + image + ',' + link;
+							var recentPro = productId + ',' + image + ',' + link;
 							
-			
-
 							html += '<div class="col-sm-6">';
 							html += '<div class="card" style="width: 18rem;">';
 							html += '<img src="' + image + '" alt="..." class="card-img-top"">';
