@@ -133,6 +133,11 @@
 
 							//html += '<a href="' + link +'" class="btn btn-primary" onclick=clickpurchase('+recentPro+')>구매하기</a> ';
 							html += '<a href="' + link +'" class="btn btn-primary">구매하기</a> ';
+							
+							// 구매하기 클릭시 최근 본 상품에 추가
+							$("#btn btn-primary").click(function(){
+								clickpurchase(recentPro);
+							});
 
 							//관심 상품 버튼 추가
 							html += '<input type="checkbox" class="heartBtn" id='

@@ -21,7 +21,7 @@
 	
 	<!-- 최근 본 상품 --> <!-- 이미지 + 링크 -->
 	<div class="card text-dark bg-light mb-3" style="max-width: 16rem;">
-		<div class="card-header"><strong>최근 본 상품</strong></div>
+		<div class="card-header"></div>
 		<div class="text-center_1">
 			<!-- <target="_blank> : 새 창에서 뜨기  / 없애면 현재 웹에서 이동-->
 			<span id="product1">
@@ -56,7 +56,8 @@
 		*/
 		
 		// var recentPro = prdouctId + ',' + image + ',' + link;
-		function clickpurchase(recentPro){			
+		function clickpurchase(recentPro){	
+			showRecent();
 			
 			var info = recentPro.split(","); // [prdouctId, image, link]
 			var productId = info[0];
@@ -69,8 +70,17 @@
 			
 			// 2. 쿠키값 배열로 저장 : 최대 5개
 			setCookieArray(productId);
+			
+			// 3. 쿠키 배열로 데이터 가져오기
+			getCookieArray(cookieArr);
 		}
-	
+		
+		
+		// 최근 본 상품 화면에 추가
+		function showRecent(){
+			document.getElementsByClassName('card-header').innerHTML = '<strong>최근 본 상품</strong>';
+		}
+			
 				
 		
 		// 쿠키 생성 함수

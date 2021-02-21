@@ -27,7 +27,7 @@
 	<!-- 검색버튼 누르면 최근 검색어에 추가 : onclick= -->
 	<!-- 엔터키 눌렀을 때도 최근 검색어에 추가 : enterKey(){}-->
 	<div id="recent_key">
-	최근 검색어 :
+		<span id="key_text"></span>
 		<span id="key1"></span>
 		<span id="key2"></span>
 		<span id="key3"></span>
@@ -40,6 +40,8 @@
 	      
 	    // 최근 검색어 6개
 		function recentSearch() {
+			showKeytext();
+			
 	    	var keyword = $('#keyword').val(); // 검색어 : keyword
 	         
 	        // 배열 맨 앞에 요소 추가, 배열의 크기 리턴
@@ -60,6 +62,11 @@
 	        showKeyword(uniqueArr);
 		}
 	    
+	    
+
+	    function showKeytext(){
+			document.getElementsById('key_text').innerHTML = '최근 검색어 :';
+		}
 	    
 	    
 		// 최근 검색어 화면에 보여주기 
