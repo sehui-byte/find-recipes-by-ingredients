@@ -15,25 +15,22 @@ import com.jns.qna.vo.QnAVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
 
-
 @Repository
 public class ChabunDAOImpl implements ChabunDAO {
-	
+
 	private Logger logger = Logger.getLogger(ChabunDAOImpl.class);
-	
-	@Autowired(required=false)
+
+	@Autowired(required = false)
 	private SqlSessionTemplate sqlSession;
-	
-	
+
 	@Override
 	public MemberVO getMemberChabun() {
 		// TODO Auto-generated method stub
-		
+
 		logger.info("채번 호출");
-		
+
 		return sqlSession.selectOne("getMemberChabun");
 	}
-
 
 	@Override
 	public BoardVO getNoticeChabun() {
@@ -41,17 +38,15 @@ public class ChabunDAOImpl implements ChabunDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getNoticeChabun");
 	}
-	
+
 	public ChefBoardVO getBoardChabun() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getBoardChabun");
 
 	}
 
-
 	@Override
 	public BoardVO getQnABoardChabun() {
-
 
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getQnABoardChabun");
@@ -69,12 +64,10 @@ public class ChabunDAOImpl implements ChabunDAO {
 		return sqlSession.selectOne("getRecipeBoardChabun");
 	}
 
-
 	@Override
 	public ChefVO getChefChabun() {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne("getChefChabun");
 	}
-	
 
 }
