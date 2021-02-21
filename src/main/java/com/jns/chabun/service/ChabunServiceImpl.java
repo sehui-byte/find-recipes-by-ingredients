@@ -11,6 +11,7 @@ import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.board.vo.BoardVO;
 import com.jns.notice.vo.NoticeVO;
+import com.jns.product.vo.ProductVO;
 import com.jns.qna.vo.QnAVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
@@ -80,4 +81,9 @@ public class ChabunServiceImpl implements ChabunService {
 	}
 	
 
+	@Override
+	public ProductVO getLikeProductChabun() {
+		logger.info("LikeProductChabun 채번호출");
+		return chabunDAO.getLikeProductChabun();
+	}
 }

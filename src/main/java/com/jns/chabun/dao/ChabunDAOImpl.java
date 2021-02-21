@@ -11,6 +11,7 @@ import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.board.vo.BoardVO;
 import com.jns.notice.vo.NoticeVO;
+import com.jns.product.vo.ProductVO;
 import com.jns.qna.vo.QnAVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
@@ -70,4 +71,24 @@ public class ChabunDAOImpl implements ChabunDAO {
 		return sqlSession.selectOne("getChefChabun");
 	}
 
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public ProductVO getLikeProductChabun() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("getLikeProductChabun");
+	}
 }

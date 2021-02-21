@@ -20,7 +20,6 @@
 	</select>
 	 -->
 	 
-	 
 	<select id="getQnABoardChabun" resultType="bvo">
 		<!--  SELECT NVL(MAX(INSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A-->
 		SELECT LPAD(NVL(SUBSTR(MAX(A.BNO), -4), 0)+1, 4, '0') BNO FROM BOARD A
@@ -40,6 +39,10 @@
 		SELECT NVL(MAX(SUBSTR(RB.RBNO, -4)), 0) + 1  RBNO FROM RECIPE_BOARD RB
 	</select>
 	
+	<select id="getLikeProductChabun" resultType="pvo">
+		SELECT NVL(MAX(SUBSTR(LP.LPNO, -4)), 0) + 1  LPNO FROM LIKEPRODUCT LP
+  </select>
+
 	<select id="getChefChabun" resultType="cvo">
 		SELECT NVL(MAX(SUBSTR(A.INO, -4)), 0) + 1  INO FROM CHEF_INFO A
 	</select>

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jns.chabun.service.ChabunService;
+import com.jns.common.ChabunUtil;
 import com.jns.member.vo.MemberVO;
 import com.jns.product.service.ProductService;
 import com.jns.product.vo.ProductVO;
@@ -21,10 +23,12 @@ import com.jns.product.vo.ProductVO;
 public class ProductController {
 
 	private ProductService service;
+	private ChabunService chabun;
 
 	@Autowired(required=false)
-	public ProductController(ProductService service) {
+	public ProductController(ProductService service, ChabunService chabun) {
 		this.service = service;
+		this.chabun = chabun;
 	}
 
 	//상품 검색 페이지로 이동
@@ -65,6 +69,11 @@ public class ProductController {
 		String mno = ((MemberVO)principal).getMno();
 		System.out.println("현재 로그인한 사용자 mno >> " + mno);
 		pvo.setMno(mno);
+		
+		//채번
+		String lpno = ChabunUtil.getLikeProductChabun("D", chabun.getLikeProductChabun().getLpno());
+		System.out.println("생성된채번 >> " + lpno);
+		pvo.setLpno(lpno);
 
 		return service.likeProductInsert(pvo);
 	}
