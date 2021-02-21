@@ -88,8 +88,7 @@
 					var html = "";
 					var item = data.items;
 					var count = 0;//식품 검색결과 총개수
-
-					html += '<div class="card-deck">';
+					html += '<div class="row row-cols-1 row-cols-md-3">';
 					for ( var i in item) {
 						var category1 = item[i].category1; //식품만 검색되게.
 						if (category1 === '식품') {
@@ -114,8 +113,7 @@
 							
  							// 최근 본 상품 목록 필요한 매개변수 문자열
 							var recentPro = productId + ',' + image + ',' + link;
-							
-							html += '<div class="col-sm-6">';
+							//html += '<div class="col-sm-6">';
 							html += '<div class="card" style="width: 18rem;">';
 							html += '<img src="' + image + '" alt="..." class="card-img-top"">';
 							html += '<div class="card-body">';
@@ -158,7 +156,8 @@
 								html+= ' />';
 							}
 
-							html += '</div></div></div>';
+							//html+= '</div>';
+							html += '</div></div>';
 							
 							//비워주기
 							$('#keyword').empty();
@@ -171,14 +170,14 @@
 							continue;
 						}
 					}
-
+					
 					if (count === 0) {
 						//검색결과가 없을 때
 						html = "<h3>검색결과가 없습니다</h3>";
 					} else {
 						html += '</div>';
 					}
-
+					//html += '</div>'
 					//html코드 넣어주기
 					$("#result").append(html);
 
