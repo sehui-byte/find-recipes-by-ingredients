@@ -24,29 +24,24 @@
 		<div class="card-header"><strong>최근 본 상품</strong></div>
 		<div class="text-center_1">
 			<!-- <target="_blank> : 새 창에서 뜨기  / 없애면 현재 웹에서 이동-->
-			<a href="https://google.com" target="_blank">
-		    	<img src="..." class="rounded_1">
-			</a>
+			<span id="product1">
+			</span>
 		</div>
 		<div class="text-center_2">
-			<a href="#" target="_blank">
-		    	<img src="..." class="rounded_2">
-			</a>
+			<span id="product2">
+			</span>
 		</div>
 		<div class="text-center_3">
-			<a href="#" target="_blank">
-		    	<img src="..." class="rounded_3">
-			</a>
+			<span id="product3">
+			</span>
 		</div>
 		<div class="text-center_4">
-			<a href="#" target="_blank">
-		    	<img src="..." class="rounded_4">
-			</a>
+			<span id="product4">
+			</span>
 		</div>
 		<div class="text-center_5">
-			<a href="#" target="_blank">
-		    	<img src="..." class="rounded_5">
-			</a>
+			<span id="product5">
+			</span>
 		</div>
 	</div>
 	
@@ -54,28 +49,39 @@
 
 
 	<script>
+				
 		
-		var recentProduct;
-
-		// 구매하기 버튼 클릭했을 때
-		function clickpurchase(){
-			// 1. 해당 상품에 대한 쿠키값 저장
-			setRecentCookie("recent",productId);
+		/*
+			구매하기 버튼 클릭했을 때, 해당 상품의 필요한 데이터 쿠키 배열로 저장
+		*/
+		
+		// var recentPro = prdouctId + ',' + image + ',' + link;
+		function clickpurchase(recentPro){			
 			
-			// 2-1. 쿠키값 가져와서
-			getRecentCookie("recent");
-			// 2-2. 배열로 저장
-			setCookieArray("recent", recentProduct);
+			var info = recentPro.split(","); // [prdouctId, image, link]
+			var productId = info[0];
+			var productImage = info[1];
+			var productLink = info[2];
+			
+			// 1. 해당 상품에 대한 쿠키값 저장
+			setRecentCookie(productId, productImage+'&&'+productLink);
+			//productId=productImage&&productLink
+			
+			// 2. 쿠키값 배열로 저장 : 최대 5개
+			setCookieArray(productId);
 		}
 	
+				
 		
 		// 쿠키 생성 함수
-		// cookieName : "recent", cookieValue : 상품명(productId), 유효시간 : 1시간
+		// cookieName : "recent", cookieValue : recentPro , 유효시간 : 1시간
 		function setRecentCookie(cookieName, cookieValue) {
 		    var expire = new Date();
 		    expire.setTime(date.getTime() + 1*60*60*1000); // 1hr
-		    document.cookie = cookieName + '=' + cookieValue; 
+		    document.cookie = cookieName + '=' + cookieValue;
 		}
+
+		
 		// 쿠키 값 가져오기
 		function getRecentCookie(cookieName) {
 			var cookieValue = null;
@@ -87,39 +93,57 @@
 				}
 			}
 			return cookieValue;
-		}	
-		// 쿠키 배열로 저장하기
-		function setCookieArray(cookieName, cookiearray){
-		 	var cookieValue = "";
-		 	for(var idx in cookiearray){
-		  		if(cookieValue != "" ) cookieValue += ",";
-		  		cookieValue += idx+":"+cookiearray[idx];
-		  		// 0:cookieValue_1,1:cookieValue_2,...
-		 	}
-		 	this.setCookie(cookieName, cookieValue);
-		 	// recent=0:cookieValue_1,1:cookieValue_2,...
 		}
 		
-		
-		
-		// 쿠키에서 배열로 저장된 데이터 가져오기
-		function getCookieArray(cookieName){
-		 	var cookieValue = this.getCookie(cookieName);
-		 	// 0:cookieValue_1,1:cookieValue_2,...
-		 
-		 	var tmp1 = cookieValue.split(",");
-			// 0:cookieValue_1
+		// 쿠키 배열로 저장하기 : 최대 5개
+		var cookieArr = [];
+		function setCookieArray(cookieName){ // productId1
+		 	var cookieValue = getRecentCookie("cookieName"); // productImage1&&productLink1
 		 	
-		 	var reData = {};
-		 	for(var i in tmp1){
-		  		var tmp2 = tmp1[i].split(":"); // {0, cookieValue_1}
-		  		reData[tmp2[0]] = tmp2[1];
-		  		// reData[0] = cookieValue_1
-		 	}
-		 	return reData; //cookieValue_1
+		 	// 배열 맨 앞에 요소 추가, 배열의 크기 리턴
+	        cookieArr.unshift(cookieValue);
+	         
+	        // 중복된 쿠키 제거 (뒷쪽에 있는 쿠키 삭제됨)
+	        var recentArr = cookieArr.filter(function(item, pos, self) {
+				return self.indexOf(item) == pos;
+	        });
+	         
+	        // 쿠키 5개 넘으면
+	        if(recentArr.length > 5){
+	        	recentArr.pop(); // 배열의 마지막 요소를 제거, 제거한 요소 리턴
+	        }
+	        console.log(recentArr);
+	        
+	        return cookieArr; // [productImage5&&productLink5, ..., productImage1&&productLink1]
 		}
+
 		
 		
+		/*
+			쿠키 이용해서 데이터 가져오기
+		*/
+		
+		// 쿠키에서 배열로 저장된 데이터(이미지, 링크) 가져와서 화면에 보여주기
+		function getCookieArray(cookieArr){ // [productImage5&&productLink5, ..., productImage1&&productLink1]
+			
+			for(var i=0; i<cookieArr.length; i++){
+				
+				var product = cookieArr[i]; // productImage&&productLink
+				var info = product.split("&&"); // [productImage, productLink]
+				var image = info[0]	// productImage5
+				var link = info[1]	// productLink5
+				
+				var recentProduct = '<a href="'+link+'" target="_blank"><img src="'+image+'" class="rounded_2"></a>';
+					        	
+	        	var id = "product"+(i+1);
+	            var a = document.getElementById(id);
+	            if (a != null){
+	            	a.innerHTML = recentProduct;
+	            }
+			}
+		}
+	
+
 		
 	</script>
 

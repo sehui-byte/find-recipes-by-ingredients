@@ -33,13 +33,12 @@
 		<input class="form-control" list="datalistOptions" name="keyword"
 			onkeydown="return captureReturnKey(event)" onkeyup="enterKey();"
 			id="keyword" placeholder="Type to search..." "style="width: 300px"/>
-		<button type="button" class="btn btn-outline-primary" onclick="find(); recentSearch();">검색</button>
+		<button type="button" class="btn btn-outline-primary" onclick="find(); recentSearch(); clearInput();">검색</button>
 	</form>
 	
 	<!-- 최근 검색어  -->
 	<%@ include file="/WEB-INF/view/product/recentKeyword.jsp" %>
 	
-		
 	<!-- 검색결과 -->
 	<div id="result"></div>
 	<script>
@@ -56,10 +55,21 @@
 				{
 					find();
 					recentSearch();
+					clearInput();
 				}
 			
 		}
+		
+		// 검색 후 검색창의 텍스트 지우기
+		function clearInput(){
+			var keyword = document.getElementsByClassName('form-control');
+			for(var i=0; i<keyword.length; i++){
+				keyword[i].value = '';
+			}
+		}
+		
 		//검색결과 찾아준다
+
 		function find() {
 			var keyword = $('#keyword').val();
 			$.ajax({
@@ -103,6 +113,11 @@
 										+ lprice + ',' 
 										+ hprice;
 							
+ 							// 최근 본 상품 목록 필요한 매개변수 문자열
+							var recentPro = prdouctId + ',' + image + ',' + link;
+							
+			
+
 							html += '<div class="col-sm-6">';
 							html += '<div class="card" style="width: 18rem;">';
 							html += '<img src="' + image + '" alt="..." class="card-img-top"">';
@@ -120,7 +135,10 @@
 							html += '<li class="list-group-item"> 브랜드 : '
 									+ brand + '</li>';
 							html += '</ul>';
+
+							//html += '<a href="' + link +'" class="btn btn-primary" onclick=clickpurchase('+recentPro+')>구매하기</a> ';
 							html += '<a href="' + link +'" class="btn btn-primary">구매하기</a> ';
+
 							//관심 상품 버튼 추가
 							html += '<input type="checkbox" class="heartBtn" id='
 									+ productId 
