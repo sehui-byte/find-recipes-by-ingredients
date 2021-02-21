@@ -72,6 +72,23 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getRecipeBoardChabun();
 	}
 
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public ProductVO getLikeProductChabun() {
 		logger.info("LikeProductChabun 채번호출");

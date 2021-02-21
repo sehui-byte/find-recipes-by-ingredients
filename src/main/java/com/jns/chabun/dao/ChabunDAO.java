@@ -25,5 +25,10 @@ public interface ChabunDAO {
 
 	public RecipeBoardVO getRecipeBoardChabun();
 	
+	
+	
+	
+	
+	
 	public ProductVO getLikeProductChabun();
 }

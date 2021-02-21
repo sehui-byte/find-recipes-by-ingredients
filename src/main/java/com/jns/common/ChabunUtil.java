@@ -21,6 +21,19 @@ public abstract class ChabunUtil {
 
 	public static final String BIZ_GUBUN_RB = "R"; // 게시판 댓글: REPLY 
 	//	public static final String BIZ_GUBUN_BUY = "P"; // 구매게시판
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static final String BIZ_GUBUN_LP = "LP"; //관심상품 
 
 	// type : D : 20210001, M : YYYYMM, Y : YYYY, 
