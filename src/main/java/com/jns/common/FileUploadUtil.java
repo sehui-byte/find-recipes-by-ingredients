@@ -1,6 +1,7 @@
 package com.jns.common;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,17 +44,33 @@ public class FileUploadUtil
 					
 					key = getUUIDKey(basepath); //create key					
 					File file = new File(basepath + "\\" + key + "." + extension);
+					FileOutputStream fos = null;
 					try 
 					{
-						mpf.transferTo(file);
+						fos = new FileOutputStream(file);
+						fos.write(mpf.getBytes());
+												
+						fos.close();
+						fos = null;
 					} 
-					catch (IllegalStateException e) 
+					catch (Exception e) 
 					{
 						e.printStackTrace();
 					}
-					catch (IOException e) 
+					finally 
 					{
-						e.printStackTrace();
+						if(fos != null)
+						{
+							try
+							{
+								fos.close();
+								fos = null;
+							}
+							catch (Exception ignore) 
+							{
+								
+							}
+						}
 					}
 				}
 				return key; //return key
@@ -90,6 +107,7 @@ public class FileUploadUtil
 				
 				while(names.hasNext())
 				{
+					System.out.println("asdfasdf");
 					String name = names.next();
 					MultipartFile mpf = map.get(name);
 					logger.info("name >>> : " + name);
@@ -99,18 +117,35 @@ public class FileUploadUtil
 
 					String key = getUUIDKey(basepath); //create key
 					File file = new File(basepath + "\\" + key + "." + extension);
+					FileOutputStream fos = null;
 					try 
 					{
-						mpf.transferTo(file);
+						fos = new FileOutputStream(file);
+						fos.write(mpf.getBytes());
+						
 						keyList.add(key);
+						
+						fos.close();
+						fos = null;
 					} 
-					catch (IllegalStateException e) 
+					catch (Exception e) 
 					{
 						e.printStackTrace();
 					}
-					catch (IOException e) 
+					finally 
 					{
-						e.printStackTrace();
+						if(fos != null)
+						{
+							try
+							{
+								fos.close();
+								fos = null;
+							}
+							catch (Exception ignore) 
+							{
+								
+							}
+						}
 					}
 				}
 				return keyList; //return key

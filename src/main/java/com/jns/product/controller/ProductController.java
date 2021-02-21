@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jns.chabun.service.ChabunService;
+import com.jns.common.ChabunUtil;
 import com.jns.member.vo.MemberVO;
 import com.jns.product.service.ProductService;
 import com.jns.product.vo.ProductVO;
@@ -21,10 +23,12 @@ import com.jns.product.vo.ProductVO;
 public class ProductController {
 
 	private ProductService service;
+	private ChabunService chabun;
 
 	@Autowired(required=false)
-	public ProductController(ProductService service) {
+	public ProductController(ProductService service, ChabunService chabun) {
 		this.service = service;
+		this.chabun = chabun;
 	}
 
 	//상품 검색 페이지로 이동
@@ -44,12 +48,6 @@ public class ProductController {
 	@RequestMapping(value="likeProduct.do", method=RequestMethod.GET)
 	public String likeList(Model model) {
 		ProductVO pvo = new ProductVO();
-		//로그인 사용자 mno 가져오기
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Object principal = auth.getPrincipal();
-		String mno = ((MemberVO)principal).getMno();
-		System.out.println("현재 로그인한 사용자 mno >> " + mno);
-		pvo.setMno(mno);
 		List<ProductVO> list = service.likeProductSelectAll(pvo);
 		model.addAttribute("list",list);
 		model.addAttribute("size", list.size());
@@ -58,13 +56,11 @@ public class ProductController {
 
 	//관심상품 정보 db저장하기
 	@RequestMapping(value="likeProductInsert.do", method=RequestMethod.POST)
-	public int likeProductInsert(@RequestBody ProductVO pvo) {
-		//로그인 사용자 mno 가져오기
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Object principal = auth.getPrincipal();
-		String mno = ((MemberVO)principal).getMno();
-		System.out.println("현재 로그인한 사용자 mno >> " + mno);
-		pvo.setMno(mno);
+	public int likeProductInsert(@RequestBody ProductVO pvo) {	
+		//채번
+		String lpno = ChabunUtil.getLikeProductChabun("D", chabun.getLikeProductChabun().getLpno());
+		System.out.println("생성된채번 >> " + lpno);
+		pvo.setLpno(lpno);
 
 		return service.likeProductInsert(pvo);
 	}
@@ -72,13 +68,6 @@ public class ProductController {
 	//관심상품 정보 삭제
 	@RequestMapping(value="likeProductDelete.do", method=RequestMethod.POST)
 	public int likeProductInsertDelete(@RequestBody ProductVO pvo) {
-		//로그인 사용자 mno 가져오기
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Object principal = auth.getPrincipal();
-		String mno = ((MemberVO)principal).getMno();
-		System.out.println("현재 로그인한 사용자 mno >> " + mno);
-		pvo.setMno(mno);
-
 		return service.likeProductDelete(pvo);
 	}
 }

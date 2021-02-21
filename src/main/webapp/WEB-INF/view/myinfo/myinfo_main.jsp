@@ -15,6 +15,9 @@
 			비밀번호 수정	
 		</li>
 		<li>
+			<a href="myinfo/myRankUpdate.do?mno=<%= mno %>">내 등급 올리기</a>
+		</li>
+		<li>
 			아래 데이터들을 시각화해서 그래프로 보여주면 좋을 듯	
 		</li>
 		<li>
@@ -31,6 +34,9 @@
 		</li>
 		<li>
 			내 댓글??	
+		</li>
+		<li>
+			<a href="index.jsp">인덱스 페이지로</a>
 		</li>
 	</ul>
 </body>

@@ -89,22 +89,22 @@ public class RecipeBoardController
 		return "recipeboard/recipeboard";
 	}
 	
-//	@RequestMapping(value = "filetest", method = RequestMethod.POST)
-//	public String filetest(RecipeBoardVO rbvo, MultipartHttpServletRequest request)
-//	{
-//		//단일파일 업로드
-//		String key = new FileUploadUtil().uploadFile(request, "recipeboard"); // 업로드 할 폴더 이름 (\WEB-INF\files\recipeboard)
-//		logger.info("key >>> : " + key);
-//		
-//		//다중 파일 업로드
-//		List<String> keyList = new FileUploadUtil().uploadFiles(request, "recipeboard");
-//		logger.info("keyList >>> : " + keyList.toString());
-//		
-//		rbvo.setManual_img01(keyList.get(0));
-//		rbvo.setManual_img02(keyList.get(1));
-//		
-//		return "";
-//	}
+	@RequestMapping(value = "filetest", method = RequestMethod.POST)
+	public String filetest(RecipeBoardVO rbvo, MultipartHttpServletRequest request)
+	{
+		//단일파일 업로드
+		String key = new FileUploadUtil().uploadFile(request, "recipeboard"); // 업로드 할 폴더 이름 (\WEB-INF\files\recipeboard)
+		logger.info("key >>> : " + key);
+		
+		//다중 파일 업로드
+		List<String> keyList = new FileUploadUtil().uploadFiles(request, "recipeboard");
+		logger.info("keyList >>> : " + keyList.toString());
+		
+		rbvo.setManual_img01(keyList.get(0));
+		rbvo.setManual_img02(keyList.get(1));
+		
+		return "";
+	}
 	
 	//================================= Ajax =================================//
 	@RequestMapping(value = "recipeBoardSelectAll", method = RequestMethod.GET)

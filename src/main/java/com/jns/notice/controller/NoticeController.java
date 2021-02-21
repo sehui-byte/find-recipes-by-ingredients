@@ -60,6 +60,8 @@ public class NoticeController {
 		
 		
 		String bno = ChabunUtil.getNoticeChabun("D", chabunService.getNoticeChabun().getBno());
+		nvo.setBviews("0");
+		nvo.setBhits("0");
 		
 		nvo.setBno(bno);
 		

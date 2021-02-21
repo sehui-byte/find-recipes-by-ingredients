@@ -42,7 +42,7 @@ public class QnAController {
 		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="", method=RequestMethod.GET)
+	@RequestMapping(value="11", method=RequestMethod.GET)
 	public String QnASelectPaging(BoardVO bvo, Model model) {
 		logger.info("QnAController QnASelectPaging ���� ::");	
 		logger.info("QnAController boardSelect bvo.getSbnum() " + bvo.getPage());
@@ -65,7 +65,8 @@ public class QnAController {
 		
 		//채번
 		String bno = ChabunUtil.getQnaBoardChabun("D", chabunService.getQnABoardChabun().getBno());
-		
+		bvo.setBviews("0");
+		bvo.setBhits("0");
 		
 		 bvo.setBno(bno);
 		
@@ -95,7 +96,6 @@ public class QnAController {
 		logger.info("QnAController QnASelectAll bvo.getBtitle() >>> : " + bvo.getBtitle());
 		logger.info("QnAController QnASelectAll bvo.getBcontent() >>> : " + bvo.getBcontent());
 		logger.info("QnAController QnASelectAll bvo.getMnick() >>> : " + bvo.getMnick());
-		logger.info("QnAController QnASelectAll bvo.getBinsertdate() >>> : " + bvo.getBinsertdate());
 		
 		List<BoardVO> listAll = qnaService.QnASelectAll(bvo);
 		logger.info("QnAController QnASelectAll listAll.size() >>> : " + listAll.size());

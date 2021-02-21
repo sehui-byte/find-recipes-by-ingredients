@@ -5,7 +5,9 @@
 <mapper namespace="com.jns.chabun.dao.ChabunDAO">
 
 	<select id="getMemberChabun" resultType="mvo">
-		SELECT NVL(MAX(INSTR(A.MNO, -4)), 0) + 1  MNO FROM MEMBER A
+	    SELECT LPAD(NVL(SUBSTR(MAX(A.MNO), -4), 0) + 1, 4, '0') MNO 
+        FROM 
+   	    MEMBER A
 	</select>
 
 	<!-- 
@@ -18,13 +20,15 @@
 	</select>
 	 -->
 	 
-	 
 	<select id="getQnABoardChabun" resultType="bvo">
-		SELECT NVL(MAX(INSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
+		<!--  SELECT NVL(MAX(INSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A-->
+		SELECT LPAD(NVL(SUBSTR(MAX(A.BNO), -4), 0)+1, 4, '0') BNO FROM BOARD A
+		where BTYPE = 'Q'
 	</select>
 	
-	<select id="getNoticeChabun" resultType="bvo">
-		SELECT NVL(MAX(INSTR(A.BNO, -4)), 0) + 1 BNO FROM BOARD A
+	<select id="getNoticeChabun" resultType="nvo">
+		SELECT LPAD(NVL(SUBSTR(MAX(A.BNO), -4), 0)+1, 4, '0') BNO FROM BOARD A
+		WHERE BTYPE = 'N'
 	</select>
 
 	<select id="getReplyChabun" resultType="reply">
@@ -33,6 +37,14 @@
 	
 	<select id="getRecipeBoardChabun" resultType="rbvo">
 		SELECT NVL(MAX(SUBSTR(RB.RBNO, -4)), 0) + 1  RBNO FROM RECIPE_BOARD RB
+	</select>
+	
+	<select id="getLikeProductChabun" resultType="pvo">
+		SELECT NVL(MAX(SUBSTR(LP.LPNO, -4)), 0) + 1  LPNO FROM LIKEPRODUCT LP
+  </select>
+
+	<select id="getChefChabun" resultType="cvo">
+		SELECT NVL(MAX(SUBSTR(A.INO, -4)), 0) + 1  INO FROM CHEF_INFO A
 	</select>
 	
 </mapper>

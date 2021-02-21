@@ -24,10 +24,10 @@
 </style>
 </head>
 <body>
-
 	<h3>상품 검색</h3>
 	<br>
-
+	<h3>회원일련번호 : <%= mno %></h3>
+	
 	<!-- 검색 -->
 	<form>
 		<input class="form-control" list="datalistOptions" name="keyword"
@@ -36,13 +36,13 @@
 		<button type="button" class="btn btn-outline-primary" onclick="find(); recentSearch(); clearInput();">검색</button>
 	</form>
 	
-	<!-- 최근 검색어 -->
+	<!-- 최근 검색어  -->
 	<%@ include file="/WEB-INF/view/product/recentKeyword.jsp" %>
 	
-
 	<!-- 검색결과 -->
 	<div id="result"></div>
 	<script>
+		
 		//enter키 눌렀을 때 페이지 재로딩 되는 것 방지
 		function captureReturnKey(e) {
 			if (e.keyCode == 13 && e.srcElement.type != 'textarea')
@@ -68,7 +68,8 @@
 			}
 		}
 		
-		//ajax코드 넣기
+		//검색결과 찾아준다
+
 		function find() {
 			var keyword = $('#keyword').val();
 			$.ajax({
@@ -116,6 +117,7 @@
 							var recentPro = prdouctId + ',' + image + ',' + link;
 							
 			
+
 							html += '<div class="col-sm-6">';
 							html += '<div class="card" style="width: 18rem;">';
 							html += '<img src="' + image + '" alt="..." class="card-img-top"">';
@@ -133,7 +135,10 @@
 							html += '<li class="list-group-item"> 브랜드 : '
 									+ brand + '</li>';
 							html += '</ul>';
-							html += '<a href="' + link +'" class="btn btn-primary" onclick=clickpurchase('+recentPro+')>구매하기</a> ';
+
+							//html += '<a href="' + link +'" class="btn btn-primary" onclick=clickpurchase('+recentPro+')>구매하기</a> ';
+							html += '<a href="' + link +'" class="btn btn-primary">구매하기</a> ';
+
 							//관심 상품 버튼 추가
 							html += '<input type="checkbox" class="heartBtn" id='
 									+ productId 
@@ -185,7 +190,6 @@
 		}
 		
 		
-
 		//쿠키 새로 생성
 		function setCookie(cookie_name, value, days) {
 			var exdate = new Date();//만료날짜
@@ -198,7 +202,6 @@
 		}
 		
 		
-
 		//쿠키 값 가져오기
 		function getCookie(cookie_name) {
 			var val = document.cookie.split(';');
@@ -319,7 +322,7 @@
 	<hr />
 	
  	<!-- 최근 본 상품 -->
-	<%@ include file="/WEB-INF/view/product/recentProduct.jsp" %>
+<%@ include file="/WEB-INF/view/product/recentProduct.jsp" %>
 
 	<!-- bootstrap -->
 	<script

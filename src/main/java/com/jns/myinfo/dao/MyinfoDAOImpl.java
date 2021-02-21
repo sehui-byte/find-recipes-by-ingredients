@@ -36,7 +36,19 @@ public class MyinfoDAOImpl implements MyinfoDAO {
 
 	@Override
 	public int myRecipeDelete(RecipeBoardVO rbvo) {
-		
+
 		return sqlSession.update("myRecipeDelete", rbvo);
+	}
+
+	@Override
+	public int myRankUpdate(BoardVO bvo) {
+
+		return sqlSession.update("myRankUpdate", bvo);
+	}
+
+	@Override
+	public List myFavRecipeList() {
+
+		return null;
 	}
 }

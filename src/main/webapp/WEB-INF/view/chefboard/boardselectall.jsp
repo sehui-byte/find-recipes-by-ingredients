@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/include/jsp/jspinclude.jsp" %>
+<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 <%@ page import="com.jns.chefboard.vo.ChefBoardVO" %> 
 <%@ page import="java.util.List" %> 
     

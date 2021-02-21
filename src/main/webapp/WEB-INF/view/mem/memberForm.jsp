@@ -25,8 +25,6 @@
         }
     </style>
 
-
-
 <meta charset="UTF-8">
 <title>JNS MEMBER : 전지적 냉장고 시점  회원 가입 </title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,86 +37,143 @@
 	}
 	.mem{text-align=center;}
 </style>
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
 <!-- 다음 주소록 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
-	
+
 	$(document).ready(function(){
-				
+		
 			//버튼 클릭시 회원가입 처리 
 			$(document).on("click","#membtn",function(){
 				console.log("membtn >>> : ");
-				alert("회원가입이 완료 되었습니다");
+				var url = "mem/memberInsert.do";
 				
-				$('#memberForm').attr('action','mem/memberInsert.do');
-				$('#memberForm').attr('method','POST');
-				$('#memberForm').attr('enctype','multipart/form-data');
-				$('#memberForm').submit();
+				// formData 객체 생성
+				var formData = new FormData($("#memberForm")[0]);
 				
-				
-			});
-			
-			// 아이디 체크 
-			$(document).on("click","#midbtn",function(){
-				console.log("midbtn >>  : ");
-				alert("아이디 중복 확인중 ...");
-				
-				let idcheckURL = "mem/checkID.do";
-				let method = "GET";
-				let midVal = $('mid').val();
-				
-				let dataParam = {"mid":midVal};
-				
+				// 이메일, 핸드폰 조합해서 key = value로 추가
+				formData.append("memail", makeMemail());
+				formData.append("mhp", makeMhp());
+
 				$.ajax({
-					url : idcheckURL,
-					type : method,
-					data: dataParam,
+					url : url,
+					method : "POST",
+					enctype : "multipart/form-data",
+					processData : false,
+					contentType : false,
+					data : formData,
 					success : whenSuccess,
 					error : whenError
 				});
 				
-				function whenSuccess(resData){
-					alert(resData);
-					var sVal = resData;
-					if('ID_GOOD'==sVal){
-						alert("사용할 수 있는 아이디 입니다");
-					}else{
-						alert("이미 사용중인 아이디 입니다 ")
-						$("#mid").val('');
-						$("#mid").focus();
-					}
-				}
-				
-				function whenError(resData){
-					
-				}
+				function whenSuccess(data){
+					alert("회원가입에 성공하였습니다. 로그인 후 이용해주시기 바랍니다");
+					location.href="main.do";
+				};
+
+				function whenError(data){
+					alert("통신 에러");
+				};
 			});
-				// 우편번호
-				$("#mzipcode").prop('readonly', true);
-				$("#maddr").prop('readonly', true);
-				$("#maddrdetail").prop(true);
-				$("#zipcode").click(function(){
-					console.log("zipcode >>> : ");
-					new daum.Postcode({
-					oncomplete: function(data) {
-					    $("#mzipcode").val(data.zonecode); //5자리 새우편번호 사용
-					    $("#maddr").val(data.roadAddress); //도로명 주소
-					    $("#maddrdetail").val(data.Adddetail); //상세주소			
-					}
-				}).open();
+			
+		$(document).on("change", "#memail3", function(){
+			var memail3 = $("#memail3").val();	
+			if (memail3 != 1){
+				$("#memail2").prop("disabled", true);
+				$("#memail2").val(memail3);
+
+			}else{
+				$("#memail2").prop("disabled", false);
+				$("#memail2").val("");
+			}
+		})	
+			
+		// 아이디 체크 
+		$(document).on("click","#midbtn",function(){
+			console.log("midbtn >>  : ");
+			alert("아이디 중복 확인중 ...");
+			
+			let idcheckURL = "mem/checkID.do";
+			let method = "GET";
+			let midVal = $('#mid').val();
+			
+			let dataParam = {"mid":midVal};
+			
+			$.ajax({
+				url : idcheckURL,
+				type : method,
+				data: dataParam,
+				success : whenSuccess,
+				error : whenError
 			});
-		});		
-					
-	
+			
+			function whenSuccess(resData){
+				var sVal = resData;
+				if('ID_GOOD'==sVal){
+					alert("사용할 수 있는 아이디 입니다");
+				}else{
+					alert("이미 사용중인 아이디입니다");
+					$("#mid").focus();
+				}
+			}
+			
+			function whenError(resData){
 				
+			}
+		});
+			
+		function mhp(obj) {
+			var number = obj.value.replace(/[^0-9]/g, "");
+			var mhp = ""; if(number.length < 4) { return number; } 
+			else if(number.length < 7) { mhp += number.substr(0, 3);
+			mhp += "-"; mhp += number.substr(3); } 
+			else if(number.length < 11) { mhp += number.substr(0, 3);
+			mhp += "-"; mhp += number.substr(3, 3); mhp += "-";
+			mhp += number.substr(6); } else { mhp += number.substr(0, 3); 
+			mhp += "-"; mhp += number.substr(3, 4); mhp += "-"; mhp += number.substr(7); }
+			obj.value = mhp; 
+		  }
+
+		// 이메일 조합
+		function makeMemail(){
+			var memail1 = $("#memail1").val();	
+			var memail2 = $("#memail2").val();
+			return memail1 + "@" + memail2;
+		}
+			
+		// 핸드폰 조합 
+		function makeMhp(){
+			var mhp1 = $("#mhp1").val();
+			var mhp2 = $("#mhp2").val();
+			var mhp3 = $("#mhp3").val();
+			return mhp1 + mhp2 + mhp3;
+		}
+		
+		// 핸드폰 정규표현식 -> 조금 더 공부 후에
+		
+		// 우편번호
+		$("#mzipcode").prop('readonly', true);
+		$("#maddr").prop('readonly', true);
+		$("#maddrdetail").prop(true);
+		$("#zipcode").click(function(){
+			console.log("zipcode >>> : ");
+			new daum.Postcode({
+			oncomplete: function(data) {
+				$("#mzipcode").val(data.zonecode); //5자리 새우편번호 사용
+				$("#maddr").val(data.roadAddress); //도로명 주소
+				$("#maddrdetail").val(data.Adddetail); //상세주소			
+			}
+		}).open();
+	});
+});				
 	
 </script>
 </head>
 <body>
+</body>
+</html>
 <div>
 <form name="memberForm" id="memberForm">
 	<h2><font size="4" style="color:Blue;">전지적 냉장고 시점 회원가입 </font></h2>
@@ -160,7 +215,7 @@
 		<td class="mem">비밀번호</td>
 		<br>
 		<td>
-			<input type="text" name="mpw" id="mpw" style="width:150px" />
+			<input type="password" name="mpw" id="mpw" style="width:150px" />
 			<br>&nbsp영문, 숫자, 특수문자 조합 (8자 이상 12자 이하)&nbsp
 		
 	<!-- 
@@ -178,23 +233,19 @@
 		<td><input type="text" name="mnick" id="mnick" style="width:150px"/></td>
 	</tr>
 	<tr>
-		<td class="mem">전화번호</td>	
+		<td class="mem">핸드폰 번호</td>	
 		<td>
-			<select name="mhp" id="mhp">
-				<option value="010">010</option>
-				<option value="011">011</option>
-				<option value="017">017</option>
-			</select>
-			<input type="text" name="mhp1" id="mhp1" size="2"/>
-			<input type="text" name="mhp2" id="mhp2" size="2"/>	
+			<input type="text" id="mhp1" name="mhp1" maxlength="3">-
+			<input type="text" id="mhp2" name="mhp2" maxlength="4">-
+			<input type="text" id="mhp3" name="mhp3" maxlength="4">
 		</td>
 	</tr>
 	<tr>
 		<td class="mem">이메일</td>
 		<td>		
-			<input type="text" name="memail" id=memail style="width:100px" />
-			@ <input type="text" name="memail1" id=memail1 style="width:100px" placeholder="직접입력" />
-			<select name="memail2" id="memail2" style="width:100px;margin-right:10px">
+			<input type="text" name="memail1" id="memail1" style="width:100px" />
+			@<input type="text" name="memail2" id="memail2" style="width:100px" placeholder="직접입력" />
+			<select name="memail3" id="memail3" style="width:100px;margin-right:10px">
 	        	 <option value="1" selected>직접입력</option>
 	       		 <option value="naver.com">naver.com</option>	       	   
 	      		 <option value="gmail.com">gmail.com</option>

@@ -53,5 +53,20 @@ public class MyinfoServiceImpl implements MyinfoService {
 		logger.info("myRecipeDelete() 진입 >>> ");
 
 		return myinfoDAO.myRecipeDelete(rbvo);
+
 	}
+
+	@Override
+	public int myRankUpdate(BoardVO bvo) {
+		logger.info("myRankUpdate() 진입 >>> ");
+
+		return myinfoDAO.myRankUpdate(bvo);
+	}
+
+	@Override
+	public List myFavRecipeList() {
+	
+		return null;
+	}
+
 }

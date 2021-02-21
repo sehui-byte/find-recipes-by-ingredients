@@ -20,9 +20,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jns.chabun.dao.ChabunDAO;
+import com.jns.member.vo.MemberVO;
 import com.jns.product.dao.ProductDAO;
 import com.jns.product.vo.ProductVO;
 
@@ -36,6 +40,7 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired(required=false)
 	public ProductServiceImpl(ProductDAO pdao) {
 		this.pdao = pdao;
+
 	}
 
 	@Override
@@ -113,6 +118,7 @@ public class ProductServiceImpl implements ProductService{
 	//관심상품 전체조회
 	@Override
 	public List<ProductVO> likeProductSelectAll(ProductVO pvo) {
+		pvo.setMno(getLoginMno(pvo));
 		List<ProductVO> result = pdao.LikeProductSelectAll(pvo);
 		System.out.println("관심상품 개수 >> " + result.size());
 		return result;
@@ -121,6 +127,7 @@ public class ProductServiceImpl implements ProductService{
 	//관심상품 등록
 	@Override
 	public int likeProductInsert(ProductVO pvo) {
+		pvo.setMno(getLoginMno(pvo));
 		int nCnt = pdao.likeProductInsert(pvo);
 		System.out.println("삽입된 컬럼 수 >> " + nCnt);
 		return nCnt;
@@ -129,6 +136,7 @@ public class ProductServiceImpl implements ProductService{
 	//관심상품 삭제
 	@Override
 	public int likeProductDelete(ProductVO pvo) {
+		pvo.setMno(getLoginMno(pvo));
 		int nCnt = pdao.likeProductDelete(pvo);
 		System.out.println("삭제된 컬럼 수 >> " + nCnt);
 		return nCnt;
@@ -185,5 +193,15 @@ public class ProductServiceImpl implements ProductService{
 			}
 
 		}
+	}
+
+	//로그인한 사용자 mno가져오기
+	private String getLoginMno(ProductVO pvo) {
+		//로그인 사용자 mno 가져오기
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Object principal = auth.getPrincipal();
+		String mno = ((MemberVO)principal).getMno();
+		
+		return mno;
 	}
 }

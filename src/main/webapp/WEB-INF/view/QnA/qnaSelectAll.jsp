@@ -106,7 +106,7 @@ for(int i=0; i<nCnt; i++){
 	<td class="tt"><%=bvo.getBtitle() %></td>
 	<td class="tt"><%=bvo.getBcontent() %></td>
 	<td class="tt"><%=bvo.getMnick() %></td>
-	<td class="tt"><img src="/imgupload/sm_<%= bvo.getBfile() %>"></td>
+	<td class="tt"><img src="find-recipes-by-ingredients/imgupload/<%= bvo.getBfile() %>"></td>
 	<td class="tt"><%=bvo.getBinsertdate() %></td>
 	<td class="tt"><%=bvo.getBviews() %></td>
 	<td class="tt"><%=bvo.getBhits() %></td>

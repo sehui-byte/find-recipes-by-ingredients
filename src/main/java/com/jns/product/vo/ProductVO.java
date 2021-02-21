@@ -2,6 +2,7 @@ package com.jns.product.vo;
 
 public class ProductVO {
 	
+	private String lpno;
 	private String productId;
 	private String link;
 	private String image;
@@ -10,6 +11,12 @@ public class ProductVO {
 	private String title;
 	private String mno;
 	
+	public String getLpno() {
+		return lpno;
+	}
+	public void setLpno(String lpno) {
+		this.lpno = lpno;
+	}
 	public String getMno() {
 		return mno;
 	}
