@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jns.board.vo.BoardVO;
@@ -64,21 +65,23 @@ public class MyinfoController {
 
 	@RequestMapping(value = "myinfo/myRecipeDelete", method = RequestMethod.POST)
 	@ResponseBody
-	public String myRecipeDelete(RecipeBoardVO rbvo) {
+	public String myRecipeDelete(RecipeBoardVO rbvo, @RequestParam("chkVal[]") List<String> chkVals) {
 
 		logger.info("myRecipeDelete() 진입 >>> ");
 
-		logger.info("rbno >>> " + rbvo.getRbno());
+		int nCnt = 0;
 
-		int result = myinfoService.myRecipeDelete(rbvo);
-
-		logger.info(result);
-
-		if (result == 1) {
-			return "OK";
-		} else {
-			return "ERROR";
+		for (String chkVal : chkVals) {
+			rbvo.setRbno(chkVal);
+			myinfoService.myRecipeDelete(rbvo);
+			nCnt++;
+			
 		}
+		logger.info(nCnt);
+		
+		String result = String.valueOf(nCnt);
+		
+		return result;
 
 	}
 
@@ -105,19 +108,20 @@ public class MyinfoController {
 
 	@RequestMapping(value = "myinfo/myQnADelete", method = RequestMethod.POST)
 	@ResponseBody
-	public String myQnADelete(BoardVO bvo) {
+	public String myQnADelete(BoardVO bvo, @RequestParam("chkVal[]") List<String> chkVals) {
 
 		logger.info("myQnADelete() 진입 >>> ");
-
-		logger.info("bno >>> " + bvo.getBno());
-
-		int result = myinfoService.myQnADelete(bvo);
-		logger.info(result);
-		if (result == 1) {
-			return "OK";
-		} else {
-			return "ERROR";
+		int nCnt = 0;
+		for (String chkVal : chkVals ) {
+			bvo.setBno(chkVal);
+			myinfoService.myQnADelete(bvo);
+			nCnt++;
 		}
+		logger.info(nCnt);
+		
+		String result = String.valueOf(nCnt);
+		
+		return result;
 
 	}
 
@@ -125,8 +129,17 @@ public class MyinfoController {
 	public String myRankUpdate(BoardVO bvo) {
 
 		logger.info("myRankUpdate() 진입 >>> ");
+		// 등급 올리는 것에 대한 기준이 필요
 	
 		return "";
+	}
+	
+	@RequestMapping(value = "myinfo/myFavRecipaList", method=RequestMethod.GET)
+	public String myFavRecipeList() {
+		logger.info("myFavRecipeList() 진입 >>> ");
+		// 내가 추천한 레시피 가져오기
+
+		 return "";
 	}
 	
 	

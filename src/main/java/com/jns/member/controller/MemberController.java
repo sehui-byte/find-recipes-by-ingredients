@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,6 +45,7 @@ public class MemberController {
 
 	// 회원 등록
 	@RequestMapping(value = "mem/memberInsert", method = RequestMethod.POST)
+	@ResponseBody
 	public String memInsert(MemberVO mvo, MultipartHttpServletRequest requset) {
 		// public String memInsert(HttpServletRequest req)
 		logger.info("MemberController memInsert 함수 시작 >>> : ");
@@ -65,18 +65,15 @@ public class MemberController {
 		logger.info("핸드폰 >>>>  :"+mvo.getMhp());
 		logger.info("이메일 >>> = "+mvo.getMemail());
 	
-	
 		// memInsert 함수에서 서비스 호출하기
 		int nCnt = memberService.memberInsert(mvo);
 		logger.info("MemberController memberInsert >>> : " + nCnt + " 건 입력 되었습니다.");
 
-		
 		if (nCnt == 1) {
 			return "main";
 		}
 
 		return "/memberForm";
-
 	}
 
 	// 회원전체 조회

@@ -63,4 +63,10 @@ public class MyinfoServiceImpl implements MyinfoService {
 		return myinfoDAO.myRankUpdate(bvo);
 	}
 
+	@Override
+	public List myFavRecipeList() {
+	
+		return null;
+	}
+
 }

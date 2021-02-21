@@ -29,38 +29,40 @@
 								 ,"action":"/kosmoJns/myinfo/myRecipeList.do"}).submit();
 		});
 		
-		// 단일 레시피 삭제
 		$("#deleteQnA").click(function(){
 			var nCnt = $(".checkbox:checked").length;
-			if (nCnt == 1){
-				var checkedbox = $(".checkbox:checked").val();
-				var url = "/kosmoJns/myinfo/myRecipeDelete.do";
-				var data = {rbno : checkedbox};
-				
-				$.ajax({
-					url : url,
-					data : data,
-					method : "POST",
-					success : whenSuccess,
-					error : whenError
-				});
-				
-				function whenSuccess(data){
-					if (data == "OK"){
-						alert("삭제되었습니다.");
-						location.reload();
-					}else{
-						alert("삭제에 실패하였습니다. ");
-					}
-				}	
-				
-				function whenError(data){
-					alert("댓글 삭제에 문제가 발생하였습니다. 관리자에게 문의하시기 바랍니다.");
-				}
-			}else{
-				// 2개 이상일 경우에는 어떻게 통신을 하는지 ?
+			var checkbox = $(".checkbox:checked");
+			var chkVal = [];
+			
+			for (var i = 0; i < nCnt; i++){
+				var chk = checkbox[i].value;
+				chkVal.push(chk);
 			}
-		})
+			
+			var data = {'chkVal' : chkVal};
+			var url = "/kosmoJns/myinfo/myRecipeDelete.do";
+			
+			$.ajax({
+				url : url,
+				data : data,
+				method : "POST",
+				success : whenSuccess,
+				error : whenError
+			});
+			
+			function whenSuccess(data){
+				if (data == nCnt){
+					alert("삭제되었습니다.");
+					location.reload();
+				}else{
+					alert("삭제에 실패하였습니다. ");
+				}
+			}	
+			
+			function whenError(data){
+				alert("댓글 삭제에 문제가 발생하였습니다. 관리자에게 문의하시기 바랍니다.");
+			}
+		}
 	})
 </script>
 </head>
