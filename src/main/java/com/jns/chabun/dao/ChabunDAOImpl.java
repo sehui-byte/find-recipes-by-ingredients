@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jns.board.vo.BoardVO;
+import com.jns.chef.vo.ChefVO;
 import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.board.vo.BoardVO;
@@ -68,6 +69,13 @@ public class ChabunDAOImpl implements ChabunDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getRecipeBoardChabun");
 	}
+
+	@Override
+	public ChefVO getChefChabun() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("getChefChabun");
+	}
+	
 
 
 	

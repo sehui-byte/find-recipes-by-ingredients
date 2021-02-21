@@ -46,9 +46,10 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
-	
+		
+
 	$(document).ready(function(){
-				
+		
 			//버튼 클릭시 회원가입 처리 
 			$(document).on("click","#membtn",function(){
 				console.log("membtn >>> : ");
@@ -59,7 +60,7 @@
 				$('#memberForm').attr('enctype','multipart/form-data');
 				$('#memberForm').submit();
 				
-				
+
 			});
 			
 			// 아이디 체크 
@@ -69,7 +70,7 @@
 				
 				let idcheckURL = "mem/checkID.do";
 				let method = "GET";
-				let midVal = $('mid').val();
+				let midVal = $('#mid').val();
 				
 				let dataParam = {"mid":midVal};
 				
@@ -87,8 +88,7 @@
 					if('ID_GOOD'==sVal){
 						alert("사용할 수 있는 아이디 입니다");
 					}else{
-						alert("이미 사용중인 아이디 입니다 ")
-						$("#mid").val('');
+						alert("이미 사용중인 아이디입니다");
 						$("#mid").focus();
 					}
 				}
@@ -97,6 +97,22 @@
 					
 				}
 			});
+			
+			function mhp(obj) {
+			  
+			  var number = obj.value.replace(/[^0-9]/g, "");
+			  var mhp = ""; if(number.length < 4) { return number; } 
+			  else if(number.length < 7) { mhp += number.substr(0, 3);
+			  mhp += "-"; mhp += number.substr(3); } 
+			  else if(number.length < 11) { mhp += number.substr(0, 3);
+			  mhp += "-"; mhp += number.substr(3, 3); mhp += "-";
+			  mhp += number.substr(6); } else { mhp += number.substr(0, 3); 
+			  mhp += "-"; mhp += number.substr(3, 4); mhp += "-"; mhp += number.substr(7); }
+			  obj.value = mhp; 
+			  }
+
+			
+
 				// 우편번호
 				$("#mzipcode").prop('readonly', true);
 				$("#maddr").prop('readonly', true);
@@ -111,14 +127,23 @@
 					}
 				}).open();
 			});
-		});		
-					
-	
 				
+
+
 	
+	});				
+
+	
+		
+		
+		
+	
+
 </script>
 </head>
 <body>
+</body>
+</html>
 <div>
 <form name="memberForm" id="memberForm">
 	<h2><font size="4" style="color:Blue;">전지적 냉장고 시점 회원가입 </font></h2>
@@ -180,20 +205,14 @@
 	<tr>
 		<td class="mem">전화번호</td>	
 		<td>
-			<select name="mhp" id="mhp">
-				<option value="010">010</option>
-				<option value="011">011</option>
-				<option value="017">017</option>
-			</select>
-			<input type="text" name="mhp1" id="mhp1" size="2"/>
-			<input type="text" name="mhp2" id="mhp2" size="2"/>	
+					<input type="tel" id="mhp" name="mhp">
 		</td>
 	</tr>
 	<tr>
 		<td class="mem">이메일</td>
 		<td>		
 			<input type="text" name="memail" id=memail style="width:100px" />
-			@ <input type="text" name="memail1" id=memail1 style="width:100px" placeholder="직접입력" />
+			@<input type="text" name="memail1" id=memail1 style="width:100px" placeholder="직접입력" />
 			<select name="memail2" id="memail2" style="width:100px;margin-right:10px">
 	        	 <option value="1" selected>직접입력</option>
 	       		 <option value="naver.com">naver.com</option>	       	   

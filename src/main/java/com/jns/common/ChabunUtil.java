@@ -11,8 +11,10 @@ public abstract class ChabunUtil {
 
 	public static final String BIZ_GUBUN_CB	= "CB"; // 쉐프 게시판 
 	//	public static final String BIZ_GUBUN_CO = "CO"; // 신고게시판 
-	public static final String BIZ_GUBUN_F	= "F"; // 즐겨찾기
 
+	public static final String BIZ_GUBUN_RB	= "RB"; // 레시피(일반/세프) 게시판 
+	public static final String BIZ_GUBUN_CO = "CO"; // 신고게시판 
+	public static final String BIZ_GUBUN_F	= "F"; // 즐겨찾기
 
 	public static final String BIZ_GUBUN_SI	= "SI"; // 구독번호
 	public static final String BIZ_GUBUN_I	= "I"; // 세프번호
@@ -22,18 +24,9 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_RB = "R"; // 게시판 댓글: REPLY 
 	//	public static final String BIZ_GUBUN_BUY = "P"; // 구매게시판
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public static final String BIZ_GUBUN_R = "R"; // 게시판 댓글: REPLY 
+//	public static final String BIZ_GUBUN_BUY = "P"; // 구매게시판
+
 	public static final String BIZ_GUBUN_LP = "LP"; //관심상품 
 
 	// type : D : 20210001, M : YYYYMM, Y : YYYY, 
@@ -44,7 +37,6 @@ public abstract class ChabunUtil {
 		String ymd = DateFormatUtil.ymdFormats(t);
 		return ymd.concat(c);
 	}
-
 
 
 	// 회원 번호 
@@ -61,7 +53,9 @@ public abstract class ChabunUtil {
 	// 게시판 댓글 글 번호  
 	public static String getReplyChabun(String type, String memNum) {
 
-		return BIZ_GUBUN_RB.concat(ChabunUtil.numPad(type, memNum));
+	//	return BIZ_GUBUN_RB.concat(ChabunUtil.numPad(type, memNum));
+		return BIZ_GUBUN_R.concat(ChabunUtil.numPad(type, memNum));
+
 	}
 
 	// 공지사항  번호  
@@ -81,6 +75,8 @@ public abstract class ChabunUtil {
 	public static String getChiefBoardChabun(String type, String memNum) {
 
 		return BIZ_GUBUN_CB.concat(ChabunUtil.numPad(type, memNum));
+		//return BIZ_GUBUN_RB.concat(ChabunUtil.numPad(type, memNum));
+
 	}
 
 	// 구매게시판  번호  
@@ -99,6 +95,8 @@ public abstract class ChabunUtil {
 	public static String getComplBoardChabun(String type, String memNum) {
 
 		return BIZ_GUBUN_CB.concat(ChabunUtil.numPad(type, memNum));
+		//return BIZ_GUBUN_CO.concat(ChabunUtil.numPad(type, memNum));
+
 	}
 
 	// 구독 번호  

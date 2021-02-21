@@ -47,28 +47,56 @@ $(document).ready(function(){
 		var option = "width ="+_width+", height ="+_height+", top ="+popupX+", left ="+popupY;//+", location = no";
 		window.open(url, title, option)	
 	})
+	
 })
+
+	//enter키 눌렀을 때 페이지 재로딩 되는 것 방지
+	function captureReturnKey(e) {
+		if (e.keyCode == 13 && e.srcElement.type != 'textarea')
+			return false;
+	}
+	
+	//input에서 엔터키 눌렀을 때도 검색 실행
+	function enterKey(){
+		if(window.event.keyCode == 13){
+			if($("#mid").val() == ""){
+				alert("로그인 아이디를 입력해주세요");
+			}else if($("#mpw").val() == ""){
+				alert("로그인 비밀번호를 입력해주세요");
+			}else{
+				$("#loginForm").attr("action", "<c:url value='/j_spring_security_check' />");
+				$("#loginForm").attr("method", "POST");
+				$("#loginForm").attr("enctype", "application/x-www-form-urlencoded");
+				$("#loginForm").submit();	
+			}	
+		}
+	}
+
 </script>
 </head>
 <body>
 	<div>
 		<form id="loginForm" name="loginForm">
-			<table border="1">
+			<table border="1" style="text-align:center;">
 				<tr>
 					<td>아이디</td>	
 					<td>
-						<input type="text" id="mid" name="mid" value="">	
+						<input type="text" id="mid" name="mid" value=""
+						onkeydown="return captureReturnKey(event)" onkeyup="enterKey()">
 					</td>	
-					<td rowspan="2">
-						<input type="button" id="loginbtn" value="Login">	
-					</td>
 				</tr>	
 				<tr>
 					<td>비밀번호</td>	
 					<td>
-						<input type="text" id="mpw" name="mpw" value="">	
+						<input type="text" id="mpw" name="mpw" value=""
+						onkeydown="return captureReturnKey(event)" onkeyup="enterKey();">
 					</td>	
 				</tr>	
+				<tr>
+					<td colspan="3">
+						<input type="button" id="loginbtn" value="Login">
+					</td>
+				</tr>
 				<tr>
 					<td colspan="3">
 						<input type="button" id="memberInsertBtn" name="memberInsertBtn" value="회원가입 하러 가기">

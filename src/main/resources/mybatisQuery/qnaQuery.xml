@@ -55,9 +55,9 @@
 						 ,#{bfile, jdbcType=VARCHAR}
 						 ,SYSDATE
 						 ,SYSDATE
-						 ,#{bviews, jdbcType=numeric}
+						 ,#{bviews, jdbcType=NUMERIC}
 						 ,'Y'
-						 ,#{bhits, jdbcType=numeric}
+						 ,#{bhits, jdbcType=NUMERIC}
 						 )
 	</insert>
 	
