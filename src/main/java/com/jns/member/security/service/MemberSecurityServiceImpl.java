@@ -3,6 +3,8 @@ package com.jns.member.security.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,13 +47,14 @@ public class MemberSecurityServiceImpl implements UserDetailsService {
 		List<String> authList = new ArrayList<String>();
 		authList.add(mvo2.getMlevel());
 
-		// setAUthorities로 객체 변환
+		// setAuthorities로 객체 변환
 
 		mvo2.setAuthorities(authList);
 
 		if (mvo2 == null) {
 			throw new UsernameNotFoundException("User Not Found");
 		}
+		
 		return mvo2;
 
 	}
