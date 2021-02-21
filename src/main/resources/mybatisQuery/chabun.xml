@@ -18,7 +18,6 @@
 	</select>
 	 -->
 	 
-	 
 	<select id="getQnABoardChabun" resultType="bvo">
 		SELECT NVL(MAX(INSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
 	</select>
@@ -33,6 +32,10 @@
 	
 	<select id="getRecipeBoardChabun" resultType="rbvo">
 		SELECT NVL(MAX(SUBSTR(RB.RBNO, -4)), 0) + 1  RBNO FROM RECIPE_BOARD RB
+	</select>
+	
+	<select id="getLikeProductChabun" resultType="pvo">
+		SELECT NVL(MAX(SUBSTR(LP.LPNO, -4)), 0) + 1  LPNO FROM LIKEPRODUCT LP
 	</select>
 	
 </mapper>

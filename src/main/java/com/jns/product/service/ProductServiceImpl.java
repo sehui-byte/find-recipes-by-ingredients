@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jns.chabun.dao.ChabunDAO;
 import com.jns.product.dao.ProductDAO;
 import com.jns.product.vo.ProductVO;
 
@@ -36,6 +37,7 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired(required=false)
 	public ProductServiceImpl(ProductDAO pdao) {
 		this.pdao = pdao;
+		
 	}
 
 	@Override

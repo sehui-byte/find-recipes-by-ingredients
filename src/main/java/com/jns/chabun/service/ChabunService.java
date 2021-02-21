@@ -5,6 +5,7 @@ import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.board.vo.BoardVO;
 import com.jns.notice.vo.NoticeVO;
+import com.jns.product.vo.ProductVO;
 import com.jns.qna.vo.QnAVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
@@ -23,6 +24,8 @@ public interface ChabunService {
 	public ReplyVO getReplyChabun();
 	
 	public RecipeBoardVO getRecipeBoardChabun();
+	
+	public ProductVO getLikeProductChabun();
 
 
 }
