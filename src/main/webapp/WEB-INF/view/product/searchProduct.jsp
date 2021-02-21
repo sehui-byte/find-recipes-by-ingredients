@@ -104,9 +104,9 @@
 										+ lprice + ',' 
 										+ hprice;
 							
-/* 							// 최근 본 상품 목록 필요한 매개변수 문자열
-							var rep = prdouctId + ',' + image + ',' + link;
- */							
+ 							// 최근 본 상품 목록 필요한 매개변수 문자열
+							var recentPro = prdouctId + ',' + image + ',' + link;
+							
 			
 							html += '<div class="col-sm-6">';
 							html += '<div class="card" style="width: 18rem;">';
@@ -125,7 +125,7 @@
 							html += '<li class="list-group-item"> 브랜드 : '
 									+ brand + '</li>';
 							html += '</ul>';
-							html += '<a href="' + link +'" class="btn btn-primary" onclick="clickpurchase()>구매하기</a> ';
+							html += '<a href="' + link +'" class="btn btn-primary" onclick=clickpurchase('+recentPro+')>구매하기</a> ';
 							//관심 상품 버튼 추가
 							html += '<input type="checkbox" class="heartBtn" id='
 									+ productId 

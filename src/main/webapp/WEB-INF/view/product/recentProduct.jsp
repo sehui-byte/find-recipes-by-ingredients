@@ -25,27 +25,27 @@
 		<div class="text-center_1">
 			<!-- <target="_blank> : 새 창에서 뜨기  / 없애면 현재 웹에서 이동-->
 			<a href="https://google.com" target="_blank">
-		    	<img src="..." class="rounded_1">
+		    	<img src="..." style="width:150px;height:150px;">
 			</a>
 		</div>
 		<div class="text-center_2">
 			<a href="#" target="_blank">
-		    	<img src="..." class="rounded_2">
+		    	<img src="" class="rounded_2">
 			</a>
 		</div>
 		<div class="text-center_3">
 			<a href="#" target="_blank">
-		    	<img src="..." class="rounded_3">
+		    	<img src="" class="rounded_3">
 			</a>
 		</div>
 		<div class="text-center_4">
 			<a href="#" target="_blank">
-		    	<img src="..." class="rounded_4">
+		    	<img src="" class="rounded_4">
 			</a>
 		</div>
 		<div class="text-center_5">
 			<a href="#" target="_blank">
-		    	<img src="..." class="rounded_5">
+		    	<img src="" class="rounded_5">
 			</a>
 		</div>
 	</div>
@@ -54,18 +54,25 @@
 
 
 	<script>
+				
 		
-		var recentProduct;
-
 		// 구매하기 버튼 클릭했을 때
-		function clickpurchase(){
+		//var recentPro = prdouctId + ',' + image + ',' + link;
+		function clickpurchase(recentPro){
+			
+			var proArr = recentPro.split(',');
+			var productId = proArr[0];
+			var productImage = proArr[1];
+			var productLink = proArr[2];
+			
+			
 			// 1. 해당 상품에 대한 쿠키값 저장
-			setRecentCookie("recent",productId);
+			setRecentCookie("recent",productId+'&&'+productImage+'&&'productLink);
 			
 			// 2-1. 쿠키값 가져와서
 			getRecentCookie("recent");
 			// 2-2. 배열로 저장
-			setCookieArray("recent", recentProduct);
+			setCookieArray("recent", productImage);
 		}
 	
 		
@@ -98,6 +105,7 @@
 		 	}
 		 	this.setCookie(cookieName, cookieValue);
 		 	// recent=0:cookieValue_1,1:cookieValue_2,...
+		 	
 		}
 		
 		
@@ -110,13 +118,26 @@
 		 	var tmp1 = cookieValue.split(",");
 			// 0:cookieValue_1
 		 	
-		 	var reData = {};
+		 	var reData = [];
 		 	for(var i in tmp1){
-		  		var tmp2 = tmp1[i].split(":"); // {0, cookieValue_1}
+		  		var tmp2 = tmp1[i].split(":"); // [0, cookieValue_1]
 		  		reData[tmp2[0]] = tmp2[1];
 		  		// reData[0] = cookieValue_1
 		 	}
-		 	return reData; //cookieValue_1
+		 	return reData; //[cookieValue_1, cookieValue_2, ...]
+		 	// [productId1&&productImage1&&productLink1, productId2&&productImage2&&productLink2, ...]
+		}
+		
+		// 쿠키로 가져온 데이터 종류별로 나누기
+		function getCookieData(reData){
+			var dataArr =[]; 
+			
+			
+			var proArr = dataArr[i].split('&&');
+			var productId = proArr[0];
+			var productImage = proArr[1];
+			var productLink = proArr[2];
+			
 		}
 		
 		
