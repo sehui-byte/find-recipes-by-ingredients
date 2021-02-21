@@ -77,7 +77,7 @@
 	
 		
 		// 쿠키 생성 함수
-		// cookieName : "recent", cookieValue : 상품명(productId), 유효시간 : 1시간
+		// cookieName : "recent", cookieValue : recentPro , 유효시간 : 1시간
 		function setRecentCookie(cookieName, cookieValue) {
 		    var expire = new Date();
 		    expire.setTime(date.getTime() + 1*60*60*1000); // 1hr

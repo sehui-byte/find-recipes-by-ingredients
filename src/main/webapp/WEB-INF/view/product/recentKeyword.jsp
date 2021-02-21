@@ -33,6 +33,7 @@
 		<span id="key3"></span>
 		<span id="key4"></span>
 		<span id="key5"></span>
+		<span id="key6"></span>
 	</div>
 	<script>
 	    var arr = []; 

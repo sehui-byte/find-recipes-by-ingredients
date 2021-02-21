@@ -33,14 +33,12 @@
 		<input class="form-control" list="datalistOptions" name="keyword"
 			onkeydown="return captureReturnKey(event)" onkeyup="enterKey();"
 			id="keyword" placeholder="Type to search..." "style="width: 300px"/>
-		<button type="button" class="btn btn-outline-primary" onclick="find(); recentSearch();">검색</button>
+		<button type="button" class="btn btn-outline-primary" onclick="find(); recentSearch(); clearInput();">검색</button>
 	</form>
 	
 	<!-- 최근 검색어 -->
 	<%@ include file="/WEB-INF/view/product/recentKeyword.jsp" %>
-		
-
-
+	
 
 	<!-- 검색결과 -->
 	<div id="result"></div>
@@ -57,9 +55,19 @@
 				{
 					find();
 					recentSearch();
+					clearInput();
 				}
 			
 		}
+		
+		// 검색 후 검색창의 텍스트 지우기
+		function clearInput(){
+			var keyword = document.getElementsByClassName('form-control');
+			for(var i=0; i<keyword.length; i++){
+				keyword[i].value = '';
+			}
+		}
+		
 		//ajax코드 넣기
 		function find() {
 			var keyword = $('#keyword').val();
