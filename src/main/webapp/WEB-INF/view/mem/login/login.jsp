@@ -88,7 +88,7 @@ $(document).ready(function(){
 				<tr>
 					<td>비밀번호</td>	
 					<td>
-						<input type="text" id="mpw" name="mpw" value=""
+						<input type="password" id="mpw" name="mpw" value=""
 						onkeydown="return captureReturnKey(event)" onkeyup="enterKey();">
 					</td>	
 				</tr>	
@@ -124,7 +124,6 @@ $(document).ready(function(){
 					</td>	
 				</tr>
 			</table>	
-			<s:csrfInput/>
 		</form>
 	</div>
 </body>

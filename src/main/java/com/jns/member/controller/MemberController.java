@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
+import com.jns.common.FileUploadUtil;
 import com.jns.member.service.MemberService;
 import com.jns.member.vo.MemberVO;
 
@@ -46,8 +46,8 @@ public class MemberController {
 
 	// 회원 등록
 	@RequestMapping(value = "mem/memberInsert", method = RequestMethod.POST)
-	public String memInsert(MemberVO mvo, MultipartHttpServletRequest requset) {
-		// public String memInsert(HttpServletRequest req)
+	@ResponseBody
+	public String memInsert(MemberVO mvo, MultipartHttpServletRequest request) {
 		logger.info("MemberController memInsert 함수 시작 >>> : ");
 
 		// 회원번호 채번 가져오기
@@ -64,19 +64,21 @@ public class MemberController {
 		logger.info("사진 >>>>  :"+mvo.getMphoto());
 		logger.info("핸드폰 >>>>  :"+mvo.getMhp());
 		logger.info("이메일 >>> = "+mvo.getMemail());
-	
+		
+		
+		String key = new FileUploadUtil().uploadFile(request, "member");
+		logger.info("key >>> : " + key);
+		mvo.setMphoto(key);
 	
 		// memInsert 함수에서 서비스 호출하기
 		int nCnt = memberService.memberInsert(mvo);
 		logger.info("MemberController memberInsert >>> : " + nCnt + " 건 입력 되었습니다.");
 
-		
 		if (nCnt == 1) {
 			return "main";
 		}
 
 		return "/memberForm";
-
 	}
 
 	// 회원전체 조회

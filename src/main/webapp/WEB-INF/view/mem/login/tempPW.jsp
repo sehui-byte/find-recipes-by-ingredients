@@ -54,12 +54,17 @@
 
 		})		
 
-		$("#memail2").on('change', function(){
-			var memail = $("#memail2").val();
-			if (memail == "custom"){
-				$("#memail2").replaceWith("<input type='text' name='memail2' id='memail2'>");
+		$(document).on("change", "#memail3", function(){
+			var memail3 = $("#memail3").val();	
+			if (memail3 != 1){
+				$("#memail2").prop("disabled", true);
+				$("#memail2").val(memail3);
+
+			}else{
+				$("#memail2").prop("disabled", false);
+				$("#memail2").val("");
 			}
-		})
+		})	
 		
 		$("#back").click(function(){
 			history.go(-1);
@@ -95,19 +100,18 @@
 				</td>
 				<td>
 					<input type="text" name="memail1" id="memail1">@
-					<select name="memail2" id="memail2">
-						<option value="" selected="selected">이메일 선택</option> 
+					<input type="text" name="memail2" id="memail2">
+					<select name="memail3" id="memail3">
+						<option value="1" selected="selected">직접입력</option> 
 						<option value="naver.com">naver.com</option>	
 						<option value="daum.com">daum.com</option>	
 						<option value="google.com">google.com</option>	
-						<option value="custom">직접 입력</option> 
 					</select>
 				</td>	
 			</tr>	
 			<tr>
 				<td colspan="2">
 					<input type="button" name="TempPW" id="TempPW" value="임시 비밀번호 발급받기">
-					<input type="reset" name="reset" id="reset" value="다시 입력하기">
 					<input type="button" name="back" id="back" value="뒤로가기">
 				</td>	
 			</tr>

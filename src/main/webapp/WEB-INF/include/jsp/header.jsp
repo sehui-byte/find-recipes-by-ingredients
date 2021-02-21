@@ -18,9 +18,17 @@
 	Object principal = auth.getPrincipal();
 	String mnick = "";
 	String mno = "";
+	String mid = "";
+	String loginSession = "";	
+	
 	if(principal != null && principal instanceof MemberVO){
 		mnick = ((MemberVO)principal).getMnick();	
 		mno = ((MemberVO)principal).getMno();
+		mid = ((MemberVO)principal).getMid();
+
+		// 로그인시 session key값 생성
+		session.setAttribute("mid", mid);
+		loginSession = (String)session.getAttribute("mid");
 	}
 %>
 

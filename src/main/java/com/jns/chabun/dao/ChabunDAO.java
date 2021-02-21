@@ -28,4 +28,5 @@ public interface ChabunDAO {
 	
 	public ProductVO getLikeProductChabun();
 	public ChefVO getChefChabun();
+
 }
