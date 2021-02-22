@@ -12,7 +12,7 @@ public class FileLoadUtil
 	
 	public String getFileSrc(String dir_name, String key)
 	{
-		return "resources\\" + dir_name + key;
+		return "resources\\" + dir_name + "\\" + key;
 	}
 	
 	public String getFileRealPath(HttpServletRequest request, String dir_name, String key)
