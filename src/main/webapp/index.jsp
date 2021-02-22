@@ -1,6 +1,7 @@
+<%@page import="com.jns.common.FileLoadUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/include/jsp/header.jsp" %>
+<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 <html>
 <body>
 <h2>main test 페이지</h2><br>

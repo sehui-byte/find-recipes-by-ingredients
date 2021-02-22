@@ -21,7 +21,7 @@ public class FileUploadUtil
 		if(request != null)
 		{
 			//file upload location
-			String basepath = request.getServletContext().getRealPath("WEB-INF\\files\\" + dir_name);
+			String basepath = request.getServletContext().getRealPath("resources\\" + dir_name);
 			if(dir_name != null && new File(basepath).isDirectory())
 			{
 				logger.info("basepath >>> : " + basepath);
@@ -102,7 +102,7 @@ public class FileUploadUtil
 		if(request != null)
 		{
 			//file upload location
-			String basepath = request.getServletContext().getRealPath("WEB-INF\\files\\" + dir_name);
+			String basepath = request.getServletContext().getRealPath("resources\\" + dir_name);
 			if(dir_name != null && new File(basepath).isDirectory())
 			{
 				logger.info("basepath >>> : " + basepath);

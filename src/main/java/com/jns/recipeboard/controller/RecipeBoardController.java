@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.DateFormatUtil;
+import com.jns.common.FileLoadUtil;
 import com.jns.common.FileUploadUtil;
 import com.jns.recipe.service.RecipeService;
 import com.jns.recipeboard.service.RecipeBoardService;
@@ -79,7 +80,7 @@ public class RecipeBoardController
 		//=========================== 파일 업로드 ===========================//
 		List<String> keyList = new FileUploadUtil().uploadFiles(request, "recipeboard");
 		
-		//=========================== VO에 매핑 ===========================//
+		//======================== VO에 이미지 key 매핑 ======================//
 		rbvo.setMain_img(keyList.get(0));
 		rbvo.setManual_img01(keyList.get(1));
 		rbvo.setManual_img02(keyList.get(2));
@@ -103,6 +104,8 @@ public class RecipeBoardController
 		rbvo.setManual_img20(keyList.get(20));
 		
 		logger.info("rbvo >>> : " + rbvo.toString());
+		
+		logger.info("insert >>> : " + recipeBoardService.recipeBoardInsert(rbvo));		
 		
 		model.addAttribute("list", recipeBoardService.recipeBoardSelectAll());
 		return "recipeboard/recipeboard";
