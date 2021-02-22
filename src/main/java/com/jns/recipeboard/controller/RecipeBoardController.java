@@ -51,6 +51,13 @@ public class RecipeBoardController
 		return "recipeboard/recipeboard";
 	}//레시피 게시판으로 이동
 	
+	@RequestMapping(value = "rbdetail", method = RequestMethod.GET)
+	public String rbdetail(RecipeBoardVO rbvo, Model model)
+	{
+		model.addAttribute("rbvo", recipeBoardService.recipeBoardSelect(rbvo));
+		return "recipeboard/recipeboard_detail";
+	}//레시피 게시판 상세보기로 이동
+	
 	@RequestMapping(value = "rbwriteform", method = RequestMethod.GET)
 	public String rbwriteform()
 	{
@@ -62,7 +69,7 @@ public class RecipeBoardController
 	public String rbupdateform(RecipeBoardVO rbvo, Model model)
 	{
 		return "recipeboard/recipeboard";
-	}
+	}//레시피 게시판 수정 폼으로 이동
 	
 	//================================= ISUD =================================//
 	@RequestMapping(value = "rbwrite", method = RequestMethod.POST)
