@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,18 +9,10 @@
 <body>
 <h3>admin 페이지</h3>
 <ul>
-	<li>
-		<a href="memberSelectAll.do">회원 조회/수정/삭제</a>
-	</li>
-	<li>
-		<a href="qnaSelectAll.do">QnA 게시판 조회/수정/삭제  </a>
-	</li>
-	<li>
-		<a href="recipeSelectAll.do">레시피 게시판 조회/수정/삭제 </a>
-	</li>
-	<li>
-		댓글 조회/수정/삭제
-	</li>
+	<li><a href="../memberSelectAll.do">회원 조회/수정/삭제</a>	</li>
+	<li><a href="../qnaSelectAll.do">QnA 게시판 조회/수정/삭제  </a></li>
+	<li><a href="../recipeboard.do">레시피 게시판 조회/수정/삭제 </a></li>
+	<li><a href="../reply/reply.do">댓글 조회/수정/삭제</a></li>
 	<li>
 		실적	
 	</li>
