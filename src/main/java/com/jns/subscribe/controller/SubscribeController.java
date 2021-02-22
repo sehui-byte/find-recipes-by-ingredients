@@ -1,8 +1,11 @@
 package com.jns.subscribe.controller;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +29,12 @@ public class SubscribeController {
 		this.chabunService = chabunService;
 	}
 	
+	// 테스트
+	@RequestMapping(value="subscribe/test", method=RequestMethod.GET)
+	public String test() {
+		return "subscribe/test";
+	}
+	
 	
 	/********************************************************************************************
 	* 구독 하기
@@ -47,6 +56,23 @@ public class SubscribeController {
 		
 		if (1 == result) { return "GOOD"; }
 		else{ return "BAD"; }
+	}
+	
+	
+	/********************************************************************************************
+	* 내 구독 리스트 확인하기
+	********************************************************************************************/
+	@RequestMapping(value="subscribe/mysublist", method=RequestMethod.POST)
+	public String mySubLinst(SubscribeVO svo, Model model) {
+		logger.info("[SubscribeC] >> mySubLinst 호출 성공");
+		logger.info("[SubscribeC] >> mySubLinst >> mno >>> : " + svo.getMno());
+		
+		List<SubscribeVO> subList = subscribeService.mySubList(svo);
+		
+		model.addAttribute("subList", subList);
+		logger.info("[ChefController] >> chefSelectAll listChef.size() >>> : " + subList.size());
+		
+		return "subscribe/mysublist";
 	}
 	
 }
