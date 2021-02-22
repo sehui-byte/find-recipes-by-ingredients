@@ -56,8 +56,20 @@ public class ChefBoardVO {
 	private String rb_updatedate;
 	private String rb_deleteyn;
 
-	//**************************
-	//검색 설정
+	// MEMBER JOIN *************************************************
+	private String mlevel;
+	
+	public String getMlevel() {
+		return mlevel;
+	}
+
+	public void setMlevel(String mlevel) {
+		this.mlevel = mlevel;
+	}
+	
+	//**************************************************************
+
+	//검색 설정 ****************************************************
 	private String keyfilter;
 	private String keyword;
 	private String startdate;
@@ -94,7 +106,7 @@ public class ChefBoardVO {
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
 	}
-	//**************************	
+	//**************************************************************	
 
 	public ChefBoardVO() {}
 
