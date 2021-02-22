@@ -9,6 +9,28 @@ public class SubscribeVO {
 	private String supdatedate;
 	private String sdeleteyn;
 	
+	// 구독 관련 JOIN *************************************************
+	private String mid;
+	private String chefnick;
+	
+	public String getMid() {
+		return mid;
+	}
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+
+	public String getChefnick() {
+		return chefnick;
+	}
+
+	public void setChefnick(String chefnick) {
+		this.chefnick = chefnick;
+	}
+	
+	// *************************************************************
+	
 	public SubscribeVO() {
 		
 	}

@@ -63,5 +63,8 @@
 	<input type="text" id="ino" name="ino" placeholder="세프번호">
 	<input type="button" id="D" value="삭제">
 </form>
+
+<br>
+<hr>
 </body>
 </html>

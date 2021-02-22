@@ -78,7 +78,6 @@
 	<li><a href="/kosmoJns/main.do">일반 접속</a></li>
 	<li><a href="/kosmoJns/admin/main.do">admin 접속</a></li>
 </ul>
-</div>
 
 <h3>세프 관련 URL</h3>
 <ul>
@@ -86,6 +85,15 @@
 </ul>
 
 <hr>
+
+<h3>구독 관련 URL</h3>
+<ul>
+	<li><a href="/kosmoJns/subscribe/test.do">테스트</a></li>
+</ul>
+
+<hr>
+</div>
+
 
 </body>
 </html>

@@ -4,6 +4,19 @@
 
 
 	<!-- 내 구독 리스트 -->
+	<select id="mySubList" parameterType="svo" resultType="svo">
+		SELECT 
+				 B.SNO		AS SNO
+				,A.MID		AS MID
+				,D.MNICK	AS CHEFNICK
+				,B.SINSERTDATE	AS SINSERTDATE
+		FROM 	 MEMBER A, SUB_INFO B, CHEF_INFO C, MEMBER D
+		WHERE 	 A.MNO = B.MNO
+		AND		 B.INO = C.INO
+		AND		 C.MNO = D.MNO
+		AND 	 A.MNO = #{mno, jdbcType=VARCHAR}
+	</select>
+
 
 	<!-- 구독하기 -->
 	<insert id="subInsert" parameterType="svo">
