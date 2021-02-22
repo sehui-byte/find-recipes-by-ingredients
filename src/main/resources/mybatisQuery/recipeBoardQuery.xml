@@ -19,7 +19,7 @@
 		FROM
 			RECIPE_BOARD
 		WHERE
-			RB_DELETEYN = 'Y',
+			RB_DELETEYN = 'Y'
 			AND RBNO = #{rbno}
 		ORDER BY
 			RBNO
