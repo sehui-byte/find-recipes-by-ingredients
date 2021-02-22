@@ -166,27 +166,30 @@
    <select id="memberSelectAll" resultType="mvo">
    SELECT *
    FROM  MEMBER A
-   WHERE A.MDELETEYN='Y'
+   WHERE A.MDELETEYN='Y'  
    </select>
    
    <!-- 회원 정보 수정  -->
    <update id="memberUpdate" parameterType="mvo">
-   UPDATE   MEMBER
-      SET MNICK = #{mnick,jdbcType=VARCHAR}
-         MADDR = #{maddr,jdbcType=VARCHAR}
-         ,MPHOTO = #{mphoto,jdbcType=VARCHAR}
-   WHERE MDELETEYN = 'Y'
-   AND   MNO = #{mno,jdbcType=VARCHAR}
+   UPDATE MEMBER
+      SET
+      	  MNICK = #{mnick,jdbcType=VARCHAR}
+         ,MHP = #{mhp, jdbcType=VARCHAR}
+         ,MUPDATEDATE = SYSDATE
+   WHERE MNO = #{mno,jdbcType=VARCHAR}
+   AND   MDELETEYN = 'Y'
    </update>
    
    <!-- 회원 삭제 -->
-   <update id="memberDelete" parameterType="mvo">
+   <delete id="memberDelete" parameterType="mvo">
    UPDATE MEMBER
-      SET MUPDATEDATE = SYSDATE
-         MDELETEYN = 'N'
-   WHERE   MDELETEYN = 'Y'
-   AMD    MNO = {mno,jdbcType=VARCHAR}
-   </update>
+      SET 
+      	  MDELETEYN = 'N'
+         ,MUPDATEDATE = SYSDATE
+   WHERE  MNO = #{mno, jdbcType=VARCHAR}  <!-- 쿼리문 	작성시 #{} 표시 주의, 띄어쓰기 주의 -->
+   AND    MDELETEYN = 'Y'
+   </delete>
+   
    <!-- 아이디 중복 확인   -->
    <select id="checkID" parameterType ="mvo" resultType="mvo">
 
