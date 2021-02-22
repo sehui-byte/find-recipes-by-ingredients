@@ -21,7 +21,7 @@
 	
 	<!-- 최근 본 상품 --> <!-- 이미지 + 링크 -->
 	<div class="card text-dark bg-light mb-3" style="max-width: 16rem;">
-		<div class="card-header"></div>
+		<span id="recent_text"></span>
 		<div class="text-center_1">
 			<!-- <target="_blank> : 새 창에서 뜨기  / 없애면 현재 웹에서 이동-->
 			<span id="product1">
@@ -50,13 +50,13 @@
 
 	<script>
 				
-		
 		/*
 			구매하기 버튼 클릭했을 때, 해당 상품의 필요한 데이터 쿠키 배열로 저장
 		*/
 		
 		// var recentPro = prdouctId + ',' + image + ',' + link;
 		function clickpurchase(recentPro){	
+			// 최근 본 상품 화면에 추가
 			showRecent();
 			
 			var info = recentPro.split(","); // [prdouctId, image, link]
@@ -76,13 +76,12 @@
 		}
 		
 		
-		// 최근 본 상품 화면에 추가
-		function showRecent(){
-			document.getElementsByClassName('card-header').innerHTML = '<strong>최근 본 상품</strong>';
+		function showRecent(){		
+			var a = document.getElementById("recent_text");
+	    	a.innerHTML = '<div class="card-header"><strong>최근 본 상품</strong></div>';
 		}
-			
-				
 		
+				
 		// 쿠키 생성 함수
 		// cookieName : "recent", cookieValue : recentPro , 유효시간 : 1시간
 		function setRecentCookie(cookieName, cookieValue) {

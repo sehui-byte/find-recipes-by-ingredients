@@ -35,6 +35,7 @@
 		<span id="key5"></span>
 		<span id="key6"></span>
 	</div>
+	<br>
 	<script>
 	    var arr = []; 
 	      
@@ -65,7 +66,9 @@
 	    
 
 	    function showKeytext(){
-			document.getElementsById('key_text').innerHTML = '최근 검색어 :';
+	    	var keytext = "최근 검색어 :";
+	    	var a = document.getElementById("key_text");
+	    	a.innerHTML = keytext;
 		}
 	    
 	    
