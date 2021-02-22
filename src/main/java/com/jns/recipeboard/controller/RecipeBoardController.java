@@ -68,13 +68,41 @@ public class RecipeBoardController
 	public String rbwrite(RecipeBoardVO rbvo, MultipartHttpServletRequest request, Model model)
 	{
 		logger.info("[RecipeBoardController] rbwrite.do 호출됨");
+		
+		//============================= 채번 =============================//
 		String no = chabunService.getRecipeBoardChabun().getRbno();
 		String rbno = "RB" + DateFormatUtil.ymdFormat() + no;
 		logger.info("rbno >>> : " + rbno);
 		rbvo.setRbno(rbno);
 		logger.info("rbvo >>> : " + rbvo.toString());
+	
+		//=========================== 파일 업로드 ===========================//
+		List<String> keyList = new FileUploadUtil().uploadFiles(request, "recipeboard");
 		
-		//파일 업로드 처리해야함.......
+		//=========================== VO에 매핑 ===========================//
+		rbvo.setMain_img(keyList.get(0));
+		rbvo.setManual_img01(keyList.get(1));
+		rbvo.setManual_img02(keyList.get(2));
+		rbvo.setManual_img03(keyList.get(3));
+		rbvo.setManual_img04(keyList.get(4));
+		rbvo.setManual_img05(keyList.get(5));
+		rbvo.setManual_img06(keyList.get(6));
+		rbvo.setManual_img07(keyList.get(7));
+		rbvo.setManual_img08(keyList.get(8));
+		rbvo.setManual_img09(keyList.get(9));
+		rbvo.setManual_img10(keyList.get(10));
+		rbvo.setManual_img11(keyList.get(11));
+		rbvo.setManual_img12(keyList.get(12));
+		rbvo.setManual_img13(keyList.get(13));
+		rbvo.setManual_img14(keyList.get(14));
+		rbvo.setManual_img15(keyList.get(15));
+		rbvo.setManual_img16(keyList.get(16));
+		rbvo.setManual_img17(keyList.get(17));
+		rbvo.setManual_img18(keyList.get(18));
+		rbvo.setManual_img19(keyList.get(19));
+		rbvo.setManual_img20(keyList.get(20));
+		
+		logger.info("rbvo >>> : " + rbvo.toString());
 		
 		model.addAttribute("list", recipeBoardService.recipeBoardSelectAll());
 		return "recipeboard/recipeboard";
@@ -89,22 +117,22 @@ public class RecipeBoardController
 		return "recipeboard/recipeboard";
 	}
 	
-	@RequestMapping(value = "filetest", method = RequestMethod.POST)
-	public String filetest(RecipeBoardVO rbvo, MultipartHttpServletRequest request)
-	{
-		//단일파일 업로드
-		String key = new FileUploadUtil().uploadFile(request, "recipeboard"); // 업로드 할 폴더 이름 (\WEB-INF\files\recipeboard)
-		logger.info("key >>> : " + key);
-		
-		//다중 파일 업로드
-		List<String> keyList = new FileUploadUtil().uploadFiles(request, "recipeboard");
-		logger.info("keyList >>> : " + keyList.toString());
-		
-		rbvo.setManual_img01(keyList.get(0));
-		rbvo.setManual_img02(keyList.get(1));
-		
-		return "";
-	}
+//	@RequestMapping(value = "filetest", method = RequestMethod.POST)
+//	public String filetest(RecipeBoardVO rbvo, MultipartHttpServletRequest request)
+//	{
+//		//단일파일 업로드
+//		String key = new FileUploadUtil().uploadFile(request, "recipeboard"); // 업로드 할 폴더 이름 (\WEB-INF\files\recipeboard)
+//		logger.info("key >>> : " + key);
+//		
+//		//다중 파일 업로드
+//		List<String> keyList = new FileUploadUtil().uploadFiles(request, "recipeboard");
+//		logger.info("keyList >>> : " + keyList.toString());
+//		
+//		rbvo.setManual_img01(keyList.get(0));
+//		rbvo.setManual_img02(keyList.get(1));
+//		
+//		return "";
+//	}
 	
 	//================================= Ajax =================================//
 	@RequestMapping(value = "recipeBoardSelectAll", method = RequestMethod.GET)
