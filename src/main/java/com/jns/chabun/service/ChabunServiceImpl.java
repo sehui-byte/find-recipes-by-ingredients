@@ -15,6 +15,7 @@ import com.jns.product.vo.ProductVO;
 import com.jns.qna.vo.QnAVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
+import com.jns.subscribe.vo.SubscribeVO;
 
 
 @Service
@@ -86,4 +87,13 @@ public class ChabunServiceImpl implements ChabunService {
 		logger.info("LikeProductChabun 채번호출");
 		return chabunDAO.getLikeProductChabun();
 	}
+
+	@Override
+	public SubscribeVO getSubscribeChabun() {
+		// TODO Auto-generated method stub
+		logger.info("SubscribeChabun 채번호출");
+		return chabunDAO.getSubscribeChabun();
+	}
+	
+	
 }

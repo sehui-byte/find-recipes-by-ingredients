@@ -1,40 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jns.chef.dao.ChefDAO">
-
-	<!-- 
-	<resultMap type="com.jns.member.vo.MemberVO" id="mvo">
-		<result property="mno" column="MNO"/>
-		<result property="mlevel" column="MLEVEL"/>
-		<result property="mid" column="MID"/>
-		<result property="mpw" column="MPW"/>
-		<result property="mname" column="MNAME"/>
-		<result property="mnick" column="MNICK"/>
-		<result property="mhp" column="MHP"/>
-		<result property="memail" column="MEMAIL"/>
-		<result property="maddr" column="MADDR"/>
-		<result property="mzipcode" column="MZIPCODE"/>
-		<result property="maddrdetail" column="MADDRDETAIL"/>
-		<result property="mphoto" column="MPHOTO"/>
-		<result property="minsertdate" column="MINSERTDATE"/>
-		<result property="mupdatedate" column="MUPDATEDATE"/>
-		<result property="mdeleteyn" column="MDELETEYN"/>
-	</resultMap>
-	
-	<resultMap type="com.jns.chef.vo.ChefVO" id="cvo">
-		<result property="ino" column="INO"/>
-		<result property="mno" column="MNO"/>
-		<result property="iinsertdate" column="IINSERTDATE"/>
-		<result property="iupdatedate" column="IUPDATEDATE"/>
-		<result property="ideleteyn" column="IDELETEYN"/>
-	</resultMap>
-	
-	<resultMap type="com.jns.chef.vo.ChefMemberJoinVO" id="cmjvo">
-		<collection property="chefVO" resultMap="cvo"/>
-		<collection property="memberVO" resultMap="mvo"/>
-	</resultMap>
-	 -->
-	
 	
 	<!-- 전체 세프 조회 -->
 	<select id="chefSelectAll" parameterType="cvo" resultType="cvo">

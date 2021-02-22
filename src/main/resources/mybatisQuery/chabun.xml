@@ -47,4 +47,8 @@
 		SELECT NVL(MAX(SUBSTR(A.INO, -4)), 0) + 1  INO FROM CHEF_INFO A
 	</select>
 	
+	<select id="getSubscribeChabun" resultType="svo">
+		SELECT NVL(MAX(SUBSTR(A.SNO, -4)), 0) + 1  SNO FROM SUB_INFO A
+	</select>
+	
 </mapper>

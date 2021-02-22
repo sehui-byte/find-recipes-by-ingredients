@@ -123,10 +123,9 @@ public class ReplyController {
 	@RequestMapping(value="reply/replyInsert", method=RequestMethod.POST)
 	public String replyInsert(ReplyVO rvo){
 		logger.info("ReplyC >> replyInsert 호출 성공");
-		logger.info("ReplyC >> list >> bno >>> : " + rvo.getBno());
-		logger.info("ReplyC >> list >> rbno >>> : " + rvo.getRbno());
-		logger.info("ReplyC >> list >> rwriter >>> : " + rvo.getRwriter());
-		
+		logger.info("ReplyC >> replyInsert >> bno >>> : " + rvo.getBno());
+		logger.info("ReplyC >> replyInsert >> rbno >>> : " + rvo.getRbno());
+		logger.info("ReplyC >> replyInsert >> rwriter >>> : " + rvo.getRwriter());		
 		
 		// 채번 setting
 		String rno = ChabunUtil.getReplyChabun("D", chabunService.getReplyChabun().getRno());
