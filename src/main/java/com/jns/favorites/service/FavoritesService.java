@@ -8,8 +8,7 @@ public interface FavoritesService {
 
 	// 레시피 추천하기
 	public int myFavRecipeInsert(FavoritesVO fvo);
-	
-	// 추천 레시피 제거
-	public int myFavRecipeDelete(FavoritesVO fvo);
 
+	// 추천 레시피 취소
+	public int myFavRecipeDelete(FavoritesVO fvo);
 }

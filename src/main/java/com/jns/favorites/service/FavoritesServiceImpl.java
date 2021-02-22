@@ -42,5 +42,5 @@ public class FavoritesServiceImpl implements FavoritesService {
 
 		return favoritesDAO.myFavRecipeDelete(fvo);
 	}
-
+	
 }

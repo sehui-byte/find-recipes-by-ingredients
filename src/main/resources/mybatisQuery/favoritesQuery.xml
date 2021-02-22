@@ -54,4 +54,5 @@
 			RBNO = #{rbno, jdbcType=VARCHAR}
 		</if>
 	</delete>
+	
 </mapper>

@@ -3,11 +3,65 @@
 <%@ include file="/WEB-INF/include/jsp/jspinclude.jsp" %>
 
 <%
-	String mno = (String)request.getAttribute("mno");
+	String mno = (String)request.getParameter("mno");
 	Object obj = request.getAttribute("recipeList");
 	List<RecipeVO> recipeList = (List)obj;
 %>    
+<script>
+	$(document).ready(function(){
+		// 체크박스 전체 선택	
+		$("#checkAll_APIRecipe").click(function(){
+			//alert("1111");
+			var checkAll = $("#checkAll_APIRecipe");	
+			if (checkAll.prop("checked")){
+				$(".checkbox_APIRecipe").prop("checked",true)	
+			}else{
+				$(".checkbox_APIRecipe").prop("checked",false)	
+			}
+		});
+			
+			$("#deleteMyFavRecipeAPI").on("click", function(){
+				var nCnt = $(".checkbox_APIRecipe:checked").length;
+				var checkbox = $(".checkbox_APIRecipe:checked");
+				var chkVal = [];
+				
+				for (var i = 0; i < nCnt; i++){
+					var chk = checkbox[i].value;
+					alert(chk);
+					chkVal.push(chk);
+				}
+				
+				var url = "/kosmoJns/favorites/myFavRecipeDelete.do";
+				var data = {'chkVal' : chkVal,
+						'recipeType' : 'API',
+						'mno' : '<%= mno %>'
+						};
 
+				$.ajax({
+					url : url,
+					data : data,
+					method : "POST",
+					success : whenSuccess,
+					error : whenError
+				});
+				
+				function whenSuccess(data){
+					if (data == nCnt){
+						alert("정상적으로 삭제되었습니다.");
+						location.reload();
+					}else{
+						alert("삭제에 실패하였습니다. ");
+					}
+				}	
+			
+				function whenError(data){
+					alert("댓글 삭제에 문제가 발생하였습니다. 관리자에게 문의하시기 바랍니다.");
+				}
+				
+			});
+		})	
+
+</script>
 <form id="myFavRecipeList" name="myFavRecipeList" >
 	<table border="1" style="text-align:center; margin-left:auto; margin-right:auto;">
 		<thead>
@@ -30,45 +84,49 @@
 		</thead>
 		<tr>
 			<td>
-				<input type="checkbox" id="checkAll">	
+				<input type="checkbox" id="checkAll_APIRecipe">	
 			</td>	
 			<td>제목 </td>	
 			<td>레시피 등록 날짜</td>	
 			<td>레시피 조회수</td>	
 			<td>레시피 추천수</td>	
+			<td>기타</td>	
 		</tr>
 
 <% 
 	if (recipeList != null){
 		int nCnt = recipeList.size();
+		if (nCnt > 0){	
 			for (int i = 0; i < nCnt; i++){
 				RecipeVO rvo = null;
 				rvo = recipeList.get(i);
 %>
 		<tr>
 			<td>
-				<input type="checkbox" name="rcp_seq" value="<%= rvo.getRcp_seq()%>" class="checkbox">	
+				<input type="checkbox" name="rcp_seq" value="<%= rvo.getRcp_seq()%>" class="checkbox_APIRecipe">	
 			</td>	
 			<td>
-				<a href="qnaSelect?rcp_seq=<%= rvo.getRcp_seq() %>"><%= rvo.getRcp_nm() %></a>
+				<a href="/kosmoJns/recipedetail.do?rcp_seq=<%= rvo.getRcp_seq() %>"><%= rvo.getRcp_nm() %></a>
 			</td>	
 			<td><%= rvo.getRcp_insertdate() %></td>	
-			<td><%= rvo %></td>	
+			<td>조회수</td>	
+			<td>추천수</td>	
 			<td>기타</td>	
 		</tr>
 <%
-		} // end of for
-	}else{
+			} // end of for
+		}else{
  %>		
 		<tr>
-			<td colspan="4">현재 추천한 레시피가 없습니다.</td>	
+			<td colspan="6">현재 추천한 레시피가 없습니다.</td>	
 		</tr>
 <% 
-	}	
+		}	
+	}
 %>
 		<tr>
-			<td colspan="4">
-				<input type="button" name="deleteQnA" id="deleteQnA" value="즐겨찾기 삭제">
+			<td colspan="6">
+				<input type="button" name="deleteMyFavRecipeAPI" id="deleteMyFavRecipeAPI" value="즐겨찾기 삭제">
 			</td>
 		</tr>	
 	</table>

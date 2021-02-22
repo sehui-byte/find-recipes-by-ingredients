@@ -13,6 +13,77 @@
 
 	$(document).ready(function(){
 		
+				// 추천 내역 확인하기	
+					var mno = "<%= mno %>";
+					var rbno = $("#rbno").val();
+					var recipeType = "user";
+
+					var url = "/kosmoJns/favorites/favRecipeCheck.do";
+
+					var data = {
+							"mno" : mno,
+							"rbno" : rbno,
+							"recipeType" : recipeType};
+					$.ajax({
+						url : url,
+						method : "GET",
+						data : data,
+						success : whenSuccess,
+						error : whenError
+					});
+					
+					function whenSuccess(data){
+						if (data == "CHECK"){
+							$("#FavRecipe").text("추천 취소하기");
+						}else{
+							$("#FavRecipe").text("추천하기");
+						}
+					}
+
+					function whenError(data){
+						alert("서비스에 문제가 발생하였습니다. 담당자에게 문의하시기 바랍니다.");
+					}
+				
+				$("#FavRecipe").on("click", function(){
+					var mno = "<%= mno %>";
+					if (mno == null && mno.length == 0){
+						alert("비회원을 추천을 할 수 없습니다. 회원 가입 후에 이용해주시기 바랍니다.");
+						return;
+					}
+
+					var rbno = $("#rbno").val();
+					var recipeType = "user";
+					var data = {
+							"mno" : mno,
+							"rbno" : rbno,
+							"recipeType" : recipeType};
+
+					var url = "/kosmoJns/favorites/favRecipe.do";
+
+					$.ajax({
+						url : url,
+						method : "GET",
+						data : data,
+						success : whenSuccess,
+						error : whenError
+					});
+					
+					function whenSuccess(data){
+						if (data == "OK"){
+							alert("해당 레시피를 추천했습니다. 추천 레시피는 나의 추천 레시피에서 확인하실 수 있습니다");
+							$("#FavRecipe").text("추천 취소하기");
+						}else if(data == "DeleteOK"){
+							alert("해당 레시피 추천을 취소하였습니다.");
+							$("#FavRecipe").text("추천하기");
+						}else{
+							alert("서버에 문제가 발생하였습니다. 잠시 후에 다시 시도해주십시오.");
+						}
+					}
+
+					function whenError(data){
+						alert("서비스에 문제가 발생하였습니다. 담당자에게 문의하시기 바랍니다.");
+					}
+				})
 		
 		// 수정
 		$(document).on("click", "#U", function(){
@@ -489,6 +560,12 @@
 			<td>수정일</td>
 			<td><%=cbvo.getRb_updatedate()%></td>
 		</tr>
+			<tr>
+				<td colspan="2">
+					<button type="button" class="" name="FavRecipe" id="FavRecipe">추천하기</button>
+					<input type="hidden" name="rbno" id="rbno" value="<%= cbvo.getRbno() %>" />
+				</td>
+			</tr>
 		<tr>
 			<td colspan="2" align="right">
 				<button type="button" id="U" >수정</button>

@@ -30,9 +30,9 @@
 					
 					function whenSuccess(data){
 						if (data == "CHECK"){
-							$("#subRecipeAPI").val("추천 해제하기");
+							$("#favRecipeAPI").text("추천 취소하기");
 						}else{
-							$("#subRecipeAPI").text("추천하기");
+							$("#favRecipeAPI").text("추천하기");
 						}
 					}
 
@@ -40,7 +40,7 @@
 						alert("실패");
 					}
 				
-				$("#subRecipeAPI").on("click", function(){
+				$("#favRecipeAPI").on("click", function(){
 					var mno = "<%= mno %>";
 					if (mno == null && mno.length == 0){
 						alert("비회원을 추천을 할 수 없습니다. 회원 가입 후에 이용해주시기 바랍니다.");
@@ -66,10 +66,10 @@
 					function whenSuccess(data){
 						if (data == "OK"){
 							alert("해당 레시피를 추천했습니다. 추천 레시피는 나의 추천 레시피에서 확인하실 수 있습니다");
-							$("#subRecipeAPI").text("추천 취소하기");
+							$("#favRecipeAPI").text("추천 취소하기");
 						}else if(data == "DeleteOK"){
 							alert("해당 레시피 추천을 취소하였습니다.");
-							$("#subRecipeAPI").text("추천하기");
+							$("#favRecipeAPI").text("추천하기");
 						}else{
 							alert("서버에 문제가 발생하였습니다. 잠시 후에 다시 시도해주십시오.");
 						}
@@ -552,7 +552,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button type="button" class="" name="subRecipeAPI" id="subRecipeAPI">추천</button>
+					<button type="button" class="" name="favRecipeAPI" id="favRecipeAPI">추천하기</button>
 					<input type="hidden" name="rcp_seq" id="rcp_seq" value="<%=	rvo.getRcp_seq() %>" />
 				</td>
 			</tr>

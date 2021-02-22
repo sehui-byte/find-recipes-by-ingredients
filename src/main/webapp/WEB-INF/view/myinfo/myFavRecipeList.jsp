@@ -27,6 +27,7 @@
 
 <jsp:include page = "./myFavRecipeList_user.jsp">
 	<jsp:param name="recipeBoardList" value="<%= recipeBoardList %>" />
+	<jsp:param name="mno" value="<%= mno %>" />
 </jsp:include>
 </body>
 </html>

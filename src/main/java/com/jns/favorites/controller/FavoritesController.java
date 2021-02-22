@@ -3,8 +3,10 @@ package com.jns.favorites.controller;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jns.chabun.service.ChabunService;
@@ -22,8 +24,7 @@ public class FavoritesController {
 	private FavoritesService favoritesService;
 
 	@Autowired(required = false)
-	public FavoritesController(FavoritesService favoritesService,
-								ChabunService chabunService) {
+	public FavoritesController(FavoritesService favoritesService, ChabunService chabunService) {
 		this.favoritesService = favoritesService;
 		this.chabunService = chabunService;
 	}
@@ -51,7 +52,7 @@ public class FavoritesController {
 
 	@RequestMapping(value = "favorites/favRecipe", method = RequestMethod.GET)
 	@ResponseBody
-	public String mySubRecipeUpdate(FavoritesVO fvo) {
+	public String myFavRecipeUpdate(FavoritesVO fvo) {
 
 		logger.info(fvo.getMno());
 		logger.info(fvo.getRcp_seq());
@@ -77,5 +78,45 @@ public class FavoritesController {
 			favoritesService.myFavRecipeDelete(fvo);
 			return "DeleteOK";
 		}
+	}
+
+	@RequestMapping(value = "favorites/myFavRecipeDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public String myFavRecipeDelete(@RequestParam("chkVal[]") String[] chkVals,
+									@RequestParam("recipeType") String recipeType,
+									@RequestParam("mno") String mno) {
+
+		logger.info("myFavRecipeDelete >>> 진입");
+
+		int nCnt = 0;
+
+		for (String chkVal : chkVals) {
+			FavoritesVO fvo = null;
+			fvo = new FavoritesVO();
+
+			if (chkVal.length() > 5 && chkVal.substring(0, 2).equals("RB")) {
+				fvo.setRbno(chkVal);
+
+			} else {
+				fvo.setRcp_seq(chkVal);
+			}
+			fvo.setRecipeType(recipeType);
+			fvo.setMno(mno);
+			
+			logger.info("chkVal >>> : "+fvo.getRbno());
+			logger.info("chkVal >>> : "+fvo.getRcp_seq());
+			logger.info("recipeType >>> : "+fvo.getRecipeType());
+			logger.info("mno >>> : " + fvo.getMno());
+
+			int dCount = favoritesService.myFavRecipeDelete(fvo);
+			
+			nCnt = nCnt + dCount;
+		}
+
+		String result = String.valueOf(nCnt);
+		
+		logger.info(result);
+
+		return result;
 	}
 }
