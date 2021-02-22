@@ -18,6 +18,7 @@
 <script type="text/javascript">
 	
 	$(document).ready(function(){
+		sessionMlevel = "<%=mlevel%>"
 		
 		//검색버튼
 		$(document).on("click", "#searchBtn", function(){
