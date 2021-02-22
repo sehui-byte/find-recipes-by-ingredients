@@ -202,7 +202,46 @@
 		SET
 			RB_DELETEYN = 'N'
 		WHERE
-			RB_DELETEYN = 'Y'
+			RBNO = #{rbno, jdbcType=VARCHAR}		
+			AND RB_DELETEYN = 'Y'
+	</update>
+	
+	<update id="recipeBoardViewsPP" parameterType="rbvo">
+		UPDATE
+			RECIPE_BOARD
+		SET
+			VIEWS = 
+			(
+				SELECT
+					VIEWS+1
+				FROM
+					RECIPE_BOARD
+				WHERE
+					RBNO = #{rbno, jdbcType=VARCHAR}
+					AND RB_DELETEYN = 'Y'
+			)
+		WHERE
+			RBNO = #{rbno, jdbcType=VARCHAR}
+			AND RB_DELETEYN = 'Y'
+	</update>
+	
+	<update id="recipeBoardHitsPP" parameterType="rbvo">
+		UPDATE
+			RECIPE_BOARD
+		SET
+			HITS = 
+			(
+				SELECT
+					HITS+1
+				FROM
+					RECIPE_BOARD
+				WHERE
+					RBNO = #{rbno, jdbcType=VARCHAR}
+					AND RB_DELETEYN = 'Y'
+			)
+		WHERE
+			RBNO = #{rbno, jdbcType=VARCHAR}
+			AND RB_DELETEYN = 'Y'
 	</update>
 	
 </mapper>
