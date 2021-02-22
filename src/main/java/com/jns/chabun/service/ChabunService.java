@@ -10,6 +10,7 @@ import com.jns.product.vo.ProductVO;
 import com.jns.qna.vo.QnAVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
+import com.jns.subscribe.vo.SubscribeVO;
 
 
 public interface ChabunService {
@@ -30,4 +31,5 @@ public interface ChabunService {
 
 	public ChefVO getChefChabun();
 	
+	public SubscribeVO getSubscribeChabun();
 }
