@@ -15,7 +15,13 @@ public class ChefDAOImpl implements ChefDAO {
 	@Override
 	public List<ChefVO> chefSelectAll(ChefVO cvo) {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("chefSelectAll");
+	}
+
+	@Override
+	public List<ChefVO> chefSelect(ChefVO cvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("chefSelect");
 	}
 
 	@Override
