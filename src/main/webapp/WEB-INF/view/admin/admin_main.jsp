@@ -10,10 +10,13 @@
 <h3>admin 페이지</h3>
 <ul>
 	<li>
-		<a href="/admin/memberSelectAll.do">회원 조회/수정/삭제</a>
+		<a href="memberSelectAll.do">회원 조회/수정/삭제</a>
 	</li>
 	<li>
-		게시판 조회/수정/삭제 - 레시피 & QnA
+		<a href="qnaSelectAll.do">QnA 게시판 조회/수정/삭제  </a>
+	</li>
+	<li>
+		<a href="recipeSelectAll.do">레시피 게시판 조회/수정/삭제 </a>
 	</li>
 	<li>
 		댓글 조회/수정/삭제
