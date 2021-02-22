@@ -77,11 +77,13 @@ SELECT ALL
 	<td class="tt">닉네임</td>
 	<td class="tt">전화번호</td>
 	<td class="tt">이메일</td>
-	<td class="tt">도로명주소</td>	
+	<td class="tt">도로명 주소</td>
+	<td class="tt">우편번호</td>
+	<td class="tt">상세주소</td>	
 	<td class="tt">사진</td>
-	<td class="tt">삭제여부</td>
 	<td class="tt">등록일</td>
 	<td class="tt">수정일</td>
+	<td class="tt">삭제여부</td>
 </tr>
 </thead>
 <%
@@ -96,6 +98,7 @@ SELECT ALL
 			value=<%= mvo.getMno()%> onclick="checkOnly(this)">
 	</td>
 	<td class="tt"><%=mvo.getMno() %></td>
+	<td class="tt"><%=mvo.getMlevel() %></td>
 	<td class="tt"><%=mvo.getMid() %></td>
 	<td class="tt"><%=mvo.getMpw() %></td>
 	<td class="tt"><%=mvo.getMname() %></td>
