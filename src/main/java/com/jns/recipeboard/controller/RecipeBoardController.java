@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -179,4 +180,27 @@ public class RecipeBoardController
 	{
 		return recipeBoardService.recipeBoardDelete(rbvo);
 	}
+	
+	@RequestMapping(value = "recipeBoardViewsPP", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Boolean> recipeBoardViewsPP(RecipeBoardVO rbvo)
+	{
+		logger.info("recipeBoardViewsPP.do 호출됨");
+		
+		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("ok", recipeBoardService.recipeBoardViewsPP(rbvo));
+		return map;
+	}
+	
+	@RequestMapping(value = "recipeBoardHitsPP", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Boolean> recipeBoardHitsPP(RecipeBoardVO rbvo)
+	{
+		logger.info("recipeBoardHitsPP.do 호출됨");
+		
+		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("ok", recipeBoardService.recipeBoardHitsPP(rbvo));
+		return map;
+	}
+	
 }
