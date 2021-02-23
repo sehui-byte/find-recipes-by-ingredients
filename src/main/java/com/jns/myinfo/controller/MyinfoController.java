@@ -129,12 +129,17 @@ public class MyinfoController {
 	}
 
 	@RequestMapping(value = "myinfo/myRankUpdate", method = RequestMethod.GET)
+	@ResponseBody
 	public String myRankUpdate(BoardVO bvo) {
 
 		logger.info("myRankUpdate() 진입 >>> ");
-		// 등급 올리는 것에 대한 기준이 필요
-
-		return "";
+		int result = myinfoService.myRankUpdate(bvo);
+		
+		if (result == 1) {
+			return "OK";
+		}else {
+			return "ERROR";
+		}
 	}
 
 	// 내가 추천한 레시피 가져오기
