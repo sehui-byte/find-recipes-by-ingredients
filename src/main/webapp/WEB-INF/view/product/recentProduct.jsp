@@ -13,40 +13,78 @@
 	crossorigin="anonymous">
 
 <style>
+#recentbox {
+	position:absolute;
+	top:180px;
+	right:50%;
+	margin-right:-670px;
+}
 </style>
 </head>
 <body>
-	<!-- 최근 본 상품 --> <!-- 이미지 + 링크 -->
-	<div class="card text-dark bg-light mb-3" style="max-width: 16rem;">
-		<span id="recent_text"></span>
-		<div class="text-center_1">
-			<!-- <target="_blank> : 새 창에서 뜨기  / 없애면 현재 웹에서 이동-->
-			<span id="product1">
-			</span>
-		</div>
-		<div class="text-center_2">
-			<span id="product2">
-			</span>
-		</div>
-		<div class="text-center_3">
-			<span id="product3">
-			</span>
-		</div>
-		<div class="text-center_4">
-			<span id="product4">
-			</span>
-		</div>
-		<div class="text-center_5">
-			<span id="product5">
-			</span>
+	<script type="text/javascript"> 
+	$(document).ready(function() {
+		// 기존 css에서 플로팅 배너 위치값(top)을 가져와서 저장
+		// 250px 이런식으로 가져오므로 숫자만 가져오기 : parseInt(값);
+		var floatPosition = parseInt($("#recentbox").css('top'));
+		$(window).scroll(function() {
+			// 현재 스크롤 위치를 가져온다.
+			var scrollTop = $(window).scrollTop();
+			if (scrollTop < 180) {
+				 scrollTop = 180;
+			}
+			var newPosition = scrollTop + floatPosition + "px";
+			// 애니메이션 없이 바로 따라감
+			//$("#recentbox").css('top', newPosition);
+			$("#recentbox").stop().animate({
+				"top" : newPosition
+			}, {
+				'duration' : 500,
+				'easing' : 'easeInOutCubic',
+				'complete' : function() {
+					console.log('이동 완료');
+				}
+			});
+		}).scroll();
+	});
+	</script>
+	
+	
+	
+	<!-- 최근 본 상품 -->
+	<!-- 퀵메뉴 -->
+	<div id="recentbox">
+		<div class="card text-dark bg-light mb-3" style="max-width: 16rem;">
+			<!-- '최근 본 상품' 텍스트 -->
+			<span id="recent_text"></span>
+			<!-- 이미지 + 링크 -->
+			<div class="text-center_1">
+				<!-- <target="_blank> : 새 창에서 뜨기  / 없애면 현재 웹에서 이동-->
+				<span id="product1">
+				</span>
+			</div>
+			<div class="text-center_2">
+				<span id="product2">
+				</span>
+			</div>
+			<div class="text-center_3">
+				<span id="product3">
+				</span>
+			</div>
+			<div class="text-center_4">
+				<span id="product4">
+				</span>
+			</div>
+			<div class="text-center_5">
+				<span id="product5">
+				</span>
+			</div>
 		</div>
 	</div>
 	
 
-
-
 	<script>
-				
+	
 		/*
 			구매하기 버튼 클릭했을 때, 해당 상품의 필요한 데이터 쿠키 배열로 저장
 		*/
@@ -80,13 +118,12 @@
 		
 				
 		// 쿠키 생성 함수
-		// cookieName : 상품명, cookieValue : 이미지&&링크 , 유효시간 : 1시간
+		// cookieName : "recent", cookieValue : recentPro , 유효시간 : 1시간
 		function setRecentCookie(cookieName, cookieValue) {
 		    var expire = new Date();
 		    expire.setTime(date.getTime() + 1*60*60*1000); // 1hr
 		    document.cookie = cookieName + '=' + cookieValue;
 		}
-
 		
 		// 쿠키 값 가져오기
 		function getRecentCookie(cookieName) {
@@ -112,7 +149,6 @@
 		 	// 배열 맨 앞에 요소 추가, 배열의 크기 리턴
 	        cookieArr_name.unshift(cookieName);		// [productId5, productId4, ..., productId1]
 		 	cookieArr_value.unshift(cookieValue);	// [productImage5&&productLink5, ...]
-
 	        // 중복된 쿠키 제거 (뒷쪽에 있는 쿠키 삭제됨)
 	        // 1) 쿠키명
 	        var recentArr_name = cookieArr_name.filter(function(item, pos, self) {
@@ -160,25 +196,22 @@
 			document.cookie = cookieName + '=' + "";
 		}
 		
-
-		
 		
 		/*
 			쿠키 이용해서 데이터 가져오기
 		*/
 		
 		// 쿠키에서 배열로 저장된 데이터(이미지, 링크) 가져와서 화면에 보여주기
-		function getCookieArray(cookieArr){ // [productImage5&&productLink5, ..., productImage1&&productLink1]
+		function getCookieArray(cookieArr){ // [{productId5, ..., productId1},{productImage5&&productLink5, ..., productImage1&&productLink1}]
 			
-			var cookieValueArr = cookieArr[1];
+			var cookieNameArr = cookieArr[0];	// [productId5, ..., productId1]
+			var cookieValueArr = cookieArr[1];	// [productImage5&&productLink5, ..., productImage1&&productLink1]
 		
 			// validation
 			if(cookieNameArr.length == cookieValueArr){
 				
-				var product = cookieValueArr[i]; // productImage&&productLink
-				var info = product.split("&&"); // [productImage, productLink]
-				var image = info[0]	// productImage5
-				var link = info[1]	// productLink5
+				var arrLength = cookieNameArr.length;
+				console.log("쿠키명&쿠키값 개수 : " + arrLength);
 				
 				// 쿠키값에 저장된 데이터 가지고 와서 브라우저에 출력하기
 				for(var i=0; i < arrLength; i++){
@@ -203,9 +236,9 @@
 				console.log("[쿠키명 : "+cookieNameArr.length+"]");
 				console.log("[쿠키값 : "+cookieValueArr.length+"]");
 			}
+			
 		}
 	
-
 		
 	</script>
 
