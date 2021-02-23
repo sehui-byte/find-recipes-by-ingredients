@@ -55,7 +55,7 @@
 			{
 			%>
 				<tr>
-					<td><%=list.get(i).getRcp_nm()%> </td>
+					<td><a href="rbdetail.do?rbno=<%=list.get(i).getRbno()%>"><%=list.get(i).getRcp_nm()%></a></td>
 					<td><%=list.get(i).getMno() %></td>
 					<td><%=list.get(i).getViews() %></td>
 					<td><%=list.get(i).getHits() %></td>
