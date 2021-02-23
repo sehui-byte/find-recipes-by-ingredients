@@ -62,10 +62,10 @@
 			
 			
 		//검색버튼
-		$(document).on("click", "#searchBtn", function(){
+		$(document).on("click", "#searchBtnAPIRecipe", function(){
 			console.log("searchBtn >>> : ");
 			$("#myFavRecipeList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/favorites/favRecipeList.do"}).submit();
+								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
 		});
 			
 	})	
@@ -80,14 +80,14 @@
 			<tr>
 				<td colspan="10" align="left">
 					<select id="keyfilter" name="keyfilter">
-						<option value="key1">제목</option>
-						<option value="key2">내용</option>
-						<option value="key3">제목+내용</option>
+						<option value="key1">메뉴명</option>
+						<option value="key2">재료</option>
+						<option value="key3">메뉴명+재료</option>
 					</select>
 					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
 					<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
 					~<input type="text" id="enddate" name="enddate" size="12" placeholder="종료일">
-					<button type="button" id="searchBtn">검색</button>
+					<button type="button" id="searchBtnAPIRecipe">검색</button>
 				</td>	
 			</tr>
 		</thead>

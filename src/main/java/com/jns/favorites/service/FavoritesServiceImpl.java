@@ -46,10 +46,4 @@ public class FavoritesServiceImpl implements FavoritesService {
 		return favoritesDAO.myFavRecipeDelete(fvo);
 	}
 
-	@Override
-	public List<RecipeVO> myFavRecipeList(FavoritesVO fvo) {
-		logger.info("myFavRecipeList() 진입 >>> ");
-
-		return favoritesDAO.myFavRecipeList(fvo);
-	}
 }
