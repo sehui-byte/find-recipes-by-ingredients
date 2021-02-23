@@ -121,7 +121,7 @@ public class MemberController {
 	}
 
 	// 회원 수정
-	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
 	public String memberUpdate(MemberVO mvo, Model model) {
 
 		logger.info("MemberController MemberUpdate 함수 시작 >>> :: ");
@@ -141,7 +141,7 @@ public class MemberController {
 	}
 
 	// 회원 삭제
-	@RequestMapping(value = "memberDelete", method = RequestMethod.GET)
+	@RequestMapping(value = "memberDelete", method = RequestMethod.POST)
 	public String memDelete(MemberVO mvo, Model model) {
 		logger.info("MemberController MemberDelete 함수 진입 >>> : ");
 			

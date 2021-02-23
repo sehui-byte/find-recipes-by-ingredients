@@ -118,6 +118,13 @@
 		</tr>
 <%
 		}
+%>
+		<tr>
+			<td colspan="6">
+				<input type="button" name="deleteQnA" id="deleteQnA" value="게시글 삭제">
+			</td>
+		</tr>	
+<% 
 	}else{
 %>
 		<tr>
@@ -126,11 +133,6 @@
 <%
 	}
 %>
-		<tr>
-			<td colspan="6">
-				<input type="button" name="deleteQnA" id="deleteQnA" value="게시글 삭제">
-			</td>
-		</tr>	
 	</table>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 </form>

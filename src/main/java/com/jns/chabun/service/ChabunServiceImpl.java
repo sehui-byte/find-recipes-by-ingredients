@@ -92,8 +92,9 @@ public class ChabunServiceImpl implements ChabunService {
 
 	@Override
 	public FavoritesVO getFavoritesChabun() {
-		// TODO Auto-generated method stub
-		return null;
+		logger.info("getFavoritesChabun 채번호출");
+		
+		return chabunDAO.getFavoritesChabun();
 	}
 
 }

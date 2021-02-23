@@ -41,7 +41,7 @@
 	<h3>myinfo default page...</h3>
 	<ul>
 		<li>
-			비밀번호 수정	
+			<a href="myinfo/updateMyPW.do">내 비밀번호 수정</a>
 		</li>
 		<s:authorize access="hasRole('ROLE_U')">		
 		<li>
@@ -55,7 +55,7 @@
 			<a href="myinfo/myRecipeList.do?mno=<%= mno %>">내가 쓴 레시피 조회하기</a>
 		</li>
 		<li>
-			내가 구독한 세프 조회하기
+			<a href="myinfo/mySubList.do?mno=<%= mno %>">내가 구독한 셰프 조회하기</a>
 		</li>
 		<li>
 			<a href="myinfo/myFavRecipeList.do?mno=<%= mno %>">내가 추천한 레시피 조회하기(즐겨찾기 레시피)</a>

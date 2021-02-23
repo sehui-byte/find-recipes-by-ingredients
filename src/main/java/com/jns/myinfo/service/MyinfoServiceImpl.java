@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jns.board.vo.BoardVO;
+import com.jns.member.security.password.PasswordEncoder;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.dao.MyinfoDAO;
 import com.jns.recipe.vo.RecipeVO;
@@ -92,4 +93,35 @@ public class MyinfoServiceImpl implements MyinfoService {
 		return myinfoDAO.myFavRecipeList2(mvo);
 	}
 
+	@Override
+	public int myPWUpdate(MemberVO mvo, MemberVO _mvo) {
+		
+		logger.info("myPWUpdate() 진입 >>> ");
+
+		int result = 0;
+		
+		logger.info("mpw >>> :" + mvo.getMpw());
+
+		// ID로 암호화된 회원의 비밀번호 추출
+		List<MemberVO> list = myinfoDAO.myPWUpdateCheck(mvo);
+		
+		MemberVO selectMvo = null;
+		selectMvo = list.get(0);
+		
+		// 패스워드 일치 여부 체크
+		boolean bool = PasswordEncoder.pwMatches(mvo.getMpw(), selectMvo.getMpw());
+		
+		// 회원 일치 >> 비밀번호 수정
+		if (bool) {
+
+			String nMpw = _mvo.getMpw();
+			logger.info(nMpw);
+			String nMpw_encoded = PasswordEncoder.pwEncoder(nMpw);
+			mvo.setMpw(nMpw_encoded);
+
+			result = myinfoDAO.myPWUpdate(mvo);
+		}
+		// 불일치
+		return result;
+	}	
 }

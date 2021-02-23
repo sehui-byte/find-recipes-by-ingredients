@@ -21,6 +21,10 @@ public interface MyinfoDAO {
 
 	public int myRankUpdate(BoardVO bvo);
 
+	public List<MemberVO> myPWUpdateCheck(MemberVO mvo);
+
+	public int myPWUpdate(MemberVO mvo);
+
 	public List<RecipeVO> myFavRecipeList1(MemberVO mvo);
 
 	public List<RecipeBoardVO> myFavRecipeList2(MemberVO mvo);
