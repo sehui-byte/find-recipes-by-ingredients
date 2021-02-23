@@ -69,7 +69,10 @@ public class RecipeBoardController
 	@RequestMapping(value = "rbupdateform", method = RequestMethod.GET)
 	public String rbupdateform(RecipeBoardVO rbvo, Model model)
 	{
-		return "recipeboard/recipeboard";
+		logger.info("[RecipeBoardController] rbupdateform.do 호출");
+		logger.info("[rbvo.toString >>> : ]" + rbvo.toString());
+		model.addAttribute("rbvo", recipeBoardService.recipeBoardSelect(rbvo));
+		return "recipeboard/recipeboard_updateform";
 	}//레시피 게시판 수정 폼으로 이동
 	
 	//================================= ISUD =================================//
