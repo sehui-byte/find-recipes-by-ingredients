@@ -62,6 +62,7 @@
 <ul>
 	<li><a href = "searchPage.do">상품 검색 페이지</a></li>
 	<li><a href = "likeProduct.do">관심상품 목록 보기(테스트)</a></li>
+	<li><a href = "socketTest.do">웹소켓 테스트</a></li>
 </ul>
 
 <hr>
