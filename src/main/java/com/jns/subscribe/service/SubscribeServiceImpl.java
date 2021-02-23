@@ -49,7 +49,7 @@ public class SubscribeServiceImpl implements SubscribeService {
 	@Override
 	public List<SubscribeVO> subRank(SubscribeVO svo) {
 		// TODO Auto-generated method stub
-		return null;
+		return subscribeDAO.subRank(svo);
 	}
 
 	@Override

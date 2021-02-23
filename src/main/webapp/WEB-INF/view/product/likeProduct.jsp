@@ -80,8 +80,7 @@
 				var hprice = td.eq(5).text();
 				var link = td.eq(6).text();
 
-				//쿠키 삭제
-				removeCookie(productId);
+
 				var param = {
 					"productId" : productId,
 					"title" : title,
@@ -97,7 +96,7 @@
 					contentType : "application/json", //전달한 string데이터는 json형태로 이루어진 데이터임을 알려준다
 					data : JSON.stringify(param),//string으로 전달
 					success : function(data) {
-						alert("전송성공");
+						console.log("success");
 					},
 					error : function() {
 						console.log("error!");
@@ -127,60 +126,7 @@
 			}
 		}
 
-		//쿠키 값 가져오기
-		function getCookie(cookie_name) {
-			var val = document.cookie.split(';');
-			var x, y;
 
-			for (var i = 0; i < val.length; i++) {
-				x = val[i].substr(0, val[i].indexOf('='));
-				y = val[i].substr(val[i].indexOf('=') + 1);
-				x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
-				if (x == cookie_name) {
-					return unescape(y); // unescape로 디코딩 후 값 리턴
-				}
-			}
-		}
-
-		//쿠키 새로 생성
-		function setCookie(cookie_name, value, days) {
-			var exdate = new Date();//만료날짜
-			exdate.setDate(exdate.getDate() + days);
-
-			var cookie_value = escape(value)
-					+ ((days == null) ? '' : '; expires='
-							+ exdate.toUTCString());
-			document.cookie = cookie_name + '=' + cookie_value;
-		}
-
-		//기존 쿠키에 value 제거하기
-		function removeCookie(productId) {
-			var items = getCookie('like'); // 이미 저장된 값을 쿠키에서 가져오기
-			var maxItemNum = 30; // 최대 저장 가능한 아이템개수
-			var expire = 1; // 쿠키값을 저장할 기간
-
-			if (items) {//쿠키가 이미 존재하면
-				var itemArray = items.split(',');
-				for ( var i in itemArray) {
-					if (productId == itemArray[i]) {
-						console.log("찾았다");
-						itemArray.splice(i, 1);//특정 인덱스 원소 삭제
-					}
-				}
-
-				if (itemArray.length > 0) {
-					items = itemArray.join(',');
-
-					setCookie('like', items, expire);
-					console.log("관심상품 해제 결과 쿠키 >> " + items);
-				}
-
-				else {
-					console.log("쿠키 아예 다 삭제");
-					setCookie('like', items, 0);//쿠키 삭제
-				}
-			}
-		}
 	</script>
 
 	<!-- bootstrap -->

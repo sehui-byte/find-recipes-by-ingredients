@@ -11,14 +11,11 @@
 	rel="stylesheet"
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous">
-<!-- jquery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 <style>
 </style>
 </head>
 <body>
-	
 	<!-- 최근 본 상품 --> <!-- 이미지 + 링크 -->
 	<div class="card text-dark bg-light mb-3" style="max-width: 16rem;">
 		<span id="recent_text"></span>
@@ -104,6 +101,7 @@
 			return cookieValue;
 		}
 		
+		
 		// 쿠키 배열로 저장하기 : 최대 5개
 		var cookieArr = [,];
 		var cookieArr_name = [];
@@ -174,20 +172,36 @@
 			
 			var cookieValueArr = cookieArr[1];
 		
-			for(var i=0; i<cookieValueArr.length; i++){
+			// validation
+			if(cookieNameArr.length == cookieValueArr){
 				
 				var product = cookieValueArr[i]; // productImage&&productLink
 				var info = product.split("&&"); // [productImage, productLink]
 				var image = info[0]	// productImage5
 				var link = info[1]	// productLink5
 				
-				var recentProduct = '<a href="'+link+'" target="_blank"><img src="'+image+'" class="rounded_2"></a>';
-					        	
-	        	var id = "product"+(i+1);
-	            var a = document.getElementById(id);
-	            if (a != null){
-	            	a.innerHTML = recentProduct;
-	            }
+				// 쿠키값에 저장된 데이터 가지고 와서 브라우저에 출력하기
+				for(var i=0; i < arrLength; i++){
+					
+					var productId = cookieNameArr[i]; // productId
+					
+					var product = cookieValueArr[i]; // productImage&&productLink
+					var info = product.split("&&"); // [productImage, productLink]
+					var image = info[0]	// productImage5
+					var link = info[1]	// productLink5
+					
+					var recentProduct = '<a href="'+link+'" target="_blank"><img src="'+image+'" class="rounded_2" title="'+productId+'"></a>';
+						        	
+		        	var id = "product"+(i+1);
+		            var a = document.getElementById(id);
+		            if (a != null){
+		            	a.innerHTML = recentProduct;
+		            }
+				}
+			}else{
+				console.log("[오류] [쿠키명, 쿠키값 개수 안 맞음]");
+				console.log("[쿠키명 : "+cookieNameArr.length+"]");
+				console.log("[쿠키값 : "+cookieValueArr.length+"]");
 			}
 		}
 	

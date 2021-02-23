@@ -124,7 +124,7 @@ public class ProductServiceImpl implements ProductService{
 	public List<ProductVO> likeProductSelectAll(ProductVO pvo) {
 		pvo.setMno(getLoginMno(pvo));
 		List<ProductVO> result = pdao.LikeProductSelectAll(pvo);
-		System.out.println("관심상품 개수 >> " + result.size());
+		logger.info("관심상품 개수 >> " + result.size());
 		return result;
 	}
 
@@ -133,7 +133,7 @@ public class ProductServiceImpl implements ProductService{
 	public int likeProductInsert(ProductVO pvo) {
 		pvo.setMno(getLoginMno(pvo));
 		int nCnt = pdao.likeProductInsert(pvo);
-		System.out.println("삽입된 컬럼 수 >> " + nCnt);
+		logger.info("삽입된 컬럼 수 >> " + nCnt);
 		return nCnt;
 	}
 
@@ -142,7 +142,7 @@ public class ProductServiceImpl implements ProductService{
 	public int likeProductDelete(ProductVO pvo) {
 		pvo.setMno(getLoginMno(pvo));
 		int nCnt = pdao.likeProductDelete(pvo);
-		System.out.println("삭제된 컬럼 수 >> " + nCnt);
+		logger.info("삭제된 컬럼 수 >> " + nCnt);
 		return nCnt;
 	}
 
@@ -182,8 +182,8 @@ public class ProductServiceImpl implements ProductService{
 					if(productId.equals(tmp.get("productId"))) {
 						//변동이 있을 경우 알람을 보낸다
 						if(!tmp.get("lprice").equals(likeLprice)) {
-							System.out.println("관심상품 원래 최저가 >> " + likeLprice + ", 최신 최저가 >> " + tmp.get("lprice"));
-							System.out.println("알람 보내기!");
+							logger.info("관심상품 원래 최저가 >> " + likeLprice + ", 최신 최저가 >> " + tmp.get("lprice"));
+							logger.info("알람 보내기!");
 							//알람 보내는 코드 작성///////////
 							
 							
@@ -191,12 +191,12 @@ public class ProductServiceImpl implements ProductService{
 							break;
 						}
 						//추후에 지우기
-						System.out.println("관심상품 원래 최저가 >> " + likeLprice + ", 최신 최저가 >> " + tmp.get("lprice"));
+						logger.info("관심상품 원래 최저가 >> " + likeLprice + ", 최신 최저가 >> " + tmp.get("lprice"));
 					}
 				}
 			}
 			else {
-				System.out.println("검색결과가 없다!");
+				logger.info("검색결과가 없다!");
 			}
 
 		}

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.jns.board.vo.BoardVO" %>
 <%@ page import="java.util.List" %>
+<%@page import="com.jns.common.FileLoadUtil"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,7 +105,7 @@ for(int i=0; i<nCnt; i++){
 	<td class="tt"><%=nvo.getBtitle() %></td>
 	<td class="tt"><%=nvo.getBcontent() %></td>
 	<td class="tt"><%=nvo.getMnick() %></td>
-	<td class="tt"><img src="/imgupload/sm_<%= nvo.getBfile() %>"></td>
+	<td class="tt"><img src="<%=new FileLoadUtil().getFileSrc("noticeboard", nvo.getBfile()) %>"></td>
 	<td class="tt"><%=nvo.getBinsertdate() %></td>
 	<td class="tt"><%=nvo.getBviews() %></td>
 	<td class="tt"><%=nvo.getBhits() %></td>
