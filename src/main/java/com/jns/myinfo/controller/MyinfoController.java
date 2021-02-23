@@ -18,6 +18,8 @@ import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.service.MyinfoService;
 import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
+import com.jns.subscribe.service.SubscribeService;
+import com.jns.subscribe.vo.SubscribeVO;
 
 @Controller
 public class MyinfoController {
@@ -25,10 +27,13 @@ public class MyinfoController {
 	Logger logger = Logger.getLogger(MyinfoController.class);
 
 	private MyinfoService myinfoService;
+	private SubscribeService subscribeService;
 
 	@Autowired(required = false)
-	public MyinfoController(MyinfoService myinfoService) {
+	public MyinfoController(MyinfoService myinfoService,
+							SubscribeService subscribeService) {
 		this.myinfoService = myinfoService;
+		this.subscribeService = subscribeService;
 
 	}
 
@@ -127,6 +132,40 @@ public class MyinfoController {
 		return result;
 
 	}
+	
+	@RequestMapping(value="myinfo/updateMyPW", method = RequestMethod.GET)
+	public String updatePW() {
+		logger.info("updatePW() 진입 >>> : ");
+
+		return "myinfo/updateMyPW";
+	}
+	
+	@RequestMapping(value="myinfo/myPWUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public String myPWUpdate(MemberVO mvo, 
+							@RequestParam("nMpw") String nMpw) {
+		logger.info("myPWUpdate() 진입 >>> : ");
+	
+		//  변경할 비밀번호
+		logger.info("mid >>> :" + mvo.getMid());
+		logger.info("mpw >>> :" + mvo.getMpw());
+		logger.info(nMpw);
+		
+		MemberVO _mvo = null;
+		_mvo = new MemberVO();
+		
+		_mvo.setMpw(nMpw);
+
+		int result = myinfoService.myPWUpdate(mvo, _mvo);
+		
+		logger.info("result >>> : "+result);
+		
+		if (result == 1) {
+			return "OK";
+		}else {
+			return "ERROR";
+		}
+	}
 
 	@RequestMapping(value = "myinfo/myRankUpdate", method = RequestMethod.GET)
 	@ResponseBody
@@ -190,6 +229,16 @@ public class MyinfoController {
 		model.addAttribute("recipeBoardList", recipeBoardList);
 
 		return "myinfo/myFavRecipeList";
+	}
+
+	@RequestMapping(value="myinfo/mySubList", method=RequestMethod.GET)
+	public String mySubList(SubscribeVO svo, Model model) {
+		
+		List<SubscribeVO> mySubList = subscribeService.mySubList(svo);
+		
+		model.addAttribute("mySubList", mySubList);
+
+		return "myinfo/mySubList";
 	}
 	
 

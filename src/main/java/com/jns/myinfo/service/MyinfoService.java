@@ -16,6 +16,8 @@ public interface MyinfoService {
 	public int myQnADelete(BoardVO bvo);
 
 	public int myRecipeDelete(RecipeBoardVO rbvo);
+	
+	public int myPWUpdate(MemberVO mvo, MemberVO _mvo);
 
 	public int myRankUpdate(BoardVO bvo);
 

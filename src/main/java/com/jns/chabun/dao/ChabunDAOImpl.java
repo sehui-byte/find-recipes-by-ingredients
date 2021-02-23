@@ -85,7 +85,7 @@ public class ChabunDAOImpl implements ChabunDAO {
 	@Override
 	public FavoritesVO getFavoritesChabun() {
 
-		return null;
+		return sqlSession.selectOne("getFavoritesChabun");
 	}
 
 }

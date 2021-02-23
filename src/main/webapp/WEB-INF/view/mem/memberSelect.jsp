@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import ="com.jns.member.vo.MemberVO"%>
 <%@ page import ="java.util.List" %>    
+<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,13 +12,11 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-
-		
 				// U
 				$(document).on("click", "#U", function(){
 					alert("U >>> :");
 					$("#memUpdateForm").attr({
-						"method":"GET",
+						"method":"POST",
 						"action":"memberUpdate.do"
 					}).submit();
 				});
@@ -25,7 +25,7 @@
 				$(document).on("click", "#D", function(){
 					alert("D >>> : ");
 					$("#memUpdateForm").attr({
-						"method":"GET",
+						"method":"POST",
 						"action":"memberDelete.do"
 					}).submit();
 				});
@@ -131,7 +131,7 @@
 <tr>
 <td class="mem">사진  </td>
 <td>
-<img src="/kosmoJns/imgupload/<%= photo %>" border="1" width="40" height="50" alt="image">
+<img src="<%= new FileLoadUtil().getFileSrc("member",  photo) %>" border="1" width="40" height="50" alt="image">
 </td>
 </tr>
 <tr>

@@ -123,6 +123,11 @@
 			<td>추천수</td>	
 			<td>기타</td>	
 		</tr>
+		<tr>
+			<td colspan="6">
+				<input type="button" name="deleteMyFavRecipeAPI" id="deleteMyFavRecipeAPI" value="즐겨찾기 삭제">
+			</td>
+		</tr>	
 <%
 			} // end of for
 		}else{
@@ -134,11 +139,6 @@
 		}	
 	}
 %>
-		<tr>
-			<td colspan="6">
-				<input type="button" name="deleteMyFavRecipeAPI" id="deleteMyFavRecipeAPI" value="즐겨찾기 삭제">
-			</td>
-		</tr>	
 	</table>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 	<input type="hidden" id="recipeType" name="recipeType" value="API">

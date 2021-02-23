@@ -174,7 +174,7 @@
 	<update id="memberUpdate" parameterType="mvo">
 	UPDATE	MEMBER
 		SET MNICK = #{mnick,jdbcType=VARCHAR}
-			MADDR = #{maddr,jdbcType=VARCHAR}
+			,MADDR = #{maddr,jdbcType=VARCHAR}
 		   ,MPHOTO = #{mphoto,jdbcType=VARCHAR}
 	WHERE MDELETEYN = 'Y'
 	AND   MNO = #{mno,jdbcType=VARCHAR}
@@ -184,9 +184,12 @@
 	<update id="memberDelete" parameterType="mvo">
 	UPDATE MEMBER
 		SET MUPDATEDATE = SYSDATE
-			MDELETEYN = 'N'
+			,MDELETEYN = 'N'
 	WHERE	MDELETEYN = 'Y'
-	AMD 	MNO = {mno,jdbcType=VARCHAR}
+	AND 	
+		MNO = #{mno, jdbcType=VARCHAR}
+	AND
+		MPW = #{mpw, jdbcType=VARCHAR}
 	</update>
 	<!-- 아이디 중복 확인   -->
 	<select id="checkID" parameterType ="mvo" resultType="mvo">
