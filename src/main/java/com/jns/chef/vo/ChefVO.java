@@ -10,7 +10,6 @@ public class ChefVO {
 	private String iupdatedate;
 	private String ideleteyn;
 	
-	
 	// Member Table JOIN ***********************************************
 	private String mlevel;
 	private String mid;
@@ -49,7 +48,11 @@ public class ChefVO {
 		this.mnick = mnick;
 	}
 
+<<<<<<< HEAD
 	//***************************************************************
+=======
+	//***************************************************************	
+>>>>>>> 2980ca2a3645c55c2aae5dca203e05a04aaaf225
 	
 	public ChefVO() {}
 	

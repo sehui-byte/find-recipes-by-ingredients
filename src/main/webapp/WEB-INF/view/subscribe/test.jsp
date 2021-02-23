@@ -23,7 +23,8 @@
 		});
 		
 	});
-
+	
+	
 </script>
 </head>
 <body>
@@ -32,6 +33,9 @@
 	<input type="button" id="mySub" value="조회">
 	<input type="hidden" name="mno" id="mno" value="<%=mno%>">
 </form>
+
+<br>
+<hr>
 
 </body>
 </html>

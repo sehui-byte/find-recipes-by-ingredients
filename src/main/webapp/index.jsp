@@ -82,5 +82,18 @@
 
 <hr>
 
+<h3>세프 관련 URL</h3>
+<ul>
+	<li><a href="/kosmoJns/chef/test.do">테스트</a></li>
+</ul>
+
+<hr>
+
+<h3>구독 관련 URL</h3>
+<ul>
+	<li><a href="/kosmoJns/subscribe/test.do">테스트</a></li>
+</ul>
+
+<hr>
 </body>
 </html>

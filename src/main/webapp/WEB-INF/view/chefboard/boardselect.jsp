@@ -13,77 +13,59 @@
 
 	$(document).ready(function(){
 		
-				// 추천 내역 확인하기	
-					var mno = "<%= mno %>";
-					var rbno = $("#rbno").val();
-					var recipeType = "user";
+		var sessionMno = "<%=mno%>";
+		var sessionWriter = "<%=mnick%>";
+		var boardWriter = $("#mnick").val();
+		
+		// 로그인 유저와 작성자가 일치할 경우 수정/삭제 버튼 생성
+		if ( sessionWriter == boardWriter){
+			$('#U').attr('disabled', false);
+			$('#D').attr('disabled', false);
+		}
+		
+		// 조회수 증가
+		var viewsUrl = "/kosmoJns/chefboard/chefBoardViewsPP.do";
+		var viewsType = "GET";
+		var viewsData = {"rbno": $("#rbno").val()};
+		$.ajax({
+			url: viewsUrl,
+			type: viewsType,
+			data: viewsData,
+			success: viewsSuccess,
+			error: viewsError
+		});
 
-					var url = "/kosmoJns/favorites/favRecipeCheck.do";
+		function viewsSuccess(resultData){
+			if(resultData=="GOOD"){
+				console.log("조회 수 +1 증가 완료");
+			}
+		}
+		function viewsError(){
+			alert("시스템 오류입니다. 관리자에게 문의하세요.");
+		}
+		
+		// 추천
+		$(document).on("click", "#hits", function(){
+			var hitsUrl = "/kosmoJns/chefboard/chefBoardHitsPP.do";
+			var hitsType = "GET";
+			var hitsData = {"rbno": $("#rbno").val()};
+			$.ajax({
+				url: hitsUrl,
+				type: hitsType,
+				data: hitsData,
+				success: hitsSuccess,
+				error: hitsError
+			});
 
-					var data = {
-							"mno" : mno,
-							"rbno" : rbno,
-							"recipeType" : recipeType};
-					$.ajax({
-						url : url,
-						method : "GET",
-						data : data,
-						success : whenSuccess,
-						error : whenError
-					});
-					
-					function whenSuccess(data){
-						if (data == "CHECK"){
-							$("#FavRecipe").text("추천 취소하기");
-						}else{
-							$("#FavRecipe").text("추천하기");
-						}
-					}
-
-					function whenError(data){
-						alert("서비스에 문제가 발생하였습니다. 담당자에게 문의하시기 바랍니다.");
-					}
-				
-				$("#FavRecipe").on("click", function(){
-					var mno = "<%= mno %>";
-					if (mno == null && mno.length == 0){
-						alert("비회원을 추천을 할 수 없습니다. 회원 가입 후에 이용해주시기 바랍니다.");
-						return;
-					}
-
-					var rbno = $("#rbno").val();
-					var recipeType = "user";
-					var data = {
-							"mno" : mno,
-							"rbno" : rbno,
-							"recipeType" : recipeType};
-
-					var url = "/kosmoJns/favorites/favRecipe.do";
-
-					$.ajax({
-						url : url,
-						method : "GET",
-						data : data,
-						success : whenSuccess,
-						error : whenError
-					});
-					
-					function whenSuccess(data){
-						if (data == "OK"){
-							alert("해당 레시피를 추천했습니다. 추천 레시피는 나의 추천 레시피에서 확인하실 수 있습니다");
-							$("#FavRecipe").text("추천 취소하기");
-						}else if(data == "DeleteOK"){
-							alert("해당 레시피 추천을 취소하였습니다.");
-							$("#FavRecipe").text("추천하기");
-						}else{
-							alert("서버에 문제가 발생하였습니다. 잠시 후에 다시 시도해주십시오.");
-						}
-					}
-
-					function whenError(data){
-						alert("서비스에 문제가 발생하였습니다. 담당자에게 문의하시기 바랍니다.");
-					}
-				})
+			function hitsSuccess(resultData){
+				if(resultData=="GOOD"){
+					console.log("추천 수 +1 증가 완료");
+				}
+			}
+			function hitsError(){
+				alert("시스템 오류입니다. 관리자에게 문의하세요.");
+			}
+		});
 		
 		// 수정
 		$(document).on("click", "#U", function(){
@@ -103,6 +85,45 @@
 		$(document).on("click", "#C", function(){
 			location.href="/kosmoJns/chefboard/boardselectall.do";
 		});
+		
+		// 구독
+		$(document).on("click", "#Subs", function(){
+			
+			// 로그인 확인
+			if(sessionMno == ""){
+				alert("로그인 후 구독할 수 있습니다.");
+				return false;
+			}
+			
+			var insertUrl = "/kosmoJns/subscribe/subinsert.do";
+			console.log("insertUrl >>> : " + insertUrl);
+			var method = "POST";
+			var dataParam = {
+					"mno": sessionMno,
+					"ino": $("#ino").val()
+			};
+			console.log("dataParam >>> : " + dataParam);
+			/* Ajax 연동 처리 */
+			$.ajax({
+				url : insertUrl,
+				type : method,
+				data:dataParam,
+				success: whenSuccess,
+				error: whenError					
+			});
+			
+			function whenSuccess(resultData){
+				if(resultData=="GOOD"){
+					alert("구독 완료!");
+					dataReset();
+					listAll(rbno);
+				}
+			}
+			function whenError(){
+				alert("시스템 오류입니다. 관리자에게 문의하세요.");
+			}
+		});
+		
 	});
 </script>
 </head>
@@ -129,8 +150,20 @@
 			</td>		
 		</tr>
 		<tr>
+			<td>작성자</td>
+			<td><%=cbvo.getMnick()%>
+				<input type="hidden" id="mnick" name="mnick" value="<%=cbvo.getMnick()%>">
+				<input type="hidden" id="ino" name="ino" value="<%=cbvo.getIno()%>">
+				<input type="button" id="Subs" value="구독하기">				
+			</td>
+		</tr>
+		<tr>
 			<td>메뉴명</td>
 			<td><%=cbvo.getRcp_nm()%></td>
+		</tr>
+		<tr>
+			<td>조회수: <%=cbvo.getViews() + 1 %></td>
+			<td>추천수: <%=cbvo.getHits() %></td>
 		</tr>
 		<tr>
 			<td>조리방법</td>
@@ -560,16 +593,11 @@
 			<td>수정일</td>
 			<td><%=cbvo.getRb_updatedate()%></td>
 		</tr>
-			<tr>
-				<td colspan="2">
-					<button type="button" class="" name="FavRecipe" id="FavRecipe">추천하기</button>
-					<input type="hidden" name="rbno" id="rbno" value="<%= cbvo.getRbno() %>" />
-				</td>
-			</tr>
 		<tr>
 			<td colspan="2" align="right">
-				<button type="button" id="U" >수정</button>
-				<button type="button" id="D" >삭제</button>
+				<button type="button" id="U" disabled="disabled">수정</button>
+				<button type="button" id="D" disabled="disabled">삭제</button>
+				<button type="button" id="hits">추천</button>
 				<button type="button" id="C">목록</button>
 			</td>
 		</tr>

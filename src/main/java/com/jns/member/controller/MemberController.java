@@ -69,7 +69,7 @@ public class MemberController {
 		String key = new FileUploadUtil().uploadFile(request, "member");
 		logger.info("key >>> : " + key);
 		mvo.setMphoto(key);
-	
+		
 		// memInsert 함수에서 서비스 호출하기
 		int nCnt = memberService.memberInsert(mvo);
 		logger.info("MemberController memberInsert >>> : " + nCnt + " 건 입력 되었습니다.");
@@ -86,12 +86,14 @@ public class MemberController {
 	public String memberSelectAll(MemberVO mvo, Model model) {
 
 		logger.info("MemberController MemberSelectAll 함수 시작 >>> :: ");
-		logger.info("mvo >>> :: " + mvo);
+		//logger.info("mvo >>> :: " + mvo);
 
+		logger.info("회원번호 >>> : " + mvo.getMno());
 		List<MemberVO> listAll = memberService.memberSelectAll(mvo);
 		logger.info("MemberController MemberSelectAll >>>> ::: " + listAll.size());
 
-		if (listAll.size() >                                                   0) {
+
+		if (listAll.size() >= 0) {
 			model.addAttribute("listAll", listAll);
 			return "mem/memberSelectAll";
 		}
@@ -105,7 +107,6 @@ public class MemberController {
 
 		logger.info("MemberController MemberSelect 함수 시작 >>> :: ");
 		logger.info("mvo >>> :: " + mvo);
-
 		logger.info("MemberController MemberSelect mvo.getMno() >>> : " + mvo.getMno());
 		List<MemberVO> listS = memberService.memberSelect(mvo);
 		int nCnt = listS.size();

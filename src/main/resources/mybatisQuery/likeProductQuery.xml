@@ -36,4 +36,8 @@ INSERT INTO LIKEPRODUCT(
 <delete id="likeProductDelete" parameterType="pvo">
 DELETE FROM LIKEPRODUCT WHERE PRODUCTID = #{productId} AND MNO = #{mno}
 </delete>
+
+<select id="likpProductIdSelectAll" resultType="pvo">
+SELECT PRODUCTID FROM LIKEPRODUCT WHERE MNO=#{mno}
+</select>
 </mapper>

@@ -42,6 +42,18 @@ public class ChefBoardDAOImpl implements ChefBoardDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.update("boardDelete");
 	}
+
+	@Override
+	public int chefBoardViewsPP(ChefBoardVO cbvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int chefBoardHitsPP(ChefBoardVO cbvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 
