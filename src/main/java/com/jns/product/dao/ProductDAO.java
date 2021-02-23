@@ -9,4 +9,5 @@ public interface ProductDAO {
 	public List<ProductVO> LikeProductSelectAll(ProductVO pvo);
 	public int likeProductInsert(ProductVO pvo);
 	public int likeProductDelete(ProductVO pvo);
+	public List<ProductVO> likpProductIdSelectAll(ProductVO pvo);
 }

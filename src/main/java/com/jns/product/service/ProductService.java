@@ -15,4 +15,6 @@ public interface ProductService {
 	public int likeProductDelete(ProductVO pvo);
 	//최저가 변동 체크
 	public void lpriceChk(ProductVO pvo);
+	//유저의 관심상품 productid만 조회
+	public List<ProductVO> likpProductIdSelectAll(ProductVO pvo);
 }

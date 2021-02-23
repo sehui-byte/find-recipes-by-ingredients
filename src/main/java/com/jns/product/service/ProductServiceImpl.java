@@ -211,4 +211,12 @@ public class ProductServiceImpl implements ProductService{
 		
 		return mno;
 	}
+
+	//로그인한 유저의 관심상품 중 productid만 가져오기
+	@Override
+	public List<ProductVO> likpProductIdSelectAll(ProductVO pvo) {
+		pvo.setMno(getLoginMno(pvo));
+		List<ProductVO> result = pdao.likpProductIdSelectAll(pvo);
+		return result;
+	}
 }
