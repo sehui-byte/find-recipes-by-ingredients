@@ -121,4 +121,28 @@ public class SubscribeController {
 		else{ return "BAD"; }
 	}
 	
+	
+	/********************************************************************************************
+	* 구독 랭킹 확인하기
+	********************************************************************************************/
+	@ResponseBody
+	@RequestMapping(value="subscribe/subRank", method=RequestMethod.POST)
+	public String subRank(SubscribeVO svo){
+		logger.info("[SubscribeC] >> subRank 호출 성공");
+		
+
+		List<SubscribeVO> subRank = subscribeService.subRank(svo);
+		
+		String ss = "";
+		String listStr = "";
+		for(int i=0; i < subRank.size(); i++) {
+			SubscribeVO _svo = subRank.get(i);
+			String s0 = Integer.toString(_svo.getSubCount());
+			String s1 = _svo.getChefnick();
+			ss = s0 + "," + s1;
+			listStr += ss + "&";
+		}
+		//System.out.println("ReplyC >> listStr >>> : " + listStr);
+		return listStr;
+	}
 }

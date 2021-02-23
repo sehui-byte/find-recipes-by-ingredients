@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 <%@ page import="com.jns.chefboard.vo.ChefBoardVO" %> 
+<%@ page import="com.jns.subscribe.vo.SubscribeVO" %> 
 <%@ page import="java.util.List" %> 
     
 <!DOCTYPE html>
@@ -24,6 +25,14 @@
 		if ( sessionMlevel == 'C'){
 			$('#I').attr('disabled', false);
 		}
+			
+		
+		//datepicker
+		
+		
+		// 구독 랭킹
+		var rankUrl = "/kosmoJns/subscribe/subRank.do"
+		var rankmethod = "POST"
 		
 		//검색버튼
 		$(document).on("click", "#searchBtn", function(){
@@ -33,9 +42,6 @@
 		});
 		
 		
-		//datepicker
-		
-		
 		// 입력
 		$(document).on("click", "#I", function(){
 			location.href="/kosmoJns/chefboard/writeForm.do";
@@ -43,10 +49,43 @@
 		
 	});	
 	
+	
 </script>
 </head>
 <body>
 <% request.setCharacterEncoding("UTF-8");%> 
+<%
+	Object objR = request.getAttribute("subRank");
+	List<SubscribeVO> listR = (List)objR;
+	
+	int rank = listR.size();
+	System.out.println("boardselectall.jsp rank >>> : " + rank);
+%>
+<form id="subscribeRank">
+	<table>
+<%
+	if (rank > 0) {
+		for(int i=0; i<rank; i++){
+			SubscribeVO svo = listR.get(i);
+%>	
+		<tr class="rankTr">
+			<td class="rankTd"><%= i + 1 %> 등</td>
+			<td class="rankTd"><%= svo.getChefnick() %></td>
+			<td class="rankTd">구독자 <%= svo.getSubCount() %> 명</td>
+		</tr>	
+<%
+		} // end of for
+	}else{
+%>
+	<tr>
+		<td colspan="10" align="center">순위가 존재하지 않습니다.</td>
+	</tr>	
+<%		
+		
+	} // end of if
+%>
+	</table>
+</form>
 <%
 	Object obj = request.getAttribute("listAll");
 	List<ChefBoardVO> list = (List)obj;
