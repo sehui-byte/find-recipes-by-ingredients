@@ -4,6 +4,7 @@
 
 <mapper namespace="com.jns.myinfo.dao.MyinfoDAO">
 
+	<!-- 내가 쓴 레시피 조회하기 -->
 	<select id="myRecipeList" parameterType="mvo" resultType="rbvo">
 	
 		SELECT 
@@ -20,56 +21,16 @@
 			<![CDATA[AND A.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 		</if>
 		<if test="keyfilter=='key2'">
-			<![CDATA[AND A.MANUAL01  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL02  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL03  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL04  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL05  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL06  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL07  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL08  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL09  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL10  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL11  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL12  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL13  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL14  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL15  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL16  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL17  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL18  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL19  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL20  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND A.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 		</if>
 		<if test="keyfilter=='key3'">
 			<![CDATA[AND A.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL01  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL02  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL03  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL04  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL05  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL06  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL07  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL08  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL09  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL10  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL11  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL12  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL13  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL14  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL15  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL16  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL17  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL18  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL19  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.MANUAL20  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-		</if>
-		<if test="keyfilter=='key5'">
-			<![CDATA[AND A.RBNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND A.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 		</if>
 		ORDER BY 1
 	</select>
 	
+	<!--  내 레시피 삭제하기 -->
 	<update id="myRecipeDelete" parameterType="rbvo">
 		UPDATE RECIPE_BOARD
 		SET
@@ -77,6 +38,7 @@
 		WHERE RBNO  = #{rbno, jdbcType=VARCHAR}
 	</update>	
 	
+	<!--  내 Q&A 리스트 조회하기 -->
 	<select id="myQnAList" parameterType="mvo" resultType="bvo">
 	
 		SELECT
@@ -103,7 +65,7 @@
 		ORDER BY 1
 	</select>
 	
-	
+	<!--  내 Q&A 리스트 삭제하기 -->
 	<update id="myQnADelete" parameterType="mvo">
 		UPDATE BOARD
 		SET
@@ -112,7 +74,63 @@
 			BTYPE = 'Q'
 		AND BNO = #{bno, jdbcType=VARCHAR}
 	</update>
+	
+	
+	<!-- 내가 추천한 레시피 조회하기 // API 레시피-->
+	<select id="myFavRecipeList1" parameterType="mvo" resultType="rvo">
 
+	SELECT 
+		*
+	FROM
+		FAVORITES A, RECIPE B
+	WHERE
+		A.MNO = #{mno, jdbcType=VARCHAR}
+	AND
+		A.RCP_SEQ = B.RCP_SEQ
+	<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+	<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+	<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+	</if>
+	<if test="keyfilter=='key1'">
+		<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+	</if>
+	<if test="keyfilter=='key2'">
+		<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+	</if>
+	<if test="keyfilter=='key3'">
+		<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+	</if>
+	ORDER BY 1
+	<!-- 레시피가 user인 경우 -->
+	
+	</select>
 
+	<!-- 내가 추천한 레시피 조회하기 // 회원 레시피-->
+	<select id="myFavRecipeList2" parameterType="mvo" resultType="rbvo">
 
+	SELECT 
+		B.*
+	FROM FAVORITES A, RECIPE_BOARD B
+	WHERE
+		A.MNO = #{mno, jdbcType=VARCHAR}
+	AND
+		A.RBNO = B.RBNO
+	<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+	<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+	<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+	</if>
+	<if test="keyfilter=='key1'">
+		<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+	</if>
+	<if test="keyfilter=='key2'">
+		<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+	</if>
+	<if test="keyfilter=='key3'">
+		<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+	</if>
+	ORDER BY 1
+	</select>
+	
 </mapper>

@@ -18,6 +18,12 @@
 <script type="text/javascript">
 	
 	$(document).ready(function(){
+		sessionMlevel = "<%=mlevel%>"
+		
+		// 로그인 유저가 세프일 경우 글쓰기 버튼 활성화
+		if ( sessionMlevel == 'C'){
+			$('#I').attr('disabled', false);
+		}
 		
 		//검색버튼
 		$(document).on("click", "#searchBtn", function(){
@@ -32,8 +38,8 @@
 		
 		// 입력
 		$(document).on("click", "#I", function(){
-				location.href="/kosmoJns/chefboard/writeForm.do";
-			});	
+			location.href="/kosmoJns/chefboard/writeForm.do";
+		});	
 		
 	});	
 	
@@ -71,6 +77,8 @@
 		<td class="tt">제목</td>
 		<td class="tt">이름</td>
 		<!-- <td class="tt">내용</td>  -->
+		<td class="tt">조회</td>
+		<td class="tt">추천</td>
 		<td class="tt">작성일</td>
 		<td class="tt">수정일</td>
 		<td class="tt">사진</td>
@@ -89,7 +97,9 @@
 			<%= cbvo.getRcp_nm() %>
 			</a>
 		</td>
-		<td class="tt"> 작성자 </td>
+		<td class="tt"><%= cbvo.getMnick() %> </td>
+		<td class="tt"><%= cbvo.getViews() %> </td>
+		<td class="tt"><%= cbvo.getHits() %> </td>
 		<td class="tt"><%= cbvo.getRb_insertdate() %> </td>
 		<td class="tt"><%= cbvo.getRb_updatedate() %> </td>
 		<td class="tt"> 메인이미지 </td>
@@ -108,7 +118,7 @@
 %>
 	<tr>
 		<td colspan="10" align="right">
-			<input type="button" value="글쓰기" id="I">
+			<input type="button" value="글쓰기" id="I" disabled="disabled">
 		</td>
 	</tr>
 	</tbody>

@@ -167,7 +167,6 @@
 	SELECT *
 	FROM  MEMBER A
 	WHERE A.MDELETEYN='Y'
-	AND	  A.MNO = #{mno,jdbcType=VARCHAR}
 	
 	</select>
 	

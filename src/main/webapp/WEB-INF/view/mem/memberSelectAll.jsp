@@ -11,6 +11,7 @@
 	.tt{
 		text-align:center;
 		font-weight: bold;
+		text-overflow: ellipsis; white-space: nowrap; max-width:140px; overflow:hidden;
 	}
 </style>
 <script src="http://code/jquery.com/jquery-3.5.1.js"></script>
@@ -77,11 +78,13 @@ SELECT ALL
 	<td class="tt">닉네임</td>
 	<td class="tt">전화번호</td>
 	<td class="tt">이메일</td>
-	<td class="tt">도로명주소</td>	
+	<td class="tt">주소</td>	
+	<td class="tt">우편번호</td>	
+	<td class="tt">상세주소</td>	
 	<td class="tt">사진</td>
-	<td class="tt">삭제여부</td>
 	<td class="tt">등록일</td>
 	<td class="tt">수정일</td>
+	<td class="tt">삭제여부</td>
 </tr>
 </thead>
 <%
@@ -96,6 +99,7 @@ SELECT ALL
 			value=<%= mvo.getMno()%> onclick="checkOnly(this)">
 	</td>
 	<td class="tt"><%=mvo.getMno() %></td>
+	<td class="tt"><%=mvo.getMlevel() %></td>
 	<td class="tt"><%=mvo.getMid() %></td>
 	<td class="tt"><%=mvo.getMpw() %></td>
 	<td class="tt"><%=mvo.getMname() %></td>
@@ -105,7 +109,7 @@ SELECT ALL
 	<td class="tt"><%=mvo.getMaddr() %></td>
 	<td class="tt"><%=mvo.getMzipcode() %></td>
 	<td class="tt"><%=mvo.getMaddrdetail() %></td>
-	<td class="tt"><img src="/kosmoJns/imgupload/<%=mvo.getMphoto()%>"></td>
+	<td class="tt"><img src="<%=mvo.getMphoto() %>"></td>
 	<td class="tt"><%=mvo.getMinsertdate() %></td>
 	<td class="tt"><%=mvo.getMupdatedate() %></td>
 	<td class="tt"><%=mvo.getMdeleteyn() %></td>
@@ -116,7 +120,7 @@ SELECT ALL
 	} // end of if
 %>
 <tr>
-	<td colspan="10" align="right">			
+	<td colspan="16" align="right">			
 		<input type="button" value="회원 목록" id="SALL">
 		<input type="button" value="회원정보 수정" id="U">
 		<input type="button" value="회원 삭제" id="D">									

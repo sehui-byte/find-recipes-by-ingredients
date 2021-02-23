@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jns.board.vo.BoardVO;
 import com.jns.member.vo.MemberVO;
+import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Repository
@@ -47,8 +48,16 @@ public class MyinfoDAOImpl implements MyinfoDAO {
 	}
 
 	@Override
-	public List myFavRecipeList() {
+	public List<RecipeVO> myFavRecipeList1(MemberVO mvo) {
 
-		return null;
+		return sqlSession.selectList("myFavRecipeList1", mvo);
 	}
+
+	@Override
+	public List<RecipeBoardVO> myFavRecipeList2(MemberVO mvo) {
+
+		return sqlSession.selectList("myFavRecipeList2", mvo);
+	}
+
+
 }

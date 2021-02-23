@@ -46,5 +46,9 @@
 	<select id="getChefChabun" resultType="cvo">
 		SELECT NVL(MAX(SUBSTR(A.INO, -4)), 0) + 1  INO FROM CHEF_INFO A
 	</select>
+
+	<select id="getFavoritesChabun" resultType="fvo">
+		SELECT NVL(MAX(SUBSTR(A.FNO, -4)), 0) + 1 FNO FROM FAVORITES A
+	</select>
 	
 </mapper>

@@ -105,6 +105,7 @@
 							$("#result").empty();
 							console.log("success");
 
+
 							var html = "";
 							var item = data.items;
 							var count = 0;//식품 검색결과 총개수
@@ -122,6 +123,14 @@
 									var maker = item[i].maker;//제조사
 									var brand = item[i].brand;//브랜드명
 									var mallName = item[i].mallName;//쇼핑몰상호
+
+							//html += '<a href="' + link +'" class="btn btn-primary" onclick=clickpurchase('+recentPro+')>구매하기</a> ';
+							html += '<a href="' + link +'" class="btn btn-primary">구매하기</a> ';
+							// 구매하기 클릭시 최근 본 상품에 추가
+							$("#btn btn-primary").click(function(){
+								clickpurchase(recentPro);
+							});
+
 
 									//onclick시 보낼 매개변수 문자열 : str (,로 구분)
 									var str = productId
@@ -245,6 +254,7 @@
 
 		}
 	</script>
+
 
 	<!-- 최근 본 상품 -->
 	<%@ include file="/WEB-INF/view/product/recentProduct.jsp"%>
