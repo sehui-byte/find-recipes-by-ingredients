@@ -91,7 +91,7 @@ public class MemberController {
 		List<MemberVO> listAll = memberService.memberSelectAll(mvo);
 		logger.info("MemberController MemberSelectAll >>>> ::: " + listAll.size());
 
-		if (listAll.size() >= 0) {
+		if (listAll.size() >                                                   0) {
 			model.addAttribute("listAll", listAll);
 			return "mem/memberSelectAll";
 		}
@@ -100,7 +100,7 @@ public class MemberController {
 	}
 
 	// 회원 조회 : 선택 조회
-	@RequestMapping(value = "memSelect", method = RequestMethod.GET)
+	@RequestMapping(value = "memberSelect", method = RequestMethod.GET)
 	public String memberSelect(MemberVO mvo, Model model) {
 
 		logger.info("MemberController MemberSelect 함수 시작 >>> :: ");
@@ -111,47 +111,46 @@ public class MemberController {
 		int nCnt = listS.size();
 		logger.info("MemberController MemberSelect nCnt >>> : " + nCnt);
 
-		if (nCnt == 1) {
+		if (nCnt > 0) {
 			model.addAttribute("listS", listS);
-			return "mem/memSelect";
+			return "mem/memberSelect";
 		}
 
-		return "memberForm";
+		return "mem/memberForm";
 	}
 
 	// 회원 수정
-	@RequestMapping(value = "memUpdate", method = RequestMethod.GET)
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
 	public String memberUpdate(MemberVO mvo, Model model) {
 
 		logger.info("MemberController MemberUpdate 함수 시작 >>> :: ");
 		logger.info("mvo >>> :: " + mvo);
 
 		logger.info("mvo.getMno()" + mvo.getMno());
-		logger.info("mvo.getMaddr()" + mvo.getMaddr());
 		logger.info("mvo.getMnick()" + mvo.getMnick());
-		logger.info("mvo.getMphoto())" + mvo.getMphoto());
+		logger.info("mvo.getMlevel()"+mvo.getMlevel());
 
 		int nCnt = memberService.memberUpdate(mvo);
 		logger.info("MemberController MemberUpdate nCnt >>> : " + nCnt);
 
 		if (nCnt == 1) {
-			return "mem/memUpdate";
+			return "mem/memberUpdate";
 		}
 		return "/main";
 	}
 
 	// 회원 삭제
-	@RequestMapping(value = "memDelete", method = RequestMethod.GET)
+	@RequestMapping(value = "memberDelete", method = RequestMethod.GET)
 	public String memDelete(MemberVO mvo, Model model) {
 		logger.info("MemberController MemberDelete 함수 진입 >>> : ");
-		logger.info("mvo >>> : " + mvo);
+			
 
 		logger.info("mvo.getMno() >>> : " + mvo.getMno());
 		int nCnt = memberService.memberDelete(mvo);
 		logger.info("MemberController MemberDelete nCnt >>> : " + nCnt);
 
-		if (nCnt == 1) {
-			return "mem/memDelete";
+		if (nCnt > 0) {
+			return "mem/memberDelete";
 		}
 		return "/main";
 	}
