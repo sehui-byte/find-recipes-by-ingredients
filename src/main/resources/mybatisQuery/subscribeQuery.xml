@@ -59,4 +59,25 @@
 				,SUPDATEDATE = SYSDATE
 		WHERE	 SNO = #{sno, jdbcType=VARCHAR} 
 	</update>
+	
+	<!-- 구독자 수 랭킹 -->
+	<select id="subRank" parameterType="svo" resultType="svo">
+		SELECT  *
+		FROM	(
+				 SELECT 	 COUNT(A.SNO) AS SUBCOUNT
+							,D.MNICK AS CHEFNICK
+				 FROM 		 SUB_INFO A, (SELECT 
+												 B.INO AS INO
+												,C.MNICK AS MNICK
+						      			  FROM CHEF_INFO B, MEMBER C
+						      			  WHERE B.MNO = C.MNO) D
+			 	 WHERE		 A.INO = D.INO
+			 	 AND		 A.SDELETEYN = 'Y'
+			 	 GROUP BY 	 D.MNICK
+			 	 ORDER BY 	 1 DESC
+				)
+		WHERE <![CDATA[ROWNUM <= 3]]>
+	</select>
+	
+	
 </mapper>
