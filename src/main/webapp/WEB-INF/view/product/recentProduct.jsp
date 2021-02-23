@@ -25,9 +25,9 @@
 	<script type="text/javascript"> 
 	$(document).ready(function() {
 
-		// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+		// 기존 css에서 플로팅 배너 위치값(top)을 가져와서 저장
+		// 250px 이런식으로 가져오므로 숫자만 가져오기 : parseInt(값);
 		var floatPosition = parseInt($("#recentbox").css('top'));
-		// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
 
 		$(window).scroll(function() {
 			// 현재 스크롤 위치를 가져온다.
@@ -37,9 +37,8 @@
 			}
 			var newPosition = scrollTop + floatPosition + "px";
 
-			/* 애니메이션 없이 바로 따라감
-			 $("#recentbox").css('top', newPosition);
-			 */
+			// 애니메이션 없이 바로 따라감
+			//$("#recentbox").css('top', newPosition);
 
 			$("#recentbox").stop().animate({
 				"top" : newPosition
@@ -144,26 +143,63 @@
 			return cookieValue;
 		}
 		
+		
 		// 쿠키 배열로 저장하기 : 최대 5개
-		var cookieArr = [];
+		var cookieArr = [,];
+		var cookieArr_name = [];
+		var cookieArr_value = [];
 		function setCookieArray(cookieName){ // productId1
 		 	var cookieValue = getRecentCookie("cookieName"); // productImage1&&productLink1
 		 	
 		 	// 배열 맨 앞에 요소 추가, 배열의 크기 리턴
-	        cookieArr.unshift(cookieValue);
-	         
+	        cookieArr_name.unshift(cookieName);		// [productId5, productId4, ..., productId1]
+		 	cookieArr_value.unshift(cookieValue);	// [productImage5&&productLink5, ...]
+
 	        // 중복된 쿠키 제거 (뒷쪽에 있는 쿠키 삭제됨)
-	        var recentArr = cookieArr.filter(function(item, pos, self) {
+	        // 1) 쿠키명
+	        var recentArr_name = cookieArr_name.filter(function(item, pos, self) {
 				return self.indexOf(item) == pos;
 	        });
-	         
-	        // 쿠키 5개 넘으면
-	        if(recentArr.length > 5){
-	        	recentArr.pop(); // 배열의 마지막 요소를 제거, 제거한 요소 리턴
-	        }
-	        console.log(recentArr);
+	        // 2) 쿠키값
+	        var recentArr_value = cookieArr_value.filter(function(item, pos, self) {
+				return self.indexOf(item) == pos;
+	        });
 	        
-	        return cookieArr; // [productImage5&&productLink5, ..., productImage1&&productLink1]
+	         
+	        // 쿠키 개수 제한 : 5개
+	        // 1) 쿠키명
+	        if(recentArr_name.length > 5){
+	        	recentArr_name.pop(); // 배열의 마지막 요소를 제거, 제거한 요소 리턴
+	        	// 배열에서 제거한 쿠키명
+	        	var delCookie_name = recentArr_name.pop();
+	        	console.log("개수제한으로 제거된 쿠키명 : " + delCookie_name);
+	        	// 배열에서 제거된 쿠기 삭제
+	        	deleteCookie(delCookie_name);
+	        }
+	        // 2) 쿠키값
+	        if(recentArr_value.length > 5){
+	        	recentArr_value.pop(); // 배열의 마지막 요소를 제거, 제거한 요소 리턴
+	        	// 배열에서 제거한 쿠키값 
+	        	var delCookie_value = recentArr.pop();
+	        	console.log("개수제한으로 제거된 쿠키값 : " + recentArr_value);
+	        }
+	        console.log("최근본상품 쿠키명 배열 : " + recentArr_name);	        
+	        console.log("최근본상품 쿠키값 배열 : " + recentArr_value);	
+	        
+	        
+	        cookieArr[0] = recentArr_name;
+	        cookieArr[1] = recentArr_value;
+ 	        
+	        return cookieArr;
+	        // [{productId5, ..., productId1},{productImage5&&productLink5, ..., productImage1&&productLink1}]
+		}
+		
+		
+		// 쿠키 삭제
+		function deleteCookie(delCookie_name){
+			var expire = new Date();
+			expire.setTime(date.getTime() - 1);
+			document.cookie = cookieName + '=' + "";
 		}
 
 		
@@ -178,11 +214,13 @@
 			var cookieNameArr = cookieArr[0];	// [productId5, ..., productId1]
 			var cookieValueArr = cookieArr[1];	// [productImage5&&productLink5, ..., productImage1&&productLink1]
 		
+			// validation
 			if(cookieNameArr.length == cookieValueArr){
 				
 				var arrLength = cookieNameArr.length;
 				console.log("쿠키명&쿠키값 개수 : " + arrLength);
 				
+				// 쿠키값에 저장된 데이터 가지고 와서 브라우저에 출력하기
 				for(var i=0; i < arrLength; i++){
 					
 					var productId = cookieNameArr[i]; // productId
