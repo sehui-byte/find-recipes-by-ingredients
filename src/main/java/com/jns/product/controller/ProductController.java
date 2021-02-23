@@ -91,11 +91,6 @@ public class ProductController {
 		return "redircet:searchPage.do";
 	}
 
-	//(Test)소켓 테스트 페이지로 이동
-	@RequestMapping("socketTest")
-	public String socketTest() {
-		return "product/webSocketTest";
-	}
 
 	//(Test)소켓 테스트 페이지로 이동
 	@RequestMapping("socketTest2")
