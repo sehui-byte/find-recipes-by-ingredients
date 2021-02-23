@@ -13,6 +13,7 @@ import com.jns.member.vo.MemberVO;
 import com.jns.product.vo.ProductVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
+import com.jns.subscribe.vo.SubscribeVO;
 
 @Repository
 public class ChabunDAOImpl implements ChabunDAO {
@@ -79,6 +80,12 @@ public class ChabunDAOImpl implements ChabunDAO {
 	public FavoritesVO getFavoritesChabun() {
 	
 		return sqlSession.selectOne("getFavoritesChabun");
+	}
+
+	@Override
+	public SubscribeVO getSubscribeChabun() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("getSubscribeChabun");
 	}
 
 }

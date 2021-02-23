@@ -8,6 +8,7 @@ import com.jns.member.vo.MemberVO;
 import com.jns.product.vo.ProductVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
+import com.jns.subscribe.vo.SubscribeVO;
 
 
 public interface ChabunDAO {
@@ -27,5 +28,6 @@ public interface ChabunDAO {
 	public ProductVO getLikeProductChabun();
 	public ChefVO getChefChabun();
 	public FavoritesVO getFavoritesChabun();
+	public SubscribeVO getSubscribeChabun();
 
 }

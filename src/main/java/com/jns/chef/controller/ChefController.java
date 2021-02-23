@@ -1,8 +1,11 @@
 package com.jns.chef.controller;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -61,12 +64,60 @@ public class ChefController {
 	/********************************************************************************************
 	* 세프 전체 조회
 	********************************************************************************************/
+	@RequestMapping(value="chef/chefselectall", method=RequestMethod.GET)
+	public String chefSelectAll(ChefVO cvo, Model model) {
+		logger.info("[ChefController] >> chefSelectAll 호출 성공");
+		
+		//페이징
+		
+		List<ChefVO> listChef = chefService.chefSelectAll(cvo);
+		
+		model.addAttribute("listChef", listChef);
+		logger.info("[ChefController] >> chefSelectAll listChef.size() >>> : " + listChef.size());
+		
+		return "chef/chefselectall";
+	}
+	
+	
+	/********************************************************************************************
+	* 세프 조회
+	********************************************************************************************/
+	@RequestMapping(value="chef/chefselect", method=RequestMethod.GET)
+	public String chefSelect(ChefVO cvo, Model model) {
+		logger.info("[ChefController] >> chefSelect 호출 성공");
+		logger.info("[ChefController] >> chefSelect >> cvo.getMno()>>> :" + cvo.getMno());
+		
+		List<ChefVO> list = chefService.chefSelect(cvo);
+		
+		logger.info("[ChefController] >> chefSelect list.size() >>> : " + list.size());
+		
+		if(list.size() == 1) {
+			model.addAttribute("list", list);
+			return "chef/chefselect";
+		}
+		
+		return "chef/chefselectall";
+	}
 	
 	
 	/********************************************************************************************
 	* 세프 삭제
 	********************************************************************************************/
-	
-	
-	
+	@RequestMapping(value="chef/chefdelete", method=RequestMethod.POST)
+	public String chefDelete(ChefVO cvo) {
+		logger.info("[ChefController] >> chefDelete 호출 성공");
+		logger.info("[ChefController] >> chefDelete >> cvo.getIno() >>> : " + cvo.getIno());
+		
+		int nCnt = 0;
+		String url = "";		
+		
+		nCnt = chefService.chefDelete(cvo);
+		logger.info("[ChefController] >> chefDelete >> nCnt >>> : " + nCnt);
+		
+		if (nCnt ==1 ) {
+			url = "/chef/test.do";
+		}
+		
+		return "redirect:" + url;
+	}
 }
