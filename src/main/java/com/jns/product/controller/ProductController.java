@@ -73,12 +73,15 @@ public class ProductController {
 	public String likeProductInsert(@RequestBody ProductVO pvo) {	
 		//채번
 		String lpno = ChabunUtil.getLikeProductChabun("D", chabun.getLikeProductChabun().getLpno());
-		System.out.println("생성된채번 >> " + lpno);
+		logger.info("생성된채번 >> " + lpno);
 		pvo.setLpno(lpno);
-		System.out.println("hprice >> " + pvo.getHprice());
-		System.out.println("lprice >> " + pvo.getLprice());
+		
+		//최고가가 0이면 최저가와 같게 설정
+		if(pvo.getHprice().equals("0"))
+			pvo.setHprice(pvo.getLprice());
+		
 		service.likeProductInsert(pvo);
-		return "redircet:searchPage.do";
+		return "redirect:searchPage.do";
 	}
 
 	//관심상품 정보 삭제

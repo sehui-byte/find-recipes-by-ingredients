@@ -33,33 +33,37 @@
 	</form>
 
 	<!-- 최근 검색어  -->
-	<!--  include file="/WEB-INF/view/product/recentKeyword.jsp"-->
+	<%@ include file="/WEB-INF/view/product/recentKeyword.jsp"%>
 
 	<!-- 검색결과 -->
 	<div id="result"></div>
 
 	<script>
 		var piArray = new Array();//유저의 관심상품 productId값이 들어가는 배열
-		//유저가 이미 저장한 관심상품의 productId 가져오기
-		$.ajax({
-			url : "chkLikeProductId.do",
-			type : 'get',
-			dataType : "json",
-			contentType : "application/json; charset:UTF-8",
-			success : function(data) {
-				console.log("chkLikeProductId 성공");
-				let item2 = data;
-				console.log(item2);
-				for ( var i in item2) {
-					var pi = item2[i].productId;
-					piArray.push(pi);
-					console.log("유저의 관심상품 productId >> " + pi);
+		chkLikeProductId();
+		function chkLikeProductId(){
+			//유저가 이미 저장한 관심상품의 productId 가져오기
+			$.ajax({
+				url : "chkLikeProductId.do",
+				type : 'get',
+				dataType : "json",
+				contentType : "application/json; charset:UTF-8",
+				success : function(data) {
+					console.log("chkLikeProductId 성공");
+					let item2 = data;
+					console.log(item2);
+					for ( var i in item2) {
+						var pi = item2[i].productId;
+						piArray.push(pi);
+						console.log("유저의 관심상품 productId >> " + pi);
+					}
+				},
+				error : function() {
+					console.log("error!");
 				}
-			},
-			error : function() {
-				console.log("error!");
-			}
-		});
+			});
+		}
+		
 
 		//enter키 눌렀을 때 페이지 재로딩 되는 것 방지
 		function captureReturnKey(e) {
@@ -196,6 +200,7 @@
 					});
 		}
 
+		
 		//관심상품 버튼 이벤트 //동적 태그에 이벤트 주기
 		function clickProductId(productStr) {
 			console.log("관심상품 등록 버튼 클릭");
@@ -206,9 +211,9 @@
 			var link = strArr[3];
 			var lprice = strArr[4];
 			var hprice = strArr[5];
-
 			var btn = document.getElementById(productId);
 			var isChecked = true;
+			
 			for ( var i in piArray) {
 				if (productId == piArray[i]) {
 					console.log("piArray[i] >> " + piArray[i]
@@ -245,7 +250,7 @@
 					}
 				});
 				alert("관심 상품을 저장했습니다!");
-				//location.reload();
+				chkLikeProductId();
 
 			} else {
 				alert("이미 등록된 상품입니다");
