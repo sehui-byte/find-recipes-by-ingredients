@@ -38,6 +38,7 @@
 		<thead>
 			<tr>
 				<th scope="col">체크</th>
+				<th scope="col">일련번호</th>
 				<th scope="col">상품번호</th>
 				<th scope="col">상품명</th>
 				<th scope="col">이미지</th>
@@ -51,6 +52,7 @@
 			<c:forEach items="${list}" var="list">
 				<tr>
 					<th><input type="checkbox" name="productChk" /></th>
+					<td><c:out value="${list.lpno}" /></td>
 					<td><c:out value="${list.productId}" /></td>
 					<td><c:out value="${list.title}" /></td>
 					<td><c:out value="${list.image}" /></td>

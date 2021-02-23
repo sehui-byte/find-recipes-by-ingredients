@@ -2,6 +2,7 @@ package com.jns.product.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -28,7 +29,6 @@ public class ProductController {
 
 	private ProductService service;
 	private ChabunService chabun;
-	HttpSession session;
 	Logger logger = Logger.getLogger(ProductController.class);
 
 	@Autowired(required=false)
@@ -42,7 +42,7 @@ public class ProductController {
 	public String search() {
 		return "product/searchProduct";
 	}
-	
+
 	//유저의 기존 관심상품 목록 productId 가져와서 search.jsp 페이지에 넘기는 부분
 	@RequestMapping("chkLikeProductId.do")
 	public @ResponseBody List<ProductVO> getProductId(){
@@ -75,11 +75,11 @@ public class ProductController {
 		String lpno = ChabunUtil.getLikeProductChabun("D", chabun.getLikeProductChabun().getLpno());
 		logger.info("생성된채번 >> " + lpno);
 		pvo.setLpno(lpno);
-		
+
 		//최고가가 0이면 최저가와 같게 설정
 		if(pvo.getHprice().equals("0"))
 			pvo.setHprice(pvo.getLprice());
-		
+
 		service.likeProductInsert(pvo);
 		return "redirect:searchPage.do";
 	}
@@ -90,10 +90,19 @@ public class ProductController {
 		service.likeProductDelete(pvo);
 		return "redircet:searchPage.do";
 	}
-	
+
 	//(Test)소켓 테스트 페이지로 이동
-	@RequestMapping("socketTest.do")
+	@RequestMapping("socketTest")
 	public String socketTest() {
 		return "product/webSocketTest";
 	}
+
+	//(Test)소켓 테스트 페이지로 이동
+	@RequestMapping("socketTest2")
+	public String socketTest2() {
+		//service.lpriceChk(pvo,mid);
+		return "product/webSocketTest2";
+	}
+
+
 }

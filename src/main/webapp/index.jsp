@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/jsp/header.jsp" %>
+<!-- jstl -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<head>
+<!-- socketJS -->
+<!-- socketJS -->
+<script
+	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<!-- jquery -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.5.1.js"></script>
+</head>
 <html>
 <body>
 <h2>main test 페이지</h2><br>
@@ -62,7 +73,7 @@
 <ul>
 	<li><a href = "searchPage.do">상품 검색 페이지</a></li>
 	<li><a href = "likeProduct.do">관심상품 목록 보기(테스트)</a></li>
-	<li><a href = "socketTest.do">웹소켓 테스트</a></li>
+	<li><a href = "socketTest2">웹소켓 테스트</a></li>
 </ul>
 
 <hr>

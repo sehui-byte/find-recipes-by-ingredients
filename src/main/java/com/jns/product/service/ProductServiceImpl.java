@@ -26,6 +26,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.jns.chabun.dao.ChabunDAO;
 import com.jns.member.vo.MemberVO;
@@ -39,7 +40,6 @@ public class ProductServiceImpl implements ProductService{
 
 	private Logger logger = Logger.getLogger(ProductServiceImpl.class);
 	private ProductDAO pdao;
-	private ProductApplicantWebSocketHandler handler;
 
 	@Autowired(required=false)
 	public ProductServiceImpl(ProductDAO pdao) {
@@ -123,6 +123,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<ProductVO> likeProductSelectAll(ProductVO pvo) {
 		pvo.setMno(getLoginMno(pvo));
+
 		List<ProductVO> result = pdao.LikeProductSelectAll(pvo);
 		logger.info("관심상품 개수 >> " + result.size());
 		return result;
@@ -133,6 +134,11 @@ public class ProductServiceImpl implements ProductService{
 	public int likeProductInsert(ProductVO pvo) {
 		pvo.setMno(getLoginMno(pvo));
 		int nCnt = pdao.likeProductInsert(pvo);
+		logger.info("회원번호>>" + pvo.getMno());
+		logger.info("최저가>>" + pvo.getLprice());
+		logger.info("이미지>>" + pvo.getImage());
+		logger.info("상품명>>" + pvo.getTitle());
+		logger.info("링크>>" + pvo.getLink());
 		logger.info("삽입된 컬럼 수 >> " + nCnt);
 		return nCnt;
 	}
@@ -146,61 +152,6 @@ public class ProductServiceImpl implements ProductService{
 		return nCnt;
 	}
 
-	//최저가 변동  확인
-	@Override
-	public void lpriceChk(ProductVO pvo) {
-		//로그인한 사용자의 관심상품 목록을 가져온다
-		List<ProductVO> list = likeProductSelectAll(pvo);
-		JSONParser parser = new JSONParser();
-
-		for(int i = 0; i<list.size(); i++) {
-			//관심상품 목록의 title로 keyword설정하여 open api에서 json데이터 받아온다
-			String jsonData = "";
-			String productId = list.get(i).getProductId();
-			String likeLprice = list.get(i).getLprice();
-			//관심상품의 상품명으로 네이버 쇼핑에서 검색
-			jsonData = naverSearchApi(list.get(i).getTitle());
-			JSONObject obj = null;
-			try {
-				obj = (JSONObject)parser.parse(new StringReader(jsonData));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			JSONArray result = (JSONArray)obj.get("items");
-			//json데이터가 0개 이상일때
-			System.out.println(list.get(i).getTitle() + " 검색결과 개수 >> " + result.size());
-			if(result.size() > 0) {
-				for(int j = 0; j<result.size(); j++) {
-					JSONObject tmp = (JSONObject)result.get(j);
-					//json데이터의 productId와 사용자 관심상품의 productId 비교하여
-					//일치하는 상품이 있다면 최저가 비교
-					if(productId.equals(tmp.get("productId"))) {
-						//변동이 있을 경우 알람을 보낸다
-						if(!tmp.get("lprice").equals(likeLprice)) {
-							logger.info("관심상품 원래 최저가 >> " + likeLprice + ", 최신 최저가 >> " + tmp.get("lprice"));
-							logger.info("알람 보내기!");
-							//알람 보내는 코드 작성///////////
-							
-							
-							//handler.noticeLpriceApplicant(session);
-							break;
-						}
-						//추후에 지우기
-						logger.info("관심상품 원래 최저가 >> " + likeLprice + ", 최신 최저가 >> " + tmp.get("lprice"));
-					}
-				}
-			}
-			else {
-				logger.info("검색결과가 없다!");
-			}
-
-		}
-	}
 
 	//로그인한 사용자 mno가져오기
 	private String getLoginMno(ProductVO pvo) {
