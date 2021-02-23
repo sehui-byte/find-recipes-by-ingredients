@@ -271,6 +271,7 @@
 		<td colspan="2">
 			<button type="button" id="membtn">가입하기</button>
 			<button type="reset">다시 입력하기</button>
+		</td>
 	</table>
 </form>
 </div>
