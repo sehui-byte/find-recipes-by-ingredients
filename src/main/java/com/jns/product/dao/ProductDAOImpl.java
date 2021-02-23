@@ -32,4 +32,10 @@ public class ProductDAOImpl implements ProductDAO {
 	public int likeProductDelete(ProductVO pvo) {
 		return (Integer)sqlSession.delete("likeProductDelete",pvo);
 	}
+
+	//로그인한 유저의 관심상품의 productId만 select
+	@Override
+	public List<ProductVO> likpProductIdSelectAll(ProductVO pvo) {
+		return sqlSession.selectList("likpProductIdSelectAll",pvo);
+	}
 }
