@@ -31,25 +31,6 @@ public class FavoritesController {
 		this.chabunService = chabunService;
 	}
 	
-	@RequestMapping(value = "favorites/favRecipeList", method = RequestMethod.GET)
-	public String myFavRecipeList(FavoritesVO fvo) {
-		
-		logger.info("mno >>> " + fvo.getMno());
-		logger.info("keyword >>> " + fvo.getKeyword());
-		logger.info("keyfilter >>> " + fvo.getKeyfilter());
-		logger.info("startdate >>> " + fvo.getStartdate());
-		logger.info("enddate >>> " + fvo.getEnddate());
-		logger.info("recipeType >>> " + fvo.getRecipeType());
-		logger.info("recipeSEQ >>> " + fvo.getRcp_seq());
-		
-		List<RecipeVO> myFavRecipeList = favoritesService.myFavRecipeList(fvo);
-		logger.info(myFavRecipeList.size());
-		
-		
-
-		return "";
-	}
-
 	@RequestMapping(value = "favorites/favRecipeCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public String myFavRecipeCheck(FavoritesVO fvo) {

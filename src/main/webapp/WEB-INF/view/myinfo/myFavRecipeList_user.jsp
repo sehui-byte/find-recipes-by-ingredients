@@ -10,17 +10,17 @@
 <script>
 	$(document).ready(function(){
 		// 체크박스 전체 선택	
-		$("#checkAll_userRecipe").click(function(){
-			var checkAll = $("#checkAll_userRecipe");	
+		$("#checkAll_RecipeBoard").click(function(){
+			var checkAll = $("#checkAll_RecipeBoard");	
 			if (checkAll.prop("checked")){
-				$(".checkbox_userRecipe").prop("checked",true)	
+				$(".checkbox_RecipeBoard").prop("checked",true)	
 			}else{
-				$(".checkbox_userRecipe").prop("checked",false)	
+				$(".checkbox_RecipeBoard").prop("checked",false)	
 			}
 			
 			$("#deleteMyFavRecipeBoard").on("click", function(){
-				var nCnt = $(".checkbox_userRecipe:checked").length;
-				var checkbox = $(".checkbox_userRecipe:checked");
+				var nCnt = $(".checkbox_RecipeBoard:checked").length;
+				var checkbox = $(".checkbox_RecipeBoard:checked");
 				var chkVal = [];
 				
 				for (var i = 0; i < nCnt; i++){
@@ -57,6 +57,14 @@
 				
 			});
 		})	
+		
+		//검색버튼
+		$(document).on("click", "#searchBtnUserRecipe", function(){
+			console.log("searchBtn >>> : ");
+			$("#myFavRecipeBoardList").attr({"method":"GET"
+								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
+		});
+		
 	})
 </script>
 
@@ -69,20 +77,20 @@
 			<tr>
 				<td colspan="10" align="left">
 					<select id="keyfilter" name="keyfilter">
-						<option value="key1">제목</option>
-						<option value="key2">내용</option>
-						<option value="key3">제목+내용</option>
+						<option value="key1">메뉴명</option>
+						<option value="key2">재료</option>
+						<option value="key3">메뉴명+재료</option>
 					</select>
 					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
 					<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
 					~<input type="text" id="enddate" name="enddate" size="12" placeholder="종료일">
-					<button type="button" id="searchBtn">검색</button>
+					<button type="button" id="searchBtnUserRecipe">검색</button>
 				</td>	
 			</tr>
 		</thead>
 		<tr>
 			<td>
-				<input type="checkbox" id="checkAll_userRecipe">	
+				<input type="checkbox" id="checkAll_RecipeBoard">	
 			</td>	
 			<td>제목 </td>	
 			<td>레시피 등록 날짜</td>	
@@ -100,7 +108,7 @@
 %>
 		<tr>
 			<td>
-				<input type="checkbox" name="rbno" value="<%= rbvo.getRbno() %>" class="checkbox_userRecipe">	
+				<input type="checkbox" name="rbno" value="<%= rbvo.getRbno() %>" class="checkbox_RecipeBoard">	
 			</td>	
 			<td>
 				<a href="/kosmoJns/chefboard/boardselect.do?rbno=<%= rbvo.getRbno() %>"><%= rbvo.getRcp_nm() %></a>
@@ -128,4 +136,5 @@
 		</tr>	
 	</table>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
+	<input type="hidden" id="recipeType" name="recipeType" value="user">
 </form>

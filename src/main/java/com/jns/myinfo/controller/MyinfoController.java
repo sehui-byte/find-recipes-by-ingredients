@@ -1,5 +1,6 @@
 package com.jns.myinfo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jns.board.vo.BoardVO;
+import com.jns.favorites.vo.FavoritesVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.service.MyinfoService;
 import com.jns.recipe.vo.RecipeVO;
@@ -135,10 +137,10 @@ public class MyinfoController {
 		return "";
 	}
 
+	// 내가 추천한 레시피 가져오기
 	@RequestMapping(value = "myinfo/myFavRecipeList", method = RequestMethod.GET)
 	public String myFavRecipeList(MemberVO mvo, Model model) {
 		logger.info("myFavRecipeList() 진입 >>> ");
-		// 내가 추천한 레시피 가져오기 - api
 		List<RecipeVO> recipeList = myinfoService.myFavRecipeList1(mvo);
 		List<RecipeBoardVO> recipeBoardList = myinfoService.myFavRecipeList2(mvo);
 
@@ -147,5 +149,43 @@ public class MyinfoController {
 
 		return "myinfo/myFavRecipeList";
 	}
+	
+	// 내가 추천한 레시피 검색하기
+	@RequestMapping(value = "myinfo/myFavRecipeList/SelectRecipe", method = RequestMethod.GET)
+	public String myFavRecipeListSelect(MemberVO mvo, FavoritesVO fvo, Model model) {
+		logger.info("myFavRecipeList() 진입 >>> ");
+		List<RecipeVO> recipeList = new ArrayList<RecipeVO>();
+		List<RecipeBoardVO> recipeBoardList = new ArrayList<RecipeBoardVO>();
+		// api 검색 >>
+		logger.info("name >>> " + mvo.getKeyword());
+		logger.info("keyfilter >>> " + mvo.getKeyfilter());
+		logger.info("startdate >>> " + mvo.getStartdate());
+		logger.info("enddate >>> " + mvo.getEnddate());
+		logger.info("recepiType >>> : "+fvo.getRecipeType());
+
+		if(fvo.getRecipeType().equals("API")) {
+			recipeList = myinfoService.myFavRecipeList1(mvo);
+			mvo.setKeyfilter("");
+			mvo.setKeyword("");
+			mvo.setEnddate("");
+			mvo.setStartdate("");
+			recipeBoardList = myinfoService.myFavRecipeList2(mvo);
+		}else {
+		// api 아닌 경우 >> user 레시피
+			recipeBoardList = myinfoService.myFavRecipeList2(mvo);
+			mvo.setKeyfilter("");
+			mvo.setKeyword("");
+			mvo.setEnddate("");
+			mvo.setStartdate("");
+			recipeList = myinfoService.myFavRecipeList1(mvo);
+		}
+
+
+		model.addAttribute("recipeList", recipeList);
+		model.addAttribute("recipeBoardList", recipeBoardList);
+
+		return "myinfo/myFavRecipeList";
+	}
+	
 
 }
