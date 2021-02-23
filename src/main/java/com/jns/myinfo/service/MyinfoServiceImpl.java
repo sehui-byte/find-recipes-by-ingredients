@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jns.board.vo.BoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.dao.MyinfoDAO;
+import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Service
@@ -64,9 +65,18 @@ public class MyinfoServiceImpl implements MyinfoService {
 	}
 
 	@Override
-	public List myFavRecipeList() {
-	
-		return null;
+	public List<RecipeVO> myFavRecipeList1(MemberVO mvo) {
+		logger.info("myFavRecipeList1() 진입 >>> ");
+
+		return myinfoDAO.myFavRecipeList1(mvo);
 	}
+
+	@Override
+	public List<RecipeBoardVO> myFavRecipeList2(MemberVO mvo) {
+		logger.info("myFavRecipeList2() 진입 >>> ");
+
+		return myinfoDAO.myFavRecipeList2(mvo);
+	}
+
 
 }

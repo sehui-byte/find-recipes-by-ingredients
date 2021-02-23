@@ -90,8 +90,9 @@ public class ChefBoardVO {
 	}
 
 	//**************************************************************
-
-	//검색 설정 ****************************************************
+	
+	//**************************
+	//검색 설정
 	private String keyfilter;
 	private String keyword;
 	private String startdate;
@@ -128,7 +129,7 @@ public class ChefBoardVO {
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
 	}
-	//**************************************************************	
+	//**************************	
 
 	public ChefBoardVO() {}
 

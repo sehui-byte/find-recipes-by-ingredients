@@ -38,8 +38,8 @@
 		
 		// 입력
 		$(document).on("click", "#I", function(){
-				location.href="/kosmoJns/chefboard/writeForm.do";
-			});	
+			location.href="/kosmoJns/chefboard/writeForm.do";
+		});	
 		
 	});	
 	
@@ -77,6 +77,8 @@
 		<td class="tt">제목</td>
 		<td class="tt">이름</td>
 		<!-- <td class="tt">내용</td>  -->
+		<td class="tt">조회</td>
+		<td class="tt">추천</td>
 		<td class="tt">작성일</td>
 		<td class="tt">수정일</td>
 		<td class="tt">사진</td>
@@ -95,7 +97,9 @@
 			<%= cbvo.getRcp_nm() %>
 			</a>
 		</td>
-		<td class="tt"> 작성자 </td>
+		<td class="tt"><%= cbvo.getMnick() %> </td>
+		<td class="tt"><%= cbvo.getViews() %> </td>
+		<td class="tt"><%= cbvo.getHits() %> </td>
 		<td class="tt"><%= cbvo.getRb_insertdate() %> </td>
 		<td class="tt"><%= cbvo.getRb_updatedate() %> </td>
 		<td class="tt"> 메인이미지 </td>

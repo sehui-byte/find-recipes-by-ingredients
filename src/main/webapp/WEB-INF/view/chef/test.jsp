@@ -38,13 +38,22 @@
 			$("#c_deleteForm").submit();
 		});
 		
+		//셰프조회
+		$(document).on("click", "#selectChef", function(){
+			console.log("selectChef >>> : ");
+			$("#c_selectForm").attr({
+				"method": "GET",
+				"action": "/kosmoJns/chef/chefselect.do"
+			});
+			$("#c_selectForm").submit();
+		});
 	});
 </script>
 </head>
 <body>
 
 <form id="c_insertForm">
-	<h3>세프 등록(MLEVEL이 'C'인 회원만 가능)</h3>
+	<h3>셰프 등록(MLEVEL이 'C'인 회원만 가능)</h3>
 	<input type="text" id="mno" name="mno" value="<%=mno%>" placeholder="회원번호">
 	<input type="button" id="I" value="등록">
 </form>
@@ -52,16 +61,25 @@
 <br>
 <hr>
 
-<h3>세프 전체 조회</h3>
+<h3>셰프 전체 조회</h3>
 <input type="button" id="S" value="조회">
 
 <br>
 <hr>
 
 <form id="c_deleteForm">
-	<h3>세프 삭제</h3>
+	<h3>셰프 삭제</h3>
 	<input type="text" id="ino" name="ino" placeholder="세프번호">
 	<input type="button" id="D" value="삭제">
+</form>
+
+<br>
+<hr>
+
+<form id="c_selectForm">
+	<h3>셰프 개인 조회(로그인 필수)</h3>
+	<input type="hidden" id="mno" name="mno" value="<%=mno%>">
+	<input type="button" id="selectChef" value="조회">
 </form>
 
 <br>

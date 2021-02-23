@@ -20,6 +20,15 @@
 					$("#rbForm").submit();
 				});
 			});
+			
+			function onBtnClick(rbno)
+			{
+				$("#rbno").val(rbno);
+				$("#rbForm").attr("action", "rbupdateform.do");
+				$("#rbForm").attr("method", "GET");
+				$("#rbForm").attr('enctype','multipart/form-data');
+				$("#rbForm").submit();
+			}
 		
 		</script>
 	</head>
@@ -29,6 +38,7 @@
 	
 	<body>
 		<form id="rbForm" name="rbForm">
+		
 			<table border="1" style="margin: auto;">
 				<tr>
 					<td><input id="writeBtn" type="button" value="글쓰기"> </td>
@@ -45,17 +55,18 @@
 			{
 			%>
 				<tr>
-					<td><a href="rbdetail.do?rbno=<%=list.get(i).getRbno()%>"><%=list.get(i).getRcp_nm()%></a></td>
+					<td><%=list.get(i).getRcp_nm()%> </td>
 					<td><%=list.get(i).getMno() %></td>
 					<td><%=list.get(i).getViews() %></td>
 					<td><%=list.get(i).getHits() %></td>
 					<td><%=list.get(i).getRb_insertdate() %></td>
-					<td><input type="button" value="글수정"></td>
+					<td><input type="button" value="글수정" onclick="onBtnClick('<%=list.get(i).getRbno()%>')"></td>
 				</tr>
 			<%
 			}
 			%>
 			</table>
+			<input type="hidden" id="rbno" name="rbno">
 		</form>
 	</body>
 </html>

@@ -1,16 +1,10 @@
 package com.jns.reply.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -123,9 +117,10 @@ public class ReplyController {
 	@RequestMapping(value="reply/replyInsert", method=RequestMethod.POST)
 	public String replyInsert(ReplyVO rvo){
 		logger.info("ReplyC >> replyInsert 호출 성공");
-		logger.info("ReplyC >> replyInsert >> bno >>> : " + rvo.getBno());
-		logger.info("ReplyC >> replyInsert >> rbno >>> : " + rvo.getRbno());
-		logger.info("ReplyC >> replyInsert >> rwriter >>> : " + rvo.getRwriter());		
+		logger.info("ReplyC >> list >> bno >>> : " + rvo.getBno());
+		logger.info("ReplyC >> list >> rbno >>> : " + rvo.getRbno());
+		logger.info("ReplyC >> list >> rwriter >>> : " + rvo.getRwriter());
+		
 		
 		// 채번 setting
 		String rno = ChabunUtil.getReplyChabun("D", chabunService.getReplyChabun().getRno());
@@ -168,18 +163,6 @@ public class ReplyController {
 	public String rboardDelete(ReplyVO rvo) {
 		logger.info("ReplyC >> replyDelete 호출 성공");
 		logger.info("ReplyC >> replyDelete result >>> : " + rvo.getRno());
-		
-		//세션 확인
-		/*
-		MemberVO mvo = null;
-		if(session != null){
-			mvo = (MemberVO)session.getAttribute("user");
-			mno = mvo.getMno();
-			
-		}
-		log.info("mno  >>>>>>>>  " + mno);
-		rvo.setMno(mno);
-		*/
 		
 		int result = replyService.replyDelete(rvo);
 		logger.info("ReplyC >> replyDelete >> result >>> : " + result);

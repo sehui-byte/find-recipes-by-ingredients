@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
    
 <!DOCTYPE html>
 <html>
@@ -37,9 +38,6 @@
 	}
 	.mem{text-align=center;}
 </style>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<!-- 다음 주소록 -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
 

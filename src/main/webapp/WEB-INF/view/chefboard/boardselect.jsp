@@ -23,6 +23,50 @@
 			$('#D').attr('disabled', false);
 		}
 		
+		// 조회수 증가
+		var viewsUrl = "/kosmoJns/chefboard/chefBoardViewsPP.do";
+		var viewsType = "GET";
+		var viewsData = {"rbno": $("#rbno").val()};
+		$.ajax({
+			url: viewsUrl,
+			type: viewsType,
+			data: viewsData,
+			success: viewsSuccess,
+			error: viewsError
+		});
+
+		function viewsSuccess(resultData){
+			if(resultData=="GOOD"){
+				console.log("조회 수 +1 증가 완료");
+			}
+		}
+		function viewsError(){
+			alert("시스템 오류입니다. 관리자에게 문의하세요.");
+		}
+		
+		// 추천
+		$(document).on("click", "#hits", function(){
+			var hitsUrl = "/kosmoJns/chefboard/chefBoardHitsPP.do";
+			var hitsType = "GET";
+			var hitsData = {"rbno": $("#rbno").val()};
+			$.ajax({
+				url: hitsUrl,
+				type: hitsType,
+				data: hitsData,
+				success: hitsSuccess,
+				error: hitsError
+			});
+
+			function hitsSuccess(resultData){
+				if(resultData=="GOOD"){
+					console.log("추천 수 +1 증가 완료");
+				}
+			}
+			function hitsError(){
+				alert("시스템 오류입니다. 관리자에게 문의하세요.");
+			}
+		});
+		
 		// 수정
 		$(document).on("click", "#U", function(){
 			$("#b_data").attr({"method":"POST"
@@ -116,6 +160,10 @@
 		<tr>
 			<td>메뉴명</td>
 			<td><%=cbvo.getRcp_nm()%></td>
+		</tr>
+		<tr>
+			<td>조회수: <%=cbvo.getViews() + 1 %></td>
+			<td>추천수: <%=cbvo.getHits() %></td>
 		</tr>
 		<tr>
 			<td>조리방법</td>
@@ -549,6 +597,7 @@
 			<td colspan="2" align="right">
 				<button type="button" id="U" disabled="disabled">수정</button>
 				<button type="button" id="D" disabled="disabled">삭제</button>
+				<button type="button" id="hits">추천</button>
 				<button type="button" id="C">목록</button>
 			</td>
 		</tr>

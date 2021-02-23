@@ -215,6 +215,45 @@
 	</update>
 	
 	
+	<update id="chefBoardViewsPP" parameterType="cbvo">
+		UPDATE
+			RECIPE_BOARD
+		SET
+			VIEWS = 
+			(
+				SELECT
+					VIEWS+1
+				FROM
+					RECIPE_BOARD
+				WHERE
+					RBNO = #{rbno, jdbcType=VARCHAR}
+					AND RB_DELETEYN = 'Y'
+			)
+		WHERE
+			RBNO = #{rbno, jdbcType=VARCHAR}
+			AND RB_DELETEYN = 'Y'
+	</update>
+	
+	<update id="chefBoardHitsPP" parameterType="cbvo">
+		UPDATE
+			RECIPE_BOARD
+		SET
+			HITS = 
+			(
+				SELECT
+					HITS+1
+				FROM
+					RECIPE_BOARD
+				WHERE
+					RBNO = #{rbno, jdbcType=VARCHAR}
+					AND RB_DELETEYN = 'Y'
+			)
+		WHERE
+			RBNO = #{rbno, jdbcType=VARCHAR}
+			AND RB_DELETEYN = 'Y'
+	</update>
+	
+	
 	<!-- 세프의 글 리스트 -->
 	
 	

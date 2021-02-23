@@ -31,6 +31,20 @@ public class SubscribeVO {
 	
 	// *************************************************************
 	
+	// 구독자 수 확인하기 ******************************************
+	private int subCount;
+	
+	public int getSubCount() {
+		return subCount;
+	}
+
+	public void setSubCount(int subCount) {
+		this.subCount = subCount;
+	}
+	
+	// *************************************************************
+	
+	
 	public SubscribeVO() {
 		
 	}

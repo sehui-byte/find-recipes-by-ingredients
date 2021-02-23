@@ -1,5 +1,6 @@
 package com.jns.subscribe.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -73,6 +74,51 @@ public class SubscribeController {
 		logger.info("[ChefController] >> chefSelectAll listChef.size() >>> : " + subList.size());
 		
 		return "subscribe/mysublist";
+	}
+	
+	
+	/********************************************************************************************
+	* 셰프의 구독자 수 확인하기
+	********************************************************************************************/
+	@ResponseBody
+	@RequestMapping(value="subscribe/chefSubCount", method=RequestMethod.GET)
+	public HashMap<String, Integer> chefSubCount(SubscribeVO svo) {
+		logger.info("[SubscribeC] >> chefSubCount 호출 성공");
+		logger.info("[SubscribeC] >> chefSubCount >> ino >>> : " + svo.getIno());
+		
+		List<SubscribeVO> subCount = subscribeService.chefSubCount(svo);
+		int s0 = 0;
+		
+		for(int i=0; i< subCount.size(); i++) {
+			SubscribeVO _svo = subCount.get(i);
+			s0 = _svo.getSubCount();
+		}
+		
+		logger.info("[SubscribeC] >> chefSubCount >> subCount >>> : " + s0);
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("key", s0);
+		
+		return map;
+	}
+	
+	
+	/********************************************************************************************
+	* 구독 취소하기
+	********************************************************************************************/
+	@ResponseBody
+	@RequestMapping(value="subscribe/subDelete", method=RequestMethod.POST)
+	public String subDelete(SubscribeVO svo) {
+		logger.info("[SubscribeC] >> subDelete 호출 성공");
+		logger.info("[SubscribeC] >> subDelete >> sno >>> : " + svo.getSno());
+		
+		int result = 0;		
+		
+		result = subscribeService.subDelete(svo);
+		logger.info("[SubscribeC] >> subDelete >> nCnt >>> : " + result);
+		
+		if (1 == result) { return "GOOD"; }
+		else{ return "BAD"; }
 	}
 	
 }

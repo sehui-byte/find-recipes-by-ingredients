@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -29,6 +31,7 @@ import com.jns.chabun.dao.ChabunDAO;
 import com.jns.member.vo.MemberVO;
 import com.jns.product.dao.ProductDAO;
 import com.jns.product.vo.ProductVO;
+import com.jns.product.websocket.ProductApplicantWebSocketHandler;
 
 @Service
 @Transactional
@@ -36,6 +39,7 @@ public class ProductServiceImpl implements ProductService{
 
 	private Logger logger = Logger.getLogger(ProductServiceImpl.class);
 	private ProductDAO pdao;
+	private ProductApplicantWebSocketHandler handler;
 
 	@Autowired(required=false)
 	public ProductServiceImpl(ProductDAO pdao) {
@@ -174,13 +178,16 @@ public class ProductServiceImpl implements ProductService{
 				for(int j = 0; j<result.size(); j++) {
 					JSONObject tmp = (JSONObject)result.get(j);
 					//json데이터의 productId와 사용자 관심상품의 productId 비교하여
+					//일치하는 상품이 있다면 최저가 비교
 					if(productId.equals(tmp.get("productId"))) {
-						//일치하는 상품이 있다면 최저가 비교
+						//변동이 있을 경우 알람을 보낸다
 						if(!tmp.get("lprice").equals(likeLprice)) {
-							//변동이 있을 경우 알람을 보낸다
-							//알람 보내는 코드 작성///////////
 							System.out.println("관심상품 원래 최저가 >> " + likeLprice + ", 최신 최저가 >> " + tmp.get("lprice"));
 							System.out.println("알람 보내기!");
+							//알람 보내는 코드 작성///////////
+							
+							
+							//handler.noticeLpriceApplicant(session);
 							break;
 						}
 						//추후에 지우기
@@ -203,5 +210,13 @@ public class ProductServiceImpl implements ProductService{
 		String mno = ((MemberVO)principal).getMno();
 		
 		return mno;
+	}
+
+	//로그인한 유저의 관심상품 중 productid만 가져오기
+	@Override
+	public List<ProductVO> likpProductIdSelectAll(ProductVO pvo) {
+		pvo.setMno(getLoginMno(pvo));
+		List<ProductVO> result = pdao.likpProductIdSelectAll(pvo);
+		return result;
 	}
 }

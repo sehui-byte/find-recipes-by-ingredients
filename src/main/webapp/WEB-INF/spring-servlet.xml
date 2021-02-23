@@ -6,17 +6,13 @@
 	xmlns:lang="http://www.springframework.org/schema/lang"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-						http://www.springframework.org/schema/beans/spring-beans.xsd
-						http://www.springframework.org/schema/context 
-						http://www.springframework.org/schema/context/spring-context.xsd
-						http://www.springframework.org/schema/lang 
-						http://www.springframework.org/schema/lang/spring-lang.xsd
-						http://www.springframework.org/schema/mvc 
-						http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-	
-	<mvc:resources location="/resources/**" mapping="/resources/"></mvc:resources>
-	
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
+
 	<!-- @ResponseBody로 String 처리할때 한글처리 -->
 	<mvc:annotation-driven>
 		<mvc:message-converters>
@@ -31,14 +27,30 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
-	<context:annotation-config />  		
+	<context:annotation-config />
+
+	<mvc:resources mapping="/WEB-INF/files/**"
+		location="/WEB-INF/files/"></mvc:resources>
+
 	<!-- View Resolver -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
+
 	<context:component-scan
 		base-package="com.jns.**" />
+
+	<!-- websocket handler -->
+	<bean id="echoHandler" class="com.jns.product.websocket.ProductApplicantWebSocketHandler" />
+
+	<websocket:handlers>
+		<websocket:mapping handler="echoHandler" path="/echo" />
+		<websocket:handshake-interceptors>
+	         <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+	      </websocket:handshake-interceptors>
+	      <websocket:sockjs/>
+	 </websocket:handlers>
+
 </beans>

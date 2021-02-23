@@ -50,15 +50,4 @@ public class RecipeBoardServiceImpl implements RecipeBoardService
 		return recipeBoardDAO.recipeBoardDelete(rbvo);
 	}
 	
-	@Override
-	public boolean recipeBoardViewsPP(RecipeBoardVO rbvo) {
-		// TODO Auto-generated method stub
-		return recipeBoardDAO.recipeBoardViewsPP(rbvo);
-	}
-	
-	@Override
-	public boolean recipeBoardHitsPP(RecipeBoardVO rbvo) {
-		// TODO Auto-generated method stub
-		return recipeBoardDAO.recipeBoardHitsPP(rbvo);
-	}
 }
