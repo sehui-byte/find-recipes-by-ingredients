@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jns.subscribe.dao.SubscribeDAO">
+
+
+	<!-- 내 구독 리스트 -->
+	<select id="mySubList" parameterType="svo" resultType="svo">
+		SELECT 
+				 B.SNO		AS SNO
+				,A.MID		AS MID
+				,D.MNICK	AS CHEFNICK
+				,B.SINSERTDATE	AS SINSERTDATE
+		FROM 	 MEMBER A, SUB_INFO B, CHEF_INFO C, MEMBER D
+		WHERE 	 A.MNO = B.MNO
+		AND		 B.INO = C.INO
+		AND		 C.MNO = D.MNO
+		AND 	 A.MNO = #{mno, jdbcType=VARCHAR}
+		AND		 B.SDELETEYN = 'Y'
+	</select>
+
+
+	<!-- 구독하기 -->
+	<insert id="subInsert" parameterType="svo">
+		INSERT INTO SUB_INFO
+					(
+					 SNO
+					,MNO
+					,INO
+					,SINSERTDATE
+					,SUPDATEDATE
+					,SDELETEYN
+					)
+		VALUES		
+					(
+					 #{sno, jdbcType=VARCHAR}
+					,#{mno, jdbcType=VARCHAR}
+					,#{ino, jdbcType=VARCHAR}
+					,SYSDATE
+					,SYSDATE
+					,'Y'  
+					)
+	</insert>
+
+	<!-- 셰프의 구독자수 확인 -->
+	<select id="chefSubCount" parameterType="svo" resultType="svo">
+		SELECT 
+				COUNT(A.SNO) as SUBCOUNT
+		FROM 	SUB_INFO A, CHEF_INFO B
+		WHERE 	A.INO = B.INO
+		AND 	B.INO = #{ino, jdbcType=VARCHAR}
+		AND 	A.SDELETEYN = 'Y'
+	</select>
+	
+	<!-- 구독 취소하기 -->
+	<update id="subDelete" parameterType="svo">
+		UPDATE 	 SUB_INFO
+		SET
+				 SDELETEYN = 'N'
+				,SUPDATEDATE = SYSDATE
+		WHERE	 SNO = #{sno, jdbcType=VARCHAR} 
+	</update>
+</mapper>

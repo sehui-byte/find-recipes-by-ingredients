@@ -11,6 +11,4 @@ public interface RecipeBoardDAO
 	public boolean recipeBoardInsert(RecipeBoardVO rbvo);
 	public boolean recipeBoardUpdate(RecipeBoardVO rbvo);
 	public boolean recipeBoardDelete(RecipeBoardVO rbvo);
-	public boolean recipeBoardViewsPP(RecipeBoardVO rbvo);
-	public boolean recipeBoardHitsPP(RecipeBoardVO rbvo);
 }

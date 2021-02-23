@@ -6,8 +6,9 @@
 		SELECT
 				*
 		FROM
-				RECIPE_BOARD A, MEMBER B
+				RECIPE_BOARD A, MEMBER B, CHEF_INFO C
 		WHERE	A.MNO = B.MNO
+		AND		B.MNO = C.MNO
 		AND		B.MLEVEL = 'C'
 		AND		RB_DELETEYN = 'Y'
 				<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
@@ -24,12 +25,12 @@
 	
 	<select id="chefBoardSelect" parameterType="cbvo" resultType="cbvo">
 		SELECT
-			*
-		FROM
-			RECIPE_BOARD
-		WHERE
-			RB_DELETEYN = 'Y'
-			AND RBNO = #{rbno}
+				*
+		FROM	RECIPE_BOARD A, MEMBER B, CHEF_INFO C
+		WHERE	A.MNO = B.MNO
+		AND		B.MNO = C.MNO
+		AND		RB_DELETEYN = 'Y'
+		AND 	RBNO = #{rbno}
 	</select>
 	
 	<insert id="boardInsert">
@@ -212,5 +213,48 @@
 		WHERE
 			 RBNO = #{rbno, jdbcType=VARCHAR}
 	</update>
+	
+	
+	<update id="chefBoardViewsPP" parameterType="cbvo">
+		UPDATE
+			RECIPE_BOARD
+		SET
+			VIEWS = 
+			(
+				SELECT
+					VIEWS+1
+				FROM
+					RECIPE_BOARD
+				WHERE
+					RBNO = #{rbno, jdbcType=VARCHAR}
+					AND RB_DELETEYN = 'Y'
+			)
+		WHERE
+			RBNO = #{rbno, jdbcType=VARCHAR}
+			AND RB_DELETEYN = 'Y'
+	</update>
+	
+	<update id="chefBoardHitsPP" parameterType="cbvo">
+		UPDATE
+			RECIPE_BOARD
+		SET
+			HITS = 
+			(
+				SELECT
+					HITS+1
+				FROM
+					RECIPE_BOARD
+				WHERE
+					RBNO = #{rbno, jdbcType=VARCHAR}
+					AND RB_DELETEYN = 'Y'
+			)
+		WHERE
+			RBNO = #{rbno, jdbcType=VARCHAR}
+			AND RB_DELETEYN = 'Y'
+	</update>
+	
+	
+	<!-- 세프의 글 리스트 -->
+	
 	
 </mapper>

@@ -5,6 +5,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.jns.member.vo.MemberVO"%>
 <%@ page import="com.jns.board.vo.BoardVO"%>
+<%@ page import="com.jns.recipe.vo.RecipeVO"%>
 <%@ page import="com.jns.recipeboard.vo.RecipeBoardVO"%>
 <%@ page import="com.jns.reply.vo.ReplyVO"%>
 
@@ -19,16 +20,21 @@ Object principal = auth.getPrincipal();
 String mnick = "";
 String mno = "";
 String mid = "";
-String loginSession = "";
+String mlevel = "";
 
 if (principal != null && principal instanceof MemberVO) {
 	mnick = ((MemberVO) principal).getMnick();
 	mno = ((MemberVO) principal).getMno();
 	mid = ((MemberVO) principal).getMid();
+	mlevel = ((MemberVO) principal).getMlevel();
 
 	// 로그인시 session key값 생성
-	session.setAttribute("mid", mid);
-	loginSession = (String) session.getAttribute("mid");
+	if (session.getAttribute(mid) != null){
+		String loginSession = (String) session.getAttribute("mid");
+	}else{
+		session.setAttribute("mid", mid);
+		String loginSession = (String) session.getAttribute("mid");
+	}
 }
 %>
 
@@ -38,25 +44,15 @@ if (principal != null && principal instanceof MemberVO) {
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-
-						// Spring Scurity logout >> post 요청만 가능
-						$("#logoutbtn")
-								.click(
-										function() {
-											$("#logoutForm")
-													.attr("action",
-															"<c:url value='/j_spring_security_logout' />");
-											$("#logoutForm").attr("method",
-													"POST");
-											$("#logoutForm")
-													.attr("enctype",
-															"application/x-www-form-urlencoded");
-											$("#logoutForm").submit();
-										})
-					})
+	$(document).ready(function() {
+		// Spring Scurity logout >> post 요청만 가능
+		$("#logoutbtn").click(function() {
+			$("#logoutForm").attr("action","<c:url value='/j_spring_security_logout' />");
+			$("#logoutForm").attr("method","POST");
+			$("#logoutForm").attr("enctype","application/x-www-form-urlencoded");
+			$("#logoutForm").submit();
+		})
+	})
 </script>
 <!-- bootstrap css-->
 <link

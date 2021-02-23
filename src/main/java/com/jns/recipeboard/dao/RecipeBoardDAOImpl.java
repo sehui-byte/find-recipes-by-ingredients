@@ -37,21 +37,8 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO
 	}
 
 	@Override
-	public boolean recipeBoardDelete(RecipeBoardVO rbvo) 
-	{
+	public boolean recipeBoardDelete(RecipeBoardVO rbvo) {
 		return sqlSession.update("recipeBoardDelete") > 0;
-	}
-	
-	@Override
-	public boolean recipeBoardViewsPP(RecipeBoardVO rbvo) 
-	{	
-		return sqlSession.update("recipeBoardViewsPP") > 0;
-	}
-	
-	@Override
-	public boolean recipeBoardHitsPP(RecipeBoardVO rbvo) 
-	{
-		return sqlSession.update("recipeBoardHitsPP") > 0;
 	}
 	
 }

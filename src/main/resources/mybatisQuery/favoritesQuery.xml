@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jns.favorites.dao.FavoritesDAO">
+
+	<!-- 추천 레시피 찾기 -->
+	<select id="myFavRecipeCheck" parameterType="fvo" resultType="java.lang.Integer">
+	SELECT 
+		COUNT(*)
+	FROM
+		FAVORITES A
+	WHERE
+		A.MNO = #{mno, jdbcType=VARCHAR}
+	<!-- API 레시피인 경우 -->
+	<if test="recipeType == 'API'">
+	AND
+		A.RCP_SEQ = #{rcp_seq, jdbcType=VARCHAR}
+	</if>
+	<!-- user 레시피인 경우 -->	
+	<if test="recipeType == 'user'">
+	AND
+		A. RBNO = #{rbno, jdbcType=VARCHAR}
+	</if>
+	</select>
+
+	<!-- 레시피 추천하기 -->
+	<insert id="myFavRecipeInsert" parameterType="fvo">
+		INSERT INTO FAVORITES(
+			 FNO 
+			,MNO
+			,RBNO
+			,RCP_SEQ
+			,FINSERTDATE
+			)
+		VALUES(
+			 #{fno, jdbcType=VARCHAR}
+			,#{mno, jdbcType=VARCHAR}
+			,#{rbno, jdbcType=VARCHAR}
+			,#{rcp_seq, jdbcType=VARCHAR}
+			,SYSDATE
+			)
+	</insert>
+	
+	<!--  추천 레시피 삭제하기 -->
+	<delete id="myFavRecipeDelete" parameterType="fvo">
+		DELETE FAVORITES
+		WHERE
+			MNO = #{mno, jdbcType=VARCHAR}
+		<if test="recipeType == 'API'">
+		AND
+			rcp_seq = #{rcp_seq, jdbcType=VARCHAR}
+		</if>
+		<if test="recipeType == 'user'">
+		AND
+			RBNO = #{rbno, jdbcType=VARCHAR}
+		</if>
+	</delete>
+	
+</mapper>

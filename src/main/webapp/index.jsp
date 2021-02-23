@@ -1,7 +1,6 @@
-<%@page import="com.jns.common.FileLoadUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+<%@ include file="/WEB-INF/include/jsp/header.jsp" %>
 <html>
 <body>
 <h2>main test 페이지</h2><br>
@@ -63,6 +62,7 @@
 <ul>
 	<li><a href = "searchPage.do">상품 검색 페이지</a></li>
 	<li><a href = "likeProduct.do">관심상품 목록 보기(테스트)</a></li>
+	<li><a href = "socketTest.do">웹소켓 테스트</a></li>
 </ul>
 
 <hr>
@@ -82,5 +82,18 @@
 
 <hr>
 
+<h3>세프 관련 URL</h3>
+<ul>
+	<li><a href="/kosmoJns/chef/test.do">테스트</a></li>
+</ul>
+
+<hr>
+
+<h3>구독 관련 URL</h3>
+<ul>
+	<li><a href="/kosmoJns/subscribe/test.do">테스트</a></li>
+</ul>
+
+<hr>
 </body>
 </html>

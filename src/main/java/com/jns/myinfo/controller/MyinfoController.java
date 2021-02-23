@@ -1,5 +1,6 @@
 package com.jns.myinfo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jns.board.vo.BoardVO;
+import com.jns.favorites.vo.FavoritesVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.service.MyinfoService;
+import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Controller
@@ -75,12 +78,12 @@ public class MyinfoController {
 			rbvo.setRbno(chkVal);
 			myinfoService.myRecipeDelete(rbvo);
 			nCnt++;
-			
+
 		}
 		logger.info(nCnt);
-		
+
 		String result = String.valueOf(nCnt);
-		
+
 		return result;
 
 	}
@@ -112,35 +115,77 @@ public class MyinfoController {
 
 		logger.info("myQnADelete() 진입 >>> ");
 		int nCnt = 0;
-		for (String chkVal : chkVals ) {
+		for (String chkVal : chkVals) {
 			bvo.setBno(chkVal);
 			myinfoService.myQnADelete(bvo);
 			nCnt++;
 		}
 		logger.info(nCnt);
-		
+
 		String result = String.valueOf(nCnt);
-		
+
 		return result;
 
 	}
 
-	@RequestMapping(value="myinfo/myRankUpdate", method=RequestMethod.GET)
+	@RequestMapping(value = "myinfo/myRankUpdate", method = RequestMethod.GET)
 	public String myRankUpdate(BoardVO bvo) {
 
 		logger.info("myRankUpdate() 진입 >>> ");
 		// 등급 올리는 것에 대한 기준이 필요
-	
+
 		return "";
 	}
-	
-	@RequestMapping(value = "myinfo/myFavRecipaList", method=RequestMethod.GET)
-	public String myFavRecipeList() {
-		logger.info("myFavRecipeList() 진입 >>> ");
-		// 내가 추천한 레시피 가져오기
 
-		 return "";
+	// 내가 추천한 레시피 가져오기
+	@RequestMapping(value = "myinfo/myFavRecipeList", method = RequestMethod.GET)
+	public String myFavRecipeList(MemberVO mvo, Model model) {
+		logger.info("myFavRecipeList() 진입 >>> ");
+		List<RecipeVO> recipeList = myinfoService.myFavRecipeList1(mvo);
+		List<RecipeBoardVO> recipeBoardList = myinfoService.myFavRecipeList2(mvo);
+
+		model.addAttribute("recipeList", recipeList);
+		model.addAttribute("recipeBoardList", recipeBoardList);
+
+		return "myinfo/myFavRecipeList";
 	}
 	
+	// 내가 추천한 레시피 검색하기
+	@RequestMapping(value = "myinfo/myFavRecipeList/SelectRecipe", method = RequestMethod.GET)
+	public String myFavRecipeListSelect(MemberVO mvo, FavoritesVO fvo, Model model) {
+		logger.info("myFavRecipeList() 진입 >>> ");
+		List<RecipeVO> recipeList = new ArrayList<RecipeVO>();
+		List<RecipeBoardVO> recipeBoardList = new ArrayList<RecipeBoardVO>();
+		// api 검색 >>
+		logger.info("name >>> " + mvo.getKeyword());
+		logger.info("keyfilter >>> " + mvo.getKeyfilter());
+		logger.info("startdate >>> " + mvo.getStartdate());
+		logger.info("enddate >>> " + mvo.getEnddate());
+		logger.info("recepiType >>> : "+fvo.getRecipeType());
+
+		if(fvo.getRecipeType().equals("API")) {
+			recipeList = myinfoService.myFavRecipeList1(mvo);
+			mvo.setKeyfilter("");
+			mvo.setKeyword("");
+			mvo.setEnddate("");
+			mvo.setStartdate("");
+			recipeBoardList = myinfoService.myFavRecipeList2(mvo);
+		}else {
+		// api 아닌 경우 >> user 레시피
+			recipeBoardList = myinfoService.myFavRecipeList2(mvo);
+			mvo.setKeyfilter("");
+			mvo.setKeyword("");
+			mvo.setEnddate("");
+			mvo.setStartdate("");
+			recipeList = myinfoService.myFavRecipeList1(mvo);
+		}
+
+
+		model.addAttribute("recipeList", recipeList);
+		model.addAttribute("recipeBoardList", recipeBoardList);
+
+		return "myinfo/myFavRecipeList";
+	}
 	
+
 }

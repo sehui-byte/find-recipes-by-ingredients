@@ -58,6 +58,7 @@ public class ChefBoardVO {
 
 	// MEMBER JOIN *************************************************
 	private String mlevel;
+	private String mnick;
 	
 	public String getMlevel() {
 		return mlevel;
@@ -67,9 +68,31 @@ public class ChefBoardVO {
 		this.mlevel = mlevel;
 	}
 	
+	public String getMnick() {
+		return mnick;
+	}
+
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
+	}
+	
 	//**************************************************************
 
-	//검색 설정 ****************************************************
+	// CHEF JOIN ***************************************************
+	private String ino;
+	
+	public String getIno() {
+		return ino;
+	}
+
+	public void setIno(String ino) {
+		this.ino = ino;
+	}
+
+	//**************************************************************
+	
+	//**************************
+	//검색 설정
 	private String keyfilter;
 	private String keyword;
 	private String startdate;
@@ -106,7 +129,7 @@ public class ChefBoardVO {
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
 	}
-	//**************************************************************	
+	//**************************	
 
 	public ChefBoardVO() {}
 

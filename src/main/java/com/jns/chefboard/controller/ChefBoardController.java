@@ -16,6 +16,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -210,5 +211,39 @@ public class ChefBoardController {
 		}
 		
 		return "redirect:" + url;
+	}
+	
+	
+	/********************************************************************************************
+	* 조회수 증가
+	********************************************************************************************/
+	@ResponseBody
+	@RequestMapping(value="/chefboard/chefBoardViewsPP", method=RequestMethod.GET)
+	public String chefBoardViewsPP(ChefBoardVO cbvo) {
+		logger.info("[chefC] >> chefBoardViewsPP 호출 성공");
+		logger.info("[chefC] >> chefBoardViewsPP >> cbvo.getRbno() >>> : " + cbvo.getRbno());
+		
+		int result = chefBoardService.chefBoardViewsPP(cbvo);
+		logger.info("[chefC] >> chefBoardViewsPP >> result >>> : " + result);
+		
+		if (1 == result) { return "GOOD"; }
+		else{ return "BAD"; }
+	}
+	
+	
+	/********************************************************************************************
+	* 추천 증가
+	********************************************************************************************/
+	@ResponseBody
+	@RequestMapping(value="/chefboard/chefBoardHitsPP", method=RequestMethod.GET)
+	public String chefBoardHitsPP(ChefBoardVO cbvo) {
+		logger.info("[chefC] >> chefBoardHitsPP 호출 성공");
+		logger.info("[chefC] >> chefBoardHitsPP >> cbvo.getRbno() >>> : " + cbvo.getRbno());
+		
+		int result = chefBoardService.chefBoardHitsPP(cbvo);
+		logger.info("[chefC] >> chefBoardHitsPP >> result >>> : " + result);
+		
+		if (1 == result) { return "GOOD"; }
+		else{ return "BAD"; }
 	}
 }

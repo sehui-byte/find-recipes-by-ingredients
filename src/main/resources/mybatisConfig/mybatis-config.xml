@@ -16,5 +16,7 @@
 		<typeAlias type="com.jns.reply.vo.ReplyVO" alias="reply"/>
 		<typeAlias type="com.jns.product.vo.ProductVO" alias="pvo"/>
  		<typeAlias type="com.jns.chef.vo.ChefVO" alias="cvo"/>
+ 		<typeAlias type="com.jns.favorites.vo.FavoritesVO" alias="fvo"/>
+ 		<typeAlias type="com.jns.subscribe.vo.SubscribeVO" alias="svo"/>
 	</typeAliases>
 </configuration>

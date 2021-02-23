@@ -27,7 +27,7 @@
 			내가 구독한 세프 조회하기
 		</li>
 		<li>
-			내가 추천한 레시피 조회하기
+			<a href="myinfo/myFavRecipeList.do?mno=<%= mno %>">내가 추천한 레시피 조회하기(즐겨찾기 레시피)</a>
 		</li>
 		<li>
 			<a href="myinfo/myQnAList.do?mno=<%= mno %>">내 Q&A 조회하기</a>

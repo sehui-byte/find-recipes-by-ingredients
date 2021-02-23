@@ -1,7 +1,5 @@
 package com.jns.chef.vo;
 
-import com.jns.member.vo.MemberVO;
-
 public class ChefVO {
 
 	private String ino;
@@ -9,7 +7,6 @@ public class ChefVO {
 	private String iinsertdate;
 	private String iupdatedate;
 	private String ideleteyn;
-	
 	
 	// Member Table JOIN ***********************************************
 	private String mlevel;
@@ -49,7 +46,7 @@ public class ChefVO {
 		this.mnick = mnick;
 	}
 
-	//***************************************************************
+	//***************************************************************	
 	
 	public ChefVO() {}
 	
