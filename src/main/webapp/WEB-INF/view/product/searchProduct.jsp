@@ -133,7 +133,6 @@
 
 							//html += '<a href="' + link +'" class="btn btn-primary" onclick=clickpurchase('+recentPro+')>구매하기</a> ';
 							html += '<a href="' + link +'" class="btn btn-primary">구매하기</a> ';
-							
 							// 구매하기 클릭시 최근 본 상품에 추가
 							$("#btn btn-primary").click(function(){
 								clickpurchase(recentPro);
@@ -323,7 +322,7 @@
 	<hr />
 	
  	<!-- 최근 본 상품 -->
-<%@ include file="/WEB-INF/view/product/recentProduct.jsp" %>
+	<%@ include file="/WEB-INF/view/product/recentProduct.jsp" %>
 
 	<!-- bootstrap -->
 	<script
