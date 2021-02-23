@@ -56,6 +56,41 @@ public class ChefBoardVO {
 	private String rb_updatedate;
 	private String rb_deleteyn;
 
+	// MEMBER JOIN *************************************************
+	private String mlevel;
+	private String mnick;
+	
+	public String getMlevel() {
+		return mlevel;
+	}
+
+	public void setMlevel(String mlevel) {
+		this.mlevel = mlevel;
+	}
+	
+	public String getMnick() {
+		return mnick;
+	}
+
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
+	}
+	
+	//**************************************************************
+
+	// CHEF JOIN ***************************************************
+	private String ino;
+	
+	public String getIno() {
+		return ino;
+	}
+
+	public void setIno(String ino) {
+		this.ino = ino;
+	}
+
+	//**************************************************************
+	
 	//**************************
 	//검색 설정
 	private String keyfilter;

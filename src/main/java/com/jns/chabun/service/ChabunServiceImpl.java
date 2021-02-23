@@ -14,6 +14,7 @@ import com.jns.member.vo.MemberVO;
 import com.jns.product.vo.ProductVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
+import com.jns.subscribe.vo.SubscribeVO;
 
 @Service
 @Transactional
@@ -89,4 +90,12 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getFavoritesChabun();
 	}
 
+	@Override
+	public SubscribeVO getSubscribeChabun() {
+		// TODO Auto-generated method stub
+		logger.info("getSubscribeChabun 채번호출");
+		return chabunDAO.getSubscribeChabun();
+	}
+
+	
 }

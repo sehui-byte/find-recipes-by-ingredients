@@ -10,7 +10,7 @@ public interface SubscribeDAO {
 	public List<SubscribeVO> mySubList(SubscribeVO svo);
 	
 	// 구독자수 확인하기
-	public int chefSubCount();
+	public List<SubscribeVO> chefSubCount(SubscribeVO svo);
 	
 	// 구독하기
 	public int subInsert(SubscribeVO svo);

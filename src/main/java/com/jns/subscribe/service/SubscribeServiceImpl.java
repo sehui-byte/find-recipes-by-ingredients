@@ -25,13 +25,13 @@ public class SubscribeServiceImpl implements SubscribeService {
 	@Override
 	public List<SubscribeVO> mySubList(SubscribeVO svo) {
 		// TODO Auto-generated method stub
-		return null;
+		return subscribeDAO.mySubList(svo);
 	}
 
 	@Override
-	public int chefSubCount() {
+	public List<SubscribeVO> chefSubCount(SubscribeVO svo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return subscribeDAO.chefSubCount(svo);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class SubscribeServiceImpl implements SubscribeService {
 	@Override
 	public int subDelete(SubscribeVO svo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return subscribeDAO.subDelete(svo);
 	}
 
 	@Override

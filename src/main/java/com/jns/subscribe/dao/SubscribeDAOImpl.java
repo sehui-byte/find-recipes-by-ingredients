@@ -15,13 +15,13 @@ public class SubscribeDAOImpl implements SubscribeDAO {
 	@Override
 	public List<SubscribeVO> mySubList(SubscribeVO svo) {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("mySubList");
 	}
 
 	@Override
-	public int chefSubCount() {
+	public List<SubscribeVO> chefSubCount(SubscribeVO svo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("chefSubCount");
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class SubscribeDAOImpl implements SubscribeDAO {
 	@Override
 	public int subDelete(SubscribeVO svo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("subDelete");
 	}
 
 	@Override

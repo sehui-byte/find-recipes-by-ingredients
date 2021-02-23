@@ -26,7 +26,13 @@ public class ChefServiceImpl implements ChefService {
 	@Override
 	public List<ChefVO> chefSelectAll(ChefVO cvo) {
 		// TODO Auto-generated method stub
-		return null;
+		return chefDAO.chefSelectAll(cvo);
+	}
+
+	@Override
+	public List<ChefVO> chefSelect(ChefVO cvo) {
+		// TODO Auto-generated method stub
+		return chefDAO.chefSelect(cvo);
 	}
 
 	@Override

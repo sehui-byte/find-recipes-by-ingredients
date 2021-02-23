@@ -8,6 +8,46 @@ public class ChefVO {
 	private String iupdatedate;
 	private String ideleteyn;
 	
+	// Member Table JOIN ***********************************************
+	private String mlevel;
+	private String mid;
+	private String mname;
+	private String mnick;
+
+	public String getMlevel() {
+		return mlevel;
+	}
+
+	public void setMlevel(String mlevel) {
+		this.mlevel = mlevel;
+	}
+
+	public String getMid() {
+		return mid;
+	}
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+	public String getMnick() {
+		return mnick;
+	}
+
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
+	}
+
+	//***************************************************************	
+	
 	public ChefVO() {}
 	
 	public ChefVO(String ino, String mno, String iinsertdate
