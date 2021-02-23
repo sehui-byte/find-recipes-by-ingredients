@@ -111,6 +111,7 @@
 								var category1 = item[i].category1; //식품만 검색되게.
 								if (category1 === '식품') {
 									var title = item[i].title;//상품명
+									title = title.replace(/,/gi,'');
 									var image = item[i].image;//상품이미지
 									var link = item[i].link;//상품구매링크
 									var lprice = item[i].lprice;//최저가
@@ -244,7 +245,7 @@
 					}
 				});
 				alert("관심 상품을 저장했습니다!");
-				location.reload();
+				//location.reload();
 
 			} else {
 				alert("이미 등록된 상품입니다");
