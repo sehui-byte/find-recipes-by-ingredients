@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ page import ="com.jns.member.vo.MemberVO"%>
 <%@ page import ="java.util.List" %>    
+<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,7 +113,7 @@ SELECT ALL
 	<td class="tt"><%=mvo.getMaddr() %></td>
 	<td class="tt"><%=mvo.getMzipcode() %></td>
 	<td class="tt"><%=mvo.getMaddrdetail() %></td>
-	<td class="tt"><img src="<%=mvo.getMphoto() %>"></td>
+	<td class="tt"><img src="<%=new FileLoadUtil().getFileSrc("member", mvo.getMphoto()) %>"></td>
 	<td class="tt"><%=mvo.getMinsertdate() %></td>
 	<td class="tt"><%=mvo.getMupdatedate() %></td>
 	<td class="tt"><%=mvo.getMdeleteyn() %></td>

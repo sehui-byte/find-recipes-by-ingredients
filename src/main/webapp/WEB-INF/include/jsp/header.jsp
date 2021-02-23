@@ -9,6 +9,9 @@
 <%@ page import="com.jns.recipeboard.vo.RecipeBoardVO"%>
 <%@ page import="com.jns.reply.vo.ReplyVO"%>
 
+<%-- fileUpload 정의 --%>
+<%@ page import="com.jns.common.FileLoadUtil" %>
+
 <%-- jstl 태그 정의 --%>
 <%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
 

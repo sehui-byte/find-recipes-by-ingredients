@@ -61,7 +61,21 @@ public class MyinfoServiceImpl implements MyinfoService {
 	public int myRankUpdate(BoardVO bvo) {
 		logger.info("myRankUpdate() 진입 >>> ");
 
-		return myinfoDAO.myRankUpdate(bvo);
+		// 게시글 50개
+		int count = myinfoDAO.myRankUpdateCheckCount(bvo);
+		logger.info("해당 회원의 게시글 >>> : "+count);
+
+		// 추천수 100
+		int hits = myinfoDAO.myRankUpdateCheckHits(bvo);
+		logger.info("해당 회원의 게시글 추천수 총합 >>> : "+hits);
+
+		if (count > 50 && hits > 100) {
+			return myinfoDAO.myRankUpdate(bvo);
+
+		} else {
+			return 0;
+		}
+
 	}
 
 	@Override
@@ -77,6 +91,5 @@ public class MyinfoServiceImpl implements MyinfoService {
 
 		return myinfoDAO.myFavRecipeList2(mvo);
 	}
-
 
 }

@@ -27,7 +27,7 @@ $(document).ready(function(){
 	// memberInsert btn click
 	$("#memberInsertBtn").click(function(){
 		alert("회원가입 페이지로 이동합니다 >>> ");
-		location.href="/kosmoJns/join.do";
+		location.href="/kosmoJns/memberForm.do";
 	})
 	
 	// findidpw btn click
