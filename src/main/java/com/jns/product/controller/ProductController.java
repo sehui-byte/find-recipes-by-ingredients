@@ -2,6 +2,8 @@ package com.jns.product.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +26,7 @@ public class ProductController {
 
 	private ProductService service;
 	private ChabunService chabun;
+	HttpSession session;
 
 	@Autowired(required=false)
 	public ProductController(ProductService service, ChabunService chabun) {
@@ -69,5 +72,11 @@ public class ProductController {
 	@RequestMapping(value="likeProductDelete.do", method=RequestMethod.POST)
 	public int likeProductInsertDelete(@RequestBody ProductVO pvo) {
 		return service.likeProductDelete(pvo);
+	}
+	
+	//(Test)소켓 테스트 페이지로 이동
+	@RequestMapping("socketTest.do")
+	public String socketTest() {
+		return "product/webSocketTest";
 	}
 }
