@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jns.chefboard.dao.ChefBoardDAO">
+
+	<select id="chefBoardSelectAll" resultType="cbvo">
+		SELECT
+			*
+		FROM
+			RECIPE_BOARD
+		WHERE
+			RB_DELETEYN = 'Y'
+			<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+			<![CDATA[AND TO_CHAR(RB_INSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			<![CDATA[AND TO_CHAR(RB_INSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			</if>
+			<if test="keyfilter=='key1'">
+				<![CDATA[AND RCP_NM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key2'">
+				<![CDATA[AND RBNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+	</select>
+	
+	<select id="chefBoardSelect" parameterType="cbvo" resultType="cbvo">
+		SELECT
+			*
+		FROM
+			RECIPE_BOARD
+		WHERE
+			RB_DELETEYN = 'Y'
+			AND RBNO = #{rbno}
+	</select>
+	
+	<insert id="boardInsert">
+		INSERT INTO RECIPE_BOARD
+		(
+			RBNO,
+			MNO,
+			RCP_NM,
+			VIEWS,
+			HITS,
+			RCP_WAY2,
+			RCP_PAT2,
+			HASH_TAG,
+			MAIN_IMG,
+			RCP_PARTS_DTLS,
+			MANUAL01,
+			MANUAL_IMG01,
+			MANUAL02,
+			MANUAL_IMG02,
+			MANUAL03,
+			MANUAL_IMG03,
+			MANUAL04,
+			MANUAL_IMG04,
+			MANUAL05,
+			MANUAL_IMG05,
+			MANUAL06,
+			MANUAL_IMG06,
+			MANUAL07,
+			MANUAL_IMG07,
+			MANUAL08,
+			MANUAL_IMG08,
+			MANUAL09,
+			MANUAL_IMG09,
+			MANUAL10,
+			MANUAL_IMG10,
+			MANUAL11,
+			MANUAL_IMG11,
+			MANUAL12,
+			MANUAL_IMG12,
+			MANUAL13,
+			MANUAL_IMG13,
+			MANUAL14,
+			MANUAL_IMG14,
+			MANUAL15,
+			MANUAL_IMG15,
+			MANUAL16,
+			MANUAL_IMG16,
+			MANUAL17,
+			MANUAL_IMG17,
+			MANUAL18,
+			MANUAL_IMG18,
+			MANUAL19,
+			MANUAL_IMG19,
+			MANUAL20,
+			MANUAL_IMG20,
+			RB_INSERTDATE,
+			RB_UPDATEDATE,
+			RB_DELETEYN
+		)
+		VALUES
+		(
+			#{rbno, jdbcType=VARCHAR},
+			#{mno, jdbcType=VARCHAR},
+			#{rcp_nm, jdbcType=VARCHAR},
+			#{views, jdbcType=NUMERIC},
+			#{hits, jdbcType=NUMERIC},
+			#{rcp_way2, jdbcType=VARCHAR},
+			#{rcp_pat2, jdbcType=VARCHAR},
+			#{hash_tag, jdbcType=VARCHAR},
+			#{main_img, jdbcType=VARCHAR},
+			#{rcp_parts_dtls, jdbcType=VARCHAR},
+			#{manual01, jdbcType=VARCHAR},
+			#{manual_img01, jdbcType=VARCHAR},
+			#{manual02, jdbcType=VARCHAR},
+			#{manual_img02, jdbcType=VARCHAR},
+			#{manual03, jdbcType=VARCHAR},
+			#{manual_img03, jdbcType=VARCHAR},
+			#{manual04, jdbcType=VARCHAR},
+			#{manual_img04, jdbcType=VARCHAR},
+			#{manual05, jdbcType=VARCHAR},
+			#{manual_img05, jdbcType=VARCHAR},
+			#{manual06, jdbcType=VARCHAR},
+			#{manual_img06, jdbcType=VARCHAR},
+			#{manual07, jdbcType=VARCHAR},
+			#{manual_img07, jdbcType=VARCHAR},
+			#{manual08, jdbcType=VARCHAR},
+			#{manual_img08, jdbcType=VARCHAR},
+			#{manual09, jdbcType=VARCHAR},
+			#{manual_img09, jdbcType=VARCHAR},
+			#{manual10, jdbcType=VARCHAR},
+			#{manual_img10, jdbcType=VARCHAR},
+			#{manual11, jdbcType=VARCHAR},
+			#{manual_img11, jdbcType=VARCHAR},
+			#{manual12, jdbcType=VARCHAR},
+			#{manual_img12, jdbcType=VARCHAR},
+			#{manual13, jdbcType=VARCHAR},
+			#{manual_img13, jdbcType=VARCHAR},
+			#{manual14, jdbcType=VARCHAR},
+			#{manual_img14, jdbcType=VARCHAR},
+			#{manual15, jdbcType=VARCHAR},
+			#{manual_img15, jdbcType=VARCHAR},
+			#{manual16, jdbcType=VARCHAR},
+			#{manual_img16, jdbcType=VARCHAR},
+			#{manual17, jdbcType=VARCHAR},
+			#{manual_img17, jdbcType=VARCHAR},
+			#{manual18, jdbcType=VARCHAR},
+			#{manual_img18, jdbcType=VARCHAR},
+			#{manual19, jdbcType=VARCHAR},
+			#{manual_img19, jdbcType=VARCHAR},
+			#{manual20, jdbcType=VARCHAR},
+			#{manual_img20, jdbcType=VARCHAR},			
+			SYSDATE,
+			SYSDATE,
+			'Y'
+		)
+	</insert>
+
+	<update id="boardUpdate">
+		UPDATE
+			RECIPE_BOARD
+		SET
+			RCP_NM = #{rcp_nm, jdbcType=VARCHAR},
+			RCP_WAY2 = #{rcp_way2, jdbcType=VARCHAR},
+			RCP_PAT2 = #{rcp_pat2, jdbcType=VARCHAR},
+			HASH_TAG = #{hash_tag, jdbcType=VARCHAR},
+			MAIN_IMG = #{main_img, jdbcType=VARCHAR},
+			RCP_PARTS_DTLS = #{rcp_parts_dtls, jdbcType=VARCHAR},
+			MANUAL01 = #{manual01, jdbcType=VARCHAR},
+			MANUAL_IMG01 = #{manual_img01, jdbcType=VARCHAR},
+			MANUAL02 = #{manual02, jdbcType=VARCHAR},
+			MANUAL_IMG02 = #{manual_img02, jdbcType=VARCHAR},
+			MANUAL03 = #{manual03, jdbcType=VARCHAR},
+			MANUAL_IMG03 = #{manual_img03, jdbcType=VARCHAR},
+			MANUAL04 = #{manual04, jdbcType=VARCHAR},
+			MANUAL_IMG04 = #{manual_img04, jdbcType=VARCHAR},
+			MANUAL05 = #{manual05, jdbcType=VARCHAR},
+			MANUAL_IMG05 = #{manual_img05, jdbcType=VARCHAR},
+			MANUAL06 = #{manual06, jdbcType=VARCHAR},
+			MANUAL_IMG06 = #{manual_img06, jdbcType=VARCHAR},
+			MANUAL07 = #{manual07, jdbcType=VARCHAR},
+			MANUAL_IMG07 = #{manual_img07, jdbcType=VARCHAR},
+			MANUAL08 = #{manual08, jdbcType=VARCHAR},
+			MANUAL_IMG08 = #{manual_img08, jdbcType=VARCHAR},
+			MANUAL09 = #{manual09, jdbcType=VARCHAR},
+			MANUAL_IMG09 = #{manual_img09, jdbcType=VARCHAR},
+			MANUAL10 = #{manual10, jdbcType=VARCHAR},
+			MANUAL_IMG10 = #{manual_img10, jdbcType=VARCHAR},
+			MANUAL11 = #{manual11, jdbcType=VARCHAR},
+			MANUAL_IMG11 = #{manual_img11, jdbcType=VARCHAR},
+			MANUAL12 = #{manual12, jdbcType=VARCHAR},
+			MANUAL_IMG12 = #{manual_img12, jdbcType=VARCHAR},
+			MANUAL13 = #{manual13, jdbcType=VARCHAR},
+			MANUAL_IMG13 = #{manual_img13, jdbcType=VARCHAR},
+			MANUAL14 = #{manual14, jdbcType=VARCHAR},
+			MANUAL_IMG14 = #{manual_img14, jdbcType=VARCHAR},
+			MANUAL15 = #{manual15, jdbcType=VARCHAR},
+			MANUAL_IMG15 = #{manual_img15, jdbcType=VARCHAR},
+			MANUAL16 = #{manual16, jdbcType=VARCHAR},
+			MANUAL_IMG16 = #{manual_img16, jdbcType=VARCHAR},
+			MANUAL17 = #{manual17, jdbcType=VARCHAR},
+			MANUAL_IMG17 = #{manual_img17, jdbcType=VARCHAR},
+			MANUAL18 = #{manual18, jdbcType=VARCHAR},
+			MANUAL_IMG18 = #{manual_img18, jdbcType=VARCHAR},
+			MANUAL19 = #{manual19, jdbcType=VARCHAR},
+			MANUAL_IMG19 = #{manual_img19, jdbcType=VARCHAR},
+			MANUAL20 = #{manual20, jdbcType=VARCHAR},
+			MANUAL_IMG20 = #{manual_img20, jdbcType=VARCHAR},
+			RB_UPDATEDATE = SYSDATE
+		WHERE
+			RBNO = #{rbno, jdbcType=VARCHAR}
+			AND RB_DELETEYN = 'Y'
+	</update>
+
+	<update id="boardDelete">
+		UPDATE
+			 RECIPE_BOARD
+		SET
+			 RB_DELETEYN = 'N'
+			,RB_UPDATEDATE = SYSDATE
+		WHERE
+			 RBNO = #{rbno, jdbcType=VARCHAR}
+	</update>
+	
+</mapper>

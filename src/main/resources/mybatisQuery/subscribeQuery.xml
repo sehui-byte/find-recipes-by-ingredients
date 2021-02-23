@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jns.subscribe.dao.SubscribeDAO">
+
+
+	<!-- 내 구독 리스트 -->
+
+	<!-- 구독하기 -->
+	<insert id="subInsert" parameterType="svo">
+		INSERT INTO SUB_INFO
+					(
+					 SNO
+					,MNO
+					,INO
+					,SINSERTDATE
+					,SUPDATEDATE
+					,SDELETEYN
+					)
+		VALUES		
+					(
+					 #{sno, jdbcType=VARCHAR}
+					,#{mno, jdbcType=VARCHAR}
+					,#{ino, jdbcType=VARCHAR}
+					,SYSDATE
+					,SYSDATE
+					,'Y'  
+					)
+	</insert>
+
+</mapper>

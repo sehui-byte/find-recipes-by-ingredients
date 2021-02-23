@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.jns.chabun.dao.ChabunDAO">
+
+	<select id="getMemberChabun" resultType="mvo">
+	    SELECT LPAD(NVL(SUBSTR(MAX(A.MNO), -4), 0) + 1, 4, '0') MNO 
+        FROM 
+   	    MEMBER A
+	</select>
+
+	<!-- 
+	<select id="getQnABoardChabun" resultType="com.jns.qna.vo.QnAVO">
+		SELECT NVL(MAX(SUBSTR(A.SNO, -4)), 0) + 1 SNO FROM QNA A
+	</select>
+	
+	<select id="getNoticeChabun" resultType="com.jns.notice.vo.NoticeVO">
+		SELECT NVL(MAX(SUBSTR(A.NNO, -4)), 0 ) + 1 NNO FROM NOTICE A
+	</select>
+	 -->
+	 
+	<select id="getQnABoardChabun" resultType="bvo">
+		<!--  SELECT NVL(MAX(INSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A-->
+		SELECT LPAD(NVL(SUBSTR(MAX(A.BNO), -4), 0)+1, 4, '0') BNO FROM BOARD A
+		where BTYPE = 'Q'
+	</select>
+	
+	<select id="getNoticeChabun" resultType="nvo">
+		SELECT LPAD(NVL(SUBSTR(MAX(A.BNO), -4), 0)+1, 4, '0') BNO FROM BOARD A
+		WHERE BTYPE = 'N'
+	</select>
+
+	<select id="getReplyChabun" resultType="reply">
+		SELECT NVL(MAX(INSTR(A.RNO, -4)), 0) + 1  RNO FROM REPLY A
+	</select>
+	
+	<select id="getRecipeBoardChabun" resultType="rbvo">
+		SELECT NVL(MAX(SUBSTR(RB.RBNO, -4)), 0) + 1  RBNO FROM RECIPE_BOARD RB
+	</select>
+	
+	<select id="getLikeProductChabun" resultType="pvo">
+		SELECT NVL(MAX(SUBSTR(LP.LPNO, -4)), 0) + 1  LPNO FROM LIKEPRODUCT LP
+  </select>
+
+	<select id="getChefChabun" resultType="cvo">
+		SELECT NVL(MAX(SUBSTR(A.INO, -4)), 0) + 1  INO FROM CHEF_INFO A
+	</select>
+
+	<select id="getFavoritesChabun" resultType="fvo">
+		SELECT NVL(MAX(SUBSTR(A.FNO, -4)), 0) + 1 FNO FROM FAVORITES A
+	</select>
+	
+</mapper>

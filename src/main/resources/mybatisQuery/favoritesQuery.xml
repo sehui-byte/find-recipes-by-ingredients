@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jns.favorites.dao.FavoritesDAO">
+
+	<!-- 추천 레시피 찾기 -->
+	<select id="myFavRecipeCheck" parameterType="fvo" resultType="java.lang.Integer">
+	SELECT 
+		COUNT(*)
+	FROM
+		FAVORITES A
+	WHERE
+		A.MNO = #{mno, jdbcType=VARCHAR}
+	<!-- API 레시피인 경우 -->
+	<if test="recipeType == 'API'">
+	AND
+		A.RCP_SEQ = #{rcp_seq, jdbcType=VARCHAR}
+	</if>
+	<!-- user 레시피인 경우 -->	
+	<if test="recipeType == 'user'">
+	AND
+		A. RBNO = #{rbno, jdbcType=VARCHAR}
+	</if>
+	</select>
+
+	<!-- 레시피 추천하기 -->
+	<insert id="myFavRecipeInsert" parameterType="fvo">
+		INSERT INTO FAVORITES(
+			 FNO 
+			,MNO
+			,RBNO
+			,RCP_SEQ
+			,FINSERTDATE
+			)
+		VALUES(
+			 #{fno, jdbcType=VARCHAR}
+			,#{mno, jdbcType=VARCHAR}
+			,#{rbno, jdbcType=VARCHAR}
+			,#{rcp_seq, jdbcType=VARCHAR}
+			,SYSDATE
+			)
+	</insert>
+	
+	<!--  추천 레시피 삭제하기 -->
+	<delete id="myFavRecipeDelete" parameterType="fvo">
+		DELETE FAVORITES
+		WHERE
+			MNO = #{mno, jdbcType=VARCHAR}
+		<if test="recipeType == 'API'">
+		AND
+			rcp_seq = #{rcp_seq, jdbcType=VARCHAR}
+		</if>
+		<if test="recipeType == 'user'">
+		AND
+			RBNO = #{rbno, jdbcType=VARCHAR}
+		</if>
+	</delete>
+	
+	
+	<!--  추천 레시피에서 검색하기 -->
+	<select id="myFavRecipeList" parameterType="fvo" resultType="rvo">
+		SELECT
+			B.RCP_NM	
+		FROM 	
+			FAVORITES A, RECIPE B
+		WHERE
+			A.MNO = #{mno, jdbcType=VARCHAR}
+		<if test="recipeType == 'API'">
+		AND
+			A.RCP_SEQ = #{rcp_seq, jdbcType=VARCHAR}
+		AND
+			A.RCP_SEQ = B.RCP_SEQ
+		<!--  
+		<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+		<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+		<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+		</if>
+		<if test="keyfilter=='key1'">
+			<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		</if>
+		<if test="keyfilter=='key2'">
+			<![CDATA[AND B.MANUAL01  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL02  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL03  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL04  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL05  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL06  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL07  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL08  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL09  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL10  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL11  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL12  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL13  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL14  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL15  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL16  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL17  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL18  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL19  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL20  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		</if>
+		<if test="keyfilter=='key3'">
+			<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL01  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL02  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL03  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL04  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL05  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL06  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL07  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL08  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL09  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL10  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL11  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL12  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL13  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL14  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL15  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL16  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL17  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL18  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL19  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.MANUAL20  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		</if>
+			-->
+		</if>	
+		ORDER BY 1
+		<!-- 레시피가 user인 경우 -->
+	</select>
+	
+</mapper>
