@@ -15,83 +15,41 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 <style>
-#recentbox {
-	position:absolute;
-	top:180px;
-	right:50%;
-	margin-right:-670px;
-}
 </style>
 </head>
 <body>
-	<script type="text/javascript"> 
-	$(document).ready(function() {
-
-		// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
-		var floatPosition = parseInt($("#recentbox").css('top'));
-		// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
-
-		$(window).scroll(function() {
-			// 현재 스크롤 위치를 가져온다.
-			var scrollTop = $(window).scrollTop();
-			if (scrollTop < 180) {
-				 scrollTop = 180;
-			}
-			var newPosition = scrollTop + floatPosition + "px";
-
-			/* 애니메이션 없이 바로 따라감
-			 $("#recentbox").css('top', newPosition);
-			 */
-
-			$("#recentbox").stop().animate({
-				"top" : newPosition
-			}, {
-				'duration' : 500,
-				'easing' : 'easeInOutCubic',
-				'complete' : function() {
-					console.log('이동 완료');
-				}
-			});
-		}).scroll();
-	});
-	</script>
 	
-	
-	
-	<!-- 최근 본 상품 -->
-	<!-- 퀵메뉴 -->
-	<div id="recentbox">
-		<div class="card text-dark bg-light mb-3" style="max-width: 16rem;">
-			<!-- '최근 본 상품' 텍스트 -->
-			<span id="recent_text"></span>
-			<!-- 이미지 + 링크 -->
-			<div class="text-center_1">
-				<!-- <target="_blank> : 새 창에서 뜨기  / 없애면 현재 웹에서 이동-->
-				<span id="product1">
-				</span>
-			</div>
-			<div class="text-center_2">
-				<span id="product2">
-				</span>
-			</div>
-			<div class="text-center_3">
-				<span id="product3">
-				</span>
-			</div>
-			<div class="text-center_4">
-				<span id="product4">
-				</span>
-			</div>
-			<div class="text-center_5">
-				<span id="product5">
-				</span>
-			</div>
+	<!-- 최근 본 상품 --> <!-- 이미지 + 링크 -->
+	<div class="card text-dark bg-light mb-3" style="max-width: 16rem;">
+		<span id="recent_text"></span>
+		<div class="text-center_1">
+			<!-- <target="_blank> : 새 창에서 뜨기  / 없애면 현재 웹에서 이동-->
+			<span id="product1">
+			</span>
+		</div>
+		<div class="text-center_2">
+			<span id="product2">
+			</span>
+		</div>
+		<div class="text-center_3">
+			<span id="product3">
+			</span>
+		</div>
+		<div class="text-center_4">
+			<span id="product4">
+			</span>
+		</div>
+		<div class="text-center_5">
+			<span id="product5">
+			</span>
 		</div>
 	</div>
 	
 
+
+
 	<script>
-	
+				
 		/*
 			구매하기 버튼 클릭했을 때, 해당 상품의 필요한 데이터 쿠키 배열로 저장
 		*/
@@ -125,7 +83,7 @@
 		
 				
 		// 쿠키 생성 함수
-		// cookieName : "recent", cookieValue : recentPro , 유효시간 : 1시간
+		// cookieName : 상품명, cookieValue : 이미지&&링크 , 유효시간 : 1시간
 		function setRecentCookie(cookieName, cookieValue) {
 		    var expire = new Date();
 		    expire.setTime(date.getTime() + 1*60*60*1000); // 1hr
@@ -147,26 +105,63 @@
 		}
 		
 		// 쿠키 배열로 저장하기 : 최대 5개
-		var cookieArr = [];
+		var cookieArr = [,];
+		var cookieArr_name = [];
+		var cookieArr_value = [];
 		function setCookieArray(cookieName){ // productId1
 		 	var cookieValue = getRecentCookie("cookieName"); // productImage1&&productLink1
 		 	
 		 	// 배열 맨 앞에 요소 추가, 배열의 크기 리턴
-	        cookieArr.unshift(cookieValue);
-	         
+	        cookieArr_name.unshift(cookieName);		// [productId5, productId4, ..., productId1]
+		 	cookieArr_value.unshift(cookieValue);	// [productImage5&&productLink5, ...]
+
 	        // 중복된 쿠키 제거 (뒷쪽에 있는 쿠키 삭제됨)
-	        var recentArr = cookieArr.filter(function(item, pos, self) {
+	        // 1) 쿠키명
+	        var recentArr_name = cookieArr_name.filter(function(item, pos, self) {
 				return self.indexOf(item) == pos;
 	        });
-	         
-	        // 쿠키 5개 넘으면
-	        if(recentArr.length > 5){
-	        	recentArr.pop(); // 배열의 마지막 요소를 제거, 제거한 요소 리턴
-	        }
-	        console.log(recentArr);
+	        // 2) 쿠키값
+	        var recentArr_value = cookieArr_value.filter(function(item, pos, self) {
+				return self.indexOf(item) == pos;
+	        });
 	        
-	        return cookieArr; // [productImage5&&productLink5, ..., productImage1&&productLink1]
+	         
+	        // 쿠키 개수 제한 : 5개
+	        // 1) 쿠키명
+	        if(recentArr_name.length > 5){
+	        	recentArr_name.pop(); // 배열의 마지막 요소를 제거, 제거한 요소 리턴
+	        	// 배열에서 제거한 쿠키명
+	        	var delCookie_name = recentArr_name.pop();
+	        	console.log("개수제한으로 제거된 쿠키명 : " + delCookie_name);
+	        	// 배열에서 제거된 쿠기 삭제
+	        	deleteCookie(delCookie_name);
+	        }
+	        // 2) 쿠키값
+	        if(recentArr_value.length > 5){
+	        	recentArr_value.pop(); // 배열의 마지막 요소를 제거, 제거한 요소 리턴
+	        	// 배열에서 제거한 쿠키값 
+	        	var delCookie_value = recentArr.pop();
+	        	console.log("개수제한으로 제거된 쿠키값 : " + recentArr_value);
+	        }
+	        console.log("최근본상품 쿠키명 배열 : " + recentArr_name);	        
+	        console.log("최근본상품 쿠키값 배열 : " + recentArr_value);	
+	        
+	        
+	        cookieArr[0] = recentArr_name;
+	        cookieArr[1] = recentArr_value;
+ 	        
+	        return cookieArr;
+	        // [{productId5, ..., productId1},{productImage5&&productLink5, ..., productImage1&&productLink1}]
 		}
+		
+		
+		// 쿠키 삭제
+		function deleteCookie(delCookie_name){
+			var expire = new Date();
+			expire.setTime(date.getTime() - 1);
+			document.cookie = cookieName + '=' + "";
+		}
+		
 
 		
 		
@@ -175,39 +170,25 @@
 		*/
 		
 		// 쿠키에서 배열로 저장된 데이터(이미지, 링크) 가져와서 화면에 보여주기
-		function getCookieArray(cookieArr){ // [{productId5, ..., productId1},{productImage5&&productLink5, ..., productImage1&&productLink1}]
+		function getCookieArray(cookieArr){ // [productImage5&&productLink5, ..., productImage1&&productLink1]
 			
-			var cookieNameArr = cookieArr[0];	// [productId5, ..., productId1]
-			var cookieValueArr = cookieArr[1];	// [productImage5&&productLink5, ..., productImage1&&productLink1]
+			var cookieValueArr = cookieArr[1];
 		
-			if(cookieNameArr.length == cookieValueArr){
+			for(var i=0; i<cookieValueArr.length; i++){
 				
-				var arrLength = cookieNameArr.length;
-				console.log("쿠키명&쿠키값 개수 : " + arrLength);
+				var product = cookieValueArr[i]; // productImage&&productLink
+				var info = product.split("&&"); // [productImage, productLink]
+				var image = info[0]	// productImage5
+				var link = info[1]	// productLink5
 				
-				for(var i=0; i < arrLength; i++){
-					
-					var productId = cookieNameArr[i]; // productId
-					
-					var product = cookieValueArr[i]; // productImage&&productLink
-					var info = product.split("&&"); // [productImage, productLink]
-					var image = info[0]	// productImage5
-					var link = info[1]	// productLink5
-					
-					var recentProduct = '<a href="'+link+'" target="_blank"><img src="'+image+'" class="rounded_2" title="'+productId+'"></a>';
-						        	
-		        	var id = "product"+(i+1);
-		            var a = document.getElementById(id);
-		            if (a != null){
-		            	a.innerHTML = recentProduct;
-		            }
-				}
-			}else{
-				console.log("[오류] [쿠키명, 쿠키값 개수 안 맞음]");
-				console.log("[쿠키명 : "+cookieNameArr.length+"]");
-				console.log("[쿠키값 : "+cookieValueArr.length+"]");
+				var recentProduct = '<a href="'+link+'" target="_blank"><img src="'+image+'" class="rounded_2"></a>';
+					        	
+	        	var id = "product"+(i+1);
+	            var a = document.getElementById(id);
+	            if (a != null){
+	            	a.innerHTML = recentProduct;
+	            }
 			}
-			
 		}
 	
 
