@@ -106,7 +106,7 @@
 							var html = "";
 							var item = data.items;
 							var count = 0;//식품 검색결과 총개수
-							html += '<div class="row row-cols-1 row-cols-md-3">';
+							html += '<div class="card-group">';
 							for ( var i in item) {
 								var category1 = item[i].category1; //식품만 검색되게.
 								if (category1 === '식품') {
@@ -167,7 +167,7 @@
 											+ ' onclick="clickProductId(\''
 											+ str + '\')"';
 
-									html += '</div></div></div>';
+									html += '/></div></div></div>';
 
 									//비워주기
 									$('#keyword').empty();
