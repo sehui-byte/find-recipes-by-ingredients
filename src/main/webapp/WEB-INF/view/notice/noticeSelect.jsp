@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.jns.board.vo.BoardVO" %>
 <%@ page import="java.util.List" %>
+<%@page import="com.jns.common.FileLoadUtil"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,7 +87,7 @@
 </tr>
 <tr>
 <td class="mem">첨부파일</td>
-<td><img src="imgupload/sm_<%= nvo.getBfile() %>" border="1" width="40" height="50" alt="image">
+<td><img src="<%=new FileLoadUtil().getFileSrc("noticeboard", nvo.getBfile()) %>" border="1" width="40" height="50" alt="image">
 </td>
 </tr>
 <tr>
