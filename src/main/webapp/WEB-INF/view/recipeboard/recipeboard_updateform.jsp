@@ -91,11 +91,12 @@
 			
 			function setThumbnail(e)
 			{
-				console.log(e);
+				no = e.target.files[0].name.slice(-2);
+				
 				var reader = new FileReader();
 				reader.onload = function(e)
 				{
-					$("#thumb01").attr("src", e.target.result);
+					$("#thumb"+no).attr("src", e.target.result);
 					console.log(e.target.result);
 				}
 			}
@@ -148,35 +149,7 @@
 				</tr>
 				
 				
-				<tr>
-					<td>만드는법 02</td>
-					<td><input id="manual02" name="manual02" type="text" value="<%=rbvo.getManual02()%>"></td>
-				</tr>
-				<tr>
-					<td>만드는법 참고 이미지_02</td>
-					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img02())%>"></td>
-				</tr>
-				<tr>
-					<td colspan="2">사진 : <input id="manual_img02" name="file02" type="file"></td>
-				</tr>
-				
-				
-				<tr>
-					<td>만드는법 03</td>
-					<td><input id="manual03" name="manual03" type="text" value="<%=rbvo.getManual03()%>"></td>
-				</tr>
-				<tr>
-					<td>만드는법 참고 이미지_02</td>
-					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img03())%>"></td>
-				</tr>
-				<tr>
-					<td colspan="2">사진 : <input id="manual_img03" name="file03" type="file"></td>
-				</tr>
-				
-				
-				<tr>
-					<td><input type="button" id="writeBtn" value="글쓰기"></td>
-				</tr>
+
 			</table>
 		</form>
 	</body>
