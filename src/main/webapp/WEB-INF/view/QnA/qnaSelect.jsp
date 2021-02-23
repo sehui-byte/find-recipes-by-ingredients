@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.jns.board.vo.BoardVO" %>
 <%@ page import="java.util.List" %>
+<%@page import="com.jns.common.FileLoadUtil"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,7 +87,7 @@ QnA Select
 <tr>
 <td class="mem">사진</td>
 <td> 
-<img src="imgupload/sm_<%= bvo.getBfile() %>" border="1" width="40" height="50" alt="image">
+<img src="<%=new FileLoadUtil().getFileSrc("qnaboard", bvo.getBfile()) %>" border="1" width="40" height="50" alt="image">
 </td>
 </tr>
 <tr>

@@ -11,10 +11,10 @@
 	$(document).ready(function(){
 		
 		$(document).on("click", "#nbtn", function(){
-			console.log("nbbtn >>> : ");					
+			console.log("nbtn >>> : ");					
 			$('#NoticeForm').attr({
 				'action':'noticeInsert.do',
-				'method':'GET',
+				'method':'POST',
 				'enctype':'multipart/form-data'
 			}).submit();
 		});
@@ -22,7 +22,7 @@
 </script>
 </head>
 <body>
-<form name="NoticeForm" id="NoticeForm">
+<form action="noticeInsert.do" method="POST" enctype="multipart/form-data" name="NoticeForm" id="NoticeForm">
 <table border="1" align="center">
 	<tr>
 		<td colspan="2" align="center">공지 게시판 글쓰기</td>
@@ -58,7 +58,7 @@
 	</tr>
 	<tr>
 		<td align="center">첨부파일</td>
-		<td><input type="file" name="bfile" id="bfile">
+		<td><input type="file" name="file02" id="file02">
 		</td>
 	</tr>
 	<tr>

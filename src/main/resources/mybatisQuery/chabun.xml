@@ -22,13 +22,11 @@
 	 
 	<select id="getQnABoardChabun" resultType="bvo">
 		<!--  SELECT NVL(MAX(INSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A-->
-		SELECT LPAD(NVL(SUBSTR(MAX(A.BNO), -4), 0)+1, 4, '0') BNO FROM BOARD A
-		where BTYPE = 'Q'
+		SELECT NVL(MAX(SUBSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
 	</select>
 	
 	<select id="getNoticeChabun" resultType="nvo">
-		SELECT LPAD(NVL(SUBSTR(MAX(A.BNO), -4), 0)+1, 4, '0') BNO FROM BOARD A
-		WHERE BTYPE = 'N'
+		SELECT NVL(MAX(SUBSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
 	</select>
 
 	<select id="getReplyChabun" resultType="reply">
