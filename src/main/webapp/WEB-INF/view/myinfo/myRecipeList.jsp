@@ -62,7 +62,7 @@
 			function whenError(data){
 				alert("댓글 삭제에 문제가 발생하였습니다. 관리자에게 문의하시기 바랍니다.");
 			}
-		}
+		})
 	})
 </script>
 </head>
@@ -76,9 +76,9 @@
 			<tr>
 				<td colspan="10" align="left">
 					<select id="keyfilter" name="keyfilter">
-						<option value="key1">제목</option>
-						<option value="key2">내용</option>
-						<option value="key3">제목+내용</option>
+						<option value="key1">메뉴명</option>
+						<option value="key2">재료</option>
+						<option value="key3">메뉴명+재료</option>
 					</select>
 					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
 					<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">

@@ -33,10 +33,4 @@ public class FavoritesDAOImpl implements FavoritesDAO {
 		return sqlSession.delete("myFavRecipeDelete", fvo);
 	}
 
-	@Override
-	public List<RecipeVO> myFavRecipeList(FavoritesVO fvo) {
-
-		return sqlSession.selectList("myFavRecipeList", fvo);
-	}
-
 }
