@@ -20,11 +20,6 @@
 	$(document).ready(function(){
 		sessionMlevel = "<%=mlevel%>"
 		
-		// 로그인 유저가 세프일 경우 글쓰기 버튼 활성화
-		if ( sessionMlevel == 'C'){
-			$('#I').attr('disabled', false);
-		}
-		
 		//검색버튼
 		$(document).on("click", "#searchBtn", function(){
 			console.log("searchBtn >>> : ");
@@ -114,7 +109,7 @@
 %>
 	<tr>
 		<td colspan="10" align="right">
-			<input type="button" value="글쓰기" id="I" disabled="disabled">
+			<input type="button" value="글쓰기" id="I">
 		</td>
 	</tr>
 	</tbody>

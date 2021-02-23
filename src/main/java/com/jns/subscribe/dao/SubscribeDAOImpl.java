@@ -15,7 +15,7 @@ public class SubscribeDAOImpl implements SubscribeDAO {
 	@Override
 	public List<SubscribeVO> mySubList(SubscribeVO svo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("mySubList");
+		return null;
 	}
 
 	@Override

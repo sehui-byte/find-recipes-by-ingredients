@@ -14,9 +14,7 @@
 						http://www.springframework.org/schema/lang/spring-lang.xsd
 						http://www.springframework.org/schema/mvc 
 						http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-	
-	<mvc:resources location="/resources/**" mapping="/resources/"></mvc:resources>
-	
+
 	<!-- @ResponseBody로 String 처리할때 한글처리 -->
 	<mvc:annotation-driven>
 		<mvc:message-converters>
@@ -31,7 +29,10 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
-	<context:annotation-config />  		
+	<context:annotation-config />  
+	
+	<mvc:resources mapping="/WEB-INF/files/**" location="/WEB-INF/files/"></mvc:resources>
+	
 	<!-- View Resolver -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

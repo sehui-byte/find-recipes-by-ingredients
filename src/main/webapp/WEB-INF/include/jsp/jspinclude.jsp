@@ -11,3 +11,17 @@
 <%-- jQuery, Vue 추가 --%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
+<%-- 
+<script src="/datepiker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script src="/find-recipes-by-ingredients/include/js/common.js"></script>
+--%>
+<%-- 다음 주소록 --%>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<%-- VO --%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.jns.member.vo.MemberVO"%>
+<%@ page import="com.jns.board.vo.BoardVO"%>
+<%@ page import="com.jns.recipe.vo.RecipeVO"%>
+<%@ page import="com.jns.recipeboard.vo.RecipeBoardVO"%>
+<%@ page import="com.jns.reply.vo.ReplyVO"%>

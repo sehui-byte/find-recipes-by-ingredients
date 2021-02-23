@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jns.board.vo.BoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.service.MyinfoService;
+import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Controller
@@ -75,12 +76,12 @@ public class MyinfoController {
 			rbvo.setRbno(chkVal);
 			myinfoService.myRecipeDelete(rbvo);
 			nCnt++;
-			
+
 		}
 		logger.info(nCnt);
-		
+
 		String result = String.valueOf(nCnt);
-		
+
 		return result;
 
 	}
@@ -112,35 +113,39 @@ public class MyinfoController {
 
 		logger.info("myQnADelete() 진입 >>> ");
 		int nCnt = 0;
-		for (String chkVal : chkVals ) {
+		for (String chkVal : chkVals) {
 			bvo.setBno(chkVal);
 			myinfoService.myQnADelete(bvo);
 			nCnt++;
 		}
 		logger.info(nCnt);
-		
+
 		String result = String.valueOf(nCnt);
-		
+
 		return result;
 
 	}
 
-	@RequestMapping(value="myinfo/myRankUpdate", method=RequestMethod.GET)
+	@RequestMapping(value = "myinfo/myRankUpdate", method = RequestMethod.GET)
 	public String myRankUpdate(BoardVO bvo) {
 
 		logger.info("myRankUpdate() 진입 >>> ");
 		// 등급 올리는 것에 대한 기준이 필요
-	
+
 		return "";
 	}
-	
-	@RequestMapping(value = "myinfo/myFavRecipaList", method=RequestMethod.GET)
-	public String myFavRecipeList() {
-		logger.info("myFavRecipeList() 진입 >>> ");
-		// 내가 추천한 레시피 가져오기
 
-		 return "";
+	@RequestMapping(value = "myinfo/myFavRecipeList", method = RequestMethod.GET)
+	public String myFavRecipeList(MemberVO mvo, Model model) {
+		logger.info("myFavRecipeList() 진입 >>> ");
+		// 내가 추천한 레시피 가져오기 - api
+		List<RecipeVO> recipeList = myinfoService.myFavRecipeList1(mvo);
+		List<RecipeBoardVO> recipeBoardList = myinfoService.myFavRecipeList2(mvo);
+
+		model.addAttribute("recipeList", recipeList);
+		model.addAttribute("recipeBoardList", recipeBoardList);
+
+		return "myinfo/myFavRecipeList";
 	}
-	
-	
+
 }

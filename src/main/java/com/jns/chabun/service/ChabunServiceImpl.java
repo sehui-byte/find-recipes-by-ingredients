@@ -4,19 +4,16 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.jns.board.vo.BoardVO;
 import com.jns.chabun.dao.ChabunDAO;
 import com.jns.chef.vo.ChefVO;
 import com.jns.chefboard.vo.ChefBoardVO;
+import com.jns.favorites.vo.FavoritesVO;
 import com.jns.member.vo.MemberVO;
-import com.jns.board.vo.BoardVO;
-import com.jns.notice.vo.NoticeVO;
 import com.jns.product.vo.ProductVO;
-import com.jns.qna.vo.QnAVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
-import com.jns.subscribe.vo.SubscribeVO;
-
 
 @Service
 @Transactional
@@ -52,7 +49,6 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getQnABoardChabun();
 	}
 
-
 	public ChefBoardVO getBoardChabun() {
 		// TODO Auto-generated method stub
 		logger.info("ChefBoard 채번호출 ");
@@ -67,8 +63,7 @@ public class ChabunServiceImpl implements ChabunService {
 	}
 
 	@Override
-	public RecipeBoardVO getRecipeBoardChabun() 
-	{
+	public RecipeBoardVO getRecipeBoardChabun() {
 		// TODO Auto-generated method stub
 		logger.info("RecipeBoard 채번호출");
 		return chabunDAO.getRecipeBoardChabun();
@@ -80,7 +75,6 @@ public class ChabunServiceImpl implements ChabunService {
 		logger.info("Chef 채번호출");
 		return chabunDAO.getChefChabun();
 	}
-	
 
 	@Override
 	public ProductVO getLikeProductChabun() {
@@ -89,11 +83,10 @@ public class ChabunServiceImpl implements ChabunService {
 	}
 
 	@Override
-	public SubscribeVO getSubscribeChabun() {
-		// TODO Auto-generated method stub
-		logger.info("SubscribeChabun 채번호출");
-		return chabunDAO.getSubscribeChabun();
+	public FavoritesVO getFavoritesChabun() {
+		logger.info("getFavoritesChabun 채번호출");
+
+		return chabunDAO.getFavoritesChabun();
 	}
-	
-	
+
 }

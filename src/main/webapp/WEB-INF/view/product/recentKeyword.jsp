@@ -16,7 +16,7 @@
 
 <style type="text/css">
 	a:link {text-decoration: none; color: blue;}
-	a:visited {text-decoration: none; color: purple;}
+	a:visited {text-decoration: none; color: green;}
 	a:active {text-decoration: none; color: grey;}
 	a:hover {text-decoration: underline; color: red;}
 </style>

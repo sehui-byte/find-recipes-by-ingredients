@@ -44,11 +44,11 @@
 	<tr>
 		<td class="tt"><%= cvo.getIno() %> </td>	
 		<td class="tt"><%= cvo.getMno() %> </td>
-		<td class="tt"><%= cvo.getMid() %> </td>
+<%-- 		<td class="tt"><%= cvo.getMid() %> </td>
 		<td class="tt"><%= cvo.getMname() %> </td>
 		<td class="tt"><%= cvo.getMnick() %> </td>
 		<td class="tt"><%= cvo.getMlevel() %> </td>
-		<td class="tt"><%= cvo.getIinsertdate() %> </td>
+ --%>		<td class="tt"><%= cvo.getIinsertdate() %> </td>
 	</tr>
 <%
 		} // end of for

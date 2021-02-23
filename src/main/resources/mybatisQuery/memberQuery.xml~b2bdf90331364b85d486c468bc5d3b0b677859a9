@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jns.member.dao.MemberDAO">
+   
+   <resultMap type="com.jns.member.vo.MemberVO" id="mvo">
+      <result property="mno" column="MNO"/>
+      <result property="mlevel" column="MLEVEL"/>
+      <result property="mid" column="MID"/>
+      <result property="mpw" column="MPW"/>
+      <result property="mname" column="MNAME"/>
+      <result property="mnick" column="MNICK"/>
+      <result property="mhp" column="MHP"/>
+      <result property="memail" column="MEMAIL"/>
+      <result property="maddr" column="MADDR"/>
+      <result property="mzipcode" column="MZIPCODE"/>
+      <result property="maddrdetail" column="MADDRDETAIL"/>
+      <result property="mphoto" column="MPHOTO"/>
+      <result property="minsertdate" column="MINSERTDATE"/>
+      <result property="mupdatedate" column="MUPDATEDATE"/>
+      <result property="mdeleteyn" column="MDELETEYN"/>
+   </resultMap>
+   <!-- 로그인-->
+   <select id="memberLogin"  parameterType="mvo" resultMap="mvo">
+      SELECT 
+          MNO               
+         ,MLEVEL           
+         ,MID               
+         ,MPW              
+         ,MNAME              
+         ,MNICK             
+         ,MHP                
+         ,MEMAIL             
+         ,MADDR             
+         ,MZIPCODE         
+         ,MADDRDETAIL       
+         ,MPHOTO            
+         ,MINSERTDATE        
+         ,MUPDATEDATE       
+         ,MDELETEYN         
+      FROM MEMBER A   
+      WHERE A.MID = #{mid, jdbcType=VARCHAR}
+   </select>
+   
+   <!--  아이디 조회(이름 / 이메일) -->
+   <select id="memberFindIDOK" parameterType="mvo" resultMap="mvo">
+      SELECT 
+          MNO               
+         ,MLEVEL           
+         ,MID               
+         ,MPW              
+         ,MNAME              
+         ,MNICK             
+         ,MHP                
+         ,MEMAIL             
+         ,MADDR             
+         ,MZIPCODE         
+         ,MADDRDETAIL       
+         ,MPHOTO            
+         ,MINSERTDATE        
+         ,MUPDATEDATE       
+         ,MDELETEYN         
+      FROM MEMBER A   
+      WHERE MNAME = #{mname, jdbcType=VARCHAR}
+      AND MEMAIL = #{memail, jdbcType=VARCHAR}
+   
+   </select>
+   <!--  회원 정보 조회(아이디 / 이메일) >> 임시 비밀번호 발급용 -->
+   <select id="memberTempPW" parameterType="mvo" resultMap="mvo">
+      SELECT 
+          MNO               
+         ,MLEVEL           
+         ,MID               
+         ,MPW              
+         ,MNAME              
+         ,MNICK             
+         ,MHP                
+         ,MEMAIL             
+         ,MADDR             
+         ,MZIPCODE         
+         ,MADDRDETAIL       
+         ,MPHOTO            
+         ,MINSERTDATE        
+         ,MUPDATEDATE       
+         ,MDELETEYN         
+      FROM MEMBER A   
+      WHERE MID = #{mid, jdbcType=VARCHAR}
+      AND MEMAIL = #{memail, jdbcType=VARCHAR}
+   
+   </select>
+
+   <!-- 회원 가입 -->
+   <insert id="memberInsert" parameterType="mvo">
+
+      INSERT INTO MEMBER(
+                MNO               
+               ,MLEVEL           
+               ,MID               
+               ,MPW              
+               ,MNAME              
+               ,MNICK             
+               ,MHP                
+               ,MEMAIL             
+               ,MADDR             
+               ,MZIPCODE         
+               ,MADDRDETAIL       
+               ,MPHOTO            
+               ,MINSERTDATE        
+               ,MUPDATEDATE       
+               ,MDELETEYN         
+               )
+            VALUES(
+                #{mno, jdbcType=VARCHAR}        
+               ,#{mlevel, jdbcType=VARCHAR}        
+               ,#{mid, jdbcType=VARCHAR}        
+               ,#{mpw, jdbcType=VARCHAR}        
+               ,#{mname, jdbcType=VARCHAR}       
+               ,#{mnick, jdbcType=VARCHAR}        
+               ,#{mhp, jdbcType=VARCHAR}        
+               ,#{memail, jdbcType=VARCHAR}        
+               ,#{maddr, jdbcType=VARCHAR}        
+               ,#{mzipcode, jdbcType=VARCHAR}        
+               ,#{maddrdetail, jdbcType=VARCHAR}        
+               ,#{mphoto, jdbcType=VARCHAR}        
+               ,SYSDATE        
+               ,SYSDATE       
+               ,'Y'    
+               )   
+   
+   </insert>
+   
+   <!-- 임시 비밀번호 발급 -->
+   <update id="memberTempPWOK" parameterType="mvo">
+      
+      UPDATE MEMBER
+      SET
+         MPW = #{mpw, jdbcType=VARCHAR}   
+      WHERE
+         MID = #{mid, jdbcType=VARCHAR}   
+      AND MEMAIL = #{memail, jdbcType=VARCHAR}
+   
+   </update>
+   <!-- 회원 조회-->
+   <select id="memberSelect" resultType="mvo">
+      SELECT 
+            A.MNO    MNO               
+            ,A.MLEVEL MLEVEL           
+            ,A.MID     MID               
+            ,A.MPW    MPW       
+            ,A.MNAME  MNAME         
+            ,A.MNICK  MNICK      
+            ,A.MHP    MHP       
+            ,A.MEMAIL    MEMAIL         
+            ,A.MADDR     MADDR  
+            ,A.MZIPCODE  MZIPCODE       
+            ,A.MADDRDETAIL     MADDRDETAIL 
+            ,A.MPHOTO            MPHOTO
+            ,TO_CHAR(A.MINSERTDATE, 'YYYY-MM-DD') MINSREDATE        
+            ,TO_CHAR(A.MUPDATEDATE, 'YYYY-MM-DD') MUPDATEDATE     
+     FROM      MEMBER A
+     WHERE    A.MDELETEYN = 'Y'
+        AND   A.MNO = #{mno,jdbcType=VARCHAR}      
+   </select>
+   
+   <!-- 회원 전체 조회  -->   
+   <select id="memberSelectAll" resultType="mvo">
+   SELECT *
+   FROM  MEMBER A
+   WHERE A.MDELETEYN='Y'  
+   </select>
+   
+   <!-- 회원 정보 수정  -->
+   <update id="memberUpdate" parameterType="mvo">
+   UPDATE MEMBER
+      SET
+      	  MNICK = #{mnick,jdbcType=VARCHAR}
+         ,MHP = #{mhp, jdbcType=VARCHAR}
+         ,MUPDATEDATE = SYSDATE
+   WHERE MNO = #{mno,jdbcType=VARCHAR}
+   AND   MDELETEYN = 'Y'
+   </update>
+   
+   <!-- 회원 삭제 -->
+   <delete id="memberDelete" parameterType="mvo">
+   UPDATE MEMBER
+      SET 
+      	  MDELETEYN = 'N'
+         ,MUPDATEDATE = SYSDATE
+   WHERE  MNO = #{mno, jdbcType=VARCHAR}  <!-- 쿼리문 	작성시 #{} 표시 주의, 띄어쓰기 주의 -->
+   AND    MDELETEYN = 'Y'
+   </delete>
+   
+   <!-- 아이디 중복 확인   -->
+   <select id="checkID" parameterType ="mvo" resultType="mvo">
+
+   SELECT A.MID MID
+   FROM    MEMBER A 
+   WHERE   A.MID = #{mid, jdbcType=VARCHAR}
+   </select>
+</mapper>

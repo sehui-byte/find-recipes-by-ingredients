@@ -6,72 +6,49 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!--  디바이스에 최적화된 크기로 출력 -->
-<meta name ="viewport" content="width=device-width, initial-scale=1.0
-		maxinum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 <title>JNS : 전지적 냉장고 시점  회원 전체 조회</title>
 <style type="text/css">
 	.tt{
 		text-align:center;
 		font-weight: bold;
+		text-overflow: ellipsis; white-space: nowrap; max-width:140px; overflow:hidden;
 	}
 </style>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="http://code/jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
-
-	
-			
+$(document).ready(function(){
 		//체크박스 체크 확인하기 
 		function checkOnly(chk){
-		 alert("선택했습니다. >>> : " + chk);
+			// alert(">>> : " + chk);
 			var chkObj = document.getElementsByName("mno");		
 			console.log("chkObj >>> : " + chkObj);
 			for (var i=0; i < chkObj.length; i++){
-					if (chkObj[i] != chk){
-						chkObj[i].checked = false;
-					}
+				if (chkObj[i] != chk){
+					chkObj[i].checked = false;
+				}
 			}
-		}
-
-		$(document).ready(function(){
-		$("#I").click(function(){	
-			alert("등록 폼 이동 >>> :");
-			location.href='memberForm.do';			
-		});
+		}	
 		
-		
-		$("#U").click(function(){
-			console.log("U >>> : ");			
-			$("#chkInMno").val();					
-			$('#memberList').attr('action', 'memberSelect.do');
-			$('#memberList').submit();
-		});	
-		
-	});
-
-
-
-/*
-	$(document).ready(function(){
-	
-		$(document).on("click","#I", function(){
-			alert("등록하러갑니다 >>> ");
-			loction.href="memberForm.do";
-		});
-		
-		$(document).on("click", "#U", function(){
-		
-			alert("수정하러갑니다. >>>");
 			
-			$("#memberList").attr({
-				"method":"GET",
-				"action":"memberSelect.do"}).submit();	
+			$(document).on("click", "#I", function(){
+				location.href="memberInsert.do";
+			});
+			
+			$(document).on("click", "#U", function(){
+				alert("U >>>");
+				$("#memberList").attr({
+					"method":"GET",
+					"action":"memberSelect.do"}).submit();	
+			});
+			
+			$(document).on("click", "#D", function(){
+				alert("D >>>");
+				$("#memberList").attr({
+					"method":"GET",
+					"action":"memberSelect.do"}).submit();
+			});
 		});
-		
-
-		
-	});
-*/	
+	
 	
 </script>
 </head>
@@ -101,8 +78,8 @@ SELECT ALL
 	<td class="tt">닉네임</td>
 	<td class="tt">전화번호</td>
 	<td class="tt">이메일</td>
-	<td class="tt">도로명 주소</td>
-	<td class="tt">우편번호</td>
+	<td class="tt">주소</td>	
+	<td class="tt">우편번호</td>	
 	<td class="tt">상세주소</td>	
 	<td class="tt">사진</td>
 	<td class="tt">등록일</td>
@@ -132,7 +109,7 @@ SELECT ALL
 	<td class="tt"><%=mvo.getMaddr() %></td>
 	<td class="tt"><%=mvo.getMzipcode() %></td>
 	<td class="tt"><%=mvo.getMaddrdetail() %></td>
-	<td class="tt"><img src="/kosmoJns/imgupload/<%=mvo.getMphoto()%>"></td>
+	<td class="tt"><img src="<%=mvo.getMphoto() %>"></td>
 	<td class="tt"><%=mvo.getMinsertdate() %></td>
 	<td class="tt"><%=mvo.getMupdatedate() %></td>
 	<td class="tt"><%=mvo.getMdeleteyn() %></td>
@@ -143,9 +120,10 @@ SELECT ALL
 	} // end of if
 %>
 <tr>
-	<td colspan="10" align="right">		
-		<input type="button" value="회원등록(관리자)" id="I">	
-		<input type="button" value="회원정보 수정" id="U">					
+	<td colspan="16" align="right">			
+		<input type="button" value="회원 목록" id="SALL">
+		<input type="button" value="회원정보 수정" id="U">
+		<input type="button" value="회원 삭제" id="D">									
 	</td>
 </tr>
 </tbody>

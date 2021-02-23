@@ -4,6 +4,7 @@
 
 <mapper namespace="com.jns.myinfo.dao.MyinfoDAO">
 
+	<!-- 내가 쓴 레시피 조회하기 -->
 	<select id="myRecipeList" parameterType="mvo" resultType="rbvo">
 	
 		SELECT 
@@ -70,6 +71,7 @@
 		ORDER BY 1
 	</select>
 	
+	<!--  내 레시피 삭제하기 -->
 	<update id="myRecipeDelete" parameterType="rbvo">
 		UPDATE RECIPE_BOARD
 		SET
@@ -77,6 +79,7 @@
 		WHERE RBNO  = #{rbno, jdbcType=VARCHAR}
 	</update>	
 	
+	<!--  내 Q&A 리스트 조회하기 -->
 	<select id="myQnAList" parameterType="mvo" resultType="bvo">
 	
 		SELECT
@@ -103,7 +106,7 @@
 		ORDER BY 1
 	</select>
 	
-	
+	<!--  내 Q&A 리스트 삭제하기 -->
 	<update id="myQnADelete" parameterType="mvo">
 		UPDATE BOARD
 		SET
@@ -112,7 +115,32 @@
 			BTYPE = 'Q'
 		AND BNO = #{bno, jdbcType=VARCHAR}
 	</update>
+	
+	
+	<!-- 내가 추천한 레시피 조회하기 // API 레시피-->
+	<select id="myFavRecipeList1" parameterType="mvo" resultType="rvo">
 
+	SELECT 
+		*
+	FROM FAVORITES A, RECIPE B
+	WHERE
+		A.MNO = #{mno, jdbcType=VARCHAR}
+	AND
+		A.RCP_SEQ = B.RCP_SEQ
+		
+	
+	</select>
 
+	<!-- 내가 추천한 레시피 조회하기 // 회원 레시피-->
+	<select id="myFavRecipeList2" parameterType="mvo" resultType="rbvo">
 
+	SELECT 
+		*
+	FROM FAVORITES A, RECIPE_BOARD B
+	WHERE
+		A.MNO = #{mno, jdbcType=VARCHAR}
+	AND
+		A.RBNO = B.RBNO
+	</select>
+	
 </mapper>

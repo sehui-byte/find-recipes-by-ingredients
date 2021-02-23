@@ -8,14 +8,11 @@ import org.springframework.stereotype.Repository;
 import com.jns.board.vo.BoardVO;
 import com.jns.chef.vo.ChefVO;
 import com.jns.chefboard.vo.ChefBoardVO;
+import com.jns.favorites.vo.FavoritesVO;
 import com.jns.member.vo.MemberVO;
-import com.jns.board.vo.BoardVO;
-import com.jns.notice.vo.NoticeVO;
 import com.jns.product.vo.ProductVO;
-import com.jns.qna.vo.QnAVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
-import com.jns.subscribe.vo.SubscribeVO;
 
 @Repository
 public class ChabunDAOImpl implements ChabunDAO {
@@ -68,7 +65,7 @@ public class ChabunDAOImpl implements ChabunDAO {
 
 	@Override
 	public ChefVO getChefChabun() {
-		
+
 		return sqlSession.selectOne("getChefChabun");
 	}
 
@@ -79,10 +76,9 @@ public class ChabunDAOImpl implements ChabunDAO {
 	}
 
 	@Override
-	public SubscribeVO getSubscribeChabun() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("getSubscribeChabun");
+	public FavoritesVO getFavoritesChabun() {
+	
+		return sqlSession.selectOne("getFavoritesChabun");
 	}
-	
-	
+
 }

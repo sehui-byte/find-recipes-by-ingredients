@@ -9,7 +9,7 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_N 	= "N"; // 공지사항 : NOTICE BOARD
 	public static final String BIZ_GUBUN_Q = "Q"; // Q&A 게시판 
 
-	//  public static final String BIZ_GUBUN_CB	= "CB"; // 쉐프 게시판 
+	public static final String BIZ_GUBUN_CB	= "CB"; // 쉐프 게시판 
 	//	public static final String BIZ_GUBUN_CO = "CO"; // 신고게시판 
 
 	public static final String BIZ_GUBUN_RB	= "RB"; // 레시피(일반/세프) 게시판 
@@ -73,7 +73,7 @@ public abstract class ChabunUtil {
 	// 쉐프게시판  번호  
 	public static String getChiefBoardChabun(String type, String memNum) {
 
-		return BIZ_GUBUN_RB.concat(ChabunUtil.numPad(type, memNum));
+		return BIZ_GUBUN_CB.concat(ChabunUtil.numPad(type, memNum));
 		//return BIZ_GUBUN_RB.concat(ChabunUtil.numPad(type, memNum));
 
 	}
@@ -93,7 +93,7 @@ public abstract class ChabunUtil {
 	// 신고 게시판  번호  
 	public static String getComplBoardChabun(String type, String memNum) {
 
-		return BIZ_GUBUN_CO.concat(ChabunUtil.numPad(type, memNum));
+		return BIZ_GUBUN_CB.concat(ChabunUtil.numPad(type, memNum));
 		//return BIZ_GUBUN_CO.concat(ChabunUtil.numPad(type, memNum));
 
 	}

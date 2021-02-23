@@ -21,7 +21,7 @@ public class FileUploadUtil
 		if(request != null)
 		{
 			//file upload location
-			String basepath = request.getServletContext().getRealPath("resources\\" + dir_name);
+			String basepath = request.getServletContext().getRealPath("WEB-INF\\files\\" + dir_name);
 			if(dir_name != null && new File(basepath).isDirectory())
 			{
 				logger.info("basepath >>> : " + basepath);
@@ -37,49 +37,40 @@ public class FileUploadUtil
 				{
 					String name = names.next();
 					MultipartFile mpf = map.get(name);
+					logger.info("name >>> : " + name);
+					int pos = mpf.getOriginalFilename().lastIndexOf(".");
+					String extension = mpf.getOriginalFilename().substring(pos + 1);
+					logger.info("extension >>> : " + extension);
 					
-					if(!mpf.isEmpty())
+					key = getUUIDKey(basepath); //create key					
+					File file = new File(basepath + "\\" + key + "." + extension);
+					FileOutputStream fos = null;
+					try 
 					{
-						logger.info("name >>> : " + name);
-						int pos = mpf.getOriginalFilename().lastIndexOf(".");
-						String extension = mpf.getOriginalFilename().substring(pos + 1);
-						logger.info("extension >>> : " + extension);
-						
-						key = getUUIDKey(basepath, extension); //create key					
-						File file = new File(basepath + "\\" + key);
-						FileOutputStream fos = null;
-						try 
+						fos = new FileOutputStream(file);
+						fos.write(mpf.getBytes());
+												
+						fos.close();
+						fos = null;
+					} 
+					catch (Exception e) 
+					{
+						e.printStackTrace();
+					}
+					finally 
+					{
+						if(fos != null)
 						{
-							fos = new FileOutputStream(file);
-							fos.write(mpf.getBytes());
-													
-							fos.close();
-							fos = null;
-						} 
-						catch (Exception e) 
-						{
-							e.printStackTrace();
-						}
-						finally 
-						{
-							if(fos != null)
+							try
 							{
-								try
-								{
-									fos.close();
-									fos = null;
-								}
-								catch (Exception ignore) 
-								{
-									
-								}
+								fos.close();
+								fos = null;
+							}
+							catch (Exception ignore) 
+							{
+								
 							}
 						}
-					}
-					else
-					{
-						//업로드된 파일이 없을 경우 업로드를 하지 않고 null값 반환
-						key = null;
 					}
 				}
 				return key; //return key
@@ -102,7 +93,7 @@ public class FileUploadUtil
 		if(request != null)
 		{
 			//file upload location
-			String basepath = request.getServletContext().getRealPath("resources\\" + dir_name);
+			String basepath = request.getServletContext().getRealPath("WEB-INF\\files\\" + dir_name);
 			if(dir_name != null && new File(basepath).isDirectory())
 			{
 				logger.info("basepath >>> : " + basepath);
@@ -116,56 +107,46 @@ public class FileUploadUtil
 				
 				while(names.hasNext())
 				{
+					System.out.println("asdfasdf");
 					String name = names.next();
 					MultipartFile mpf = map.get(name);
-					
-					if(!mpf.isEmpty()) //업로드된 파일이 존재할 경우
-					{
-						logger.info("name >>> : " + name);
-						int pos = mpf.getOriginalFilename().lastIndexOf(".");
-						String extension = mpf.getOriginalFilename().substring(pos + 1);
-						logger.info("extension >>> : " + extension);
+					logger.info("name >>> : " + name);
+					int pos = mpf.getOriginalFilename().lastIndexOf(".");
+					String extension = mpf.getOriginalFilename().substring(pos + 1);
+					logger.info("extension >>> : " + extension);
 
-						String key = getUUIDKey(basepath, extension); //create key
-						File file = new File(basepath + "\\" + key);
-						FileOutputStream fos = null;
-						try 
+					String key = getUUIDKey(basepath); //create key
+					File file = new File(basepath + "\\" + key + "." + extension);
+					FileOutputStream fos = null;
+					try 
+					{
+						fos = new FileOutputStream(file);
+						fos.write(mpf.getBytes());
+						
+						keyList.add(key);
+						
+						fos.close();
+						fos = null;
+					} 
+					catch (Exception e) 
+					{
+						e.printStackTrace();
+					}
+					finally 
+					{
+						if(fos != null)
 						{
-							fos = new FileOutputStream(file);
-							fos.write(mpf.getBytes());
-							
-							keyList.add(key);
-							logger.info("name :" + name + ", key :" + key);
-							
-							fos.close();
-							fos = null;
-						} 
-						catch (Exception e) 
-						{
-							e.printStackTrace();
-						}
-						finally 
-						{
-							if(fos != null)
+							try
 							{
-								try
-								{
-									fos.close();
-									fos = null;
-								}
-								catch (Exception ignore) 
-								{
-									
-								}
+								fos.close();
+								fos = null;
+							}
+							catch (Exception ignore) 
+							{
+								
 							}
 						}
 					}
-					else //end of if(!mpf.isEmpty())
-					{
-						//업로드된 파일이 없을 경우 업로드를 하지 않고 null값 반환
-						keyList.add(null);
-					}
-					
 				}
 				return keyList; //return key
 			}
@@ -182,12 +163,12 @@ public class FileUploadUtil
 		return null;
 	}
 	
-	private String getUUIDKey(String path, String extension)
+	private String getUUIDKey(String path)
 	{
 		String key;
 		do 
 		{
-			key = UUID.randomUUID().toString() + "." + extension;
+			key = UUID.randomUUID().toString();
 		} 
 		while (new File(path + "\\" + key).exists()); //이미 같은 이름의 파일이 존재하면 키 다시 생성
 		 
