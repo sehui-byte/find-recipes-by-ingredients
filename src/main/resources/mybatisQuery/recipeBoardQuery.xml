@@ -19,7 +19,7 @@
 		FROM
 			RECIPE_BOARD
 		WHERE
-			RB_DELETEYN = 'Y',
+			RB_DELETEYN = 'Y'
 			AND RBNO = #{rbno}
 		ORDER BY
 			RBNO
@@ -31,8 +31,8 @@
 			RBNO,
 			MNO,
 			RCP_NM,
-			RB_VIEWCNT,
-			RB_LIKECNT,
+			VIEWS,
+			HITS,
 			RCP_WAY2,
 			RCP_PAT2,
 			HASH_TAG,
@@ -79,7 +79,7 @@
 			MANUAL20,
 			MANUAL_IMG20,
 			RB_INSERTDATE,
-			RB_DELETEYN,
+			RB_DELETEYN
 		)
 		VALUES
 		(
@@ -143,8 +143,8 @@
 			RECIPE_BOARD
 		SET
 			RCP_NM = #{rcp_nm, jdbcType=VARCHAR},
-			RB_VIEWCNT = #{rb_viewcnt, jdbcType=NUMERIC},
-			RB_LIKECNT = #{rb_likecnt, jdbcType=NUMERIC},
+			VIEWS = #{rb_viewcnt, jdbcType=NUMERIC},
+			HITS = #{rb_likecnt, jdbcType=NUMERIC},
 			RCP_WAY2 = #{rcp_way2, jdbcType=VARCHAR},
 			RCP_PAT2 = #{rcp_pat2, jdbcType=VARCHAR},
 			HASH_TAG = #{hash_tag, jdbcType=VARCHAR},
@@ -202,7 +202,46 @@
 		SET
 			RB_DELETEYN = 'N'
 		WHERE
-			RB_DELETEYN = 'Y'
+			RBNO = #{rbno, jdbcType=VARCHAR}		
+			AND RB_DELETEYN = 'Y'
+	</update>
+	
+	<update id="recipeBoardViewsPP" parameterType="rbvo">
+		UPDATE
+			RECIPE_BOARD
+		SET
+			VIEWS = 
+			(
+				SELECT
+					VIEWS+1
+				FROM
+					RECIPE_BOARD
+				WHERE
+					RBNO = #{rbno, jdbcType=VARCHAR}
+					AND RB_DELETEYN = 'Y'
+			)
+		WHERE
+			RBNO = #{rbno, jdbcType=VARCHAR}
+			AND RB_DELETEYN = 'Y'
+	</update>
+	
+	<update id="recipeBoardHitsPP" parameterType="rbvo">
+		UPDATE
+			RECIPE_BOARD
+		SET
+			HITS = 
+			(
+				SELECT
+					HITS+1
+				FROM
+					RECIPE_BOARD
+				WHERE
+					RBNO = #{rbno, jdbcType=VARCHAR}
+					AND RB_DELETEYN = 'Y'
+			)
+		WHERE
+			RBNO = #{rbno, jdbcType=VARCHAR}
+			AND RB_DELETEYN = 'Y'
 	</update>
 	
 </mapper>
