@@ -31,7 +31,7 @@
 					data:{rbno:"<%=rbvo.getRbno()%>"},
 					type:"GET",
 					dataType:"json"
-				}).always((data)=>{console.log(data)});
+				}).always((data)=>{console.log(data); alert("추천하였습니다")});
 			});
 		});
 	</script>
