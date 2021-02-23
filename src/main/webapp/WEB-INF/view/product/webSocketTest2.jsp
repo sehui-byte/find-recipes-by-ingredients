@@ -63,7 +63,7 @@
 			var toast = '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
 			toast +='<div class="toast-header"><class="rounded me-2">';
 		    toast += '<strong class="me-auto">Bootstrap</strong>';
-		    toast += '<small><div class="sub"></div></small>';
+		    toast += '<small class="sub"></small>';
 		    toast += '<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
 		    toast += '</div><div class="toast-body">';
 		  	toast += data;
@@ -98,12 +98,12 @@
 				    time +=  minus+"시간 ";
 				   }
 				  
-				  if(now.getMinutes() > writeDay.getMinutes()){
+				 else if(now.getMinutes() > writeDay.getMinutes()){
 				     minus = now.getMinutes() - writeDay.getMinutes();
 				   time += minus+"분 ";
 				   }
 				  
-				  if(now.getSeconds() > writeDay.getSeconds()){
+				 else if(now.getSeconds() > writeDay.getSeconds()){
 				     minus = now.getSeconds() - writeDay.getSeconds();
 				     time += "방금";
 				   }
