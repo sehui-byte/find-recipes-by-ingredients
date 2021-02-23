@@ -11,8 +11,6 @@
 	rel="stylesheet"
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous">
-<!-- jquery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 <style>
 #recentbox {

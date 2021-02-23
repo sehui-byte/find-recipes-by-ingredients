@@ -15,9 +15,7 @@
 	rel="stylesheet"
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous">
-<!-- jquery -->
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
 <style>
 </style>
 </head>
@@ -35,7 +33,7 @@
 	</form>
 
 	<!-- 최근 검색어  -->
-	<%@ include file="/WEB-INF/view/product/recentKeyword.jsp"%>
+	<!--  include file="/WEB-INF/view/product/recentKeyword.jsp"-->
 
 	<!-- 검색결과 -->
 	<div id="result"></div>
@@ -73,8 +71,8 @@
 		function enterKey() {
 			if (window.event.keyCode == 13) {
 				find();
-				recentSearch();
-				clearInput();
+				//recentSearch();
+				//clearInput();
 			}
 		}
 
@@ -105,7 +103,6 @@
 							$("#result").empty();
 							console.log("success");
 
-
 							var html = "";
 							var item = data.items;
 							var count = 0;//식품 검색결과 총개수
@@ -124,13 +121,12 @@
 									var brand = item[i].brand;//브랜드명
 									var mallName = item[i].mallName;//쇼핑몰상호
 
-							//html += '<a href="' + link +'" class="btn btn-primary" onclick=clickpurchase('+recentPro+')>구매하기</a> ';
-							html += '<a href="' + link +'" class="btn btn-primary">구매하기</a> ';
-							// 구매하기 클릭시 최근 본 상품에 추가
-							$("#btn btn-primary").click(function(){
-								clickpurchase(recentPro);
-							});
-
+									//html += '<a href="' + link +'" class="btn btn-primary" onclick=clickpurchase('+recentPro+')>구매하기</a> ';
+									//html += '<a href="' + link +'" class="btn btn-primary">구매하기</a> ';
+									// 구매하기 클릭시 최근 본 상품에 추가
+									/* $("#btn btn-primary").click(function(){
+										clickpurchase(recentPro);
+									}) */;
 
 									//onclick시 보낼 매개변수 문자열 : str (,로 구분)
 									var str = productId
@@ -144,6 +140,7 @@
 									// 최근 본 상품 목록 필요한 매개변수 문자열
 									var recentPro = productId + ',' + image
 											+ ',' + link;
+									html += '<div class="col">';
 									html += '<div class="card" style="width: 18rem;">';
 									html += '<img src="' + image + '" alt="..." class="card-img-top"">';
 									html += '<div class="card-body">';
@@ -170,7 +167,7 @@
 											+ ' onclick="clickProductId(\''
 											+ str + '\')"';
 
-									html += '</div></div>';
+									html += '</div></div></div>';
 
 									//비워주기
 									$('#keyword').empty();
@@ -190,7 +187,7 @@
 							} else {
 								html += '</div>';
 							}
-
+			
 							//html코드 넣어주기
 							$("#result").append(html);
 
@@ -240,13 +237,14 @@
 					contentType : "application/json", //전달한 string데이터는 json형태로 이루어진 데이터임을 알려준다
 					data : JSON.stringify(param),//string으로 전달
 					success : function(data) {
-						alert("전송성공");
+						console.log("전송성공");
 					},
 					error : function() {
 						console.log("error!");
 					}
 				});
 				alert("관심 상품을 저장했습니다!");
+				location.reload();
 
 			} else {
 				alert("이미 등록된 상품입니다");
@@ -257,7 +255,8 @@
 
 
 	<!-- 최근 본 상품 -->
-	<%@ include file="/WEB-INF/view/product/recentProduct.jsp"%>
+	<!--  include file="/WEB-INF/view/product/recentProduct.jsp" -->
+
 
 	<!-- bootstrap -->
 	<script

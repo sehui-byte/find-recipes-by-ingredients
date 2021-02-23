@@ -71,21 +71,21 @@ public class ProductController {
 	//관심상품 정보 db저장하기
 	@ResponseBody
 	@RequestMapping(value="likeProductInsert.do", method=RequestMethod.POST)
-	public int likeProductInsert(@RequestBody ProductVO pvo) {	
+	public String likeProductInsert(@RequestBody ProductVO pvo) {	
 		//채번
 		String lpno = ChabunUtil.getLikeProductChabun("D", chabun.getLikeProductChabun().getLpno());
 		System.out.println("생성된채번 >> " + lpno);
 		pvo.setLpno(lpno);
 		service.likeProductInsert(pvo);
-		return service.likeProductInsert(pvo);
+		return "redircet:searchPage.do";
 	}
 
 	//관심상품 정보 삭제
 	@ResponseBody
 	@RequestMapping(value="likeProductDelete.do", method=RequestMethod.POST)
-	public int likeProductInsertDelete(@RequestBody ProductVO pvo) {
+	public String likeProductInsertDelete(@RequestBody ProductVO pvo) {
 		service.likeProductDelete(pvo);
-		return service.likeProductDelete(pvo);
+		return "redircet:searchPage.do";
 	}
 	
 	//(Test)소켓 테스트 페이지로 이동
