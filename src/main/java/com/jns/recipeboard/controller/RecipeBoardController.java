@@ -90,6 +90,8 @@ public class RecipeBoardController
 		//=========================== 파일 업로드 ===========================//
 		List<String> keyList = new FileUploadUtil().uploadFiles(request, "recipeboard");
 		
+		logger.info("keyList.size() >>> : " + keyList.size());
+		logger.info(keyList);
 		//======================== VO에 이미지 key 매핑 ======================//
 		rbvo.setMain_img(keyList.get(0));
 		rbvo.setManual_img01(keyList.get(1));
