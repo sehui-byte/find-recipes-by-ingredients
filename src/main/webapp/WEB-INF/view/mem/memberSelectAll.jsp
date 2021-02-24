@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="com.jns.common.FileLoadUtil"%>    
@@ -15,40 +16,38 @@
 		text-overflow: ellipsis; white-space: nowrap; max-width:140px; overflow:hidden;
 	}
 </style>
-<script src="http://code/jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-		//체크박스 체크 확인하기 
-		function checkOnly(chk){
-			// alert(">>> : " + chk);
-			var chkObj = document.getElementsByName("mno");		
-			console.log("chkObj >>> : " + chkObj);
-			for (var i=0; i < chkObj.length; i++){
-				if (chkObj[i] != chk){
-					chkObj[i].checked = false;
+
+
+
+			//체크박스 체크 확인하기 
+			function checkOnly(chk){
+			 alert("선택했습니다. >>> : " + chk);
+				var chkObj = document.getElementsByName("mno");		
+				console.log("chkObj >>> : " + chkObj);
+				for (var i=0; i < chkObj.length; i++){
+						if (chkObj[i] != chk){
+							chkObj[i].checked = false;
+						}
 				}
 			}
-		}	
 		
+		$(document).ready(function(){
 			
-			$(document).on("click", "#I", function(){
-				location.href="memberInsert.do";
+				$("#I").click(function(){	
+					alert("등록 폼 이동 >>> :");
+					location.href='memberForm.do';			
+				});
+				
+				
+				$(document).on("click", "#U", function(){
+					alert("U >>> :");
+					$("#memberList").attr({
+						"method":"GET",
+						"action":"memberSelect.do"}).submit();			
+				}); 
 			});
-			
-			$(document).on("click", "#U", function(){
-				alert("U >>>");
-				$("#memberList").attr({
-					"method":"GET",
-					"action":"memberSelect.do"}).submit();	
-			});
-			
-			$(document).on("click", "#D", function(){
-				alert("D >>>");
-				$("#memberList").attr({
-					"method":"GET",
-					"action":"memberSelect.do"}).submit();
-			});
-		});
 	
 	
 </script>
@@ -121,10 +120,10 @@ SELECT ALL
 	} // end of if
 %>
 <tr>
-	<td colspan="16" align="right">			
-		<input type="button" value="회원 목록" id="SALL">
+	<td colspan="16" align="right">	
+		<input type="button" value="회원 등록(관리자)" id="I">		
 		<input type="button" value="회원정보 수정" id="U">
-		<input type="button" value="회원 삭제" id="D">									
+											
 	</td>
 </tr>
 </tbody>

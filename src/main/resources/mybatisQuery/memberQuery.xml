@@ -173,20 +173,20 @@
 	<!-- 회원 정보 수정  -->
 	<update id="memberUpdate" parameterType="mvo">
 	UPDATE	MEMBER
-		SET MNICK = #{mnick,jdbcType=VARCHAR}
-			MADDR = #{maddr,jdbcType=VARCHAR}
-		   ,MPHOTO = #{mphoto,jdbcType=VARCHAR}
+		SET MNICK = #{mnick, jdbcType=VARCHAR}
+		   ,MADDR = #{maddr, jdbcType=VARCHAR}
+		   ,MPHOTO = #{mphoto, jdbcType=VARCHAR}
 	WHERE MDELETEYN = 'Y'
-	AND   MNO = #{mno,jdbcType=VARCHAR}
+	AND   MNO = #{mno, jdbcType=VARCHAR}
 	</update>
 	
 	<!-- 회원 삭제 -->
-	<update id="memberDelete" parameterType="mvo">
-	UPDATE MEMBER
-		SET MUPDATEDATE = SYSDATE
-			MDELETEYN = 'N'
-	WHERE	MDELETEYN = 'Y'
-	AMD 	MNO = {mno,jdbcType=VARCHAR}
+	<update id="memberDelete" parameterType="nvo">
+		UPDATE	 MEMBER
+		SET		 MDELETEYN = 'N'
+				,MUPDATEDATE = SYSDATE
+		WHERE	 MNO = #{mno, jdbcType=VARCHAR}
+		AND		 MDELETEYN = 'Y'
 	</update>
 	<!-- 아이디 중복 확인   -->
 	<select id="checkID" parameterType ="mvo" resultType="mvo">

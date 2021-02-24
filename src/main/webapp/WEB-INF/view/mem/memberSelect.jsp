@@ -6,40 +6,39 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JNS : 전지적 냉장고 시점  회원 전체 조회</title>
-<script src="http://code/jquery.com/jquery-3.5.1.js"></script>
+<title>JNS : 전지적 냉장고 시점  회원  조회</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 	
 
 	
 $(document).ready(function(){
 	
-	$("#I").click(function(){			
-		location.href='memberForm.do';			
-	});
-	$("#SALL").click(function(){			
-		$('#memFormAll').attr('action', '/memSelectAll.do');
-		$('#memFormAll').attr('method', 'GET');
-		$('#memFormAll').submit();
-	});
-	
-	$("#U").click(function(){
-		console.log("U >>> : ");			
-		$('#chkInMnum').val();					
-		$('#memFormAll').attr('action', '/memSelect.do');
-		$('#memFormAll').attr('method', 'GET');
-		$('#memFormAll').submit();
-	});	
-	
-	$("#D").click(function(){
-		console.log("D >>> : ");			
-		$('#chkInMnum').val();
-		$('#memFormAll').attr('action', '/memSelect.do');
-		$('#memFormAll').attr('method', 'GET');
-		$('#memFormAll').submit();
-	});	
 
-});
+			// U
+			$(document).on("click", "#U", function(){
+				alert("U >>> :");
+				$("#memUpdateForm").attr({
+					"method":"GET",
+					"action":"memberUpdate.do"
+				}).submit();
+			});
+			
+			// D
+			$(document).on("click", "#D", function(){
+				alert("D >>> : ");
+				$("#memUpdateForm").attr({
+					"method":"GET",
+					"action":"memberDelete.do"
+				}).submit();
+			});
+			
+			// ALL
+			$(document).on("click", "#SALL", function(){
+				location.href="memberSelectAll.do";
+			});
+		});
+
 </script>
 </head>
 <body>
