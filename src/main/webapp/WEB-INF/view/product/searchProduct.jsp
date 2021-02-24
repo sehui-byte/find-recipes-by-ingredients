@@ -148,8 +148,8 @@
 											+ ',' + hprice;
 
 									// 최근 본 상품 목록 필요한 매개변수 문자열
-									var recentPro = productId + ',' + image
-											+ ',' + link;
+									var recentPro = productId + '^^' + image
+											+ '^^' + link;
 									html += '<div class="col">';
 									html += '<div class="card" style="width: 18rem;">';
 									html += '<img src="' + image + '" alt="..." class="card-img-top"">';
