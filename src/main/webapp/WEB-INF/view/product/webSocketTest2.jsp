@@ -38,7 +38,6 @@
 		// 전역변수 설정
 		var socket = null;
 		$(document).ready(function() {
-
 		});
 
 		// 웹소켓 연결
@@ -48,11 +47,11 @@
 		//웹소켓 서버에서 메세지를 보내면 자동으로 실행된다
 		socket.onmessage = onMessage;
 
-		function sendMessage() {
+		/* function sendMessage() {
 			//웹소켓으로 메세지 전달
 			sock.send($("#message").val());
 			console.log("메세지 전달");
-		}
+		} */
 
 		//evt파라미터는 웹소켓이 보내준 데이터 의미
 		function onMessage(evt) {
@@ -116,7 +115,6 @@
 
 				  setInterval(timeBefore,1000);
 
-			
 		}
 		
 		

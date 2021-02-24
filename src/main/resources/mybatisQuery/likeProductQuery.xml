@@ -34,7 +34,7 @@ INSERT INTO LIKEPRODUCT(
 </insert>
 
 <delete id="likeProductDelete" parameterType="pvo">
-DELETE FROM LIKEPRODUCT WHERE PRODUCTID = #{productId} AND MNO = #{mno}
+DELETE FROM LIKEPRODUCT WHERE PRODUCTID = #{productId,jdbcType=VARCHAR} AND MNO = #{mno,jdbcType=VARCHAR}
 </delete>
 
 <select id="likpProductIdSelectAll" resultType="pvo">

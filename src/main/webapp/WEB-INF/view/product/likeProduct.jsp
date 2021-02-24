@@ -75,12 +75,12 @@
 
 				//체크된 row의 모든 값을 배열에 담는다
 				rowData.push(tr.text());
-				var productId = td.eq(1).text();
-				var title = td.eq(2).text();
-				var image = td.eq(3).text();
-				var lprice = td.eq(4).text();
-				var hprice = td.eq(5).text();
-				var link = td.eq(6).text();
+				var productId = td.eq(2).text();
+				var title = td.eq(3).text();
+				var image = td.eq(4).text();
+				var lprice = td.eq(5).text();
+				var hprice = td.eq(6).text();
+				var link = td.eq(7).text();
 
 
 				var param = {
@@ -107,7 +107,7 @@
 			});//for
 
 			alert("관심상품이 삭제되었습니다!");
-			window.location.reload();
+			window.location.reload();//화면새로고침
 
 		});
 

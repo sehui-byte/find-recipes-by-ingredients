@@ -131,6 +131,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public int likeProductInsert(ProductVO pvo) {
 		pvo.setMno(getLoginMno(pvo));
+		
 		int nCnt = pdao.likeProductInsert(pvo);
 		logger.info("회원번호>>" + pvo.getMno());
 		logger.info("최저가>>" + pvo.getLprice());
@@ -145,6 +146,8 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public int likeProductDelete(ProductVO pvo) {
 		pvo.setMno(getLoginMno(pvo));
+		logger.info("productid >> " + pvo.getProductId());
+		logger.info("mno >> " + pvo.getMno());
 		int nCnt = pdao.likeProductDelete(pvo);
 		logger.info("삭제된 컬럼 수 >> " + nCnt);
 		return nCnt;
@@ -157,6 +160,7 @@ public class ProductServiceImpl implements ProductService{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Object principal = auth.getPrincipal();
 		String mno = ((MemberVO)principal).getMno();
+		//System.out.println("mno >>" + mno);
 		
 		return mno;
 	}

@@ -9,7 +9,6 @@
 <script type="text/javascript">
 
 	$(function(){
-		
 		/* rcontent 길이 제한 */
 		$("#rcontent").keyup(function(){
 			cut_200(this);
@@ -331,7 +330,7 @@
 					<input type="text" name="rwriter" id="rwriter" value="<%=mnick%>">
 					<input type="hidden" name="bno" id="bno" value="<%=bno%>">
 					<input type="hidden" name="mno" id="mno" value="<%=mno%>">
-					<input type="button" id="replyInsert" value="저장하기">
+					<input type="button" id="replyInsert" value="저장하기" onclick="sendMessage()">
 				</td>
 			</tr>
 			<tr>
@@ -345,5 +344,20 @@
 		</form>
 	</div>
 </div>
+<script>
+function sendMessage() {
+	//웹소켓으로 메세지 전달(프로토콜 : "댓글 작성자 id, 글작성 id, reply")
+	var mid = '<%=mid%>';//댓글 작성자 아이디
+	var msg = ''; 
+	msg += mid;//댓글 작성자 id
+	msg += ',';
+	///////////test값 -> 글작성자 id로 수정해야함////////
+	msg += 'user0001'; //글 작성자 id 넣어야 된다 (현재 글 작성자 없어서 test값 넣어둠)
+	msg += ',';
+	msg += 'reply';
+	sock.send(msg);//웹소켓 서버로 프로토콜 보낸다
+	
+}
+</script>
 </body>
 </html>
