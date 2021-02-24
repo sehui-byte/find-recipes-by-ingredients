@@ -3,6 +3,8 @@
 <%@ page import="com.jns.board.vo.BoardVO" %>
 <%@ page import="java.util.List" %>
 <%@page import="com.jns.common.FileLoadUtil"%>
+<%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
+<%@ include file="/WEB-INF/include/jsp/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>

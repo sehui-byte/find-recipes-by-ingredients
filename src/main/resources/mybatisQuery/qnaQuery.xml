@@ -32,6 +32,31 @@
 			</if>
 	</select>
 	
+	<select id="QnASelectPaging" parameterType="bvo" resultType="int">
+	
+		SELECT 
+			COUNT(1)
+			FROM (SELECT
+							 A.BNO		BNO
+							,A.MNO		MNO
+							,A.BTYPE	BTYPE
+							,A.BTITLE	BTITLE
+							,A.BCONTENT	BCONTENT
+							,A.MNICK	MNICK
+							,A.BFILE	BFILE
+							,TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') BINSERTDATE
+							,TO_CHAR(A.BUPDATEDATE, 'YYYY-MM-DD') BUPDATEDATE
+							,A.BVIEWS		BVIEWS	
+							,A.BDELETEYN	BDELETEYN
+							,A.BHITS		BHITS
+					FROM BOARD A
+					WHERE A.BNO = BNO
+					AND   A.BDELETEYN = 'Y'
+					ORDER BY A.BNO DESC)	
+			WHERE 	BDELETEYN = 'Y'			
+			
+	</select>
+	
 	<insert id="QnAInsert" parameterType="bvo">
 		INSERT INTO BOARD(
 						  BNO
@@ -101,5 +126,45 @@
 		WHERE	 BNO = #{bno, jdbcType=VARCHAR}
 		AND		 BDELETEYN = 'Y'
 	</delete>
+	
+	<update id="QnAVIEWS" parameterType="bvo">
+		UPDATE
+			BOARD 
+				SET
+					VIEWS =
+					(
+						SELECT
+							BVIEWS+1
+						FROM
+							BOARD
+						WHERE
+							BNO = #{bno, jdbcType=VARCHAR}
+							AND BDELETEYN ='Y'
+					)
+			WHERE
+				BNO = #{bno, jdbcType=VARCHAR}
+				AND BDELETEYN = 'Y'
+				AND BTYPE = 'Q'
+	</update>
+	
+	<update id="QnAHITS" parameterType="bvo">
+		UPDATE
+			BOARD 
+				SET
+					HITS =
+					(
+						SELECT
+							BHITS+1
+						FROM
+							BOARD
+						WHERE
+							BNO = #{bno, jdbcType=VARCHAR}
+							AND BDELETEYN ='Y'
+					)
+			WHERE
+				BNO = #{bno, jdbcType=VARCHAR}
+				AND BDELETEYN = 'Y'
+				AND BTYPE = 'Q'
+	</update>
 	
 </mapper>

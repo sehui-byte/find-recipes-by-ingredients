@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/include/jsp/jspinclude.jsp" %>
+    pageEncoding="UTF-8"%>>
+<%@ include file="/WEB-INF/include/jsp/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +63,9 @@
 	</tr>
 	<tr>
 		<td align="center">글 작성자</td>
-		<td><input type="text" name="mnick" id="mnick" size="20"></td>
+		<td>
+		<input type="text" name="mnick" id="mnick" value="<%=mnick%>">
+		</td>
 	</tr>
 	<tr>
 		<td align="center">첨부파일</td>

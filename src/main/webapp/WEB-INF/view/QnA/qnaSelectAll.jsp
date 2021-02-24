@@ -24,7 +24,7 @@
 		});
 	
 
-		$(document).on("click", "#U", function(){
+		$(document).on("click", "#S", function(){
 			alert("U >>> :");
 			$("#QnAList").attr({
 				"method":"GET",
@@ -118,7 +118,7 @@ for(int i=0; i<nCnt; i++){
 <tr>
 	<td colspan="10" align="right">
 		<input type="button" value="글쓰기" id="I">
-		<input type="button" value="글수정" id="U">
+		<input type="button" value="글보기" id="S">
 		<input type="button" value="전체목록" id="A">
 	</td>
 </tr>
