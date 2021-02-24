@@ -11,12 +11,17 @@
 			$(document).ready(()=>
 			{
 				
+				function write()
+				{
+					$("")
+				}
 			});
 		</script>
 	</head>
 	
 	<body>
 		<form id="rbwriteForm" name="rbwriteForm">
+			<input type="button" value="작성">
 			<input type="hidden" name="mno" value="<%=mno%>">
 			<table border="1" style="margin: auto;">
 				<tr>
