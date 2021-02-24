@@ -80,5 +80,15 @@
 	</select>
 	
 	<!-- 구독 확인 -->
-	<!-- 로그인한 mno로 해당 셰프 구독 확인...? -->
+	<select id="subCheck" parameterType="svo" resultType="svo">
+		SELECT	SNO
+		FROM	SUB_INFO
+		WHERE	MNO = #{mno, jdbcType=VARCHAR}
+		AND		INO = (SELECT 	B.INO
+					   FROM 	RECIPE_BOARD A, CHEF_INFO B, MEMBER C
+					   WHERE 	C.MNO = B.MNO
+					   AND 		A.MNO = B.MNO
+					   AND 		A.RBNO = #{rbno, jdbcType=VARCHAR})
+		AND 	SDELETEYN = 'Y'
+	</select>
 </mapper>

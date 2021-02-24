@@ -25,8 +25,9 @@
 	<select id="chefBoardSelect" parameterType="cbvo" resultType="cbvo">
 		SELECT
 				*
-		FROM	RECIPE_BOARD A
+		FROM	RECIPE_BOARD A, MEMBER B
 		WHERE	RB_DELETEYN = 'Y'
+		AND 	A.MNO = B.MNO
 		AND 	RBNO = #{rbno, jdbcType=VARCHAR}
 	</select>
 	

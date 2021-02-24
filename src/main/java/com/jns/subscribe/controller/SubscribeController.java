@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -123,26 +124,25 @@ public class SubscribeController {
 	
 	
 	/********************************************************************************************
-	* 구독 랭킹 확인하기
+	* 구독 랭킹 확인하기 => chefBoardController
+	********************************************************************************************/
+	
+	
+	/********************************************************************************************
+	* 구독 여부 확인하기
 	********************************************************************************************/
 	@ResponseBody
-	@RequestMapping(value="subscribe/subRank", method=RequestMethod.POST)
-	public String subRank(SubscribeVO svo){
-		logger.info("[SubscribeC] >> subRank 호출 성공");
+	@RequestMapping(value="subscribe/subCheck", method=RequestMethod.GET)
+	public String subCheck(SubscribeVO svo) {
+		logger.info("[SubscribeC] >> subCheck 호출 성공");
+		logger.info("[SubscribeC] >> subCheck >> ino >>> : " + svo.getIno());
+		logger.info("[SubscribeC] >> subCheck >> mno >>> : " + svo.getMno());
 		
-
-		List<SubscribeVO> subRank = subscribeService.subRank(svo);
+		List<SubscribeVO> subCheck = subscribeService.subCheck(svo);
+		logger.info("[SubscribeC] >> subCheck >> subCheck.size() >>> : " + subCheck.size());
 		
-		String ss = "";
-		String listStr = "";
-		for(int i=0; i < subRank.size(); i++) {
-			SubscribeVO _svo = subRank.get(i);
-			String s0 = Integer.toString(_svo.getSubCount());
-			String s1 = _svo.getChefnick();
-			ss = s0 + "," + s1;
-			listStr += ss + "&";
-		}
-		//System.out.println("ReplyC >> listStr >>> : " + listStr);
-		return listStr;
+		if (subCheck.size() > 0) {
+			return "ALREADY";
+		}else {	return "NOT_YET"; }
 	}
 }

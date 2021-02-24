@@ -55,7 +55,7 @@ public class SubscribeServiceImpl implements SubscribeService {
 	@Override
 	public List<SubscribeVO> subCheck(SubscribeVO svo) {
 		// TODO Auto-generated method stub
-		return null;
+		return subscribeDAO.subCheck(svo);
 	}
 
 }

@@ -45,7 +45,7 @@ public class SubscribeDAOImpl implements SubscribeDAO {
 	@Override
 	public List<SubscribeVO> subCheck(SubscribeVO svo) {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("subCheck");
 	}
 
 }
