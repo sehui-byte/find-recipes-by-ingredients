@@ -69,8 +69,8 @@
 				 FROM 		 SUB_INFO A, (SELECT 
 												 B.INO AS INO
 												,C.MNICK AS MNICK
-						      			  FROM CHEF_INFO B, MEMBER C
-						      			  WHERE B.MNO = C.MNO) D
+						      			  FROM 	 CHEF_INFO B, MEMBER C
+						      			  WHERE	 B.MNO = C.MNO) D
 			 	 WHERE		 A.INO = D.INO
 			 	 AND		 A.SDELETEYN = 'Y'
 			 	 GROUP BY 	 D.MNICK
@@ -79,5 +79,6 @@
 		WHERE <![CDATA[ROWNUM <= 3]]>
 	</select>
 	
-	
+	<!-- 구독 확인 -->
+	<!-- 로그인한 mno로 해당 셰프 구독 확인...? -->
 </mapper>
