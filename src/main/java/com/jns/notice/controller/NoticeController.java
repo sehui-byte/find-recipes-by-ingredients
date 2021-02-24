@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jns.board.vo.BoardVO;
@@ -175,6 +176,40 @@ public class NoticeController {
 		return "notice/noticeSelectAll";
 				
 	}	
+	
+	@ResponseBody
+	@RequestMapping(value="noticeViews", method=RequestMethod.GET)
+	public String NoticeVIEWS(BoardVO nvo) {
+		logger.info("noticeViews >>> ");
+		logger.info("noticeViews nvo.getBno() >>> : " + nvo.getBno());
+		
+		int result = noticeService.NoticeVIEWS(nvo);
+		logger.info("noticeViews result >>> : " + result);
+		
+		if (1 == result) {
+			return "GOOD";
+		}
+		else{
+			return "BAD"; 
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="noticeHits", method=RequestMethod.GET)
+	public String NoticeHITS(BoardVO nvo) {
+		logger.info("noticeHits >>> ");
+		logger.info("noticeHits bvo.getBno() >>> : " + nvo.getBno());
+		
+		int result = noticeService.NoticeHITS(nvo);
+		logger.info("noticeHits result >>> : " + result);
+		
+		if (1 == result) {
+			return "GOOD"; 
+		}
+		else{
+			return "BAD";
+		}
+	}
 	
 	
 	@RequestMapping(value="noticeDelete", method=RequestMethod.GET)

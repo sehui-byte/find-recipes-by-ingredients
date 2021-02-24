@@ -56,7 +56,9 @@
 	<tr>
 	<tr>
 		<td align="center">글 작성자</td>
-		<td><input type="text" name="mnick" id="mnick" size="20"></td>
+		<td>
+		<input type="text" name="mnick" id="mnick" size="20">
+		</td>
 	</tr>
 	<tr>
 		<td align="center">첨부파일</td>

@@ -59,4 +59,16 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDAO.NoticeDelete(nvo);
 	}
 
+	@Override
+	public int NoticeVIEWS(BoardVO nvo) {
+		// TODO Auto-generated method stub
+		return noticeDAO.NoticeVIEWS(nvo);
+	}
+
+	@Override
+	public int NoticeHITS(BoardVO nvo) {
+		// TODO Auto-generated method stub
+		return noticeDAO.NoticeHITS(nvo);
+	}
+
 }
