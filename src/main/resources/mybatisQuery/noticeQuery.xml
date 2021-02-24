@@ -102,4 +102,44 @@
 		AND		 BDELETEYN = 'Y'
 	</update>
 	
+	<update id="NoticeVIEWS" parameterType="nvo">
+		UPDATE
+			BOARD 
+				SET
+					BVIEWS =
+					(
+						SELECT
+							BVIEWS+1
+						FROM
+							BOARD
+						WHERE
+							BNO = #{bno, jdbcType=VARCHAR}
+							AND BDELETEYN ='Y'
+					)
+			WHERE
+				BNO = #{bno, jdbcType=VARCHAR}
+				AND BDELETEYN = 'Y'
+				
+	</update>
+	
+	<update id="NoticeHITS" parameterType="nvo">
+		UPDATE
+			BOARD 
+				SET
+					BHITS =
+					(
+						SELECT
+							BHITS+1
+						FROM
+							BOARD
+						WHERE
+							BNO = #{bno, jdbcType=VARCHAR}
+							AND BDELETEYN ='Y'
+					)
+			WHERE
+				BNO = #{bno, jdbcType=VARCHAR}
+				AND BDELETEYN = 'Y'
+				
+	</update>
+	
 </mapper>

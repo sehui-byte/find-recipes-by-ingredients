@@ -13,6 +13,6 @@ public interface QnADAO {
 	public int QnAUpdate(BoardVO bvo);
 	public int QnADelete(BoardVO bvo);
 	
-	public boolean QnAVIEWS(BoardVO bvo);
-	public boolean QnAHITS(BoardVO bvo);
+	public int QnAVIEWS(BoardVO bvo);
+	public int QnAHITS(BoardVO bvo);
 }

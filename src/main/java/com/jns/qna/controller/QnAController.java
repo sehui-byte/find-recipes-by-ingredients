@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jns.board.vo.BoardVO;
 import com.jns.chabun.service.ChabunService;
+import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.common.ChabunUtil;
 import com.jns.common.FileUploadUtil;
 import com.jns.common.Paging;
@@ -200,28 +201,38 @@ public class QnAController {
 				
 	}	
 	
-	@RequestMapping(value="qnaViews", method=RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Boolean> QnAVIEWS(BoardVO bvo) {
+	@RequestMapping(value="qnaViews", method=RequestMethod.GET)
+	public String QnAVIEWS(BoardVO bvo) {
+		logger.info("qnaViews >>> ");
+		logger.info("qnaViews bvo.getBno() >>> : " + bvo.getBno());
 		
-		logger.info("QnAVIEWS >>> : ");
+		int result = qnaService.QnAVIEWS(bvo);
+		logger.info("qnaViews result >>> : " + result);
 		
-		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
-		map.put("ok", qnaService.QnAVIEWS(bvo));
-		
-		return map;
+		if (1 == result) {
+			return "GOOD";
+		}
+		else{
+			return "BAD";
+		}
 	}
 	
-	@RequestMapping(value="qnaHits", method=RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Boolean> QnAHITS(BoardVO bvo) {
+	@RequestMapping(value="qnaHits", method=RequestMethod.GET)
+	public String QnAHITS(BoardVO bvo) {
+		logger.info("qnaHits >>> ");
+		logger.info("qnaHits bvo.getBno() >>> : " + bvo.getBno());
 		
-		logger.info("QnAHITS >>> : ");
+		int result = qnaService.QnAHITS(bvo);
+		logger.info("qnaHits result >>> : " + result);
 		
-		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
-		map.put("ok", qnaService.QnAHITS(bvo));
-		
-		return map;
+		if (1 == result) {
+			return "GOOD";
+		}
+		else{
+			return "BAD";
+		}
 	}
 	
 	@RequestMapping(value="qnaDelete", method=RequestMethod.GET)

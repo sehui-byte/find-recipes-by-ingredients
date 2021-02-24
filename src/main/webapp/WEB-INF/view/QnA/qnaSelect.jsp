@@ -10,10 +10,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<%
-		BoardVO _bvo = new BoardVO();
-		_bvo = (BoardVO)request.getAttribute("bvo");
-	%>
 <title>QnA Select</title>
 <style type="text/css">
 	div {
@@ -27,26 +23,49 @@
 	$(document).ready(function(){
 	
 		
-		$(document).ready(()=>
-		{
-			$.ajax
-			({
-				url:"qnaViews.do",
-				type:"GET",
-				dataType:"json"
-			}).always((data)=>{console.log(data)});
-			
-			$("#hitsBtn").click(()=>
-			{
-				$.ajax
-				({
-					url:"qnaHits.do",
-					type:"GET",
-					dataType:"json"
-				}).always((data)=>{console.log(data); alert("추천하였습니다")});
-			});
+		// 조회수 증가
+		var viewsUrl = "qnaViews.do";
+		var viewsType = "GET";
+		var viewsData = {"bno": $("#bno").val()};
+		$.ajax({
+			url: viewsUrl,
+			type: viewsType,
+			data: viewsData,
+			success: viewsSuccess,
+			error: viewsError
 		});
+
+		function viewsSuccess(resultData){
+			if(resultData=="GOOD"){
+				console.log("조회 수 +1 증가");
+			}
+		}
+		function viewsError(){
+			alert("시스템 오류입니다. 관리자에게 문의하세요.");
+		}
 		
+		// 좋아요
+		$(document).on("click", "#hitsbtn", function(){
+			var hitsUrl = "qnaHits.do";
+			var hitsType = "GET";
+			var hitsData = {"bno": $("#bno").val()};
+			$.ajax({
+				url: hitsUrl,
+				type: hitsType,
+				data: hitsData,
+				success: hitsSuccess,
+				error: hitsError
+			});
+
+			function hitsSuccess(resultData){
+				if(resultData=="GOOD"){
+					console.log("좋아요 수 +1 증가");
+				}
+			}
+			function hitsError(){
+				alert("시스템 오류입니다. 관리자에게 문의하세요.");
+			}
+		});
 		
 		
 		// U
