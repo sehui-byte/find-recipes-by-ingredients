@@ -9,15 +9,11 @@
 <body>
 <h3>admin 페이지</h3>
 <ul>
-	<li>
-		<a href="/admin/memberSelectAll.do">회원 조회/수정/삭제</a>
-	</li>
-	<li>
-		게시판 조회/수정/삭제 - 레시피 & QnA
-	</li>
-	<li>
-		댓글 조회/수정/삭제
-	</li>
+	<li><a href="../noticeSelectAll.do">공지사항 </a>
+	<li><a href="../memberSelectAll.do">회원 조회/수정/삭제</a>	</li>
+	<li><a href="../qnaSelectAll.do">QnA 게시판 조회/수정/삭제  </a></li>
+	<li><a href="../recipeboard.do">레시피 게시판 조회/수정/삭제 </a></li>
+	<li><a href="../reply/reply.do">댓글 조회/수정/삭제</a></li>
 	<li>
 		실적	
 	</li>

@@ -101,14 +101,17 @@ public class MemberController {
 		return "mem/memberForm";
 	}
 
+
 	// 회원 조회 : 선택 조회
 	@RequestMapping(value = "memberSelect", method = RequestMethod.GET)
 	public String memberSelect(MemberVO mvo, Model model) {
 
 		logger.info("MemberController MemberSelect 함수 시작 >>> :: ");
 		logger.info("mvo >>> :: " + mvo);
+
 		logger.info("MemberController MemberSelect mvo.getMno() >>> : " + mvo.getMno());
 		List<MemberVO> listS = memberService.memberSelect(mvo);
+		
 		int nCnt = listS.size();
 		logger.info("MemberController MemberSelect nCnt >>> : " + nCnt);
 
@@ -120,8 +123,9 @@ public class MemberController {
 		return "mem/memberForm";
 	}
 
+
 	// 회원 수정
-	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
 	public String memberUpdate(MemberVO mvo, Model model) {
 
 		logger.info("MemberController MemberUpdate 함수 시작 >>> :: ");
@@ -141,7 +145,8 @@ public class MemberController {
 	}
 
 	// 회원 삭제
-	@RequestMapping(value = "memberDelete", method = RequestMethod.POST)
+
+	@RequestMapping(value = "memberDelete", method = RequestMethod.GET)
 	public String memDelete(MemberVO mvo, Model model) {
 		logger.info("MemberController MemberDelete 함수 진입 >>> : ");
 			
@@ -155,6 +160,7 @@ public class MemberController {
 		}
 		return "/main";
 	}
+	
 
 	// 아이디 중복 체크
 	@RequestMapping(value = "mem/checkID", method = RequestMethod.GET)
