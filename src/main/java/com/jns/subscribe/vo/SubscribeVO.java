@@ -12,6 +12,7 @@ public class SubscribeVO {
 	// 구독 관련 JOIN *************************************************
 	private String mid;
 	private String chefnick;
+	private String rbno;
 	
 	public String getMid() {
 		return mid;
@@ -29,8 +30,17 @@ public class SubscribeVO {
 		this.chefnick = chefnick;
 	}
 	
-	// *************************************************************
+	public String getRbno() {
+		return rbno;
+	}
+
+	public void setRbno(String rbno) {
+		this.rbno = rbno;
+	}
+
 	
+	// *************************************************************
+
 	// 구독자 수 확인하기 ******************************************
 	private int subCount;
 	

@@ -44,6 +44,36 @@
 			alert("시스템 오류입니다. 관리자에게 문의하세요.");
 		}
 		
+		// 구독 여부 체크
+		var subCheckUrl = "/kosmoJns/subscribe/subCheck.do";
+		var subCheckType = "GET";
+		var subCheckData = {
+				"rbno": "<%=request.getParameter("rbno")%>",
+				"mno": sessionMno
+		};
+		$.ajax({
+			url: subCheckUrl,
+			type: subCheckType,
+			data: subCheckData,
+			success: subCheckSuccess,
+			error: subCheckError
+		});
+
+		function subCheckSuccess(resultData){
+			if(resultData=="ALREADY"){
+				console.log("이미 구독중");
+				$('#Subs').attr('sytle', 'background-color:red;');
+				$('#Subs').attr('disabled', true);
+				
+			}else{
+				console.log("아직 구독하지 않음");
+			}
+		}
+		function subCheckError(){
+			alert("[구독] 시스템 오류입니다. 관리자에게 문의하세요.");
+		}		
+		
+		
 		// 추천
 		$(document).on("click", "#hits", function(){
 			var hitsUrl = "/kosmoJns/chefboard/chefBoardHitsPP.do";
@@ -125,6 +155,7 @@
 		});
 		
 	});
+
 </script>
 </head>
 <body>
