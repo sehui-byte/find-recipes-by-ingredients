@@ -34,12 +34,12 @@
 		//삭제
 		$(document).on("click", "#D", function(){
 			$("#f_updateForm").attr({"method":"POST"
-									   ,"action":"boarddelete.kjm"}).submit();
+									   ,"action":"boarddelete.do"}).submit();
 		});
 		
 		// 취소
 		$(document).on("click", "#C", function(){
-			location.href="/kosmoJns/chefboard/boardselectall.do";
+			location.href="/kosmoJns/chefboard/boardselectallpage.do";
 		});
 		
 	});

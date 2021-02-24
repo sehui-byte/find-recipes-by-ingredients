@@ -64,6 +64,12 @@ public class ChefBoardServiceImpl implements ChefBoardService {
 		// TODO Auto-generated method stub
 		return chefBoardDAO.chefBoardHitsPP(cbvo);
 	}
+
+	@Override
+	public List<ChefBoardVO> chefBoardSelectAllPage(ChefBoardVO cbvo) {
+		// TODO Auto-generated method stub
+		return chefBoardDAO.chefBoardSelectAllPage(cbvo);
+	}
 	
 	
 

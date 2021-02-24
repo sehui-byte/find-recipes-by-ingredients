@@ -25,10 +25,11 @@
 	<select id="chefBoardSelect" parameterType="cbvo" resultType="cbvo">
 		SELECT
 				*
-		FROM	RECIPE_BOARD A, MEMBER B
+		FROM	RECIPE_BOARD A, MEMBER B, CHEF_INFO C
 		WHERE	RB_DELETEYN = 'Y'
 		AND 	A.MNO = B.MNO
-		AND 	RBNO = #{rbno, jdbcType=VARCHAR}
+		AND 	B.MNO = C.MNO
+		AND 	A.RBNO = #{rbno, jdbcType=VARCHAR}
 	</select>
 	
 	<insert id="boardInsert">
@@ -252,7 +253,84 @@
 	</update>
 	
 	
-	<!-- 세프의 글 리스트 -->
-	
+	<select id="chefBoardSelectAllPage" resultType="cbvo">
+		
+		SELECT * FROM
+			(SELECT
+					A.RBNO,
+					A.MNO,
+					B.MNICK,
+					A.RCP_NM,
+					A.VIEWS,
+					A.HITS,
+					A.RCP_WAY2,
+					A.RCP_PAT2,
+					A.HASH_TAG,
+					A.MAIN_IMG,
+					A.RCP_PARTS_DTLS,
+					A.MANUAL01,
+					A.MANUAL_IMG01,
+					A.MANUAL02,
+					A.MANUAL_IMG02,
+					A.MANUAL03,
+					A.MANUAL_IMG03,
+					A.MANUAL04,
+					A.MANUAL_IMG04,
+					A.MANUAL05,
+					A.MANUAL_IMG05,
+					A.MANUAL06,
+					A.MANUAL_IMG06,
+					A.MANUAL07,
+					A.MANUAL_IMG07,
+					A.MANUAL08,
+					A.MANUAL_IMG08,
+					A.MANUAL09,
+					A.MANUAL_IMG09,
+					A.MANUAL10,
+					A.MANUAL_IMG10,
+					A.MANUAL11,
+					A.MANUAL_IMG11,
+					A.MANUAL12,
+					A.MANUAL_IMG12,
+					A.MANUAL13,
+					A.MANUAL_IMG13,
+					A.MANUAL14,
+					A.MANUAL_IMG14,
+					A.MANUAL15,
+					A.MANUAL_IMG15,
+					A.MANUAL16,
+					A.MANUAL_IMG16,
+					A.MANUAL17,
+					A.MANUAL_IMG17,
+					A.MANUAL18,
+					A.MANUAL_IMG18,
+					A.MANUAL19,
+					A.MANUAL_IMG19,
+					A.MANUAL20,
+					A.MANUAL_IMG20,
+					A.RB_INSERTDATE,
+					A.RB_UPDATEDATE,
+					A.RB_DELETEYN
+					,CEIL(ROW_NUMBER() OVER(ORDER BY A.RBNO DESC)/ #{pageSize}) PAGENO
+					,COUNT(A.RBNO) OVER() AS TOTALCOUNT
+			FROM
+					RECIPE_BOARD A, MEMBER B
+			WHERE	A.MNO = B.MNO
+			AND		B.MLEVEL = 'C'
+			AND		A.RB_DELETEYN = 'Y'
+					<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+					<![CDATA[AND TO_CHAR(RB_INSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					<![CDATA[AND TO_CHAR(RB_INSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					</if>
+					<if test="keyfilter=='key1'">
+						<![CDATA[AND RCP_NM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+					<if test="keyfilter=='key2'">
+						<![CDATA[AND RBNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+			) RB
+		WHERE PAGENO = #{curPage}
+		ORDER BY RBNO DESC	
+	</select>
 	
 </mapper>

@@ -13,7 +13,11 @@ public interface ChefBoardDAO {
 	public int boardUpdate(ChefBoardVO cbvo);
 	public int boardDelete(ChefBoardVO cbvo);
 	
-	//조회, 추천
+	// 조회, 추천
 	public int chefBoardViewsPP(ChefBoardVO cbvo);
 	public int chefBoardHitsPP(ChefBoardVO cbvo);
+	
+	// 페이징
+	public List<ChefBoardVO> chefBoardSelectAllPage(ChefBoardVO cbvo);
+	
 }

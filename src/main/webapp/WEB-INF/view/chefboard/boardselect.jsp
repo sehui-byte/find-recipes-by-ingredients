@@ -62,7 +62,8 @@
 		function subCheckSuccess(resultData){
 			if(resultData=="ALREADY"){
 				console.log("이미 구독중");
-				$('#Subs').attr('sytle', 'background-color:red;');
+				$('#Subs').attr('style', 'background-color:red;');
+				$('#Subs').attr('value', '구독중');
 				$('#Subs').attr('disabled', true);
 				
 			}else{
