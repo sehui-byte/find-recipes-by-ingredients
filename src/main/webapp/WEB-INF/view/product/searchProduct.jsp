@@ -17,13 +17,17 @@
 	crossorigin="anonymous">
 
 <style>
+	.jns_wrap{
+		width:80%;
+		margin:auto;
+	}
 </style>
 </head>
 <body>
+	<!-- 검색 -->
+	<div class="jns_wrap">
 	<h3>상품 검색</h3>
 	<br>
-
-	<!-- 검색 -->
 	<form>
 		<input class="form-control" list="datalistOptions" name="keyword"
 			onkeydown="return captureReturnKey(event)" onkeyup="enterKey();"
@@ -37,7 +41,8 @@
 
 	<!-- 검색결과 -->
 	<div id="result"></div>
-
+	</div>
+	
 	<script>
 		var piArray = new Array();//유저의 관심상품 productId값이 들어가는 배열
 		chkLikeProductId();
