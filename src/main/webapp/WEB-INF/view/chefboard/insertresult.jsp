@@ -25,7 +25,7 @@
 		else{
 %>
 			<script>
-				location.href="/kosmoJns/chefboard/boardselectall.do";
+				location.href="/kosmoJns/chefboard/boardselectallpage.do";
 			</script>
 <% 
 		}

@@ -29,7 +29,7 @@
 		});
 		
 		$("#boardList").click(function(){
-			location.href="/kosmoJns/chefboard/boardList.do";
+			location.href="/kosmoJns/chefboard/boardselectallpage.do";
 		});
 	});
 	

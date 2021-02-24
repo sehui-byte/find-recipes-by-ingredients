@@ -26,6 +26,7 @@ import com.jns.chefboard.service.ChefBoardService;
 import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.common.ChabunUtil;
 import com.jns.common.CommonUtil;
+import com.jns.common.Paging;
 import com.jns.recipeboard.service.RecipeBoardService;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.subscribe.service.SubscribeService;
@@ -63,11 +64,6 @@ public class ChefBoardController {
 	public String writeForm(ChefBoardVO cbvo, Model model, HttpServletRequest request) {
 		logger.info("[chefC] >> writeForm 호출 성공");
 		
-		// 세션에서 닉네임 가져오기
-		//HttpSession hs = request.getSession();
-		//String mnick = (String)hs.getAttribute("mnick");
-		//model.addAttribute("mnick", mnick);
-		
 		return "chefboard/writeForm";
 	}
 	
@@ -83,9 +79,7 @@ public class ChefBoardController {
 		int result = 0;
 		String resultStr = "";
 		
-		// 테스트용 데이터(mno, views, hits)
-		//cbvo.setRbno("kjmTest0001");
-		//cbvo.setMno("kjmTest0001");
+		//조회수 setting
 		cbvo.setViews(0);
 		cbvo.setHits(0);
 		
@@ -110,6 +104,42 @@ public class ChefBoardController {
 		
 		return mav;
 	}
+	
+	
+	/********************************************************************************************
+	* 글 전체 조회 페이징
+	********************************************************************************************/
+	@RequestMapping(value="/chefboard/boardselectallpage", method=RequestMethod.GET)
+	public String boardSelectAllPage(ChefBoardVO cbvo, Model model, SubscribeVO svo
+									,HttpServletRequest request) {
+		logger.info("[chefC] >> boardSelectAllPage 호출 성공");
+		
+		// 페이징		
+		int totalCnt = 0;
+		String cPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
+		
+		Paging.setPage(cbvo, cPage, pageCtrl); //페이징할 정보를 Paging클래스에 보내줍니다
+		
+		List<ChefBoardVO> listPage = chefBoardService.chefBoardSelectAllPage(cbvo);
+		logger.info("[chefC] >> boardSelectAll listPage.size() >>> : " + listPage.size());
+		
+		if( listPage.size() != 0) {
+			totalCnt = listPage.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+			cbvo.setTotalCount(totalCnt);				// vo에 담기
+		}
+		
+		model.addAttribute("listPage", listPage);
+		model.addAttribute("p_cbvo", cbvo);
+		
+		// 랭킹
+		List<SubscribeVO> subRank = subscribeService.subRank(svo);
+		model.addAttribute("subRank", subRank);
+		logger.info("[chefC] >> boardSelectAll subRank.size() >>> : " + subRank.size());
+		
+		return "chefboard/boardselectallpage";
+	}
+	
 	
 	
 	/********************************************************************************************

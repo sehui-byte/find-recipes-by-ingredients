@@ -135,7 +135,7 @@ public class SubscribeController {
 	@RequestMapping(value="subscribe/subCheck", method=RequestMethod.GET)
 	public String subCheck(SubscribeVO svo) {
 		logger.info("[SubscribeC] >> subCheck 호출 성공");
-		logger.info("[SubscribeC] >> subCheck >> ino >>> : " + svo.getIno());
+		logger.info("[SubscribeC] >> subCheck >> rbno >>> : " + svo.getRbno());
 		logger.info("[SubscribeC] >> subCheck >> mno >>> : " + svo.getMno());
 		
 		List<SubscribeVO> subCheck = subscribeService.subCheck(svo);
