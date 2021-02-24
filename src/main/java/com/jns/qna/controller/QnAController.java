@@ -1,20 +1,25 @@
 package com.jns.qna.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.jns.board.vo.BoardVO;
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
 import com.jns.common.FileUploadUtil;
+import com.jns.common.Paging;
 import com.jns.qna.service.QnAService;
 
 @Controller
@@ -44,6 +49,7 @@ public class QnAController {
 		return "QnA/qnaForm";
 	}
 	
+	/*
 	@RequestMapping(value="11", method=RequestMethod.GET)
 	public String QnASelectPaging(BoardVO bvo, Model model) {
 		logger.info("QnAController QnASelectPaging  ::");	
@@ -60,7 +66,7 @@ public class QnAController {
 		
 		return "QnA/qnaForm";
 	}
-	
+	*/
 	
 	@RequestMapping(value="imgtest", method=RequestMethod.GET)
 	public String qnAInsert(BoardVO bvo, Model model) {
@@ -121,11 +127,23 @@ public class QnAController {
 	}
 	
 	@RequestMapping(value="qnaSelectAll",method=RequestMethod.GET)
-	public String QnASelectAll(BoardVO bvo, Model model) {
+	public String QnASelectAll(@ModelAttribute("BoardVO")BoardVO bvo, Model model) {
 		logger.info("QnAController QnASelectAll start >>>: ");
+		
+		// 전체 레코드 수
+		
+		int totalcount = qnaService.QnASelectPaging(bvo); 
+		logger.info("totalcount : " + totalcount);
 		
 		List<BoardVO> listAll = qnaService.QnASelectAll(bvo);
 		logger.info("QnAController QnASelectAll listAll.size() >>> : " + listAll.size());
+		
+		ModelAndView mav = new ModelAndView(); 
+		mav.addObject("curPage", bvo.getPage());
+		mav.addObject("totalcount", totalcount + "");
+		mav.addObject("count", bvo.getCount());
+		
+		mav.addObject("bvo", bvo);
 		
 		try {
 		
@@ -182,6 +200,29 @@ public class QnAController {
 				
 	}	
 	
+	@RequestMapping(value="qnaViews", method=RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Boolean> QnAVIEWS(BoardVO bvo) {
+		
+		logger.info("QnAVIEWS >>> : ");
+		
+		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("ok", qnaService.QnAVIEWS(bvo));
+		
+		return map;
+	}
+	
+	@RequestMapping(value="qnaHits", method=RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Boolean> QnAHITS(BoardVO bvo) {
+		
+		logger.info("QnAHITS >>> : ");
+		
+		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("ok", qnaService.QnAHITS(bvo));
+		
+		return map;
+	}
 	
 	@RequestMapping(value="qnaDelete", method=RequestMethod.GET)
 	public String QnADelete(BoardVO bvo, Model model) {
@@ -197,5 +238,5 @@ public class QnAController {
 		
 		return "QnA/qnaSelectAll";
 	}
-	
+
 }

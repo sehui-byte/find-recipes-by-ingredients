@@ -21,7 +21,7 @@ public class BoardVO {
 	private String groupsize;
 	private String curpage;
 	private String totalcount;
-	
+	private String count;
 	
 	private String keyfilter;
 	private String keyword;
@@ -38,7 +38,8 @@ public class BoardVO {
 		   ,String keyfilter
 		   ,String keyword
 		   ,String startdate
-		   ,String enddate) {
+		   ,String enddate
+		   ,String count) {
 		
 		this.mno = mno;
 		this.bno = bno;
@@ -58,6 +59,7 @@ public class BoardVO {
 		this.groupsize = groupsize;
 		this.curpage = curpage;
 		this.totalcount = totalcount;
+		this.count = count;
 		
 		this.keyfilter = keyfilter;
 		this.keyword = keyword;
@@ -232,6 +234,24 @@ public class BoardVO {
 
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
+	}
+
+	public void setStart_row(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setEnd_row(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getCount() {
+		return count;
+	}
+
+	public void setCount(String count) {
+		this.count = count;
 	}
 
 

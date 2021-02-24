@@ -24,7 +24,7 @@ public class QnAServiceImpl implements QnAService {
 	}
 	
 	@Override
-	public List<BoardVO> QnASelectPaging(BoardVO bvo) {
+	public int QnASelectPaging(BoardVO bvo) {
 		// TODO Auto-generated method stub
 		return qnaDAO.QnASelectPaging(bvo);
 	}
@@ -57,6 +57,18 @@ public class QnAServiceImpl implements QnAService {
 	public int QnADelete(BoardVO bvo) {
 		// TODO Auto-generated method stub
 		return qnaDAO.QnADelete(bvo);
+	}
+
+	@Override
+	public boolean QnAVIEWS(BoardVO bvo) {
+		// TODO Auto-generated method stub
+		return qnaDAO.QnAVIEWS(bvo);
+	}
+
+	@Override
+	public boolean QnAHITS(BoardVO bvo) {
+		// TODO Auto-generated method stub
+		return qnaDAO.QnAHITS(bvo);
 	}
 
 }

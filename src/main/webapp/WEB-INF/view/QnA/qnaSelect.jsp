@@ -3,10 +3,17 @@
 <%@ page import="com.jns.board.vo.BoardVO" %>
 <%@ page import="java.util.List" %>
 <%@page import="com.jns.common.FileLoadUtil"%>
+<%@page import="com.jns.common.Validation"%>
+<%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
+<%@ include file="/WEB-INF/include/jsp/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+	<%
+		BoardVO _bvo = new BoardVO();
+		_bvo = (BoardVO)request.getAttribute("bvo");
+	%>
 <title>QnA Select</title>
 <style type="text/css">
 	div {
@@ -18,6 +25,29 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
+	
+		
+		$(document).ready(()=>
+		{
+			$.ajax
+			({
+				url:"qnaViews.do",
+				type:"GET",
+				dataType:"json"
+			}).always((data)=>{console.log(data)});
+			
+			$("#hitsBtn").click(()=>
+			{
+				$.ajax
+				({
+					url:"qnaHits.do",
+					type:"GET",
+					dataType:"json"
+				}).always((data)=>{console.log(data); alert("추천하였습니다")});
+			});
+		});
+		
+		
 		
 		// U
 		$(document).on("click", "#U", function(){
@@ -41,7 +71,9 @@
 		$(document).on("click", "#C", function(){
 			location.href="qnaSelectAll.do";
 		});
+		
 	});
+	
 </script>
 </head>
 <body>
@@ -51,7 +83,7 @@ QnA Select
 <%
 	Object obj = request.getAttribute("listS");
 	List<BoardVO> list = (List)obj;
-	BoardVO bvo = null;
+	BoardVO bvo = null;	
 	
 	if(list.size() == 1){
 		bvo = list.get(0);
@@ -61,7 +93,7 @@ QnA Select
 <form name="QnAUpdateForm" id="QnAUpdateForm">
 <table border="1">
 <tr>
-<td colspan="2" align="center">QnA 글 수정하기</td>
+<td colspan="2" align="center">QnA 글 보기 </td>
 </tr>
 <tr>
 <td class="mem">글 번호</td>
@@ -108,6 +140,7 @@ QnA Select
 </tr>
 <tr>
 	<td colspan="7" align="right">
+		<input type="button" value="좋아요" id="hitsbtn">
 		<input type="button" value="수정하기" id="U">
 		<input type="button" value="삭제하기" id="D">
 		<input type="button" value="돌아가기" id="C">

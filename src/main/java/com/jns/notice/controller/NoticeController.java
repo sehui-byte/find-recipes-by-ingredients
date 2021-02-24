@@ -116,6 +116,7 @@ public class NoticeController {
 		logger.info("NoticeController NoticeSelectAll start >>>: ");
 		
 		
+		
 		List<BoardVO> listAll = noticeService.NoticeSelectAll(nvo);
 		logger.info("NoticeController NoticeSelectAll listAll.size() >>> : " + listAll.size());
 		
