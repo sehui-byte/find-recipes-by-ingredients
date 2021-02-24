@@ -93,12 +93,12 @@
 			구매하기 버튼 클릭했을 때, 해당 상품의 필요한 데이터 쿠키 배열로 저장
 		*/
 		
-		// var recentPro = prdouctId + ',' + image + ',' + link;
+		// var recentPro = prdouctId + '^^' + image + '^^' + link;
 		function clickpurchase(recentPro){	
 			// 최근 본 상품 화면에 추가
 			showRecent();
 			
-			var info = recentPro.split(","); // [prdouctId, image, link]
+			var info = recentPro.split("^^"); // [prdouctId, image, link]
 			var productId = info[0];
 			var productImage = info[1];
 			var productLink = info[2];
