@@ -8,6 +8,7 @@
 						http://www.springframework.org/schema/security/spring-security.xsd">
 						
 	<!--  security 적용 제외 요청 패턴 -->
+
 	<s:http pattern="/**/*.js" security="none" />
 	<s:http pattern="/**/*.css" security="none" />
 	<s:http pattern="/images/*" security="none" />
@@ -16,7 +17,7 @@
 		<s:intercept-url pattern="/login.do" access="isAnonymous()"/>
 		<s:intercept-url pattern="/join.do" access="isAnonymous()"/>
 		<s:intercept-url pattern="/main.do" access="permitAll"/>
-		<s:intercept-url pattern="/**" access="permitAll"/>
+		<s:intercept-url pattern="/**" access="permitAll"/> 
 		<s:form-login
 			username-parameter="mid"	
 			password-parameter="mpw"
