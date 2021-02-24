@@ -20,16 +20,14 @@
 					$("#rbForm").submit();
 				});
 			});
-			
-			function onBtnClick(rbno)
-			{
-				$("#rbno").val(rbno);
-				$("#rbForm").attr("action", "rbupdateform.do");
-				$("#rbForm").attr("method", "GET");
-				$("#rbForm").attr('enctype','multipart/form-data');
-				$("#rbForm").submit();
-			}
-		
+			function onBtnClick(rbno)	
+			{	
+				$("#rbno").val(rbno);	
+				$("#rbForm").attr("action", "rbupdateform.do");	
+				$("#rbForm").attr("method", "GET");	
+				$("#rbForm").attr('enctype','multipart/form-data');	
+				$("#rbForm").submit();	
+			}	
 		</script>
 	</head>
 	<%
@@ -38,7 +36,6 @@
 	
 	<body>
 		<form id="rbForm" name="rbForm">
-		
 			<table border="1" style="margin: auto;">
 				<tr>
 					<td><input id="writeBtn" type="button" value="글쓰기"> </td>

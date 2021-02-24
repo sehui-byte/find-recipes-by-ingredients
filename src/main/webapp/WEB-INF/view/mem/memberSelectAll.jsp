@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.jns.common.FileLoadUtil"%>    
+
 <%@ page import ="com.jns.member.vo.MemberVO"%>
 <%@ page import ="java.util.List" %>    
+<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,25 +15,23 @@
 	.tt{
 		text-align:center;
 		font-weight: bold;
-		text-overflow: ellipsis; white-space: nowrap; max-width:140px; overflow:hidden;
 	}
 </style>
-<script src="http://code/jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 		//체크박스 체크 확인하기 
-		function checkOnly(chk){
-			// alert(">>> : " + chk);
-			var chkObj = document.getElementsByName("mno");		
-			console.log("chkObj >>> : " + chkObj);
-			for (var i=0; i < chkObj.length; i++){
-				if (chkObj[i] != chk){
-					chkObj[i].checked = false;
-				}
-			}
-		}	
 		
+		$("#chkAll").click(function(){
+			//var chkbox = $(".chkbox").length;
+			if($("#chkAll").prop("checked")){
+				$(".chkbox").prop("checked", true);
+			}else{
+				$(".chkbox").prop("checked", false);
+				
+			}
 			
+		});
+
 			$(document).on("click", "#I", function(){
 				location.href="memberInsert.do";
 			});
@@ -44,6 +45,7 @@ $(document).ready(function(){
 			
 			$(document).on("click", "#D", function(){
 				alert("D >>>");
+				
 				$("#memberList").attr({
 					"method":"GET",
 					"action":"memberSelect.do"}).submit();
@@ -51,6 +53,15 @@ $(document).ready(function(){
 		});
 	
 	
+		function checkOnly(chk){
+			var chkObj = document.getElementsByName("mno");		
+			console.log("chkObj >>> : " + chkObj);
+			for (var i=0; i < chkObj.length; i++){
+				if (chkObj[i] != chk){
+					chkObj[i].checked = false;
+				}
+			}
+		}	
 </script>
 </head>
 <body>
@@ -79,8 +90,8 @@ SELECT ALL
 	<td class="tt">닉네임</td>
 	<td class="tt">전화번호</td>
 	<td class="tt">이메일</td>
-	<td class="tt">주소</td>	
-	<td class="tt">우편번호</td>	
+	<td class="tt">도로명 주소</td>
+	<td class="tt">우편번호</td>
 	<td class="tt">상세주소</td>	
 	<td class="tt">사진</td>
 	<td class="tt">등록일</td>
@@ -97,7 +108,7 @@ SELECT ALL
 <tr>
 	<td class="tt">	
 		<input type="checkbox" name="mno" id="chkInMnum" 
-			value=<%= mvo.getMno()%> onclick="checkOnly(this)">
+			value=<%= mvo.getMno()%> onclick="checkOnly(this)"  class="chkbox">
 	</td>
 	<td class="tt"><%=mvo.getMno() %></td>
 	<td class="tt"><%=mvo.getMlevel() %></td>
@@ -121,7 +132,7 @@ SELECT ALL
 	} // end of if
 %>
 <tr>
-	<td colspan="16" align="right">			
+	<td colspan="10" align="right">			
 		<input type="button" value="회원 목록" id="SALL">
 		<input type="button" value="회원정보 수정" id="U">
 		<input type="button" value="회원 삭제" id="D">									

@@ -1,5 +1,7 @@
 package com.jns.chef.vo;
 
+import com.jns.member.vo.MemberVO;
+
 public class ChefVO {
 
 	private String ino;

@@ -118,6 +118,11 @@
 			<td><%= rbvo.getHits() %></td>	
 			<td>기타</td>	
 		</tr>
+		<tr>
+			<td colspan="6">
+				<button type="button" name="deleteMyFavRecipeBoard" id="deleteMyFavRecipeBoard">즐겨찾기 삭제</button>
+			</td>
+		</tr>	
 <%
 			} // end for
 		} else{
@@ -129,11 +134,6 @@
 		} 
 	}
 %>
-		<tr>
-			<td colspan="6">
-				<button type="button" name="deleteMyFavRecipeBoard" id="deleteMyFavRecipeBoard">즐겨찾기 삭제</button>
-			</td>
-		</tr>	
 	</table>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 	<input type="hidden" id="recipeType" name="recipeType" value="user">

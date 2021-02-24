@@ -102,8 +102,6 @@
 		<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 	</if>
 	ORDER BY 1
-	<!-- 레시피가 user인 경우 -->
-	
 	</select>
 
 	<!-- 내가 추천한 레시피 조회하기 // 회원 레시피-->
@@ -132,5 +130,57 @@
 	</if>
 	ORDER BY 1
 	</select>
+	
+	<select id="myRankUpdateCheckCount" parameterType="mvo" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			RECIPE_BOARD A
+		WHERE A.MNO = #{mno, jdbcType=VARCHAR}
+		AND A.RB_DELETEYN = 'Y'
+	</select>	
+	
+	<select id="myRankUpdateCheckHits" parameterType="mvo" resultType="java.lang.Integer">
+		SELECT
+			NVL(SUM(A.HITS), 0)
+		FROM
+			RECIPE_BOARD A
+		WHERE A.MNO = #{mno, jdbcType=VARCHAR}
+		AND A.RB_DELETEYN = 'Y'
+	</select>	
+	
+	<update id="myRankUpdate" parameterType="mvo">
+		UPDATE MEMBER A
+			A.MLEVEL = 'C'
+		WHERE
+			A.MNO = #{mno, jdbcType=VARCHAR}
+		AND
+			A.MDELETEYN = 'Y'
+	</update>
+	
+	<!-- 패스워드 수정 체크 -->
+	<select id="myPWUpdateCheck" parameterType="mvo" resultType="mvo">
+	
+		SELECT 
+			* 
+		FROM
+			MEMBER
+		WHERE
+			mid = #{mid, jdbcType=VARCHAR}
+		AND
+			MDELETEYN = 'Y'
+	
+	</select>
+	
+	<!--  패스워드 수정 로직 -->
+	<update id="myPWUpdate" parameterType="mvo">
+		UPDATE MEMBER
+		SET
+			MPW = #{mpw, jdbcType=VARCHAR}
+		WHERE
+			MID = #{mid, jdbcType=VARCHAR}	
+	</update>
+	
+	
 	
 </mapper>

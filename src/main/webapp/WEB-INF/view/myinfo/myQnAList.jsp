@@ -17,9 +17,9 @@
 		$("#checkAll").click(function(){
 			var checkAll = $("#checkAll");	
 			if (checkAll.prop("checked")){
-				$(".checkbox").prop("checked",true)	
+				$(".checkbox").prop("checked",true);
 			}else{
-				$(".checkbox").prop("checked",false)	
+				$(".checkbox").prop("checked",false);
 			}
 		})	
 	
@@ -117,6 +117,13 @@
 		</tr>
 <%
 		} // end of for
+%>
+		<tr>
+			<td colspan="4">
+				<input type="button" name="deleteQnA" id="deleteQnA" value="게시글 삭제">
+			</td>
+		</tr>	
+<%
 	}else{
  %>		
 		<tr>
@@ -125,11 +132,6 @@
 <% 
 	}	
 %>
-		<tr>
-			<td colspan="4">
-				<input type="button" name="deleteQnA" id="deleteQnA" value="게시글 삭제">
-			</td>
-		</tr>	
 	</table>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 </form>

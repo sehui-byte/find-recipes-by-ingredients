@@ -84,18 +84,17 @@ public class ChabunServiceImpl implements ChabunService {
 	}
 
 	@Override
-	public FavoritesVO getFavoritesChabun() {
-		logger.info("getFavoritesChabun 채번호출");
-
-		return chabunDAO.getFavoritesChabun();
-	}
-
-	@Override
 	public SubscribeVO getSubscribeChabun() {
 		// TODO Auto-generated method stub
 		logger.info("getSubscribeChabun 채번호출");
 		return chabunDAO.getSubscribeChabun();
 	}
 
-	
+	@Override
+	public FavoritesVO getFavoritesChabun() {
+		logger.info("getFavoritesChabun 채번호출");
+		
+		return chabunDAO.getFavoritesChabun();
+	}
+
 }

@@ -24,11 +24,9 @@
 <body>
 	<script type="text/javascript"> 
 	$(document).ready(function() {
-
 		// 기존 css에서 플로팅 배너 위치값(top)을 가져와서 저장
 		// 250px 이런식으로 가져오므로 숫자만 가져오기 : parseInt(값);
 		var floatPosition = parseInt($("#recentbox").css('top'));
-
 		$(window).scroll(function() {
 			// 현재 스크롤 위치를 가져온다.
 			var scrollTop = $(window).scrollTop();
@@ -36,10 +34,8 @@
 				 scrollTop = 180;
 			}
 			var newPosition = scrollTop + floatPosition + "px";
-
 			// 애니메이션 없이 바로 따라감
 			//$("#recentbox").css('top', newPosition);
-
 			$("#recentbox").stop().animate({
 				"top" : newPosition
 			}, {
@@ -128,7 +124,6 @@
 		    expire.setTime(date.getTime() + 1*60*60*1000); // 1hr
 		    document.cookie = cookieName + '=' + cookieValue;
 		}
-
 		
 		// 쿠키 값 가져오기
 		function getRecentCookie(cookieName) {
@@ -154,7 +149,6 @@
 		 	// 배열 맨 앞에 요소 추가, 배열의 크기 리턴
 	        cookieArr_name.unshift(cookieName);		// [productId5, productId4, ..., productId1]
 		 	cookieArr_value.unshift(cookieValue);	// [productImage5&&productLink5, ...]
-
 	        // 중복된 쿠키 제거 (뒷쪽에 있는 쿠키 삭제됨)
 	        // 1) 쿠키명
 	        var recentArr_name = cookieArr_name.filter(function(item, pos, self) {
@@ -201,7 +195,6 @@
 			expire.setTime(date.getTime() - 1);
 			document.cookie = cookieName + '=' + "";
 		}
-
 		
 		
 		/*
@@ -246,7 +239,6 @@
 			
 		}
 	
-
 		
 	</script>
 

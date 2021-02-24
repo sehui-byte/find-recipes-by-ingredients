@@ -1,7 +1,5 @@
 package com.jns.favorites.controller;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +13,6 @@ import com.jns.common.ChabunUtil;
 import com.jns.favorites.service.FavoritesService;
 import com.jns.favorites.vo.FavoritesVO;
 import com.jns.myinfo.controller.MyinfoController;
-import com.jns.recipe.vo.RecipeVO;
 
 @Controller
 public class FavoritesController {
