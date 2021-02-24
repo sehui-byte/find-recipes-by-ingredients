@@ -108,7 +108,7 @@
 				     time += "방금";
 				   }
 				  
-				   time += "전";
+				   time += "전          ";
 				  document.getElementsByClassName("sub")[0].innerHTML = time;
 				      
 				        
