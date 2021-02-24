@@ -108,16 +108,23 @@
 				<input type="checkbox" name="rbno" value="<%= rbvo.getRbno()%>" class="checkbox">	
 			</td>	
 			<td>
-				<a href="/kosmoJns/boardController.do?<%= rbvo.getRbno()%>"><%= rbvo.getRcp_nm() %></a>
+				<a href="/kosmoJns/boardController.do?rbvo=<%= rbvo.getRbno()%>"><%= rbvo.getRcp_nm() %></a>
 			</td>	
 			<!-- 댓글을 가져오려면 어떻게 해야 하지?? -->
 			<td>댓글</td>	
-			<td>조회수</td>	
-			<td>추천</td>	
+			<td><%= rbvo.getHits() %></td>	
+			<td><%= rbvo.getViews() %></td>	
 			<td><%= rbvo.getRb_updatedate() %></td>	
 		</tr>
 <%
 		}
+%>
+		<tr>
+			<td colspan="6">
+				<input type="button" name="deleteQnA" id="deleteQnA" value="게시글 삭제">
+			</td>
+		</tr>	
+<% 
 	}else{
 %>
 		<tr>
@@ -126,11 +133,6 @@
 <%
 	}
 %>
-		<tr>
-			<td colspan="6">
-				<input type="button" name="deleteQnA" id="deleteQnA" value="게시글 삭제">
-			</td>
-		</tr>	
 	</table>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 </form>

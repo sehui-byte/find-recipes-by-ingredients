@@ -25,3 +25,4 @@
 <%@ page import="com.jns.recipe.vo.RecipeVO"%>
 <%@ page import="com.jns.recipeboard.vo.RecipeBoardVO"%>
 <%@ page import="com.jns.reply.vo.ReplyVO"%>
+<%@ page import="com.jns.subscribe.vo.SubscribeVO"%>

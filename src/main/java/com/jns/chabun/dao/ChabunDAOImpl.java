@@ -77,15 +77,15 @@ public class ChabunDAOImpl implements ChabunDAO {
 	}
 
 	@Override
-	public FavoritesVO getFavoritesChabun() {
-	
-		return sqlSession.selectOne("getFavoritesChabun");
-	}
-
-	@Override
 	public SubscribeVO getSubscribeChabun() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getSubscribeChabun");
+	}
+
+	@Override
+	public FavoritesVO getFavoritesChabun() {
+
+		return sqlSession.selectOne("getFavoritesChabun");
 	}
 
 }

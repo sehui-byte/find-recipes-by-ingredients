@@ -10,7 +10,6 @@ import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
 import com.jns.subscribe.vo.SubscribeVO;
 
-
 public interface ChabunDAO {
 
 	public MemberVO getMemberChabun();
@@ -20,14 +19,17 @@ public interface ChabunDAO {
 	public BoardVO getQnABoardChabun();
 
 	public ChefBoardVO getBoardChabun();
-	
+
 	public ReplyVO getReplyChabun();
 
 	public RecipeBoardVO getRecipeBoardChabun();
-	
+
 	public ProductVO getLikeProductChabun();
+
 	public ChefVO getChefChabun();
+
 	public FavoritesVO getFavoritesChabun();
+
 	public SubscribeVO getSubscribeChabun();
 
 }

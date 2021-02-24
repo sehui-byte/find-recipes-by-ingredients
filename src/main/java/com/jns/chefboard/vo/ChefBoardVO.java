@@ -129,7 +129,7 @@ public class ChefBoardVO {
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
 	}
-	//**************************	
+	//**************************************************************	
 
 	public ChefBoardVO() {}
 

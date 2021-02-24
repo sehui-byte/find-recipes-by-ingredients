@@ -17,7 +17,7 @@ public class PasswordEncoder {
 		return pw1;
 	}
 
-	// 비밀번호 매칭
+	// 비밀번호 복호화
 	public static boolean pwMatches(String password) {
 
 		BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
@@ -29,6 +29,17 @@ public class PasswordEncoder {
 		return bool;
 	}
 
+	// 비밀번호 매칭
+	public static boolean pwMatches(String password, String encoded_password) {
+
+		BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
+
+		boolean bool = pwEncoder.matches(password, encoded_password);
+		
+		System.out.println(bool);
+		
+		return bool;
+	}
 	/*
 	// 암호화  할떄만
 	public static void main(String args[]) {

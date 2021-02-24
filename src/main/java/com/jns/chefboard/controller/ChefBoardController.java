@@ -28,6 +28,8 @@ import com.jns.common.ChabunUtil;
 import com.jns.common.CommonUtil;
 import com.jns.recipeboard.service.RecipeBoardService;
 import com.jns.recipeboard.vo.RecipeBoardVO;
+import com.jns.subscribe.service.SubscribeService;
+import com.jns.subscribe.vo.SubscribeVO;
 
 @Controller
 public class ChefBoardController {
@@ -35,12 +37,16 @@ public class ChefBoardController {
 	
 	private ChefBoardService chefBoardService;
 	private ChabunService chabunService;
+	private SubscribeService subscribeService;
 	
 	// 기본 생성자 주입
 	@Autowired(required=false)
-	public ChefBoardController(ChefBoardService chefBoardService, ChabunService chabunService) {
+	public ChefBoardController(ChefBoardService chefBoardService
+							  ,ChabunService chabunService
+							  ,SubscribeService subscribeService) {
 		this.chefBoardService = chefBoardService;
 		this.chabunService = chabunService;
+		this.subscribeService = subscribeService;
 	}
 	
 	// 테스트
@@ -110,7 +116,7 @@ public class ChefBoardController {
 	* 글 전체 조회
 	********************************************************************************************/
 	@RequestMapping(value="/chefboard/boardselectall", method=RequestMethod.GET)
-	public String boardSelectAll(ChefBoardVO cbvo, Model model) {
+	public String boardSelectAll(ChefBoardVO cbvo, Model model, SubscribeVO svo) {
 		logger.info("[chefC] >> boardSelectAll 호출 성공");
 		
 		// 페이징
@@ -120,6 +126,11 @@ public class ChefBoardController {
 		
 		model.addAttribute("listAll", listAll);
 		logger.info("[chefC] >> boardSelectAll listAll.size() >>> : " + listAll.size());
+		
+		// 랭킹
+		List<SubscribeVO> subRank = subscribeService.subRank(svo);
+		model.addAttribute("subRank", subRank);
+		logger.info("[chefC] >> boardSelectAll subRank.size() >>> : " + subRank.size());
 		
 		return "chefboard/boardselectall";
 	}

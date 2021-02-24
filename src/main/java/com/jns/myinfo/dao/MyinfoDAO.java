@@ -15,13 +15,20 @@ public interface MyinfoDAO {
 
 	public int myQnADelete(BoardVO bvo);
 
-	public int myRecipeDelete(RecipeBoardVO rbvo);
+	public int myRankUpdateCheckCount(BoardVO bvo);
+
+	public int myRankUpdateCheckHits(BoardVO bvo);
 
 	public int myRankUpdate(BoardVO bvo);
+
+	public List<MemberVO> myPWUpdateCheck(MemberVO mvo);
+
+	public int myPWUpdate(MemberVO mvo);
 
 	public List<RecipeVO> myFavRecipeList1(MemberVO mvo);
 
 	public List<RecipeBoardVO> myFavRecipeList2(MemberVO mvo);
 
-	
+	public int myRecipeDelete(RecipeBoardVO rbvo);
+
 }

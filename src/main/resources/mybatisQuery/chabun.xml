@@ -22,17 +22,15 @@
 	 
 	<select id="getQnABoardChabun" resultType="bvo">
 		<!--  SELECT NVL(MAX(INSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A-->
-		SELECT LPAD(NVL(SUBSTR(MAX(A.BNO), -4), 0)+1, 4, '0') BNO FROM BOARD A
-		where BTYPE = 'Q'
+		SELECT NVL(MAX(SUBSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
 	</select>
 	
 	<select id="getNoticeChabun" resultType="nvo">
-		SELECT LPAD(NVL(SUBSTR(MAX(A.BNO), -4), 0)+1, 4, '0') BNO FROM BOARD A
-		WHERE BTYPE = 'N'
+		SELECT NVL(MAX(SUBSTR(A.BNO, -4)), 0) + 1  BNO FROM BOARD A
 	</select>
 
 	<select id="getReplyChabun" resultType="reply">
-		SELECT NVL(MAX(INSTR(A.RNO, -4)), 0) + 1  RNO FROM REPLY A
+		SELECT NVL(MAX(SUBSTR(A.RNO, -4)), 0) + 1  RNO FROM REPLY A
 	</select>
 	
 	<select id="getRecipeBoardChabun" resultType="rbvo">
@@ -51,4 +49,7 @@
 		SELECT NVL(MAX(SUBSTR(A.FNO, -4)), 0) + 1 FNO FROM FAVORITES A
 	</select>
 	
+	<select id="getSubscribeChabun" resultType="svo">
+		SELECT NVL(MAX(SUBSTR(A.SNO, -4)), 0) + 1 SNO FROM SUB_INFO A
+	</select>
 </mapper>

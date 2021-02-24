@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jns.board.vo.BoardVO;
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
+import com.jns.common.FileUploadUtil;
 import com.jns.qna.service.QnAService;
 
 @Controller
@@ -23,7 +25,7 @@ public class QnAController {
 	private QnAService qnaService;
 	private ChabunService chabunService; 
 	
-	// ������ Autowired 
+	// Autowired 
 	@Autowired(required=false)	
 	public QnAController( QnAService qnaService,
 				          ChabunService chabunService
@@ -33,7 +35,7 @@ public class QnAController {
 		
 	}	
 	
-	//�� �Է� �� 
+
 	@RequestMapping(value="qnaForm", method=RequestMethod.GET)
 	public String boardForm() {
 		
@@ -44,7 +46,7 @@ public class QnAController {
 	
 	@RequestMapping(value="11", method=RequestMethod.GET)
 	public String QnASelectPaging(BoardVO bvo, Model model) {
-		logger.info("QnAController QnASelectPaging ���� ::");	
+		logger.info("QnAController QnASelectPaging  ::");	
 		logger.info("QnAController boardSelect bvo.getSbnum() " + bvo.getPage());
 		
 		List<BoardVO> listS = qnaService.QnASelectPaging(bvo);
@@ -59,9 +61,10 @@ public class QnAController {
 		return "QnA/qnaForm";
 	}
 	
-	@RequestMapping(value="qnaInsert", method=RequestMethod.GET)
-	public String QnAInsert(BoardVO bvo, Model model) {
-		logger.info("QnAController QnAInsert  ���� ::");
+	
+	@RequestMapping(value="imgtest", method=RequestMethod.GET)
+	public String qnAInsert(BoardVO bvo, Model model) {
+		logger.info("QnAController QnAInsert  start ::");
 		
 		//채번
 		String bno = ChabunUtil.getQnaBoardChabun("D", chabunService.getQnABoardChabun().getBno());
@@ -69,13 +72,15 @@ public class QnAController {
 		bvo.setBhits("0");
 		
 		 bvo.setBno(bno);
-		
+		 
 		 logger.info("QnAController QnAInsert bvo.getBno() >>> : "
 			 		+ bvo.getBno());
 		 logger.info("QnAController QnAInsert bvo.getBcontent() >>> : "
 				 	+ bvo.getBcontent());
 		 logger.info("QnAController QnAInsert bvo.getMnick() >>> : "
 				 	+ bvo.getMnick());
+		 
+		//imgtest(bvo, null).
 		 
 		 int nCnt = qnaService.QnAInsert(bvo);
 		 logger.info("QnAController QnAInsert nCnt >>> : " + nCnt);
@@ -87,21 +92,43 @@ public class QnAController {
 		return "QnA/qnaForm";
 	}
 	
+	
+	@RequestMapping(value = "qnaInsert", method = RequestMethod.POST)
+	public String QnAInsert(BoardVO bvo, MultipartHttpServletRequest request){
+		logger.info("qnaInsert >>> : 시작 ");
+		
+		//단일파일 업로드
+		String key = new FileUploadUtil().uploadFile(request, "qnaboard"); // 업로드 할 폴더 이름 
+		logger.info("key >>> : " + key);
+		bvo.setBfile(key);
+		
+		String bno = ChabunUtil.getQnaBoardChabun("D", chabunService.getQnABoardChabun().getBno());
+		logger.info("bno >>> : " + bno);
+		bvo.setBviews("0");
+		bvo.setBhits("0");
+		
+		bvo.setBno(bno);
+		
+		 int nCnt = qnaService.QnAInsert(bvo);
+		 
+		 logger.info("QnAController QnAInsert nCnt >>> : " + nCnt);
+		 
+		 if(nCnt > 0) {
+			 return "QnA/qnaInsert";
+		 }
+		
+		return "QnA/qnaSelectAll";
+	}
+	
 	@RequestMapping(value="qnaSelectAll",method=RequestMethod.GET)
 	public String QnASelectAll(BoardVO bvo, Model model) {
-		logger.info("QnAController QnASelectAll �Լ� ���� >>>: ");
-		
-		
-		logger.info("QnAController QnASelectAll bvo.getBno() >>> : " + bvo.getBno());
-		logger.info("QnAController QnASelectAll bvo.getBtitle() >>> : " + bvo.getBtitle());
-		logger.info("QnAController QnASelectAll bvo.getBcontent() >>> : " + bvo.getBcontent());
-		logger.info("QnAController QnASelectAll bvo.getMnick() >>> : " + bvo.getMnick());
+		logger.info("QnAController QnASelectAll start >>>: ");
 		
 		List<BoardVO> listAll = qnaService.QnASelectAll(bvo);
 		logger.info("QnAController QnASelectAll listAll.size() >>> : " + listAll.size());
 		
 		try {
-		// ��ü ����� ũ�Ⱑ 0 ���� ũ�ٸ� ����� �ҷ��´�.
+		
 	
 		if(listAll.size() > 0) {
 
@@ -118,7 +145,7 @@ public class QnAController {
 	@RequestMapping(value="qnaSelect",method=RequestMethod.GET)
 	public String QnASelect(BoardVO bvo,Model model) {
 		
-		logger.info("QnAController QnASelect �Լ� ���� :::: ");
+		logger.info("QnAController QnASelect start :::: ");
 		logger.info("QnAController QnASelect bvo.getBno() " + bvo.getBno());
 		
 		List<BoardVO> listS = qnaService.QnASelect(bvo);
@@ -146,7 +173,7 @@ public class QnAController {
 		
 		logger.info("QnAController QnAUpdate nCnt >>> " + nCnt);
 		
-		//������ �Խù��� 1���� ũ�ٸ� ����  â���� �̵� 
+		
 		if(nCnt > 0) {
 			return "QnA/qnaUpdate";
 		}
@@ -155,10 +182,10 @@ public class QnAController {
 				
 	}	
 	
-	///�� �����ϱ� 
+	
 	@RequestMapping(value="qnaDelete", method=RequestMethod.GET)
 	public String QnADelete(BoardVO bvo, Model model) {
-		logger.info("QnAController QnADelete �Լ� ���� >>> :");
+		logger.info("QnAController QnADelete start >>> :");
 		
 		logger.info("QnAController QnADelete bvo.getSno() >>> : " + bvo.getBno());		
 		int nCnt = qnaService.QnADelete(bvo);

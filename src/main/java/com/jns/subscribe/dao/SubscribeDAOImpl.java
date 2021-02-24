@@ -39,7 +39,7 @@ public class SubscribeDAOImpl implements SubscribeDAO {
 	@Override
 	public List<SubscribeVO> subRank(SubscribeVO svo) {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("subRank");
 	}
 
 	@Override

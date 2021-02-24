@@ -23,7 +23,7 @@
 			console.log("sbtn >>> : ");	
 			$("#QnAForm").attr({
 				'action':'qnaInsert.do',
-				'method':'GET',
+				'method':'POST',
 				'enctype':'multipart/form-data'
 			}).submit();
 		});
@@ -31,8 +31,7 @@
 </script>
 </head>
 <body>
-<form name="QnAForm" id="QnAForm">
-<s:csrfInput/>
+<form action="qnaInsert.do" method="POST" enctype="multipart/form-data" name="QnAForm" id="QnAForm">
 <table border="1" align="center">
 	<tr>
 		<td colspan="2" align="center">질문 글쓰기</td>
@@ -69,10 +68,10 @@
 	<tr>
 		<td align="center">첨부파일</td>
 		<td>
-		<input type="file" name="bfile" id="bfile">
+		<input type="file" name="file01" id="file01">
 		</td>
 	</tr>
-	<tr>
+		<tr>
 		<td colspan="2" align="right">
 		<input type="button" value="글쓰기" id="sbtn">
 		</td>

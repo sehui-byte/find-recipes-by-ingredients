@@ -145,6 +145,7 @@ public class MemberController {
 	}
 
 	// 회원 삭제
+
 	@RequestMapping(value = "memberDelete", method = RequestMethod.GET)
 	public String memDelete(MemberVO mvo, Model model) {
 		logger.info("MemberController MemberDelete 함수 진입 >>> : ");

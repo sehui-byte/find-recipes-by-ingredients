@@ -2,10 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ page import ="com.jns.member.vo.MemberVO"%>
 <%@ page import ="java.util.List" %>    
+<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>JNS : 전지적 냉장고 시점  회원  조회</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
@@ -39,9 +42,39 @@ $(document).ready(function(){
 			});
 		});
 
+<title>JNS : 전지적 냉장고 시점  회원 전체 조회</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+				// U
+				$(document).on("click", "#U", function(){
+					alert("U >>> :");
+					$("#memUpdateForm").attr({
+						"method":"POST",
+						"action":"memberUpdate.do"
+					}).submit();
+				});
+				
+				// D
+				$(document).on("click", "#D", function(){
+					alert("D >>> : ");
+					$("#memUpdateForm").attr({
+						"method":"POST",
+						"action":"memberDelete.do"
+					}).submit();
+				});
+				
+				// ALL
+				$(document).on("click", "#SALL", function(){
+					location.href="memberSelectAll.do";
+				});
+			});
+
+
 </script>
 </head>
 <body>
+<% request.setCharacterEncoding("UTF-8"); %>
 <%
 	Object obj = request.getAttribute("listS");
 
@@ -50,7 +83,9 @@ $(document).ready(function(){
 	int nCnt = aList.size();
 	out.println( "nCnt >>> : " +nCnt );
 	
+	
 	String no = "";	
+	String level = "";
 	String id = "";
 	String pw = "";	
 	String name = "";
@@ -70,6 +105,7 @@ $(document).ready(function(){
 		MemberVO mvo = aList.get(0);
 		
 	no = mvo.getMno();
+	level = mvo.getMlevel();
 	id = mvo.getMid();
 	pw = mvo.getMpw();
 	name = mvo.getMname();
@@ -130,9 +166,18 @@ $(document).ready(function(){
 <tr>
 <td class="mem">사진  </td>
 <td>
-<img src="/kosmoJns/imgupload/<%= photo %>" border="1" width="40" height="50" alt="image">
+<img src="<%= new FileLoadUtil().getFileSrc("member",  photo) %>" border="1" width="40" height="50" alt="image">
 </td>
 </tr>
+<tr>
+<td class="mem">등록일</td>
+<td><input type="text" name="minsertdate" id="minsertdate" value="<%=insertdate %>" readonly></td>
+</tr>
+<tr>
+<td class="mem">수정일</td>
+<td><input type="text" name="mupdatedate" id="mupdatedate" value="<%=updatedate %>" readonly></td>
+</tr>
+
 <tr>
 	<td colspan="2">
 		<input type="button" value="수정" id="U">

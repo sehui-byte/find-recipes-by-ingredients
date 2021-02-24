@@ -100,8 +100,8 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("mvo >>> : " + mvo);
 
 		// 비밀번호 암호화 Bcrypt
-		String mpw = PasswordEncoder.pwEncoder(mvo.getMpw());
-		mvo.setMpw(mpw);
+		//String mpw = PasswordEncoder.pwEncoder(mvo.getMpw());
+		//mvo.setMpw(mpw);
 
 		return memberDAO.memberDelete(mvo);
 	}
