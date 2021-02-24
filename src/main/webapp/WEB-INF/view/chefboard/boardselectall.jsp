@@ -30,9 +30,6 @@
 		//datepicker
 		
 		
-		// 구독 랭킹
-		var rankUrl = "/kosmoJns/subscribe/subRank.do"
-		var rankmethod = "POST"
 		
 		//검색버튼
 		$(document).on("click", "#searchBtn", function(){
@@ -62,7 +59,15 @@
 	System.out.println("boardselectall.jsp rank >>> : " + rank);
 %>
 <form id="subscribeRank">
-	<table>
+	<table border=1>
+		<tr>
+			<td colspan="3" align="center">셰프 랭킹</td>
+		</tr>
+		<tr>
+			<td>순위</td>
+			<td>셰프이름</td>
+			<td>구독자 수</td>
+		</tr>
 <%
 	if (rank > 0) {
 		for(int i=0; i<rank; i++){
@@ -71,7 +76,7 @@
 		<tr class="rankTr">
 			<td class="rankTd"><%= i + 1 %> 등</td>
 			<td class="rankTd"><%= svo.getChefnick() %></td>
-			<td class="rankTd">구독자 <%= svo.getSubCount() %> 명</td>
+			<td class="rankTd"><%= svo.getSubCount() %> 명</td>
 		</tr>	
 <%
 		} // end of for
@@ -84,8 +89,8 @@
 		
 	} // end of if
 %>
-	</table>
-</form>
+	</table>	
+</form>	
 <%
 	Object obj = request.getAttribute("listAll");
 	List<ChefBoardVO> list = (List)obj;

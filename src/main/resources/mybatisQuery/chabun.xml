@@ -30,7 +30,7 @@
 	</select>
 
 	<select id="getReplyChabun" resultType="reply">
-		SELECT NVL(MAX(INSTR(A.RNO, -4)), 0) + 1  RNO FROM REPLY A
+		SELECT NVL(MAX(SUBSTR(A.RNO, -4)), 0) + 1  RNO FROM REPLY A
 	</select>
 	
 	<select id="getRecipeBoardChabun" resultType="rbvo">
