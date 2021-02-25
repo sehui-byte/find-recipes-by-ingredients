@@ -14,79 +14,13 @@
 	<script type="text/javascript">
 			$(document).ready(()=>
 			{		
-				$("#writeBtn").click(()=>
+				$("#updateBtn").click(()=>
 				{
-					if(validation())
-					{
-						$("#rbwriteForm").attr("action", "rbwrite.do");
-						$("#rbwriteForm").submit();
-					}
-					else
-					{
-						console.log("else");
-					}
+
+					$("#rbupdateForm").attr("action", "rbupdate.do");
+					$("#rbupdateForm").submit();
+
 				});
-				
-				function validation()
-				{
-					var mno = $("#mno").val(); //로그인한 회원번호(작성자)
-					var rcp_nm = $("#rcp_nm").val(); //메뉴명
-					var rcp_way2 = $("#rcp_way2").val(); //조리방법
-					var rcp_pat2 = $("#rcp_pat2").val(); //요리종류
-					var hash_tag = $("#hash_tag").val(); //해쉬태그
-					var main_img = $("#main_img").val(); //레시피 메인 이미지
-					var rcp_parts_dtls = $("#rcp_parts_dtls").val(); //재료정보
-					
-					console.log("mno >>> : " + mno);
-					console.log("rcp_nm >>> : " + rcp_nm);
-					console.log("rcp_way2 >>> : " + rcp_way2);
-					console.log("rcp_pat2 >>> : " + rcp_pat2);
-					console.log("hash_tag >>> : " + hash_tag);
-					console.log("main_img >>> : " + main_img);
-					console.log("rcp_parts_dtls >>> : " + rcp_parts_dtls);
-					
-					if(!mno) //"", null, undefined, 0, NaN 값일 경우
-					{
-						alert("회원번호가 유효하지 않습니다.");
-						console.log("mno >>> : " + mno);
-					}
-					else if(!rcp_nm)
-					{
-						alert("메뉴명이 유효하지 않습니다.");
-						console.log("rcp_nm >>> : " + rcp_nm);
-					}
-					else if(!rcp_way2)
-					{
-						alert("조리방법이 유효하지 않습니다.");
-						console.log("rcp_way2 >>> : " + rcp_way2);
-					}
-					else if(!rcp_pat2)
-					{
-						alert("요리종류가 유효하지 않습니다.");
-						console.log("rcp_pat2 >>> : " + rcp_pat2);
-					}
-					else if(!hash_tag)
-					{
-						alert("해쉬태그가 유효하지 않습니다.");
-						console.log("hash_tag >>> : " + hash_tag);
-					}
-					else if(!main_img)
-					{
-						alert("레시피 메인 이미지가 유효하지 않습니다.");
-						console.log("main_img >>> : " + main_img);
-					}
-					else if(!rcp_parts_dtls)
-					{
-						alert("재료정보가 유효하지 않습니다.");
-						console.log("rcp_parts_dtls >>> : " + rcp_parts_dtls);
-					}
-					else
-					{
-						return true;
-					}
-					
-					return false;
-				};	
 			});
 			
 			function setThumbnail(e)
@@ -106,8 +40,10 @@
 	</head>
 	
 	<body>
-		<form id="rbwriteForm" name="rbwriteForm" enctype="multipart/form-data" method="post">
+		<form id="rbupdateForm" name="rbupdateForm" enctype="multipart/form-data" method="post">
+			<input type="hidden" id="rbno" name="rbno" value="<%=rbvo.getRbno()%>">
 			<input type="hidden" id="mno" name="mno" value="<%=mno%>">
+			<input type="button" id="updateBtn" value="수정"> 
 			<table border="1" style="margin: auto;">
 				<tr>
 					<td colspan="2"><p style="text-align: center;">글수정</p></td>
