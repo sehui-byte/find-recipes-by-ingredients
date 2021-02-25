@@ -111,7 +111,7 @@ if (principal != null && principal instanceof MemberVO) {
 				</ul>
 				<!-- 로그아웃시에 왔던 알림 갯수 표시 -->
 				<button type="button" class="btn btn-primary">
-					미확인알림 <span class="badge bg-secondary"><%  %></span>
+					미확인알림 <span class="badge bg-secondary" id="msgCount"></span>
 				</button>
 				<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
 				<div id="socketAlarm"></div>
@@ -158,27 +158,39 @@ if (principal != null && principal instanceof MemberVO) {
 		console.log("웹소켓 연결");
 		//웹소켓 서버에서 메세지를 보내면 자동으로 실행된다
 		socket.onmessage = onMessage;
+		var mid = "<%=mid %>";
+		console.log("mid >> " + mid);
+		//var a = 'null,\'' + mid '\',' + 'count';
+		//onMessage(a);
 
 		//evt파라미터는 웹소켓이 보내준 데이터 의미
 		function onMessage(evt) {
 			console.log("메세지 받음");
 			var arriveTime = new Date();
 			var data = evt.data;
+			
+			if(data.substring(0,5) == 'count'){
+				var count = data.substring(6,1);
+				document.getElementById("msgCount").innerHTML = count;
+			}
+			else{
+				var toast = '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
+				toast += '<div class="toast-header"><class="rounded me-2">';
+				toast += '<strong class="me-auto">Bootstrap</strong>';
+				toast += '<small class="sub"></small>';
+				toast += '<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
+				toast += '</div><div class="toast-body">';
+				toast += data;
+				toast += '</div></div>';
+				$("#socketAlarm").append(toast);
+				$(".toast").toast({
+					"animation" : true,
+					"autohide" : false
+				});
+				$('.toast').toast('show');
+			}
 			console.log(data);
-			var toast = '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
-			toast += '<div class="toast-header"><class="rounded me-2">';
-			toast += '<strong class="me-auto">Bootstrap</strong>';
-			toast += '<small class="sub"></small>';
-			toast += '<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
-			toast += '</div><div class="toast-body">';
-			toast += data;
-			toast += '</div></div>';
-			$("#socketAlarm").append(toast);
-			$(".toast").toast({
-				"animation" : true,
-				"autohide" : false
-			});
-			$('.toast').toast('show');
+			
 			sock.close();//소켓연결종료
 
 			function timeBefore() {
