@@ -12,6 +12,8 @@
 			{
 				$("#writeBtn").click(()=>
 				{
+					console.log("adasd");
+					$("#rbwriteForm").attr("action", "rbwrite.do");
 					$("#rbwriteForm").submit();
 				});
 			});
@@ -19,7 +21,7 @@
 	</head>
 	
 	<body>
-		<form id="rbwriteForm" name="rbwriteForm" action="rbwrite.do" enctype="multipart/form-data" method="POST">
+		<form id="rbwriteForm" name="rbwriteForm" enctype="multipart/form-data" method="POST">
 			<input type="button" id="writeBtn" value="작성">
 			<input type="hidden" name="mno" value="<%=mno%>">
 			<table border="1" style="margin: auto;">
