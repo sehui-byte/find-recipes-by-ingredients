@@ -117,7 +117,7 @@ public class RecipeBoardController
 		
 		logger.info("rbvo >>> : " + rbvo.toString());
 		
-		logger.info("insert >>> : " + recipeBoardService.recipeBoardInsert(rbvo));		
+		logger.info("insert >>> : " + recipeBoardService.recipeBoardInsert(rbvo));
 		
 		model.addAttribute("list", recipeBoardService.recipeBoardSelectAll());
 		return "recipeboard/recipeboard";
