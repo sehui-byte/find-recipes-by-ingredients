@@ -38,7 +38,8 @@
 
 	<!-- 최근 검색어  -->
 	<%@ include file="/WEB-INF/view/product/recentKeyword.jsp"%>
-
+	<!-- 최근 본 상품 -->
+	<%@ include file="./recentProduct.jsp"%>
 	<!-- 검색결과 -->
 	<div id="result"></div>
 	</div>
@@ -80,8 +81,8 @@
 		function enterKey() {
 			if (window.event.keyCode == 13) {
 				find();
-				//recentSearch();
-				//clearInput();
+				recentSearch();
+				clearInput();
 			}
 		}
 
@@ -118,7 +119,7 @@
 							html += '<div class="card-group">';
 							for ( var i in item) {
 								var category1 = item[i].category1; //식품만 검색되게.
-								if (category1 === '식품') {
+								if (true) {
 									var title = item[i].title;//상품명
 									title = title.replace(/,/gi,'');
 									var image = item[i].image;//상품이미지
@@ -131,13 +132,6 @@
 									var brand = item[i].brand;//브랜드명
 									var mallName = item[i].mallName;//쇼핑몰상호
 
-									//html += '<a href="' + link +'" class="btn btn-primary" onclick=clickpurchase('+recentPro+')>구매하기</a> ';
-									//html += '<a href="' + link +'" class="btn btn-primary">구매하기</a> ';
-									// 구매하기 클릭시 최근 본 상품에 추가
-									/* $("#btn btn-primary").click(function(){
-										clickpurchase(recentPro);
-									}) */;
-
 									//onclick시 보낼 매개변수 문자열 : str (,로 구분)
 									var str = productId
 											+ ','
@@ -148,8 +142,9 @@
 											+ ',' + hprice;
 
 									// 최근 본 상품 목록 필요한 매개변수 문자열
-									var recentPro = productId + '^^' + image
+									var recentPro = title + '^^' + image
 											+ '^^' + link;
+									
 									html += '<div class="col">';
 									html += '<div class="card" style="width: 18rem;">';
 									html += '<img src="' + image + '" alt="..." class="card-img-top"">';
@@ -167,9 +162,9 @@
 									html += '<li class="list-group-item"> 브랜드 : '
 											+ brand + '</li>';
 									html += '</ul>';
-
-									//html += '<a href="' + link +'" class="btn btn-primary" onclick=clickpurchase('+recentPro+')>구매하기</a> ';
-									html += '<a href="' + link +'" class="btn btn-primary">구매하기</a> ';
+									html += '<a href="' + link +'" class="btn btn-primary" id="purchaseBtn" target="_blank" onclick="return clickpurchase(\''
+											+ recentPro
+											+'\');">구매하기</a> ';
 
 									//관심 상품 버튼 추가
 									html += '<input type="button" class="heartBtn" value="관심상품 추가" id='
@@ -205,6 +200,7 @@
 					});
 		}
 
+		
 		
 		//관심상품 버튼 이벤트 //동적 태그에 이벤트 주기
 		function clickProductId(productStr) {
@@ -260,13 +256,11 @@
 			} else {
 				alert("이미 등록된 상품입니다");
 			}
-
 		}
 	</script>
 
 
-	<!-- 최근 본 상품 -->
-	<!--  include file="/WEB-INF/view/product/recentProduct.jsp" -->
+	
 
 
 	<!-- bootstrap -->

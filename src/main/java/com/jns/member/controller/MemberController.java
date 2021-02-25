@@ -2,6 +2,8 @@ package com.jns.member.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
 import com.jns.common.FileUploadUtil;
+import com.jns.common.Paging;
 import com.jns.member.service.MemberService;
 import com.jns.member.vo.MemberVO;
 
@@ -83,7 +86,7 @@ public class MemberController {
 
 	// 회원전체 조회
 	@RequestMapping(value = "memberSelectAll", method = RequestMethod.GET)
-	public String memberSelectAll(MemberVO mvo, Model model) {
+	public String memberSelectAll(MemberVO mvo, Model model){
 
 		logger.info("MemberController MemberSelectAll 함수 시작 >>> :: ");
 		//logger.info("mvo >>> :: " + mvo);
@@ -102,6 +105,42 @@ public class MemberController {
 	}
 
 
+	// 회원전체 조회
+	@RequestMapping(value = "memberSelectAllPage", method = RequestMethod.GET)
+	public String memberSelectAllPage(MemberVO mvo, Model model,HttpServletRequest request) {
+
+		logger.info("MemberController MemberSelectAll 함수 시작 >>> :: ");
+		//logger.info("mvo >>> :: " + mvo);
+
+		logger.info("회원번호 >>> : " + mvo.getMno());
+		List<MemberVO> listAll = memberService.memberSelectAll(mvo);
+		logger.info("MemberController MemberSelectAll >>>> ::: " + listAll.size());
+
+
+		//페이징 세팅	
+		int totalCnt =0;
+		String mPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
+		
+		Paging.setPage(mvo, mPage, pageCtrl);
+		
+		List<MemberVO> listPage = memberService.memberSelectAllPage(mvo);
+		logger.info("member page >>> memberSelectAll listPage.size() "+listPage.size());
+		
+		if( listPage.size() != 0) {
+			totalCnt = listPage.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+			mvo.setTotalCount(totalCnt);				// vo에 담기
+		}
+
+		model.addAttribute("listPage", listPage);
+		model.addAttribute("p_mvo", mvo);
+		
+		return "mem/memberSelectAllpage";
+	}
+	
+	
+	
+	
 	// 회원 조회 : 선택 조회
 	@RequestMapping(value = "memberSelect", method = RequestMethod.GET)
 	public String memberSelect(MemberVO mvo, Model model) {

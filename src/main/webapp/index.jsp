@@ -21,6 +21,7 @@
 <ul>
 	<li><a href="noticeForm.do">공지사항 글쓰기</a></li>
 	<li><a href="noticeSelectAll.do">공지사항 목록</a></li>
+	<li><a href="noticeSelectAllPage.do">공지사항 목록 페이징</a></li>
 </ul>
 
 <hr>
@@ -29,6 +30,7 @@
 <ul>
 	<li><a href="qnaForm.do">QnA 글쓰기</a></li>
 	<li><a href="qnaSelectAll.do">QnA 목록 조회</a></li>
+	<li><a href="qnaSelectAllPage.do">QnA 목록 페이징</a></li>
 </ul>
 
 <hr>
@@ -56,6 +58,7 @@
 
 <ul>
 	<li><a href="chefboard/writeForm.do">chefboard writeForm</a></li>
+	<li><a href="chefboard/writeFormFile.do">chefboard writeForm 파일</a></li>
 	<li><a href="chefboard/boardselectall.do">chefboard boardList</a></li>
 	<li><a href="chefboard/boardselectallpage.do">chefboard 페이징</a></li>
 </ul>
@@ -72,8 +75,8 @@
 
 <h3>구매 관련 URL</h3>
 <ul>
-	<li><a href = "searchPage.do">상품 검색 페이지</a></li>
-	<li><a href = "likeProduct.do">관심상품 목록 보기(테스트)</a></li>
+	<li><a href = "searchPage.do">상품 검색 페이지(최근검색어,최근본상품,관심상품등록)</a></li>
+	<li><a href = "likeProduct.do">관심상품 목록 보기</a></li>
 	<li><a href = "socketTest2">웹소켓 테스트</a></li>
 </ul>
 
@@ -104,6 +107,11 @@
 <h3>구독 관련 URL</h3>
 <ul>
 	<li><a href="/kosmoJns/subscribe/test.do">테스트</a></li>
+</ul>
+
+<h3>플라스크 테스트</h3>
+<ul>
+	<li><a href="flaskTest.do">플라스크 테스트</a></li>
 </ul>
 
 <hr>

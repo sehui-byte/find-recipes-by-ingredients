@@ -42,6 +42,7 @@ public class RecipeServiceImpl implements RecipeService
 		logger.info("[RecipeController] recipeSelectAll() >>> : 진입");
 		List<RecipeVO> result = recipeDAO.recipeSelectAll();
 		System.out.println("result.size >>> : " + result.size());
+	
 		return result;
 	}
 

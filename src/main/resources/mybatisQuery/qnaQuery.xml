@@ -32,31 +32,6 @@
 			</if>
 	</select>
 	
-	<select id="QnASelectPaging" parameterType="bvo" resultType="int">
-	
-		SELECT 
-			COUNT(1)
-			FROM (SELECT
-							 A.BNO		BNO
-							,A.MNO		MNO
-							,A.BTYPE	BTYPE
-							,A.BTITLE	BTITLE
-							,A.BCONTENT	BCONTENT
-							,A.MNICK	MNICK
-							,A.BFILE	BFILE
-							,TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') BINSERTDATE
-							,TO_CHAR(A.BUPDATEDATE, 'YYYY-MM-DD') BUPDATEDATE
-							,A.BVIEWS		BVIEWS	
-							,A.BDELETEYN	BDELETEYN
-							,A.BHITS		BHITS
-					FROM BOARD A
-					WHERE A.BNO = BNO
-					AND   A.BDELETEYN = 'Y'
-					ORDER BY A.BNO DESC)	
-			WHERE 	BDELETEYN = 'Y'			
-			
-	</select>
-	
 	<insert id="QnAInsert" parameterType="bvo">
 		INSERT INTO BOARD(
 						  BNO
@@ -131,7 +106,7 @@
 		UPDATE
 			BOARD 
 				SET
-					VIEWS =
+					BVIEWS =
 					(
 						SELECT
 							BVIEWS+1
@@ -144,14 +119,14 @@
 			WHERE
 				BNO = #{bno, jdbcType=VARCHAR}
 				AND BDELETEYN = 'Y'
-				AND BTYPE = 'Q'
+				
 	</update>
 	
 	<update id="QnAHITS" parameterType="bvo">
 		UPDATE
 			BOARD 
 				SET
-					HITS =
+					BHITS =
 					(
 						SELECT
 							BHITS+1
@@ -164,7 +139,36 @@
 			WHERE
 				BNO = #{bno, jdbcType=VARCHAR}
 				AND BDELETEYN = 'Y'
-				AND BTYPE = 'Q'
+				
 	</update>
 	
+	<select id="QnASelectPaging" resultType="bvo">
+		SELECT * FROM
+		(SELECT
+				 A.BNO
+				,A.BTYPE
+				,A.BTITLE
+				,A.BCONTENT
+				,A.MNICK
+				,A.BFILE
+				,CEIL(ROW_NUMBER() OVER(ORDER BY A.BNO DESC)/ #{pageSize}) PAGENO
+				,COUNT(A.BNO)	OVER() AS TOTALCOUNT
+		FROM
+				BOARD A
+		WHERE A.BTYPE='Q'
+		AND	  A.BDELETEYN ='Y'
+					<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+					<![CDATA[AND TO_CHAR(BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					<![CDATA[AND TO_CHAR(BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					</if>
+					<if test="keyfilter=='key1'">
+						<![CDATA[AND BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+					<if test="keyfilter=='key2'">
+						<![CDATA[AND BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+			) RB
+		WHERE PAGENO = #{curPage}
+		ORDER BY BNO DESC	
+	</select>
 </mapper>

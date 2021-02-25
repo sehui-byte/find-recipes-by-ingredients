@@ -4,7 +4,9 @@
 
 <%@ page import ="com.jns.member.vo.MemberVO"%>
 <%@ page import ="java.util.List" %>    
+
 <%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+
 
 
 <!DOCTYPE html>
@@ -51,61 +53,18 @@
 						"action":"memberSelect.do"}).submit();			
 				}); 
 			});
-
-<script type="text/javascript">
-$(document).ready(function(){
-		//체크박스 체크 확인하기 
-		
-		$("#chkAll").click(function(){
-			//var chkbox = $(".chkbox").length;
-			if($("#chkAll").prop("checked")){
-				$(".chkbox").prop("checked", true);
-			}else{
-				$(".chkbox").prop("checked", false);
-				
-			}
-			
-		});
-
-			$(document).on("click", "#I", function(){
-				location.href="memberInsert.do";
-			});
-			
-			$(document).on("click", "#U", function(){
-				alert("U >>>");
-				$("#memberList").attr({
-					"method":"GET",
-					"action":"memberSelect.do"}).submit();	
-			});
-			
-			$(document).on("click", "#D", function(){
-				alert("D >>>");
-				
-				$("#memberList").attr({
-					"method":"GET",
-					"action":"memberSelect.do"}).submit();
-			});
-		});
-
-	
-		function checkOnly(chk){
-			var chkObj = document.getElementsByName("mno");		
-			console.log("chkObj >>> : " + chkObj);
-			for (var i=0; i < chkObj.length; i++){
-				if (chkObj[i] != chk){
-					chkObj[i].checked = false;
-				}
-			}
-		}	
 </script>
 </head>
 <body>
 <%request.setCharacterEncoding("UTF-8"); %>
-SELECT ALL
+
 <%
 	Object obj = request.getAttribute("listAll");
 	List<MemberVO> list = (List)obj;
 	int nCnt = list.size();
+	
+
+	
 %>
 <form name = "memberList" id="memberList">
 <table border="1" align="center">

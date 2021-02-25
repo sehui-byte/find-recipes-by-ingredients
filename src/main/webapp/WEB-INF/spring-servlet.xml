@@ -42,14 +42,14 @@
 		base-package="com.jns.**" />
 
 	<!-- websocket handler -->
-	<websocket:handlers allowed-origins="*">
-		<websocket:mapping handler="echoHandler" path="/echo" />
-		<websocket:handshake-interceptors>
-	         <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
-	      </websocket:handshake-interceptors>
-	      <websocket:sockjs websocket-enabled="true"/>
-	 </websocket:handlers>
-	 
-	 <bean id="echoHandler" class="com.jns.product.websocket.ProductApplicantWebSocketHandler" />
-
-</beans>
+	   <websocket:handlers allowed-origins="*">
+	      <websocket:mapping handler="echoHandler" path="/echo" />
+	      <websocket:handshake-interceptors>
+	            <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+	         </websocket:handshake-interceptors>
+	         <websocket:sockjs websocket-enabled="true"/>
+	    </websocket:handlers>
+	    
+	    <bean id="echoHandler" class="com.jns.product.websocket.ProductApplicantWebSocketHandler" />
+	
+	</beans>

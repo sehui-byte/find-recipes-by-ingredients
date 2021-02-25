@@ -13,4 +13,7 @@ public interface NoticeService {
 	public int NoticeInsert(BoardVO nvo);
 	public int NoticeUpdate(BoardVO nvo);
 	public int NoticeDelete(BoardVO nvo);
+	
+	public int NoticeVIEWS(BoardVO nvo);
+	public int NoticeHITS(BoardVO nvo);
 }

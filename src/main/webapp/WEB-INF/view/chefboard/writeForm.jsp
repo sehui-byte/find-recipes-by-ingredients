@@ -21,8 +21,7 @@
 				
 				$("#f_writeForm").attr({
 					"method": "POST",
-					"action": "/kosmoJns/chefboard/boardInsert.do",
-					//"enctype": "multipart/form-data"
+					"action": "/kosmoJns/chefboard/boardInsert.do"
 				});
 				$("#f_writeForm").submit();
 			}		
@@ -50,7 +49,7 @@
 </head>
 <body>
 <div id="boardTit"><h3>글쓰기</h3></div>
-	<form id="f_writeForm" name="f_writeForm">
+	<form id="f_writeForm" name="f_writeForm" enctype="multipart/form-data">
 		<table border="1">
 			<tr>
 				<td colspan="2"><p style="text-align: center;">레시피 작성하기</p></td>
@@ -80,15 +79,15 @@
 			</tr>
 			<tr>
 				<td>해쉬태그</td>
-				<td></td>
+				<td>#<input id="hash_tag" name="hash_tag" type="text" placeholder="해쉬태그"></td>
 			</tr>
 			<tr>
-				<td>이미지</td>
-				<td><img src=""></td>
+				<td>메인 이미지</td>
+				<td><input id="main_img" name="main_img" type="file"></td>
 			</tr>
 			<tr>
 				<td>재료정보</td>
-				<td></td>
+				<td><input id="rcp_parts_dtls" name="rcp_parts_dtls" type="text" placeholder=",로 구분 예)양파 1/6개, 달걀 1개, 소금  1작은술"></td>
 			</tr>
 			<tr>
 				<td>만드는법 1</td>

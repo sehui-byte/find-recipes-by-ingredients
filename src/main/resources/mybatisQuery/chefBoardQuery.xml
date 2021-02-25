@@ -329,14 +329,14 @@
 			AND		B.MLEVEL = 'C'
 			AND		A.RB_DELETEYN = 'Y'
 					<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
-					<![CDATA[AND TO_CHAR(RB_INSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-					<![CDATA[AND TO_CHAR(RB_INSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					<![CDATA[AND TO_CHAR(A.RB_INSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					<![CDATA[AND TO_CHAR(A.RB_INSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
 					</if>
 					<if test="keyfilter=='key1'">
-						<![CDATA[AND RCP_NM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+						<![CDATA[AND A.RCP_NM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 					</if>
 					<if test="keyfilter=='key2'">
-						<![CDATA[AND RBNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+						<![CDATA[AND A.RBNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 					</if>
 			) RB
 		WHERE PAGENO = #{curPage}

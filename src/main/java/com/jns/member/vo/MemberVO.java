@@ -34,6 +34,14 @@ public class MemberVO implements UserDetails {
 	private String startdate;
 	private String enddate;
 
+	
+	// 페이징 **
+	private int pageSize;
+	private int groupSize;
+	private int curPage;
+	private int totalCount;
+	
+
 	// spring security 권한 관련 변수
 	private List<GrantedAuthority> authorities;
 	
@@ -43,7 +51,8 @@ public class MemberVO implements UserDetails {
 	
 	public MemberVO(String mno, String mlevel, String mid, String mpw, String mname, String mnick, String mhp,
 			String memail, String maddr, String mzipcode, String maddrdetail, String mphoto, String minsertdate,
-			String mupdatedate, String mdeleteyn, String keyfilter, String keyword, String startdate, String enddate,
+			String mupdatedate, String mdeleteyn, String keyfilter, String keyword, String startdate, String enddate, int pageSize, int groupSize, int curPage, int totalCount,
+			
 			List<GrantedAuthority> authorities) {
 		this.mno = mno;
 		this.mlevel = mlevel;
@@ -65,8 +74,47 @@ public class MemberVO implements UserDetails {
 		this.startdate = startdate;
 		this.enddate = enddate;
 		this.authorities = authorities;
+		this.curPage = curPage;
+		this.pageSize = pageSize;
+		this.groupSize = groupSize;
+		this.totalCount = totalCount;
 	}
 
+	//페이지
+	
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public int getGroupSize() {
+		return groupSize;
+	}
+
+	public int getCurPage() {
+		return curPage;
+	}
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public void setGroupSize(int groupSize) {
+		this.groupSize = groupSize;
+	}
+
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
+	}
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	
 	// setter
 	public void setMno(String mno) {
 		this.mno = mno;

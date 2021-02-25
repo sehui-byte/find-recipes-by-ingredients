@@ -4,6 +4,8 @@ package com.jns.qna.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jns.board.vo.BoardVO;
 import com.jns.chabun.service.ChabunService;
+import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.common.ChabunUtil;
 import com.jns.common.FileUploadUtil;
 import com.jns.common.Paging;
@@ -49,24 +52,34 @@ public class QnAController {
 		return "QnA/qnaForm";
 	}
 	
-	/*
-	@RequestMapping(value="11", method=RequestMethod.GET)
-	public String QnASelectPaging(BoardVO bvo, Model model) {
-		logger.info("QnAController QnASelectPaging  ::");	
-		logger.info("QnAController boardSelect bvo.getSbnum() " + bvo.getPage());
+	
+	@RequestMapping(value="qnaSelectAllPage", method=RequestMethod.GET)
+	public String QnASelectPaging(BoardVO bvo, Model model, HttpServletRequest request) {
+		logger.info("QnAController QnASelectPaging  :: ");	
+
+		// 페이징		
+		int totalCnt = 0;
+		String cPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
 		
-		List<BoardVO> listS = qnaService.QnASelectPaging(bvo);
-		logger.info("QnAController QnASelectPaging listS.size >>>:: " + listS.size());
+		Paging.setPage(bvo, cPage, pageCtrl);
+		
+		List<BoardVO> listPage = qnaService.QnASelectPaging(bvo);
+		logger.info("QnAController QnASelectPaging listS.size >>> " + listPage.size());
 		
 		
-		if(listS.size() == 1) {
-			model.addAttribute("listS", listS);
-			return "QnA/qnaSelectAll";
+		if(listPage.size() != 0) {
+			
+			totalCnt = listPage.get(0).getTotalCount();
+			bvo.setTotalCount(totalCnt);
 		}
 		
-		return "QnA/qnaForm";
+		model.addAttribute("listPage", listPage);
+		model.addAttribute("p_bvo", bvo);
+		
+		return "QnA/qnaSelectAllPage";
 	}
-	*/
+	
 	
 	@RequestMapping(value="imgtest", method=RequestMethod.GET)
 	public String qnAInsert(BoardVO bvo, Model model) {
@@ -127,23 +140,13 @@ public class QnAController {
 	}
 	
 	@RequestMapping(value="qnaSelectAll",method=RequestMethod.GET)
-	public String QnASelectAll(@ModelAttribute("BoardVO")BoardVO bvo, Model model) {
+	public String QnASelectAll(BoardVO bvo, Model model) {
 		logger.info("QnAController QnASelectAll start >>>: ");
 		
-		// 전체 레코드 수
-		
-		int totalcount = qnaService.QnASelectPaging(bvo); 
-		logger.info("totalcount : " + totalcount);
 		
 		List<BoardVO> listAll = qnaService.QnASelectAll(bvo);
 		logger.info("QnAController QnASelectAll listAll.size() >>> : " + listAll.size());
 		
-		ModelAndView mav = new ModelAndView(); 
-		mav.addObject("curPage", bvo.getPage());
-		mav.addObject("totalcount", totalcount + "");
-		mav.addObject("count", bvo.getCount());
-		
-		mav.addObject("bvo", bvo);
 		
 		try {
 		
@@ -200,28 +203,38 @@ public class QnAController {
 				
 	}	
 	
-	@RequestMapping(value="qnaViews", method=RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Boolean> QnAVIEWS(BoardVO bvo) {
+	@RequestMapping(value="qnaViews", method=RequestMethod.GET)
+	public String QnAVIEWS(BoardVO bvo) {
+		logger.info("qnaViews >>> ");
+		logger.info("qnaViews bvo.getBno() >>> : " + bvo.getBno());
 		
-		logger.info("QnAVIEWS >>> : ");
+		int result = qnaService.QnAVIEWS(bvo);
+		logger.info("qnaViews result >>> : " + result);
 		
-		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
-		map.put("ok", qnaService.QnAVIEWS(bvo));
-		
-		return map;
+		if (1 == result) {
+			return "GOOD";
+		}
+		else{
+			return "BAD";
+		}
 	}
 	
-	@RequestMapping(value="qnaHits", method=RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Boolean> QnAHITS(BoardVO bvo) {
+	@RequestMapping(value="qnaHits", method=RequestMethod.GET)
+	public String QnAHITS(BoardVO bvo) {
+		logger.info("qnaHits >>> ");
+		logger.info("qnaHits bvo.getBno() >>> : " + bvo.getBno());
 		
-		logger.info("QnAHITS >>> : ");
+		int result = qnaService.QnAHITS(bvo);
+		logger.info("qnaHits result >>> : " + result);
 		
-		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
-		map.put("ok", qnaService.QnAHITS(bvo));
-		
-		return map;
+		if (1 == result) {
+			return "GOOD";
+		}
+		else{
+			return "BAD";
+		}
 	}
 	
 	@RequestMapping(value="qnaDelete", method=RequestMethod.GET)

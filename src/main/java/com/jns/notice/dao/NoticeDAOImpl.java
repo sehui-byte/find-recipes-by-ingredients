@@ -51,4 +51,16 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return (Integer)sqlSession.delete("NoticeDelete", nvo);
 	}
 
+	@Override
+	public int NoticeVIEWS(BoardVO nvo) {
+		// TODO Auto-generated method stub
+		return (Integer)sqlSession.update("NoticeVIEWS", nvo);
+	}
+
+	@Override
+	public int NoticeHITS(BoardVO nvo) {
+		// TODO Auto-generated method stub
+		return (Integer)sqlSession.update("NoticeHITS", nvo);
+	}
+
 }

@@ -26,6 +26,7 @@ import com.jns.chefboard.service.ChefBoardService;
 import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.common.ChabunUtil;
 import com.jns.common.CommonUtil;
+import com.jns.common.FileUploadUtil;
 import com.jns.common.Paging;
 import com.jns.recipeboard.service.RecipeBoardService;
 import com.jns.recipeboard.vo.RecipeBoardVO;
@@ -60,19 +61,24 @@ public class ChefBoardController {
 	/********************************************************************************************
 	* 글쓰기 Form
 	********************************************************************************************/
-	@RequestMapping(value="chefboard/writeForm", method=RequestMethod.GET)
-	public String writeForm(ChefBoardVO cbvo, Model model, HttpServletRequest request) {
+	@RequestMapping(value="/chefboard/writeForm", method=RequestMethod.GET)
+	public String writeForm(ChefBoardVO cbvo) {
 		logger.info("[chefC] >> writeForm 호출 성공");
 		
 		return "chefboard/writeForm";
 	}
-	
+	@RequestMapping(value="/chefboard/writeFormFile", method=RequestMethod.GET)
+	public String writeFormFile(ChefBoardVO cbvo) {
+		logger.info("[chefC] >> writeForm 호출 성공");
+		
+		return "chefboard/writeFormFile";
+	}
 	
 	/********************************************************************************************
 	* 글쓰기
 	********************************************************************************************/
-	@RequestMapping(value="chefboard/boardInsert", method=RequestMethod.POST)
-	public ModelAndView boardInsert(ChefBoardVO cbvo, HttpServletRequest request) {
+	@RequestMapping(value="/chefboard/boardInsert", method=RequestMethod.POST)
+	public ModelAndView boardInsert(ChefBoardVO cbvo, MultipartHttpServletRequest request) {
 		logger.info("[chefC] >> boardInsert 호출 성공");
 		logger.info("[chefC] >> boardInsert >> cbvo.getMno >>> : " + cbvo.getMno());
 		
@@ -86,11 +92,35 @@ public class ChefBoardController {
 		//채번 setting
 		String rbno = ChabunUtil.getChiefBoardChabun("D", chabunService.getRecipeBoardChabun().getRbno());
 		logger.info("[chefC] >> boardInsert >> rbno >>> : " + rbno);
-		cbvo.setRbno(rbno);
+		cbvo.setRbno(rbno);	
 		
+		//========================== 이미지 업로드 ===========================//
+		List<String> keyList = new FileUploadUtil().uploadFiles(request, "chefboard");
 		
-		//이미지 업로드
+		//======================== VO에 이미지 key 매핑 ======================//
+		cbvo.setMain_img(keyList.get(0));
+		cbvo.setManual_img01(keyList.get(1));
+		cbvo.setManual_img02(keyList.get(2));
+		cbvo.setManual_img03(keyList.get(3));
+		cbvo.setManual_img04(keyList.get(4));
+		cbvo.setManual_img05(keyList.get(5));
+		cbvo.setManual_img06(keyList.get(6));
+		cbvo.setManual_img07(keyList.get(7));
+		cbvo.setManual_img08(keyList.get(8));
+		cbvo.setManual_img09(keyList.get(9));
+		cbvo.setManual_img10(keyList.get(10));
+		cbvo.setManual_img11(keyList.get(11));
+		cbvo.setManual_img12(keyList.get(12));
+		cbvo.setManual_img13(keyList.get(13));
+		cbvo.setManual_img14(keyList.get(14));
+		cbvo.setManual_img15(keyList.get(15));
+		cbvo.setManual_img16(keyList.get(16));
+		cbvo.setManual_img17(keyList.get(17));
+		cbvo.setManual_img18(keyList.get(18));
+		cbvo.setManual_img19(keyList.get(19));
+		cbvo.setManual_img20(keyList.get(20));
 		
+		logger.info("cbvo >>> : " + cbvo.toString());
 		
 		result = chefBoardService.boardInsert(cbvo);
 		logger.info("result>>>"+result);
@@ -148,10 +178,7 @@ public class ChefBoardController {
 	@RequestMapping(value="/chefboard/boardselectall", method=RequestMethod.GET)
 	public String boardSelectAll(ChefBoardVO cbvo, Model model, SubscribeVO svo) {
 		logger.info("[chefC] >> boardSelectAll 호출 성공");
-		
-		// 페이징
-		
-		
+			
 		List<ChefBoardVO> listAll = chefBoardService.chefBoardSelectAll(cbvo);
 		
 		model.addAttribute("listAll", listAll);
@@ -208,7 +235,7 @@ public class ChefBoardController {
 	* 글 수정
 	********************************************************************************************/
 	@RequestMapping(value="/chefboard/boardupdate", method=RequestMethod.POST)
-	public String boardUpdate(@ModelAttribute ChefBoardVO cbvo, HttpServletRequest request)
+	public String boardUpdate(@ModelAttribute ChefBoardVO cbvo, MultipartHttpServletRequest request)
 							throws IllegalStateException, IOException{		
 		logger.info("[chefC] >> boardUpdate 호출 성공");
 		logger.info("[chefC] >> boardUpdate >> cbvo.getRbno() >>> : " + cbvo.getRbno());
@@ -216,7 +243,33 @@ public class ChefBoardController {
 		int nCnt = 0;
 		String url = "";
 		
-		// 이미지 업로드
+		//========================== 이미지 업로드 ===========================//
+		List<String> keyList = new FileUploadUtil().uploadFiles(request, "chefboard");
+		
+		//======================== VO에 이미지 key 매핑 ======================//
+		cbvo.setMain_img(keyList.get(0));
+		cbvo.setManual_img01(keyList.get(1));
+		cbvo.setManual_img02(keyList.get(2));
+		cbvo.setManual_img03(keyList.get(3));
+		cbvo.setManual_img04(keyList.get(4));
+		cbvo.setManual_img05(keyList.get(5));
+		cbvo.setManual_img06(keyList.get(6));
+		cbvo.setManual_img07(keyList.get(7));
+		cbvo.setManual_img08(keyList.get(8));
+		cbvo.setManual_img09(keyList.get(9));
+		cbvo.setManual_img10(keyList.get(10));
+		cbvo.setManual_img11(keyList.get(11));
+		cbvo.setManual_img12(keyList.get(12));
+		cbvo.setManual_img13(keyList.get(13));
+		cbvo.setManual_img14(keyList.get(14));
+		cbvo.setManual_img15(keyList.get(15));
+		cbvo.setManual_img16(keyList.get(16));
+		cbvo.setManual_img17(keyList.get(17));
+		cbvo.setManual_img18(keyList.get(18));
+		cbvo.setManual_img19(keyList.get(19));
+		cbvo.setManual_img20(keyList.get(20));
+		
+		logger.info("cbvo >>> : " + cbvo.toString());
 		
 		nCnt = chefBoardService.boardUpdate(cbvo);
 		logger.info("[chefC] >> boardUpdate >> nCnt >>> : " + nCnt);
@@ -240,9 +293,6 @@ public class ChefBoardController {
 		
 		int nCnt = 0;
 		String url = "";
-		
-		// 이미지 삭제
-		
 		
 		nCnt = chefBoardService.boardDelete(cbvo);
 		logger.info("[chefC] >> boardDelete >> nCnt >>> : " + nCnt);

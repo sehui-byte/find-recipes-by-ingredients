@@ -31,6 +31,8 @@
 		font-weight: bole;
 	}
 </style>
+<link rel="stylesheet" href="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.css">
+<script src="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	
 	$(document).ready(function(){
@@ -43,14 +45,34 @@
 			
 		
 		//datepicker
-		
-		
+		$("#startdate").datepicker({
+			showOn: "button",    // 달력을 표시할 타이밍 (both: focus or button)
+			buttonImage: "/kosmoJns/resources/img/cal_0.gif", 
+			buttonImageOnly : true,            
+			buttonText: "날짜선택",             
+			dateFormat: "yy-mm-dd",             
+			changeMonth: true,                  			
+			onClose: function(selectedDate) {    
+				$("#enddate").datepicker("option", "minDate", selectedDate);
+			}	
+		});
+		$("#enddate").datepicker({
+			showOn: "button", 
+			buttonImage: "/kosmoJns/resources/img/cal_0.gif", 
+			buttonImageOnly : true,
+			buttonText: "날짜선택",
+			dateFormat: "yy-mm-dd",
+			changeMonth: true,			
+			onClose: function(selectedDate) {	
+				$("#startdate").datepicker("option", "maxDate", selectedDate);
+			}               
+		});
 		
 		//검색버튼
 		$(document).on("click", "#searchBtn", function(){
 			console.log("searchBtn >>> : ");
 			$("#boardList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/myinfo/myRecipeList.do"}).submit();
+								 ,"action":"/kosmoJns/chefboard/boardselectallpage.do"}).submit();
 		});
 		
 		
@@ -161,7 +183,7 @@
 		<td class="tt"><%= cbvo.getHits() %> </td>
 		<td class="tt"><%= cbvo.getRb_insertdate() %> </td>
 		<td class="tt"><%= cbvo.getRb_updatedate() %> </td>
-		<td class="tt"> 메인이미지 </td>
+		<td class="tt"><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getMain_img())%>"></td>
 	</tr>
 <%
 		} // end of for
@@ -184,7 +206,7 @@
 </table>
 <br>
 	<div class="paging">
-		<jsp:include page="paging.jsp" flush="true">
+		<jsp:include page="../../include/jsp/paging.jsp" flush="true">
 		<jsp:param name="url" value="boardselectallpage.do"/>
 		<jsp:param name="str" value=""/>
 		<jsp:param name="pageSize" value="<%=pageSize%>"/>

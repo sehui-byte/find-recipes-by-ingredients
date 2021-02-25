@@ -16,9 +16,9 @@ public class QnADAOImpl implements QnADAO {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int QnASelectPaging(BoardVO bvo) {
+	public List<BoardVO> QnASelectPaging(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.insert("QnASelectPaging", bvo);
+		return sqlSession.selectList("QnASelectPaging", bvo);
 	}
 
 	@Override
@@ -52,15 +52,15 @@ public class QnADAOImpl implements QnADAO {
 	}
 
 	@Override
-	public boolean QnAVIEWS(BoardVO bvo) {
+	public int QnAVIEWS(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("QnAVIEWS") > 0;
+		return (Integer)sqlSession.update("QnAVIEWS", bvo);
 	}
 
 	@Override
-	public boolean QnAHITS(BoardVO bvo) {
+	public int QnAHITS(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("QnAHITS") > 0;
+		return (Integer)sqlSession.insert("QnAHITS", bvo);
 	}
 
 }

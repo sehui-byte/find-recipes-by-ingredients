@@ -2,18 +2,22 @@ package com.jns.notice.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jns.board.vo.BoardVO;
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
 import com.jns.common.FileUploadUtil;
+import com.jns.common.Paging;
 import com.jns.notice.service.NoticeService;
 
 @Controller
@@ -40,20 +44,30 @@ public class NoticeController {
 		return "notice/noticeForm";
 	}	
 		
-	@RequestMapping(value="noticeSelectPaging", method=RequestMethod.GET)
-	public String NoticeSelectPaging(BoardVO nvo, Model model) {
+	@RequestMapping(value="noticeSelectAllPage", method=RequestMethod.GET)
+	public String NoticeSelectPaging(BoardVO nvo, Model model, HttpServletRequest request) {
 		logger.info("NoticeController NoticeSelectPaging start ::");	
-		//logger.info("NoticeController NoticeSelectPaging nvo.getPage() " + nvo.getPage());
 		
-		List<BoardVO> listS = noticeService.NoticeSelectPaging(nvo);
-		logger.info("NoticeController NoticeSelectPaging listS.size >>>:: " + listS.size());
+		// 페이징		
+		int totalCnt = 0;
+		String cPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
+				
+		Paging.setPage(nvo, cPage, pageCtrl);
 		
-		if(listS.size() == 1) {
-			model.addAttribute("listS", listS);
-			return "notice/noticeInsert";
+		List<BoardVO> listPage = noticeService.NoticeSelectPaging(nvo);
+		logger.info("NoticeController NoticeSelectPaging listS.size >>>:: " + listPage.size());
+		
+		if(listPage.size() != 0) {
+			
+			totalCnt = listPage.get(0).getTotalCount();
+			nvo.setTotalCount(totalCnt);
 		}
 		
-		return "notice/noticeForm";
+		model.addAttribute("listPage", listPage);
+		model.addAttribute("p_nvo", nvo);
+		
+		return "notice/noticeSelectAllPage";
 	}
 	
 	
@@ -175,6 +189,40 @@ public class NoticeController {
 		return "notice/noticeSelectAll";
 				
 	}	
+	
+	@ResponseBody
+	@RequestMapping(value="noticeViews", method=RequestMethod.GET)
+	public String NoticeVIEWS(BoardVO nvo) {
+		logger.info("noticeViews >>> ");
+		logger.info("noticeViews nvo.getBno() >>> : " + nvo.getBno());
+		
+		int result = noticeService.NoticeVIEWS(nvo);
+		logger.info("noticeViews result >>> : " + result);
+		
+		if (1 == result) {
+			return "GOOD";
+		}
+		else{
+			return "BAD"; 
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="noticeHits", method=RequestMethod.GET)
+	public String NoticeHITS(BoardVO nvo) {
+		logger.info("noticeHits >>> ");
+		logger.info("noticeHits bvo.getBno() >>> : " + nvo.getBno());
+		
+		int result = noticeService.NoticeHITS(nvo);
+		logger.info("noticeHits result >>> : " + result);
+		
+		if (1 == result) {
+			return "GOOD"; 
+		}
+		else{
+			return "BAD";
+		}
+	}
 	
 	
 	@RequestMapping(value="noticeDelete", method=RequestMethod.GET)

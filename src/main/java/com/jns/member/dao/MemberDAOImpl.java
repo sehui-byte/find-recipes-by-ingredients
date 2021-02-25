@@ -113,4 +113,11 @@ public class MemberDAOImpl implements MemberDAO {
 
 		return sqlSession.selectOne("memberTempPWOK", mvo);
 	}
+	
+	@Override
+	public List<MemberVO> memberSelectAllpage(MemberVO mvo){
+		logger.info("memberSelectAll paging >>>>> ");
+		
+		return sqlSession.selectList("memberSelectAllPage", mvo);
+	}
 }
