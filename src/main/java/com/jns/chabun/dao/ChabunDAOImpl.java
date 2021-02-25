@@ -3,6 +3,7 @@ package com.jns.chabun.dao;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.jns.alarm.vo.AlarmVO;
@@ -16,7 +17,7 @@ import com.jns.recipeboard.vo.RecipeBoardVO;
 import com.jns.reply.vo.ReplyVO;
 import com.jns.subscribe.vo.SubscribeVO;
 
-@Repository
+//@Repository
 public class ChabunDAOImpl implements ChabunDAO {
 
 	private Logger logger = Logger.getLogger(ChabunDAOImpl.class);

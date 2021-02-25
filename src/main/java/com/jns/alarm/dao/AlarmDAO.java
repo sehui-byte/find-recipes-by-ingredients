@@ -7,7 +7,7 @@ import com.jns.alarm.vo.AlarmVO;
 public interface AlarmDAO {
 
 	//알람 개수 리턴
-	public int countAlarm(AlarmVO avo);
+	public String countAlarm(AlarmVO avo);
 	//receiver의 알람 리턴
 	public List<AlarmVO> selectAlarm(AlarmVO avo);
 	//알람 읽으면 삭제되게

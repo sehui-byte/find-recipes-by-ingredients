@@ -2,20 +2,26 @@ package com.jns.alarm.dao;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.jns.alarm.vo.AlarmVO;
 
+//@Repository
 public class AlarmDAOImpl implements AlarmDAO{
+	
+	@Autowired(required = false)
+	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public int countAlarm(AlarmVO avo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String countAlarm(AlarmVO avo) {
+		return sqlSession.selectOne("countAlarm",avo);
 	}
 
 	@Override
 	public List<AlarmVO> selectAlarm(AlarmVO avo) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("selectAlarm",avo);
 	}
 
 	@Override
@@ -26,8 +32,7 @@ public class AlarmDAOImpl implements AlarmDAO{
 
 	@Override
 	public int insertAlarm(AlarmVO avo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("insertAlarm",avo);
 	}
 
 }
