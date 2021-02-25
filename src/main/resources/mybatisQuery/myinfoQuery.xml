@@ -4,6 +4,15 @@
 
 <mapper namespace="com.jns.myinfo.dao.MyinfoDAO">
 
+	<select id="myinfoSelect" parameterType="mvo" resultType="mvo">
+		SELECT
+			*
+		FROM
+			MEMBER A
+		WHERE
+			A.MNO = #{mno, jdbcType=VARCHAR}
+	</select>
+
 	<!-- 내가 쓴 레시피 조회하기 -->
 	<select id="myRecipeList" parameterType="mvo" resultType="rbvo">
 	
@@ -131,7 +140,7 @@
 	ORDER BY 1
 	</select>
 	
-	<select id="myRankUpdateCheckCount" parameterType="mvo" resultType="java.lang.Integer">
+	<select id="myLevelUpdateCheckCount" parameterType="mvo" resultType="java.lang.Integer">
 		SELECT
 			COUNT(*)
 		FROM
@@ -140,20 +149,23 @@
 		AND A.RB_DELETEYN = 'Y'
 	</select>	
 	
-	<select id="myRankUpdateCheckHits" parameterType="mvo" resultType="java.lang.Integer">
+	<select id="myLevelUpdateCheckHits" parameterType="mvo" resultType="java.lang.Integer">
 		SELECT
-			NVL(SUM(A.HITS), 0)
+			SUM(A.HITS)
 		FROM
 			RECIPE_BOARD A
 		WHERE A.MNO = #{mno, jdbcType=VARCHAR}
 		AND A.RB_DELETEYN = 'Y'
 	</select>	
 	
-	<update id="myRankUpdate" parameterType="mvo">
+	<update id="myLevelUpdate" parameterType="mvo">
 		UPDATE MEMBER A
+		SET
 			A.MLEVEL = 'C'
 		WHERE
 			A.MNO = #{mno, jdbcType=VARCHAR}
+		AND
+			A.MLEVEL = 'U'
 		AND
 			A.MDELETEYN = 'Y'
 	</update>

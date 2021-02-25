@@ -41,7 +41,7 @@ if (principal != null && principal instanceof MemberVO) {
 			<a href="/kosmoJns/admin/main.do">admin 접속</a>
 			<br>
 		</s:authorize>
-		<s:authorize access="hasRole('ROLE_U')">
-			<a href="/kosmoJns/myinfo.do">일반 회원 페이지로</a>
+		<s:authorize access="hasAnyRole('ROLE_U', 'ROLE_C')">
+			<a href="/kosmoJns/myinfo.do?mno=<%=mno%>">MyPage</a>
 		</s:authorize>
 	</div>

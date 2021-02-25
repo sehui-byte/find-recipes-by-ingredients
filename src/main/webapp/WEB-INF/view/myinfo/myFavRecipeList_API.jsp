@@ -9,9 +9,7 @@
 %>    
 <script>
 	$(document).ready(function(){
-		// 체크박스 전체 선택	
 		$("#checkAll_APIRecipe").click(function(){
-			//alert("1111");
 			var checkAll = $("#checkAll_APIRecipe");	
 			if (checkAll.prop("checked")){
 				$(".checkbox_APIRecipe").prop("checked",true)	
@@ -27,7 +25,6 @@
 				
 				for (var i = 0; i < nCnt; i++){
 					var chk = checkbox[i].value;
-					alert(chk);
 					chkVal.push(chk);
 				}
 				
@@ -123,13 +120,15 @@
 			<td>추천수</td>	
 			<td>기타</td>	
 		</tr>
+<%
+			} // end of for
+%>
 		<tr>
 			<td colspan="6">
 				<input type="button" name="deleteMyFavRecipeAPI" id="deleteMyFavRecipeAPI" value="즐겨찾기 삭제">
 			</td>
 		</tr>	
 <%
-			} // end of for
 		}else{
  %>		
 		<tr>

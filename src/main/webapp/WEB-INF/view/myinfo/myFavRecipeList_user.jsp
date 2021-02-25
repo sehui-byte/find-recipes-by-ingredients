@@ -16,7 +16,7 @@
 				$(".checkbox_RecipeBoard").prop("checked",true)	
 			}else{
 				$(".checkbox_RecipeBoard").prop("checked",false)	
-			}
+			}})
 			
 			$("#deleteMyFavRecipeBoard").on("click", function(){
 				var nCnt = $(".checkbox_RecipeBoard:checked").length;
@@ -65,7 +65,6 @@
 								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
 		});
 		
-	})
 </script>
 
 <form id="myFavRecipeBoardList" name="myFavRecipeBoardList" >
@@ -118,13 +117,15 @@
 			<td><%= rbvo.getHits() %></td>	
 			<td>기타</td>	
 		</tr>
+<%
+			} // end for
+%>
 		<tr>
 			<td colspan="6">
 				<button type="button" name="deleteMyFavRecipeBoard" id="deleteMyFavRecipeBoard">즐겨찾기 삭제</button>
 			</td>
 		</tr>	
 <%
-			} // end for
 		} else{
  %>		
 		<tr>

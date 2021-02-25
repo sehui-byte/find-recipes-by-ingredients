@@ -54,21 +54,21 @@ public class MyinfoDAOImpl implements MyinfoDAO {
 	}
 
 	@Override
-	public int myRankUpdateCheckCount(BoardVO bvo) {
+	public int myLevelUpdateCheckCount(BoardVO bvo) {
 
 		return (Integer) sqlSession.selectOne("myRankUpdateCheckCount", bvo);
 	}
 
 	@Override
-	public int myRankUpdateCheckHits(BoardVO bvo) {
+	public int myLevelUpdateCheckHits(BoardVO bvo) {
 
 		return (Integer) sqlSession.selectOne("myRankUpdateCheckHits", bvo);
 	}
 
 	@Override
-	public int myRankUpdate(BoardVO bvo) {
+	public int myLevelUpdate(BoardVO bvo) {
 
-		return sqlSession.update("myRankUpdate", bvo);
+		return sqlSession.update("myLevelUpdate", bvo);
 	}
 
 	@Override
@@ -81,6 +81,12 @@ public class MyinfoDAOImpl implements MyinfoDAO {
 	public List<RecipeBoardVO> myFavRecipeList2(MemberVO mvo) {
 
 		return sqlSession.selectList("myFavRecipeList2", mvo);
+	}
+
+	@Override
+	public List<MemberVO> myinfoSelect(MemberVO mvo) {
+	
+		return sqlSession.selectOne("myinfoSelect", mvo);
 	}
 
 }

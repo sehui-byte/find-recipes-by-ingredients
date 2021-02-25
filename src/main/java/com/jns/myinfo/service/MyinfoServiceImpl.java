@@ -59,19 +59,19 @@ public class MyinfoServiceImpl implements MyinfoService {
 	}
 
 	@Override
-	public int myRankUpdate(BoardVO bvo) {
-		logger.info("myRankUpdate() 진입 >>> ");
+	public int myLevelUpdate(BoardVO bvo) {
+		logger.info("myLevelUpdate() 진입 >>> ");
 
 		// 게시글 50개
-		int count = myinfoDAO.myRankUpdateCheckCount(bvo);
-		logger.info("해당 회원의 게시글 >>> : "+count);
+		int count = myinfoDAO.myLevelUpdateCheckCount(bvo);
+		logger.info("해당 회원의 게시글 >>> : " + count);
 
 		// 추천수 100
-		int hits = myinfoDAO.myRankUpdateCheckHits(bvo);
-		logger.info("해당 회원의 게시글 추천수 총합 >>> : "+hits);
+		int hits = myinfoDAO.myLevelUpdateCheckHits(bvo);
+		logger.info("해당 회원의 게시글 추천수 총합 >>> : " + hits);
 
-		if (count > 50 && hits > 100) {
-			return myinfoDAO.myRankUpdate(bvo);
+		if (count > 0 && hits >= 0) {
+			return myinfoDAO.myLevelUpdate(bvo);
 
 		} else {
 			return 0;
@@ -95,22 +95,22 @@ public class MyinfoServiceImpl implements MyinfoService {
 
 	@Override
 	public int myPWUpdate(MemberVO mvo, MemberVO _mvo) {
-		
+
 		logger.info("myPWUpdate() 진입 >>> ");
 
 		int result = 0;
-		
+
 		logger.info("mpw >>> :" + mvo.getMpw());
 
 		// ID로 암호화된 회원의 비밀번호 추출
 		List<MemberVO> list = myinfoDAO.myPWUpdateCheck(mvo);
-		
+
 		MemberVO selectMvo = null;
 		selectMvo = list.get(0);
-		
+
 		// 패스워드 일치 여부 체크
 		boolean bool = PasswordEncoder.pwMatches(mvo.getMpw(), selectMvo.getMpw());
-		
+
 		// 회원 일치 >> 비밀번호 수정
 		if (bool) {
 
@@ -123,5 +123,12 @@ public class MyinfoServiceImpl implements MyinfoService {
 		}
 		// 불일치
 		return result;
-	}	
+	}
+
+	@Override
+	public List<MemberVO> myinfoSelect(MemberVO mvo) {
+	
+		return myinfoDAO.myinfoSelect(mvo);
+	}
+
 }

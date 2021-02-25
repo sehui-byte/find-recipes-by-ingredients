@@ -1,9 +1,6 @@
 package com.jns.favorites.service;
 
-import java.util.List;
-
 import com.jns.favorites.vo.FavoritesVO;
-import com.jns.recipe.vo.RecipeVO;
 
 public interface FavoritesService {
 	// 추천 레시피 확인하기
@@ -14,5 +11,6 @@ public interface FavoritesService {
 
 	// 추천 레시피 취소
 	public int myFavRecipeDelete(FavoritesVO fvo);
+	
 	
 }

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.jns.chefboard.vo.ChefBoardVO;
+import com.jns.favorites.vo.FavoritesVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Repository
@@ -60,7 +61,11 @@ public class ChefBoardDAOImpl implements ChefBoardDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("chefBoardSelectAllPage");
 	}
+
+	@Override
+	public int chefBoardHitsCount(FavoritesVO fvo) {
 	
-	
+		return sqlSession.selectOne("chefBoardHitsCount", fvo);
+	}
 
 }

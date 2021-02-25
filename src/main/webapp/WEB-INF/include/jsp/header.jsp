@@ -42,7 +42,6 @@ if (principal != null && principal instanceof MemberVO) {
 	}
 }
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,7 +114,6 @@ if (principal != null && principal instanceof MemberVO) {
 			<%=mnick%>님 반갑습니다.<br />
 			<form id="logoutForm">
 				<input type="button" id="logoutbtn" name="logoutbtn" value="로그아웃하기" />
-				<s:csrfInput />
 			</form>
 			<br>
 		</s:authorize>
@@ -123,8 +121,8 @@ if (principal != null && principal instanceof MemberVO) {
 			<a href="/kosmoJns/admin/main.do">admin 접속</a>
 			<br>
 		</s:authorize>
-		<s:authorize access="hasRole('ROLE_U')">
-			<a href="/kosmoJns/myinfo.do">일반 회원 페이지로</a>
+		<s:authorize access="hasAnyRole('ROLE_U', 'ROLE_C')">
+			<a href="/kosmoJns/myinfo.do?mno=<%=mno%>">MyPage</a>
 		</s:authorize>
 	</div>
 

@@ -15,5 +15,13 @@
 		
 		<input type="submit" value="submit">
 	</form>
+<br>
+<hr/>
+<%
+	Object obj = request.getAttribute("returnText");
+	out.println(obj);
+
+%>
+
 </body>
 </html>
