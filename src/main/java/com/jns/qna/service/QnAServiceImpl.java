@@ -24,7 +24,7 @@ public class QnAServiceImpl implements QnAService {
 	}
 	
 	@Override
-	public int QnASelectPaging(BoardVO bvo) {
+	public List<BoardVO> QnASelectPaging(BoardVO bvo) {
 		// TODO Auto-generated method stub
 		return qnaDAO.QnASelectPaging(bvo);
 	}

@@ -2,6 +2,8 @@ package com.jns.notice.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import com.jns.board.vo.BoardVO;
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
 import com.jns.common.FileUploadUtil;
+import com.jns.common.Paging;
 import com.jns.notice.service.NoticeService;
 
 @Controller
@@ -41,20 +44,30 @@ public class NoticeController {
 		return "notice/noticeForm";
 	}	
 		
-	@RequestMapping(value="noticeSelectPaging", method=RequestMethod.GET)
-	public String NoticeSelectPaging(BoardVO nvo, Model model) {
+	@RequestMapping(value="noticeSelectAllPage", method=RequestMethod.GET)
+	public String NoticeSelectPaging(BoardVO nvo, Model model, HttpServletRequest request) {
 		logger.info("NoticeController NoticeSelectPaging start ::");	
-		//logger.info("NoticeController NoticeSelectPaging nvo.getPage() " + nvo.getPage());
 		
-		List<BoardVO> listS = noticeService.NoticeSelectPaging(nvo);
-		logger.info("NoticeController NoticeSelectPaging listS.size >>>:: " + listS.size());
+		// 페이징		
+		int totalCnt = 0;
+		String cPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
+				
+		Paging.setPage(nvo, cPage, pageCtrl);
 		
-		if(listS.size() == 1) {
-			model.addAttribute("listS", listS);
-			return "notice/noticeInsert";
+		List<BoardVO> listPage = noticeService.NoticeSelectPaging(nvo);
+		logger.info("NoticeController NoticeSelectPaging listS.size >>>:: " + listPage.size());
+		
+		if(listPage.size() != 0) {
+			
+			totalCnt = listPage.get(0).getTotalCount();
+			nvo.setTotalCount(totalCnt);
 		}
 		
-		return "notice/noticeForm";
+		model.addAttribute("listPage", listPage);
+		model.addAttribute("p_nvo", nvo);
+		
+		return "notice/noticeSelectAllPage";
 	}
 	
 	

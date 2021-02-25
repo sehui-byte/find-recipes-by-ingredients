@@ -1,5 +1,6 @@
 package com.jns.common;
 
+import com.jns.board.vo.BoardVO;
 import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.common.CommonUtil;
 import com.jns.qna.vo.QnAVO;
@@ -45,5 +46,41 @@ public class Paging {
 			cbvo.setPageSize(ctrl);
 		}
 		
+	}
+	
+	public static void setPage(BoardVO bvo, String curpage, String sizeCtrl) {
+		
+		if(curpage == null) bvo.setCurPage(1);
+		
+		if(curpage!=null){
+			int curnum=Integer.parseInt(curpage);
+			bvo.setCurPage(curnum);
+		}
+		
+		bvo.setGroupSize(10);
+		
+		if(sizeCtrl==null) bvo.setPageSize(10);
+		if(sizeCtrl!=null){
+			int ctrl=Integer.parseInt(sizeCtrl);
+			bvo.setPageSize(ctrl);
+		}
+	}
+	
+	public static void setPage1(BoardVO nvo, String curpage, String sizeCtrl) {
+		
+		if(curpage == null) nvo.setCurPage(1);
+		
+		if(curpage!=null){
+			int curnum=Integer.parseInt(curpage);
+			nvo.setCurPage(curnum);
+		}
+		
+		nvo.setGroupSize(10);
+		
+		if(sizeCtrl==null) nvo.setPageSize(10);
+		if(sizeCtrl!=null){
+			int ctrl=Integer.parseInt(sizeCtrl);
+			nvo.setPageSize(ctrl);
+		}
 	}
 }

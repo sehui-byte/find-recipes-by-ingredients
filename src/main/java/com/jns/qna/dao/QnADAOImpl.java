@@ -16,9 +16,9 @@ public class QnADAOImpl implements QnADAO {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int QnASelectPaging(BoardVO bvo) {
+	public List<BoardVO> QnASelectPaging(BoardVO bvo) {
 		// TODO Auto-generated method stub
-		return (Integer)sqlSession.insert("QnASelectPaging", bvo);
+		return sqlSession.selectList("QnASelectPaging", bvo);
 	}
 
 	@Override
