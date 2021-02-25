@@ -5,6 +5,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jns.alarm.vo.AlarmVO;
 import com.jns.board.vo.BoardVO;
 import com.jns.chef.vo.ChefVO;
 import com.jns.chefboard.vo.ChefBoardVO;
@@ -86,6 +87,11 @@ public class ChabunDAOImpl implements ChabunDAO {
 	public FavoritesVO getFavoritesChabun() {
 
 		return sqlSession.selectOne("getFavoritesChabun");
+	}
+
+	@Override
+	public AlarmVO getAlarmChabun() {
+		return sqlSession.selectOne("getAlarmChabun");
 	}
 
 }
