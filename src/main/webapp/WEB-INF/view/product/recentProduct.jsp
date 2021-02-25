@@ -64,16 +64,16 @@
 				<!-- <target="_blank> : 새 창에서 뜨기  / 없애면 현재 웹에서 이동-->
 				<span id="product1"> </span>
 			</div>
-			<div class="text-center_2">
+			<div class="text-center_2" align="center">
 				<span id="product2"> </span>
 			</div>
-			<div class="text-center_3">
+			<div class="text-center_3" align="center">
 				<span id="product3"> </span>
 			</div>
-			<div class="text-center_4">
+			<div class="text-center_4" align="center">
 				<span id="product4"> </span>
 			</div>
-			<div class="text-center_5">
+			<div class="text-center_5" align="center">
 				<span id="product5"> </span>
 			</div>
 		</div>
