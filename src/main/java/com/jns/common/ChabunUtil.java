@@ -22,11 +22,12 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_CA	= "CA"; // 장바구니 번호
 
 	//	public static final String BIZ_GUBUN_BUY = "P"; // 구매게시판
-	
+
 	public static final String BIZ_GUBUN_R = "R"; // 게시판 댓글: REPLY 
-//	public static final String BIZ_GUBUN_BUY = "P"; // 구매게시판
+	//	public static final String BIZ_GUBUN_BUY = "P"; // 구매게시판
 
 	public static final String BIZ_GUBUN_LP = "LP"; //관심상품 
+	public static final String BIZ_GUBUN_A = "A"; //소켓 알람 
 
 	// type : D : 20210001, M : YYYYMM, Y : YYYY, 
 	public static String numPad(String t, String c){
@@ -52,7 +53,7 @@ public abstract class ChabunUtil {
 	// 게시판 댓글 글 번호  
 	public static String getReplyChabun(String type, String memNum) {
 
-	//	return BIZ_GUBUN_RB.concat(ChabunUtil.numPad(type, memNum));
+		//	return BIZ_GUBUN_RB.concat(ChabunUtil.numPad(type, memNum));
 		return BIZ_GUBUN_R.concat(ChabunUtil.numPad(type, memNum));
 
 	}
@@ -119,6 +120,11 @@ public abstract class ChabunUtil {
 	// 관심상품 일련번호
 	public static String getLikeProductChabun(String type, String memNum) {
 		return BIZ_GUBUN_LP.concat(ChabunUtil.numPad(type, memNum));
+	}
+
+	// 알람 일련번호
+	public static String getAlarmChabun(String type, String memNum) {
+		return BIZ_GUBUN_A.concat(ChabunUtil.numPad(type, memNum));
 	}
 
 
