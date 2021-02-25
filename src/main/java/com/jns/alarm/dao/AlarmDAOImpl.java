@@ -2,8 +2,11 @@ package com.jns.alarm.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.jns.alarm.vo.AlarmVO;
 
+//@Repository
 public class AlarmDAOImpl implements AlarmDAO{
 
 	@Override

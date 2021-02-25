@@ -8,6 +8,7 @@
 <%@ page import="com.jns.recipe.vo.RecipeVO"%>
 <%@ page import="com.jns.recipeboard.vo.RecipeBoardVO"%>
 <%@ page import="com.jns.reply.vo.ReplyVO"%>
+<%@ page import="com.jns.alarm.vo.AlarmVO"%>
 
 <%-- fileUpload 정의 --%>
 <%@ page import="com.jns.common.FileLoadUtil"%>
@@ -41,6 +42,9 @@ if (principal != null && principal instanceof MemberVO) {
 		String loginSession = (String) session.getAttribute("mid");
 	}
 }
+
+
+
 %>
 
 <!DOCTYPE html>
@@ -107,7 +111,7 @@ if (principal != null && principal instanceof MemberVO) {
 				</ul>
 				<!-- 로그아웃시에 왔던 알림 갯수 표시 -->
 				<button type="button" class="btn btn-primary">
-					미확인알림 <span class="badge bg-secondary">4</span>
+					미확인알림 <span class="badge bg-secondary"><%  %></span>
 				</button>
 				<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
 				<div id="socketAlarm"></div>

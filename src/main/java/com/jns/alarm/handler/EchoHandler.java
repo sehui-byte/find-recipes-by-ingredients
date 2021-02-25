@@ -20,6 +20,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -39,13 +41,15 @@ import com.jns.product.vo.ProductVO;
 
 public class EchoHandler extends TextWebSocketHandler {
 	Logger logger = Logger.getLogger(EchoHandler.class);
-	private MemberDAO mdao;
+	//private MemberDAO mdao;
 	private AlarmDAO adao;
 	private ChabunDAO chabun;
 
 	@Autowired(required=false)
-	public EchoHandler(MemberDAO mdao) {
-		this.mdao = mdao;
+	public EchoHandler(AlarmDAO adao, ChabunDAO chabun) {
+		//this.mdao = mdao;
+		this.adao = adao;
+		this.chabun = chabun;
 
 	}
 	//로그인중인 개별유저
