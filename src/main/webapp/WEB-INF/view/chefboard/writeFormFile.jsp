@@ -83,7 +83,7 @@
 			</tr>
 			<tr>
 				<td>메인 이미지</td>
-				<td><input id="main_img" name="main_img" type="file"></td>
+				<td><input id="main_imgf" name="main_imgf" type="file"></td>
 			</tr>
 			<tr>
 				<td>재료정보</td>
@@ -95,7 +95,7 @@
 			</tr>
 			<tr>
 				<td>만드는법1_이미지</td>
-				<td><input type="file" name="manual_img01" id="manual_img01"></td>
+				<td><input type="file" name="manual_img01f" id="manual_img01f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 2</td>
@@ -103,7 +103,7 @@
 			</tr>
 			<tr>
 				<td>만드는법2_이미지</td>
-				<td><input type="file" name="manual_img02" id="manual_img02"></td>
+				<td><input type="file" name="manual_img02f" id="manual_img02f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 3</td>
@@ -111,7 +111,7 @@
 			</tr>
 			<tr>
 				<td>만드는법3_이미지</td>
-				<td><input type="file" name="manual_img03" id="manual_img03"></td>
+				<td><input type="file" name="manual_img03f" id="manual_img03f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 4</td>
@@ -119,7 +119,7 @@
 			</tr>
 			<tr>
 				<td>만드는법4_이미지</td>
-				<td><input type="file" name="manual_img04" id="manual_img04"></td>
+				<td><input type="file" name="manual_img04f" id="manual_img04f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 5</td>
@@ -127,7 +127,7 @@
 			</tr>
 			<tr>
 				<td>만드는법5_이미지</td>
-				<td><input type="file" name="manual_img05" id="manual_img05"></td>
+				<td><input type="file" name="manual_img05f" id="manual_img05f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 6</td>
@@ -135,7 +135,7 @@
 			</tr>
 			<tr>
 				<td>만드는법6_이미지</td>
-				<td><input type="file" name="manual_img06" id="manual_img06"></td>
+				<td><input type="file" name="manual_img06f" id="manual_img06f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 7</td>
@@ -143,7 +143,7 @@
 			</tr>
 			<tr>
 				<td>만드는법7_이미지</td>
-				<td><input type="file" name="manual_img07" id="manual_img07"></td>
+				<td><input type="file" name="manual_img07f" id="manual_img07f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 8</td>
@@ -151,7 +151,7 @@
 			</tr>
 			<tr>
 				<td>만드는법8_이미지</td>
-				<td><input type="file" name="manual_img08" id="manual_img08"></td>
+				<td><input type="file" name="manual_img08f" id="manual_img08f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 9</td>
@@ -159,7 +159,7 @@
 			</tr>
 			<tr>
 				<td>만드는법9_이미지</td>
-				<td><input type="file" name="manual_img09" id="manual_img09"></td>
+				<td><input type="file" name="manual_img09f" id="manual_img09f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 10</td>
@@ -167,7 +167,7 @@
 			</tr>
 			<tr>
 				<td>만드는법10_이미지</td>
-				<td><input type="file" name="manual_img10" id="manual_img10"></td>
+				<td><input type="file" name="manual_img10f" id="manual_img10f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 11</td>
@@ -175,7 +175,7 @@
 			</tr>
 			<tr>
 				<td>만드는법11_이미지</td>
-				<td><input type="file" name="manual_img11" id="manual_img11"></td>
+				<td><input type="file" name="manual_img11f" id="manual_img11f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 12</td>
@@ -183,7 +183,7 @@
 			</tr>
 			<tr>
 				<td>만드는법12_이미지</td>
-				<td><input type="file" name="manual_img12" id="manual_img12"></td>
+				<td><input type="file" name="manual_img12f" id="manual_img12f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 13</td>
@@ -191,7 +191,7 @@
 			</tr>
 			<tr>
 				<td>만드는법13_이미지</td>
-				<td><input type="file" name="manual_img13" id="manual_img13"></td>
+				<td><input type="file" name="manual_img13f" id="manual_img13f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 14</td>
@@ -199,7 +199,7 @@
 			</tr>
 			<tr>
 				<td>만드는법14_이미지</td>
-				<td><input type="file" name="manual_img14" id="manual_img14"></td>
+				<td><input type="file" name="manual_img14f" id="manual_img14f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 15</td>
@@ -207,7 +207,7 @@
 			</tr>
 			<tr>
 				<td>만드는법15_이미지</td>
-				<td><input type="file" name="manual_img15" id="manual_img15"></td>
+				<td><input type="file" name="manual_img15f" id="manual_img15f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 16</td>
@@ -215,7 +215,7 @@
 			</tr>
 			<tr>
 				<td>만드는법16_이미지</td>
-				<td><input type="file" name="manual_img16" id="manual_img16"></td>
+				<td><input type="file" name="manual_img16f" id="manual_img16f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 17</td>
@@ -223,7 +223,7 @@
 			</tr>
 			<tr>
 				<td>만드는법17_이미지</td>
-				<td><input type="file" name="manual_img17" id="manual_img17"></td>
+				<td><input type="file" name="manual_img17f" id="manual_img17f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 18</td>
@@ -231,7 +231,7 @@
 			</tr>
 			<tr>
 				<td>만드는법18_이미지</td>
-				<td><input type="file" name="manual_img18" id="manual_img18"></td>
+				<td><input type="file" name="manual_img18f" id="manual_img18f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 19</td>
@@ -239,7 +239,7 @@
 			</tr>
 			<tr>
 				<td>만드는법19_이미지</td>
-				<td><input type="file" name="manual_img19" id="manual_img19"></td>
+				<td><input type="file" name="manual_img19f" id="manual_img19f"></td>
 			</tr>
 			<tr>
 				<td>만드는법 20</td>
@@ -247,7 +247,7 @@
 			</tr>
 			<tr>
 				<td>만드는법20_이미지</td>
-				<td><input type="file" name="manual_img20" id="manual_img20"></td>
+				<td><input type="file" name="manual_img20f" id="manual_img20f"></td>
 			</tr>
 		</table>
 

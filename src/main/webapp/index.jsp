@@ -58,6 +58,7 @@
 
 <ul>
 	<li><a href="chefboard/writeForm.do">chefboard writeForm</a></li>
+	<li><a href="chefboard/writeFormFile.do">chefboard writeForm 파일</a></li>
 	<li><a href="chefboard/boardselectall.do">chefboard boardList</a></li>
 	<li><a href="chefboard/boardselectallpage.do">chefboard 페이징</a></li>
 </ul>
