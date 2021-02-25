@@ -25,7 +25,7 @@
 				$("#f_updateForm").attr({
 					"method": "POST",
 					"action": "/kosmoJns/chefboard/boardupdate.do",
-					//"enctype": "multipart/form-data"
+					"enctype": "multipart/form-data"
 				});
 				$("#f_updateForm").submit();
 			}
@@ -57,6 +57,22 @@
 			return true;
 		}
 	}
+	
+	
+	//썸네일
+	function setThumbnail(e){
+		console.log(e);
+		no = e.target.name.slice(-2);
+		
+		var reader = new FileReader();
+		reader.onload = function(e)
+		{
+			console.log("thumb+no >>> : " + "thumb"+no);
+			$("#thumb"+no).attr("src", e.target.result);
+		}
+		reader.readAsDataURL(event.target.files[0]);
+	}
+	
 </script>
 </head>
 <body>
@@ -95,416 +111,360 @@
 		</tr>
 		<tr>
 			<td>해쉬태그</td>
-			<td><%=cbvo.getHash_tag() == null ? "--" : "#" + cbvo.getHash_tag()%></td>
+			<td>#<input id="hash_tag" name="hash_tag" type="text" value="<%=cbvo.getHash_tag()%>"></td>
 		</tr>
 		<tr>
-			<td>이미지</td>
-			<td><img src="<%=cbvo.getMain_img()%>" width="300" height="300"></td>
+			<td>메인 이미지</td>
+			<!-- ********************* 경로 수정 필요함 *************************** -->
+			<td><img id="thumb00" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getMain_img())%>"></td>
+		</tr>
+		<tr>
+			<td colspan="2">사진 : <input id="main_img" name="file00" type="file" onchange="setThumbnail(event);"></td>
 		</tr>
 		<tr>
 			<td>재료정보</td>
 			<td><input type="text" id="rcp_parts_dtls" name="rcp_parts_dtls" value="<%=cbvo.getRcp_parts_dtls()%>"></td>
 		</tr>
-		
-		<%
-			if(cbvo.getManual01() != null && cbvo.getManual01().length() > 0)
-			{
-		%>
+
+
+
 				<tr>
-					<td>만드는법 1</td>
-					<td><textarea name="manual01" id="manual01" rows="10" cols="70"><%=cbvo.getManual01()%></textarea></td>
+					<td>만드는법 01</td>
+					<td><input id="manual01" name="manual01" type="text" value="<%=cbvo.getManual01()%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img01() != null && cbvo.getManual_img01().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법1_이미지</td>
-						<td><img src="<%=cbvo.getManual_img01()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual02() != null && cbvo.getManual02().length() > 0)
-			{
-		%>
 				<tr>
-					<td>만드는법 2</td>
-					<td><textarea name="manual02" id="manual02" rows="10" cols="70"><%=cbvo.getManual02()%></textarea></td>
+					<td>만드는법 참고 이미지_01</td>
+					<td><img id="thumb01" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img01())%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img02() != null && cbvo.getManual_img02().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법2_이미지</td>
-						<td><img src="<%=cbvo.getManual_img02()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual03() != null && cbvo.getManual03().length() > 0)
-			{
-		%>
 				<tr>
-					<td>만드는법 3</td>
-					<td><textarea name="manual03" id="manual03" rows="10" cols="70"><%=cbvo.getManual03()%></textarea></td>
+					<td colspan="2">사진 : <input id="manual_img01" name="file01" type="file" onchange="setThumbnail(event);"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img03() != null && cbvo.getManual_img03().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법3_이미지</td>
-						<td><img src="<%=cbvo.getManual_img03()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual04() != null && cbvo.getManual04().length() > 0)
-			{
-		%>
+
 				<tr>
-					<td>만드는법 4</td>
-					<td><textarea name="manual04" id="manual04" rows="10" cols="70"><%=cbvo.getManual04()%></textarea></td>
-				</tr>
-		<%
-				if(cbvo.getManual_img04() != null && cbvo.getManual_img04().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법4_이미지</td>
-						<td><img src="<%=cbvo.getManual_img04()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual05() != null && cbvo.getManual05().length() > 0)
-			{
-		%>
+					<td>만드는법1_이미지</td>
+					<td><input type="file" name="manual_img01f" id="manual_img01f"></td>
+				</tr>	
+
+
+	
+				
 				<tr>
-					<td>만드는법 5</td>
-					<td><textarea name="manual05" id="manual05" rows="10" cols="70"><%=cbvo.getManual05()%></textarea></td>
+					<td>만드는법 02</td>
+					<td><input id="manual02" name="manual02" type="text" value="<%=cbvo.getManual02()%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img05() != null && cbvo.getManual_img05().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법5_이미지</td>
-						<td><img src="<%=cbvo.getManual_img05()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual06() != null && cbvo.getManual06().length() > 0)
-			{
-		%>
 				<tr>
-					<td>만드는법 6</td>
-					<td><textarea name="manual06" id="manual06" rows="10" cols="70"><%=cbvo.getManual06()%></textarea></td>
+					<td>만드는법 참고 이미지_02</td>
+					<td><img id="thumb02" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img02())%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img06() != null && cbvo.getManual_img06().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법6_이미지</td>
-						<td><img src="<%=cbvo.getManual_img06()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual07() != null && cbvo.getManual07().length() > 0)
-			{
-		%>
 				<tr>
-					<td>만드는법 7</td>
-					<td><textarea name="manual07" id="manual07" rows="10" cols="70"><%=cbvo.getManual07()%></textarea></td>
+					<td colspan="2">사진 : <input id="manual_img02" name="file02" type="file" onchange="setThumbnail(event);"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img07() != null && cbvo.getManual_img07().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법7_이미지</td>
-						<td><img src="<%=cbvo.getManual_img07()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual08() != null && cbvo.getManual08().length() > 0)
-			{
-		%>
+				
+				
+				
+				
 				<tr>
-					<td>만드는법 8</td>
-					<td><textarea name="manual08" id="manual08" rows="10" cols="70"><%=cbvo.getManual08()%></textarea></td>
+					<td>만드는법 03</td>
+					<td><input id="manual03" name="manual03" type="text" value="<%=cbvo.getManual03()%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img08() != null && cbvo.getManual_img08().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법8_이미지</td>
-						<td><img src="<%=cbvo.getManual_img08()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual09() != null && cbvo.getManual09().length() > 0)
-			{
-		%>
 				<tr>
-					<td>만드는법 9</td>
-					<td><textarea name="manual09" id="manual09" rows="10" cols="70"><%=cbvo.getManual09()%></textarea></td>
+					<td>만드는법 참고 이미지_03</td>
+					<td><img id="thumb03" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img03())%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img09() != null && cbvo.getManual_img09().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법9_이미지</td>
-						<td><img src="<%=cbvo.getManual_img09()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual10() != null && cbvo.getManual10().length() > 0)
-			{
-		%>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img03" name="file03" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
+				
+				<tr>
+					<td>만드는법 04</td>
+					<td><input id="manual04" name="manual04" type="text" value="<%=cbvo.getManual04()%>"></td>
+				</tr>
+				<tr>
+					<td>만드는법 참고 이미지_04</td>
+					<td><img id="thumb04" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img04())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img04" name="file04" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
+				<tr>
+					<td>만드는법 04</td>
+					<td><input id="manual04" name="manual04" type="text" value="<%=cbvo.getManual04()%>"></td>
+				</tr>
+				<tr>
+					<td>만드는법 참고 이미지_04</td>
+					<td><img id="thumb04" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img04())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img04" name="file04" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
+				<tr>
+					<td>만드는법 05</td>
+					<td><input id="manual05" name="manual05" type="text" value="<%=cbvo.getManual05()%>"></td>
+				</tr>
+				<tr>
+					<td>만드는법 참고 이미지_05</td>
+					<td><img id="thumb05" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img05())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img05" name="file05" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
+				<tr>
+					<td>만드는법 06</td>
+					<td><input id="manual06" name="manual06" type="text" value="<%=cbvo.getManual06()%>"></td>
+				</tr>
+				<tr>
+					<td>만드는법 참고 이미지_06</td>
+					<td><img id="thumb06" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img06())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img06" name="file06" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
+				<tr>
+					<td>만드는법 07</td>
+					<td><input id="manual07" name="manual07" type="text" value="<%=cbvo.getManual07()%>"></td>
+				</tr>
+				<tr>
+					<td>만드는법 참고 이미지_07</td>
+					<td><img id="thumb07" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img07())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img07" name="file07" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
+				<tr>
+					<td>만드는법 08</td>
+					<td><input id="manual08" name="manual08" type="text" value="<%=cbvo.getManual08()%>"></td>
+				</tr>
+				<tr>
+					<td>만드는법 참고 이미지_03</td>
+					<td><img id="thumb08" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img08())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img08" name="file08" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
+				<tr>
+					<td>만드는법 09</td>
+					<td><input id="manual09" name="manual09" type="text" value="<%=cbvo.getManual09()%>"></td>
+				</tr>
+				<tr>
+					<td>만드는법 참고 이미지_09</td>
+					<td><img id="thumb09" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img09())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img09" name="file09" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
 				<tr>
 					<td>만드는법 10</td>
-					<td><textarea name="manual10" id="manual10" rows="10" cols="70"><%=cbvo.getManual10()%></textarea></td>
+					<td><input id="manual10" name="manual03" type="text" value="<%=cbvo.getManual10()%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img10() != null && cbvo.getManual_img10().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법10_이미지</td>
-						<td><img src="<%=cbvo.getManual_img10()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual11() != null && cbvo.getManual11().length() > 0)
-			{
-		%>
+				<tr>
+					<td>만드는법 참고 이미지_03</td>
+					<td><img id="thumb10" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img10())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img10" name="file10" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
 				<tr>
 					<td>만드는법 11</td>
-					<td><textarea name="manual11" id="manual11" rows="10" cols="70"><%=cbvo.getManual11()%></textarea></td>
+					<td><input id="manual11" name="manual11" type="text" value="<%=cbvo.getManual11()%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img11() != null && cbvo.getManual_img11().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법11_이미지</td>
-						<td><img src="<%=cbvo.getManual_img11()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual12() != null && cbvo.getManual12().length() > 0)
-			{
-		%>
+				<tr>
+					<td>만드는법 참고 이미지_11</td>
+					<td><img id="thumb11" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img11())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img11" name="file11" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
 				<tr>
 					<td>만드는법 12</td>
-					<td><textarea name="manual12" id="manual12" rows="10" cols="70"><%=cbvo.getManual12()%></textarea></td>
+					<td><input id="manual12" name="manual12" type="text" value="<%=cbvo.getManual12()%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img12() != null && cbvo.getManual_img12().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법12_이미지</td>
-						<td><img src="<%=cbvo.getManual_img12()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual13() != null && cbvo.getManual13().length() > 0)
-			{
-		%>
+				<tr>
+					<td>만드는법 참고 이미지_12</td>
+					<td><img id="thumb12" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img12())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img12" name="file12" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
 				<tr>
 					<td>만드는법 13</td>
-					<td><textarea name="manual13" id="manual13" rows="10" cols="70"><%=cbvo.getManual13()%></textarea></td>
+					<td><input id="manual13" name="manual13" type="text" value="<%=cbvo.getManual13()%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img13() != null && cbvo.getManual_img13().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법13_이미지</td>
-						<td><img src="<%=cbvo.getManual_img13()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual14() != null && cbvo.getManual14().length() > 0)
-			{
-		%>
+				<tr>
+					<td>만드는법 참고 이미지_13</td>
+					<td><img id="thumb13" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img13())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img13" name="file13" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
+				
 				<tr>
 					<td>만드는법 14</td>
-					<td><textarea name="manual14" id="manual14" rows="10" cols="70"><%=cbvo.getManual14()%></textarea></td>
+					<td><input id="manual14" name="manual14" type="text" value="<%=cbvo.getManual14()%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img14() != null && cbvo.getManual_img14().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법14_이미지</td>
-						<td><img src="<%=cbvo.getManual_img14()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual15() != null && cbvo.getManual15().length() > 0)
-			{
-		%>
 				<tr>
-					<td>만드는법15</td>
-					<td><textarea name="manual15" id="manual15" rows="10" cols="70"><%=cbvo.getManual15()%></textarea></td>
+					<td>만드는법 참고 이미지_14</td>
+					<td><img id="thumb14" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img14())%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img15() != null && cbvo.getManual_img15().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법15_이미지</td>
-						<td><img src="<%=cbvo.getManual_img15()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual16() != null && cbvo.getManual16().length() > 0)
-			{
-		%>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img14" name="file14" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
+				<tr>
+					<td>만드는법 14</td>
+					<td><input id="manual14" name="manual14" type="text" value="<%=cbvo.getManual14()%>"></td>
+				</tr>
+				<tr>
+					<td>만드는법 참고 이미지_14</td>
+					<td><img id="thumb14" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img14())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img14" name="file14" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
+				<tr>
+					<td>만드는법 15</td>
+					<td><input id="manual15" name="manual15" type="text" value="<%=cbvo.getManual15()%>"></td>
+				</tr>
+				<tr>
+					<td>만드는법 참고 이미지_15</td>
+					<td><img id="thumb15" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img15())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img15" name="file15" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
 				<tr>
 					<td>만드는법 16</td>
-					<td><textarea name="manual16" id="manual16" rows="10" cols="70"><%=cbvo.getManual16()%></textarea></td>
+					<td><input id="manual16" name="manual16" type="text" value="<%=cbvo.getManual16()%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img16() != null && cbvo.getManual_img16().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법16_이미지</td>
-						<td><img src="<%=cbvo.getManual_img16()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual17() != null && cbvo.getManual17().length() > 0)
-			{
-		%>
+				<tr>
+					<td>만드는법 참고 이미지_16</td>
+					<td><img id="thumb16" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img16())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img16" name="file16" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
 				<tr>
 					<td>만드는법 17</td>
-					<td><textarea name="manual17" id="manual17" rows="10" cols="70"><%=cbvo.getManual17()%></textarea></td>
+					<td><input id="manual17" name="manual17" type="text" value="<%=cbvo.getManual17()%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img17() != null && cbvo.getManual_img17().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법17_이미지</td>
-						<td><img src="<%=cbvo.getManual_img17()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual18() != null && cbvo.getManual18().length() > 0)
-			{
-		%>
+				<tr>
+					<td>만드는법 참고 이미지_17</td>
+					<td><img id="thumb17" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img17())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img17" name="file17" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
 				<tr>
 					<td>만드는법 18</td>
-					<td><textarea name="manual18" id="manual18" rows="10" cols="70"><%=cbvo.getManual18()%></textarea></td>
+					<td><input id="manual18" name="manual18" type="text" value="<%=cbvo.getManual18()%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img18() != null && cbvo.getManual_img18().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법18_이미지</td>
-						<td><img src="<%=cbvo.getManual_img18()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual19() != null && cbvo.getManual19().length() > 0)
-			{
-		%>
 				<tr>
-					<td>만드는법19</td>
-					<td><textarea name="manual19" id="manual19" rows="10" cols="70"><%=cbvo.getManual19()%></textarea></td>
+					<td>만드는법 참고 이미지_13</td>
+					<td><img id="thumb18" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img18())%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img19() != null && cbvo.getManual_img19().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법19_이미지</td>
-						<td><img src="<%=cbvo.getManual_img19()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>
-		
-		<%
-			if(cbvo.getManual20() != null && cbvo.getManual20().length() > 0)
-			{
-		%>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img18" name="file18" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
+				<tr>
+					<td>만드는법 19</td>
+					<td><input id="manual19" name="manual19" type="text" value="<%=cbvo.getManual19()%>"></td>
+				</tr>
+				<tr>
+					<td>만드는법 참고 이미지_19</td>
+					<td><img id="thumb19" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img19())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img19" name="file19" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+				
+				
+				
+				
+				
 				<tr>
 					<td>만드는법 20</td>
-					<td><textarea name="manual20" id="manual20" rows="10" cols="70"><%=cbvo.getManual20()%></textarea></td>
+					<td><input id="manual10" name="manual03" type="text" value="<%=cbvo.getManual20()%>"></td>
 				</tr>
-		<%
-				if(cbvo.getManual_img20() != null && cbvo.getManual_img20().length() > 0)
-				{
-		%>
-					<tr>
-						<td>만드는법20_이미지</td>
-						<td><img src="<%=cbvo.getManual_img20()%>"></td>
-					</tr>
-		<%		}
-			}
-		%>		
+				<tr>
+					<td>만드는법 참고 이미지_20</td>
+					<td><img id="thumb10" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img20())%>"></td>
+				</tr>
+				<tr>
+					<td colspan="2">사진 : <input id="manual_img20" name="file20" type="file" onchange="setThumbnail(event);"></td>
+				</tr>
+
+
+
 		<tr>
 			<td>등록일</td>
 			<td><%=cbvo.getRb_insertdate()%></td>

@@ -7,6 +7,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<% request.setCharacterEncoding("UTF-8"); %>
+<%
+	Object obj = request.getAttribute("listS");
+	List<ChefBoardVO> list = (List)obj;
+	ChefBoardVO cbvo = null;
+	if(list.size() == 1){
+		cbvo = list.get(0);
+	};
+%>
 <meta charset="UTF-8">
 <title>세프레시피 상세보기</title>
 <script type="text/javascript">
@@ -16,6 +25,20 @@
 		var sessionMno = "<%=mno%>";
 		var sessionWriter = "<%=mnick%>";
 		var boardWriter = $("#mnick").val();
+		
+		var vm = new Vue({
+			el: "#selectForm",
+			data: {  
+				hitsPoint:"<%=cbvo.getHits()%>",
+				plus:"1"
+			},
+			methods: {
+				hitPlus:function(){
+					this.hitsPoint = parseInt(this.hitsPoint) + parseInt(this.plus);
+				}
+			}
+		});
+		
 		
 		// 로그인 유저와 작성자가 일치할 경우 수정/삭제 버튼 생성
 		if ( sessionWriter == boardWriter){
@@ -160,16 +183,7 @@
 </script>
 </head>
 <body>
-<% request.setCharacterEncoding("UTF-8"); %>
-<%
-	Object obj = request.getAttribute("listS");
-	List<ChefBoardVO> list = (List)obj;
-	ChefBoardVO cbvo = null;
-	if(list.size() == 1){
-		cbvo = list.get(0);
-	};
-%>
-<div>
+<div id="selectForm">
 <form name="b_data" id="b_data">
 	<table border=1>
 		<tr>
@@ -195,7 +209,7 @@
 		</tr>
 		<tr>
 			<td>조회수: <%=cbvo.getViews() + 1 %></td>
-			<td>추천수: <%=cbvo.getHits() %></td>
+			<td>추천수: {{hitsPoint}} </td>
 		</tr>
 		<tr>
 			<td>조리방법</td>
@@ -210,8 +224,8 @@
 			<td><%=cbvo.getHash_tag() == null ? "--" : "#" + cbvo.getHash_tag()%></td>
 		</tr>
 		<tr>
-			<td>이미지</td>
-			<td><img src="<%=cbvo.getMain_img()%>" width="300" height="300"></td>
+			<td>메인 이미지</td>
+			<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getMain_img())%>"></td>
 		</tr>
 		<tr>
 			<td>재료정보</td>
@@ -232,7 +246,7 @@
 		%>
 					<tr>
 						<td>만드는법1_이미지</td>
-						<td><img src="<%=cbvo.getManual_img01()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img01())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -252,7 +266,7 @@
 		%>
 					<tr>
 						<td>만드는법2_이미지</td>
-						<td><img src="<%=cbvo.getManual_img02()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img02())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -272,7 +286,7 @@
 		%>
 					<tr>
 						<td>만드는법3_이미지</td>
-						<td><img src="<%=cbvo.getManual_img03()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img03())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -292,7 +306,7 @@
 		%>
 					<tr>
 						<td>만드는법4_이미지</td>
-						<td><img src="<%=cbvo.getManual_img04()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img04())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -312,7 +326,7 @@
 		%>
 					<tr>
 						<td>만드는법5_이미지</td>
-						<td><img src="<%=cbvo.getManual_img05()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img05())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -332,7 +346,7 @@
 		%>
 					<tr>
 						<td>만드는법6_이미지</td>
-						<td><img src="<%=cbvo.getManual_img06()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img06())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -352,7 +366,7 @@
 		%>
 					<tr>
 						<td>만드는법7_이미지</td>
-						<td><img src="<%=cbvo.getManual_img07()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img07())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -372,7 +386,7 @@
 		%>
 					<tr>
 						<td>만드는법8_이미지</td>
-						<td><img src="<%=cbvo.getManual_img08()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img08())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -392,7 +406,7 @@
 		%>
 					<tr>
 						<td>만드는법9_이미지</td>
-						<td><img src="<%=cbvo.getManual_img09()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img09())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -412,7 +426,7 @@
 		%>
 					<tr>
 						<td>만드는법10_이미지</td>
-						<td><img src="<%=cbvo.getManual_img10()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img10())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -432,7 +446,7 @@
 		%>
 					<tr>
 						<td>만드는법11_이미지</td>
-						<td><img src="<%=cbvo.getManual_img11()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img11())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -452,7 +466,7 @@
 		%>
 					<tr>
 						<td>만드는법12_이미지</td>
-						<td><img src="<%=cbvo.getManual_img12()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img12())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -472,7 +486,7 @@
 		%>
 					<tr>
 						<td>만드는법13_이미지</td>
-						<td><img src="<%=cbvo.getManual_img13()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img13())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -492,7 +506,7 @@
 		%>
 					<tr>
 						<td>만드는법14_이미지</td>
-						<td><img src="<%=cbvo.getManual_img14()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img14())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -512,7 +526,7 @@
 		%>
 					<tr>
 						<td>만드는법15_이미지</td>
-						<td><img src="<%=cbvo.getManual_img15()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img15())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -532,7 +546,7 @@
 		%>
 					<tr>
 						<td>만드는법16_이미지</td>
-						<td><img src="<%=cbvo.getManual_img16()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img16())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -552,7 +566,7 @@
 		%>
 					<tr>
 						<td>만드는법17_이미지</td>
-						<td><img src="<%=cbvo.getManual_img17()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img17())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -572,7 +586,7 @@
 		%>
 					<tr>
 						<td>만드는법18_이미지</td>
-						<td><img src="<%=cbvo.getManual_img18()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img18())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -592,7 +606,7 @@
 		%>
 					<tr>
 						<td>만드는법19_이미지</td>
-						<td><img src="<%=cbvo.getManual_img19()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img19())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -612,7 +626,7 @@
 		%>
 					<tr>
 						<td>만드는법20_이미지</td>
-						<td><img src="<%=cbvo.getManual_img20()%>"></td>
+						<td><img src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img20())%>"></td>
 					</tr>
 		<%		}
 			}
@@ -629,7 +643,7 @@
 			<td colspan="2" align="right">
 				<button type="button" id="U" disabled="disabled">수정</button>
 				<button type="button" id="D" disabled="disabled">삭제</button>
-				<button type="button" id="hits">추천</button>
+				<button type="button" id="hits" @click="hitPlus">추천</button>
 				<button type="button" id="C">목록</button>
 			</td>
 		</tr>
