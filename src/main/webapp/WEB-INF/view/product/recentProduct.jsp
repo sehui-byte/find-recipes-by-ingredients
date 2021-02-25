@@ -5,19 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>최근 본 상품</title>
+<script
+	src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js' />
 <!-- bootstrap -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous">
-
 <style>
 #recentbox {
-	position:absolute;
-	top:180px;
-	right:50%;
-	margin-right:-670px;
+	position: absolute;
+	top: 180px;
+	right: 50%;
+	margin-right: -670px;
 }
 </style>
 </head>
@@ -48,11 +49,12 @@
 		}).scroll();
 	});
 	</script>
-	
-	
-	
+
+
+
 	<!-- 최근 본 상품 -->
 	<!-- 퀵메뉴 -->
+	최근 본 상품 리스트
 	<div id="recentbox">
 		<div class="card text-dark bg-light mb-3" style="max-width: 16rem;">
 			<!-- '최근 본 상품' 텍스트 -->
@@ -60,38 +62,40 @@
 			<!-- 이미지 + 링크 -->
 			<div class="text-center_1">
 				<!-- <target="_blank> : 새 창에서 뜨기  / 없애면 현재 웹에서 이동-->
-				<span id="product1">
-				</span>
+				<span id="product1"> </span>
 			</div>
 			<div class="text-center_2">
-				<span id="product2">
-				</span>
+				<span id="product2"> </span>
 			</div>
 			<div class="text-center_3">
-				<span id="product3">
-				</span>
+				<span id="product3"> </span>
 			</div>
 			<div class="text-center_4">
-				<span id="product4">
-				</span>
+				<span id="product4"> </span>
 			</div>
 			<div class="text-center_5">
-				<span id="product5">
-				</span>
+				<span id="product5"> </span>
 			</div>
 		</div>
 	</div>
-	
+
 
 	<script>
+	
 	
 		/*
 			구매하기 버튼 클릭했을 때, 해당 상품의 필요한 데이터 쿠키 배열로 저장
 		*/
-		
-		// var recentPro = prdouctId + '^^' + image + '^^' + link;
+		// 구매하기 클릭시 최근 본 상품에 추가
+		/*  $("#purchaseBtn").click(function(){
+			 alert("상품 구매버튼 클릭");
+			clickpurchase(recentPro);
+		}); */
+		//var recentPro = prdouctId + '^^' + image + '^^' + link;
 		function clickpurchase(recentPro){	
 			// 최근 본 상품 화면에 추가
+			alert("상품 구매 버튼 클릭!");
+			console.log("recentPro >> " + recentPro);
 			showRecent();
 			
 			var info = recentPro.split("^^"); // [prdouctId, image, link]
@@ -100,7 +104,7 @@
 			var productLink = info[2];
 			
 			// 1. 해당 상품에 대한 쿠키값 저장
-			setRecentCookie(productId, productImage+'&&'+productLink);
+			setRecentCookie(productId, productImage+'&&'+productLink,1);
 			//productId=productImage&&productLink
 			
 			// 2. 쿠키값 배열로 저장 : 최대 5개
@@ -108,6 +112,7 @@
 			
 			// 3. 쿠키 배열로 데이터 가져오기
 			getCookieArray(cookieArr);
+			return true;
 		}
 		
 		
@@ -119,20 +124,21 @@
 				
 		// 쿠키 생성 함수
 		// cookieName : "recent", cookieValue : recentPro , 유효시간 : 1시간
-		function setRecentCookie(cookieName, cookieValue) {
+		function setRecentCookie(cookieName, cookieValue,days) {
 		    var expire = new Date();
-		    expire.setTime(date.getTime() + 1*60*60*1000); // 1hr
+		    expire.setDate(days);
+		    //expire.setTime(date.getTime() + 1*60*60*1000); // 1hr
 		    document.cookie = cookieName + '=' + cookieValue;
 		}
 		
 		// 쿠키 값 가져오기
 		function getRecentCookie(cookieName) {
-			var cookieValue = null;
+			var cookieValue = '';
 			if(document.cookie != ""){
-				var array = document.cookies.split((escape(cookieName)+'='));
+				var array = document.cookie.split((escape(cookieName)+'='));
 				if(array.length >= 2){
 					var arraySub = array[1];
-					cookieValue = unescape(arraySub[0]);
+					cookieValue = unescape(arraySub);
 				}
 			}
 			return cookieValue;
@@ -144,7 +150,7 @@
 		var cookieArr_name = [];
 		var cookieArr_value = [];
 		function setCookieArray(cookieName){ // productId1
-		 	var cookieValue = getRecentCookie("cookieName"); // productImage1&&productLink1
+		 	var cookieValue = getRecentCookie(cookieName); // productImage1&&productLink1
 		 	
 		 	// 배열 맨 앞에 요소 추가, 배열의 크기 리턴
 	        cookieArr_name.unshift(cookieName);		// [productId5, productId4, ..., productId1]
@@ -208,7 +214,8 @@
 			var cookieValueArr = cookieArr[1];	// [productImage5&&productLink5, ..., productImage1&&productLink1]
 		
 			// validation
-			if(cookieNameArr.length == cookieValueArr){
+			//cookieNameArr.length == cookieValueArr
+			if(true){
 				
 				var arrLength = cookieNameArr.length;
 				console.log("쿠키명&쿠키값 개수 : " + arrLength);
