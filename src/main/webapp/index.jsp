@@ -108,6 +108,11 @@
 	<li><a href="/kosmoJns/subscribe/test.do">테스트</a></li>
 </ul>
 
+<h3>플라스크 테스트</h3>
+<ul>
+	<li><a href="flaskTest.do">플라스크 테스트</a></li>
+</ul>
+
 <hr>
 </body>
 </html>

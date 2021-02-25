@@ -69,7 +69,7 @@ public class NutrientVO
 	}
 	
 	@SuppressWarnings("unchecked")
-	public JSONObject toJson()
+	public JSONObject toJSONObject()
 	{
 		JSONObject json = new JSONObject();
 		json.put("eng", Integer.parseInt(eng));
