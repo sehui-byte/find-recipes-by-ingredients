@@ -196,5 +196,37 @@
 	SELECT A.MID MID
 	FROM 	MEMBER A 
 	WHERE	A.MID = #{mid, jdbcType=VARCHAR}
+	
 	</select>
+	
+	<select id="memberSelectAllpage" resultType="mvo">
+		
+		SELECT * FROM
+		 	(SELECT
+		 			A.MNO	
+		 		   ,A.MLEVEL 
+		 		   ,A.MID	
+		 	       ,A.MPW	
+		 		   ,A.MNAME	
+		 		   ,A.MNICK 
+		 		   ,A.MHP	
+		 		   ,A.MEMAIL	
+		 		   ,A.MADDR		
+		 		   ,A.MZIPCODE	
+		 		   ,A.MADDRDETAIL	
+		 		   ,A.MPHOTO	MPHOTO
+		 		   ,TO_CHAR(A.MINSERTDATE,'YYYY-MM-DD') 
+		 		   ,TO_CHAR(A.MUPDATEDATE,'YYYY-MM-DD') 
+		 		   ,CEIL(ROW_NUMBER() OVER(ORDER BY A.MNO DESC)/ #{pageSize}) PAGENO
+				   ,COUNT(A.MNO) OVER() AS TOTALCOUNT
+		 	FROM	MEMBER A
+		 	WHERE A.MDELETEYN = 'Y'
+		 	)
+		 	WHERE PAGENO = #{curPage}
+		 	ORDER BY MNO DESC	
+	</select>
+
+   
+	
+
 </mapper>

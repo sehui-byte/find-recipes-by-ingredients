@@ -42,33 +42,7 @@ $(document).ready(function(){
 			});
 		});
 
-<title>JNS : 전지적 냉장고 시점  회원 전체 조회</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-				// U
-				$(document).on("click", "#U", function(){
-					alert("U >>> :");
-					$("#memUpdateForm").attr({
-						"method":"POST",
-						"action":"memberUpdate.do"
-					}).submit();
-				});
-				
-				// D
-				$(document).on("click", "#D", function(){
-					alert("D >>> : ");
-					$("#memUpdateForm").attr({
-						"method":"POST",
-						"action":"memberDelete.do"
-					}).submit();
-				});
-				
-				// ALL
-				$(document).on("click", "#SALL", function(){
-					location.href="memberSelectAll.do";
-				});
-			});
+
 
 
 </script>

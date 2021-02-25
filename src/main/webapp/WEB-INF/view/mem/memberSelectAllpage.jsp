@@ -1,10 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ page import ="com.jns.member.vo.MemberVO"%>
 <%@ page import ="java.util.List" %>    
-
 <%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 
 
@@ -12,6 +9,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%
+	Object obj2= request.getAttribute("p_mvo");
+	MemberVO mvoP = (MemberVO) obj2;
+	
+	int Size = mvoP.getPageSize();
+	int pageSize = mvoP.getPageSize();
+	int groupSize = mvoP.getGroupSize();
+	int curPage = mvoP.getCurPage();
+	int totalCount = mvoP.getTotalCount();
+			
+%>
 <meta charset="UTF-8">
 <title>JNS : 전지적 냉장고 시점  회원 전체 조회</title>
 <style type="text/css">
@@ -59,7 +67,7 @@
 <%request.setCharacterEncoding("UTF-8"); %>
 
 <%
-	Object obj = request.getAttribute("listAll");
+	Object obj = request.getAttribute("listPage");
 	List<MemberVO> list = (List)obj;
 	int nCnt = list.size();
 	
@@ -95,7 +103,7 @@
 </thead>
 <%
 	for(int i=0; i<nCnt; i++){
-		MemberVO mvo = (MemberVO)list.get(i);
+		MemberVO mvo = list.get(i);
 	
 %>
 <tbody>
@@ -135,6 +143,17 @@
 </tr>
 </tbody>
 </table>
+<br>
+	<div class="paging">
+		<jsp:include page="paging.jsp">
+		<jsp:param value="memberSelectAllPage.do" name="url"/>
+		<jsp:param value="" name="str"/>
+		<jsp:param name="pageSize" value="<%=pageSize%>"/>
+		<jsp:param name="groupSize" value="<%=groupSize%>"/>
+		<jsp:param name="curPage" value="<%=curPage%>"/>
+		<jsp:param name="totalCount" value="<%=totalCount%>"/>	
+		</jsp:include>
+	</div>
 </form>
 </body>
 </html>

@@ -117,6 +117,17 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.checkID(mvo);
 	}
 
+	
+	//페이징 처리
+	
+	@Override
+	public List<MemberVO> memberSelectAllPage(MemberVO mvo){
+		
+		logger.info("memberSelectAllpage >>>");
+		
+		return memberDAO.memberSelectAllpage(mvo);
+	}
+	
 	// 아이디 찾기
 	@Override
 	public List<MemberVO> memberFindIDOK(MemberVO _mvo) {
