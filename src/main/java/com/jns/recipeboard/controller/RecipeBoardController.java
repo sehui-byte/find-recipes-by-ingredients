@@ -21,7 +21,7 @@ import com.jns.common.DateFormatUtil;
 import com.jns.common.FileLoadUtil;
 import com.jns.common.FileUploadUtil;
 import com.jns.recipe.service.RecipeService;
-import com.jns.recipeboard.service.RecipeBoardService;
+import com.jns.recipeboard.service.RecipeBoardService;import com.jns.recipeboard.service.RecipeBoardServiceImpl;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Controller
@@ -124,9 +124,46 @@ public class RecipeBoardController
 	}
 	
 	@RequestMapping(value = "rbupdate", method = RequestMethod.POST)
-	public String rbupdate(RecipeBoardVO rbvo, Model model)
+	public String rbupdate(RecipeBoardVO rbvo, MultipartHttpServletRequest request, Model model)
 	{
-		//update code
+		logger.info("[RecipeBoardController] rbupdate.do 호출됨");
+		
+		//=========================== 파일 업로드 ===========================//
+		List<String> keyList = new FileUploadUtil().uploadFiles(request, "recipeboard");
+		logger.info("keyList.size() >>> : " + keyList.size());
+		logger.info(keyList);
+		
+		//======================== VO에 null값 빼고 매핑 =====================//
+		logger.info("rbvo >>> : " + rbvo);
+
+		RecipeBoardVO originVO = recipeBoardService.recipeBoardSelect(rbvo);
+		
+		
+		if(keyList.get(0) != null){rbvo.setMain_img(keyList.get(0));}else{rbvo.setMain_img(originVO.getMain_img());}
+		if(keyList.get(1) != null){rbvo.setManual_img01(keyList.get(1));}else{rbvo.setManual_img01(originVO.getManual_img01());}
+		if(keyList.get(2) != null){rbvo.setManual_img02(keyList.get(2));}else{rbvo.setManual_img02(originVO.getManual_img02());}
+		if(keyList.get(3) != null){rbvo.setManual_img03(keyList.get(3));}else{rbvo.setManual_img03(originVO.getManual_img03());}
+		if(keyList.get(4) != null){rbvo.setManual_img04(keyList.get(4));}else{rbvo.setManual_img04(originVO.getManual_img04());}
+		if(keyList.get(5) != null){rbvo.setManual_img05(keyList.get(5));}else{rbvo.setManual_img05(originVO.getManual_img05());}
+		if(keyList.get(6) != null){rbvo.setManual_img06(keyList.get(6));}else{rbvo.setManual_img06(originVO.getManual_img06());}
+		if(keyList.get(7) != null){rbvo.setManual_img07(keyList.get(7));}else{rbvo.setManual_img07(originVO.getManual_img07());}
+		if(keyList.get(8) != null){rbvo.setManual_img08(keyList.get(8));}else{rbvo.setManual_img08(originVO.getManual_img08());}
+		if(keyList.get(9) != null){rbvo.setManual_img09(keyList.get(9));}else{rbvo.setManual_img09(originVO.getManual_img09());}
+		if(keyList.get(10) != null){rbvo.setManual_img10(keyList.get(10));}else{rbvo.setManual_img10(originVO.getManual_img10());}
+		if(keyList.get(11) != null){rbvo.setManual_img11(keyList.get(11));}else{rbvo.setManual_img11(originVO.getManual_img11());}
+		if(keyList.get(12) != null){rbvo.setManual_img12(keyList.get(12));}else{rbvo.setManual_img12(originVO.getManual_img12());}
+		if(keyList.get(13) != null){rbvo.setManual_img13(keyList.get(13));}else{rbvo.setManual_img13(originVO.getManual_img13());}
+		if(keyList.get(14) != null){rbvo.setManual_img14(keyList.get(14));}else{rbvo.setManual_img14(originVO.getManual_img14());}
+		if(keyList.get(15) != null){rbvo.setManual_img15(keyList.get(15));}else{rbvo.setManual_img15(originVO.getManual_img15());}
+		if(keyList.get(16) != null){rbvo.setManual_img16(keyList.get(16));}else{rbvo.setManual_img16(originVO.getManual_img16());}
+		if(keyList.get(17) != null){rbvo.setManual_img17(keyList.get(17));}else{rbvo.setManual_img17(originVO.getManual_img17());}
+		if(keyList.get(18) != null){rbvo.setManual_img18(keyList.get(18));}else{rbvo.setManual_img18(originVO.getManual_img18());}
+		if(keyList.get(19) != null){rbvo.setManual_img19(keyList.get(19));}else{rbvo.setManual_img19(originVO.getManual_img19());}
+		if(keyList.get(20) != null){rbvo.setManual_img20(keyList.get(20));}else{rbvo.setManual_img20(originVO.getManual_img20());}
+
+		logger.info("rbvo >>> : " + rbvo.toString());
+
+		recipeBoardService.recipeBoardUpdate(rbvo);
 		
 		model.addAttribute("list", recipeBoardService.recipeBoardSelectAll());
 		return "recipeboard/recipeboard";

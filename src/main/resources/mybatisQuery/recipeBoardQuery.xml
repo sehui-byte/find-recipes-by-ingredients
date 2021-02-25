@@ -143,8 +143,8 @@
 			RECIPE_BOARD
 		SET
 			RCP_NM = #{rcp_nm, jdbcType=VARCHAR},
-			VIEWS = #{rb_viewcnt, jdbcType=NUMERIC},
-			HITS = #{rb_likecnt, jdbcType=NUMERIC},
+			VIEWS = #{views, jdbcType=NUMERIC},
+			HITS = #{hits, jdbcType=NUMERIC},
 			RCP_WAY2 = #{rcp_way2, jdbcType=VARCHAR},
 			RCP_PAT2 = #{rcp_pat2, jdbcType=VARCHAR},
 			HASH_TAG = #{hash_tag, jdbcType=VARCHAR},
