@@ -34,4 +34,7 @@ public interface MemberService {
 	public int memberTempPWOK(MemberVO mvo);
 	
 
+
+	// 페이징
+	public List<MemberVO> memberSelectAllPage(MemberVO mvo);
 }

@@ -12,7 +12,7 @@
 <body>
 		
 <script>
-	location.href="login.do";
+	location.href="login/login.do";
 </script>
 </body>
 </html>
