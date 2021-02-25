@@ -119,7 +119,7 @@
 							html += '<div class="card-group">';
 							for ( var i in item) {
 								var category1 = item[i].category1; //식품만 검색되게.
-								if (category1 === '식품') {
+								if (true) {
 									var title = item[i].title;//상품명
 									title = title.replace(/,/gi,'');
 									var image = item[i].image;//상품이미지
@@ -142,7 +142,7 @@
 											+ ',' + hprice;
 
 									// 최근 본 상품 목록 필요한 매개변수 문자열
-									var recentPro = productId + '^^' + image
+									var recentPro = title + '^^' + image
 											+ '^^' + link;
 									
 									html += '<div class="col">';
