@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jns.flask.dao.FlaskDAO">
+
+	<select id="getNutrient" parameterType="rvo" resultType="nvo">
+		SELECT 
+			INFO_ENG,
+			INFO_CAR,
+			INFO_PRO,
+			INFO_FAT,
+			INFO_NA
+		FROM
+			RECIPE
+		WHERE
+			RCP_SEQ = #{rcp_seq}
+	</select>
+	
+	
+	
+	<select id="getSubscribeInc" parameterType="ssvo" resultType="ssvo">
+		SELECT
+			COUNT(*) AS INC
+		FROM
+			SUB_INFO S
+		WHERE
+			TO_CHAR(S.SINSERTDATE, 'YY') = #{year}
+			AND TO_CHAR(S.SINSERTDATE, 'MM') = #{mon}
+	</select>
+	
+	
+	
+	<select id="getSignupInc" parameterType="suvo" resultType="suvo">
+		SELECT
+			COUNT(*) AS INC
+		FROM
+			MEMBER M
+		WHERE
+			TO_CHAR(M.MINSERTDATE, 'YY') = #{year}
+			AND TO_CHAR(M.MINSERTDATE, 'MM') = #{mon}
+	</select>
+	
+</mapper>
