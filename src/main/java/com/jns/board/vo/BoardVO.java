@@ -15,26 +15,23 @@ public class BoardVO {
 	private String bviews;
 	private String bhits;
 	
-	
-	private String page;
-	private String pagesize;
-	private String groupsize;
-	private String curpage;
-	private String totalcount;
-	private String count;
-	
 	private String keyfilter;
 	private String keyword;
 	private String startdate;
 	private String enddate;	
+	
+	private int pageSize;
+	private int groupSize;
+	private int curPage;
+	private int totalCount;
 	
 	public BoardVO() {
 		
 	}
 
 	public BoardVO(String mno, String bno, String btype, String btitle, String bcontent, String mnick, String bfile,
-			String binsertdate, String bupdatedate, String bdeleteyn, String bviews, String page, String pagesize,
-			String groupsize, String curpage, String totalcount, String bhits
+			String binsertdate, String bupdatedate, String bdeleteyn, String bviews, int pagesize,
+			int groupsize, int curpage, int totalcount, String bhits
 		   ,String keyfilter
 		   ,String keyword
 		   ,String startdate
@@ -54,12 +51,10 @@ public class BoardVO {
 		this.bviews = bviews;
 		this.bhits = bhits;
 		
-		this.page = page;
-		this.pagesize = pagesize;
-		this.groupsize = groupsize;
-		this.curpage = curpage;
-		this.totalcount = totalcount;
-		this.count = count;
+		this.pageSize = pagesize;
+		this.groupSize = groupsize;
+		this.curPage = curpage;
+		this.totalCount = totalcount;
 		
 		this.keyfilter = keyfilter;
 		this.keyword = keyword;
@@ -164,46 +159,6 @@ public class BoardVO {
 		this.bhits = bhits;
 	}
 
-	public String getPage() {
-		return page;
-	}
-
-	public void setPage(String page) {
-		this.page = page;
-	}
-
-	public String getPagesize() {
-		return pagesize;
-	}
-
-	public void setPagesize(String pagesize) {
-		this.pagesize = pagesize;
-	}
-
-	public String getGroupsize() {
-		return groupsize;
-	}
-
-	public void setGroupsize(String groupsize) {
-		this.groupsize = groupsize;
-	}
-
-	public String getCurpage() {
-		return curpage;
-	}
-
-	public void setCurpage(String curpage) {
-		this.curpage = curpage;
-	}
-
-	public String getTotalcount() {
-		return totalcount;
-	}
-
-	public void setTotalcount(String totalcount) {
-		this.totalcount = totalcount;
-	}
-
 	public String getKeyfilter() {
 		return keyfilter;
 	}
@@ -236,23 +191,37 @@ public class BoardVO {
 		this.enddate = enddate;
 	}
 
-	public void setStart_row(String string) {
-		// TODO Auto-generated method stub
-		
+	public int getPageSize() {
+		return pageSize;
 	}
 
-	public void setEnd_row(String string) {
-		// TODO Auto-generated method stub
-		
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 
-	public String getCount() {
-		return count;
+	public int getGroupSize() {
+		return groupSize;
 	}
 
-	public void setCount(String count) {
-		this.count = count;
+	public void setGroupSize(int groupSize) {
+		this.groupSize = groupSize;
 	}
 
+	public int getCurPage() {
+		return curPage;
+	}
 
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
+	}
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	
 }

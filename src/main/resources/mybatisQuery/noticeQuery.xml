@@ -142,4 +142,33 @@
 				
 	</update>
 	
+	<select id="NoticeSelectPaging" resultType="nvo">
+		SELECT * FROM
+		(SELECT
+				 A.BNO
+				,A.BTYPE
+				,A.BTITLE
+				,A.BCONTENT
+				,A.MNICK
+				,A.BFILE
+				,CEIL(ROW_NUMBER() OVER(ORDER BY A.BNO DESC)/ #{pageSize}) PAGENO
+				,COUNT(A.BNO)	OVER() AS TOTALCOUNT
+		FROM
+				BOARD A
+		WHERE A.BTYPE='N'
+		AND	  A.BDELETEYN ='Y'
+					<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+					<![CDATA[AND TO_CHAR(BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					<![CDATA[AND TO_CHAR(BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					</if>
+					<if test="keyfilter=='key1'">
+						<![CDATA[AND BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+					<if test="keyfilter=='key2'">
+						<![CDATA[AND BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+			) RB
+		WHERE PAGENO = #{curPage}
+		ORDER BY BNO DESC	
+	</select>
 </mapper>

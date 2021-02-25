@@ -6,7 +6,7 @@ import com.jns.board.vo.BoardVO;
 
 public interface QnAService {
 
-	public int QnASelectPaging(BoardVO bvo);
+	public List<BoardVO> QnASelectPaging(BoardVO bvo);
 	public List<BoardVO> QnASelectAll(BoardVO bvo);
 	public List<BoardVO> QnASelect(BoardVO bvo);
 	public int QnAInsert(BoardVO bvo);
