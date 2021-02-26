@@ -1178,7 +1178,7 @@ to {
 					<h3>회원 관련 URL</h3>
 					<ul>
 						<li><a href="memberForm.do">회원가입</a></li>
-						<li><a href="memberSelectAll.do">회원목록</a></li>
+						<li><a href="memberSelectAllPage.do">회원목록</a></li>
 
 					</ul>
 
