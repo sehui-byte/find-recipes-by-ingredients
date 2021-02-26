@@ -4,11 +4,11 @@
 
 	<select id="getNutrient" parameterType="rvo" resultType="nuvo">
 		SELECT 
-			INFO_ENG,
-			INFO_CAR,
-			INFO_PRO,
-			INFO_FAT,
-			INFO_NA
+			INFO_ENG AS ENG,
+			INFO_CAR AS CAR,
+			INFO_PRO AS PRO,
+			INFO_FAT AS FAT,
+			INFO_NA AS NA
 		FROM
 			RECIPE
 		WHERE
@@ -19,6 +19,8 @@
 	
 	<select id="getSubscribeInc" parameterType="ssvo" resultType="ssvo">
 		SELECT
+			#{year} AS YEAR,
+			#{mon} AS MON,
 			COUNT(*) AS INC
 		FROM
 			SUB_INFO S
@@ -31,6 +33,8 @@
 	
 	<select id="getSignupInc" parameterType="suvo" resultType="suvo">
 		SELECT
+			#{year} AS YEAR,
+			#{mon} AS MON,
 			COUNT(*) AS INC
 		FROM
 			MEMBER M

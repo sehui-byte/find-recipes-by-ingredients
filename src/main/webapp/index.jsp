@@ -110,7 +110,7 @@
 
 <h3>플라스크 테스트</h3>
 <ul>
-	<li><a href="flaskTest.do">플라스크 테스트</a></li>
+	<li><a href="sendNutrient.do?rcp_seq=1">플라스크 테스트 - 영양소</a></li>
 </ul>
 
 <hr>
