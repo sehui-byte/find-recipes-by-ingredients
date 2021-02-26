@@ -29,6 +29,7 @@
 	보낸사람id , 받는사람id , 유형(댓글,구독)
 	<br> 댓글 : reply
 	<br> 구독 : subscribe
+	<br>
 	<input type="text" id="message" />
 	<input type="button" id="sendBtn" value="submit"
 		onclick="sendMessage()" />
@@ -46,7 +47,6 @@
 		});
 
 		
-
 		function sendMessage() {
 			//웹소켓으로 메세지 전달
 			console.log("전달 메세지 >> " + $("#message").val());
