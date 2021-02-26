@@ -50,6 +50,14 @@ public class ProductController {
 		List<ProductVO> list = service.likpProductIdSelectAll(pvo);
 		return list;
 	}
+	
+	//유저의 기존 관심상품 목록 productId, title, lprice 가져와서 search.jsp 페이지에 넘기는 부분
+	@RequestMapping("getlikeProInfo.do")
+	public @ResponseBody List<ProductVO> getlikeProInfoSelectAll(){
+		ProductVO pvo = new ProductVO();
+		List<ProductVO> list = service.getlikeProInfoSelectAll(pvo);
+		return list;
+	}
 
 	//네이버 open api 이용해서 json데이터 받아서 @responsebody로 jsp페이지에 데이터 보내준다
 	@RequestMapping(value="search.do",method=RequestMethod.GET, produces="application/json; charset=UTF-8")
