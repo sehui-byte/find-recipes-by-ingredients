@@ -80,7 +80,7 @@ public class QnAController {
 		return "QnA/qnaSelectAllPage";
 	}
 	
-	
+	/*
 	@RequestMapping(value="imgtest", method=RequestMethod.GET)
 	public String qnAInsert(BoardVO bvo, Model model) {
 		logger.info("QnAController QnAInsert  start ::");
@@ -110,7 +110,7 @@ public class QnAController {
 		 
 		return "QnA/qnaForm";
 	}
-	
+	*/
 	
 	@RequestMapping(value = "qnaInsert", method = RequestMethod.POST)
 	public String QnAInsert(BoardVO bvo, MultipartHttpServletRequest request){
@@ -139,7 +139,8 @@ public class QnAController {
 		return "QnA/qnaSelectAll";
 	}
 	
-	@RequestMapping(value="qnaSelectAll",method=RequestMethod.GET)
+	/*
+	@RequestMapping(value="",method=RequestMethod.GET)
 	public String QnASelectAll(BoardVO bvo, Model model) {
 		logger.info("QnAController QnASelectAll start >>>: ");
 		
@@ -162,6 +163,7 @@ public class QnAController {
 			}
 		return "QnA/qnaForm";
 	}
+	*/
 	
 	@RequestMapping(value="qnaSelect",method=RequestMethod.GET)
 	public String QnASelect(BoardVO bvo,Model model) {

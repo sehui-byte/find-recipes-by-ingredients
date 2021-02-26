@@ -20,8 +20,7 @@
 <h3>공지사항 관련 URL</h3>
 <ul>
 	<li><a href="noticeForm.do">공지사항 글쓰기</a></li>
-	<li><a href="noticeSelectAll.do">공지사항 목록</a></li>
-	<li><a href="noticeSelectAllPage.do">공지사항 목록 페이징</a></li>
+	<li><a href="noticeSelectAllPage.do">공지사항 목록</a></li>
 </ul>
 
 <hr>
@@ -29,8 +28,7 @@
 <h3>QnA 관련 URL</h3>
 <ul>
 	<li><a href="qnaForm.do">QnA 글쓰기</a></li>
-	<li><a href="qnaSelectAll.do">QnA 목록 조회</a></li>
-	<li><a href="qnaSelectAllPage.do">QnA 목록 페이징</a></li>
+	<li><a href="qnaSelectAllPage.do">QnA 목록</a></li>
 </ul>
 
 <hr>

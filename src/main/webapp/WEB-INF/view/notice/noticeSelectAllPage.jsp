@@ -45,6 +45,24 @@
 		$(document).on("click", "#I", function(){
 			location.href="noticeForm.do";
 		});	
+		
+		$(document).on("click", "#A", function(){
+			location.href="noticeSelectAllPage.do";
+		});
+		
+		$(document).on("click", "#S", function(){
+			alert("S >>>");
+			$("#NoticeList").attr({
+				"method":"GET",
+				"action":"noticeSelect.do"}).submit();	
+		});
+			
+		$(document).on("click", "#searchBtn", function(){
+			console.log("searchBtn >>> : ");
+			$("#NoticeList").attr({
+				"method":"GET",
+				"action":"noticeSelectAllPage.do"}).submit();
+		});
 	});
 </script>
 </head>
@@ -58,7 +76,7 @@
 	System.out.println("noticeSelectAllPage.jsp nCnt >>> : " + nCnt);
 %>
 <form name="NoticeList" id="NoticeList">
-<table border="1">
+<table border="1" align="center">
 	<thead>
 	<tr>
 		<td colspan="10" align="center"><h2>공지사항 목록 게시판</h2></td>
@@ -68,6 +86,9 @@
 			<select id="keyfilter" name="keyfilter">
 				<option value="key1">제목</option>
 				<option value="key2">내용</option>
+				<option value="key3">글제목+글내용</option>
+				<option value="key4">작성자</option>
+				<option value="key5">글번호</option>
 			</select>
 			<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
 			<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
@@ -76,12 +97,16 @@
 		</td>
 	</tr>
 	<tr>
+		<td class="tt"><input type="checkbox" name="chkAll" id="chkAll"></td>
 		<td class="tt">글번호</td>
 		<td class="tt">글유형</td>
 		<td class="tt">글제목</td>
 		<td class="tt">글내용</td>
 		<td class="tt">작성자</td>
 		<td class="tt">사진</td>
+		<td class="tt">입력날짜</td>
+		<td class="tt">조회수</td>
+		<td class="tt">좋아요 수</td>
 	</tr>
 	</thead>
 <%
@@ -91,12 +116,19 @@
 %>
 <tbody>
 <tr>	
+		<td>
+			<input type="checkbox" name="bno" id="chkInMnum"
+					value=<%= nvo.getBno() %> onclick="checkOnly(this)">
+		</td>	
 		<td class="tt"><%=nvo.getBno()%></td>
 		<td class="tt"><%=nvo.getBtype() %></td>
 		<td class="tt"><%=nvo.getBtitle() %></td>
 		<td class="tt"><%=nvo.getBcontent() %></td>
 		<td class="tt"><%=nvo.getMnick() %></td>
 		<td class="tt"><img src="<%=new FileLoadUtil().getFileSrc("noticeboard", nvo.getBfile())%>"></td>
+		<td class="tt"><%=nvo.getBinsertdate() %></td>
+		<td class="tt"><%=nvo.getBviews() %></td>
+		<td class="tt"><%=nvo.getBhits() %></td>
 </tr>
 <%
 		} // end of for
@@ -113,6 +145,8 @@
 	<tr>
 		<td colspan="10" align="right">
 			<input type="button" value="글쓰기" id="I">
+			<input type="button" value="글보기" id="S">
+			<input type="button" value="전체목록" id="A">
 		</td>
 	</tr>
 	</tbody>
