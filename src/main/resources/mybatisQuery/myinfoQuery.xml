@@ -107,7 +107,7 @@
 	
 	
 	<!-- 내가 추천한 레시피 조회하기 // API 레시피-->
-	<select id="myFavRecipeList1" parameterType="mvo" resultType="rvo">
+	<select id="myFavRecipeList" parameterType="mvo" resultType="rvo">
 		SELECT 
 			* 
 		FROM
@@ -197,7 +197,7 @@
 	</select>
 
 	<!-- 내가 추천한 레시피 조회하기 // 회원 레시피-->
-	<select id="myFavRecipeList2" parameterType="mvo" resultType="rbvo">
+	<select id="myFavRecipeBoardList" parameterType="mvo" resultType="rbvo">
 	SELECT 
 		*
 	FROM

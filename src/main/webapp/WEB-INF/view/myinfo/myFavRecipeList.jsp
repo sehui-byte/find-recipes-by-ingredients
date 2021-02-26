@@ -6,18 +6,20 @@
 	Object obj = request.getAttribute("recipeList");
 	List<RecipeVO> recipeList = (List)obj;
 	
-	MemberVO rbvoP = (MemberVO)request.getAttribute("p_rbvo");
+	Object obj2 = request.getAttribute("p_rbvo");
 	
+	MemberVO rbvoP = (MemberVO)obj2;
 	
-      int Size = rbvoP.getPageSize();
-      int pageSize = rbvoP.getPageSize();
-      int groupSize = rbvoP.getGroupSize();
-      int curPage = rbvoP.getCurPage();
-      int totalCount = rbvoP.getTotalCount();
+	int Size = rbvoP.getPageSize();
+	int pageSize = rbvoP.getPageSize();
+	int groupSize = rbvoP.getGroupSize();
+	int curPage = rbvoP.getCurPage();
+	int totalCount = rbvoP.getTotalCount();
 	
-      if(request.getParameter("curPage") != null){
-         curPage = Integer.parseInt(request.getParameter("curPage"));
-      }
+	if(request.getParameter("curPage") != null){
+	 curPage = Integer.parseInt(request.getParameter("curPage"));
+	}
+	
 %>    
 <!DOCTYPE html>
 <html>
@@ -33,13 +35,28 @@
 			var recipeTable = $("#recipeTable option:selected").val();	
 			console.log(recipeTable);
 			if(recipeTable == 'user'){
-				//alert("1111");
 				location.href="/kosmoJns/myinfo/myFavReciepBoardList.do?mno=<%=mno%>";				
 			}
-			
 		})	
-		
 	})
+
+	//enter키 눌렀을 때 페이지 재로딩 되는 것 방지
+	function captureReturnKey(e) {
+		if (e.keyCode == 13 && e.srcElement.type != 'textarea')
+			return false;
+	}
+	
+	//input에서 엔터키 눌렀을 때도 검색 실행
+	function enterKey(){
+		if(window.event.keyCode == 13){
+			if($("#keyword").val() == "" && $("#startdate").val() == "" && $("#enddate").val() == ""){
+				alert("검색 조건을 입력해주세요");
+			}else{
+			$("#myFavRecipeList").attr({"method":"GET"
+						 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
+			}	
+		}
+	}
 </script>
 <body>
 <select name="recipeTable" id="recipeTable">
@@ -57,55 +74,47 @@
 			}
 		});
 			
-			$("#deleteMyFavRecipeAPI").on("click", function(){
-				var nCnt = $(".checkbox_APIRecipe:checked").length;
-				var checkbox = $(".checkbox_APIRecipe:checked");
-				var chkVal = [];
-				
-				for (var i = 0; i < nCnt; i++){
-					var chk = checkbox[i].value;
-					chkVal.push(chk);
-				}
-				
-				var url = "/kosmoJns/favorites/myFavRecipeDelete.do";
-				var data = {'chkVal' : chkVal,
-						'recipeType' : 'API',
-						'mno' : '<%= mno %>'
-						};
-
-				$.ajax({
-					url : url,
-					data : data,
-					method : "POST",
-					success : whenSuccess,
-					error : whenError
-				});
-				
-				function whenSuccess(data){
-					if (data == nCnt){
-						alert("정상적으로 삭제되었습니다.");
-						location.reload();
-					}else{
-						alert("삭제에 실패하였습니다. ");
-					}
-				}	
+		$("#deleteMyFavRecipeAPI").on("click", function(){
+			var nCnt = $(".checkbox_APIRecipe:checked").length;
+			var checkbox = $(".checkbox_APIRecipe:checked");
+			var chkVal = [];
 			
-				function whenError(data){
-					alert("댓글 삭제에 문제가 발생하였습니다. 관리자에게 문의하시기 바랍니다.");
-				}
-				
+			for (var i = 0; i < nCnt; i++){
+				var chk = checkbox[i].value;
+				chkVal.push(chk);
+			}
+			
+			var url = "/kosmoJns/favorites/myFavRecipeDelete.do";
+			var data = {'chkVal' : chkVal,
+					'recipeType' : 'API',
+					'mno' : '<%= mno %>'
+					};
+
+			$.ajax({
+				url : url,
+				data : data,
+				method : "POST",
+				success : whenSuccess,
+				error : whenError
 			});
 			
+			function whenSuccess(data){
+				if (data == nCnt){
+					alert("정상적으로 삭제되었습니다.");
+					location.reload();
+				}else{
+					alert("삭제에 실패하였습니다. ");
+				}
+			}	
+		
+			function whenError(data){
+				alert("댓글 삭제에 문제가 발생하였습니다. 관리자에게 문의하시기 바랍니다.");
+			}
 			
-		//검색버튼
-		$(document).on("click", "#searchBtnAPIRecipe", function(){
-			console.log("searchBtn >>> : ");
-			$("#myFavRecipeList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
 		});
-			
+		
 		//datepicker
-		$("#startdate1").datepicker({
+		$("#startdate").datepicker({
 			showOn: "button",    // 달력을 표시할 타이밍 (both: focus or button)
 			buttonImage: "/kosmoJns/resources/img/cal_0.gif", 
 			buttonImageOnly : true,            
@@ -113,10 +122,10 @@
 			dateFormat: "yy-mm-dd",             
 			changeMonth: true,                  			
 			onClose: function(selectedDate) {    
-				$("#enddate1").datepicker("option", "minDate", selectedDate);
+				$("#enddate").datepicker("option", "minDate", selectedDate);
 			}	
 		});
-		$("#enddate1").datepicker({
+		$("#enddate").datepicker({
 			showOn: "button", 
 			buttonImage: "/kosmoJns/resources/img/cal_0.gif", 
 			buttonImageOnly : true,
@@ -124,9 +133,24 @@
 			dateFormat: "yy-mm-dd",
 			changeMonth: true,			
 			onClose: function(selectedDate) {	
-				$("#startdate1").datepicker("option", "maxDate", selectedDate);
+				$("#startdate").datepicker("option", "maxDate", selectedDate);
 			}               
 		});
+		
+		//검색버튼
+		$(document).on("click", "#searchBtnAPIRecipe", function(){
+			console.log("searchBtn >>> : ");
+			$("#myFavRecipeList").attr({"method":"GET"
+								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
+		});
+		
+		// 검색 버튼 초기화
+		$(document).on("click", "#searchReset", function(){
+			$("#myFavRecipeList").attr({"method":"GET"
+							 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
+			})	
+			
+		
 
 	})	
 
@@ -144,10 +168,11 @@
 						<option value="key2">재료</option>
 						<option value="key3">메뉴명+재료</option>
 					</select>
-					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
-					<input type="text" id="startdate1" name="startdate" size="12" placeholder="시작일">
-					~<input type="text" id="enddate1" name="enddate" size="12" placeholder="종료일">
+					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" onkeydown="enterKey()"><br>
+					<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
+					~<input type="text" id="enddate" name="enddate" size="12" placeholder="종료일">
 					<button type="button" id="searchBtnAPIRecipe">검색</button>
+					<button type="button" id="searchReset">검색 초기화</button>
 				</td>	
 			</tr>
 		</thead>
@@ -193,7 +218,7 @@
 		</tr>	
 		<tr>
 			<td class="paging" colspan="6">
-				<jsp:include page="./page/myRecipeListPaging.jsp" flush="true">
+				<jsp:include page="./page/paging.jsp" flush="true">
 					<jsp:param name="url" value="myFavRecipeList.do"/>
 					<jsp:param name="str" value=""/>
 					<jsp:param name="pageSize" value="<%=pageSize%>"/>

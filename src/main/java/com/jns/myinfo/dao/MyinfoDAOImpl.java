@@ -72,15 +72,15 @@ public class MyinfoDAOImpl implements MyinfoDAO {
 	}
 
 	@Override
-	public List<RecipeVO> myFavRecipeList1(MemberVO mvo) {
+	public List<RecipeVO> myFavRecipeList(MemberVO mvo) {
 
-		return sqlSession.selectList("myFavRecipeList1", mvo);
+		return sqlSession.selectList("myFavRecipeList", mvo);
 	}
 
 	@Override
-	public List<RecipeBoardVO> myFavRecipeList2(MemberVO mvo) {
+	public List<RecipeBoardVO> myFavRecipeBoardList(MemberVO mvo) {
 
-		return sqlSession.selectList("myFavRecipeList2", mvo);
+		return sqlSession.selectList("myFavRecipeBoardList", mvo);
 	}
 
 	@Override

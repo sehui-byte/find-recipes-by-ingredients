@@ -290,7 +290,7 @@ public class MyinfoController {
 
 		Paging.setPage(mvo, cPage, pageCtrl); // 페이징할 정보를 Paging클래스에 보내줍니다
 
-		List<RecipeVO> recipeList = myinfoService.myFavRecipeList1(mvo);
+		List<RecipeVO> recipeList = myinfoService.myFavRecipeList(mvo);
 
 		logger.info("API 레시피 사이즈 >>> : "+recipeList.size());
 
@@ -321,7 +321,7 @@ public class MyinfoController {
 
 		Paging.setPage(mvo, cPage, pageCtrl); // 페이징할 정보를 Paging클래스에 보내줍니다
 
-		List<RecipeBoardVO> recipeBoardList = myinfoService.myFavRecipeList2(mvo);
+		List<RecipeBoardVO> recipeBoardList = myinfoService.myFavRecipeBoardList(mvo);
 
 		if (recipeBoardList.size() != 0) {
 			totalCnt = recipeBoardList.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
@@ -359,18 +359,18 @@ public class MyinfoController {
 
 
 		if (fvo.getRecipeType().equals("API")) {
-			recipeList = myinfoService.myFavRecipeList1(mvo);
+			recipeList = myinfoService.myFavRecipeList(mvo);
 			logger.info("조회된 레시피 개수 >>> : "+recipeList.size());
 		if (recipeList.size() != 0) {
 			totalCnt = recipeList.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
 			mvo.setTotalCount(totalCnt);				// vo에 담기
+			}
 			model.addAttribute("recipeList", recipeList);
 			model.addAttribute("p_rbvo", mvo);
-			}
 			return "myinfo/myFavRecipeList";
 		} else {
 			// api 아닌 경우 >> user 레시피
-			recipeBoardList = myinfoService.myFavRecipeList2(mvo);
+			recipeBoardList = myinfoService.myFavRecipeBoardList(mvo);
 			logger.info("조회된 레시피 개수 >>> : "+recipeBoardList.size());
 		if( recipeBoardList.size() != 0) {
 			totalCnt = recipeBoardList.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값

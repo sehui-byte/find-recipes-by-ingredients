@@ -34,13 +34,30 @@
 			var recipeTable = $("#recipeTable option:selected").val();	
 			console.log(recipeTable);
 			if(recipeTable == 'API'){
-				//alert("1111");
 				location.href="/kosmoJns/myinfo/myFavRecipeList.do?mno=<%=mno%>";				
 			}
 			
 		})	
-		
 	})
+
+	//enter키 눌렀을 때 페이지 재로딩 되는 것 방지
+	function captureReturnKey(e) {
+		if (e.keyCode == 13 && e.srcElement.type != 'textarea')
+			return false;
+	}
+	
+	//input에서 엔터키 눌렀을 때도 검색 실행
+	function enterKey(){
+		if(window.event.keyCode == 13){
+			if($("#keyword").val() == "" && $("#startdate").val() == "" && $("#enddate").val() == ""){
+				alert("검색 조건을 입력해주세요");
+			}else{
+			$("#myFavRecipeBoardList").attr({"method":"GET"
+								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
+			}	
+		}
+	}
+	
 </script>
 </head>
 <body>
@@ -95,7 +112,7 @@
 			});
 		
 		//datepicker
-		$("#startdate2").datepicker({
+		$("#startdate").datepicker({
 			showOn: "button",    // 달력을 표시할 타이밍 (both: focus or button)
 			buttonImage: "/kosmoJns/resources/img/cal_0.gif", 
 			buttonImageOnly : true,            
@@ -103,10 +120,10 @@
 			dateFormat: "yy-mm-dd",             
 			changeMonth: true,                  			
 			onClose: function(selectedDate) {    
-				$("#enddate2").datepicker("option", "minDate", selectedDate);
+				$("#enddate").datepicker("option", "minDate", selectedDate);
 			}	
 		});
-		$("#enddate2").datepicker({
+		$("#enddate").datepicker({
 			showOn: "button", 
 			buttonImage: "/kosmoJns/resources/img/cal_0.gif", 
 			buttonImageOnly : true,
@@ -114,24 +131,25 @@
 			dateFormat: "yy-mm-dd",
 			changeMonth: true,			
 			onClose: function(selectedDate) {	
-				$("#startdate2").datepicker("option", "maxDate", selectedDate);
+				$("#startdate").datepicker("option", "maxDate", selectedDate);
 			}               
 		});
 		
 		
 		})	
 		
-		//검색버튼
+		// 검색버튼
 		$(document).on("click", "#searchBtnUserRecipe", function(){
 			console.log("searchBtn >>> : ");
 			$("#myFavRecipeBoardList").attr({"method":"GET"
 								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
 		});
 		
-	
-	
-	
-	
+		// 검색 초기화	
+		$(document).on("click", "#searchReset", function(){
+			$("#myFavRecipeBoardList").attr({"method":"GET"
+							 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
+			})	
 </script>
 
 <select name="recipeTable" id="recipeTable">
@@ -152,10 +170,11 @@
 						<option value="key2">재료</option>
 						<option value="key3">메뉴명+재료</option>
 					</select>
-					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
-					<input type="text" id="startdate2" name="startdate" size="12" placeholder="시작일">
-					~<input type="text" id="enddate2" name="enddate" size="12" placeholder="종료일">
+					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" onkeydown="enterKey()"><br>
+					<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
+					~<input type="text" id="enddate" name="enddate" size="12" placeholder="종료일">
 					<button type="button" id="searchBtnUserRecipe">검색</button>
+					<button type="button" id="searchReset">검색 초기화</button>
 				</td>	
 			</tr>
 		</thead>
@@ -199,7 +218,7 @@
 		</tr>	
 		<tr>
 			<td class="paging" colspan="6">
-				<jsp:include page="./page/myRecipeListPaging.jsp" flush="true">
+				<jsp:include page="./page/paging.jsp" flush="true">
 					<jsp:param name="url" value="myFavReciepBoardList.do"/>
 					<jsp:param name="str" value=""/>
 					<jsp:param name="pageSize" value="<%=pageSize%>"/>

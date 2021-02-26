@@ -98,13 +98,37 @@
 			}               
 		});
 		
-		//검색버튼
-		$(document).on("click", "#searchBtn", function(){
-			console.log("searchBtn >>> : ");
-			$("#myQnAList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
-		});
-	})
+			//검색버튼
+			$(document).on("click", "#searchBtn", function(){
+				console.log("searchBtn >>> : ");
+				$("#myQnAList").attr({"method":"GET"
+									 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
+			});
+			// 검색 초기화	
+			$(document).on("click", "#searchReset", function(){
+				$("#myQnAList").attr({"method":"GET"
+									 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
+				})	
+				
+			})
+		
+			//enter키 눌렀을 때 페이지 재로딩 되는 것 방지
+			function captureReturnKey(e) {
+				if (e.keyCode == 13 && e.srcElement.type != 'textarea')
+					return false;
+			}
+			
+			//input에서 엔터키 눌렀을 때도 검색 실행
+			function enterKey(){
+				if(window.event.keyCode == 13){
+					if($("#keyword").val() == "" && $("#startdate").val() == "" && $("#enddate").val() == ""){
+						alert("검색 조건을 입력해주세요");
+					}else{
+					$("#myQnAList").attr({"method":"GET"
+									 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
+					}	
+				}
+			}
 </script>
 </head>
 <body>
@@ -121,10 +145,11 @@
 						<option value="key2">내용</option>
 						<option value="key3">제목+내용</option>
 					</select>
-					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
+					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" onkeydown="enterKey();"><br>
 					<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
 					~<input type="text" id="enddate" name="enddate" size="12" placeholder="종료일">
 					<button type="button" id="searchBtn">검색</button>
+					<button type="button" id="searchReset">검색 초기화</button>
 				</td>	
 			</tr>
 		</thead>
@@ -173,7 +198,7 @@
 %>
 	<tr>
 		<td class="paging" colspan="6">
-			<jsp:include page="./page/myRecipeListPaging.jsp" flush="true">
+			<jsp:include page="./page/paging.jsp" flush="true">
 				<jsp:param name="url" value="myQnAList.do"/>
 				<jsp:param name="str" value=""/>
 				<jsp:param name="pageSize" value="<%=pageSize%>"/>

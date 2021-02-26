@@ -25,9 +25,9 @@ public interface MyinfoDAO {
 
 	public int myPWUpdate(MemberVO mvo);
 
-	public List<RecipeVO> myFavRecipeList1(MemberVO mvo);
+	public List<RecipeVO> myFavRecipeList(MemberVO mvo);
 
-	public List<RecipeBoardVO> myFavRecipeList2(MemberVO mvo);
+	public List<RecipeBoardVO> myFavRecipeBoardList(MemberVO mvo);
 
 	public int myRecipeDelete(RecipeBoardVO rbvo);
 	

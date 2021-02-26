@@ -22,10 +22,10 @@ public interface MyinfoService {
 	public int myLevelUpdate(BoardVO bvo);
 
 	// 내가 추천한 레시피 가져오기 >> 식약처 레시피
-	public List<RecipeVO> myFavRecipeList1(MemberVO mvo);
+	public List<RecipeVO> myFavRecipeList(MemberVO mvo);
 
 	// 내가 추천한 레시피 가져오기 >> 유저 레시피
-	public List<RecipeBoardVO> myFavRecipeList2(MemberVO mvo);
+	public List<RecipeBoardVO> myFavRecipeBoardList(MemberVO mvo);
 	
 	public List<MemberVO> myinfoSelect(MemberVO mvo);
 	
