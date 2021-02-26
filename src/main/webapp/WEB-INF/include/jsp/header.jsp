@@ -83,7 +83,7 @@ if (principal != null && principal instanceof MemberVO) {
 	<!-- navbar -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="main.do">전냉시</a>
+			<a class="navbar-brand" href="http://localhost:8080/kosmoJns">전냉시</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -93,20 +93,20 @@ if (principal != null && principal instanceof MemberVO) {
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="main.do">Home</a></li>
+						aria-current="page" href="http://localhost:8080/kosmoJns">Home</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="">레시피 일반</a></li>
+						aria-current="page" href="http://localhost:8080/kosmoJns/recipeboard.do">레시피 일반</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="">셰프 게시판</a></li>
+						aria-current="page" href="http://localhost:8080/kosmoJns/chefboard/boardselectall.do">셰프 게시판</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="">식재료 구매</a></li>
+						aria-current="page" href="http://localhost:8080/kosmoJns/searchPage.do">식재료 구매</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							공지 </a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">공지사항</a></li>
-							<li><a class="dropdown-item" href="#">Q&A</a></li>
+							<li><a class="dropdown-item" href="http://localhost:8080/kosmoJns/noticeSelectAllPage.do">공지사항</a></li>
+							<li><a class="dropdown-item" href="http://localhost:8080/kosmoJns/qnaSelectAllPage.do">Q&A</a></li>
 						</ul></li>
 				</ul>
 
