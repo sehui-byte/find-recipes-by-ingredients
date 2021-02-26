@@ -5,6 +5,19 @@
 <%
 	Object obj = request.getAttribute("myQnAList");
 	List<BoardVO> list = (List)obj;	
+
+	Object obj2 = request.getAttribute("p_bvo");
+	BoardVO bvoP = (BoardVO)obj2;
+
+      int Size = bvoP.getPageSize();
+      int pageSize = bvoP.getPageSize();
+      int groupSize = bvoP.getGroupSize();
+      int curPage = bvoP.getCurPage();
+      int totalCount = bvoP.getTotalCount();
+	
+      if(request.getParameter("curPage") != null){
+         curPage = Integer.parseInt(request.getParameter("curPage"));
+      }
 %>
 
 <!DOCTYPE html>
@@ -158,6 +171,19 @@
 <% 
 	}	
 %>
+	<tr>
+		<td class="paging" colspan="6">
+			<jsp:include page="./page/myRecipeListPaging.jsp" flush="true">
+				<jsp:param name="url" value="myQnAList.do"/>
+				<jsp:param name="str" value=""/>
+				<jsp:param name="pageSize" value="<%=pageSize%>"/>
+				<jsp:param name="groupSize" value="<%=groupSize%>"/>
+				<jsp:param name="curPage" value="<%=curPage%>"/>
+				<jsp:param name="totalCount" value="<%=totalCount%>"/>
+				<jsp:param name="mno" value="<%=mno %>"/>
+			</jsp:include>
+		</td>
+	</tr>
 	</table>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 </form>

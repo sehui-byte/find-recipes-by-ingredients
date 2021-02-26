@@ -11,7 +11,7 @@ public interface MyinfoService {
 
 	public List<RecipeBoardVO> myRecipeList(MemberVO mvo);
 
-	public List<BoardVO> myQnAList(MemberVO mvo);
+	public List<BoardVO> myQnAList(BoardVO bvo);
 
 	public int myQnADelete(BoardVO bvo);
 

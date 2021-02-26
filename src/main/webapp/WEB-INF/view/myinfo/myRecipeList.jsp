@@ -43,7 +43,7 @@
 		$(document).on("click", "#searchBtn", function(){
 			console.log("searchBtn >>> : ");
 			$("#myRecipeList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/myinfo/myRecipeList.do"}).submit();
+								 ,"action":"/kosmoJns/myinfo/myRecipeListPage.do"}).submit();
 		});
 		
 		$("#deleteQnA").click(function(){
@@ -171,24 +171,27 @@
 	}else{
 %>
 		<tr>
-			<td colspan="6">현재 게시한 레시피 게시글이 존재하지 않습니다.</td>	
+			<td colspan="6">현재 게시한 레시피 게시글이 존재하지 않습니다.	
+			</td>
 		</tr>
 <%
 	}
 %>
+	<tr>
+		<td class="paging" colspan="6">
+			<jsp:include page="./page/myRecipeListPaging.jsp" flush="true">
+				<jsp:param name="url" value="myRecipeListPage.do"/>
+				<jsp:param name="str" value=""/>
+				<jsp:param name="pageSize" value="<%=pageSize%>"/>
+				<jsp:param name="groupSize" value="<%=groupSize%>"/>
+				<jsp:param name="curPage" value="<%=curPage%>"/>
+				<jsp:param name="totalCount" value="<%=totalCount%>"/>
+				<jsp:param name="mno" value="<%=mno %>"/>
+			</jsp:include>
+		</td>
+	</tr>
 	</table>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
-
-	<div class="paging">
-	<jsp:include page="../../include/jsp/paging.jsp" flush="true">
-		<jsp:param name="url" value="myRecipeListPage.do"/>
-		<jsp:param name="str" value=""/>
-		<jsp:param name="pageSize" value="<%=pageSize%>"/>
-		<jsp:param name="groupSize" value="<%=groupSize%>"/>
-		<jsp:param name="curPage" value="<%=curPage%>"/>
-		<jsp:param name="totalCount" value="<%=totalCount%>"/>
-	</jsp:include>
-	</div>
 </form>
 </body>
 </html>

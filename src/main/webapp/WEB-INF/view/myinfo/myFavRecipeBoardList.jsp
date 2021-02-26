@@ -1,12 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/include/jsp/jspinclude.jsp" %>
+<%@ include file="/WEB-INF/include/jsp/header.jsp" %>
 
 <%
-	String mno = (String)request.getParameter("mno");
 	Object obj = request.getAttribute("recipeBoardList");
 	List<RecipeBoardVO> recipeBoardList = (List)obj;
+
+	Object obj2 = request.getAttribute("p_rbvo");
+	MemberVO rbvoP = (MemberVO)obj2;
+
+      int Size = rbvoP.getPageSize();
+      int pageSize = rbvoP.getPageSize();
+      int groupSize = rbvoP.getGroupSize();
+      int curPage = rbvoP.getCurPage();
+      int totalCount = rbvoP.getTotalCount();
+	
+      if(request.getParameter("curPage") != null){
+         curPage = Integer.parseInt(request.getParameter("curPage"));
+      }
+	
 %>    
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.css">
+<script src="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#recipeTable").on("change", function(){
+			var recipeTable = $("#recipeTable option:selected").val();	
+			console.log(recipeTable);
+			if(recipeTable == 'API'){
+				//alert("1111");
+				location.href="/kosmoJns/myinfo/myFavRecipeList.do?mno=<%=mno%>";				
+			}
+			
+		})	
+		
+	})
+</script>
+</head>
+<body>
 <script>
 	$(document).ready(function(){
 		// 체크박스 전체 선택	
@@ -97,6 +134,11 @@
 	
 </script>
 
+<select name="recipeTable" id="recipeTable">
+	<option value="API">식약처 레시피</option>
+	<option value="user"selected="selected">유저 레시피</option>
+</select>
+
 <form id="myFavRecipeBoardList" name="myFavRecipeBoardList" >
 	<table border="1" style="text-align:center; margin-left:auto; margin-right:auto;">
 		<thead>
@@ -155,6 +197,19 @@
 				<button type="button" name="deleteMyFavRecipeBoard" id="deleteMyFavRecipeBoard">즐겨찾기 삭제</button>
 			</td>
 		</tr>	
+		<tr>
+			<td class="paging" colspan="6">
+				<jsp:include page="./page/myRecipeListPaging.jsp" flush="true">
+					<jsp:param name="url" value="myFavReciepBoardList.do"/>
+					<jsp:param name="str" value=""/>
+					<jsp:param name="pageSize" value="<%=pageSize%>"/>
+					<jsp:param name="groupSize" value="<%=groupSize%>"/>
+					<jsp:param name="curPage" value="<%=curPage%>"/>
+					<jsp:param name="totalCount" value="<%=totalCount%>"/>
+					<jsp:param name="mno" value="<%=mno %>"/>
+				</jsp:include>
+			</td>
+		</tr>
 <%
 		} else{
  %>		
@@ -169,3 +224,5 @@
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 	<input type="hidden" id="recipeType" name="recipeType" value="user">
 </form>
+</body>
+</html>

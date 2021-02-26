@@ -80,6 +80,10 @@
 		<li>
 			<a href="myinfo/test.do">test to flask</a>
 		</li>
+		
+		<li>
+			<a href="/kosmoJns/myinfo/myFavReciepBoardList.do?mno=<%=mno%>">내 즐겨찾기 레시피 - 유저</a>
+		</li>
 		<li>
 			<a href="index.jsp">인덱스 페이지로</a>
 		</li>

@@ -68,42 +68,43 @@ public class MyinfoController {
 		return "myinfo/myinfo_main";
 	}
 
-	@RequestMapping(value="myinfo/myRecipeListPage", method = RequestMethod.GET)
-	public String myRecipeListPage(RecipeBoardVO rbvo, HttpServletRequest request,
-									Model model) {
-		
-		List<RecipeBoardVO> myRecipeList = myinfoService.myRecipeListPage(rbvo);
-		
+	@RequestMapping(value = "myinfo/myRecipeListPage", method = RequestMethod.GET)
+	public String myRecipeListPage(RecipeBoardVO rbvo, HttpServletRequest request, Model model) {
+
+		// 페이징 처리 조건 검색
+		logger.info("mno >>> " + rbvo.getMno());
+		logger.info("name >>> " + rbvo.getKeyword());
+		logger.info("keyfilter >>> " + rbvo.getKeyfilter());
+		logger.info("startdate >>> " + rbvo.getStartdate());
+		logger.info("enddate >>> " + rbvo.getEnddate());
+
 		int totalCnt = 0;
 		String cPage = request.getParameter("curPage");
 		String pageCtrl = request.getParameter("pageCtrl");
 
-		logger.info(cPage);
-		logger.info(pageCtrl);
-		
-		Paging.setPage(rbvo, cPage, pageCtrl); //페이징할 정보를 Paging클래스에 보내줍니다
-		
-		List<RecipeBoardVO> listPage = myinfoService.myRecipeListPage(rbvo);
-		
-		if( listPage.size() != 0) {
-			totalCnt = listPage.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
-			rbvo.setTotalCount(totalCnt);				// vo에 담기
+		Paging.setPage(rbvo, cPage, pageCtrl); // 페이징할 정보를 Paging클래스에 보내줍니다
+
+		List<RecipeBoardVO> myRecipeList = myinfoService.myRecipeListPage(rbvo);
+
+		if (myRecipeList.size() != 0) {
+			totalCnt = myRecipeList.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+			rbvo.setTotalCount(totalCnt); // vo에 담기
 		}
-		
-		
+
+		logger.info(rbvo.getMno());
+		logger.info(myRecipeList.size());
+
 		model.addAttribute("myRecipeList", myRecipeList);
 		model.addAttribute("p_rbvo", rbvo);
-		
+
 		return "myinfo/myRecipeList";
 	}
-	
-	
-	
-	
+
+// 삭제 예정	
 	@RequestMapping(value = "myinfo/myRecipeList", method = RequestMethod.GET)
 	public String myRecipeList(MemberVO mvo, Model model, HttpServletRequest request) {
 		logger.info("myRecipeList() 진입 >>> ");
-		
+
 		logger.info("mno >>> " + mvo.getMno());
 		logger.info("name >>> " + mvo.getKeyword());
 		logger.info("keyfilter >>> " + mvo.getKeyfilter());
@@ -113,15 +114,21 @@ public class MyinfoController {
 		List<RecipeBoardVO> list = myinfoService.myRecipeList(mvo);
 		int result = list.size();
 
+		int totalCnt = 0;
+		String cPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
+
+		Paging.setPage(mvo, cPage, pageCtrl); // 페이징할 정보를 Paging클래스에 보내줍니다
+
 		logger.info("result >>> " + result);
 
-		if (result > 0) {
-
-			model.addAttribute("myRecipeList", list);
-
-		} else {
-
+		if (result != 0) {
+			totalCnt = list.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+			mvo.setTotalCount(totalCnt); // vo에 담기
 		}
+
+		model.addAttribute("myRecipeList", list);
+		model.addAttribute("p_bvo", mvo);
 
 		return "myinfo/myRecipeList";
 
@@ -150,21 +157,36 @@ public class MyinfoController {
 	}
 
 	@RequestMapping(value = "myinfo/myQnAList", method = RequestMethod.GET)
-	public String myQnAList(MemberVO mvo, Model model) {
+	public String myQnAList(BoardVO bvo, Model model, HttpServletRequest request) {
 
 		logger.info("myQnAList() 진입 >>> ");
 
-		logger.info("mno >>> " + mvo.getMno());
+		logger.info("mno >>> " + bvo.getMno());
+		logger.info("name >>> " + bvo.getKeyword());
+		logger.info("keyfilter >>> " + bvo.getKeyfilter());
+		logger.info("startdate >>> " + bvo.getStartdate());
+		logger.info("enddate >>> " + bvo.getEnddate());
 
-		List<BoardVO> list = myinfoService.myQnAList(mvo);
+		int totalCnt = 0;
+		String cPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
 
-		int result = list.size();
+		Paging.setPage(bvo, cPage, pageCtrl); // 페이징할 정보를 Paging클래스에 보내줍니다
 
-		logger.info(result);
+		List<BoardVO> myQnAList = myinfoService.myQnAList(bvo);
 
-		if (result > 0) {
-			model.addAttribute("myQnAList", list);
+		if (myQnAList.size() != 0) {
+			totalCnt = myQnAList.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+			bvo.setTotalCount(totalCnt); // vo에 담기
 		}
+
+		logger.info(bvo.getMno());
+		logger.info(myQnAList.size());
+
+		model.addAttribute("myQnAList", myQnAList);
+		model.addAttribute("p_bvo", bvo);
+
+		// -----------------------------------------------------------
 
 		return "myinfo/myQnAList";
 
@@ -251,53 +273,114 @@ public class MyinfoController {
 		}
 	}
 
-	// 내가 추천한 레시피 가져오기
+	// 내가 추천한 레시피 가져오기1
 	@RequestMapping(value = "myinfo/myFavRecipeList", method = RequestMethod.GET)
-	public String myFavRecipeList(MemberVO mvo, Model model) {
+	public String myFavRecipeList(MemberVO mvo, Model model, HttpServletRequest request) {
 		logger.info("myFavRecipeList() 진입 >>> ");
-		List<RecipeVO> recipeList = myinfoService.myFavRecipeList1(mvo);
-		List<RecipeBoardVO> recipeBoardList = myinfoService.myFavRecipeList2(mvo);
 
+		logger.info("mno >>> " + mvo.getMno());
+		logger.info("name >>> " + mvo.getKeyword());
+		logger.info("keyfilter >>> " + mvo.getKeyfilter());
+		logger.info("startdate >>> " + mvo.getStartdate());
+		logger.info("enddate >>> " + mvo.getEnddate());
+
+		int totalCnt = 0;
+		String cPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
+
+		Paging.setPage(mvo, cPage, pageCtrl); // 페이징할 정보를 Paging클래스에 보내줍니다
+
+		List<RecipeVO> recipeList = myinfoService.myFavRecipeList1(mvo);
+
+		logger.info("API 레시피 사이즈 >>> : "+recipeList.size());
+
+		if (recipeList.size() != 0) {
+			 totalCnt = recipeList.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴
+			 mvo.setTotalCount(totalCnt); // vo에 담기
+
+		}
 		model.addAttribute("recipeList", recipeList);
-		model.addAttribute("recipeBoardList", recipeBoardList);
+		model.addAttribute("p_rbvo", mvo);
 
 		return "myinfo/myFavRecipeList";
 	}
 
+	// 내가 추천한 레시피 가져오기2
+	@RequestMapping(value = "myinfo/myFavReciepBoardList", method = RequestMethod.GET)
+	public String myFavRecipeBoardList(MemberVO mvo, Model model, HttpServletRequest request) {
+
+		logger.info("mno >>> " + mvo.getMno());
+		logger.info("name >>> " + mvo.getKeyword());
+		logger.info("keyfilter >>> " + mvo.getKeyfilter());
+		logger.info("startdate >>> " + mvo.getStartdate());
+		logger.info("enddate >>> " + mvo.getEnddate());
+
+		int totalCnt = 0;
+		String cPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
+
+		Paging.setPage(mvo, cPage, pageCtrl); // 페이징할 정보를 Paging클래스에 보내줍니다
+
+		List<RecipeBoardVO> recipeBoardList = myinfoService.myFavRecipeList2(mvo);
+
+		if (recipeBoardList.size() != 0) {
+			totalCnt = recipeBoardList.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+			mvo.setTotalCount(totalCnt); // vo에 담기
+
+		}
+		model.addAttribute("recipeBoardList", recipeBoardList);
+		model.addAttribute("p_rbvo", mvo);
+
+		return "myinfo/myFavRecipeBoardList";
+	}
+
 	// 내가 추천한 레시피 검색하기
 	@RequestMapping(value = "myinfo/myFavRecipeList/SelectRecipe", method = RequestMethod.GET)
-	public String myFavRecipeListSelect(MemberVO mvo, FavoritesVO fvo, Model model) {
+	public String myFavRecipeListSelect(MemberVO mvo, FavoritesVO fvo, Model model,
+										HttpServletRequest request) {
 		logger.info("myFavRecipeList() 진입 >>> ");
 		List<RecipeVO> recipeList = new ArrayList<RecipeVO>();
 		List<RecipeBoardVO> recipeBoardList = new ArrayList<RecipeBoardVO>();
+
+		
 		// api 검색 >>
+		logger.info("mno >>> " + mvo.getMno());
 		logger.info("name >>> " + mvo.getKeyword());
 		logger.info("keyfilter >>> " + mvo.getKeyfilter());
 		logger.info("startdate >>> " + mvo.getStartdate());
 		logger.info("enddate >>> " + mvo.getEnddate());
 		logger.info("recepiType >>> : " + fvo.getRecipeType());
+		
+		int totalCnt = 0;
+		String cPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
+		
+		Paging.setPage(mvo, cPage, pageCtrl); //페이징할 정보를 Paging클래스에 보내줍니다
+
 
 		if (fvo.getRecipeType().equals("API")) {
 			recipeList = myinfoService.myFavRecipeList1(mvo);
-			mvo.setKeyfilter("");
-			mvo.setKeyword("");
-			mvo.setEnddate("");
-			mvo.setStartdate("");
-			recipeBoardList = myinfoService.myFavRecipeList2(mvo);
+			logger.info("조회된 레시피 개수 >>> : "+recipeList.size());
+		if (recipeList.size() != 0) {
+			totalCnt = recipeList.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+			mvo.setTotalCount(totalCnt);				// vo에 담기
+			model.addAttribute("recipeList", recipeList);
+			model.addAttribute("p_rbvo", mvo);
+			}
+			return "myinfo/myFavRecipeList";
 		} else {
 			// api 아닌 경우 >> user 레시피
 			recipeBoardList = myinfoService.myFavRecipeList2(mvo);
-			mvo.setKeyfilter("");
-			mvo.setKeyword("");
-			mvo.setEnddate("");
-			mvo.setStartdate("");
-			recipeList = myinfoService.myFavRecipeList1(mvo);
+			logger.info("조회된 레시피 개수 >>> : "+recipeBoardList.size());
+		if( recipeBoardList.size() != 0) {
+			totalCnt = recipeBoardList.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+			mvo.setTotalCount(totalCnt);				// vo에 담기
+
+			}
+			model.addAttribute("recipeBoardList", recipeBoardList);
+			model.addAttribute("p_rbvo", mvo);
+			return "myinfo/myFavRecipeBoardList";
 		}
-
-		model.addAttribute("recipeList", recipeList);
-		model.addAttribute("recipeBoardList", recipeBoardList);
-
-		return "myinfo/myFavRecipeList";
 	}
 
 	@RequestMapping(value = "myinfo/mySubList", method = RequestMethod.GET)
@@ -338,111 +421,94 @@ public class MyinfoController {
 		 * mav.addObject("fail", false); mav.setViewName("test"); // jsp파일 이름 return
 		 * mav;
 		 */
-		//=============================================웹 페이지를 그대로 가져옴 사진도
+		// =============================================웹 페이지를 그대로 가져옴 사진도
 		/*
-		URL url = null;
-		HttpURLConnection conn = null;
-		String jsonData = "";
-		BufferedReader br = null;
-		StringBuffer sb = null;
-		String returnText = "";
-
+		 * URL url = null; HttpURLConnection conn = null; String jsonData = "";
+		 * BufferedReader br = null; StringBuffer sb = null; String returnText = "";
+		 * 
+		 * try { url = new URL("http://localhost:5000/tospring");
+		 * 
+		 * conn = (HttpURLConnection) url.openConnection();
+		 * conn.setRequestProperty("Accept", "application/json");
+		 * conn.setRequestMethod("GET"); conn.connect();
+		 * 
+		 * br = new BufferedReader(new InputStreamReader(conn.getInputStream(),
+		 * "UTF-8"));
+		 * 
+		 * sb = new StringBuffer();
+		 * 
+		 * while ((jsonData = br.readLine()) != null) { sb.append(jsonData); }
+		 * 
+		 * returnText = sb.toString();
+		 * 
+		 * } catch (IOException e) { e.printStackTrace(); } finally { try { if (br !=
+		 * null) br.close(); } catch (IOException e) { e.printStackTrace(); } }
+		 * model.addAttribute("returnText", returnText);
+		 */
+		String spec = "http://localhost:5000/static/image/test.png";
+		String outputDir = "D:/sample/output/download";
+		InputStream is = null;
+		FileOutputStream os = null;
 		try {
-			url = new URL("http://localhost:5000/tospring");
+			URL url = new URL(spec);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			int responseCode = conn.getResponseCode();
 
-			conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestProperty("Accept", "application/json");
-			conn.setRequestMethod("GET");
-			conn.connect();
+			System.out.println("responseCode " + responseCode);
 
-			br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+			// Status 가 200 일 때
+			if (responseCode == HttpURLConnection.HTTP_OK) {
+				String fileName = "";
+				String disposition = conn.getHeaderField("Content-Disposition");
+				String contentType = conn.getContentType();
 
-			sb = new StringBuffer();
+				// 일반적으로 Content-Disposition 헤더에 있지만
+				// 없을 경우 url 에서 추출해 내면 된다.
+				if (disposition != null) {
+					String target = "filename=";
+					int index = disposition.indexOf(target);
+					if (index != -1) {
+						fileName = disposition.substring(index + target.length() + 1);
+					}
+				} else {
+					fileName = spec.substring(spec.lastIndexOf("/") + 1);
+				}
 
-			while ((jsonData = br.readLine()) != null) {
-				sb.append(jsonData);
+				System.out.println("Content-Type = " + contentType);
+				System.out.println("Content-Disposition = " + disposition);
+				System.out.println("fileName = " + fileName);
+
+				is = conn.getInputStream();
+				os = new FileOutputStream(new File(outputDir, fileName));
+
+				final int BUFFER_SIZE = 4096;
+				int bytesRead;
+				byte[] buffer = new byte[BUFFER_SIZE];
+				while ((bytesRead = is.read(buffer)) != -1) {
+					os.write(buffer, 0, bytesRead);
+				}
+				os.close();
+				is.close();
+				System.out.println("File downloaded");
+			} else {
+				System.out.println("No file to download. Server replied HTTP code: " + responseCode);
 			}
-
-			returnText = sb.toString();
-
-		} catch (IOException e) {
+			conn.disconnect();
+		} catch (Exception e) {
+			System.out.println("An error occurred while trying to download a file.");
 			e.printStackTrace();
-		} finally {
 			try {
-				if (br != null)
-					br.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+				if (is != null) {
+					is.close();
+				}
+				if (os != null) {
+					os.close();
+				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
 		}
-		model.addAttribute("returnText", returnText);
-		*/
-			String spec = "http://localhost:5000/static/image/test.png";
-	        String outputDir = "D:/sample/output/download";
-	        InputStream is = null;
-	        FileOutputStream os = null;
-	        try{
-	            URL url = new URL(spec);
-	            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	            int responseCode = conn.getResponseCode();
 
-	            System.out.println("responseCode " + responseCode);
-
-	            // Status 가 200 일 때
-	            if (responseCode == HttpURLConnection.HTTP_OK) {
-	                String fileName = "";
-	                String disposition = conn.getHeaderField("Content-Disposition");
-	                String contentType = conn.getContentType();
-	                
-	                // 일반적으로 Content-Disposition 헤더에 있지만 
-	                // 없을 경우 url 에서 추출해 내면 된다.
-	                if (disposition != null) {
-	                    String target = "filename=";
-	                    int index = disposition.indexOf(target);
-	                    if (index != -1) {
-	                        fileName = disposition.substring(index + target.length() + 1);
-	                    }
-	                } else {
-	                    fileName = spec.substring(spec.lastIndexOf("/") + 1);
-	                }
-
-	                System.out.println("Content-Type = " + contentType);
-	                System.out.println("Content-Disposition = " + disposition);
-	                System.out.println("fileName = " + fileName);
-
-	                is = conn.getInputStream();
-	                os = new FileOutputStream(new File(outputDir, fileName));
-
-	                final int BUFFER_SIZE = 4096;
-	                int bytesRead;
-	                byte[] buffer = new byte[BUFFER_SIZE];
-	                while ((bytesRead = is.read(buffer)) != -1) {
-	                    os.write(buffer, 0, bytesRead);
-	                }
-	                os.close();
-	                is.close();
-	                System.out.println("File downloaded");
-	            } else {
-	                System.out.println("No file to download. Server replied HTTP code: " + responseCode);
-	            }
-	            conn.disconnect();
-	        } catch (Exception e){
-	            System.out.println("An error occurred while trying to download a file.");
-	            e.printStackTrace();
-	            try {
-	                if (is != null){
-	                    is.close();
-	                }
-	                if (os != null){
-	                    os.close();
-	                }
-	            } catch (IOException e1){
-	                e1.printStackTrace();
-	            }
-	        }	
-		
-		
-		
 		return "test";
 	}
 

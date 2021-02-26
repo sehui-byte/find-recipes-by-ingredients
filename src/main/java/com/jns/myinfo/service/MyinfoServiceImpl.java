@@ -37,10 +37,10 @@ public class MyinfoServiceImpl implements MyinfoService {
 	}
 
 	@Override
-	public List<BoardVO> myQnAList(MemberVO mvo) {
+	public List<BoardVO> myQnAList(BoardVO bvo) {
 		logger.info("myQnAList() 진입 >>> ");
 
-		return myinfoDAO.myQnAList(mvo);
+		return myinfoDAO.myQnAList(bvo);
 	}
 
 	@Override

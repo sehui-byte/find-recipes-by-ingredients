@@ -24,9 +24,9 @@ public class MyinfoDAOImpl implements MyinfoDAO {
 	}
 
 	@Override
-	public List<BoardVO> myQnAList(MemberVO mvo) {
+	public List<BoardVO> myQnAList(BoardVO bvo) {
 
-		return sqlSession.selectList("myQnAList", mvo);
+		return sqlSession.selectList("myQnAList", bvo);
 	}
 
 	@Override
