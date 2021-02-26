@@ -55,12 +55,176 @@ public class RecipeBoardVO
 	private String rb_insertdate;
 	private String rb_updatedate;
 	private String rb_deleteyn;
+
+	// 페이징 *************************************************
+	private int pageSize;
+	private int groupSize;
+	private int curPage;
+	private int totalCount;
+	
+	
+	// 조건 검색 ***********************************************
+	private String keyfilter;
+	private String keyword;
+	private String startdate;
+	private String enddate;
+	
+	public String getKeyfilter() {
+		return keyfilter;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public String getStartdate() {
+		return startdate;
+	}
+
+	public String getEnddate() {
+		return enddate;
+	}
+
+	public void setKeyfilter(String keyfilter) {
+		this.keyfilter = keyfilter;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+
+	//***************************************************
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public int getGroupSize() {
+		return groupSize;
+	}
+
+	public void setGroupSize(int groupSize) {
+		this.groupSize = groupSize;
+	}
+
+	public int getCurPage() {
+		return curPage;
+	}
+
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
+	}
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+	
+	
+	//**************************************************************
+	
 	
 	public RecipeBoardVO()
 	{
 		
 	}//Default Constructor
+	
+	
+	
+	
+	
+	
+public RecipeBoardVO(String rbno, String mno, String rcp_nm, String views, String hits, String rcp_way2,
+			String rcp_pat2, String hash_tag, String main_img, String rcp_parts_dtls, String manual01,
+			String manual_img01, String manual02, String manual_img02, String manual03, String manual_img03,
+			String manual04, String manual_img04, String manual05, String manual_img05, String manual06,
+			String manual_img06, String manual07, String manual_img07, String manual08, String manual_img08,
+			String manual09, String manual_img09, String manual10, String manual_img10, String manual11,
+			String manual_img11, String manual12, String manual_img12, String manual13, String manual_img13,
+			String manual14, String manual_img14, String manual15, String manual_img15, String manual16,
+			String manual_img16, String manual17, String manual_img17, String manual18, String manual_img18,
+			String manual19, String manual_img19, String manual20, String manual_img20, String rb_insertdate,
+			String rb_updatedate, String rb_deleteyn, int pageSize, int groupSize, int curPage, int totalCount,
+			String keyfilter, String keyword, String startdate, String enddate) {
+		super();
+		this.rbno = rbno;
+		this.mno = mno;
+		this.rcp_nm = rcp_nm;
+		this.views = views;
+		this.hits = hits;
+		this.rcp_way2 = rcp_way2;
+		this.rcp_pat2 = rcp_pat2;
+		this.hash_tag = hash_tag;
+		this.main_img = main_img;
+		this.rcp_parts_dtls = rcp_parts_dtls;
+		this.manual01 = manual01;
+		this.manual_img01 = manual_img01;
+		this.manual02 = manual02;
+		this.manual_img02 = manual_img02;
+		this.manual03 = manual03;
+		this.manual_img03 = manual_img03;
+		this.manual04 = manual04;
+		this.manual_img04 = manual_img04;
+		this.manual05 = manual05;
+		this.manual_img05 = manual_img05;
+		this.manual06 = manual06;
+		this.manual_img06 = manual_img06;
+		this.manual07 = manual07;
+		this.manual_img07 = manual_img07;
+		this.manual08 = manual08;
+		this.manual_img08 = manual_img08;
+		this.manual09 = manual09;
+		this.manual_img09 = manual_img09;
+		this.manual10 = manual10;
+		this.manual_img10 = manual_img10;
+		this.manual11 = manual11;
+		this.manual_img11 = manual_img11;
+		this.manual12 = manual12;
+		this.manual_img12 = manual_img12;
+		this.manual13 = manual13;
+		this.manual_img13 = manual_img13;
+		this.manual14 = manual14;
+		this.manual_img14 = manual_img14;
+		this.manual15 = manual15;
+		this.manual_img15 = manual_img15;
+		this.manual16 = manual16;
+		this.manual_img16 = manual_img16;
+		this.manual17 = manual17;
+		this.manual_img17 = manual_img17;
+		this.manual18 = manual18;
+		this.manual_img18 = manual_img18;
+		this.manual19 = manual19;
+		this.manual_img19 = manual_img19;
+		this.manual20 = manual20;
+		this.manual_img20 = manual_img20;
+		this.rb_insertdate = rb_insertdate;
+		this.rb_updatedate = rb_updatedate;
+		this.rb_deleteyn = rb_deleteyn;
+		this.pageSize = pageSize;
+		this.groupSize = groupSize;
+		this.curPage = curPage;
+		this.totalCount = totalCount;
+		this.keyfilter = keyfilter;
+		this.keyword = keyword;
+		this.startdate = startdate;
+		this.enddate = enddate;
+	}
 
+	/*
 	public RecipeBoardVO(String rbno, String mno, String rcp_nm, String views, String hits, String rcp_way2,
 			String rcp_pat2, String hash_tag, String main_img, String rcp_parts_dtls, String manual01,
 			String manual_img01, String manual02, String manual_img02, String manual03, String manual_img03,
@@ -127,7 +291,7 @@ public class RecipeBoardVO
 		this.rb_updatedate = rb_updatedate;
 		this.rb_deleteyn = rb_deleteyn;
 	}
-
+*/
 	public String getRbno() {
 		return rbno;
 	}

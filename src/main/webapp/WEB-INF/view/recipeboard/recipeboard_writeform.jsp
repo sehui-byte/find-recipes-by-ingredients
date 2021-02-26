@@ -92,7 +92,7 @@
 	<body>
 		<form id="rbwriteForm" name="rbwriteForm" enctype="multipart/form-data" method="POST">
 			<input type="button" id="writeBtn" value="작성">
-			<input type="hidden" name="mno" value="<%=mno%>">
+			<input type="hidden" name="mno" id="mno" value="<%=mno%>">
 			<table border="1" style="margin: auto;">
 				<tr>
 					<td colspan="2"><p style="text-align: center;">글쓰기</p></td>
