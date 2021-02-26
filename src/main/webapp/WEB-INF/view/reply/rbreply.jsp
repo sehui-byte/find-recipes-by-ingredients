@@ -6,9 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript">
 
 	$(function(){
+		
+		/* 댓글 입력창 vue setting */
+		var vm = new Vue({
+			el: "#comment_write",
+			data: {
+				sessionWriter: "<%=mnick%>"
+			}
+		});
 		
 		/* rcontent 길이 제한 */
 		$("#rcontent").keyup(function(){
@@ -20,16 +29,15 @@
 		
 		/* 댓글 내용 저장 이벤트 */
 		$(document).on("click", "#replyInsert", function(){
-			//작성자 이름에 대한 입력여부 검사
-			if(!chkSubmit($("#rwriter"),"이름을")) return;
-			else if(!chkSubmit($("#rcontent"),"내용을")) return;
+			//작성 내용 대한 입력여부 검사
+			if(!chkSubmit($("#rcontent"),"내용을")) return;
 			else{
 				var insertUrl = "/kosmoJns/reply/replyInsert.do";
 				console.log("insertUrl >>> : " + insertUrl);
 				var method = "POST";
 				var dataParam = {
 						"rbno": $("#rbno").val(),
-						"rwriter": $("#rwriter").val(),
+						"rwriter": "<%=mnick%>",
 						"rcontent": $("#rcontent").val(),
 						"mno": $("#mno").val()
 				};
@@ -66,14 +74,14 @@
 			var conArea = $(this).parents("li").children().eq(1);
 			
 			conArea.html("");
-			var data="<textarea name='content' id='content'>" + conText + "</textarea>";
-			data += "<input type='button' class='update_btn' value='수정완료'>";
-			data += "<input type='button' class='reset_btn' value='수정취소'>";
+			var data="<textarea class='form-control' name='content' id='content'>" + conText + "</textarea>";
+			data += "<input type='button' id='update_btn' class='btn btn-outline-danger btn-sm' value='수정완료'>";
+			data += "<input type='button' id='reset_btn' class='btn btn-outline-danger btn-sm' value='수정취소'>";
 			conArea.html(data);
 		});
 		
 		/* 초기화 버튼 */
-		$(document).on("click", ".reset_btn", function(){
+		$(document).on("click", "#reset_btn", function(){
 			var conText = $(this).parents("li").find("textarea").html();
 			$(this).parents("li").find("input[type='button']").show();
 			var conArea = $(this).parents("li").children().eq(1);
@@ -81,7 +89,7 @@
 		});
 		
 		/* 글 수정을 위한 Ajax 연동 처리 */
-		$(document).on("click", ".update_btn", function(){
+		$(document).on("click", "#update_btn", function(){
 			var rno = $(this).parents("li").attr("data-num");
 			var rcontent = $("#content").val();
 			if(!chkSubmit($("#content"),"댓글 내용을")) return;
@@ -212,7 +220,7 @@
 		if(isEmpty(rno)) return false;
 			
 		// 새로운 글이 추가될 li 태그 객체
-		var new_li = $("<li>");
+		var new_li = $("<li class='list-group-item'>");
 		new_li.attr("data-num", rno);
 		new_li.addClass("comment_item");
 		
@@ -221,22 +229,30 @@
 		writer_p.addClass("writer");
 		
 		// 작성자 정보와 이름
-		var name_span = $("<span>");
+		var name_span = $("<span style='font-weight: bold'>");
 		name_span.addClass("name");
-		name_span.html(rwriter + "님");
+		name_span.html(rwriter + "&nbsp;&nbsp;");
 		
 		// 작성일지
-		var date_span = $("<span style='font-size: 10px;'>");
+		var date_span = $("<span style='font-size: 8px;'>");
 		date_span.html(" 등록일:" + rinsertdate + "/ 수정일:" + rupdatedate + " ");
 		
 		// 수정하기 버튼
-		var up_input = $("<input>");
-		up_input.attr({"type" : "button", "value" : "수정하기", "v-if": "rwriter==sessionWriter"});
+		var up_input = $("<input class='btn btn-warning btn-sm'>");
+		up_input.attr({"type" : "button", "value" : "수정"});
 		up_input.addClass("update_form");
 		
+		// 여백 1칸
+		var nbsp = $("<span>");
+		nbsp.html("&nbsp;");
+		
+		// 여백 많이
+		var nbspM = $("<span>");
+		nbspM.html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		
 		// 삭제하기 버튼
-		var del_input = $("<input>");
-		del_input.attr({"type" : "button", "value" : "삭제하기"});
+		var del_input = $("<input class='btn btn-warning btn-sm'>");
+		del_input.attr({"type" : "button", "value" : "삭제" });
 		del_input.addClass("delete_btn");
 		
 		// 내용
@@ -246,7 +262,7 @@
 		
 		// 조립하기 (로그인 유저의 닉네임일 경우 수정/삭제 버튼 생성)
 		if(rwriter == sessionWriter){
-			writer_p.append(name_span).append(date_span).append(up_input).append(del_input)
+			writer_p.append(name_span).append(date_span).append(nbspM).append(up_input).append(nbsp).append(del_input)
 			new_li.append(writer_p).append(content_p);
 			$("#comment_list").append(new_li);
 		}else{
@@ -320,32 +336,39 @@
 	
 %>
 <div id="replyContainer">
-	<ul id="comment_list">
-		<!-- 여기에 동적 생성 요소가 들어가게 됩니다. -->
-	</ul>
-	<div id="comment_write">
+	<div id="comment_write" v-cloak>
 		<!-- ========== 댓글 입력 폼 ==========-->
 		<form id="comment_form">
+		<br>
+		댓글(로그인 후 작성 가능합니다.)
+		<div v-if="sessionWriter !== ''">
 		<table>
 			<tr>
-				<td>작성자</td>
 				<td>
-					<input type="text" name="rwriter" id="rwriter" value="<%=mnick%>">
+					<p class="fw-bold fs-5">{{sessionWriter}}</p>
 					<input type="hidden" name="rbno" id="rbno" value="<%=rbno%>">
 					<input type="hidden" name="mno" id="mno" value="<%=mno%>">
-					<input type="button" id="replyInsert" value="저장하기" onclick="sendMessage()";>
 				</td>
 			</tr>
 			<tr>
-				<td>댓글 내용</td>
 				<td>
-				<textarea name="rcontent" id="rcontent" rows="5" cols="50" style="resize:none"></textarea>
-				<div style="font-size: 12px;"><span class="bytes">0</span>bytes</div>
+					<textarea class="form-control" name="rcontent" id="rcontent" rows="3" cols="80" style="resize:none"></textarea>
+					<div style="font-size: 12px;"><span class="bytes">0</span>bytes</div>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">
+					<input class="btn btn-warning" type="button" id="replyInsert" value="저장" 
+						   onclick="sendMessage()">
 				</td>
 			</tr>
 		</table>
+		</div>
 		</form>
 	</div>
+	<ul class="list-group" id="comment_list">
+		<!-- 여기에 동적 생성 요소가 들어가게 됩니다. -->	
+	</ul>
 </div>
 <script>
 function sendMessage() {
