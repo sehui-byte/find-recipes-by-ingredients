@@ -173,4 +173,13 @@ public class ProductServiceImpl implements ProductService{
 		List<ProductVO> result = pdao.likpProductIdSelectAll(pvo);
 		return result;
 	}
+	
+	
+	//로그인한 유저의 관심상품 중 productId, title, lprice 가져오기
+	@Override
+	public List<ProductVO> getlikeProInfoSelectAll(ProductVO pvo) {
+		pvo.setMno(getLoginMno(pvo));
+		List<ProductVO> result = pdao.getlikeProInfoSelectAll(pvo);
+		return result;
+	}
 }

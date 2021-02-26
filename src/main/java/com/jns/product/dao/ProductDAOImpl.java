@@ -38,4 +38,11 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<ProductVO> likpProductIdSelectAll(ProductVO pvo) {
 		return sqlSession.selectList("likpProductIdSelectAll",pvo);
 	}
+	
+	//로그인한 유저의 관심상품의 productId, title, lprice만 select
+	@Override
+	public List<ProductVO> getlikeProInfoSelectAll(ProductVO pvo) {
+		return sqlSession.selectList("getlikeProInfoSelectAll",pvo);
+	}
+	
 }
