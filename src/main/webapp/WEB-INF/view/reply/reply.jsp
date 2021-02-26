@@ -234,7 +234,7 @@
 		
 		// 작성일지
 		var date_span = $("<span style='font-size: 8px;'>");
-		date_span.html(" 등록일:" + rinsertdate + "/ 수정일:" + rupdatedate + " ");
+		date_span.html(" 등록:" + rinsertdate + " / 수정:" + rupdatedate + " ");
 		
 		// 수정하기 버튼
 		var up_input = $("<input class='btn btn-warning btn-sm'>");
