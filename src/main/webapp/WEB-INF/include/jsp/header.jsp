@@ -42,9 +42,6 @@ if (principal != null && principal instanceof MemberVO) {
 		String loginSession = (String) session.getAttribute("mid");
 	}
 }
-
-
-
 %>
 
 <!DOCTYPE html>
@@ -52,6 +49,9 @@ if (principal != null && principal instanceof MemberVO) {
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -109,12 +109,16 @@ if (principal != null && principal instanceof MemberVO) {
 							<li><a class="dropdown-item" href="#">Q&A</a></li>
 						</ul></li>
 				</ul>
+
 				<!-- 로그아웃시에 왔던 알림 갯수 표시 -->
-				<button type="button" class="btn btn-primary">
-					미확인알림 <span class="badge bg-secondary" id="msgCount"></span>
-				</button>
+				<div>
+					미확인 알림 <span class="badge bg-primary" id="msgCount"></span>
+				</div>
+
 				<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
 				<div id="socketAlarm"></div>
+
+				<!-- 레시피 검색 -->
 				<form class="d-flex">
 					<input class="form-control me-2" type="search" placeholder="레시피 검색"
 						aria-label="Search">
@@ -122,6 +126,7 @@ if (principal != null && principal instanceof MemberVO) {
 				</form>
 			</div>
 		</div>
+
 	</nav>
 	<span>main header</span>
 	<div class="loginInfo" style='text-align: right;'>
@@ -158,22 +163,23 @@ if (principal != null && principal instanceof MemberVO) {
 		console.log("웹소켓 연결");
 		//웹소켓 서버에서 메세지를 보내면 자동으로 실행된다
 		socket.onmessage = onMessage;
-		var mid = "<%=mid %>";
+		var mid = "<%=mid%>";
 		console.log("mid >> " + mid);
 		//var a = 'null,\'' + mid '\',' + 'count';
 		//onMessage(a);
 
 		//evt파라미터는 웹소켓이 보내준 데이터 의미
 		function onMessage(evt) {
-			console.log("메세지 받음");
+			console.log("서버로부터 메세지 받음");
 			var arriveTime = new Date();
 			var data = evt.data;
-			
-			if(data.substring(0,5) == 'count'){
-				var count = data.substring(6,1);
-				document.getElementById("msgCount").innerHTML = count;
-			}
-			else{
+			var dataArr = data.split(",");
+
+			//type이 count이면 
+			if (dataArr[2].substring(0, 5) == 'count') {
+				var count = dataArr[2].substring(5, 6);
+				$("#msgCount").text(count);
+			} else {//type이 count가 아니면 toast 메세지 발송
 				var toast = '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
 				toast += '<div class="toast-header"><class="rounded me-2">';
 				toast += '<strong class="me-auto">Bootstrap</strong>';
@@ -188,50 +194,51 @@ if (principal != null && principal instanceof MemberVO) {
 					"autohide" : false
 				});
 				$('.toast').toast('show');
+
+				console.log(data);
+
+				sock.close();//소켓연결종료
+
+				function timeBefore() {
+					//현재시간
+					var now = new Date();
+					//기준시간 
+					var writeDay = arriveTime;
+					var minus;
+					var time = '';
+					if (now.getFullYear() > writeDay.getFullYear()) {
+						minus = now.getFullYear() - writeDay.getFullYear();
+						time += minus + "년 ";
+					}
+					if (now.getMonth() > writeDay.getMonth()) {
+						minus = now.getMonth() - writeDay.getMonth();
+						time += minus + "달 ";
+					}
+					if (now.getDate() > writeDay.getDate()) {
+						minus = now.getDate() - writeDay.getDate();
+						time += minus + "일 ";
+					}
+
+					if (now.getHours() > writeDay.getHours()) {
+						minus = now.getHours() - writeDay.getHours();
+						time += minus + "시간 ";
+					}
+
+					else if (now.getMinutes() > writeDay.getMinutes()) {
+						minus = now.getMinutes() - writeDay.getMinutes();
+						time += minus + "분 ";
+					}
+
+					else if (now.getSeconds() > writeDay.getSeconds()) {
+						minus = now.getSeconds() - writeDay.getSeconds();
+						time += "방금";
+					}
+
+					time += "전          ";
+					document.getElementsByClassName("sub")[0].innerHTML = time;
+				}
+				setInterval(timeBefore, 1000);
 			}
-			console.log(data);
-			
-			sock.close();//소켓연결종료
-
-			function timeBefore() {
-				//현재시간
-				var now = new Date();
-				//기준시간 
-				var writeDay = arriveTime;
-				var minus;
-				var time = '';
-				if (now.getFullYear() > writeDay.getFullYear()) {
-					minus = now.getFullYear() - writeDay.getFullYear();
-					time += minus + "년 ";
-				}
-				if (now.getMonth() > writeDay.getMonth()) {
-					minus = now.getMonth() - writeDay.getMonth();
-					time += minus + "달 ";
-				}
-				if (now.getDate() > writeDay.getDate()) {
-					minus = now.getDate() - writeDay.getDate();
-					time += minus + "일 ";
-				}
-
-				if (now.getHours() > writeDay.getHours()) {
-					minus = now.getHours() - writeDay.getHours();
-					time += minus + "시간 ";
-				}
-
-				else if (now.getMinutes() > writeDay.getMinutes()) {
-					minus = now.getMinutes() - writeDay.getMinutes();
-					time += minus + "분 ";
-				}
-
-				else if (now.getSeconds() > writeDay.getSeconds()) {
-					minus = now.getSeconds() - writeDay.getSeconds();
-					time += "방금";
-				}
-
-				time += "전          ";
-				document.getElementsByClassName("sub")[0].innerHTML = time;
-			}
-			setInterval(timeBefore, 1000);
 		}
 	</script>
 	<!-- bootstrap js -->

@@ -45,9 +45,6 @@ import com.jns.product.vo.ProductVO;
 
 public class EchoHandler extends TextWebSocketHandler {
 	Logger logger = Logger.getLogger(EchoHandler.class);
-//	private MemberDAO mdao = new MemberDAOImpl();
-//	private AlarmDAO adao = new AlarmDAOImpl();
-//	private ChabunDAO chabun = new ChabunDAOImpl();
 	private AlarmDAO adao;
 	private ChabunDAO chabun;
 	
@@ -73,11 +70,11 @@ public class EchoHandler extends TextWebSocketHandler {
 			else {
 				count = Integer.valueOf(adao.countAlarm(avo));
 			}
-			System.out.println("쌓인 알람수 >> " + count);
-			System.out.println(userId + "연결됨.");
+			logger.info("쌓인 알람수 >> " + count);
+			logger.info(userId + "서버 연결됨.");
 			users.put(userId,session); //로그인중인 개별 유저 저장
 			WebSocketSession user = users.get(userId);
-			user.sendMessage(new TextMessage("null,"+userId +",count"+count));
+			user.sendMessage(new TextMessage("null,"+userId +",count"+count));//쌓인 알림 개수 보내줌
 		}
 	}
 
@@ -85,7 +82,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	private String getMid(WebSocketSession session) {
 		Map<String, Object> httpSession = session.getAttributes();
 		String mid = (String) httpSession.get("mid");
-		System.out.println("mid >> " + mid);
+		logger.info("로그인한 유저 mid >> " + mid);
 		return mid == null?null:mid;
 	}
 
@@ -106,19 +103,18 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message)throws Exception{
 		String msg = message.getPayload();
-		System.out.println(msg);
 		String[]strs = msg.split(",");
 		String sender = strs[0];
 		String receiver = strs[1];
 		String type = strs[2];
 
-		System.out.println("msg >> " + msg);
-		System.out.println("sender >> " + sender);
-		System.out.println("receiver >> " + receiver);
-		System.out.println("type >> " + type);
+		logger.info("msg >> " + msg);
+		logger.info("sender >> " + sender);
+		logger.info("receiver >> " + receiver);
+		logger.info("type >> " + type);
+		
 		MemberVO mvo = new MemberVO();
 		mvo.setMid(receiver);
-
 		AlarmVO avo = new AlarmVO();
 		System.out.println(chabun.getAlarmChabun().getAno());
 		avo.setAno(ChabunUtil.getAlarmChabun("D", chabun.getAlarmChabun().getAno()));
@@ -151,8 +147,8 @@ public class EchoHandler extends TextWebSocketHandler {
 		if(!isLogin) {
 			//DB에 저장한다
 			int nCnt = adao.insertAlarm(avo);
-			System.out.println("nCnt >> " + nCnt);
-			System.out.println("로그아웃 상태! db에 알람 저장!");
+			logger.info("insert nCnt >> " + nCnt);
+			logger.info("로그아웃 상태! db에 알람 저장!");
 		}
 	}
 }
