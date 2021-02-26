@@ -38,7 +38,7 @@ $(document).ready(function(){
 			
 			// ALL
 			$(document).on("click", "#SALL", function(){
-				location.href="memberSelectAll.do";
+				location.href="memberSelectAllPage.do";
 			});
 		});
 
