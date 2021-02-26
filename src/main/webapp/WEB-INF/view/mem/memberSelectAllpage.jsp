@@ -84,7 +84,7 @@
 	
 %>
 <form name = "memberList" id="memberList">
-<table border="1" align="center">
+<table border="1" align="center" class="table table-striped"  > 
 <thead>
 <tr>
 	<td colspan="20" align="center">
@@ -137,7 +137,7 @@
 	<td class="tt"><%=mvo.getMno() %></td>
 	<td class="tt"><%=mvo.getMlevel() %></td>
 	<td class="tt"><%=mvo.getMid() %></td>
-<!--<td class="tt"><%=mvo.getMpw() %></td> -->
+	<td class="tt"><%=mvo.getMpw() %></td> 
 	<td class="tt"><%=mvo.getMname() %></td>
 	<td class="tt"><%=mvo.getMnick() %></td>
 	<td class="tt"><%=mvo.getMhp() %></td>
@@ -166,7 +166,7 @@
 </tbody>
 </table>
 <br>
-	<div class="paging" style="position: absolute; left: 1200px; top: 700px;">
+	<div class="paging" style="position: absolute; left: 1200px; top: 200px;">
 		<jsp:include page="paging.jsp" >
 		<jsp:param value="memberSelectAllPage.do" name="url"/>
 		<jsp:param value="" name="str"/>
