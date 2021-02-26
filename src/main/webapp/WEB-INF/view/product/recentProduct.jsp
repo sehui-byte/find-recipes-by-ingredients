@@ -102,9 +102,9 @@
 			var title = info[0];
 			var productImage = info[1];
 			var productLink = info[2];
-			console.log(title);
-			console.log(productImage);
-			console.log(productLink);
+			//console.log(title);
+			//console.log(productImage);
+			//console.log(productLink);
 			
 			var cookievalue = productImage+'&&'+productLink;
 			console.log(cookievalue);
@@ -242,16 +242,16 @@
 					var title = cookieNameArr[i]; // title
 					title = title.replace(/<b>/gi,'');
 					title = title.replace(/<\/b>/gi,'');
-					console.log(title);
+					//console.log(title);
 					
 					var product = cookieValueArr[i]; // productImage&&productLink
 					var info = product.split("&&"); // [productImage, productLink]
 					var image = info[0]	// productImage5
 					var link = info[1]	// productLink5
-					console.log(product);
-					console.log(info);
-					console.log(image);
-					console.log(link);
+					//console.log(product);
+					//console.log(info);
+					//console.log(image);
+					//console.log(link);
 					
 					
 					var recentProduct = '<a href="'+link+'" target="_blank"><img src="'+image+'" class="rounded_2" title="'+title+'" style="width: 150px; height: 150px;"></a>';
