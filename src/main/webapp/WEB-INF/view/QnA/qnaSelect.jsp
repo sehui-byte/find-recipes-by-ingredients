@@ -88,7 +88,7 @@
 		
 		// C
 		$(document).on("click", "#C", function(){
-			location.href="qnaSelectAll.do";
+			location.href="qnaSelectAllPage.do";
 		});
 		
 	});
