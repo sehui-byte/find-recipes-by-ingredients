@@ -119,10 +119,12 @@
 				클릭한 검색어에 대한 검색 결과
 			*/
 			
- 			$.ajax({
+	        $.ajax({
 				type : "GET",
 				url : "search.do",
-				data : { keyword : keyword },
+				data : {
+					keyword : keyword
+				},
 				dataType : "json",
 				contentType : "application/json; charset:UTF-8",
 				error : function(error) {
@@ -131,17 +133,16 @@
 				success : function(data) {
 					$("#result").empty();
 					console.log("success");
-					//console.log(data);
 
 					var html = "";
 					var item = data.items;
 					var count = 0;//식품 검색결과 총개수
-
-					html += '<div class="card-deck">';
+					html += '<div class="card-group">';
 					for ( var i in item) {
 						var category1 = item[i].category1; //식품만 검색되게.
-						if (category1 === '식품') {
+						if (true) {
 							var title = item[i].title;//상품명
+							title = title.replace(/,/gi,'');
 							var image = item[i].image;//상품이미지
 							var link = item[i].link;//상품구매링크
 							var lprice = item[i].lprice;//최저가
@@ -151,20 +152,21 @@
 							var maker = item[i].maker;//제조사
 							var brand = item[i].brand;//브랜드명
 							var mallName = item[i].mallName;//쇼핑몰상호
-							
+
 							//onclick시 보낼 매개변수 문자열 : str (,로 구분)
-							var str = productId + ','
-										+ title.replace(/<b>/gi,'').replace(/<\/b>/gi,'') + ',' //html<br>태그 지워주기
-										+ image + ',' 
-										+ link + ',' 
-										+ lprice + ',' 
-										+ hprice;
+							var str = productId
+									+ ','
+									+ title.replace(/<b>/gi, '')
+											.replace(/<\/b>/gi, '')
+									+ ',' //html<br>태그 지워주기
+									+ image + ',' + link + ',' + lprice
+									+ ',' + hprice;
+
+							// 최근 본 상품 목록 필요한 매개변수 문자열
+							var recentPro = title + '^^' + image
+									+ '^^' + link;
 							
- 							// 최근 본 상품 목록 필요한 매개변수 문자열
-							var recentPro = prdouctId + ',' + image + ',' + link;
-							
-			
-							html += '<div class="col-sm-6">';
+							html += '<div class="col">';
 							html += '<div class="card" style="width: 18rem;">';
 							html += '<img src="' + image + '" alt="..." class="card-img-top"">';
 							html += '<div class="card-body">';
@@ -181,31 +183,18 @@
 							html += '<li class="list-group-item"> 브랜드 : '
 									+ brand + '</li>';
 							html += '</ul>';
-							html += '<a href="' + link +'" class="btn btn-primary" onclick=clickpurchase('+recentPro+')>구매하기</a> ';
-							//관심 상품 버튼 추가
-							html += '<input type="checkbox" class="heartBtn" id='
-									+ productId 
-									+ ' onclick="clickProductId(\'' + str +'\')"';
-							
-							var cookieString = getCookie('like');
-							console.log(cookieString);
-							if (cookieString != undefined) {
-								var cookie = cookieString.split(',');
-								for ( var i in cookie) {
-									//기존 저장되어있는 쿠키랑 현재 상품id가 같으면 checkbox 체크해준다
-									if (cookie[i] == productId) {
-										html += 'checked';
-									}
-								}
-								html+= ' />';
-							}
-							
-							else{
-								html+= ' />';
-							}
+							html += '<a href="' + link +'" class="btn btn-primary" id="purchaseBtn" target="_blank" onclick="return clickpurchase(\''
+									+ recentPro
+									+'\');">구매하기</a> ';
 
-							html += '</div></div></div>';
-							
+							//관심 상품 버튼 추가
+							html += '<input type="button" class="heartBtn" value="관심상품 추가" id='
+									+ productId
+									+ ' onclick="clickProductId(\''
+									+ str + '\')"';
+
+							html += '/></div></div></div>';
+
 							//비워주기
 							$('#keyword').empty();
 
@@ -224,7 +213,7 @@
 					} else {
 						html += '</div>';
 					}
-
+	
 					//html코드 넣어주기
 					$("#result").append(html);
 
@@ -232,8 +221,11 @@
 			});
 		}
 	    
-	    
 	</script>
+	
+	
+	<!-- 최근 검색어 링크로 얻은 검색 결과에서 구매하기 버튼 눌러도 최근본상품에 추가되도록  -->
+	<%@ include file="./recentProduct_cookie.jsp"%>
 
 </body>
 </html>
