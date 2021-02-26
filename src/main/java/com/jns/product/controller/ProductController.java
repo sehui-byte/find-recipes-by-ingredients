@@ -51,7 +51,7 @@ public class ProductController {
 		return list;
 	}
 	
-	//유저의 기존 관심상품 목록 productId, title, lprice 가져와서 search.jsp 페이지에 넘기는 부분
+	//유저의 기존 관심상품 목록 productId, title, lprice 가져와서 lpriceProduct.jsp 페이지에 넘기는 부분
 	@RequestMapping("getlikeProInfo.do")
 	public @ResponseBody List<ProductVO> getlikeProInfoSelectAll(){
 		ProductVO pvo = new ProductVO();
