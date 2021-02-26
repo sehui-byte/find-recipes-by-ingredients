@@ -10,7 +10,7 @@
 NOTICE DELETE
 <hr>
 <script>
-	location.href="noticeSelectAll.do";
+	location.href="noticeSelectAllPage.do";
 </script>
 </body>
 </html>

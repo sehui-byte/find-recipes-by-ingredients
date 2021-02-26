@@ -18,32 +18,38 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO {
 	}
 
 	@Override
-	public RecipeBoardVO recipeBoardSelect(RecipeBoardVO rbvo) {
-		return sqlSession.selectOne("recipeBoardSelect");
+	public RecipeBoardVO recipeBoardSelect(RecipeBoardVO rbvo) 
+	{
+		return sqlSession.selectOne("recipeBoardSelect", rbvo);
 	}
 
 	@Override
-	public boolean recipeBoardInsert(RecipeBoardVO rbvo) {
-		return sqlSession.insert("recipeBoardInsert") > 0;
+	public boolean recipeBoardInsert(RecipeBoardVO rbvo) 
+	{
+		return sqlSession.insert("recipeBoardInsert", rbvo) > 0;
 	}
 
 	@Override
-	public boolean recipeBoardUpdate(RecipeBoardVO rbvo) {
-		return sqlSession.update("recipeBoardUpdate") > 0;
+	public boolean recipeBoardUpdate(RecipeBoardVO rbvo) 
+	{
+		return sqlSession.update("recipeBoardUpdate", rbvo) > 0;
 	}
 
 	@Override
-	public boolean recipeBoardDelete(RecipeBoardVO rbvo) {
-		return sqlSession.update("recipeBoardDelete") > 0;
+	public boolean recipeBoardDelete(RecipeBoardVO rbvo) 
+	{
+		return sqlSession.update("recipeBoardDelete", rbvo) > 0;
 	}
 
 	@Override
-	public boolean recipeBoardViewsPP(RecipeBoardVO rbvo) {
-		return sqlSession.update("recipeBoardViewsPP") > 0;
+	public boolean recipeBoardViewsPP(RecipeBoardVO rbvo) 
+	{	
+		return sqlSession.update("recipeBoardViewsPP", rbvo) > 0;
 	}
 
 	@Override
-	public boolean recipeBoardHitsPP(RecipeBoardVO rbvo) {
-		return sqlSession.update("recipeBoardHitsPP") > 0;
+	public boolean recipeBoardHitsPP(RecipeBoardVO rbvo) 
+	{
+		return sqlSession.update("recipeBoardHitsPP", rbvo) > 0;
 	}
 }

@@ -14,71 +14,9 @@
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous">
 <style>
-#recentbox {
-	position: absolute;
-	top: 180px;
-	right: 50%;
-	margin-right: -670px;
-}
 </style>
 </head>
 <body>
-	<script type="text/javascript"> 
-	$(document).ready(function() {
-		// 기존 css에서 플로팅 배너 위치값(top)을 가져와서 저장
-		// 250px 이런식으로 가져오므로 숫자만 가져오기 : parseInt(값);
-		var floatPosition = parseInt($("#recentbox").css('top'));
-		$(window).scroll(function() {
-			// 현재 스크롤 위치를 가져온다.
-			var scrollTop = $(window).scrollTop();
-			if (scrollTop < 180) {
-				 scrollTop = 180;
-			}
-			var newPosition = scrollTop + floatPosition + "px";
-			// 애니메이션 없이 바로 따라감
-			//$("#recentbox").css('top', newPosition);
-			$("#recentbox").stop().animate({
-				"top" : newPosition
-			}, {
-				'duration' : 500,
-				'easing' : 'easeInOutCubic',
-				'complete' : function() {
-					console.log('이동 완료');
-				}
-			});
-		}).scroll();
-	});
-	</script>
-
-
-
-	<!-- 최근 본 상품 -->
-	<!-- 퀵메뉴 -->
-	최근 본 상품 리스트
-	<div id="recentbox">
-		<div class="card text-dark bg-light mb-3" style="max-width: 16rem;">
-			<!-- '최근 본 상품' 텍스트 -->
-			<span id="recent_text"></span>
-			<!-- 이미지 + 링크 -->
-			<div class="text-center_1" align="center">
-				<!-- <target="_blank> : 새 창에서 뜨기  / 없애면 현재 웹에서 이동-->
-				<span id="product1"> </span>
-			</div>
-			<div class="text-center_2" align="center">
-				<span id="product2"> </span>
-			</div>
-			<div class="text-center_3" align="center">
-				<span id="product3"> </span>
-			</div>
-			<div class="text-center_4" align="center">
-				<span id="product4"> </span>
-			</div>
-			<div class="text-center_5" align="center">
-				<span id="product5"> </span>
-			</div>
-		</div>
-	</div>
-
 
 	<script>
 	
@@ -272,13 +210,12 @@
 	
 		
 	</script>
-
-
-
+	
 	<!-- bootstrap -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
 		crossorigin="anonymous"></script>
+
 </body>
 </html>

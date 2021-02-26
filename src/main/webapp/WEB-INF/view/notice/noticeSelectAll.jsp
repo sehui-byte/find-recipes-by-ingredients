@@ -3,6 +3,7 @@
 <%@ page import="com.jns.board.vo.BoardVO" %>
 <%@ page import="java.util.List" %>
 <%@page import="com.jns.common.FileLoadUtil"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +46,7 @@
 </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
 	Object obj = request.getAttribute("listAll");
@@ -54,7 +56,7 @@
 %>
 
 <form name="NoticeList" id="NoticeList">
-<table border="1" align="center">
+<table class="table table-striped" align="center">
 <thead>
 <tr>
 	<td colspan="10" align="center">

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jns.alarm.dao.AlarmDAO">
+
+
+<select id="selectAlarm" resultType="avo" parameterType="avo">
+SELECT * FROM ALARM WHERE RECEIVER = #{receiver, jdbcType=VARCHAR}
+</select>
+
+<select id="countAlarm" resultType="String" parameterType="avo">
+SELECT COUNT(*)
+FROM ALARM 
+GROUP BY RECEIVER
+HAVING RECEIVER = #{receiver, jdbcType=VARCHAR}
+</select>
+
+<insert id="insertAlarm" parameterType="avo">
+INSERT INTO ALARM
+(
+	ANO,
+	RECEIVER,
+	SENDER,
+	TYPE	
+)
+VALUES(
+	#{ano, jdbcType=VARCHAR},
+	#{receiver, jdbcType=VARCHAR},
+	#{sender, jdbcType=VARCHAR},
+	#{type, jdbcType=VARCHAR}
+)
+</insert>
+</mapper>

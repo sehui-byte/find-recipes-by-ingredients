@@ -32,8 +32,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 
-
-
 			//체크박스 체크 확인하기 
 			function checkOnly(chk){
 			 alert("선택했습니다. >>> : " + chk);
@@ -59,7 +57,18 @@
 					$("#memberList").attr({
 						"method":"GET",
 						"action":"memberSelect.do"}).submit();			
-				}); 
+				});
+				
+				
+				$(document).on("click", "#searchBtn", function(){
+					console.log("searchBtn >>> : ");
+					$("#memberList").attr({
+						"method":"GET",
+						"action":"memberSelectAllPage.do"}).submit();
+				});
+				
+				
+				
 			});
 </script>
 </head>
@@ -75,19 +84,32 @@
 	
 %>
 <form name = "memberList" id="memberList">
-<table border="1" align="center">
+<table border="1" align="center" class="table table-striped"  > 
 <thead>
 <tr>
 	<td colspan="20" align="center">
 		<h2>회원 정보</h2>
 	</td>
 </tr>
+
+<tr>
+		<td colspan="10" align="left">
+			<select id="keyfilter" name="keyfilter">
+				<option value="key1">회원이름</option>
+				<option value="key2">회원아이디</option>
+			</select>
+			<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
+			<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
+			~<input type="text" id="enddate" name="enddate" size="12" placeholder="종료일">
+			<button type="button" id="searchBtn">검색</button>
+		</td>	
+	</tr>
 <tr>
 	<td class="tt"><input type="checkbox" name="chkAll" id="chkAll"></td>
 	<td class="tt">회원번호</td>
 	<td class="tt">회원등급</td>	
 	<td class="tt">아이디</td>
-	<td class="tt">비밀번호</td>
+	<td class="tt">비밀번호</td> 
 	<td class="tt">이름</td>	
 	<td class="tt">닉네임</td>
 	<td class="tt">전화번호</td>
@@ -115,7 +137,7 @@
 	<td class="tt"><%=mvo.getMno() %></td>
 	<td class="tt"><%=mvo.getMlevel() %></td>
 	<td class="tt"><%=mvo.getMid() %></td>
-	<td class="tt"><%=mvo.getMpw() %></td>
+	<td class="tt"><%=mvo.getMpw() %></td> 
 	<td class="tt"><%=mvo.getMname() %></td>
 	<td class="tt"><%=mvo.getMnick() %></td>
 	<td class="tt"><%=mvo.getMhp() %></td>
@@ -144,8 +166,8 @@
 </tbody>
 </table>
 <br>
-	<div class="paging">
-		<jsp:include page="paging.jsp">
+	<div class="paging" style="position: absolute; left: 1200px; top: 200px;">
+		<jsp:include page="paging.jsp" >
 		<jsp:param value="memberSelectAllPage.do" name="url"/>
 		<jsp:param value="" name="str"/>
 		<jsp:param name="pageSize" value="<%=pageSize%>"/>

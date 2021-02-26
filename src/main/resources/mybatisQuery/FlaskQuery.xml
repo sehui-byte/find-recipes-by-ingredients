@@ -4,11 +4,11 @@
 
 	<select id="getNutrient" parameterType="rvo" resultType="nuvo">
 		SELECT 
-			INFO_ENG,
-			INFO_CAR,
-			INFO_PRO,
-			INFO_FAT,
-			INFO_NA
+			INFO_ENG AS ENG,
+			INFO_CAR AS CAR,
+			INFO_PRO AS PRO,
+			INFO_FAT AS FAT,
+			INFO_NA AS NA
 		FROM
 			RECIPE
 		WHERE
@@ -19,24 +19,28 @@
 	
 	<select id="getSubscribeInc" parameterType="ssvo" resultType="ssvo">
 		SELECT
+			#{year} AS YEAR,
+			#{mon} AS MON,
 			COUNT(*) AS INC
 		FROM
 			SUB_INFO S
 		WHERE
-			TO_CHAR(S.SINSERTDATE, 'YY') = #{year}
-			AND TO_CHAR(S.SINSERTDATE, 'MM') = #{mon}
+			TO_CHAR(S.SINSERTDATE, 'YYYY') = #{year}
+			AND TO_CHAR(S.SINSERTDATE, 'MM') = LPAD(#{mon}, 2, '0')
 	</select>
 	
 	
 	
 	<select id="getSignupInc" parameterType="suvo" resultType="suvo">
 		SELECT
+			#{year} AS YEAR,
+			#{mon} AS MON,
 			COUNT(*) AS INC
 		FROM
 			MEMBER M
 		WHERE
-			TO_CHAR(M.MINSERTDATE, 'YY') = #{year}
-			AND TO_CHAR(M.MINSERTDATE, 'MM') = #{mon}
+			TO_CHAR(M.MINSERTDATE, 'YYYY') = #{year}
+			AND TO_CHAR(M.MINSERTDATE, 'MM') = LPAD(#{mon}, 2, '0')
 	</select>
 	
 </mapper>

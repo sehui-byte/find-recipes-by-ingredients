@@ -59,7 +59,7 @@
 	System.out.println("boardselectall.jsp rank >>> : " + rank);
 %>
 <form id="subscribeRank">
-	<table border=1>
+	<table border=1 >
 		<tr>
 			<td colspan="3" align="center">셰프 랭킹</td>
 		</tr>
@@ -99,7 +99,7 @@
 	System.out.println("boardselectall.jsp nCnt >>> : " + nCnt);
 %>
 <form name="boardList" id="boardList">
-<table border="1">
+<table class="table table-striped">
 	<thead>
 	<tr>
 		<td colspan="10" align="center"><h2>세프게시판</h2></td>

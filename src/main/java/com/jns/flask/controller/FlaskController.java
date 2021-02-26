@@ -1,12 +1,19 @@
 package com.jns.flask.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jns.common.FlaskUtil;
 import com.jns.flask.service.FlaskService;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
@@ -29,31 +36,55 @@ public class FlaskController
 		this.recipeService = recipeService;
 	}
 	
-	@RequestMapping(value = "flaskTest", method = RequestMethod.GET)
-	public String flaskTest()
+	@RequestMapping(value = "sendNutrient", method = RequestMethod.GET)
+	public String sendNutrient(RecipeVO rvo, RedirectAttributes redirectAttributes)
 	{
-		RecipeVO rvo = recipeService.recipeSelectAll().get(0);
-		SubscribeIncVO ssvo = new SubscribeIncVO();
-		SignupIncVO suvo = new SignupIncVO();
+		logger.info("rvo >>> : " + rvo.toString());
+		NutrientVO nvo = flaskService.getNutrient(recipeService.recipeSelect(rvo));
+		String jsonStr = FlaskUtil.getNutrientJSON(nvo).toJSONString();
 		
-		logger.info("nutrient >>> : " + flaskService.getNutrient(rvo).toJSONObject().toJSONString());
+		redirectAttributes.addAttribute("nutrient", jsonStr);
 		
-		ssvo.setYear("2021");
-		ssvo.setMon("02");
-		logger.info("subscribe >>> : " + flaskService.getSubscribeInc(ssvo).toJSONObject().toJSONString());
-		
-		suvo.setYear("2021");
-		ssvo.setMon("02");
-		logger.info("signup >>> : " + flaskService.getSignupInc(suvo).toJSONObject().toJSONString()); 
-		
-		return "index.jsp";
+		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
 	}
 	
-//	public static void main(String[] args) 
-//	{
-//		NutrientVO nvo = new NutrientVO("445", "70", "26", "7", "245");
-//		JSONObject nutrient = new JSONObject();
-//		nutrient.put("nutrient", nvo.toJSONObject());
-//		System.out.println(nutrient);
-//	}
+	@RequestMapping(value = "sendSubscribeInc", method = RequestMethod.GET)
+	public String sendSubscribeInc(SubscribeIncVO ssvo, RedirectAttributes redirectAttributes)
+	{
+		logger.info("ssvo >>> : " + ssvo.toString());
+		
+		List<SubscribeIncVO> voList = FlaskUtil.divSsvoYYYYMM(ssvo);
+		
+		for(int i=0; i<voList.size(); i++)
+		{
+			voList.set(i, flaskService.getSubscribeInc(voList.get(i))); //날짜만 들어있는 vo를 증가값까지 set된 vo로 교체
+		}
+		
+		String jsonStr = FlaskUtil.getSubscribeInc(voList).toJSONString();
+		logger.info("jsonStr >>> : " + jsonStr);
+		
+		redirectAttributes.addAttribute("subscribeInc", jsonStr);
+		
+		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
+	}
+	
+	@RequestMapping(value = "sendSignupInc", method = RequestMethod.GET)
+	public String sendSignupInc(SignupIncVO suvo, RedirectAttributes redirectAttributes)
+	{
+		logger.info("suvo >>> : " + suvo);
+		
+		List<SignupIncVO> voList = FlaskUtil.divSuvoYYYYMM(suvo);
+		
+		for(int i=0; i<voList.size(); i++)
+		{
+			voList.set(i, flaskService.getSignupInc(voList.get(i)));
+		}
+		
+		String jsonStr = FlaskUtil.getSignupInc(voList).toJSONString();
+		logger.info("jsonStr >>> : " + jsonStr);
+		
+		redirectAttributes.addAttribute("signupInc", jsonStr);
+		
+		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
+	}
 }

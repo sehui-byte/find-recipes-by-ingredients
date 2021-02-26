@@ -85,7 +85,7 @@
 		
 		// C
 		$(document).on("click", "#C", function(){
-			location.href="noticeSelectAll.do";
+			location.href="noticeSelectAllPage.do";
 		});
 		
 	});

@@ -35,18 +35,20 @@
 	%>
 	
 	<body>
+	<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+	<input id="writeBtn" type="button" value="글쓰기"> 
 		<form id="rbForm" name="rbForm">
-			<table border="1" style="margin: auto;">
+			<table class="table table-striped" style="margin: auto;">
+				<thead>
 				<tr>
-					<td><input id="writeBtn" type="button" value="글쓰기"> </td>
+					<th scope="col">제목</th>
+					<th scope="col">작성자</th>
+					<th scope="col">조회수</th>
+					<th scope="col">추천수</th>
+					<th scope="col">작성일</th>
+					<th scope="col">수정</th>
 				</tr>
-				<tr>
-					<td>제목</td>
-					<td>작성자</td>
-					<td>조회수</td>
-					<td>추천수</td>
-					<td>작성일</td>
-				</tr>
+				</thead>
 			<%
 			for(int i=0; i<list.size(); i++)
 			{

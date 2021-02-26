@@ -150,6 +150,8 @@ nav.navbar.show-color .navbar-home {
 	vertical-align: middle;
 }
 
+
+
 .navbar-brand:hover, .navbar-brand:focus {
 	color: white;
 }
@@ -405,6 +407,7 @@ a.tutorials-link:hover {
 		min-height: 640px;
 	}
 }
+
 
 #home .container {
 	z-index: 1;
@@ -1130,8 +1133,7 @@ to {
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-xs-12">
-					<a class="tutorials-link" href="" role="button">Read More
-						Recipe</a>
+					<a class="tutorials-link" href="" role="button">Read More Recipe</a>
 				</div>
 			</div>
 		</div>
@@ -1178,7 +1180,7 @@ to {
 					<h3>회원 관련 URL</h3>
 					<ul>
 						<li><a href="memberForm.do">회원가입</a></li>
-						<li><a href="memberSelectAllPage.do">회원목록</a></li>
+						<li><a href="memberSelectAll.do">회원목록</a></li>
 
 					</ul>
 

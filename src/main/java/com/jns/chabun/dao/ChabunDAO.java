@@ -1,5 +1,6 @@
 package com.jns.chabun.dao;
 
+import com.jns.alarm.vo.AlarmVO;
 import com.jns.board.vo.BoardVO;
 import com.jns.chef.vo.ChefVO;
 import com.jns.chefboard.vo.ChefBoardVO;
@@ -31,5 +32,7 @@ public interface ChabunDAO {
 	public FavoritesVO getFavoritesChabun();
 
 	public SubscribeVO getSubscribeChabun();
+	
+	public AlarmVO getAlarmChabun();
 
 }

@@ -70,7 +70,7 @@ public class NoticeController {
 		return "notice/noticeSelectAllPage";
 	}
 	
-	
+	/*
 	@RequestMapping(value="imgtry", method=RequestMethod.GET)
 	public String noticeInsert(BoardVO nvo, Model model) {
 		logger.info("NoticeController NoticeInsert  start ::");
@@ -98,7 +98,7 @@ public class NoticeController {
 		 
 		return "notice/noticeForm";
 	}
-	
+	*/
 	
 	@RequestMapping(value = "noticeInsert", method = RequestMethod.POST)
 	public String NoticeInsert(BoardVO nvo, MultipartHttpServletRequest request){
@@ -122,10 +122,11 @@ public class NoticeController {
 			 return "notice/noticeInsert";
 		 }
 		
-		return "notice/noticeSelectAll";
+		return "notice/noticeSelectAllPage";
 	}
 	
-	@RequestMapping(value="noticeSelectAll",method=RequestMethod.GET)
+	/*
+	@RequestMapping(value="",method=RequestMethod.GET)
 	public String boardSelectAll(BoardVO nvo, Model model) {
 		logger.info("NoticeController NoticeSelectAll start >>>: ");
 		
@@ -148,6 +149,7 @@ public class NoticeController {
 		
 		return "notice/noticeForm";
 	}
+	*/
 	
 	// NoticeList : list selection
 	@RequestMapping(value="noticeSelect",method=RequestMethod.GET)
