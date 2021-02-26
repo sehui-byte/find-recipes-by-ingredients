@@ -25,8 +25,8 @@
 		FROM
 			SUB_INFO S
 		WHERE
-			TO_CHAR(S.SINSERTDATE, 'YY') = #{year}
-			AND TO_CHAR(S.SINSERTDATE, 'MM') = #{mon}
+			TO_CHAR(S.SINSERTDATE, 'YYYY') = #{year}
+			AND TO_CHAR(S.SINSERTDATE, 'MM') = LPAD(#{mon}, 2, '0')
 	</select>
 	
 	
@@ -39,8 +39,8 @@
 		FROM
 			MEMBER M
 		WHERE
-			TO_CHAR(M.MINSERTDATE, 'YY') = #{year}
-			AND TO_CHAR(M.MINSERTDATE, 'MM') = #{mon}
+			TO_CHAR(M.MINSERTDATE, 'YYYY') = #{year}
+			AND TO_CHAR(M.MINSERTDATE, 'MM') = LPAD(#{mon}, 2, '0')
 	</select>
 	
 </mapper>
