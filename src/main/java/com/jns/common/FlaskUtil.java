@@ -40,7 +40,7 @@ public abstract class FlaskUtil
 		int monDiff = (end_yyyy * 12 + end_mm) -(start_yyyy * 12 + start_mm); //시작 ~ 끝 개월 차이 : 예)2001.04, 2002.04 = 12
 		logger.info("monDiff >>> : " + monDiff);
 		
-		for(int i=0; i<monDiff; i++)
+		for(int i=0; i<=monDiff; i++)
 		{
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(startDate);
@@ -81,7 +81,7 @@ public abstract class FlaskUtil
 		int monDiff = (end_yyyy * 12 + end_mm) -(start_yyyy * 12 + start_mm); //시작 ~ 끝 개월 차이 : 예)2001.04, 2002.04 = 12
 		logger.info("monDiff >>> : " + monDiff);
 		
-		for(int i=0; i<monDiff; i++)
+		for(int i=0; i<=monDiff; i++)
 		{
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(startDate);

@@ -87,33 +87,4 @@ public class FlaskController
 		
 		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
 	}
-	
-/*
-	@RequestMapping(value = "flaskTest", method = RequestMethod.GET)
-	public String flaskTest(RedirectAttributes redirectAttributes)
-	{
-		RecipeVO rvo = recipeService.recipeSelectAll().get(0);
-		SubscribeIncVO ssvo = new SubscribeIncVO();
-		SignupIncVO suvo = new SignupIncVO();
-		
-		String nutrient = flaskService.getNutrient(rvo).toJSONObject().toJSONString();
-		logger.info("nutrient >>> : " + nutrient);
-		
-		ssvo.setYear("2021");
-		ssvo.setMon("02");
-		String subscribe = flaskService.getSubscribeInc(ssvo).toJSONObject().toJSONString();
-		logger.info("subscribe >>> : " + subscribe);
-		
-		suvo.setYear("2021");
-		suvo.setMon("02");
-		String signup = flaskService.getSignupInc(suvo).toJSONObject().toJSONString();
-		logger.info("signup >>> : " + signup); 
-		
-		redirectAttributes.addAttribute("nutrient", nutrient);
-		redirectAttributes.addAttribute("subscribeInc", subscribe);
-		redirectAttributes.addAttribute("signupInc", signup);
-		
-		return "redirect:http://127.0.0.1:5000/test";
-	}
-*/
 }

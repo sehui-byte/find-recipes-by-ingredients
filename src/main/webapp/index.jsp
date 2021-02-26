@@ -111,8 +111,8 @@
 <h3>플라스크 테스트</h3>
 <ul>
 	<li><a href="sendNutrient.do?rcp_seq=1">플라스크 테스트 - 영양소</a></li>
-	<li><a href="sendSubscribeInc?start_yyyymm=202004&end_yyyymm=202104">플라스크 테스트 - 월별구독자증가추이(파라미터 : 202004 ~ 202104)</a></li>
-	<li><a href="sendSignupInc?start_yyyymm=202004&end_yyyymm=202104">플라스크 테스트 - 월별회원가입증가추이(파라미터 : 202004 ~ 202104)</a></li>
+	<li><a href="sendSubscribeInc?start_yyyymm=201102&end_yyyymm=202102">플라스크 테스트 - 월별구독자증가추이(파라미터 : 201102 ~ 202102)</a></li>
+	<li><a href="sendSignupInc?start_yyyymm=201102&end_yyyymm=202102">플라스크 테스트 - 월별회원가입증가추이(파라미터 : 201102 ~ 202102)</a></li>
 </ul>
 
 <hr>
