@@ -102,12 +102,12 @@
 			var title = info[0];
 			var productImage = info[1];
 			var productLink = info[2];
-			//console.log(title);
-			//console.log(productImage);
-			//console.log(productLink);
+			console.log(title);
+			console.log(productImage);
+			console.log(productLink);
 			
 			var cookievalue = productImage+'&&'+productLink;
-			//console.log(cookievalue);
+			console.log(cookievalue);
 			
 			// 1. 해당 상품에 대한 쿠키값 저장
 			setRecentCookie(title, cookievalue, 1);
@@ -130,18 +130,31 @@
 				
 		// 쿠키 생성 함수
 		// cookieName : "recent", cookieValue : recentPro , 유효시간 : 1시간
-		function setRecentCookie(cookieName, cookieValue,days) {
+		function setRecentCookie(cookieName, cookieValue, days) {
 		    var expire = new Date();
-		    expire.setDate(days);
+		    expire.setDate(days); //1일
 		    //expire.setTime(date.getTime() + 1*60*60*1000); // 1hr
-		    document.cookie = cookieName + '=' + cookieValue;
+		    document.cookie = cookieName + '=' + cookieValue + ";";
 		}
 		
 		// 쿠키 값 가져오기
 		function getRecentCookie(cookieName) {
-			cookieName = new RegExp(cookieName + '=([^;]*)');
-			return cookieName.test(document.cookie) ? unescape(RegExp.$1) : '';
+	     	var name = cookieName + "=";
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var ca = decodedCookie.split(';');
+			for(var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+			    while (c.charAt(0) == ' ') {
+			    	c = c.substring(1);
+			    }
+			    if (c.indexOf(name) == 0) {
+			    	return c.substring(name.length, c.length);
+			    }
+			}
+			return "";
 		}
+
+
 		
 		
 		// 쿠키 배열로 저장하기 : 최대 5개
@@ -150,7 +163,7 @@
 		var cookieArr_value = [];
 		function setCookieArray(cookieName){ // title1
 		 	var cookieValue = getRecentCookie(cookieName); // productImage1&&productLink1
-		 	//console.log(cookieValue);
+		 	console.log(cookieValue);
 		 	
 		 	// 배열 맨 앞에 요소 추가, 배열의 크기 리턴
 	        cookieArr_name.unshift(cookieName);		// [title5, title4, ..., title1]
@@ -229,11 +242,17 @@
 					var title = cookieNameArr[i]; // title
 					title = title.replace(/<b>/gi,'');
 					title = title.replace(/<\/b>/gi,'');
+					console.log(title);
 					
 					var product = cookieValueArr[i]; // productImage&&productLink
 					var info = product.split("&&"); // [productImage, productLink]
 					var image = info[0]	// productImage5
 					var link = info[1]	// productLink5
+					console.log(product);
+					console.log(info);
+					console.log(image);
+					console.log(link);
+					
 					
 					var recentProduct = '<a href="'+link+'" target="_blank"><img src="'+image+'" class="rounded_2" title="'+title+'" style="width: 150px; height: 150px;"></a>';
 						        	
