@@ -1,5 +1,9 @@
 package com.jns.flask.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,21 +47,47 @@ public class FlaskController
 		
 		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
 	}
-//	
-//	@RequestMapping(value = "sendSubscribeInc", method = RequestMethod.GET)
-//	public String sendSubscribeInc(SubscribeIncVO svo, RedirectAttributes redirectAttributes)
-//	{
-//		logger.info("svo >>> : " + svo.toString());
-//		SubscribeIncVO svo = flaskService.getSubscribeInc(svo);
-//		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
-//	}
-//	
-//	@RequestMapping(value = "sendSignupInc", method = RequestMethod.GET)
-//	public String sendSignupInc(SignupIncVO svo, RedirectAttributes redirectAttributes)
-//	{
-//		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
-//	}
-//	
+	
+	@RequestMapping(value = "sendSubscribeInc", method = RequestMethod.GET)
+	public String sendSubscribeInc(SubscribeIncVO ssvo, RedirectAttributes redirectAttributes)
+	{
+		logger.info("ssvo >>> : " + ssvo.toString());
+		
+		List<SubscribeIncVO> voList = FlaskUtil.divSsvoYYYYMM(ssvo);
+		
+		for(int i=0; i<voList.size(); i++)
+		{
+			voList.set(i, flaskService.getSubscribeInc(voList.get(i))); //날짜만 들어있는 vo를 증가값까지 set된 vo로 교체
+		}
+		
+		String jsonStr = FlaskUtil.getSubscribeInc(voList).toJSONString();
+		logger.info("jsonStr >>> : " + jsonStr);
+		
+		redirectAttributes.addAttribute("subscribeInc", jsonStr);
+		
+		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
+	}
+	
+	@RequestMapping(value = "sendSignupInc", method = RequestMethod.GET)
+	public String sendSignupInc(SignupIncVO suvo, RedirectAttributes redirectAttributes)
+	{
+		logger.info("suvo >>> : " + suvo);
+		
+		List<SignupIncVO> voList = FlaskUtil.divSuvoYYYYMM(suvo);
+		
+		for(int i=0; i<voList.size(); i++)
+		{
+			voList.set(i, flaskService.getSignupInc(voList.get(i)));
+		}
+		
+		String jsonStr = FlaskUtil.getSignupInc(voList).toJSONString();
+		logger.info("jsonStr >>> : " + jsonStr);
+		
+		redirectAttributes.addAttribute("signupInc", jsonStr);
+		
+		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
+	}
+	
 /*
 	@RequestMapping(value = "flaskTest", method = RequestMethod.GET)
 	public String flaskTest(RedirectAttributes redirectAttributes)
