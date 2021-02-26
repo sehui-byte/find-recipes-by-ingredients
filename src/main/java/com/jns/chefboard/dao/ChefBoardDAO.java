@@ -3,6 +3,7 @@ package com.jns.chefboard.dao;
 import java.util.List;
 
 import com.jns.chefboard.vo.ChefBoardVO;
+import com.jns.favorites.vo.FavoritesVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 
 public interface ChefBoardDAO {
@@ -19,5 +20,7 @@ public interface ChefBoardDAO {
 	
 	// 페이징
 	public List<ChefBoardVO> chefBoardSelectAllPage(ChefBoardVO cbvo);
+	
+	public int chefBoardHitsCount(FavoritesVO fvo);
 	
 }

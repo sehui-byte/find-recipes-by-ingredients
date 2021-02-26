@@ -5,6 +5,19 @@
 <%
 	Object obj = request.getAttribute("myQnAList");
 	List<BoardVO> list = (List)obj;	
+
+	Object obj2 = request.getAttribute("p_bvo");
+	BoardVO bvoP = (BoardVO)obj2;
+
+      int Size = bvoP.getPageSize();
+      int pageSize = bvoP.getPageSize();
+      int groupSize = bvoP.getGroupSize();
+      int curPage = bvoP.getCurPage();
+      int totalCount = bvoP.getTotalCount();
+	
+      if(request.getParameter("curPage") != null){
+         curPage = Integer.parseInt(request.getParameter("curPage"));
+      }
 %>
 
 <!DOCTYPE html>
@@ -12,6 +25,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.css">
+<script src="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#checkAll").click(function(){
@@ -58,14 +73,62 @@
 			}
 			
 		});
-		
-		//검색버튼
-		$(document).on("click", "#searchBtn", function(){
-			console.log("searchBtn >>> : ");
-			$("#myQnAList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
+
+		//datepicker
+		$("#startdate").datepicker({
+			showOn: "button",    // 달력을 표시할 타이밍 (both: focus or button)
+			buttonImage: "/kosmoJns/resources/img/cal_0.gif", 
+			buttonImageOnly : true,            
+			buttonText: "날짜선택",             
+			dateFormat: "yy-mm-dd",             
+			changeMonth: true,                  			
+			onClose: function(selectedDate) {    
+				$("#enddate").datepicker("option", "minDate", selectedDate);
+			}	
 		});
-	})
+		$("#enddate").datepicker({
+			showOn: "button", 
+			buttonImage: "/kosmoJns/resources/img/cal_0.gif", 
+			buttonImageOnly : true,
+			buttonText: "날짜선택",
+			dateFormat: "yy-mm-dd",
+			changeMonth: true,			
+			onClose: function(selectedDate) {	
+				$("#startdate").datepicker("option", "maxDate", selectedDate);
+			}               
+		});
+		
+			//검색버튼
+			$(document).on("click", "#searchBtn", function(){
+				console.log("searchBtn >>> : ");
+				$("#myQnAList").attr({"method":"GET"
+									 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
+			});
+			// 검색 초기화	
+			$(document).on("click", "#searchReset", function(){
+				$("#myQnAList").attr({"method":"GET"
+									 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
+				})	
+				
+			})
+		
+			//enter키 눌렀을 때 페이지 재로딩 되는 것 방지
+			function captureReturnKey(e) {
+				if (e.keyCode == 13 && e.srcElement.type != 'textarea')
+					return false;
+			}
+			
+			//input에서 엔터키 눌렀을 때도 검색 실행
+			function enterKey(){
+				if(window.event.keyCode == 13){
+					if($("#keyword").val() == "" && $("#startdate").val() == "" && $("#enddate").val() == ""){
+						alert("검색 조건을 입력해주세요");
+					}else{
+					$("#myQnAList").attr({"method":"GET"
+									 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
+					}	
+				}
+			}
 </script>
 </head>
 <body>
@@ -82,10 +145,11 @@
 						<option value="key2">내용</option>
 						<option value="key3">제목+내용</option>
 					</select>
-					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
+					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" onkeydown="enterKey();"><br>
 					<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
 					~<input type="text" id="enddate" name="enddate" size="12" placeholder="종료일">
 					<button type="button" id="searchBtn">검색</button>
+					<button type="button" id="searchReset">검색 초기화</button>
 				</td>	
 			</tr>
 		</thead>
@@ -132,6 +196,19 @@
 <% 
 	}	
 %>
+	<tr>
+		<td class="paging" colspan="6">
+			<jsp:include page="./page/paging.jsp" flush="true">
+				<jsp:param name="url" value="myQnAList.do"/>
+				<jsp:param name="str" value=""/>
+				<jsp:param name="pageSize" value="<%=pageSize%>"/>
+				<jsp:param name="groupSize" value="<%=groupSize%>"/>
+				<jsp:param name="curPage" value="<%=curPage%>"/>
+				<jsp:param name="totalCount" value="<%=totalCount%>"/>
+				<jsp:param name="mno" value="<%=mno %>"/>
+			</jsp:include>
+		</td>
+	</tr>
 	</table>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 </form>

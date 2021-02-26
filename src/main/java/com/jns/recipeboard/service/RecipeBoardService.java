@@ -2,6 +2,7 @@ package com.jns.recipeboard.service;
 
 import java.util.List;
 
+import com.jns.favorites.vo.FavoritesVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 
 public interface RecipeBoardService 

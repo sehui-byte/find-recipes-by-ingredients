@@ -61,12 +61,105 @@ public class RecipeVO
 	private String rcp_updatedate;
 	private String rcp_deleteyn;
 	
+	// 페이징 *************************************************
+	private int pageSize;
+	private int groupSize;
+	private int curPage;
+	private int totalCount;
 	
+	
+	// 조건 검색 ***********************************************
+	private String keyfilter;
+	private String keyword;
+	private String startdate;
+	private String enddate;
+	
+	
+	
+	public int getPageSize() {
+		return pageSize;
+	}
+
+
+	public int getGroupSize() {
+		return groupSize;
+	}
+
+
+	public int getCurPage() {
+		return curPage;
+	}
+
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+
+	public String getKeyfilter() {
+		return keyfilter;
+	}
+
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+
+	public String getStartdate() {
+		return startdate;
+	}
+
+
+	public String getEnddate() {
+		return enddate;
+	}
+
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+
+	public void setGroupSize(int groupSize) {
+		this.groupSize = groupSize;
+	}
+
+
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
+	}
+
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+
+
+	public void setKeyfilter(String keyfilter) {
+		this.keyfilter = keyfilter;
+	}
+
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+
+
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+//***************************************************************
+
 	public RecipeVO() 
 	{
 
 	}//Default Constructor
-
 
 	public RecipeVO(String rcp_seq, String rcp_nm, String rcp_way2, String rcp_pat2, String info_wgt, String info_eng,
 			String info_car, String info_pro, String info_fat, String info_na, String hash_tag, String att_file_no_main,
@@ -78,8 +171,9 @@ public class RecipeVO
 			String manual_img12, String manual13, String manual_img13, String manual14, String manual_img14,
 			String manual15, String manual_img15, String manual16, String manual_img16, String manual17,
 			String manual_img17, String manual18, String manual_img18, String manual19, String manual_img19,
-			String manual20, String manual_img20, String rcp_insertdate, String rcp_updatedate, String rcp_deleteyn) 
-	{
+			String manual20, String manual_img20, String rcp_insertdate, String rcp_updatedate, String rcp_deleteyn,
+			int pageSize, int groupSize, int curPage, int totalCount, String keyfilter, String keyword,
+			String startdate, String enddate) {
 		this.rcp_seq = rcp_seq;
 		this.rcp_nm = rcp_nm;
 		this.rcp_way2 = rcp_way2;
@@ -137,6 +231,14 @@ public class RecipeVO
 		this.rcp_insertdate = rcp_insertdate;
 		this.rcp_updatedate = rcp_updatedate;
 		this.rcp_deleteyn = rcp_deleteyn;
+		this.pageSize = pageSize;
+		this.groupSize = groupSize;
+		this.curPage = curPage;
+		this.totalCount = totalCount;
+		this.keyfilter = keyfilter;
+		this.keyword = keyword;
+		this.startdate = startdate;
+		this.enddate = enddate;
 	}
 
 

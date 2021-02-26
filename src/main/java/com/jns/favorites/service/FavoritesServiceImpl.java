@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jns.favorites.dao.FavoritesDAO;
 import com.jns.favorites.vo.FavoritesVO;
 import com.jns.recipe.vo.RecipeVO;
+import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Service
 @Transactional

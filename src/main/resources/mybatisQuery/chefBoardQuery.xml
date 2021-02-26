@@ -22,6 +22,16 @@
 				</if>
 	</select>
 	
+	<select id="chefBoardHitsCount" parameterType="fvo" resultType="java.lang.Integer">
+	SELECT
+		COUNT(*)
+	FROM
+		FAVORITES
+	WHERE
+		RBNO = #{rbno, jdbcType=VARCHAR}	
+	
+	</select>
+	
 	<select id="chefBoardSelect" parameterType="cbvo" resultType="cbvo">
 		SELECT
 				*

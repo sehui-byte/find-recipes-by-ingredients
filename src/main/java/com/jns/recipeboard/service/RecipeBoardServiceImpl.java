@@ -6,21 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jns.favorites.vo.FavoritesVO;
 import com.jns.recipeboard.dao.RecipeBoardDAO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Service
 @Transactional
-public class RecipeBoardServiceImpl implements RecipeBoardService 
-{
+public class RecipeBoardServiceImpl implements RecipeBoardService {
 	private RecipeBoardDAO recipeBoardDAO;
-	
+
 	@Autowired(required = false)
-	public RecipeBoardServiceImpl(RecipeBoardDAO recipeBoardDAO) 
-	{
+	public RecipeBoardServiceImpl(RecipeBoardDAO recipeBoardDAO) {
 		this.recipeBoardDAO = recipeBoardDAO;
 	}
-	
+
 	@Override
 	public List<RecipeBoardVO> recipeBoardSelectAll() {
 		// TODO Auto-generated method stub
@@ -49,13 +48,13 @@ public class RecipeBoardServiceImpl implements RecipeBoardService
 	public boolean recipeBoardDelete(RecipeBoardVO rbvo) {
 		return recipeBoardDAO.recipeBoardDelete(rbvo);
 	}
-	
+
 	@Override
 	public boolean recipeBoardViewsPP(RecipeBoardVO rbvo) {
 		// TODO Auto-generated method stub
 		return recipeBoardDAO.recipeBoardViewsPP(rbvo);
 	}
-	
+
 	@Override
 	public boolean recipeBoardHitsPP(RecipeBoardVO rbvo) {
 		// TODO Auto-generated method stub

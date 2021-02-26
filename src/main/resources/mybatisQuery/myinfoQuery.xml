@@ -4,6 +4,15 @@
 
 <mapper namespace="com.jns.myinfo.dao.MyinfoDAO">
 
+	<select id="myinfoSelect" parameterType="mvo" resultType="mvo">
+		SELECT
+			*
+		FROM
+			MEMBER A
+		WHERE
+			A.MNO = #{mno, jdbcType=VARCHAR}
+	</select>
+
 	<!-- 내가 쓴 레시피 조회하기 -->
 	<select id="myRecipeList" parameterType="mvo" resultType="rbvo">
 	
@@ -39,29 +48,50 @@
 	</update>	
 	
 	<!--  내 Q&A 리스트 조회하기 -->
-	<select id="myQnAList" parameterType="mvo" resultType="bvo">
+	<select id="myQnAList" parameterType="bvo" resultType="bvo">
 	
 		SELECT
 			*
 		FROM
-			BOARD A
-		WHERE MNO = #{mno, jdbcType=VARCHAR}
-		AND A.BTYPE = 'Q'
-		AND A.BDELETEYN = 'Y'
-		<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
-		<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-		<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-		</if>
-		<if test="keyfilter=='key1'">
-			<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-		</if>
-		<if test="keyfilter=='key2'">
-			<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-		</if>
-		<if test="keyfilter=='key3'">
-			<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-			<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-		</if>
+			(SELECT 
+						 BNO                      
+						,MNO                      
+						,BTYPE                    
+						,BTITLE                   
+						,BCONTENT                 
+						,MNICK                    
+						,BFILE                    
+						,BINSERTDATE              
+						,BUPDATEDATE              
+						,BVIEWS                   
+						,BDELETEYN                
+						,BHITS                    
+						,CEIL(ROW_NUMBER() OVER(ORDER BY A.BNO DESC) / 10) PAGENO
+						,COUNT(A.BNO) OVER() AS TOTALCOUNT
+			FROM BOARD A
+			WHERE 
+				A.MNO = #{mno, jdbcType=VARCHAR}
+			AND 
+				A.BTYPE = 'Q'
+			AND 
+				A.BDELETEYN = 'Y'
+			<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+			<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			<![CDATA[AND TO_CHAR(A.BINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			</if>
+			<if test="keyfilter=='key1'">
+				<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key2'">
+				<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key3'">
+				<![CDATA[AND A.BTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND A.BCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+				) B
+		WHERE
+			PAGENO = #{curPage, jdbcType=VARCHAR}
 		ORDER BY 1
 	</select>
 	
@@ -77,61 +107,183 @@
 	
 	
 	<!-- 내가 추천한 레시피 조회하기 // API 레시피-->
-	<select id="myFavRecipeList1" parameterType="mvo" resultType="rvo">
-
-	SELECT 
-		*
-	FROM
-		FAVORITES A, RECIPE B
-	WHERE
-		A.MNO = #{mno, jdbcType=VARCHAR}
-	AND
-		A.RCP_SEQ = B.RCP_SEQ
-	<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
-	<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-	<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-	</if>
-	<if test="keyfilter=='key1'">
-		<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-	</if>
-	<if test="keyfilter=='key2'">
-		<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-	</if>
-	<if test="keyfilter=='key3'">
-		<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-		<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-	</if>
-	ORDER BY 1
+	<select id="myFavRecipeList" parameterType="mvo" resultType="rvo">
+		SELECT 
+			* 
+		FROM
+			(SELECT 
+					 B.RCP_SEQ 
+					,B.RCP_NM 
+					,B.RCP_WAY2 
+					,B.RCP_PAT2 
+					,B.INFO_WGT 
+					,B.INFO_ENG 
+					,B.INFO_CAR 
+					,B.INFO_PRO 
+					,B.INFO_FAT 
+					,B.INFO_NA 
+					,B.HASH_TAG 
+					,B.ATT_FILE_NO_MAIN 
+					,B.ATT_FILE_NO_MK 
+					,B.RCP_PARTS_DTLS 
+					,B.MANUAL01 
+					,B.MANUAL_IMG01 
+					,B.MANUAL02 
+					,B.MANUAL_IMG02 
+					,B.MANUAL03 
+					,B.MANUAL_IMG03 
+					,B.MANUAL04 
+					,B.MANUAL_IMG04 
+					,B.MANUAL05 
+					,B.MANUAL_IMG05 
+					,B.MANUAL06 
+					,B.MANUAL_IMG06 
+					,B.MANUAL07 
+					,B.MANUAL_IMG07 
+					,B.MANUAL08 
+					,B.MANUAL_IMG08 
+					,B.MANUAL09 
+					,B.MANUAL_IMG09 
+					,B.MANUAL10 
+					,B.MANUAL_IMG10 
+					,B.MANUAL11 
+					,B.MANUAL_IMG11 
+					,B.MANUAL12 
+					,B.MANUAL_IMG12 
+					,B.MANUAL13 
+					,B.MANUAL_IMG13 
+					,B.MANUAL14
+					,B.MANUAL_IMG14 
+					,B.MANUAL15 
+					,B.MANUAL_IMG15 
+					,B.MANUAL16 
+					,B.MANUAL_IMG16 
+					,B.MANUAL17 
+					,B.MANUAL_IMG17 
+					,B.MANUAL18 
+					,B.MANUAL_IMG18 
+					,B.MANUAL19 
+					,B.MANUAL_IMG19 
+					,B.MANUAL20 
+					,B.MANUAL_IMG20 
+					,B.RCP_INSERTDATE 
+					,B.RCP_UPDATEDATE 
+					,B.RCP_DELETEYN
+					,CEIL(ROW_NUMBER() OVER(ORDER BY A.RCP_SEQ DESC) / 10) PAGENO
+					,COUNT(A.RCP_SEQ) OVER() AS TOTALCOUNT
+			FROM
+				FAVORITES A, RECIPE B
+			WHERE
+				A.MNO = #{mno, jdbcType=VARCHAR}
+			AND
+				A.RCP_SEQ = B.RCP_SEQ
+			<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+			<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+			</if>
+			<if test="keyfilter=='key1'">
+				<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key2'">
+				<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="keyfilter=='key3'">
+				<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+				<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			</if>)
+		WHERE
+			PAGENO = #{curPage, jdbcType=VARCHAR}
+		ORDER BY 1
 	</select>
 
 	<!-- 내가 추천한 레시피 조회하기 // 회원 레시피-->
-	<select id="myFavRecipeList2" parameterType="mvo" resultType="rbvo">
-
+	<select id="myFavRecipeBoardList" parameterType="mvo" resultType="rbvo">
 	SELECT 
-		B.*
-	FROM FAVORITES A, RECIPE_BOARD B
-	WHERE
-		A.MNO = #{mno, jdbcType=VARCHAR}
-	AND
-		A.RBNO = B.RBNO
-	<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
-	<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-	<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-	</if>
-	<if test="keyfilter=='key1'">
-		<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-	</if>
-	<if test="keyfilter=='key2'">
-		<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-	</if>
-	<if test="keyfilter=='key3'">
-		<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-		<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-	</if>
-	ORDER BY 1
+		*
+	FROM
+		(SELECT 
+			 B.RBNO
+			,B.MNO 
+			,B.RCP_NM 
+			,B.VIEWS 
+			,B.HITS 
+			,B.RCP_WAY2
+			,B.RCP_PAT2 
+			,B.HASH_TAG 
+			,B.MAIN_IMG 
+			,B.RCP_PARTS_DTLS 
+			,B.MANUAL01 
+			,B.MANUAL_IMG01 
+			,B.MANUAL02 
+			,B.MANUAL_IMG02
+			,B.MANUAL03 
+			,B.MANUAL_IMG03 
+			,B.MANUAL04 
+			,B.MANUAL_IMG04 
+			,B.MANUAL05 
+			,B.MANUAL_IMG05 
+			,B.MANUAL06 
+			,B.MANUAL_IMG06 
+			,B.MANUAL07 
+			,B.MANUAL_IMG07 
+			,B.MANUAL08 
+			,B.MANUAL_IMG08 
+			,B.MANUAL09 
+			,B.MANUAL_IMG09 
+			,B.MANUAL10 
+			,B.MANUAL_IMG10 
+			,B.MANUAL11 
+			,B.MANUAL_IMG11 
+			,B.MANUAL12 
+			,B.MANUAL_IMG12 
+			,B.MANUAL13 
+			,B.MANUAL_IMG13 
+			,B.MANUAL14 
+			,B.MANUAL_IMG14 
+			,B.MANUAL15 
+			,B.MANUAL_IMG15 
+			,B.MANUAL16 
+			,B.MANUAL_IMG16 
+			,B.MANUAL17 
+			,B.MANUAL_IMG17 
+			,B.MANUAL18 
+			,B.MANUAL_IMG18 
+			,B.MANUAL19
+			,B.MANUAL_IMG19 
+			,B.MANUAL20 
+			,B.MANUAL_IMG20 
+			,B.RB_INSERTDATE 
+			,B.RB_UPDATEDATE 
+			,B.RB_DELETEYN 
+			,CEIL(ROW_NUMBER() OVER(ORDER BY A.RBNO DESC) / 10) PAGENO
+			,COUNT(A.RBNO) OVER() AS TOTALCOUNT
+		FROM FAVORITES A, RECIPE_BOARD B
+		WHERE
+			A.MNO = #{mno, jdbcType=VARCHAR}
+		AND
+			A.RBNO = B.RBNO
+		AND
+			B.RB_DELETEYN = 'Y'
+		<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+		<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+		<![CDATA[AND TO_CHAR(A.FINSERTDATE , 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+		</if>
+		<if test="keyfilter=='key1'">
+			<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		</if>
+		<if test="keyfilter=='key2'">
+			<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		</if>
+		<if test="keyfilter=='key3'">
+			<![CDATA[AND B.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND B.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		</if>)
+		WHERE
+			PAGENO = #{curPage, jdbcType=VARCHAR}
+		ORDER BY 1
 	</select>
 	
-	<select id="myRankUpdateCheckCount" parameterType="mvo" resultType="java.lang.Integer">
+	<select id="myLevelUpdateCheckCount" parameterType="mvo" resultType="java.lang.Integer">
 		SELECT
 			COUNT(*)
 		FROM
@@ -140,20 +292,23 @@
 		AND A.RB_DELETEYN = 'Y'
 	</select>	
 	
-	<select id="myRankUpdateCheckHits" parameterType="mvo" resultType="java.lang.Integer">
+	<select id="myLevelUpdateCheckHits" parameterType="mvo" resultType="java.lang.Integer">
 		SELECT
-			NVL(SUM(A.HITS), 0)
+			SUM(A.HITS)
 		FROM
 			RECIPE_BOARD A
 		WHERE A.MNO = #{mno, jdbcType=VARCHAR}
 		AND A.RB_DELETEYN = 'Y'
 	</select>	
 	
-	<update id="myRankUpdate" parameterType="mvo">
+	<update id="myLevelUpdate" parameterType="mvo">
 		UPDATE MEMBER A
+		SET
 			A.MLEVEL = 'C'
 		WHERE
 			A.MNO = #{mno, jdbcType=VARCHAR}
+		AND
+			A.MLEVEL = 'U'
 		AND
 			A.MDELETEYN = 'Y'
 	</update>
@@ -180,7 +335,91 @@
 		WHERE
 			MID = #{mid, jdbcType=VARCHAR}	
 	</update>
+
+	<select id="myRecipeListPage" parameterType="rbvo" resultType="rbvo">
+		SELECT
+			*
+		FROM
+			(SELECT		
+					A.RBNO,
+					A.MNO,
+					A.RCP_NM,
+					A.VIEWS,
+					A.HITS,
+					A.RCP_WAY2,
+					A.RCP_PAT2,
+					A.HASH_TAG,
+					A.MAIN_IMG,
+					A.RCP_PARTS_DTLS,
+					A.MANUAL01,
+					A.MANUAL_IMG01,
+					A.MANUAL02,
+					A.MANUAL_IMG02,
+					A.MANUAL03,
+					A.MANUAL_IMG03,
+					A.MANUAL04,
+					A.MANUAL_IMG04,
+					A.MANUAL05,
+					A.MANUAL_IMG05,
+					A.MANUAL06,
+					A.MANUAL_IMG06,
+					A.MANUAL07,
+					A.MANUAL_IMG07,
+					A.MANUAL08,
+					A.MANUAL_IMG08,
+					A.MANUAL09,
+					A.MANUAL_IMG09,
+					A.MANUAL10,
+					A.MANUAL_IMG10,
+					A.MANUAL11,
+					A.MANUAL_IMG11,
+					A.MANUAL12,
+					A.MANUAL_IMG12,
+					A.MANUAL13,
+					A.MANUAL_IMG13,
+					A.MANUAL14,
+					A.MANUAL_IMG14,
+					A.MANUAL15,
+					A.MANUAL_IMG15,
+					A.MANUAL16,
+					A.MANUAL_IMG16,
+					A.MANUAL17,
+					A.MANUAL_IMG17,
+					A.MANUAL18,
+					A.MANUAL_IMG18,
+					A.MANUAL19,
+					A.MANUAL_IMG19,
+					A.MANUAL20,
+					A.MANUAL_IMG20,
+					A.RB_INSERTDATE,
+					A.RB_UPDATEDATE,
+					A.RB_DELETEYN,
+					CEIL(ROW_NUMBER() OVER(ORDER BY A.RBNO DESC) / 10) PAGENO,
+					COUNT(A.RBNO) OVER() AS TOTALCOUNT
+		FROM 	RECIPE_BOARD A
+		WHERE
+			MNO = #{mno, jdbcType=VARCHAR}
+		<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+		<![CDATA[AND TO_CHAR(A.RB_INSERTDATE , 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+		<![CDATA[AND TO_CHAR(A.RB_INSERTDATE , 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+		</if>
+		<if test="keyfilter=='key1'">
+			<![CDATA[AND A.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		</if>
+		<if test="keyfilter=='key2'">
+			<![CDATA[AND A.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		</if>
+		<if test="keyfilter=='key3'">
+			<![CDATA[AND A.RCP_NM  LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+			<![CDATA[AND A.RCP_PARTS_DTLS   LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		</if>
+		AND
+			RB_DELETEYN = 'Y') B
+		WHERE
+			PAGENO = #{curPage, jdbcType=VARCHAR}
+		ORDER BY 1
 	
+	</select>	
 	
 	
 </mapper>

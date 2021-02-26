@@ -35,9 +35,9 @@ public class ChefController {
 	}
 	
 	/********************************************************************************************
-	* 세프 등록
+	* 세프 등록 >> url을 없애고 MyinfoController에 셰프 레벨 등업시 호출하도록 로직을 변경
 	********************************************************************************************/
-	@RequestMapping(value="chef/chefinsert", method=RequestMethod.POST)
+	//@RequestMapping(value="chef/chefinsert", method=RequestMethod.POST)
 	public String chefInsert(ChefVO cvo) {
 		logger.info("[ChefController] >> chefinsert 호출 성공");
 		logger.info("[ChefController] >> chefinsert >> cvo.getMno()>>> :" + cvo.getMno());
@@ -54,10 +54,12 @@ public class ChefController {
 		logger.info("[chefC] >> boardUpdate >> nCnt >>> : " + nCnt);
 		
 		if(nCnt == 1) {
-			url = "/chef/test.do";
+			//url = "/chef/test.do";
+			return "OK";
 		}
 		
-		return "redirect:" + url;
+		//return "redirect:" + url;
+		return "ERROR";
 	}
 	
 	

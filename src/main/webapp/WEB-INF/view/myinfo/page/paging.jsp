@@ -11,6 +11,7 @@
 	String url = null;
 	String str = null;
 	String ctrl = null;
+	String mno = null;
 	
 	url = request.getParameter("url");
 	System.out.println("url >>> : " + url);
@@ -18,6 +19,8 @@
 	System.out.println("str >>> : " + str);
 	ctrl=request.getParameter("pageSize");
 	System.out.println("ctrl >>> : " + ctrl);
+	mno=request.getParameter("mno");
+	System.out.println("mno >>> : " + mno);
 	
 	if(str != null){
 		str = str + "&";
@@ -74,8 +77,8 @@
 	//첫번재 그룹이 아닌 경우
 	if(curGroup > 0){		
 %>
-	<a href="<%=url%>?<%=str%>curpage=1">◁◁</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?<%=str%>curpage=<%=linkPage%>">◀</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?<%=str%>curpage=1&mno=<%= mno %>">◁◁</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?<%=str%>curpage=<%=linkPage%>&mno=<%= mno %>">◀</a>&nbsp;&nbsp;&nbsp;
 <%
 	}else{
 %>	
@@ -85,7 +88,6 @@
 
 	//다음 링크를 위해 증가시킴
 	linkPage++;
-	
 	int loopCount = groupSize;
 	// 그룹범위내에서 페이지 링크만듬.
 	while((loopCount >0) && (linkPage <= pageCount)){
@@ -95,7 +97,7 @@
 <% 
 		}else{
 %>
-			[<a href="<%=url%>?curPage=<%=linkPage%>&pageCtrl=<%=ctrl%>"><%=linkPage%></a>]&nbsp;
+			[<a href="<%=url%>?curPage=<%=linkPage%>&pageCtrl=<%=ctrl%>&mno=<%= mno %>"><%=linkPage%></a>]&nbsp;
 <% 
 		}
 		
@@ -107,8 +109,8 @@
 	if(linkPage <= pageCount)
 	{
 %>
-	<a href="<%=url%>?curPage=<%=linkPage%>&pageCtrl=<%=ctrl%>">▶</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?curPage=<%=pageCount%>&pageCtrl=<%=ctrl%>">▷▷</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?curPage=<%=linkPage%>&pageCtrl=<%=ctrl%>&mno=<%= mno %>">▶</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?curPage=<%=pageCount%>&pageCtrl=<%=ctrl%>&mno=<%= mno %>">▷▷</a>&nbsp;&nbsp;&nbsp;
 <%
 	}
 	else
