@@ -66,7 +66,7 @@
 			아래 데이터들을 시각화해서 그래프로 보여주면 좋을 듯	
 		</li>
 		<li>
-			<a href="myinfo/myRecipeList.do?mno=<%= mno %>">내가 쓴 레시피 조회하기</a>
+			<a href="myinfo/myRecipeListPage.do?mno=<%= mno %>">내가 쓴 레시피 조회하기</a>
 		</li>
 		<li>
 			<a href="myinfo/mySubList.do?mno=<%= mno %>">내가 구독한 셰프 조회하기</a>

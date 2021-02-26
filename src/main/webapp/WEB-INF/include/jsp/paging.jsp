@@ -56,6 +56,7 @@
 	}
 	if(request.getParameter("totalCount") != null){
 		totalCount = Integer.parseInt(request.getParameter("totalCount"));
+		System.out.println("totalCount >>> : " + totalCount);
 	}
 	
 	// 전체게시물수와 페이지크기를 가지고 전체 페이지 개수를 계산함.

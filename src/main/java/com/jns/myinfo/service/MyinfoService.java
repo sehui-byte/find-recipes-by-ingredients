@@ -28,5 +28,7 @@ public interface MyinfoService {
 	public List<RecipeBoardVO> myFavRecipeList2(MemberVO mvo);
 	
 	public List<MemberVO> myinfoSelect(MemberVO mvo);
+	
+	public List<RecipeBoardVO> myRecipeListPage(RecipeBoardVO rbvo);
 
 }

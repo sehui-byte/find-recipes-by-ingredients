@@ -192,7 +192,74 @@
 		WHERE
 			MID = #{mid, jdbcType=VARCHAR}	
 	</update>
+
+	<select id="myRecipeListPage" parameterType="rbvo" resultType="rbvo">
+		SELECT
+			*
+		FROM
+			(SELECT		
+					A.RBNO,
+					A.MNO,
+					A.RCP_NM,
+					A.VIEWS,
+					A.HITS,
+					A.RCP_WAY2,
+					A.RCP_PAT2,
+					A.HASH_TAG,
+					A.MAIN_IMG,
+					A.RCP_PARTS_DTLS,
+					A.MANUAL01,
+					A.MANUAL_IMG01,
+					A.MANUAL02,
+					A.MANUAL_IMG02,
+					A.MANUAL03,
+					A.MANUAL_IMG03,
+					A.MANUAL04,
+					A.MANUAL_IMG04,
+					A.MANUAL05,
+					A.MANUAL_IMG05,
+					A.MANUAL06,
+					A.MANUAL_IMG06,
+					A.MANUAL07,
+					A.MANUAL_IMG07,
+					A.MANUAL08,
+					A.MANUAL_IMG08,
+					A.MANUAL09,
+					A.MANUAL_IMG09,
+					A.MANUAL10,
+					A.MANUAL_IMG10,
+					A.MANUAL11,
+					A.MANUAL_IMG11,
+					A.MANUAL12,
+					A.MANUAL_IMG12,
+					A.MANUAL13,
+					A.MANUAL_IMG13,
+					A.MANUAL14,
+					A.MANUAL_IMG14,
+					A.MANUAL15,
+					A.MANUAL_IMG15,
+					A.MANUAL16,
+					A.MANUAL_IMG16,
+					A.MANUAL17,
+					A.MANUAL_IMG17,
+					A.MANUAL18,
+					A.MANUAL_IMG18,
+					A.MANUAL19,
+					A.MANUAL_IMG19,
+					A.MANUAL20,
+					A.MANUAL_IMG20,
+					A.RB_INSERTDATE,
+					A.RB_UPDATEDATE,
+					A.RB_DELETEYN,
+					CEIL(ROW_NUMBER() OVER(ORDER BY A.RBNO DESC) / 10) PAGENO,
+					COUNT(A.RBNO) OVER() AS TOTALCOUNT
+		FROM 	RECIPE_BOARD A)
+		WHERE
+			PAGENO = #{curPage, jdbcType=VARCHAR}
+		AND
+			mno= #{mno, jdbcType=VARCHAR}
 	
+	</select>	
 	
 	
 </mapper>

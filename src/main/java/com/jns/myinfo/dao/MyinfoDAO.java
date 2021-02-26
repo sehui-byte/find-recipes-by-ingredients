@@ -33,5 +33,6 @@ public interface MyinfoDAO {
 	
 	public List<MemberVO> myinfoSelect(MemberVO mvo);	
 	
+	public List<RecipeBoardVO> myRecipeListPage(RecipeBoardVO rbvo);
 
 }

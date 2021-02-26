@@ -127,8 +127,14 @@ public class MyinfoServiceImpl implements MyinfoService {
 
 	@Override
 	public List<MemberVO> myinfoSelect(MemberVO mvo) {
-	
+
 		return myinfoDAO.myinfoSelect(mvo);
+	}
+
+	@Override
+	public List<RecipeBoardVO> myRecipeListPage(RecipeBoardVO rbvo) {
+	
+		return myinfoDAO.myRecipeListPage(rbvo);
 	}
 
 }

@@ -18,6 +18,11 @@
 </head>
 <body>
 
+<select name="recipeTable" id="recipeTable">
+	<option value="API" selected="selected">식약처 레시피</option>
+	<option value="user">유저 레시피</option>
+</select>
+
 <jsp:include page = "./myFavRecipeList_API.jsp">
 	<jsp:param name="recipeList" value="<%= recipeList %>" />
 	<jsp:param name="mno" value="<%= mno %>" />

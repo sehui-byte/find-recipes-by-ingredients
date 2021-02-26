@@ -56,6 +56,32 @@
 				}
 				
 			});
+		
+		//datepicker
+		$("#startdate2").datepicker({
+			showOn: "button",    // 달력을 표시할 타이밍 (both: focus or button)
+			buttonImage: "/kosmoJns/resources/img/cal_0.gif", 
+			buttonImageOnly : true,            
+			buttonText: "날짜선택",             
+			dateFormat: "yy-mm-dd",             
+			changeMonth: true,                  			
+			onClose: function(selectedDate) {    
+				$("#enddate2").datepicker("option", "minDate", selectedDate);
+			}	
+		});
+		$("#enddate2").datepicker({
+			showOn: "button", 
+			buttonImage: "/kosmoJns/resources/img/cal_0.gif", 
+			buttonImageOnly : true,
+			buttonText: "날짜선택",
+			dateFormat: "yy-mm-dd",
+			changeMonth: true,			
+			onClose: function(selectedDate) {	
+				$("#startdate2").datepicker("option", "maxDate", selectedDate);
+			}               
+		});
+		
+		
 		})	
 		
 		//검색버튼
@@ -65,6 +91,10 @@
 								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
 		});
 		
+	
+	
+	
+	
 </script>
 
 <form id="myFavRecipeBoardList" name="myFavRecipeBoardList" >
@@ -81,8 +111,8 @@
 						<option value="key3">메뉴명+재료</option>
 					</select>
 					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
-					<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
-					~<input type="text" id="enddate" name="enddate" size="12" placeholder="종료일">
+					<input type="text" id="startdate2" name="startdate" size="12" placeholder="시작일">
+					~<input type="text" id="enddate2" name="enddate" size="12" placeholder="종료일">
 					<button type="button" id="searchBtnUserRecipe">검색</button>
 				</td>	
 			</tr>

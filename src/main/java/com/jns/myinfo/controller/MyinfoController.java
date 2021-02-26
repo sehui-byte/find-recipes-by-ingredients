@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.jns.board.vo.BoardVO;
 import com.jns.chef.controller.ChefController;
 import com.jns.chef.vo.ChefVO;
+import com.jns.common.Paging;
 import com.jns.favorites.vo.FavoritesVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.service.MyinfoService;
@@ -65,10 +68,42 @@ public class MyinfoController {
 		return "myinfo/myinfo_main";
 	}
 
-	@RequestMapping(value = "myinfo/myRecipeList", method = RequestMethod.GET)
-	public String myRecipeList(MemberVO mvo, Model model) {
-		logger.info("myRecipeList() 진입 >>> ");
+	@RequestMapping(value="myinfo/myRecipeListPage", method = RequestMethod.GET)
+	public String myRecipeListPage(RecipeBoardVO rbvo, HttpServletRequest request,
+									Model model) {
+		
+		List<RecipeBoardVO> myRecipeList = myinfoService.myRecipeListPage(rbvo);
+		
+		int totalCnt = 0;
+		String cPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
 
+		logger.info(cPage);
+		logger.info(pageCtrl);
+		
+		Paging.setPage(rbvo, cPage, pageCtrl); //페이징할 정보를 Paging클래스에 보내줍니다
+		
+		List<RecipeBoardVO> listPage = myinfoService.myRecipeListPage(rbvo);
+		
+		if( listPage.size() != 0) {
+			totalCnt = listPage.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+			rbvo.setTotalCount(totalCnt);				// vo에 담기
+		}
+		
+		
+		model.addAttribute("myRecipeList", myRecipeList);
+		model.addAttribute("p_rbvo", rbvo);
+		
+		return "myinfo/myRecipeList";
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "myinfo/myRecipeList", method = RequestMethod.GET)
+	public String myRecipeList(MemberVO mvo, Model model, HttpServletRequest request) {
+		logger.info("myRecipeList() 진입 >>> ");
+		
 		logger.info("mno >>> " + mvo.getMno());
 		logger.info("name >>> " + mvo.getKeyword());
 		logger.info("keyfilter >>> " + mvo.getKeyfilter());

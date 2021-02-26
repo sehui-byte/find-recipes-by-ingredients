@@ -12,6 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.css">
+<script src="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#checkAll").click(function(){
@@ -57,6 +59,30 @@
 				alert("댓글 삭제에 문제가 발생하였습니다. 관리자에게 문의하시기 바랍니다.");
 			}
 			
+		});
+
+		//datepicker
+		$("#startdate").datepicker({
+			showOn: "button",    // 달력을 표시할 타이밍 (both: focus or button)
+			buttonImage: "/kosmoJns/resources/img/cal_0.gif", 
+			buttonImageOnly : true,            
+			buttonText: "날짜선택",             
+			dateFormat: "yy-mm-dd",             
+			changeMonth: true,                  			
+			onClose: function(selectedDate) {    
+				$("#enddate").datepicker("option", "minDate", selectedDate);
+			}	
+		});
+		$("#enddate").datepicker({
+			showOn: "button", 
+			buttonImage: "/kosmoJns/resources/img/cal_0.gif", 
+			buttonImageOnly : true,
+			buttonText: "날짜선택",
+			dateFormat: "yy-mm-dd",
+			changeMonth: true,			
+			onClose: function(selectedDate) {	
+				$("#startdate").datepicker("option", "maxDate", selectedDate);
+			}               
 		});
 		
 		//검색버튼

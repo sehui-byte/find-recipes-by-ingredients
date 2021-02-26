@@ -85,8 +85,13 @@ public class MyinfoDAOImpl implements MyinfoDAO {
 
 	@Override
 	public List<MemberVO> myinfoSelect(MemberVO mvo) {
-	
+
 		return sqlSession.selectOne("myinfoSelect", mvo);
 	}
 
+	@Override
+	public List<RecipeBoardVO> myRecipeListPage(RecipeBoardVO rbvo) {
+
+		return sqlSession.selectList("myRecipeListPage", rbvo);
+	}
 }

@@ -2,11 +2,9 @@ package com.jns.common;
 
 import com.jns.board.vo.BoardVO;
 import com.jns.chefboard.vo.ChefBoardVO;
-import com.jns.common.CommonUtil;
-import com.jns.qna.vo.QnAVO;
-import java.util.*;
-import com.jns.common.Util;
 import com.jns.member.vo.MemberVO;
+import com.jns.qna.vo.QnAVO;
+import com.jns.recipeboard.vo.RecipeBoardVO;
 
 public class Paging {
 
@@ -49,6 +47,24 @@ public class Paging {
 		
 	}
 	
+	public static void setPage(RecipeBoardVO rbvo, String curpage, String sizeCtrl) {
+		
+		if(curpage==null) rbvo.setCurPage(1);
+
+		if(curpage!=null){
+			int curnum=Integer.parseInt(curpage);
+			rbvo.setCurPage(curnum);
+		}
+		
+		rbvo.setGroupSize(10);
+		
+		if(sizeCtrl==null) rbvo.setPageSize(10);
+		if(sizeCtrl!=null){
+			int ctrl=Integer.parseInt(sizeCtrl);
+			rbvo.setPageSize(ctrl);
+		}
+		
+	}
 	public static void setPage(BoardVO bvo, String curpage, String sizeCtrl) {
 		
 		if(curpage == null) bvo.setCurPage(1);
