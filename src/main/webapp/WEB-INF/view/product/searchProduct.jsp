@@ -16,6 +16,15 @@
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous">
 
+<style>
+
+/*소켓 알림 오른쪽에 고정*/
+#recentbox {
+	position: fixed;
+	right: 40px;
+	top: 100px;
+}
+</style>
 
 </head>
 <body>

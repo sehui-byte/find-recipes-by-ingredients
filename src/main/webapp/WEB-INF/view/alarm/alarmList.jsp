@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,26 +13,29 @@
 	<br>
 	<div id="wrapper">
 		<h3>알림 전체 조회</h3>
-		<c:if test="${size ne 0}">
-			<table class="table">
-				<thead>
+		${size}
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">날짜</th>
+					<th scope="col">내용</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${list}" var="alarmList">
 					<tr>
-						<th scope="col">날짜</th>
-						<th scope="col">내용</th>
+						<td><c:out value="${alarmList.insertdate}" /></td>
+						<td><c:out value="${alarmList.receiver}" />님이 <c:out
+								value="${alarmList.type}" />을 하셨습니다.</td>
 					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${list}" var="list">
-						<tr>
-							<td><c:out value="${list.insertdate}" /></td>
-							<td><c:out value="${list.receiver}" />님이 <c:out
-									value="${list.type}" />을 하셨습니다.</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</c:if>
+				</c:forEach>
+			</tbody>
+		</table>
+
 
 	</div>
+	<script>
+console.log("${size}");
+</script>
 </body>
 </html>
