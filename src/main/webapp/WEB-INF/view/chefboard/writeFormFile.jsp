@@ -6,7 +6,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>글쓰기 화면</title>
+<style type="text/css">
+	/*google 웹폰트 */
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
+	
+	div, h1, h2, h3, h4, h5, h6, p {
+	   font-family: 'Noto Serif KR', serif;
+	}
+
+	.tt{
+		text-align: center;
+		vertical-align: middle;
+	}
+	
+	.tb{
+		vertical-align: bottom;
+	}
+	
+	.btn-orange { 
+		background-color: #FF7F00; 
+		font-weight: bold;
+	}
+</style>
 <script type="text/javascript">
 	
 	$(function(){
@@ -30,6 +53,16 @@
 		$("#boardList").click(function(){
 			location.href="/kosmoJns/chefboard/boardselectallpage.do";
 		});
+		
+		// 숨겨진 행 show
+		$(document).on("click", "#downArrow", function(){		
+			var target = $(this).closest('tr').next();
+			console.log(target);
+			target.attr('style', "display:'';");
+			
+			// 클릭한 이미지 지우기
+			$(this).remove();
+		});
 	});
 	
 	/**
@@ -44,238 +77,251 @@
 		}else{
 			return true;
 		}
-	}
+	}	
 </script>
 </head>
 <body>
-<div id="boardTit"><h3>글쓰기</h3></div>
 	<form id="f_writeForm" name="f_writeForm" enctype="multipart/form-data">
-		<table border="1">
+		<table class="table">
+		<thead>
 			<tr>
-				<td colspan="2"><p style="text-align: center;">레시피 작성하기</p></td>
+				<td colspan="3"><h3>레시피 작성하기</h3></td>
 			</tr>
+		</thead>
+		<tbody>
 			<tr>
-				<td colspan="2"><p style="text-align: center;">작성자</p></td>
-				<td>
-					<input type="text" name="mnick" id="mnick" value="<%=mnick%>">
+				<td colspan="3">
+					<h5><%=mnick%></h5>
 					<input type="hidden" name="mno" id="mno" value="<%=mno%>">
 				</td>
 			</tr>
 			<tr>
-				<td>일련번호</td>
-				<td></td>
+				<td class="tt" >메뉴명</td>
+				<td><input type="text" class="form-control" name="rcp_nm" id="rcp_nm" placeholder="제목을 입력해주세요."></td>
 			</tr>
 			<tr>
-				<td>메뉴명</td>
-				<td><input type="text" name="rcp_nm" id="rcp_nm"></td>
+				<td class="tt" >조리방법</td>
+				<td><input type="text" class="form-control" name="rcp_way2" id="rcp_way2"></td>
 			</tr>
 			<tr>
-				<td>조리방법</td>
-				<td><input type="text" name="rcp_way2" id="rcp_way2"></td>
+				<td class="tt" >요리종류</td>
+				<td><input type="text" class="form-control" name="rcp_pat2" id="rcp_pat2"></td>
 			</tr>
 			<tr>
-				<td>요리종류</td>
-				<td><input type="text" name="rcp_pat2" id="rcp_pat2"></td>
+				<td class="tt" >해시태그</td>
+				<td><input type="text" class="form-control" name="hash_tag" id="hash_tag" placeholder="# 태그를 입력해주세요."></td>
 			</tr>
 			<tr>
-				<td>해쉬태그</td>
-				<td>#<input id="hash_tag" name="hash_tag" type="text" placeholder="해쉬태그"></td>
+				<td class="tt">메인 이미지</td>
+				<td><input type="file" class="form-control" id="main_imgf" name="main_imgf"></td>
 			</tr>
 			<tr>
-				<td>메인 이미지</td>
-				<td><input id="main_imgf" name="main_imgf" type="file"></td>
+				<td class="tt">재료정보</td>
+				<td><input type="text" class="form-control" id="rcp_parts_dtls" name="rcp_parts_dtls" placeholder=",로 구분 예)양파 1/6개, 달걀 1개, 소금  1작은술"></td>
 			</tr>
 			<tr>
-				<td>재료정보</td>
-				<td><input id="rcp_parts_dtls" name="rcp_parts_dtls" type="text" placeholder=",로 구분 예)양파 1/6개, 달걀 1개, 소금  1작은술"></td>
+				<td class="tt">만드는법 1</td>
+				<td><textarea class="form-control" name="manual01" id="manual01" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img01f" id="manual_img01f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법 1</td>
-				<td><textarea name="manual01" id="manual01" rows="10" cols="70"></textarea></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 2</td>
+				<td><textarea class="form-control" name="manual02" id="manual02" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img02f" id="manual_img02f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법1_이미지</td>
-				<td><input type="file" name="manual_img01f" id="manual_img01f"></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 3</td>
+				<td><textarea class="form-control" name="manual03" id="manual03" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img03f" id="manual_img03f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법 2</td>
-				<td><textarea name="manual02" id="manual02" rows="10" cols="70"></textarea></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 4</td>
+				<td><textarea class="form-control" name="manual04" id="manual04" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img04f" id="manual_img04f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법2_이미지</td>
-				<td><input type="file" name="manual_img02f" id="manual_img02f"></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 5</td>
+				<td><textarea class="form-control" name="manual05" id="manual05" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img05f" id="manual_img05f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법 3</td>
-				<td><textarea name="manual03" id="manual03" rows="10" cols="70"></textarea></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 6</td>
+				<td><textarea class="form-control" name="manual06" id="manual06" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img06f" id="manual_img06f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법3_이미지</td>
-				<td><input type="file" name="manual_img03f" id="manual_img03f"></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 7</td>
+				<td><textarea class="form-control" name="manual07" id="manual07" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img07f" id="manual_img07f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법 4</td>
-				<td><textarea name="manual04" id="manual04" rows="10" cols="70"></textarea></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 8</td>
+				<td><textarea class="form-control" name="manual08" id="manual08" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img08f" id="manual_img08f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법4_이미지</td>
-				<td><input type="file" name="manual_img04f" id="manual_img04f"></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 9</td>
+				<td><textarea class="form-control" name="manual09" id="manual09" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img09f" id="manual_img09f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법 5</td>
-				<td><textarea name="manual05" id="manual05" rows="10" cols="70"></textarea></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 10</td>
+				<td><textarea class="form-control" name="manual10" id="manual10" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img10f" id="manual_img10f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법5_이미지</td>
-				<td><input type="file" name="manual_img05f" id="manual_img05f"></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 11</td>
+				<td><textarea class="form-control" name="manual11" id="manual11" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img11f" id="manual_img11f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법 6</td>
-				<td><textarea name="manual06" id="manual06" rows="10" cols="70"></textarea></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 12</td>
+				<td><textarea class="form-control" name="manual12" id="manual12" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img12f" id="manual_img12f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법6_이미지</td>
-				<td><input type="file" name="manual_img06f" id="manual_img06f"></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 13</td>
+				<td><textarea class="form-control" name="manual13" id="manual13" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img13f" id="manual_img13f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법 7</td>
-				<td><textarea name="manual07" id="manual07" rows="10" cols="70"></textarea></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 14</td>
+				<td><textarea class="form-control" name="manual14" id="manual14" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img14f" id="manual_img14f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법7_이미지</td>
-				<td><input type="file" name="manual_img07f" id="manual_img07f"></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 15</td>
+				<td><textarea class="form-control" name="manual15" id="manual15" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img15f" id="manual_img15f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법 8</td>
-				<td><textarea name="manual08" id="manual08" rows="10" cols="70"></textarea></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 16</td>
+				<td><textarea class="form-control" name="manual16" id="manual16" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img16f" id="manual_img16f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법8_이미지</td>
-				<td><input type="file" name="manual_img08f" id="manual_img08f"></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 17</td>
+				<td><textarea class="form-control" name="manual17" id="manual17" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img17f" id="manual_img17f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법 9</td>
-				<td><textarea name="manual09" id="manual09" rows="10" cols="70"></textarea></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 18</td>
+				<td><textarea class="form-control" name="manual18" id="manual18" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img18f" id="manual_img18f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법9_이미지</td>
-				<td><input type="file" name="manual_img09f" id="manual_img09f"></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 19</td>
+				<td><textarea class="form-control" name="manual19" id="manual19" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img19f" id="manual_img19f">
+				</td>
+				<td class="tb">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법 10</td>
-				<td><textarea name="manual10" id="manual10" rows="10" cols="70"></textarea></td>
+			<tr id="ta" style="display: none;">
+				<td class="tt">만드는법 20</td>
+				<td><textarea class="form-control" name="manual20" id="manual20" rows="10" cols="70"></textarea>
+					<input type="file" class="form-control" name="manual_img20f" id="manual_img20f">
+				</td>
 			</tr>
-			<tr>
-				<td>만드는법10_이미지</td>
-				<td><input type="file" name="manual_img10f" id="manual_img10f"></td>
-			</tr>
-			<tr>
-				<td>만드는법 11</td>
-				<td><textarea name="manual11" id="manual11" rows="10" cols="70"></textarea></td>
-			</tr>
-			<tr>
-				<td>만드는법11_이미지</td>
-				<td><input type="file" name="manual_img11f" id="manual_img11f"></td>
-			</tr>
-			<tr>
-				<td>만드는법 12</td>
-				<td><textarea name="manual12" id="manual12" rows="10" cols="70"></textarea></td>
-			</tr>
-			<tr>
-				<td>만드는법12_이미지</td>
-				<td><input type="file" name="manual_img12f" id="manual_img12f"></td>
-			</tr>
-			<tr>
-				<td>만드는법 13</td>
-				<td><textarea name="manual13" id="manual13" rows="10" cols="70"></textarea></td>
-			</tr>
-			<tr>
-				<td>만드는법13_이미지</td>
-				<td><input type="file" name="manual_img13f" id="manual_img13f"></td>
-			</tr>
-			<tr>
-				<td>만드는법 14</td>
-				<td><textarea name="manual14" id="manual14" rows="10" cols="70"></textarea></td>
-			</tr>
-			<tr>
-				<td>만드는법14_이미지</td>
-				<td><input type="file" name="manual_img14f" id="manual_img14f"></td>
-			</tr>
-			<tr>
-				<td>만드는법 15</td>
-				<td><textarea name="manual15" id="manual15" rows="10" cols="70"></textarea></td>
-			</tr>
-			<tr>
-				<td>만드는법15_이미지</td>
-				<td><input type="file" name="manual_img15f" id="manual_img15f"></td>
-			</tr>
-			<tr>
-				<td>만드는법 16</td>
-				<td><textarea name="manual16" id="manual16" rows="10" cols="70"></textarea></td>
-			</tr>
-			<tr>
-				<td>만드는법16_이미지</td>
-				<td><input type="file" name="manual_img16f" id="manual_img16f"></td>
-			</tr>
-			<tr>
-				<td>만드는법 17</td>
-				<td><textarea name="manual17" id="manual17" rows="10" cols="70"></textarea></td>
-			</tr>
-			<tr>
-				<td>만드는법17_이미지</td>
-				<td><input type="file" name="manual_img17f" id="manual_img17f"></td>
-			</tr>
-			<tr>
-				<td>만드는법 18</td>
-				<td><textarea name="manual18" id="manual18" rows="10" cols="70"></textarea></td>
-			</tr>
-			<tr>
-				<td>만드는법18_이미지</td>
-				<td><input type="file" name="manual_img18f" id="manual_img18f"></td>
-			</tr>
-			<tr>
-				<td>만드는법 19</td>
-				<td><textarea name="manual19" id="manual19" rows="10" cols="70"></textarea></td>
-			</tr>
-			<tr>
-				<td>만드는법19_이미지</td>
-				<td><input type="file" name="manual_img19f" id="manual_img19f"></td>
-			</tr>
-			<tr>
-				<td>만드는법 20</td>
-				<td><textarea name="manual20" id="manual20" rows="10" cols="70"></textarea></td>
-			</tr>
-			<tr>
-				<td>만드는법20_이미지</td>
-				<td><input type="file" name="manual_img20f" id="manual_img20f"></td>
-			</tr>
+		</tbody>
 		</table>
-
-<!-- 
-	<table id="boardWrite">
-		<tr>
-			<td>작성자</td>
-			<td><input type="text" name="mnick" id="mnick"></td>
-		</tr>
-		<tr>
-			<td>글제목</td>
-			<td><input type="text" name="btitle" id="btitle"></td>
-		</tr>
-		<tr>
-			<td>내용</td>
-			<td height="200"><textarea name="bcontent" id="bcontent" rows="10" cols="70"></textarea></td>
-		</tr>
-		<tr>
-			<td>첨부파일</td>
-			<td><input type="file" name="bfile" id="bfile"></td>
-		</tr>
-	</table>
- -->	
-	<!--<s:csrfInput/> -->
-</form>
+	</form>
 <div id="boardBut">
-	<input type="button" value="저장" class="but" id="boardInsert">
-	<input type="button" value="목록" class="but" id="boardList">
+	<input type="button" class="btn btn-orange" value="저장" class="but" id="boardInsert">
+	<input type="button" class="btn btn-orange" value="목록" class="but" id="boardList">
 </div>
+<div>Icons made by <a href="https://www.flaticon.com/kr/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
 </body>
 </html>
