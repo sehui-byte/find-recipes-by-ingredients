@@ -39,4 +39,9 @@ public class AlarmDAOImpl implements AlarmDAO{
 		return sqlSession.selectList("selectFiveAlarm",avo);
 	}
 
+	@Override
+	public int updateReadYN(AlarmVO avo) {
+		return sqlSession.update("updateReadYN",avo);
+	}
+
 }

@@ -16,5 +16,6 @@ public interface AlarmDAO {
 	public int insertAlarm(AlarmVO avo);
 	//최신 5개의 알람만 리턴
 	public List<AlarmVO> selectFiveAlarm(AlarmVO avo);
-
+	//알람 확인 여부 변경
+	public int updateReadYN(AlarmVO avo);
 }

@@ -10,7 +10,6 @@ public class AlarmVO {
 	private String readyn;
 	
 	
-	
 	public String getReadyn() {
 		return readyn;
 	}

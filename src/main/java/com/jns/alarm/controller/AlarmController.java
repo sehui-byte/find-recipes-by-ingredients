@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jns.alarm.service.AlarmService;
@@ -39,6 +40,14 @@ public class AlarmController {
 		model.addAttribute("size", size);
 		System.out.println("size >> " + size);
 		return "alarm/alarmList";
+	}
+	
+	@RequestMapping("updateReadYN.do")
+	public String updateReadYN(@RequestBody AlarmVO avo) {
+		System.out.println("updateReadYN");
+		avo.setReadyn("Y"); //읽었을 경우 Y
+		service.updateReadYN(avo);
+		return "redirect:alarmList.do";
 	}
 
 }

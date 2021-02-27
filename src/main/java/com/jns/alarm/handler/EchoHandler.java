@@ -138,6 +138,9 @@ public class EchoHandler extends TextWebSocketHandler {
 			//로그인 상태인 경우
 			if(tmpKey.equals(receiver)) {
 				System.out.println("로그인 상태");
+				avo.setReadyn("Y");//로그인 상태시엔 읽은 걸로 처리
+				adao.insertAlarm(avo);
+				
 				if(type.equals("subscribe")) {
 					user.sendMessage(new TextMessage(",," +sender +"님이 회원님을 구독하기 시작했습니다."));
 				}
