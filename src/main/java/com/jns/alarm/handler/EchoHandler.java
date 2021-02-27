@@ -63,18 +63,39 @@ public class EchoHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception{
 		String userId = getMid(session);//세션으로 유저 아이디 얻어옴
 		if(userId != null) {
-			AlarmVO avo = new AlarmVO();
-			avo.setReceiver(userId);
-			if(adao.countAlarm(avo) == null)
-				count = 0; //쌓인 알람 수
-			else {
-				count = Integer.valueOf(adao.countAlarm(avo));
-			}
-			logger.info("쌓인 알람수 >> " + count);
 			logger.info(userId + "서버 연결됨.");
 			users.put(userId,session); //로그인중인 개별 유저 저장
 			WebSocketSession user = users.get(userId);
-			user.sendMessage(new TextMessage("null,"+userId +",count"+count));//쌓인 알림 개수 보내줌
+			
+			AlarmVO avo = new AlarmVO();
+			avo.setReceiver(userId);
+			if(adao.countAlarm(avo) == null) {
+				logger.info("쌓인 알람 없음!");
+				count = 0; 
+			}
+			else {//쌓인 알람이 존재할 경우
+				count = Integer.valueOf(adao.countAlarm(avo));
+				logger.info("쌓인 알람수 >> " + count);
+				user.sendMessage(new TextMessage("null,"+userId +",count"+count));//쌓인 알림 개수 보내줌
+				
+				List<AlarmVO> list = adao.selectAlarm(avo);
+				for(int i = 0; i<count; i++) {
+					String sender = list.get(i).getSender();
+					String type = list.get(i).getType();
+					String insertdate = list.get(i).getInsertdate();
+					
+					//쌓인 메세지 보내주기
+					if(type.equals("subscribe")) {
+						user.sendMessage(new TextMessage(",," +sender +"님이 회원님을 구독하기 시작했습니다. ," ));
+					}
+					else if(type.equals("reply")) {
+						user.sendMessage(new TextMessage(",," +sender +"님이 회원님 게시물에 댓글을 달았습니다."));
+					}
+					//메세지 삭제하기
+					logger.info("알람 ano >> "  + list.get(i).getAno() +"삭제");
+					adao.deleteAlarm(list.get(i));
+				}
+			}
 		}
 	}
 
@@ -89,12 +110,14 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
 		//클라이언트와 연결이 해제되면 제거한다
+		logger.info("유저 세션 제거");
 		users.remove(session);
 	}
 
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception{
 		//메세지 전송 중 에러가 발생하면 실행되는 함수
+		logger.info("에러발생! 유저 세션 제거");
 		users.remove(session);
 	}
 
@@ -131,10 +154,10 @@ public class EchoHandler extends TextWebSocketHandler {
 			if(tmpKey.equals(receiver)) {
 				System.out.println("로그인 상태");
 				if(type.equals("subscribe")) {
-					user.sendMessage(new TextMessage(sender +"님이 회원님을 구독하기 시작했습니다."));
+					user.sendMessage(new TextMessage(",," +sender +"님이 회원님을 구독하기 시작했습니다."));
 				}
 				else if(type.equals("reply")) {
-					user.sendMessage(new TextMessage(sender +"님이 회원님 게시물에 댓글을 달았습니다."));
+					user.sendMessage(new TextMessage(",," +sender +"님이 회원님 게시물에 댓글을 달았습니다."));
 				}
 				else if(type.equals("count")) {
 					user.sendMessage(new TextMessage(Integer.toString(count)));

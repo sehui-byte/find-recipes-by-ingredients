@@ -26,13 +26,17 @@ public class AlarmDAOImpl implements AlarmDAO{
 
 	@Override
 	public int deleteAlarm(AlarmVO avo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("deleteAlarm",avo);
 	}
 
 	@Override
 	public int insertAlarm(AlarmVO avo) {
 		return sqlSession.insert("insertAlarm",avo);
+	}
+
+	@Override
+	public List<AlarmVO> selectFiveAlarm(AlarmVO avo) {
+		return sqlSession.selectList("selectFiveAlarm",avo);
 	}
 
 }

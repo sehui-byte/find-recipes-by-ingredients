@@ -14,12 +14,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <style>
-
-#navbarSupportedContent {
-	max-width: 1020px;
-	margin: 0 auto;
-}
-
 .carousel, .carousel-item img {
 	height: 350px;
 	width: auto;
@@ -27,13 +21,12 @@
 	object-fit: cover;
 	object-position: 50% 15%;
 }
-
-.navbar-nav ul li a:hover, .navbar ul li a:active {
-	color: #F9A781;
-}
 </style>
 </head>
 <body>
+
+	
+	
 	<!-- navbar -->
 	<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 
@@ -94,6 +87,9 @@
 	</div>
 
 	<!-- content -->
+	
+	<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
+	<div id="socketAlarm"></div>
 
 	<div id="wrapper">
 		<h3>공지사항 관련 URL</h3>

@@ -30,7 +30,6 @@ import com.jns.chabun.dao.ChabunDAO;
 import com.jns.member.vo.MemberVO;
 import com.jns.product.dao.ProductDAO;
 import com.jns.product.vo.ProductVO;
-import com.jns.product.websocket.ProductApplicantWebSocketHandler;
 
 @Service
 @Transactional

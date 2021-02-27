@@ -14,4 +14,7 @@ public interface AlarmDAO {
 	public int deleteAlarm(AlarmVO avo);
 	//로그아웃 상태시에 알람 추가
 	public int insertAlarm(AlarmVO avo);
+	//최신 5개의 알람만 리턴
+	public List<AlarmVO> selectFiveAlarm(AlarmVO avo);
+
 }

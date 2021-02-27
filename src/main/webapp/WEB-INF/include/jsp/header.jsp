@@ -9,17 +9,12 @@
 <%@ page import="com.jns.recipeboard.vo.RecipeBoardVO"%>
 <%@ page import="com.jns.reply.vo.ReplyVO"%>
 <%@ page import="com.jns.alarm.vo.AlarmVO"%>
-
 <%-- fileUpload 정의 --%>
 <%@ page import="com.jns.common.FileLoadUtil"%>
-
 <%-- jstl 태그 정의 --%>
 <%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
-<!-- socketJS -->
-<script
-	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<%-- 현재 로그인한 회원의 정보 파악 --%>
 
+<%-- 현재 로그인한 회원의 정보 파악 --%>
 <%
 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 Object principal = auth.getPrincipal();
@@ -47,37 +42,26 @@ if (principal != null && principal instanceof MemberVO) {
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>navbar</title>
+<!-- socketJS -->
+<script
+	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<!-- font awewome -->
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+	crossorigin="anonymous" />
+<!-- jquery -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						// Spring Scurity logout >> post 요청만 가능
-						$("#logoutbtn")
-								.click(
-										function() {
-											$("#logoutForm")
-													.attr("action",
-															"<c:url value='/j_spring_security_logout' />");
-											$("#logoutForm").attr("method",
-													"POST");
-											$("#logoutForm")
-													.attr("enctype",
-															"application/x-www-form-urlencoded");
-											$("#logoutForm").submit();
-										})
-					})
-</script>
+
 <!-- bootstrap css-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-	crossorigin="anonymous"/>
-	
+	crossorigin="anonymous" />
+
 <style>
 /*google 웹폰트 */
 @import
@@ -102,6 +86,30 @@ div, h1, h2, h3, h4, h5, h6, p {
 	margin: 0 auto;
 }
 
+/*소켓 알림 오른쪽에 고정*/
+#socketAlarm {
+	position: fixed;
+	right: 40px;
+	top: 100px;
+}
+
+.fas {
+	margin-left: 5px;
+	margin-right: 5px;
+	color: white;
+}
+
+.fas:hover {
+	color: #F9A781;
+}
+
+/*마이페이지, 로그아웃버튼, 미확인 알림 수평정렬*/
+.userInfo {
+	display: flex;
+	margin: 10px auto;
+	width: 90%;
+	margin-right: 50px;
+}
 </style>
 </head>
 <body>
@@ -122,17 +130,14 @@ div, h1, h2, h3, h4, h5, h6, p {
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="http://localhost:8080/kosmoJns">Home</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page"
+					<li class="nav-item"><a class="nav-link" aria-current="page"
+						href="http://localhost:8080/kosmoJns">Home</a></li>
+					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="http://localhost:8080/kosmoJns/recipeboard.do">레시피 일반</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page"
+					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="http://localhost:8080/kosmoJns/chefboard/boardselectall.do">셰프
 							게시판</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page"
+					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="http://localhost:8080/kosmoJns/searchPage.do">식재료 구매</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
@@ -154,42 +159,43 @@ div, h1, h2, h3, h4, h5, h6, p {
 					<button class="btn btn-outline-success" type="submit">Search</button>
 				</form>
 				 -->
-
-				<!-- 로그아웃시에 왔던 알림 갯수 표시 -->
-				<div>
-					미확인 알림 <span class="badge bg-primary" id="msgCount"></span>
-				</div>
-
-				<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
-				<div id="socketAlarm"></div>
 			</div>
 
+			<!-- 로그인 버튼 -->
 			<div class="loginInfo" style='text-align: right;'>
 				<s:authorize access="isAnonymous()">
 					<a href="/kosmoJns/login.do">로그인</a>
 				</s:authorize>
-				<s:authorize access="isAuthenticated()">
-					<%=mnick%>님 반갑습니다.<br />
-					<form id="logoutForm">
-						<input type="button" id="logoutbtn" name="logoutbtn"
-							value="로그아웃하기" />
-					</form>
-					<br>
-				</s:authorize>
-				<s:authorize access="hasRole('ROLE_A')">
-					<a href="/kosmoJns/admin/main.do">admin 접속</a>
-					<br>
-				</s:authorize>
-				<s:authorize access="hasAnyRole('ROLE_U', 'ROLE_C')">
-					<a href="/kosmoJns/myinfo.do?mno=<%=mno%>">MyPage</a>
-				</s:authorize>
+				<div class="userInfo">
+					<s:authorize access="hasAnyRole('ROLE_U', 'ROLE_C')">
+						<!-- 마이페이지 -->
+						<a href="/kosmoJns/myinfo.do?mno=<%=mno%>"><i
+							class="fas fa-user-circle fa-lg" title="마이페이지"></i> </a>
+					</s:authorize>
+					<s:authorize access="isAuthenticated()">
+						<!-- mnick 님 반갑습니다.<br /> -->
+						<!-- 알람 모양 아이콘 -->
+						<i class="fas fa-bell fa-lg" title="미확인알림"></i>
+						<!-- 로그아웃시에 왔던 알림 갯수 표시 -->
+						<div>
+							<span class="badge bg-primary" id="msgCount"></span>
+						</div>
+						<form id="logoutForm">
+							<!-- 로그아웃 버튼 -->
+							<input type="button" id="logoutbtn" name="logoutbtn" value="로그아웃"
+								style="color: white; font-family: FontAwesome; border: none; background: transparent;" />
+						</form>
+						<br>
+					</s:authorize>
+					<s:authorize access="hasRole('ROLE_A')">
+						<a href="/kosmoJns/admin/main.do">admin 접속</a>
+						<br>
+					</s:authorize>
+
+				</div>
 			</div>
 		</div>
-
 	</nav>
-
-
-
 	<!-- web socket 부분 -->
 	<script>
 		// 전역변수 설정
@@ -203,31 +209,30 @@ div, h1, h2, h3, h4, h5, h6, p {
 		console.log("웹소켓 연결");
 		//웹소켓 서버에서 메세지를 보내면 자동으로 실행된다
 		socket.onmessage = onMessage;
-		var mid = "<%=mid%>
-		";
+		var mid = "<%=mid%>";
 		console.log("mid >> " + mid);
-		//var a = 'null,\'' + mid '\',' + 'count';
-		//onMessage(a);
 
-		//evt파라미터는 웹소켓이 보내준 데이터 의미
-		function onMessage(evt) {
+		var count = 0;//로그아웃시 왔던 메세지 개수
+		var toast = '';
+		function onMessage(evt) {//evt파라미터는 웹소켓이 보내준 데이터 의미
 			console.log("서버로부터 메세지 받음");
 			var arriveTime = new Date();
 			var data = evt.data;
 			var dataArr = data.split(",");
-
+			console.log("dataArr[2]>> " + dataArr[2]);
 			//type이 count이면 
 			if (dataArr[2].substring(0, 5) == 'count') {
-				var count = dataArr[2].substring(5, 6);
+				count = dataArr[2].substring(5, 6);
 				$("#msgCount").text(count);
-			} else {//type이 count가 아니면 toast 메세지 발송
-				var toast = '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
+				console.log("count >> " + count);
+			} else {
+				toast = '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
 				toast += '<div class="toast-header"><class="rounded me-2">';
 				toast += '<strong class="me-auto">Bootstrap</strong>';
 				toast += '<small class="sub"></small>';
 				toast += '<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
 				toast += '</div><div class="toast-body">';
-				toast += data;
+				toast += dataArr[2];
 				toast += '</div></div>';
 				$("#socketAlarm").append(toast);
 				$(".toast").toast({
@@ -237,8 +242,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 				$('.toast').toast('show');
 
 				console.log(data);
-
-				sock.close();//소켓연결종료
+				
 
 				function timeBefore() {
 					//현재시간
@@ -281,6 +285,28 @@ div, h1, h2, h3, h4, h5, h6, p {
 				setInterval(timeBefore, 1000);
 			}
 		}
+	</script>
+	<script>
+		$(document)
+				.ready(
+						function() {
+							// Spring Scurity logout >> post 요청만 가능
+							$("#logoutbtn")
+									.click(
+											
+											function() {
+												sock.close();//소켓연결종료
+												$("#logoutForm")
+														.attr("action",
+																"<c:url value='/j_spring_security_logout' />");
+												$("#logoutForm").attr("method",
+														"POST");
+												$("#logoutForm")
+														.attr("enctype",
+																"application/x-www-form-urlencoded");
+												$("#logoutForm").submit();
+											})
+						})
 	</script>
 	<!-- bootstrap js -->
 	<script
