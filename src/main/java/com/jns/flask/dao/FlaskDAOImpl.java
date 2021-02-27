@@ -7,6 +7,7 @@ import com.jns.flask.vo.LikeProductInfoVO;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
 import com.jns.flask.vo.SubscribeIncVO;
+import com.jns.product.vo.ProductVO;
 import com.jns.recipe.vo.RecipeVO;
 
 public class FlaskDAOImpl implements FlaskDAO
@@ -33,8 +34,8 @@ public class FlaskDAOImpl implements FlaskDAO
 	}
 	
 	@Override
-	public LikeProductInfoVO getLikeProductInfo(LikeProductInfoVO lpvo) {
-		return sqlSession.selectOne("getLikeProductInfo", lpvo);
+	public LikeProductInfoVO getLikeProductInfo(ProductVO pvo) {
+		return sqlSession.selectOne("getLikeProductInfo", pvo);
 	}
 	
 }

@@ -10,6 +10,7 @@ import com.jns.flask.vo.LikeProductInfoVO;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
 import com.jns.flask.vo.SubscribeIncVO;
+import com.jns.product.vo.ProductVO;
 import com.jns.recipe.vo.RecipeVO;
 
 @Service
@@ -46,8 +47,8 @@ public class FlaskServiceImpl implements FlaskService
 	}
 	
 	@Override
-	public LikeProductInfoVO getLikeProductInfo(LikeProductInfoVO lpvo) {
+	public LikeProductInfoVO getLikeProductInfo(ProductVO pvo) {
 		// TODO Auto-generated method stub
-		return flaskDAO.getLikeProductInfo(lpvo);
+		return flaskDAO.getLikeProductInfo(pvo);
 	}
 }

@@ -16,6 +16,7 @@ import com.jns.flask.vo.LikeProductInfoVO;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
 import com.jns.flask.vo.SubscribeIncVO;
+import com.jns.product.vo.ProductVO;
 import com.jns.recipe.service.RecipeService;
 import com.jns.recipe.vo.RecipeVO;
 
@@ -92,10 +93,10 @@ public class FlaskController
 	}
 	
 	@RequestMapping(value = "sendLikeProductInfo", method = RequestMethod.GET)
-	public String sendLikeProductInfo(LikeProductInfoVO lpvo, RedirectAttributes redirectAttributes)
+	public String sendLikeProductInfo(ProductVO pvo, RedirectAttributes redirectAttributes)
 	{
-		logger.info("lpvo >>> : " + lpvo.toString());
-		LikeProductInfoVO lpvo2 = flaskService.getLikeProductInfo(lpvo);
+		logger.info("pvo >>> : " + pvo.toString());
+		LikeProductInfoVO lpvo2 = flaskService.getLikeProductInfo(pvo);
 		String jsonStr = FlaskUtil.getLikeProductInfo(lpvo2).toJSONString();
 		logger.info("jsonStr >>> : " + jsonStr);
 		

@@ -43,4 +43,13 @@
 			AND TO_CHAR(M.MINSERTDATE, 'MM') = LPAD(#{mon}, 2, '0')
 	</select>
 	
+	
+	<select id="getLikeProductInfo" parameterType="pvo" resultType="lpvo">
+		SELECT
+			PRODUCTID,
+			TITLE,
+			LPRICE
+		FROM LIKEPRODUCT WHERE MNO=#{mno}
+	</select>
+	
 </mapper>
