@@ -91,9 +91,15 @@ public class EchoHandler extends TextWebSocketHandler {
 					else if(type.equals("reply")) {
 						user.sendMessage(new TextMessage(",," +sender +"님이 회원님 게시물에 댓글을 달았습니다."));
 					}
+				}
+				
+				for(int i = 0; i<count; i++) {
+					logger.info("쌓인 알람수 >> " + count);
+					user.sendMessage(new TextMessage("null,"+userId +",count"+count));//쌓인 알림 개수 보내줌
 					//메세지 삭제하기
 					logger.info("알람 ano >> "  + list.get(i).getAno() +"삭제");
 					adao.deleteAlarm(list.get(i));
+					count--;
 				}
 			}
 		}
@@ -111,14 +117,16 @@ public class EchoHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
 		//클라이언트와 연결이 해제되면 제거한다
 		logger.info("유저 세션 제거");
-		users.remove(session);
+		String mid = getMid(session);
+		users.remove(mid);
 	}
 
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception{
 		//메세지 전송 중 에러가 발생하면 실행되는 함수
 		logger.info("에러발생! 유저 세션 제거");
-		users.remove(session);
+		String mid = getMid(session);
+		users.remove(mid);
 	}
 
 	//클라이언트가 웹소켓 서버로 메세지를 전송했을 때 실행되는 메소드
@@ -148,7 +156,7 @@ public class EchoHandler extends TextWebSocketHandler {
 
 		boolean isLogin = false;
 		for(String tmpKey : users.keySet()) {
-			//System.out.println("tmpKey >>" + tmpKey);
+			System.out.println("tmpKey >>" + tmpKey);
 			WebSocketSession user = users.get(tmpKey);
 			//로그인 상태인 경우
 			if(tmpKey.equals(receiver)) {

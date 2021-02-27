@@ -24,9 +24,6 @@
 </style>
 </head>
 <body>
-
-	
-	
 	<!-- navbar -->
 	<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 

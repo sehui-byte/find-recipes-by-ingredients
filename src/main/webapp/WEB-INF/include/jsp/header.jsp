@@ -226,7 +226,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 				$("#msgCount").text(count);
 				console.log("count >> " + count);
 			} else {
-				toast = '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
+				toast += '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
 				toast += '<div class="toast-header"><class="rounded me-2">';
 				toast += '<strong class="me-auto">Bootstrap</strong>';
 				toast += '<small class="sub"></small>';
@@ -240,10 +240,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 					"autohide" : false
 				});
 				$('.toast').toast('show');
-
-				console.log(data);
 				
-
 				function timeBefore() {
 					//현재시간
 					var now = new Date();
@@ -283,6 +280,9 @@ div, h1, h2, h3, h4, h5, h6, p {
 					document.getElementsByClassName("sub")[0].innerHTML = time;
 				}
 				setInterval(timeBefore, 1000);
+				//console.log(data);
+				//window.location.reload();//새로고침
+				//sock.close();//소켓연결종료
 			}
 		}
 	</script>
@@ -295,7 +295,8 @@ div, h1, h2, h3, h4, h5, h6, p {
 									.click(
 											
 											function() {
-												sock.close();//소켓연결종료
+												socket.close();
+												sock.close();
 												$("#logoutForm")
 														.attr("action",
 																"<c:url value='/j_spring_security_logout' />");
