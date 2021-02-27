@@ -22,6 +22,10 @@
 	crossorigin="anonymous">
 </head>
 <body>
+	
+	<!-- navbar -->
+	<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+	
 	<button type="button" class="btn btn-primary">
 		Notifications <span class="badge bg-secondary">4</span>
 	</button>
@@ -34,19 +38,8 @@
 	<input type="button" id="sendBtn" value="submit"
 		onclick="sendMessage()" />
 	<div id="data"></div>
-
+	
 	<script>
-		// 전역변수 설정
-		var socket = null;
-		$(document).ready(function() {
-			// 웹소켓 연결
-			sock = new SockJS("<c:url value="/echo"/>");
-			console.log("웹소켓 연결");
-			//웹소켓 서버에서 메세지를 보내면 자동으로 실행된다
-			sock.onmessage = onMessage;
-		});
-
-		
 		function sendMessage() {
 			//웹소켓으로 메세지 전달
 			console.log("전달 메세지 >> " + $("#message").val());

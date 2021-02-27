@@ -54,7 +54,6 @@
 
 	<!-- 최근 본 상품 -->
 	<!-- 퀵메뉴 -->
-	최근 본 상품 리스트
 	<div id="recentbox">
 		<div class="card text-dark bg-light mb-3" style="max-width: 16rem;">
 			<!-- '최근 본 상품' 텍스트 -->

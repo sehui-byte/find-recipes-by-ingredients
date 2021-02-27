@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!-- jstl -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,16 +16,20 @@
 	src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 <body>
-	<h3>관심상품 목록</h3>
+	<!-- navbar -->
+	<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+	
+	<div id="wrapper">	<h3>My Favorite Products</h3>
 	<button type="button" id="deleteAllBtn" class="btn btn-primary"
 		onclick="checkAll()">전체선택</button>
 	<button type="button" id="deleteBtn" class="btn btn-primary">삭제</button>
-
+	<br>
 	<h4>
 		총 관심상품 :
 		<c:out value="${size}" />
 		개
 	</h4>
+	<br>
 	<c:if test="${size eq 0}">
 			관심상품이 없습니다!
 			</c:if>
@@ -38,7 +41,6 @@
 		<thead>
 			<tr>
 				<th scope="col">체크</th>
-				<th scope="col">일련번호</th>
 				<th scope="col">상품번호</th>
 				<th scope="col">상품명</th>
 				<th scope="col">이미지</th>
@@ -52,18 +54,19 @@
 			<c:forEach items="${list}" var="list">
 				<tr>
 					<th><input type="checkbox" name="productChk" /></th>
-					<td><c:out value="${list.lpno}" /></td>
 					<td><c:out value="${list.productId}" /></td>
 					<td><c:out value="${list.title}" /></td>
-					<td><c:out value="${list.image}" /></td>
-					<td><c:out value="${list.lprice}" /></td>
-					<td><c:out value="${list.hprice}" /></td>
-					<td><c:out value="${list.link}" /></td>
+					<td><img src =" <c:out value="${list.image}" />" height="50"/></td>
+					<td><c:out value="${list.lprice}" />원</td>
+					<td><c:out value="${list.hprice}" />원</td>
+					<td><a href='<c:out value="${list.link}" />'>구매</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	</c:if>
+</div>
+
 	<script>
 		$("#deleteBtn").click(function() {
 			var rowData = new Array();
@@ -75,12 +78,12 @@
 
 				//체크된 row의 모든 값을 배열에 담는다
 				rowData.push(tr.text());
-				var productId = td.eq(2).text();
-				var title = td.eq(3).text();
-				var image = td.eq(4).text();
-				var lprice = td.eq(5).text();
-				var hprice = td.eq(6).text();
-				var link = td.eq(7).text();
+				
+				var title = td.eq(2).text();
+				var image = td.eq(3).text();
+				var lprice = td.eq(4).text();
+				var hprice = td.eq(5).text();
+				var link = td.eq(6).text();
 
 
 				var param = {

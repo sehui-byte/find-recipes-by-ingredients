@@ -16,6 +16,15 @@
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous">
 
+<style>
+
+/*최근 본 상품 오른쪽에 위치*/
+#recentbox {
+	position: fixed;
+	right: 40px;
+	top: 100px;
+}
+</style>
 
 </head>
 <body>

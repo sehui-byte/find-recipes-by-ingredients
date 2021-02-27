@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!-- jstl -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <head>
 <!-- jquery -->
 <script type="text/javascript"
@@ -24,9 +23,6 @@
 </style>
 </head>
 <body>
-
-	
-	
 	<!-- navbar -->
 	<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 
