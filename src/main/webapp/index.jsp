@@ -14,34 +14,22 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <style>
-/*google 웹폰트 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap')
-	;
 
-/*font 적용*/
-div, h1, h2, h3, h4, h5, h6, p {
-	font-family: 'Noto Serif KR', serif;
-}
-
-/*콘텐츠 가운데 정렬*/
-#wrapper {
-	max-width: 1020px;
-	margin: 0 auto;
-	margin-top: 50px;
-}
-
-#navbarSupportedContent{
+#navbarSupportedContent {
 	max-width: 1020px;
 	margin: 0 auto;
 }
+
 .carousel, .carousel-item img {
-  height: 350px;
-  width: auto;
-  /*overflow: hidden;*/
-  object-fit: cover;
-  object-position: 50% 15%;
+	height: 350px;
+	width: auto;
+	/*overflow: hidden;*/
+	object-fit: cover;
+	object-position: 50% 15%;
+}
 
+.navbar-nav ul li a:hover, .navbar ul li a:active {
+	color: #F9A781;
 }
 </style>
 </head>
@@ -64,14 +52,18 @@ div, h1, h2, h3, h4, h5, h6, p {
 		</div>
 		<div class="carousel-inner">
 			<div class="carousel-item active" data-bs-interval="10000">
-				<img src="https://cdn.pixabay.com/photo/2017/11/08/22/18/spaghetti-2931846_1280.jpg" class="d-block w-100" alt="...">
+				<img
+					src="https://cdn.pixabay.com/photo/2017/11/08/22/18/spaghetti-2931846_1280.jpg"
+					class="d-block w-100" alt="...">
 				<div class="carousel-caption d-none d-md-block">
 					<h5>First slide label</h5>
 					<p>Some representative placeholder content for the first slide.</p>
 				</div>
 			</div>
 			<div class="carousel-item" data-bs-interval="2000">
-				<img src="https://cdn.pixabay.com/photo/2017/09/28/18/13/bread-2796393_1280.jpg" class="d-block w-100" alt="...">
+				<img
+					src="https://cdn.pixabay.com/photo/2017/09/28/18/13/bread-2796393_1280.jpg"
+					class="d-block w-100" alt="...">
 				<div class="carousel-caption d-none d-md-block">
 					<h5>Second slide label</h5>
 					<p>Some representative placeholder content for the second
@@ -79,7 +71,9 @@ div, h1, h2, h3, h4, h5, h6, p {
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_1280.jpg" class="d-block w-100" alt="...">
+				<img
+					src="https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_1280.jpg"
+					class="d-block w-100" alt="...">
 				<div class="carousel-caption d-none d-md-block">
 					<h5>Third slide label</h5>
 					<p>Some representative placeholder content for the third slide.</p>

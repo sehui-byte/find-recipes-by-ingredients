@@ -76,13 +76,44 @@ if (principal != null && principal instanceof MemberVO) {
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-	crossorigin="anonymous">
+	crossorigin="anonymous"/>
+	
+<style>
+/*google 웹폰트 */
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap')
+	;
+
+/*font 적용*/
+div, h1, h2, h3, h4, h5, h6, p {
+	font-family: 'Noto Serif KR', serif;
+}
+
+/*콘텐츠 가운데 정렬*/
+#wrapper {
+	max-width: 1020px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+/*navbar 일부 가운데 정렬*/
+#navbarSupportedContent {
+	max-width: 1020px;
+	margin: 0 auto;
+}
+
+</style>
 </head>
 <body>
 	<!-- navbar -->
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="http://localhost:8080/kosmoJns">전냉시</a>
+			<!-- 사이트 아이콘 넣기 -->
+			<a class="navbar-brand" href="http://localhost:8080/kosmoJns"> <img
+				src="/kosmoJns/resources/img/jns_logo.png" alt="" width="40"
+				height="40"> 전지적 냉장고 시점
+			</a>
+
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -94,18 +125,23 @@ if (principal != null && principal instanceof MemberVO) {
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="http://localhost:8080/kosmoJns">Home</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="http://localhost:8080/kosmoJns/recipeboard.do">레시피 일반</a></li>
+						aria-current="page"
+						href="http://localhost:8080/kosmoJns/recipeboard.do">레시피 일반</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="http://localhost:8080/kosmoJns/chefboard/boardselectall.do">셰프 게시판</a></li>
+						aria-current="page"
+						href="http://localhost:8080/kosmoJns/chefboard/boardselectall.do">셰프
+							게시판</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="http://localhost:8080/kosmoJns/searchPage.do">식재료 구매</a></li>
+						aria-current="page"
+						href="http://localhost:8080/kosmoJns/searchPage.do">식재료 구매</a></li>
 					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" id="navbarDropdown"
-						role="button" data-bs-toggle="dropdown" aria-expanded="true">
-							공지 </a>
+						class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+						data-bs-toggle="dropdown" aria-expanded="true"> 공지 </a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="http://localhost:8080/kosmoJns/noticeSelectAllPage.do">공지사항</a></li>
-							<li><a class="dropdown-item" href="http://localhost:8080/kosmoJns/qnaSelectAllPage.do">Q&A</a></li>
+							<li><a class="dropdown-item"
+								href="http://localhost:8080/kosmoJns/noticeSelectAllPage.do">공지사항</a></li>
+							<li><a class="dropdown-item"
+								href="http://localhost:8080/kosmoJns/qnaSelectAllPage.do">Q&A</a></li>
 						</ul></li>
 				</ul>
 
@@ -118,7 +154,7 @@ if (principal != null && principal instanceof MemberVO) {
 					<button class="btn btn-outline-success" type="submit">Search</button>
 				</form>
 				 -->
-				 
+
 				<!-- 로그아웃시에 왔던 알림 갯수 표시 -->
 				<div>
 					미확인 알림 <span class="badge bg-primary" id="msgCount"></span>
@@ -127,31 +163,32 @@ if (principal != null && principal instanceof MemberVO) {
 				<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
 				<div id="socketAlarm"></div>
 			</div>
-			
+
 			<div class="loginInfo" style='text-align: right;'>
-		<s:authorize access="isAnonymous()">
-			<a href="/kosmoJns/login.do">로그인</a>
-		</s:authorize>
-		<s:authorize access="isAuthenticated()">
-			<%=mnick%>님 반갑습니다.<br />
-			<form id="logoutForm">
-				<input type="button" id="logoutbtn" name="logoutbtn" value="로그아웃하기" />
-			</form>
-			<br>
-		</s:authorize>
-		<s:authorize access="hasRole('ROLE_A')">
-			<a href="/kosmoJns/admin/main.do">admin 접속</a>
-			<br>
-		</s:authorize>
-		<s:authorize access="hasAnyRole('ROLE_U', 'ROLE_C')">
-			<a href="/kosmoJns/myinfo.do?mno=<%=mno%>">MyPage</a>
-		</s:authorize>
-	</div>
+				<s:authorize access="isAnonymous()">
+					<a href="/kosmoJns/login.do">로그인</a>
+				</s:authorize>
+				<s:authorize access="isAuthenticated()">
+					<%=mnick%>님 반갑습니다.<br />
+					<form id="logoutForm">
+						<input type="button" id="logoutbtn" name="logoutbtn"
+							value="로그아웃하기" />
+					</form>
+					<br>
+				</s:authorize>
+				<s:authorize access="hasRole('ROLE_A')">
+					<a href="/kosmoJns/admin/main.do">admin 접속</a>
+					<br>
+				</s:authorize>
+				<s:authorize access="hasAnyRole('ROLE_U', 'ROLE_C')">
+					<a href="/kosmoJns/myinfo.do?mno=<%=mno%>">MyPage</a>
+				</s:authorize>
+			</div>
 		</div>
-		
+
 	</nav>
-	
-	
+
+
 
 	<!-- web socket 부분 -->
 	<script>
@@ -166,7 +203,8 @@ if (principal != null && principal instanceof MemberVO) {
 		console.log("웹소켓 연결");
 		//웹소켓 서버에서 메세지를 보내면 자동으로 실행된다
 		socket.onmessage = onMessage;
-		var mid = "<%=mid%>";
+		var mid = "<%=mid%>
+		";
 		console.log("mid >> " + mid);
 		//var a = 'null,\'' + mid '\',' + 'count';
 		//onMessage(a);
