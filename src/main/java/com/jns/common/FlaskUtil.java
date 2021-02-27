@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.jns.flask.vo.LikeProductInfoVO;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
 import com.jns.flask.vo.SubscribeIncVO;
@@ -139,6 +140,15 @@ public abstract class FlaskUtil
 		json.put("signupInc", jArr); 
 		logger.info("json >>> : " + json.toJSONString());
 		
+		return json;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static JSONObject getLikeProductInfo(LikeProductInfoVO lpvo)
+	{
+		JSONObject json = new JSONObject();
+		json.put("LikeProductInfo", lpvo.toJSONObject());
+		logger.info("json >>> : " + json.toJSONString());
 		return json;
 	}
 }

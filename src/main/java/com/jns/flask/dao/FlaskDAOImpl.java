@@ -3,6 +3,7 @@ package com.jns.flask.dao;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.jns.flask.vo.LikeProductInfoVO;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
 import com.jns.flask.vo.SubscribeIncVO;
@@ -29,6 +30,11 @@ public class FlaskDAOImpl implements FlaskDAO
 	public SignupIncVO getSignupInc(SignupIncVO suvo) 
 	{
 		return sqlSession.selectOne("getSignupInc", suvo);
+	}
+	
+	@Override
+	public LikeProductInfoVO getLikeProductInfo(LikeProductInfoVO lpvo) {
+		return sqlSession.selectOne("getLikeProductInfo", lpvo);
 	}
 	
 }

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jns.common.FlaskUtil;
 import com.jns.flask.service.FlaskService;
+import com.jns.flask.vo.LikeProductInfoVO;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
 import com.jns.flask.vo.SubscribeIncVO;
@@ -88,5 +89,18 @@ public class FlaskController
 		logger.info("flask로 데이터 전송 >>> ");
 		
 		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
+	}
+	
+	@RequestMapping(value = "sendLikeProductInfo", method = RequestMethod.GET)
+	public String sendLikeProductInfo(LikeProductInfoVO lpvo, RedirectAttributes redirectAttributes)
+	{
+		logger.info("lpvo >>> : " + lpvo.toString());
+		LikeProductInfoVO lpvo2 = flaskService.getLikeProductInfo(lpvo);
+		String jsonStr = FlaskUtil.getLikeProductInfo(lpvo2).toJSONString();
+		logger.info("jsonStr >>> : " + jsonStr);
+		
+		redirectAttributes.addAttribute("likeProductInfo", jsonStr);
+		
+		return "redirect:http://127.0.0.1:5001/lprice";
 	}
 }
