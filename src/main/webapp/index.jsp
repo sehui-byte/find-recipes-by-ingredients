@@ -1254,8 +1254,6 @@ to {
 						<li><a
 							href="sendSignupInc?start_yyyymm=201102&end_yyyymm=202102">플라스크
 								테스트 - 월별회원가입증가추이(파라미터 : 201102 ~ 202102)</a></li>
-						<li><a
-							href="sendLikeProductInfo.do?productId=82549095413&title=스타벅스%20캡슐커피%208종%20네스카페%20돌체구스토캡슐%2018종&lprice=6700">플라스크 테스트 - 관심상품 최저가 비교</a></li>
 					</ul>
 
 					<hr>
