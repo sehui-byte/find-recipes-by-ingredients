@@ -40,43 +40,38 @@
 						console.log("lprice >> " + lprice);
 						
 						
+						// -----------------------------------------------
+						
+						
 						/*
-							title로 파이썬에서 크롤링
+							Spring -> Flask : http://127.0.0.1:5001/lprice
+							
+							def lprice():
+								관심상품 데이터 Json(문자열) : LikeProductInfo : 유저의 관심상품 productId, title, lprice
+								def naver_api(title, lprice, productId):
+									1. title로 크롤링
+									2. productId로 해당 상품 정보 가져오기
+									3. lprice 최저가 비교
+									4. 최저가 발견시 최저가 상품의 title, lprice, productId 가져오기
 						*/ 
 						
-					/* Node.js
-					
-						// 1. child-process모듈의 spawn 취득
-						const spawn = require('child_process').spawn;
-						// 2. spawn을 통해 "python 파이썬파일.py" 명령어 실행
-						const result = spawn('python', ['getLikeProInfo.py', title]); 
-						
-						// 3. stdout의 'data'이벤트리스너로 실행결과를 받는다. 
-						result.stdout.on('data', function(data) { 
-							console.log(data.toString()); 
-						}); 
-						// 4. 에러 발생 시, stderr의 'data'이벤트리스너로 실행결과를 받는다. 
-						result.stderr.on('data', function(data) { 
-							console.log(data.toString()); 
-						});
-
-					 */						
+									
 
 
 
 						
 						/*
-							lprice 최저가 비교
+							해당 상품 정보 가져오기
 						*/
 						
 						
 						
 						
 						/*
-							만약 lprice 보다 낮은 가격이 있으면, 실시간 알림 (productId, title, lprice)
+							실시간 알림 (productId, title, lprice)
 						*/				
 			
-						
+						// message = "관심 상품 " + title + " 의 최저가 상품을 지금 만나보세요 !";
 						
 						
 					}

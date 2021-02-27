@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jns.flask.dao.FlaskDAO;
+import com.jns.flask.vo.LikeProductInfoVO;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
 import com.jns.flask.vo.SubscribeIncVO;
@@ -44,4 +45,9 @@ public class FlaskServiceImpl implements FlaskService
 		return flaskDAO.getSignupInc(suvo);
 	}
 	
+	@Override
+	public LikeProductInfoVO getLikeProductInfo(LikeProductInfoVO lpvo) {
+		// TODO Auto-generated method stub
+		return flaskDAO.getLikeProductInfo(lpvo);
+	}
 }
