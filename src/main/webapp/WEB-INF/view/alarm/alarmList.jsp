@@ -30,8 +30,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="alarmList">
-			<c:out value="${ alarmList.readyn}"/>
-						
+			
 						<tr class="alarmRow" id=<c:out value="${alarmList.ano}" /> 
 						style="background-color:
 						<c:if test='${alarmList.readyn eq "Y"}'>#DEDDDD;</c:if>
