@@ -10,7 +10,6 @@
 
 <body>
 
-
 	<script>
 
 		getLikeProLprice();
@@ -55,11 +54,9 @@
 									4. 최저가 발견시 최저가 상품의 title, lprice, productId 가져오기
 						*/ 
 						
-									
+						//<a href="sendLikeProductInfo.do?productId=&title=&lprice=">플라스크 테스트 - 관심상품 최저가 비교</a>
 
-
-
-						
+								
 						/*
 							해당 상품 정보 가져오기
 						*/
@@ -84,6 +81,7 @@
 		}
 		
 	</script>
+	
 
 </body>
 </html>
