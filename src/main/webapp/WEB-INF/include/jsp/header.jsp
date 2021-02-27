@@ -61,7 +61,23 @@ if (principal != null && principal instanceof MemberVO) {
 	rel="stylesheet"
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous" />
-
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+	crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 <style>
 /*google 웹폰트 */
 @import
@@ -94,8 +110,8 @@ div, h1, h2, h3, h4, h5, h6, p {
 }
 
 .fas {
-	margin-left: 5px;
-	margin-right: 5px;
+	margin-top: 9px;
+	margin-right: 8px;
 	color: white;
 }
 
@@ -109,6 +125,45 @@ div, h1, h2, h3, h4, h5, h6, p {
 	margin: 10px auto;
 	width: 90%;
 	margin-right: 50px;
+}
+
+/*알림 버튼 */
+.icon-button {
+	margin-top: -1px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	color: white;
+	background: none;
+	border: none;
+	outline: none;
+	border-radius: 50%;
+}
+
+.icon-button:hover {
+	color: #F9A781;
+	cursor: pointer;
+}
+
+.icon-button:active {
+	background: black;
+}
+
+.icon-button__badge {
+	position: absolute;
+	top: -8px;
+	right: -5px;
+	width: 20px;
+	height: 20px;
+	background: red;
+	color: #ffffff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
 }
 </style>
 </head>
@@ -167,19 +222,28 @@ div, h1, h2, h3, h4, h5, h6, p {
 					<a href="/kosmoJns/login.do">로그인</a>
 				</s:authorize>
 				<div class="userInfo">
-					<s:authorize access="hasAnyRole('ROLE_U', 'ROLE_C')">
-						<!-- 마이페이지 -->
-						<a href="/kosmoJns/myinfo.do?mno=<%=mno%>"><i
-							class="fas fa-user-circle fa-lg" title="마이페이지"></i> </a>
-					</s:authorize>
+					<div class="dropdown">
+						<s:authorize access="hasAnyRole('ROLE_U', 'ROLE_C')">
+							<!-- 마이페이지 -->
+							<a data-toggle="dropdown"><i class="fas fa-user-circle fa-lg"></i>
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="/kosmoJns/myinfo.do?mno=<%=mno%>">마이페이지</a>
+								<a class="dropdown-item" href="#">나의 레시피</a> <a
+									class="dropdown-item" href="#">나의 Q&A</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">로그아웃</a>
+							</div>
+						</s:authorize>
+					</div>
 					<s:authorize access="isAuthenticated()">
 						<!-- mnick 님 반갑습니다.<br /> -->
 						<!-- 알람 모양 아이콘 -->
-						<i class="fas fa-bell fa-lg" title="미확인알림"></i>
-						<!-- 로그아웃시에 왔던 알림 갯수 표시 -->
-						<div>
-							<span class="badge bg-primary" id="msgCount"></span>
-						</div>
+						<button type="button" class="icon-button" onclick="location.href='alarmList.do'">
+							<span class="material-icons">notifications</span> <span
+								class="icon-button__badge" id="msgCount"></span>
+						</button>
+
 						<form id="logoutForm">
 							<!-- 로그아웃 버튼 -->
 							<input type="button" id="logoutbtn" name="logoutbtn" value="로그아웃"
@@ -225,6 +289,9 @@ div, h1, h2, h3, h4, h5, h6, p {
 				count = dataArr[2].substring(5, 6);
 				$("#msgCount").text(count);
 				console.log("count >> " + count);
+				var alert = '<div class="alert alert-primary" role="alert">미확인 알람이 있습니다!</div>';
+				$("#socketAlarm").append(alert);
+				
 			} else {
 				toast += '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
 				toast += '<div class="toast-header"><class="rounded me-2">';
@@ -280,9 +347,6 @@ div, h1, h2, h3, h4, h5, h6, p {
 					document.getElementsByClassName("sub")[0].innerHTML = time;
 				}
 				setInterval(timeBefore, 1000);
-				//console.log(data);
-				//window.location.reload();//새로고침
-				//sock.close();//소켓연결종료
 			}
 		}
 	</script>
@@ -310,6 +374,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 						})
 	</script>
 	<!-- bootstrap js -->
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"

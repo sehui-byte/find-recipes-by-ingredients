@@ -78,29 +78,6 @@ public class EchoHandler extends TextWebSocketHandler {
 				logger.info("쌓인 알람수 >> " + count);
 				user.sendMessage(new TextMessage("null,"+userId +",count"+count));//쌓인 알림 개수 보내줌
 				
-				List<AlarmVO> list = adao.selectAlarm(avo);
-				for(int i = 0; i<count; i++) {
-					String sender = list.get(i).getSender();
-					String type = list.get(i).getType();
-					String insertdate = list.get(i).getInsertdate();
-					
-					//쌓인 메세지 보내주기
-					if(type.equals("subscribe")) {
-						user.sendMessage(new TextMessage(",," +sender +"님이 회원님을 구독하기 시작했습니다. ," ));
-					}
-					else if(type.equals("reply")) {
-						user.sendMessage(new TextMessage(",," +sender +"님이 회원님 게시물에 댓글을 달았습니다."));
-					}
-				}
-				
-				for(int i = 0; i<count; i++) {
-					logger.info("쌓인 알람수 >> " + count);
-					user.sendMessage(new TextMessage("null,"+userId +",count"+count));//쌓인 알림 개수 보내줌
-					//메세지 삭제하기
-					logger.info("알람 ano >> "  + list.get(i).getAno() +"삭제");
-					adao.deleteAlarm(list.get(i));
-					count--;
-				}
 			}
 		}
 	}
@@ -177,6 +154,7 @@ public class EchoHandler extends TextWebSocketHandler {
 		//로그아웃 상태인 경우
 		if(!isLogin) {
 			//DB에 저장한다
+			avo.setReadyn("N");
 			int nCnt = adao.insertAlarm(avo);
 			logger.info("insert nCnt >> " + nCnt);
 			logger.info("로그아웃 상태! db에 알람 저장!");

@@ -7,7 +7,16 @@ public class AlarmVO {
 	private String receiver;
 	private String type;
 	private String insertdate;
+	private String readyn;
 	
+	
+	
+	public String getReadyn() {
+		return readyn;
+	}
+	public void setReadyn(String readyn) {
+		this.readyn = readyn;
+	}
 	public String getInsertdate() {
 		return insertdate;
 	}

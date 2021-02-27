@@ -22,15 +22,18 @@
 		RECEIVER,
 		SENDER,
 		TYPE,
-		INSERTDATE
+		INSERTDATE,
+		READYN
 		)
 		VALUES(
 		#{ano, jdbcType=VARCHAR},
 		#{receiver, jdbcType=VARCHAR},
 		#{sender, jdbcType=VARCHAR},
 		#{type, jdbcType=VARCHAR},
-		SYSDATE
+		SYSDATE,
+		#{readyn, jdbcType=VARCHAR}
 		)
+		
 	</insert>
 	
 	<select id="selectFiveAlarm" resultType="avo" parameterType="avo">
