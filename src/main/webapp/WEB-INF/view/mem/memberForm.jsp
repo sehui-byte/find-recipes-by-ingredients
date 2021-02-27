@@ -101,6 +101,20 @@ form .reset, .membtn {
 #memail3, #memail2, #memail1{
 	vertical-algin:middle;
 }
+
+#membtn {
+	text-transform: uppercase;
+	outline: 0;
+	background: #F9A781;
+	width: 100%;
+	border: 0;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+}
 </style>
 
 
@@ -372,7 +386,7 @@ form .reset, .membtn {
 					<span class="help-block">*Required fields</span>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary btn-block">Register</button>
+			<button type="submit" id="membtn" class="membtn">Register</button>
 		</form>
 	</div>
 </body>
