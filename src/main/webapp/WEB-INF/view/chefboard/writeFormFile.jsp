@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>글쓰기 화면</title>
 <style type="text/css">
 	/*google 웹폰트 */
@@ -14,6 +13,13 @@
 	
 	div, h1, h2, h3, h4, h5, h6, p {
 	   font-family: 'Noto Serif KR', serif;
+	}
+	
+	/*콘텐츠 가운데 정렬*/
+	#wrapper {
+	max-width: 1020px;
+	margin: 0 auto;
+	margin-top: 50px;
 	}
 
 	.tt{
@@ -81,6 +87,7 @@
 </script>
 </head>
 <body>
+<div id ="wrapper">
 	<form id="f_writeForm" name="f_writeForm" enctype="multipart/form-data">
 		<table class="table">
 		<thead>
@@ -323,5 +330,6 @@
 	<input type="button" class="btn btn-orange" value="목록" class="but" id="boardList">
 </div>
 <div>Icons made by <a href="https://www.flaticon.com/kr/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
+</div>
 </body>
 </html>

@@ -24,7 +24,6 @@
       }
 %>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>세프게시판 글 목록</title>
 <style type="text/css">
 	/*google 웹폰트 */
@@ -32,6 +31,13 @@
 	
 	div, h1, h2, h3, h4, h5, h6, p {
 	   font-family: 'Noto Serif KR', serif;
+	}
+
+	/*콘텐츠 가운데 정렬*/
+	#wrapper {
+	max-width: 1020px;
+	margin: 0 auto;
+	margin-top: 50px;
 	}
 
 	.tt{
@@ -123,7 +129,8 @@
 </script>
 </head>
 <body>
-<div class="section-header">ChefBoard</div>
+<div id ="wrapper">
+<div class="section-header">Chef Board</div>
 <% request.setCharacterEncoding("UTF-8");%> 
 <%
 	Object objR = request.getAttribute("subRank");
@@ -323,5 +330,6 @@
 </form>
 <div>Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+</div>
 </body>
 </html>

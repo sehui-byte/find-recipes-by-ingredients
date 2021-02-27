@@ -69,7 +69,7 @@
 	int linkPage = curGroup * groupSize;	
 	System.out.println("linkPage >>> : " + linkPage);
 %>
-<p align="right">
+<p align="center">
 <%
 	//첫번재 그룹이 아닌 경우
 	if(curGroup > 0){		

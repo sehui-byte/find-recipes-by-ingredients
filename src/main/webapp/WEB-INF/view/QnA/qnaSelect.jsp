@@ -168,5 +168,7 @@ QnA Select
 </table>
 </form>
 </div>
+		<c:import url="/reply/reply.do">
+		</c:import>
 </body>
 </html>
