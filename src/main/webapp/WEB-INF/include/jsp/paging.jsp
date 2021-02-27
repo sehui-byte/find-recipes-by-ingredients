@@ -69,17 +69,22 @@
 	int linkPage = curGroup * groupSize;	
 	System.out.println("linkPage >>> : " + linkPage);
 %>
-<p align="right">
+<ul class="pagination justify-content-center">
 <%
 	//첫번재 그룹이 아닌 경우
 	if(curGroup > 0){		
 %>
-	<a href="<%=url%>?<%=str%>curpage=1">◁◁</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?<%=str%>curpage=<%=linkPage%>">◀</a>&nbsp;&nbsp;&nbsp;
+	<li class="page-item"><a class="page-link" href="<%=url%>?<%=str%>curpage=1">◁◁</a></li>
+	<li class="page-item"><a class="page-link" href="<%=url%>?<%=str%>curpage=<%=linkPage%>">◀</a></li>
 <%
 	}else{
 %>	
-	◁◁&nbsp;&nbsp;&nbsp;◀&nbsp;&nbsp;&nbsp;
+	<li class="page-item disabled">
+		<a class="page-link" href="#" tabindex="-1" aria-disabled="true">◁◁</a>
+	</li>
+	<li class="page-item disabled">
+		<a class="page-link" href="#" tabindex="-1" aria-disabled="true">◀</a>
+	</li>
 <% 
 	}
 
@@ -91,11 +96,13 @@
 	while((loopCount >0) && (linkPage <= pageCount)){
 		if(linkPage == curPage){
 %>	
-			<%=linkPage%>
+			<li class="page-item active" aria-current="page">
+				<a class="page-link" href="#"><%=linkPage%></a>
+			</li>
 <% 
 		}else{
 %>
-			[<a href="<%=url%>?curPage=<%=linkPage%>&pageCtrl=<%=ctrl%>"><%=linkPage%></a>]&nbsp;
+			<li class="page-item"><a class="page-link" href="<%=url%>?curPage=<%=linkPage%>&pageCtrl=<%=ctrl%>"><%=linkPage%></a></li>
 <% 
 		}
 		
@@ -107,15 +114,22 @@
 	if(linkPage <= pageCount)
 	{
 %>
-	<a href="<%=url%>?curPage=<%=linkPage%>&pageCtrl=<%=ctrl%>">▶</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?curPage=<%=pageCount%>&pageCtrl=<%=ctrl%>">▷▷</a>&nbsp;&nbsp;&nbsp;
+	<li class="page-item"><a class="page-link" href="<%=url%>?curPage=<%=linkPage%>&pageCtrl=<%=ctrl%>">▶</a></li>
+	<li class="page-item"><a class="page-link" href="<%=url%>?curPage=<%=pageCount%>&pageCtrl=<%=ctrl%>">▷▷</a></li>
 <%
 	}
 	else
 	{
 %>
-	▶&nbsp;&nbsp;&nbsp;▷▷&nbsp;&nbsp;&nbsp;
+	<li class="page-item disabled">
+		<a class="page-link" href="#" tabindex="-1" aria-disabled="true">▶</a>
+		▶
+	</li>
+	<li class="page-item disabled">
+		<a class="page-link" href="#" tabindex="-1" aria-disabled="true">▷▷</a>		
+	</li>
 <%
 	}
 %>
-</p>
+</ul>
+

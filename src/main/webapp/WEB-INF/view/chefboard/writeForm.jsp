@@ -9,6 +9,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>글쓰기 화면</title>
 <style type="text/css">
+	/*google 웹폰트 */
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
+	
+	div, h1, h2, h3, h4, h5, h6, p {
+	   font-family: 'Noto Serif KR', serif;
+	}
+	
+	
+	/*콘텐츠 가운데 정렬*/
+	#wrapper {
+	max-width: 1020px;
+	margin: 0 auto;
+	margin-top: 50px;
+	}
+
 	.tt{
 		text-align: center;
 		vertical-align: middle;
@@ -55,6 +70,7 @@
 </script>
 </head>
 <body>
+<div id ="wrapper">
 	<form id="f_writeForm" name="f_writeForm" enctype="multipart/form-data">
 		<table class="table">
 		<thead>
@@ -62,6 +78,7 @@
 				<td colspan="2"><h2>레시피 작성하기</h2></td>
 			</tr>
 		</thead>
+		<tbody>
 			<tr>
 				<td colspan="2">
 					<h4><%=mnick%></h4>
@@ -252,11 +269,13 @@
 				<td class="tt" >만드는법20_이미지</td>
 				<td><input type="file" name="manual_img20" id="manual_img20"></td>
 			</tr>
+		</tbody>	
 		</table>
 	</form>
 <div id="boardBut">
 	<input type="button" value="저장" class="but" id="boardInsert">
 	<input type="button" value="목록" class="but" id="boardList">
+</div>
 </div>
 </body>
 </html>
