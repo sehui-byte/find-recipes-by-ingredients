@@ -236,7 +236,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 						<!-- 알람 모양 아이콘 -->
 						<button type="button" class="icon-button" onclick="location.href='alarmList.do'">
 							<span class="material-icons">notifications</span> <span
-								class="icon-button__badge" id="msgCount"></span>
+								class="icon-button__badge" id="msgCount">0</span>
 						</button>
 
 						<form id="logoutForm">

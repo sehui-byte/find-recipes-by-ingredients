@@ -34,7 +34,7 @@
 						
 						<tr class="alarmRow" id=<c:out value="${alarmList.ano}" /> 
 						style="background-color:
-						<c:if test='${alarmList.readyn eq "Y"}'>orange;</c:if>
+						<c:if test='${alarmList.readyn eq "Y"}'>#DEDDDD;</c:if>
 						<c:if test='${alarmList.readyn eq "N"}'>white;</c:if>
 						">
 							<fmt:parseDate value="${alarmList.insertdate}" var="insertdate"
@@ -60,7 +60,7 @@
 	$(document).ready(function(){
 		$(".alarmRow").click(function() {
 			//클릭한 행 배경색 변경
-			$(this).css("background-color", "orange");
+			$(this).css("background-color", "#DEDDDD");
 			var currentRow = $(this).closest('tr');
 			//클릭한 행 id값 가져오기(ano)
 			var ano = currentRow.attr('id');
