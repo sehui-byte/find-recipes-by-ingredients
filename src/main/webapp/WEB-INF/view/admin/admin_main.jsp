@@ -8,6 +8,10 @@
 </head>
 <body>
 <h3>admin 페이지</h3>
+
+<!-- admin 페이지 메인 부분에다가 회원 유입 현황 그래프  -->
+<img src="http://localhost:5000/statis/image/signupInc">
+
 <ul>
 	<li><a href="../noticeSelectAll.do">공지사항 </a>
 	<li><a href="../memberSelectAll.do">회원 조회/수정/삭제</a>	</li>

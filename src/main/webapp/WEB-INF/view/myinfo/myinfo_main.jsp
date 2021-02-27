@@ -14,6 +14,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+/*google 웹폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
+
+div, h1, h2, h3, h4, h5, h6, p {
+   font-family: 'Noto Serif KR', serif;
+}
+</style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#myLevelUpdate").click(function(){
@@ -37,10 +45,7 @@
 
 			function whenError(data){
 				alert("서버에 문제가 발생했습니다. 관리자에게 문의하시기 바랍니다.");
-			
-				
 			}
-			
 		})
 	})
 
@@ -48,11 +53,28 @@
 </head>
 <body>
 	<h3>myinfo default page...</h3>
+	<!-- 셰프인 경우에 구독자 증가 추이를 그린 그래프를 삽입 -->	
+<% 
+	if(mlevel.equals("C")){
+%>
+	<table>
+		<tr>
+			<td>현재 내 구독자 수 증가 추이</td>	
+		</tr>
+		<tr>
+			<td>
+				<img src="http://loacalhost:5000/static/image/subscribeInc">
+			</td>	
+		</tr>	
+	</table>
+<% 
+	}
+%>
+	
 	<ul>
 		<li>
 			<a href="myinfo/updateMyPW.do">내 비밀번호 수정</a>
 		</li>
-
 <% 
 			if (mlevel.equals("U")){
 %>

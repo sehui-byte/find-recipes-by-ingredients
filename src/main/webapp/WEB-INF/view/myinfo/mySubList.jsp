@@ -7,6 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>내 구독 리스트</title>
+<style type="text/css">
+/*google 웹폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
+
+div, h1, h2, h3, h4, h5, h6, p {
+   font-family: 'Noto Serif KR', serif;
+}
+</style>
 <script type="text/javascript">
 
 	$(document).ready(function(){

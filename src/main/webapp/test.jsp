@@ -22,6 +22,10 @@
 	out.println(obj);
 
 %>
+<a href="/kosmoJns/testDownload.do">플라스크 테스트 다운로드</a><br>
+
+<img src="resources/graph/test.png"><br>
+<img src="resources/img/cal_0.gif">
 
 </body>
 </html>

@@ -27,6 +27,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style type="text/css">
+/*google 웹폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
+
+div, h1, h2, h3, h4, h5, h6, p {
+   font-family: 'Noto Serif KR', serif;
+}
+</style>
 <link rel="stylesheet" href="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.css">
 <script src="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript">

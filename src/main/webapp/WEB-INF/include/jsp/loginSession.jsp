@@ -4,24 +4,29 @@
 
 <%
 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-Object principal = auth.getPrincipal();
-String mnick = "";
-String mno = "";
-String mid = "";
+	String mnick = "";
+	String mno = "";
+	String mid = "";
+if (auth != null){
+	Object principal = auth.getPrincipal();
 
-if (principal != null && principal instanceof MemberVO) {
-	mnick = ((MemberVO) principal).getMnick();
-	mno = ((MemberVO) principal).getMno();
-	mid = ((MemberVO) principal).getMid();
+	if (principal != null && principal instanceof MemberVO) {
+		mnick = ((MemberVO) principal).getMnick();
+		mno = ((MemberVO) principal).getMno();
+		mid = ((MemberVO) principal).getMid();
 
-	// 로그인시 session key값 생성
-	if (session.getAttribute(mid) != null){
-		String loginSession = (String) session.getAttribute("mid");
-	}else{
-		session.setAttribute("mid", mid);
-		String loginSession = (String) session.getAttribute("mid");
+		// 로그인시 session key값 생성
+		if (session.getAttribute(mid) != null){
+			String loginSession = (String) session.getAttribute("mid");
+		}else{
+			session.setAttribute("mid", mid);
+			String loginSession = (String) session.getAttribute("mid");
+		}
+		
 	}
-}
+}else{
+
+	}
 %>
 
 	<span>main header</span>
