@@ -235,7 +235,7 @@
 		
 		// 작성일지
 		var date_span = $("<span style='font-size: 8px;'>");
-		date_span.html(" 등록일:" + rinsertdate + "/ 수정일:" + rupdatedate + " ");
+		date_span.html(" 등록:" + rinsertdate + " / 수정:" + rupdatedate + " ");
 		
 		// 수정하기 버튼
 		var up_input = $("<input class='btn btn-warning btn-sm'>");
@@ -340,7 +340,7 @@
 		<!-- ========== 댓글 입력 폼 ==========-->
 		<form id="comment_form">
 		<br>
-		댓글(로그인 후 작성 가능합니다.)
+		<p class=fs-6>댓글(로그인 후 작성 가능합니다.)</p>
 		<div v-if="sessionWriter !== ''">
 		<table>
 			<tr>

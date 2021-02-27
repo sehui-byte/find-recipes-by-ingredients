@@ -11,7 +11,6 @@
 		<title>레시피 상세정보</title>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				// 추천 내역 확인하기	
 					var mno = "<%= mno %>";
 					var rcp_seq = $("#rcp_seq").val();
 					var recipeType = "API";
@@ -30,9 +29,9 @@
 					
 					function whenSuccess(data){
 						if (data == "CHECK"){
-							$("#favRecipeAPI").text("추천 취소하기");
+							$("#favRecipeAPI").text("즐겨찾기 취소하기");
 						}else{
-							$("#favRecipeAPI").text("추천하기");
+							$("#favRecipeAPI").text("즐겨찾기");
 						}
 					}
 
@@ -43,7 +42,7 @@
 				$("#favRecipeAPI").on("click", function(){
 					var mno = "<%= mno %>";
 					if (mno == null && mno.length == 0){
-						alert("비회원을 추천을 할 수 없습니다. 회원 가입 후에 이용해주시기 바랍니다.");
+						alert("비회원을 즐겨찾기를 할 수 없습니다. 회원 가입 후에 이용해주시기 바랍니다.");
 						return;
 					}
 					var rcp_seq = $("#rcp_seq").val();
@@ -65,11 +64,11 @@
 					
 					function whenSuccess(data){
 						if (data == "OK"){
-							alert("해당 레시피를 추천했습니다. 추천 레시피는 나의 추천 레시피에서 확인하실 수 있습니다");
-							$("#favRecipeAPI").text("추천 취소하기");
+							alert("해당 레시피를 즐겨찾기했습니다. 즐겨찾기 레시피는 나의 즐겨찾기 레시피에서 확인하실 수 있습니다");
+							$("#favRecipeAPI").text("즐겨찾기 취소하기");
 						}else if(data == "DeleteOK"){
-							alert("해당 레시피 추천을 취소하였습니다.");
-							$("#favRecipeAPI").text("추천하기");
+							alert("해당 레시피 즐겨찾기를 취소하였습니다.");
+							$("#favRecipeAPI").text("즐겨찾기");
 						}else{
 							alert("서버에 문제가 발생하였습니다. 잠시 후에 다시 시도해주십시오.");
 						}
@@ -550,12 +549,14 @@
 				<td>등록일</td>
 				<td><%=rvo.getRcp_insertdate()%></td>
 			</tr>
+			<s:authorize access="isAuthenticated()">
 			<tr>
 				<td colspan="2">
-					<button type="button" class="" name="favRecipeAPI" id="favRecipeAPI">추천하기</button>
+					<button type="button" class="" name="favRecipeAPI" id="favRecipeAPI">즐겨찾기</button>
 					<input type="hidden" name="rcp_seq" id="rcp_seq" value="<%=	rvo.getRcp_seq() %>" />
 				</td>
 			</tr>
+			</s:authorize>
 		</table>
 	</body>
 </html>

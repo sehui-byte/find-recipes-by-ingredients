@@ -178,6 +178,76 @@
 			}
 		});
 		
+		//========================즐겨찾기===============================
+		
+					var mno = "<%= mno %>";
+					var rbno = $("#rbno").val();
+					var recipeType = "user";
+					var url = "/kosmoJns/favorites/favRecipeCheck.do";
+					var data = {
+							"mno" : mno,
+							"rbno" : rbno,
+							"recipeType" : recipeType};
+					$.ajax({
+						url : url,
+						method : "GET",
+						data : data,
+						success : whenSuccess,
+						error : whenError
+					});
+					
+					function whenSuccess(data){
+						if (data == "CHECK"){
+							$("#favRecipeUser").text("즐겨찾기 취소하기");
+						}else{
+							$("#favRecipeUser").text("즐겨찾기");
+						}
+					}
+
+					function whenError(data){
+						alert("실패");
+					}
+				
+				$("#favRecipeUser").on("click", function(){
+					var mno = "<%= mno %>";
+					if (mno == null && mno.length == 0){
+						alert("비회원을 즐겨찾기를 할 수 없습니다. 회원 가입 후에 이용해주시기 바랍니다.");
+						return;
+					}
+					var rbno = $("#rbno").val();
+					var recipeType = "user";
+					var data = {
+							"mno" : mno,
+							"rbno" : rbno,
+							"recipeType" : recipeType};
+
+					var url = "/kosmoJns/favorites/favRecipe.do";
+
+					$.ajax({
+						url : url,
+						method : "GET",
+						data : data,
+						success : whenSuccess,
+						error : whenError
+					});
+					
+					function whenSuccess(data){
+						if (data == "OK"){
+							alert("해당 레시피를 즐겨찾기했습니다. 즐겨찾기 레시피는 나의 즐겨찾기 레시피에서 확인하실 수 있습니다");
+							$("#favRecipeUser").text("즐겨찾기 취소하기");
+						}else if(data == "DeleteOK"){
+							alert("해당 레시피 즐겨찾기를 취소하였습니다.");
+							$("#favRecipeUser").text("즐겨찾기");
+						}else{
+							alert("서버에 문제가 발생하였습니다. 잠시 후에 다시 시도해주십시오.");
+						}
+						
+					}
+
+					function whenError(data){
+						alert("서비스에 문제가 발생하였습니다. 담당자에게 문의하시기 바랍니다.");
+					}
+				})
 	});
 
 </script>
@@ -644,6 +714,7 @@
 				<button type="button" id="U" disabled="disabled">수정</button>
 				<button type="button" id="D" disabled="disabled">삭제</button>
 				<button type="button" id="hits" @click="hitPlus">추천</button>
+				<button type="button" class="" name="favRecipeUser" id="favRecipeUser">즐겨찾기</button>
 				<button type="button" id="C">목록</button>
 			</td>
 		</tr>

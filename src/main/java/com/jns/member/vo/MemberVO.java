@@ -198,6 +198,7 @@ public class MemberVO implements UserDetails {
 
 		for (int i = 0; i < authList.size(); i++) {
 			authorities.add(new SimpleGrantedAuthority("ROLE_" + authList.get(i)));
+			//System.out.println(authorities.get(i));
 		}
 
 		this.authorities = authorities;

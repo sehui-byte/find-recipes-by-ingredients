@@ -10,10 +10,12 @@
    - **common : 정희찬, 박병율, 정상우**
    - **member : 김정우, 정상우**
    - **product : 김세희, 김예빈**
-   - **comment : 김재민**
+   - **reply : 김재민**
    - **chef : 김재민**
    - **recipe : 정희찬**
    - **notice : 박병율**
+   - **front : 김세희**
+   - **websocket : 김세희**
    
 
 ### 커밋 규칙

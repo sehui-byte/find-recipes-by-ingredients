@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jns.favorites.vo.FavoritesVO;
 import com.jns.recipe.vo.RecipeVO;
+import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Repository
 public class FavoritesDAOImpl implements FavoritesDAO {

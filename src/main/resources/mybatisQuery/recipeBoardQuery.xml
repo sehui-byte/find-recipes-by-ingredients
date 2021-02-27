@@ -224,7 +224,7 @@
 			RBNO = #{rbno, jdbcType=VARCHAR}
 			AND RB_DELETEYN = 'Y'
 	</update>
-	
+
 	<update id="recipeBoardHitsPP" parameterType="rbvo">
 		UPDATE
 			RECIPE_BOARD

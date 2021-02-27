@@ -5,41 +5,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <style>
-        #wrap{
-            width:530px;
-            margin-left:auto; 
-            margin-right:auto;
-            text-align:center;
-        }
-        
-        table{
-            border:3px solid skyblue
-        }
-        
-        td{
-            border:1px solid skyblue
-        }
-        
-        #title{
-            background-color:yellow
-        }
-    </style>
-
 <meta charset="UTF-8">
-<title>JNS MEMBER : 전지적 냉장고 시점  회원 가입 </title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!--  디바이스에 최적화된 크기로 출력 -->
 <meta name ="viewport" content="width=device-width, initial-scale=1.0
 		maxinum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 <style type="text/css">
 	div{
-			margin: 50px 0px 0px 100px;
+			margin: 100px 0px 0px 100px;
 	}
 	.mem{text-align=center;}
 </style>
+<style>
 
+.body{
+
+	background-image:url('https://japan-magazine.jnto.go.jp/jnto2wm/wp-content/uploads/koriyama_a.001.jpeg');
+	backgorund-repeat: no-repeat;
+	background-size:cover;
+
+}
+
+ #memberForm{
+       width:700px;
+       margin-left:auto; 
+       margin-right:auto;
+       text-align:center;
+       height:150px;
+	   }
+        
+ table{
+       border:7px solid skyblue
+      }
+      
+memberForm{
+       border:4px solid skyblue
+      }
+    
+   .mem{
+   	 
+       background-color:skyblue
+     
+      }
+
+.membtn{
+    float: right;
+    margin-top: 10%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #0062cc;
+    color: #fff;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+}
+
+.reset{
+    float: right;
+    margin-top: 10%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #0062cc;
+    color: #fff;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+}
+</style>
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script type="text/javascript">
+
 
 	$(document).ready(function(){
 		
@@ -169,34 +208,33 @@
 	
 </script>
 </head>
-<body>
-</body>
-</html>
+<body class="body">
 <div>
-<form name="memberForm" id="memberForm">
-	<h2><font size="4" style="color:Blue;">전지적 냉장고 시점 회원가입 </font></h2>
+<form name="memberForm" id="memberForm" align="center"  class="memberForm">
+	<h2 class="member">전지적 냉장고 시점 회원가입 </h2>
 	<hr>
-	<table  border="1" align="center"
-		bordercolor="gray">
+	<table  border="1" 	bordercolor="gray" class="memberForm" align="center" style="width:800px;height:900px;font-size:15px;">
 
 	<tr>
-		<td colspan="2" align="center">
-			<font size="4" style="color:Blue;">전.냉.시</font>
-			<img src="/kosmoJns/img/ban.gif" width="25" height="25" alt="image">
+		<td colspan="2" align="center" class="tit">
+			<font size="5" style="color:black;">정보를 입력해주세요</font>
 		</td>
 	</tr>
 	<tr>
 		<td class="mem">회원번호</td>
-		<td><input type="text" name="mno" id="mno" style="width:150px" readonly/></td>
+		<td><input type="text" name="mno" id="mno" style="width:200px" disabled readonly/>
+		<br>&nbsp  ****회원번호는 자동으로 입력됩니다**** &nbsp
+		</td>
 	</tr>
 	<tr>
 		<td class="mem">회원등급</td>
 		<td>
-		<select name=mlevel id=mlevel style="width:150px" >
+		<select name=mlevel id=mlevel style="width:280px" >
 			<option >회원등급을 선택하세요</option>
 			<option>U</option>
 			<option>C</option>
 		</select>
+		<br>&nbsp U: 일반회원 C: 쉐프 &nbsp
 		
 		</td>
 	</tr>
@@ -252,9 +290,9 @@
 		</td>
 	</tr>
 	 <tr>
-	 	<td class="mem">주소</td>
+	 	<td class="mem" >주소</td>
 	 	<td>
-	 		<input type="text" name="mzipcode" id="mzipcode" placeholder="우편번호" style="width:50px">
+	 		<input type="text" name="mzipcode" id="mzipcode" placeholder="우편번호" style="width:80px">
 	 		<input type="button" name="zipcode" id="zipcode" value="우편번호 찾기"><br>	 	
 	 		<input type="text" name="maddr" id="maddr" placeholder="도로명주소" style="width:250px"><br>	 	
 	 		<input type="text" name="maddrdetail" id="maddrdetail" placeholder="도로명주소 상세주소" style="width:250px"><br>	 	
@@ -267,11 +305,14 @@
 	</tr>
 	<tr> 
 		<td colspan="2">
-			<button type="button" id="membtn">가입하기</button>
-			<button type="reset">다시 입력하기</button>
+			<button type="button" id="membtn"class="membtn">가입하기</button>
+			<button type="reset" class="reset">다시 입력하기</button>
 		</td>
+	</tr>
 	</table>
 </form>
 </div>
+</body>
+</html>
 </body>
 </html>

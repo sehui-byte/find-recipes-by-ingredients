@@ -5,16 +5,15 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.jns.favorites.vo.FavoritesVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 
-public class RecipeBoardDAOImpl implements RecipeBoardDAO
-{
+public class RecipeBoardDAOImpl implements RecipeBoardDAO {
 	@Autowired(required = false)
 	private SqlSession sqlSession;
-	
+
 	@Override
-	public List<RecipeBoardVO> recipeBoardSelectAll() 
-	{
+	public List<RecipeBoardVO> recipeBoardSelectAll() {
 		return sqlSession.selectList("recipeBoardSelectAll");
 	}
 
@@ -41,17 +40,16 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO
 	{
 		return sqlSession.update("recipeBoardDelete", rbvo) > 0;
 	}
-	
+
 	@Override
 	public boolean recipeBoardViewsPP(RecipeBoardVO rbvo) 
 	{	
 		return sqlSession.update("recipeBoardViewsPP", rbvo) > 0;
 	}
-	
+
 	@Override
 	public boolean recipeBoardHitsPP(RecipeBoardVO rbvo) 
 	{
 		return sqlSession.update("recipeBoardHitsPP", rbvo) > 0;
 	}
-	
 }

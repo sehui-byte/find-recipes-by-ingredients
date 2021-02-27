@@ -11,24 +11,28 @@ public interface MyinfoDAO {
 
 	public List<RecipeBoardVO> myRecipeList(MemberVO mvo);
 
-	public List<BoardVO> myQnAList(MemberVO mvo);
+	public List<BoardVO> myQnAList(BoardVO bvo);
 
 	public int myQnADelete(BoardVO bvo);
 
-	public int myRankUpdateCheckCount(BoardVO bvo);
+	public int myLevelUpdateCheckCount(BoardVO bvo);
+	
+	public int myLevelUpdateCheckHits(BoardVO bvo);
 
-	public int myRankUpdateCheckHits(BoardVO bvo);
-
-	public int myRankUpdate(BoardVO bvo);
+	public int myLevelUpdate(BoardVO bvo);
 
 	public List<MemberVO> myPWUpdateCheck(MemberVO mvo);
 
 	public int myPWUpdate(MemberVO mvo);
 
-	public List<RecipeVO> myFavRecipeList1(MemberVO mvo);
+	public List<RecipeVO> myFavRecipeList(MemberVO mvo);
 
-	public List<RecipeBoardVO> myFavRecipeList2(MemberVO mvo);
+	public List<RecipeBoardVO> myFavRecipeBoardList(MemberVO mvo);
 
 	public int myRecipeDelete(RecipeBoardVO rbvo);
+	
+	public List<MemberVO> myinfoSelect(MemberVO mvo);	
+	
+	public List<RecipeBoardVO> myRecipeListPage(RecipeBoardVO rbvo);
 
 }

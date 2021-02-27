@@ -40,4 +40,13 @@ DELETE FROM LIKEPRODUCT WHERE PRODUCTID = #{productId,jdbcType=VARCHAR} AND MNO 
 <select id="likpProductIdSelectAll" resultType="pvo">
 SELECT PRODUCTID FROM LIKEPRODUCT WHERE MNO=#{mno}
 </select>
+
+<select id="getlikeProInfoSelectAll" resultType="pvo">
+SELECT
+	PRODUCTID,
+	TITLE,
+	LPRICE
+FROM LIKEPRODUCT WHERE MNO=#{mno}
+</select>
+
 </mapper>

@@ -15,4 +15,6 @@ public interface ProductService {
 	public int likeProductDelete(ProductVO pvo);
 	//유저의 관심상품 productid만 조회
 	public List<ProductVO> likpProductIdSelectAll(ProductVO pvo);
+	//유저의 관심상품 productId, title, lprice 조회
+	public List<ProductVO> getlikeProInfoSelectAll(ProductVO pvo);
 }
