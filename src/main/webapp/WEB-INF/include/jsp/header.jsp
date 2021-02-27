@@ -122,6 +122,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 	display: flex;
 	margin: 10px auto;
 	width: 90%;
+	margin-right: 50px;
 }
 </style>
 </head>
@@ -194,6 +195,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 						<!-- mnick 님 반갑습니다.<br /> -->
 						<!-- 알람 모양 아이콘 -->
 						<i class="fas fa-bell fa-lg" title="미확인알림"></i>
+						</button>
 						<!-- 로그아웃시에 왔던 알림 갯수 표시 -->
 						<div>
 							<span class="badge bg-primary" id="msgCount"></span>
@@ -214,9 +216,6 @@ div, h1, h2, h3, h4, h5, h6, p {
 			</div>
 		</div>
 	</nav>
-
-
-
 	<!-- web socket 부분 -->
 	<script>
 		// 전역변수 설정
@@ -230,8 +229,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 		console.log("웹소켓 연결");
 		//웹소켓 서버에서 메세지를 보내면 자동으로 실행된다
 		socket.onmessage = onMessage;
-		var mid = "<%=mid%>
-		";
+		var mid = "<%=mid%>";
 		console.log("mid >> " + mid);
 		//var a = 'null,\'' + mid '\',' + 'count';
 		//onMessage(a);
