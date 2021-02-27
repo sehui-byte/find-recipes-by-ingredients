@@ -3,30 +3,44 @@
 <mapper namespace="com.jns.alarm.dao.AlarmDAO">
 
 
-<select id="selectAlarm" resultType="avo" parameterType="avo">
-SELECT * FROM ALARM WHERE RECEIVER = #{receiver, jdbcType=VARCHAR}
-</select>
+	<select id="selectAlarm" resultType="avo" parameterType="avo">
+		SELECT * FROM ALARM WHERE RECEIVER = #{receiver, jdbcType=VARCHAR}
+		ORDER BY INSERTDATE DESC
+	</select>
 
-<select id="countAlarm" resultType="String" parameterType="avo">
-SELECT COUNT(*)
-FROM ALARM 
-GROUP BY RECEIVER
-HAVING RECEIVER = #{receiver, jdbcType=VARCHAR}
-</select>
+	<select id="countAlarm" resultType="String" parameterType="avo">
+		SELECT COUNT(*)
+		FROM ALARM
+		GROUP BY RECEIVER
+		HAVING RECEIVER = #{receiver, jdbcType=VARCHAR}
+	</select>
 
-<insert id="insertAlarm" parameterType="avo">
-INSERT INTO ALARM
-(
-	ANO,
-	RECEIVER,
-	SENDER,
-	TYPE	
-)
-VALUES(
-	#{ano, jdbcType=VARCHAR},
-	#{receiver, jdbcType=VARCHAR},
-	#{sender, jdbcType=VARCHAR},
-	#{type, jdbcType=VARCHAR}
-)
-</insert>
+	<insert id="insertAlarm" parameterType="avo">
+		INSERT INTO ALARM
+		(
+		ANO,
+		RECEIVER,
+		SENDER,
+		TYPE,
+		INSERTDATE
+		)
+		VALUES(
+		#{ano, jdbcType=VARCHAR},
+		#{receiver, jdbcType=VARCHAR},
+		#{sender, jdbcType=VARCHAR},
+		#{type, jdbcType=VARCHAR},
+		SYSDATE
+		)
+	</insert>
+	
+	<select id="selectFiveAlarm" resultType="avo" parameterType="avo">
+		SELECT *
+		FROM (SELECT * FROM ALARM ORDER BY INSERTDATE DESC )
+		WHERE RECEIVER = #{receiver, jdbcType=VARCHAR}
+		<![CDATA[WHERE ROWNUM <= 5]]>
+	</select>
+	
+	<delete id="deleteAlarm" parameterType="avo">
+	DELETE FROM ALARM WHERE ANO = #{ano,jdbcType=VARCHAR}
+	</delete>
 </mapper>

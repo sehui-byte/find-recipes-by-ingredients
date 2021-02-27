@@ -6,7 +6,14 @@ public class AlarmVO {
 	private String sender;
 	private String receiver;
 	private String type;
+	private String insertdate;
 	
+	public String getInsertdate() {
+		return insertdate;
+	}
+	public void setInsertdate(String insertdate) {
+		this.insertdate = insertdate;
+	}
 	public String getAno() {
 		return ano;
 	}

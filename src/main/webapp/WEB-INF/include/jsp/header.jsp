@@ -9,17 +9,12 @@
 <%@ page import="com.jns.recipeboard.vo.RecipeBoardVO"%>
 <%@ page import="com.jns.reply.vo.ReplyVO"%>
 <%@ page import="com.jns.alarm.vo.AlarmVO"%>
-
 <%-- fileUpload 정의 --%>
 <%@ page import="com.jns.common.FileLoadUtil"%>
-
 <%-- jstl 태그 정의 --%>
 <%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
-<!-- socketJS -->
-<script
-	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<%-- 현재 로그인한 회원의 정보 파악 --%>
 
+<%-- 현재 로그인한 회원의 정보 파악 --%>
 <%
 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 Object principal = auth.getPrincipal();
@@ -47,7 +42,10 @@ if (principal != null && principal instanceof MemberVO) {
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>navbar</title>
+<!-- socketJS -->
+<script
+	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <!-- font awewome -->
 <link rel="stylesheet"
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -56,26 +54,7 @@ if (principal != null && principal instanceof MemberVO) {
 <!-- jquery -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						// Spring Scurity logout >> post 요청만 가능
-						$("#logoutbtn")
-								.click(
-										function() {
-											$("#logoutForm")
-													.attr("action",
-															"<c:url value='/j_spring_security_logout' />");
-											$("#logoutForm").attr("method",
-													"POST");
-											$("#logoutForm")
-													.attr("enctype",
-															"application/x-www-form-urlencoded");
-											$("#logoutForm").submit();
-										})
-					})
-</script>
+
 <!-- bootstrap css-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
@@ -105,6 +84,13 @@ div, h1, h2, h3, h4, h5, h6, p {
 #navbarSupportedContent {
 	max-width: 1020px;
 	margin: 0 auto;
+}
+
+/*소켓 알림 오른쪽에 고정*/
+#socketAlarm {
+	position: fixed;
+	right: 40px;
+	top: 100px;
 }
 
 .fas {
@@ -173,11 +159,6 @@ div, h1, h2, h3, h4, h5, h6, p {
 					<button class="btn btn-outline-success" type="submit">Search</button>
 				</form>
 				 -->
-
-
-
-				<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
-				<div id="socketAlarm"></div>
 			</div>
 
 			<!-- 로그인 버튼 -->
@@ -195,7 +176,6 @@ div, h1, h2, h3, h4, h5, h6, p {
 						<!-- mnick 님 반갑습니다.<br /> -->
 						<!-- 알람 모양 아이콘 -->
 						<i class="fas fa-bell fa-lg" title="미확인알림"></i>
-						</button>
 						<!-- 로그아웃시에 왔던 알림 갯수 표시 -->
 						<div>
 							<span class="badge bg-primary" id="msgCount"></span>
@@ -231,28 +211,28 @@ div, h1, h2, h3, h4, h5, h6, p {
 		socket.onmessage = onMessage;
 		var mid = "<%=mid%>";
 		console.log("mid >> " + mid);
-		//var a = 'null,\'' + mid '\',' + 'count';
-		//onMessage(a);
 
-		//evt파라미터는 웹소켓이 보내준 데이터 의미
-		function onMessage(evt) {
+		var count = 0;//로그아웃시 왔던 메세지 개수
+		var toast = '';
+		function onMessage(evt) {//evt파라미터는 웹소켓이 보내준 데이터 의미
 			console.log("서버로부터 메세지 받음");
 			var arriveTime = new Date();
 			var data = evt.data;
 			var dataArr = data.split(",");
-
+			console.log("dataArr[2]>> " + dataArr[2]);
 			//type이 count이면 
 			if (dataArr[2].substring(0, 5) == 'count') {
-				var count = dataArr[2].substring(5, 6);
+				count = dataArr[2].substring(5, 6);
 				$("#msgCount").text(count);
-			} else {//type이 count가 아니면 toast 메세지 발송
-				var toast = '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
+				console.log("count >> " + count);
+			} else {
+				toast = '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
 				toast += '<div class="toast-header"><class="rounded me-2">';
 				toast += '<strong class="me-auto">Bootstrap</strong>';
 				toast += '<small class="sub"></small>';
 				toast += '<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
 				toast += '</div><div class="toast-body">';
-				toast += data;
+				toast += dataArr[2];
 				toast += '</div></div>';
 				$("#socketAlarm").append(toast);
 				$(".toast").toast({
@@ -262,8 +242,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 				$('.toast').toast('show');
 
 				console.log(data);
-
-				sock.close();//소켓연결종료
+				
 
 				function timeBefore() {
 					//현재시간
@@ -306,6 +285,28 @@ div, h1, h2, h3, h4, h5, h6, p {
 				setInterval(timeBefore, 1000);
 			}
 		}
+	</script>
+	<script>
+		$(document)
+				.ready(
+						function() {
+							// Spring Scurity logout >> post 요청만 가능
+							$("#logoutbtn")
+									.click(
+											
+											function() {
+												sock.close();//소켓연결종료
+												$("#logoutForm")
+														.attr("action",
+																"<c:url value='/j_spring_security_logout' />");
+												$("#logoutForm").attr("method",
+														"POST");
+												$("#logoutForm")
+														.attr("enctype",
+																"application/x-www-form-urlencoded");
+												$("#logoutForm").submit();
+											})
+						})
 	</script>
 	<!-- bootstrap js -->
 	<script

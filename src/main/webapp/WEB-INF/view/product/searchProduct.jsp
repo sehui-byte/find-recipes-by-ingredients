@@ -16,14 +16,10 @@
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous">
 
-<style>
-	.jns_wrap{
-		width:80%;
-		margin:auto;
-	}
-</style>
+
 </head>
 <body>
+	<div id="wrapper">
 	<!-- 검색 -->
 	<div class="jns_wrap">
 	<h3>상품 검색</h3>
@@ -46,7 +42,7 @@
 	
 	<!-- 유저의 관심상품 최저가 비교 -->
 	<%@ include file="./lpriceProduct.jsp"%>
-	
+</div>	
 	<script>
 		var piArray = new Array();//유저의 관심상품 productId값이 들어가는 배열
 		chkLikeProductId();
