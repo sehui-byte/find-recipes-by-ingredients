@@ -48,7 +48,12 @@ if (principal != null && principal instanceof MemberVO) {
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<!-- font awewome -->
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+	crossorigin="anonymous" />
+<!-- jquery -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
@@ -76,8 +81,8 @@ if (principal != null && principal instanceof MemberVO) {
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-	crossorigin="anonymous"/>
-	
+	crossorigin="anonymous" />
+
 <style>
 /*google 웹폰트 */
 @import
@@ -102,6 +107,22 @@ div, h1, h2, h3, h4, h5, h6, p {
 	margin: 0 auto;
 }
 
+.fas {
+	margin-left: 5px;
+	margin-right: 5px;
+	color: white;
+}
+
+.fas:hover {
+	color: #F9A781;
+}
+
+/*마이페이지, 로그아웃버튼, 미확인 알림 수평정렬*/
+.userInfo {
+	display: flex;
+	margin: 10px auto;
+	width: 90%;
+}
 </style>
 </head>
 <body>
@@ -122,17 +143,14 @@ div, h1, h2, h3, h4, h5, h6, p {
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="http://localhost:8080/kosmoJns">Home</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page"
+					<li class="nav-item"><a class="nav-link" aria-current="page"
+						href="http://localhost:8080/kosmoJns">Home</a></li>
+					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="http://localhost:8080/kosmoJns/recipeboard.do">레시피 일반</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page"
+					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="http://localhost:8080/kosmoJns/chefboard/boardselectall.do">셰프
 							게시판</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page"
+					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="http://localhost:8080/kosmoJns/searchPage.do">식재료 구매</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
@@ -155,37 +173,46 @@ div, h1, h2, h3, h4, h5, h6, p {
 				</form>
 				 -->
 
-				<!-- 로그아웃시에 왔던 알림 갯수 표시 -->
-				<div>
-					미확인 알림 <span class="badge bg-primary" id="msgCount"></span>
-				</div>
+
 
 				<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
 				<div id="socketAlarm"></div>
 			</div>
 
+			<!-- 로그인 버튼 -->
 			<div class="loginInfo" style='text-align: right;'>
 				<s:authorize access="isAnonymous()">
 					<a href="/kosmoJns/login.do">로그인</a>
 				</s:authorize>
-				<s:authorize access="isAuthenticated()">
-					<%=mnick%>님 반갑습니다.<br />
-					<form id="logoutForm">
-						<input type="button" id="logoutbtn" name="logoutbtn"
-							value="로그아웃하기" />
-					</form>
-					<br>
-				</s:authorize>
-				<s:authorize access="hasRole('ROLE_A')">
-					<a href="/kosmoJns/admin/main.do">admin 접속</a>
-					<br>
-				</s:authorize>
-				<s:authorize access="hasAnyRole('ROLE_U', 'ROLE_C')">
-					<a href="/kosmoJns/myinfo.do?mno=<%=mno%>">MyPage</a>
-				</s:authorize>
+				<div class="userInfo">
+					<s:authorize access="hasAnyRole('ROLE_U', 'ROLE_C')">
+						<!-- 마이페이지 -->
+						<a href="/kosmoJns/myinfo.do?mno=<%=mno%>"><i
+							class="fas fa-user-circle fa-lg" title="마이페이지"></i> </a>
+					</s:authorize>
+					<s:authorize access="isAuthenticated()">
+						<!-- mnick 님 반갑습니다.<br /> -->
+						<!-- 알람 모양 아이콘 -->
+						<i class="fas fa-bell fa-lg" title="미확인알림"></i>
+						<!-- 로그아웃시에 왔던 알림 갯수 표시 -->
+						<div>
+							<span class="badge bg-primary" id="msgCount"></span>
+						</div>
+						<form id="logoutForm">
+							<!-- 로그아웃 버튼 -->
+							<input type="button" id="logoutbtn" name="logoutbtn" value="로그아웃"
+								style="color: white; font-family: FontAwesome; border: none; background: transparent;" />
+						</form>
+						<br>
+					</s:authorize>
+					<s:authorize access="hasRole('ROLE_A')">
+						<a href="/kosmoJns/admin/main.do">admin 접속</a>
+						<br>
+					</s:authorize>
+
+				</div>
 			</div>
 		</div>
-
 	</nav>
 
 

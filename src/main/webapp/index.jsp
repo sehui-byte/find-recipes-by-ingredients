@@ -15,11 +15,6 @@
 	rel="stylesheet">
 <style>
 
-#navbarSupportedContent {
-	max-width: 1020px;
-	margin: 0 auto;
-}
-
 .carousel, .carousel-item img {
 	height: 350px;
 	width: auto;
@@ -28,9 +23,6 @@
 	object-position: 50% 15%;
 }
 
-.navbar-nav ul li a:hover, .navbar ul li a:active {
-	color: #F9A781;
-}
 </style>
 </head>
 <body>
