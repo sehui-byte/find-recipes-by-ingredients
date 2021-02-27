@@ -81,7 +81,7 @@ if (principal != null && principal instanceof MemberVO) {
 </head>
 <body>
 	<!-- navbar -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="http://localhost:8080/kosmoJns">전냉시</a>
 			<button class="navbar-toggler" type="button"
@@ -110,6 +110,16 @@ if (principal != null && principal instanceof MemberVO) {
 						</ul></li>
 				</ul>
 
+
+				<!-- 레시피 검색 -->
+				<!-- 
+				<form class="d-flex">
+					<input class="form-control me-2" type="search" placeholder="레시피 검색"
+						aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+				</form>
+				 -->
+				 
 				<!-- 로그아웃시에 왔던 알림 갯수 표시 -->
 				<div>
 					미확인 알림 <span class="badge bg-primary" id="msgCount"></span>
@@ -117,18 +127,9 @@ if (principal != null && principal instanceof MemberVO) {
 
 				<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
 				<div id="socketAlarm"></div>
-
-				<!-- 레시피 검색 -->
-				<form class="d-flex">
-					<input class="form-control me-2" type="search" placeholder="레시피 검색"
-						aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">Search</button>
-				</form>
 			</div>
-		</div>
-	</nav>
-	
-	<div class="loginInfo" style='text-align: right;'>
+			
+			<div class="loginInfo" style='text-align: right;'>
 		<s:authorize access="isAnonymous()">
 			<a href="/kosmoJns/login.do">로그인</a>
 		</s:authorize>
@@ -148,6 +149,11 @@ if (principal != null && principal instanceof MemberVO) {
 			<a href="/kosmoJns/myinfo.do">일반 회원 페이지로</a>
 		</s:authorize>
 	</div>
+		</div>
+		
+	</nav>
+	
+	
 
 	<!-- web socket 부분 -->
 	<script>
