@@ -557,6 +557,12 @@
 				</td>
 			</tr>
 			</s:authorize>
+			<tr>
+				<td colspan="2">
+				<!-- flask 이미지 자원 경로 지정  test -->
+					<img src="http://localhost:5000/static/image/nutrient.png">	
+				</td>	
+			</tr>
 		</table>
 	</body>
 </html>

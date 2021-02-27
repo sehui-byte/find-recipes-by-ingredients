@@ -10,11 +10,11 @@ public class NutrientVO
 	private String fat;// 지방
 	private String na;// 나트륨
 	
-	public NutrientVO() 
-	{
-
-	}//Default Constructor
+	// Defalut Constructor
+	public NutrientVO() {
 	
+	}
+
 	public NutrientVO(String eng, String car, String pro, String fat, String na) {
 		this.eng = eng;
 		this.car = car;
@@ -77,6 +77,7 @@ public class NutrientVO
 		json.put("pro", Integer.parseInt(pro));
 		json.put("fat", Integer.parseInt(fat));
 		json.put("na", Integer.parseInt(na));
+		
 		
 		return json;
 	}

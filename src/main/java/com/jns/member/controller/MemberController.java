@@ -219,12 +219,33 @@ public class MemberController {
 	}
 
 	// 로그인 페이지
-	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String memberLogin() {
+	@RequestMapping(value = "login", method = {RequestMethod.POST, RequestMethod.GET})
+	public String memberLogin(HttpServletRequest request) {
 		logger.info("memberLogin page 진입 >>> ");
+		
+		String uri = request.getHeader("Referer");
+		if(!uri.contains("/login.do")){
+			request.getSession().setAttribute("prevPage", request.getHeader("Refer"));
+		}
 
 		return "mem/login/login";
 	}
+	
+	// 로그인 실패
+	@RequestMapping(value="login/loginFail", method=RequestMethod.POST)
+	public String memberLoginFail() {
+		logger.info("memberLoginFail 진입 >>> ");
+	
+		return "mem/login/loginFail";
+	}
+	
+	// 접근 불가
+	@RequestMapping(value="login/accessDenied")
+	public String memberAccessDeny() {
+
+		return "mem/login/accessDenied";
+	}
+	
 
 	// main 페이지 >> 나중에 없애기
 	@RequestMapping(value = "main", method = RequestMethod.GET)

@@ -2,15 +2,12 @@ package com.jns.flask.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jns.common.FlaskUtil;
@@ -42,8 +39,9 @@ public class FlaskController
 		logger.info("rvo >>> : " + rvo.toString());
 		NutrientVO nvo = flaskService.getNutrient(recipeService.recipeSelect(rvo));
 		String jsonStr = FlaskUtil.getNutrientJSON(nvo).toJSONString();
-		
 		redirectAttributes.addAttribute("nutrient", jsonStr);
+		
+		logger.info("flask로 데이터 전송 >>> ");
 		
 		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
 	}
@@ -64,6 +62,8 @@ public class FlaskController
 		logger.info("jsonStr >>> : " + jsonStr);
 		
 		redirectAttributes.addAttribute("subscribeInc", jsonStr);
+
+		logger.info("flask로 데이터 전송 >>> ");
 		
 		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
 	}
@@ -84,6 +84,8 @@ public class FlaskController
 		logger.info("jsonStr >>> : " + jsonStr);
 		
 		redirectAttributes.addAttribute("signupInc", jsonStr);
+
+		logger.info("flask로 데이터 전송 >>> ");
 		
 		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
 	}

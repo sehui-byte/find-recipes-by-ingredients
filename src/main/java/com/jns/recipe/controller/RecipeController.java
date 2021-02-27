@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jns.flask.controller.FlaskController;
 import com.jns.recipe.service.RecipeService;
 import com.jns.recipe.vo.RecipeVO;
 
@@ -18,6 +20,7 @@ import com.jns.recipe.vo.RecipeVO;
 public class RecipeController 
 {
 	private RecipeService recipeService;
+	private FlaskController flaskController;
 	private Logger logger = Logger.getLogger(RecipeController.class);
 	
 	public RecipeController() 
@@ -26,9 +29,11 @@ public class RecipeController
 	}//Default Constructor
 	
 	@Autowired(required = false)
-	public RecipeController(RecipeService recipeServce) 
+	public RecipeController(RecipeService recipeServce,
+							FlaskController flaskController) 
 	{
 		this.recipeService = recipeServce;
+		this.flaskController = flaskController;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "recipelist")
@@ -40,9 +45,13 @@ public class RecipeController
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "recipedetail")
-	public String recipedetail(RecipeVO rvo, Model model)
+	public String recipedetail(RecipeVO rvo, Model model, RedirectAttributes redirectAttributes )
 	{
 		logger.info("[RecipeController] recipeDetail() 호출");
+	
+		// 해당 레피시 영양소를 flask에 보낸다
+		flaskController.sendNutrient(rvo, redirectAttributes);
+		
 		logger.info("rcp_seq >>> : " + rvo.getRcp_seq());
 		logger.info("recipeService.recipeSelect(rvo) >>> : " + recipeService.recipeSelect(rvo));
 		model.addAttribute("data", recipeService.recipeSelect(rvo));

@@ -7,17 +7,24 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jns.recipe.controller.RecipeController;
+
+@Controller
 public class FlaskFileDownload {
 
 //=======================test=========================
 
-	@RequestMapping(value = "myinfo/test.do", method = RequestMethod.GET)
-	public String Test(Model model) {
+	@RequestMapping(value = "testDownload", method = RequestMethod.GET)
+	public String Test(Model model, HttpServletRequest request ) {
+		
 		ModelAndView mav = new ModelAndView();
 		/*
 		 * ================================================flask 웹 페이지 내부 string을 읽어온다.
@@ -67,7 +74,10 @@ public class FlaskFileDownload {
 		 * model.addAttribute("returnText", returnText);
 		 */
 		String spec = "http://localhost:5000/static/image/test.png";
-		String outputDir = "D:/sample/output/download";
+
+		String outputDir = request.getServletContext().getRealPath("resources/graph");
+		System.out.println(outputDir);
+//		String outputDir = "D:/sample/output/download";
 		InputStream is = null;
 		FileOutputStream os = null;
 		try {
@@ -130,6 +140,6 @@ public class FlaskFileDownload {
 			}
 		}
 
-		return "test";
+		return "recipe/recipedetail";
 	}
 }
