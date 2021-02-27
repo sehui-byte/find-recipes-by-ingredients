@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/include/jsp/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -24,12 +24,12 @@ $(document).ready(function(){
 		}
 	});
 	
-	// memberInsert btn click
+	/* // memberInsert btn click
 	$("#memberInsertBtn").click(function(){
 		alert("회원가입 페이지로 이동합니다 >>> ");
 		location.href="/kosmoJns/memberForm.do";
 	})
-	
+	 */
 	// findidpw btn click
 	$('#findidpw').click(function(){
 		alert("아이디/비밀번호 찾기 페이지로 이동합니다 >>> ")
@@ -73,58 +73,144 @@ $(document).ready(function(){
 	}
 
 </script>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+	width: 360px;
+	padding: 8% 0 0;
+	margin: auto;
+}
+
+.form {
+	position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	max-width: 360px;
+	margin: 0 auto 100px;
+	padding: 45px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+		rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+	font-family: "Roboto", sans-serif;
+	outline: 0;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+.form button {
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+	outline: 0;
+	background: #F9A781;
+	width: 100%;
+	border: 0;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+}
+
+.form button:hover, .form button:active, .form button:focus {
+	background: #F9A781;
+}
+
+.form .message {
+	margin: 15px 0 0;
+	color: #b3b3b3;
+	font-size: 12px;
+}
+
+.form .message a {
+	color: #F9A781;
+	text-decoration: none;
+}
+
+.form .register-form {
+	display: none;
+}
+
+.container {
+	position: relative;
+	z-index: 1;
+	max-width: 300px;
+	margin: 0 auto;
+}
+
+.container:before, .container:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.container .info {
+	margin: 50px auto;
+	text-align: center;
+}
+
+.container .info h1 {
+	margin: 0 0 15px;
+	padding: 0;
+	font-size: 36px;
+	font-weight: 300;
+	color: #F9A781;
+}
+
+.container .info span {
+	color: #F9A781;
+	font-size: 12px;
+}
+
+.container .info span a {
+	color: #000000;
+	text-decoration: none;
+}
+
+
+
+body {
+	background: #F9A781; /*배경 컬러*/
+	font-family: "Roboto", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+</style>
 </head>
 <body>
-	<div>
-		<form id="loginForm" name="loginForm">
-			<table border="1" style="text-align:center;">
-				<tr>
-					<td>아이디</td>	
-					<td>
-						<input type="text" id="mid" name="mid" value=""
-						onkeydown="return captureReturnKey(event)" onkeyup="enterKey()">
-					</td>	
-				</tr>	
-				<tr>
-					<td>비밀번호</td>	
-					<td>
-						<input type="password" id="mpw" name="mpw" value=""
-						onkeydown="return captureReturnKey(event)" onkeyup="enterKey();">
-					</td>	
-				</tr>	
-				<tr>
-					<td colspan="3">
-						<input type="button" id="loginbtn" value="Login">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<input type="button" id="memberInsertBtn" name="memberInsertBtn" value="회원가입 하러 가기">
-						<input type="button" id="findidpw" name="findidpw" value="아이디/비밀번호 찾기">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<input type="button" id="snsLogin_naver" name="snsLogin_naver" value="네이버 아이디로 로그인">	
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<input type="button" id="snsLogin_kakao" name="snsLogin_kakao" value="카카오 아이디로 로그인">	
-					</td>	
-				</tr>
-				<tr>
-					<td colspan="3">
-						<input type="button" id="snsLogin_google" name="snsLogin_google" value="구글 아이디로 로그인">	
-					</td>	
-				</tr>
-				<tr>
-					<td colspan="3">
-						<input type="button" id="snsLogin_facebook" name="snsLogin_facebook" value="페이스북 아이디로 로그인">	
-					</td>	
-				</tr>
-			</table>	
-		</form>
+	<div class="login-page">
+		<h1>Welcome</h1>
+		<div class="form">
+			<form class="login-form" id="loginForm" name="loginForm">
+
+				<input type="text" id="mid" name="mid" value="" placeholder="아이디"
+					onkeydown="return captureReturnKey(event)" onkeyup="enterKey()">
+
+				<input type="password" id="mpw" name="mpw" value=""
+					placeholder="비밀번호" onkeydown="return captureReturnKey(event)"
+					onkeyup="enterKey();"> 
+					
+					<button id="loginbtn">LOGIN</button>
+					
+					<!-- <input
+					type="button" id="findidpw" name="findidpw" value="아이디/비밀번호 찾기"> -->
+					<p class="message">
+					Forget? <a href="memberFindIDnPw.do">Find ID/PW</a>
+				</p>
+				<p class="message">
+					Not registered? <a href="memberForm.do">Create an account</a>
+				</p>
+			</form>
+		</div>
 	</div>
 </body>
 </html>
