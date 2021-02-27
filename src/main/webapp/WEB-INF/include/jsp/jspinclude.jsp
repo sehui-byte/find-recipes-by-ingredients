@@ -27,7 +27,6 @@
 <%@ page import="com.jns.reply.vo.ReplyVO"%>
 <%@ page import="com.jns.subscribe.vo.SubscribeVO"%>
 
-<!-- bootstrap -->
 <!-- bootstrap css-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"

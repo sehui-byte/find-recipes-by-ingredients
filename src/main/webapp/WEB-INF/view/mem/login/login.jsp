@@ -95,7 +95,6 @@ $(document).ready(function(){
 }
 
 .form input {
-	font-family: "Roboto", sans-serif;
 	outline: 0;
 	background: #f2f2f2;
 	width: 100%;
@@ -107,7 +106,6 @@ $(document).ready(function(){
 }
 
 .form button {
-	font-family: "Roboto", sans-serif;
 	text-transform: uppercase;
 	outline: 0;
 	background: #F9A781;
@@ -136,10 +134,6 @@ $(document).ready(function(){
 	text-decoration: none;
 }
 
-.form .register-form {
-	display: none;
-}
-
 .container {
 	position: relative;
 	z-index: 1;
@@ -152,30 +146,6 @@ $(document).ready(function(){
 	display: block;
 	clear: both;
 }
-
-.container .info {
-	margin: 50px auto;
-	text-align: center;
-}
-
-.container .info h1 {
-	margin: 0 0 15px;
-	padding: 0;
-	font-size: 36px;
-	font-weight: 300;
-	color: #F9A781;
-}
-
-.container .info span {
-	color: #F9A781;
-	font-size: 12px;
-}
-
-.container .info span a {
-	color: #000000;
-	text-decoration: none;
-}
-
 
 
 body {

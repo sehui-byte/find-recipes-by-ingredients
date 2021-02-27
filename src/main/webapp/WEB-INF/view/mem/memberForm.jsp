@@ -1,317 +1,341 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
-   
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!--  디바이스에 최적화된 크기로 출력 -->
-<meta name ="viewport" content="width=device-width, initial-scale=1.0
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0
 		maxinum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-<style type="text/css">
-	div{
-			margin: 100px 0px 0px 100px;
-	}
-	.mem{text-align=center;}
-</style>
+<!-- bootstrap css-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+	crossorigin="anonymous"></script>
+
 <style>
+/*google 웹폰트 */
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap')
+	;
 
-.body{
-
-	background-image:url('https://japan-magazine.jnto.go.jp/jnto2wm/wp-content/uploads/koriyama_a.001.jpeg');
-	backgorund-repeat: no-repeat;
-	background-size:cover;
-
+/*font 적용*/
+div, h1, h2, h3, h4, h5, h6, p, form {
+	font-family: 'Noto Serif KR', serif;
 }
 
- #memberForm{
-       width:700px;
-       margin-left:auto; 
-       margin-right:auto;
-       text-align:center;
-       height:150px;
-	   }
-        
- table{
-       border:7px solid skyblue
-      }
-      
-memberForm{
-       border:4px solid skyblue
-      }
-    
-   .mem{
-   	 
-       background-color:skyblue
-     
-      }
-
-.membtn{
-    float: right;
-    margin-top: 10%;
-    border: none;
-    border-radius: 1.5rem;
-    padding: 2%;
-    background: #0062cc;
-    color: #fff;
-    font-weight: 600;
-    width: 50%;
-    cursor: pointer;
+.body {
+	background: #F9A781;
 }
 
-.reset{
-    float: right;
-    margin-top: 10%;
-    border: none;
-    border-radius: 1.5rem;
-    padding: 2%;
-    background: #0062cc;
-    color: #fff;
-    font-weight: 600;
-    width: 50%;
-    cursor: pointer;
+/*콘텐츠 가운데 배치*/
+form {
+	max-width: 1020px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+/*회원번호 안보이게*/
+#mno {
+	display: none;
+}
+
+form {
+	margin-top: 50px;
+	position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	max-width: 800px;
+	margin: 0 auto 100px;
+	padding: 45px;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+		rgba(0, 0, 0, 0.24);
+}
+
+input {
+	outline: 0;
+	background: #f2f2f2;
+	border: 0;
+	padding: 5px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+form .reset, .membtn {
+	text-transform: uppercase;
+	outline: 0;
+	background: #F9A781;
+	border: 0;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+}
+
+.memberForm {
+	width: 530px;
+	padding: 8% 0 0;
+	margin: auto;
 }
 </style>
 
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
 <script type="text/javascript">
+	$(document).ready(function() {
 
+		//버튼 클릭시 회원가입 처리 
+		$(document).on("click", "#membtn", function() {
+			console.log("membtn >>> : ");
+			var url = "mem/memberInsert.do";
 
-	$(document).ready(function(){
-		
-			//버튼 클릭시 회원가입 처리 
-			$(document).on("click","#membtn",function(){
-				console.log("membtn >>> : ");
-				var url = "mem/memberInsert.do";
-				
-				// formData 객체 생성
-				var formData = new FormData($("#memberForm")[0]);
-				
-				// 이메일, 핸드폰 조합해서 key = value로 추가
-				formData.append("memail", makeMemail());
-				formData.append("mhp", makeMhp());
+			// formData 객체 생성
+			var formData = new FormData($("#memberForm")[0]);
 
-				$.ajax({
-					url : url,
-					method : "POST",
-					enctype : "multipart/form-data",
-					processData : false,
-					contentType : false,
-					data : formData,
-					success : whenSuccess,
-					error : whenError
-				});
-				
-				function whenSuccess(data){
-					alert("회원가입에 성공하였습니다. 로그인 후 이용해주시기 바랍니다");
-					location.href="main.do";
-				};
+			// 이메일, 핸드폰 조합해서 key = value로 추가
+			formData.append("memail", makeMemail());
+			formData.append("mhp", makeMhp());
 
-				function whenError(data){
-					alert("통신 에러");
-				};
-			});
-			
-		$(document).on("change", "#memail3", function(){
-			var memail3 = $("#memail3").val();	
-			if (memail3 != 1){
-				$("#memail2").prop("disabled", true);
-				$("#memail2").val(memail3);
-
-			}else{
-				$("#memail2").prop("disabled", false);
-				$("#memail2").val("");
-			}
-		})	
-			
-		// 아이디 체크 
-		$(document).on("click","#midbtn",function(){
-			console.log("midbtn >>  : ");
-			alert("아이디 중복 확인중 ...");
-			
-			let idcheckURL = "mem/checkID.do";
-			let method = "GET";
-			let midVal = $('#mid').val();
-			
-			let dataParam = {"mid":midVal};
-			
 			$.ajax({
-				url : idcheckURL,
-				type : method,
-				data: dataParam,
+				url : url,
+				method : "POST",
+				enctype : "multipart/form-data",
+				processData : false,
+				contentType : false,
+				data : formData,
 				success : whenSuccess,
 				error : whenError
 			});
-			
-			function whenSuccess(resData){
+
+			function whenSuccess(data) {
+				alert("회원가입에 성공하였습니다. 로그인 후 이용해주시기 바랍니다");
+				location.href = "main.do";
+			}
+			;
+
+			function whenError(data) {
+				alert("통신 에러");
+			}
+			;
+		});
+
+		$(document).on("change", "#memail3", function() {
+			var memail3 = $("#memail3").val();
+			if (memail3 != 1) {
+				$("#memail2").prop("disabled", true);
+				$("#memail2").val(memail3);
+
+			} else {
+				$("#memail2").prop("disabled", false);
+				$("#memail2").val("");
+			}
+		})
+
+		// 아이디 체크 
+		$(document).on("click", "#midbtn", function() {
+			console.log("midbtn >>  : ");
+			alert("아이디 중복 확인중 ...");
+
+			let idcheckURL = "mem/checkID.do";
+			let method = "GET";
+			let midVal = $('#mid').val();
+
+			let dataParam = {
+				"mid" : midVal
+			};
+
+			$.ajax({
+				url : idcheckURL,
+				type : method,
+				data : dataParam,
+				success : whenSuccess,
+				error : whenError
+			});
+
+			function whenSuccess(resData) {
 				var sVal = resData;
-				if('ID_GOOD'==sVal){
+				if ('ID_GOOD' == sVal) {
 					alert("사용할 수 있는 아이디 입니다");
-				}else{
+				} else {
 					alert("이미 사용중인 아이디입니다");
 					$("#mid").focus();
 				}
 			}
-			
-			function whenError(resData){
-				
+
+			function whenError(resData) {
+
 			}
 		});
-			
+
 		function mhp(obj) {
 			var number = obj.value.replace(/[^0-9]/g, "");
-			var mhp = ""; if(number.length < 4) { return number; } 
-			else if(number.length < 7) { mhp += number.substr(0, 3);
-			mhp += "-"; mhp += number.substr(3); } 
-			else if(number.length < 11) { mhp += number.substr(0, 3);
-			mhp += "-"; mhp += number.substr(3, 3); mhp += "-";
-			mhp += number.substr(6); } else { mhp += number.substr(0, 3); 
-			mhp += "-"; mhp += number.substr(3, 4); mhp += "-"; mhp += number.substr(7); }
-			obj.value = mhp; 
-		  }
+			var mhp = "";
+			if (number.length < 4) {
+				return number;
+			} else if (number.length < 7) {
+				mhp += number.substr(0, 3);
+				mhp += "-";
+				mhp += number.substr(3);
+			} else if (number.length < 11) {
+				mhp += number.substr(0, 3);
+				mhp += "-";
+				mhp += number.substr(3, 3);
+				mhp += "-";
+				mhp += number.substr(6);
+			} else {
+				mhp += number.substr(0, 3);
+				mhp += "-";
+				mhp += number.substr(3, 4);
+				mhp += "-";
+				mhp += number.substr(7);
+			}
+			obj.value = mhp;
+		}
 
 		// 이메일 조합
-		function makeMemail(){
-			var memail1 = $("#memail1").val();	
+		function makeMemail() {
+			var memail1 = $("#memail1").val();
 			var memail2 = $("#memail2").val();
 			return memail1 + "@" + memail2;
 		}
-			
+
 		// 핸드폰 조합 
-		function makeMhp(){
+		function makeMhp() {
 			var mhp1 = $("#mhp1").val();
 			var mhp2 = $("#mhp2").val();
 			var mhp3 = $("#mhp3").val();
 			return mhp1 + mhp2 + mhp3;
 		}
-		
+
 		// 핸드폰 정규표현식 -> 조금 더 공부 후에
-		
+
 		// 우편번호
 		$("#mzipcode").prop('readonly', true);
 		$("#maddr").prop('readonly', true);
 		$("#maddrdetail").prop(true);
-		$("#zipcode").click(function(){
+		$("#zipcode").click(function() {
 			console.log("zipcode >>> : ");
 			new daum.Postcode({
-			oncomplete: function(data) {
-				$("#mzipcode").val(data.zonecode); //5자리 새우편번호 사용
-				$("#maddr").val(data.roadAddress); //도로명 주소
-				$("#maddrdetail").val(data.Adddetail); //상세주소			
-			}
-		}).open();
+				oncomplete : function(data) {
+					$("#mzipcode").val(data.zonecode); //5자리 새우편번호 사용
+					$("#maddr").val(data.roadAddress); //도로명 주소
+					$("#maddrdetail").val(data.Adddetail); //상세주소			
+				}
+			}).open();
+		});
 	});
-});				
-	
 </script>
 </head>
 <body class="body">
-<div>
-<form name="memberForm" id="memberForm" align="center"  class="memberForm">
-	<h2 class="member">전지적 냉장고 시점 회원가입 </h2>
-	<hr>
-	<table  border="1" 	bordercolor="gray" class="memberForm" align="center" style="width:800px;height:900px;font-size:15px;">
-
-	<tr>
-		<td colspan="2" align="center" class="tit">
-			<font size="5" style="color:black;">정보를 입력해주세요</font>
-		</td>
-	</tr>
-	<tr>
-		<td class="mem">회원번호</td>
-		<td><input type="text" name="mno" id="mno" style="width:200px" disabled readonly/>
-		<br>&nbsp  ****회원번호는 자동으로 입력됩니다**** &nbsp
-		</td>
-	</tr>
-	<tr>
-		<td class="mem">회원등급</td>
-		<td>
-		<select name=mlevel id=mlevel style="width:280px" >
-			<option >회원등급을 선택하세요</option>
-			<option>U</option>
-			<option>C</option>
-		</select>
-		<br>&nbsp U: 일반회원 C: 쉐프 &nbsp
-		
-		</td>
-	</tr>
-	<tr>
-		<td class="mem">아이디</td>
-		<td>
 	
-		<input type="text" name="mid" id="mid" size="30"placeholder="아이디중복체크"  style="width:150px"/>
-		<button type="button" id="midbtn">아이디중복체크</button>
-		<br>&nbsp영문,숫자,영문숫자 조합만 가능 (6자 이상 30자 이하)	&nbsp
-		</td>
-	</tr>
-	<tr>
-		<td class="mem">비밀번호</td>
-		<br>
-		<td>
-			<input type="password" name="mpw" id="mpw" style="width:150px" />
-			<br>&nbsp영문, 숫자, 특수문자 조합 (8자 이상 12자 이하)&nbsp
-		
-	<!-- 
-			<input type="text" name="mpw_r" id="mpw_r" />
-			<input type="button" value="비밀번호확인" onclick="mpwCheck()" /><br/>
-	 --> 
-		</td>
-	</tr>
-	<tr>
-		<td class="mem">이름</td>
-		<td><input type="text" name="mname" id="mname" style="width:150px"/></td>
-	</tr>
-	<tr>
-		<td class="mem">닉네임</td>
-		<td><input type="text" name="mnick" id="mnick" style="width:150px"/></td>
-	</tr>
-	<tr>
-		<td class="mem">핸드폰 번호</td>	
-		<td>
-			<input type="text" id="mhp1" name="mhp1" maxlength="3">-
-			<input type="text" id="mhp2" name="mhp2" maxlength="4">-
-			<input type="text" id="mhp3" name="mhp3" maxlength="4">
-		</td>
-	</tr>
-	<tr>
-		<td class="mem">이메일</td>
-		<td>		
-			<input type="text" name="memail1" id="memail1" style="width:100px" />
-			@<input type="text" name="memail2" id="memail2" style="width:100px" placeholder="직접입력" />
-			<select name="memail3" id="memail3" style="width:100px;margin-right:10px">
-	        	 <option value="1" selected>직접입력</option>
-	       		 <option value="naver.com">naver.com</option>	       	   
-	      		 <option value="gmail.com">gmail.com</option>
-	      		 <option value="daum.net">daum.net</option>	       	   
-	         </select>
-		</td>
-	</tr>
-	 <tr>
-	 	<td class="mem" >주소</td>
-	 	<td>
-	 		<input type="text" name="mzipcode" id="mzipcode" placeholder="우편번호" style="width:80px">
-	 		<input type="button" name="zipcode" id="zipcode" value="우편번호 찾기"><br>	 	
-	 		<input type="text" name="maddr" id="maddr" placeholder="도로명주소" style="width:250px"><br>	 	
-	 		<input type="text" name="maddrdetail" id="maddrdetail" placeholder="도로명주소 상세주소" style="width:250px"><br>	 	
-	 		
-	 	</td>
-	 </tr>	
-	<tr>
-		<td class="mem">프로필사진</td>
-		<td><input type="file" name="file"  /></td>
-	</tr>
-	<tr> 
-		<td colspan="2">
-			<button type="button" id="membtn"class="membtn">가입하기</button>
-			<button type="reset" class="reset">다시 입력하기</button>
-		</td>
-	</tr>
-	</table>
-</form>
-</div>
+	<div name="memberForm" id="memberForm" class="memberForm">
+	<h2>Registration</h2>
+		<form class="form-horizontal" role="form">
+
+			<div class="form-group">
+				<label for="firstName" class="col-sm-3 control-label">이름</label>
+				<div class="col-sm-9">
+					<select class="form-select" name=mlevel id=mlevel>
+						<option selected disabled>--선택---</option>
+						<option value="U">U</option>
+						<option value="C">C</option>
+					</select>
+				</div>
+			</div>
+			<!-- 아이디 -->
+			<div class="form-group">
+				<label for="id" class="col-sm-3 control-label">아이디</label>
+				<div class="col-sm-9">
+					<input type="text" name="mid" id="mid" placeholder="아이디"
+						class="form-control" autofocus> <span><button
+							type="button" id="midbtn">아이디중복체크</button></span>
+				</div>
+			</div>
+			<!-- 비밀번호 -->
+			<div class="form-group">
+				<label for="password" class="col-sm-3 control-label">Password*</label>
+				<div class="col-sm-9">
+					<input type="password" name="mpw" id="mpw" placeholder="Password"
+						class="form-control"> <span id="passwordHelpInline"
+						class="form-text"> 영문, 숫자, 특수문자 조합 (8자 이상 12자 이하)</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-sm-3 control-label">
+					Confirm Password*</label>
+				<div class="col-sm-9">
+					<input type="password" id="password" placeholder="Password"
+						class="form-control">
+				</div>
+
+
+			</div>
+			<!-- 이름 -->
+			<div class="form-group">
+				<label for="firstName" class="col-sm-3 control-label">이름</label>
+				<div class="col-sm-9">
+					<input type="text" id="firstName" placeholder="이름"
+						class="form-control" autofocus>
+				</div>
+			</div>
+
+			<!-- 핸드폰번호 -->
+			<div class="form-group">
+				<label for="phoneNumber" class="col-sm-3 control-label">Phone
+					number </label>
+				<div class="col-sm-9">
+					<input type="phoneNumber" id="phoneNumber"
+						placeholder="Phone number" class="form-control"> <span
+						class="help-block">Your phone number won't be disclosed
+						anywhere </span>
+				</div>
+			</div>
+			<!-- 이메일 -->
+			<div class="form-group">
+				<label for="email" class="col-sm-3 control-label">Email* </label>
+				<div class="col-sm-9">
+					<input type="email" id="email" placeholder="Email"
+						class="form-control" name="email">
+				</div>
+			</div>
+			<!-- 주소 -->
+			<!-- 프로필 사진 -->
+			<div class="input-group mb-3">
+				<input type="file" class="form-control" id="inputGroupFile02"
+					name="file"> <label class="input-group-text"
+					for="inputGroupFile02">Upload</label>
+			</div>
+			
+			<!-- /.form-group -->
+			<div class="form-group">
+				<div class="col-sm-9 col-sm-offset-3">
+					<span class="help-block">*Required fields</span>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary btn-block">Register</button>
+		</form>
+	</div>
 </body>
 </html>
 </body>
