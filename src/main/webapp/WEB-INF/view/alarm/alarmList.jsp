@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>알림 전체조회</title>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 <body>
 	<!-- navbar -->
@@ -28,9 +30,17 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="alarmList">
-						<tr>
-						<fmt:parseDate value="${alarmList.insertdate}" var="insertdate" pattern="yyyy-MM-dd"/>
-						<fmt:formatDate value="${insertdate}" var="insertdate2" type="DATE" pattern="yyyy-MM-dd"/>
+			<c:out value="${ alarmList.readyn}"/>
+						
+						<tr class="alarmRow" id=<c:out value="${alarmList.ano}" /> 
+						style="background-color:
+						<c:if test='${alarmList.readyn eq "Y"}'>orange;</c:if>
+						<c:if test='${alarmList.readyn eq "N"}'>white;</c:if>
+						">
+							<fmt:parseDate value="${alarmList.insertdate}" var="insertdate"
+								pattern="yyyy-MM-dd" />
+							<fmt:formatDate value="${insertdate}" var="insertdate2"
+								type="DATE" pattern="yyyy-MM-dd" />
 							<td><c:out value="${insertdate2}" /></td>
 
 							<td><c:if test="${alarmList.type eq 'reply'}">
@@ -47,7 +57,32 @@
 
 	</div>
 	<script>
-		console.log("${size}");
+	$(document).ready(function(){
+		$(".alarmRow").click(function() {
+			//클릭한 행 배경색 변경
+			$(this).css("background-color", "orange");
+			var currentRow = $(this).closest('tr');
+			//클릭한 행 id값 가져오기(ano)
+			var ano = currentRow.attr('id');
+			console.log("ano >> " + ano);
+			var param = {"ano" : ano};
+			
+			$.ajax({
+				url : 'updateReadYN.do',
+				type : 'post',
+				contentType : "application/json", //전달한 string데이터는 json형태로 이루어진 데이터임을 알려준다
+				data : JSON.stringify(param),//string으로 전달
+				success : function(data) {
+					console.log("읽음처리 success");
+				},
+				error : function() {
+					console.log("error!");
+				}
+			});
+			window.location.reload();//화면새로고침
+		});
+	});
+		
 	</script>
 </body>
 </html>

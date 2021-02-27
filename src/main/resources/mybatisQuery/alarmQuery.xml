@@ -8,11 +8,13 @@
 		ORDER BY INSERTDATE DESC
 	</select>
 
+	<!-- 안읽은 데이터만 센다 - 확인 여부 Y : 확인 , N: 미확인 -->
 	<select id="countAlarm" resultType="String" parameterType="avo">
-		SELECT COUNT(*)
+		SELECT COUNT(*), READYN
 		FROM ALARM
-		GROUP BY RECEIVER
+		GROUP BY RECEIVER, READYN
 		HAVING RECEIVER = #{receiver, jdbcType=VARCHAR}
+		AND READYN = 'N'
 	</select>
 
 	<insert id="insertAlarm" parameterType="avo">
@@ -39,11 +41,15 @@
 	<select id="selectFiveAlarm" resultType="avo" parameterType="avo">
 		SELECT *
 		FROM (SELECT * FROM ALARM ORDER BY INSERTDATE DESC )
-		WHERE RECEIVER = #{receiver, jdbcType=VARCHAR}
+		WHERE RECEIVER = #{receiver, jdbcType=VARCHAR} AND READYN = 'N'
 		<![CDATA[WHERE ROWNUM <= 5]]>
 	</select>
 	
 	<delete id="deleteAlarm" parameterType="avo">
 	DELETE FROM ALARM WHERE ANO = #{ano,jdbcType=VARCHAR}
 	</delete>
+	
+	<update id="updateReadYN" parameterType="avo">
+	UPDATE ALARM SET READYN = #{readyn,jdbcType=VARCHAR} WHERE ANO=#{ano,jdbcType=VARCHAR}
+	</update>
 </mapper>
