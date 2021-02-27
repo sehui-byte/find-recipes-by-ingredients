@@ -18,7 +18,7 @@
 
 <style>
 
-/*소켓 알림 오른쪽에 고정*/
+/*최근 본 상품 오른쪽에 위치*/
 #recentbox {
 	position: fixed;
 	right: 40px;

@@ -11,7 +11,6 @@
 <%@ page import="com.jns.alarm.vo.AlarmVO"%>
 <%-- fileUpload 정의 --%>
 <%@ page import="com.jns.common.FileLoadUtil"%>
-<%-- jstl 태그 정의 --%>
 <%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
 
 <%-- 현재 로그인한 회원의 정보 파악 --%>
@@ -231,6 +230,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 								<a class="dropdown-item" href="/kosmoJns/myinfo.do?mno=<%=mno%>">마이페이지</a>
 								<a class="dropdown-item" href="#">나의 레시피</a> <a
 									class="dropdown-item" href="#">나의 Q&A</a>
+									<a class="dropdown-item" href="likeProduct.do">나의 관심상품</a> 
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#">로그아웃</a>
 							</div>
