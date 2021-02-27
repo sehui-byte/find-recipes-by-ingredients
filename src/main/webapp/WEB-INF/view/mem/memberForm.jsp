@@ -92,9 +92,14 @@ form .reset, .membtn {
 }
 
 .memberForm {
-	width: 530px;
+	width: 800px;
 	padding: 8% 0 0;
 	margin: auto;
+}
+
+/*이메일 수평정렬*/
+#memail3, #memail2, #memail1{
+	vertical-algin:middle;
 }
 </style>
 
@@ -215,17 +220,27 @@ form .reset, .membtn {
 
 		// 이메일 조합
 		function makeMemail() {
+			
 			var memail1 = $("#memail1").val();
 			var memail2 = $("#memail2").val();
 			return memail1 + "@" + memail2;
 		}
+		
+		$("#memail3").change(function(){
+			$("#memail3 option:selected").each(function () { if($(this).val()== '1'){ //직접입력일 경우
+				$("#memail2").val(''); //값 초기화
+				$("#memail2").attr("disabled",false); //활성화 
+				}else{ //직접입력이 아닐경우 
+					$("#memail2").val($(this).text()); //선택값 입력 
+					$("#memail2").attr("disabled",true); //비활성화 
+					}
+			});
+		});
 
 		// 핸드폰 조합 
 		function makeMhp() {
 			var mhp1 = $("#mhp1").val();
-			var mhp2 = $("#mhp2").val();
-			var mhp3 = $("#mhp3").val();
-			return mhp1 + mhp2 + mhp3;
+			return mhp1;
 		}
 
 		// 핸드폰 정규표현식 -> 조금 더 공부 후에
@@ -248,15 +263,15 @@ form .reset, .membtn {
 </script>
 </head>
 <body class="body">
-	
+
 	<div name="memberForm" id="memberForm" class="memberForm">
-	<h2>Registration</h2>
+		<h2>Registration</h2>
 		<form class="form-horizontal" role="form">
 
 			<div class="form-group">
-				<label for="firstName" class="col-sm-3 control-label">이름</label>
+				<label for="level" class="col-sm-3 control-label">등급</label>
 				<div class="col-sm-9">
-					<select class="form-select" name=mlevel id=mlevel>
+					<select class="form-select" name="mlevel" id="mlevel">
 						<option selected disabled>--선택---</option>
 						<option value="U">U</option>
 						<option value="C">C</option>
@@ -274,7 +289,7 @@ form .reset, .membtn {
 			</div>
 			<!-- 비밀번호 -->
 			<div class="form-group">
-				<label for="password" class="col-sm-3 control-label">Password*</label>
+				<label for="password" class="col-sm-3 control-label">비밀번호*</label>
 				<div class="col-sm-9">
 					<input type="password" name="mpw" id="mpw" placeholder="Password"
 						class="form-control"> <span id="passwordHelpInline"
@@ -282,51 +297,75 @@ form .reset, .membtn {
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="password" class="col-sm-3 control-label">
-					Confirm Password*</label>
+				<label for="password" class="col-sm-3 control-label"> 비밀번호
+					확인*</label>
 				<div class="col-sm-9">
 					<input type="password" id="password" placeholder="Password"
 						class="form-control">
 				</div>
-
-
 			</div>
 			<!-- 이름 -->
 			<div class="form-group">
 				<label for="firstName" class="col-sm-3 control-label">이름</label>
 				<div class="col-sm-9">
-					<input type="text" id="firstName" placeholder="이름"
+					<input type="text" name="mname" id="mname" placeholder="이름"
 						class="form-control" autofocus>
 				</div>
 			</div>
 
 			<!-- 핸드폰번호 -->
 			<div class="form-group">
-				<label for="phoneNumber" class="col-sm-3 control-label">Phone
-					number </label>
+				<label for="phoneNumber" class="col-sm-3 control-label">핸드폰번호
+				</label>
 				<div class="col-sm-9">
-					<input type="phoneNumber" id="phoneNumber"
-						placeholder="Phone number" class="form-control"> <span
-						class="help-block">Your phone number won't be disclosed
-						anywhere </span>
+					<input type="text" id="mhp1" name="mhp1"
+						placeholder="01012341234( - 제외)" class="form-control"/>
 				</div>
 			</div>
 			<!-- 이메일 -->
 			<div class="form-group">
-				<label for="email" class="col-sm-3 control-label">Email* </label>
-				<div class="col-sm-9">
-					<input type="email" id="email" placeholder="Email"
-						class="form-control" name="email">
+				<label for="email" class="col-sm-3 control-label">이메일*</label>
+				<div class="row">
+				<div class="col-sm-4">
+					<input type="email" placeholder="이메일" class="form-control"
+						name="memail1" id="memail1"/>
+						</div>
+					<div class="col-sm-3">
+						<input type="email" placeholder="도메인" class="form-control"
+						name="memail2" id="memail2" disabled/>
+					</div>
+					<div class="col-sm-3">
+						<select name="memail3" class="form-select"
+						id="memail3">
+						<option selected disabled>--선택--</option>
+						<option value="1">직접입력</option>
+						<option value="naver.com">naver.com</option>
+						<option value="gmail.com">gmail.com</option>
+						<option value="daum.net">daum.net</option>
+					</select>
+
+				</div>
 				</div>
 			</div>
 			<!-- 주소 -->
+
+			<!-- 주소 -->
+			주소 <input type="text" name="mzipcode" id="mzipcode"
+				placeholder="우편번호" style="width: 80px"> <input type="button"
+				name="zipcode" id="zipcode" value="우편번호 찾기"><br> <input
+				type="text" name="maddr" id="maddr" placeholder="도로명주소"
+				style="width: 250px"><br> <input type="text"
+				name="maddrdetail" id="maddrdetail" placeholder="도로명주소 상세주소"
+				style="width: 250px"><br>
+
+
 			<!-- 프로필 사진 -->
 			<div class="input-group mb-3">
 				<input type="file" class="form-control" id="inputGroupFile02"
 					name="file"> <label class="input-group-text"
 					for="inputGroupFile02">Upload</label>
 			</div>
-			
+
 			<!-- /.form-group -->
 			<div class="form-group">
 				<div class="col-sm-9 col-sm-offset-3">
