@@ -44,6 +44,9 @@
 	<div id="result"></div>
 	</div>
 	
+	<!-- 유저의 관심상품 최저가 비교 -->
+	<%@ include file="./lpriceProduct.jsp"%>
+	
 	<script>
 		var piArray = new Array();//유저의 관심상품 productId값이 들어가는 배열
 		chkLikeProductId();

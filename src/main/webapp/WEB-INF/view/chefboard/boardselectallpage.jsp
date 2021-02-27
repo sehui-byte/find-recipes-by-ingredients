@@ -24,8 +24,16 @@
       }
 %>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>세프게시판 글 목록</title>
 <style type="text/css">
+	/*google 웹폰트 */
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
+	
+	div, h1, h2, h3, h4, h5, h6, p {
+	   font-family: 'Noto Serif KR', serif;
+	}
+
 	.tt{
 		text-align: center;
 	}
@@ -53,6 +61,12 @@
 		transform: translate(-50%, 0);
 		transform: translate3d(-50%, 0, 0);
 	}
+	
+	.btn-orange { 
+		background-color: #FF7F00; 
+		font-weight: bold;
+	}
+
 </style>
 <link rel="stylesheet" href="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.css">
 <script src="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
@@ -100,7 +114,7 @@
 		
 		// 입력
 		$(document).on("click", "#I", function(){
-			location.href="/kosmoJns/chefboard/writeForm.do";
+			location.href="/kosmoJns/chefboard/writeFormFile.do";
 		});	
 		
 	});	
@@ -132,61 +146,67 @@
 		svo0 = listR.get(0);
 	}
 %>
-<div class="container">
-  <div class="row">
-    <div class="col-sm">
-    	<img src="/kosmoJns/resources/img/gold-medal.png"
-    		 alt="gold" style="width:50px; height:50px"><br>     
-<%
-		if( svo0 != null){		
-%>
-		<p class="fs-3 fw-bold"><%=svo0.getChefnick()%></p>
-		<p class="fs-5">구독자 <%=svo0.getSubCount()%>명</p>
-<%
-		} // end of if 
-		else{
-%>
-		<p>NO DATA</p>
-<%
-		} // end of else
-%>      
+<!-- 랭킹 그리드 시작 -->
+<div class="container marketing">
+	<div class="row">
+      <div class="col-lg-4">
+      	<img src="/kosmoJns/resources/img/gold-medal.png"
+    		 alt="gold" style="width:100px; height:100px">
+		<%
+			if( svo0 != null){		
+		%>
+			<h2><%=svo0.getChefnick()%></h2>
+			<p>구독자 <%=svo0.getSubCount()%>명<br>전냉시 주방장</p>
+			<p><a class="btn btn-warning" href="#">View details &raquo;</a></p>
+		<%
+			} // end of if 
+			else{
+		%>
+			<p>NO DATA</p>
+		<%
+			} // end of else
+		%>          
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img src="/kosmoJns/resources/img/silver-medal.png"
+    		 alt="silver" style="width:100px; height:100px">
+    	<%
+			if( svo1 != null){		
+		%>
+			<h2><%=svo1.getChefnick()%></h2>
+			<p>구독자 <%=svo1.getSubCount()%>명<br>전냉시 수석 조리장</p>
+			<p><a class="btn btn-warning" href="#">View details &raquo;</a></p>
+		<%
+			} // end of if 
+			else{
+		%>
+			<p>NO DATA</p>
+		<%
+			} // end of else
+		%>  	 
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+		<img src="/kosmoJns/resources/img/bronze-medal.png"
+    		 alt="bronze" style="width:100px; height:100px">
+		<%
+			if( svo2 != null){		
+		%>
+			<h2><%=svo2.getChefnick()%></h2>
+			<p>구독자 <%=svo2.getSubCount()%>명<br>전냉시 1급 요리사</p>
+        	<p><a class="btn btn-warning" href="#">View details &raquo;</a></p>			
+		<%
+			} // end of if 
+			else{
+		%>
+			<p>NO DATA</p>
+		<%
+			} // end of else
+		%>     	
+      </div><!-- /.col-lg-4 -->
     </div>
-    <div class="col-sm">
-    	<img src="/kosmoJns/resources/img/silver-medal.png"
-    		 alt="silver" style="width:50px; height:50px"><br>
-<%
-		if( svo1 != null){		
-%>
-		<p class="fs-3 fw-bold"><%=svo1.getChefnick()%></p>
-		<p class="fs-5">구독자 <%=svo1.getSubCount()%>명</p>
-<%
-		} // end of if 
-		else{
-%>
-		<p>NO DATA</p>
-<%
-		} // end of else
-%>    
-    </div>
-    <div class="col-sm">
-    	<img src="/kosmoJns/resources/img/bronze-medal.png"
-    		 alt="bronze" style="width:50px; height:50px"><br>
-<%
-		if( svo2 != null){		
-%>
-		<p class="fs-3 fw-bold"><%=svo2.getChefnick()%></p>
-		<p class="fs-5">구독자 <%=svo2.getSubCount()%>명</p>
-<%
-		} // end of if 
-		else{
-%>
-		<p>NO DATA</p>
-<%
-		} // end of else
-%>    
-    </div>
-  </div>
 </div>
+<!-- 랭킹 그리드 종료 -->
+
 <%
 	Object obj = request.getAttribute("listPage");
 	List<ChefBoardVO> list = (List)obj;
@@ -239,7 +259,7 @@
 %>
 	<tr>
 		<td colspan="10" align="right">
-			<input class="btn btn-danger col-12" type="button" value="글쓰기" id="I" disabled="disabled">
+			<input class="btn btn-orange" type="button" value="글쓰기" id="I" disabled="disabled">
 		</td>
 	</tr>
 	</tbody>
@@ -260,7 +280,7 @@
 			    	<div class="input-group">
 			    		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어 입력">
 				    	<span class="input-group-btn">
-				    		<button class="btn btn-danger" type="button" id="searchBtn">검색</button>
+				    		<button class="btn btn-orange" type="button" id="searchBtn">검색</button>
 				    	</span>			    			    	
 			    	</div>
 			    </div>
@@ -269,8 +289,8 @@
 		  <div class="col-6 col-md-4"></div>
 		</div>
 		<div class="row">
-		  <div class="col-md-4"></div>
-		  <div class="col-md-4">
+		  <div class="col-6 col-md-4"></div>
+		  <div class="col-6 col-md-4">
 		  	<div class="row row-cols-4">
 		  		<div class="col-4">
 		  			<input type="text" class="form-control" id="startdate" name="startdate" size="12" placeholder="시작일">
@@ -285,6 +305,7 @@
 		  		</div>
 		  	</div>
 		  </div>
+		  <div class="col-6 col-md-4"></div>
 		</div>	
 	</div>
 	<!-- =================  검색창 그리드 설정 ================= -->	
@@ -300,5 +321,7 @@
 	</jsp:include>
 	</div>
 </form>
+<div>Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 </body>
 </html>
