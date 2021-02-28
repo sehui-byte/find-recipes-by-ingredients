@@ -107,7 +107,7 @@
 		<h3>레시피 관련 URL</h3>
 		<ul>
 			<li><a href="recipelist.do">레시피 리스트</a></li>
-			<li><a href="recipeboard.do">레시피 일반 게시판</a></li>
+			<li><a href="recipeboard_list.do">레시피 일반 게시판</a></li>
 		</ul>
 
 		<hr>

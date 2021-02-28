@@ -18,6 +18,11 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO {
 	}
 
 	@Override
+	public List<RecipeBoardVO> recipeBoardSelectAllPage(RecipeBoardVO rbvo) {
+		return sqlSession.selectList("recipeBoardSelectAllPage");
+	}
+	
+	@Override
 	public RecipeBoardVO recipeBoardSelect(RecipeBoardVO rbvo) 
 	{
 		return sqlSession.selectOne("recipeBoardSelect", rbvo);
