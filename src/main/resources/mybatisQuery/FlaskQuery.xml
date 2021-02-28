@@ -17,7 +17,7 @@
 	
 	
 	
-	<select id="getSubscribeInc" parameterType="ssvo" resultType="ssvo">
+	<select id="getSubscribeInc1" parameterType="ssvo" resultType="ssvo">
 		SELECT
 			#{year} AS YEAR,
 			#{mon} AS MON,
@@ -28,6 +28,26 @@
 			S.INO = #{ino}
 			AND TO_CHAR(S.SINSERTDATE, 'YYYY') = #{year}
 			AND TO_CHAR(S.SINSERTDATE, 'MM') = LPAD(#{mon}, 2, '0')
+	</select>
+	
+	<select id="getSubscribeInc" parameterType="ssvo" resultType="ssvo">
+		select
+			#{year, jdbcType=VARCHAR} AS YEAR,
+			#{mon, jdbcType=VARCHAR} AS MON,
+			COUNT(*) AS INC
+		from
+			(SELECT
+				*
+			FROM
+				CHEF_INFO C
+			WHERE
+				C.MNO = #{mno}
+			) A, SUB_INFO S
+		WHERE
+			A.INO = S.INO
+			AND TO_CHAR(S.SINSERTDATE, 'YYYY') = #{year, jdbcType=VARCHAR}
+			AND TO_CHAR(S.SINSERTDATE, 'MM') = LPAD(#{mon, jdbcType=VARCHAR}, 2, '0')
+				
 	</select>
 	
 	

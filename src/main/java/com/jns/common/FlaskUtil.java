@@ -18,11 +18,11 @@ public abstract class FlaskUtil
 {
 	private static Logger logger = Logger.getLogger(FlaskUtil.class);
 	public static String FLASK_SERVER_URL = "http://127.0.0.1:5000/test";
-	//public static String FLASK_SERVER_URL = "http://54.180.83.249:5000/graph";
 	
 	public static List<SubscribeIncVO> divSsvoYYYYMM(SubscribeIncVO ssvo)
 	{
 		String ino = ssvo.getIno(); //셰프번호
+		String mno = ssvo.getMno(); // 회원번호 >> 조인
 		List<SubscribeIncVO> list = new ArrayList<SubscribeIncVO>();
 		int start_yyyy = Integer.parseInt(ssvo.getStart_yyyymm().substring(0, 4));
 		int start_mm = Integer.parseInt(ssvo.getStart_yyyymm().substring(4));
@@ -53,6 +53,7 @@ public abstract class FlaskUtil
 			tempVo.setYear(String.valueOf(cal.getTime().getYear()+1900));
 			tempVo.setMon(String.valueOf(cal.getTime().getMonth()+1));
 			tempVo.setIno(ino);
+			tempVo.setMno(mno);
 			logger.info("tempVO >>> : " + tempVo.toString());
 			
 			list.add(tempVo);

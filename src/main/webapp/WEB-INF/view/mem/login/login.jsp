@@ -11,7 +11,6 @@
 $(document).ready(function(){
 	// login btn click
 	$("#loginbtn").click(function(){
-		alert("click");
 		if($("#mid").val() == ""){
 			alert("로그인 아이디를 입력해주세요");
 		}else if($("#mpw").val() == ""){

@@ -24,7 +24,9 @@
 %>
 <!--  <a href="/kosmoJns/testDownload.do">플라스크 테스트 다운로드</a><br>-->
 <a href="/kosmoJns/sendNutrient.do?rcp_seq=1">플라스트 테스트</a><br>
-<a href="sendSignupInc?start_yyyymm=202004&end_yyyymm=202104">플라스크 테스트 - 월별회원가입증가추이(파라미터 : 202004 ~ 202104)</a>
+<a href="sendSignupInc?start_yyyymm=202004&end_yyyymm=202104">플라스크 테스트 - 월별회원가입증가추이(파라미터 : 202004 ~ 202104)</a><br>
+
+<a href="sendSubscribeInc?mno=M202102221177&start_yyyymm=202004&end_yyyymm=202104">내 구독자 </a>
 
 
 </body>

@@ -83,17 +83,16 @@
 						alert("서비스에 문제가 발생하였습니다. 담당자에게 문의하시기 바랍니다.");
 					}
 				})
-				
 			})	
-			
-		$(document).ready(function(){
+
+		function requestGraph(){
 			var status = location.search;
 			if(status.indexOf("redirect") != -1){
 				return;	
 			}
 			var rcp_seq = <%= rvo.getRcp_seq()%>;
 			location.href="/kosmoJns/sendNutrient.do?rcp_seq="+rcp_seq;
-		})
+		}
 		</script>
 	</head>
 	<body>
@@ -567,7 +566,7 @@
 				</td>
 				<td>
 				<!-- flask 이미지 자원 경로 지정  test -->
-					<img src="http://localhost:5000/static/nutrient/<%= rvo.getRcp_seq() %>.png">	
+					<img src="http://localhost:5000/static/nutrient/<%= rvo.getRcp_seq() %>.png" onError="requestGraph()">	
 				</td>	
 			</tr>
 			<s:authorize access="isAuthenticated()">
