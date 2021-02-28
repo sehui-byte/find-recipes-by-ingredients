@@ -137,23 +137,23 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="tt" >메뉴명</td>
+				<td class="align-middle">메뉴명</td>
 				<td><input type="text" class="form-control" name="rcp_nm" id="rcp_nm" value="<%=cbvo.getRcp_nm()%>"></td>
 			</tr>
 			<tr>
-				<td class="tt" >조리방법</td>
+				<td class="align-middle">조리방법</td>
 				<td><input type="text" class="form-control" name="rcp_way2" id="rcp_way2" value="<%=cbvo.getRcp_way2()%>"></td>
 			</tr>
 			<tr>
-				<td class="tt" >요리종류</td>
+				<td class="align-middle">요리종류</td>
 				<td><input type="text" class="form-control" name="rcp_pat2" id="rcp_pat2" value="<%=cbvo.getRcp_pat2()%>"></td>
 			</tr>
 			<tr>
-				<td class="tt" >해시태그</td>
+				<td class="align-middle">해시태그</td>
 				<td><input type="text" class="form-control" name="hash_tag" id="hash_tag" value="<%=cbvo.getHash_tag()%>"></td>
 			</tr>
 			<tr>
-				<td>메인 이미지</td>
+				<td class="align-middle">메인 이미지</td>
 				<!-- ********************* 경로 수정 필요함 *************************** -->
 				<td><img id="thumb00" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getMain_img())%>"><br>
 					이미지 변경하기▼ 
@@ -161,7 +161,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>재료정보</td>
+				<td class="align-middle">재료정보</td>
 				<td><input type="text" class="form-control" id="rcp_parts_dtls" name="rcp_parts_dtls" value="<%=cbvo.getRcp_parts_dtls()%>"></td>
 			</tr>
 		<%
@@ -169,23 +169,22 @@
 			{
 		%>
 			<tr>
-				<td>만드는법 1</td>
+				<td class="align-middle">만드는법 1</td>
 				<td>
 					<textarea class="form-control" name="manual01" id="manual01" rows="10" cols="70"><%=cbvo.getManual01()%></textarea>
 					<img id="thumb01" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img01())%>"><br>
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img01" name="file01" onchange="setThumbnail(event);">
-					<td style="vertical-align: bottom;">				
-						<img src="/kosmoJns/resources/img/down-arrow.png"
-	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
-					</td>
+				<td style="vertical-align: bottom;">				
+					<img src="/kosmoJns/resources/img/down-arrow.png"
+    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
 			</tr>
 		<%		
 			}else{
 		%>
 				<tr>
-					<td class="tt">만드는법 1</td>
+					<td class="align-middle">만드는법 1</td>
 					<td><textarea class="form-control" name="manual01" id="manual01" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img01f" id="manual_img01f">
 					</td>
@@ -202,7 +201,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 2</td>
+				<td class="align-middle">만드는법 2</td>
 				<td>
 					<textarea class="form-control" name="manual02" id="manual02" rows="10" cols="70"><%=cbvo.getManual02()%></textarea>
 					<img id="thumb02" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img02())%>"><br>
@@ -218,7 +217,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 2</td>
+					<td class="align-middle">만드는법 2</td>
 					<td><textarea class="form-control" name="manual02" id="manual02" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img02f" id="manual_img02f">
 					</td>
@@ -235,7 +234,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 3</td>
+				<td class="align-middle">만드는법 3</td>
 				<td>
 					<textarea class="form-control" name="manual03" id="manual03" rows="10" cols="70"><%=cbvo.getManual03()%></textarea>
 					<img id="thumb03" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img03())%>"><br>
@@ -251,7 +250,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 3</td>
+					<td class="align-middle">만드는법 3</td>
 					<td><textarea class="form-control" name="manual03" id="manual03" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img03f" id="manual_img03f">
 					</td>
@@ -268,7 +267,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 4</td>
+				<td class="align-middle">만드는법 4</td>
 				<td>
 					<textarea class="form-control" name="manual04" id="manual04" rows="10" cols="70"><%=cbvo.getManual04()%></textarea>
 					<img id="thumb04" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img04())%>"><br>
@@ -284,7 +283,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 4</td>
+					<td class="align-middle">만드는법 4</td>
 					<td><textarea class="form-control" name="manual04" id="manual04" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img04f" id="manual_img04f">
 					</td>
@@ -301,7 +300,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 5</td>
+				<td class="align-middle">만드는법 5</td>
 				<td>
 					<textarea class="form-control" name="manual05" id="manual05" rows="10" cols="70"><%=cbvo.getManual05()%></textarea>
 					<img id="thumb05" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img05())%>"><br>
@@ -317,7 +316,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 5</td>
+					<td class="align-middle">만드는법 5</td>
 					<td><textarea class="form-control" name="manual05" id="manual05" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img05f" id="manual_img05f">
 					</td>
@@ -334,7 +333,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 6</td>
+				<td class="align-middle">만드는법 6</td>
 				<td>
 					<textarea class="form-control" name="manual06" id="manual06" rows="10" cols="70"><%=cbvo.getManual06()%></textarea>
 					<img id="thumb06" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img06())%>"><br>
@@ -350,7 +349,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 6</td>
+					<td class="align-middle">만드는법 6</td>
 					<td><textarea class="form-control" name="manual06" id="manual06" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img06f" id="manual_img06f">
 					</td>
@@ -367,7 +366,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 7</td>
+				<td class="align-middle">만드는법 7</td>
 				<td>
 					<textarea class="form-control" name="manual07" id="manual07" rows="10" cols="70"><%=cbvo.getManual07()%></textarea>
 					<img id="thumb07" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img07())%>"><br>
@@ -383,7 +382,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 7</td>
+					<td class="align-middle">만드는법 7</td>
 					<td><textarea class="form-control" name="manual07" id="manual07" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img07f" id="manual_img07f">
 					</td>
@@ -400,7 +399,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 8</td>
+				<td class="align-middle">만드는법 8</td>
 				<td>
 					<textarea class="form-control" name="manual08" id="manual08" rows="10" cols="70"><%=cbvo.getManual08()%></textarea>
 					<img id="thumb08" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img08())%>"><br>
@@ -416,7 +415,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 8</td>
+					<td class="align-middle">만드는법 8</td>
 					<td><textarea class="form-control" name="manual08" id="manual08" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img08f" id="manual_img08f">
 					</td>
@@ -433,7 +432,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 9</td>
+				<td class="align-middle">만드는법 9</td>
 				<td>
 					<textarea class="form-control" name="manual09" id="manual09" rows="10" cols="70"><%=cbvo.getManual09()%></textarea>
 					<img id="thumb09" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img09())%>"><br>
@@ -449,7 +448,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 9</td>
+					<td class="align-middle">만드는법 9</td>
 					<td><textarea class="form-control" name="manual09" id="manual09" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img09f" id="manual_img09f">
 					</td>
@@ -466,7 +465,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 10</td>
+				<td class="align-middle">만드는법 10</td>
 				<td>
 					<textarea class="form-control" name="manual10" id="manual10" rows="10" cols="70"><%=cbvo.getManual10()%></textarea>
 					<img id="thumb10" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img10())%>"><br>
@@ -482,7 +481,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 10</td>
+					<td class="align-middle">만드는법 10</td>
 					<td><textarea class="form-control" name="manual10" id="manual10" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img10f" id="manual_img10f">
 					</td>
@@ -499,7 +498,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 11</td>
+				<td class="align-middle">만드는법 11</td>
 				<td>
 					<textarea class="form-control" name="manual11" id="manual11" rows="10" cols="70"><%=cbvo.getManual11()%></textarea>
 					<img id="thumb11" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img11())%>"><br>
@@ -515,7 +514,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 11</td>
+					<td class="align-middle">만드는법 11</td>
 					<td><textarea class="form-control" name="manual11" id="manual11" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img11f" id="manual_img11f">
 					</td>
@@ -532,7 +531,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 12</td>
+				<td class="align-middle">만드는법 12</td>
 				<td>
 					<textarea class="form-control" name="manual12" id="manual12" rows="10" cols="70"><%=cbvo.getManual12()%></textarea>
 					<img id="thumb12" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img12())%>"><br>
@@ -548,7 +547,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 12</td>
+					<td class="align-middle">만드는법 12</td>
 					<td><textarea class="form-control" name="manual12" id="manual12" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img12f" id="manual_img12f">
 					</td>
@@ -565,7 +564,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 13</td>
+				<td class="align-middle">만드는법 13</td>
 				<td>
 					<textarea class="form-control" name="manual13" id="manual13" rows="10" cols="70"><%=cbvo.getManual13()%></textarea>
 					<img id="thumb13" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img13())%>"><br>
@@ -581,7 +580,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 13</td>
+					<td class="align-middle">만드는법 13</td>
 					<td><textarea class="form-control" name="manual13" id="manual13" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img13f" id="manual_img13f">
 					</td>
@@ -598,7 +597,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 14</td>
+				<td class="align-middle">만드는법 14</td>
 				<td>
 					<textarea class="form-control" name="manual14" id="manual14" rows="10" cols="70"><%=cbvo.getManual14()%></textarea>
 					<img id="thumb14" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img14())%>"><br>
@@ -614,7 +613,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 14</td>
+					<td class="align-middle">만드는법 14</td>
 					<td><textarea class="form-control" name="manual14" id="manual14" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img14f" id="manual_img14f">
 					</td>
@@ -631,7 +630,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 15</td>
+				<td class="align-middle">만드는법 15</td>
 				<td>
 					<textarea class="form-control" name="manual15" id="manual15" rows="10" cols="70"><%=cbvo.getManual15()%></textarea>
 					<img id="thumb15" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img15())%>"><br>
@@ -647,7 +646,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 15</td>
+					<td class="align-middle">만드는법 15</td>
 					<td><textarea class="form-control" name="manual15" id="manual15" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img15f" id="manual_img15f">
 					</td>
@@ -664,7 +663,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 16</td>
+				<td class="align-middle">만드는법 16</td>
 				<td>
 					<textarea class="form-control" name="manual16" id="manual16" rows="10" cols="70"><%=cbvo.getManual16()%></textarea>
 					<img id="thumb16" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img16())%>"><br>
@@ -680,7 +679,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 16</td>
+					<td class="align-middle">만드는법 16</td>
 					<td><textarea class="form-control" name="manual16" id="manual16" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img16f" id="manual_img16f">
 					</td>
@@ -697,7 +696,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 17</td>
+				<td class="align-middle">만드는법 17</td>
 				<td>
 					<textarea class="form-control" name="manual17" id="manual17" rows="10" cols="70"><%=cbvo.getManual17()%></textarea>
 					<img id="thumb17" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img17())%>"><br>
@@ -713,7 +712,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 17</td>
+					<td class="align-middle">만드는법 17</td>
 					<td><textarea class="form-control" name="manual17" id="manual17" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img17f" id="manual_img17f">
 					</td>
@@ -730,7 +729,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 18</td>
+				<td class="align-middle">만드는법 18</td>
 				<td>
 					<textarea class="form-control" name="manual17" id="manual17" rows="10" cols="70"><%=cbvo.getManual18()%></textarea>
 					<img id="thumb18" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img18())%>"><br>
@@ -746,7 +745,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 18</td>
+					<td class="align-middle">만드는법 18</td>
 					<td><textarea class="form-control" name="manual18" id="manual18" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img18f" id="manual_img18f">
 					</td>
@@ -763,7 +762,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 19</td>
+				<td class="align-middle">만드는법 19</td>
 				<td>
 					<textarea class="form-control" name="manual19" id="manual19" rows="10" cols="70"><%=cbvo.getManual19()%></textarea>
 					<img id="thumb19" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img19())%>"><br>
@@ -779,7 +778,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 19</td>
+					<td class="align-middle">만드는법 19</td>
 					<td><textarea class="form-control" name="manual19" id="manual19" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img19f" id="manual_img19f">
 					</td>
@@ -796,7 +795,7 @@
 			{
 		%>
 			<tr id="ta" style="display: none;">
-				<td>만드는법 20</td>
+				<td class="align-middle">만드는법 20</td>
 				<td>
 					<textarea class="form-control" name="manual20" id="manual20" rows="10" cols="70"><%=cbvo.getManual20()%></textarea>
 					<img id="thumb20" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img20())%>"><br>
@@ -808,7 +807,7 @@
 			}else{
 		%>
 				<tr id="ta" style="display: none;">
-					<td class="tt">만드는법 20</td>
+					<td class="align-middle">만드는법 20</td>
 					<td><textarea class="form-control" name="manual20" id="manual20" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img20f" id="manual_img20f">
 					</td>
