@@ -184,11 +184,11 @@ i {
 
 			<!-- 핸드폰번호 -->
 			<div class="form-group">
-				<label for="phoneNumber" class="col-sm-3 control-label">핸드폰번호
+				<label for="phoneNumber" class="col-sm-3 control-label">핸드폰번호*
 				</label>
 				<div class="col-sm-9">
 					<input type="text" id="mhp1" name="mhp1"
-						placeholder="01012341234( - 제외)" class="form-control" />
+						placeholder="01012341234(- 제외하고 입력)" class="form-control" />
 				</div>
 			</div>
 			<!-- 이메일 -->
@@ -440,15 +440,18 @@ i {
 					},
 					mpw : {
 						required : true,
-						minlength : 8
+						minlength : 8,
+						maxlength : 12
 					},
 					mpw2 : {
 						required : true,
 						equalTo : mpw,
-						minlength : 8
+						minlength : 8,
+						maxlength : 12
 					},
 					mhp1 : {
-						required : true
+						required : true,
+						//regex : '^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$'
 					},
 					mnick : {
 						required : true
@@ -468,16 +471,19 @@ i {
 					mpw2 : {
 						required : "비밀번호를 다시 한번 입력해주세요.",
 						equalTo : "비밀번호가 다릅니다.",
-						minlength : "비밀번호는 최소 8자 이상입니다."
+						minlength : "비밀번호는 최소 8자 이상입니다.",
+						maxlength : "비밀번호는 최대 12자까지만 가능합니다."
 
 					},
 					mpw : {
 						required : "비밀번호를 입력해주세요.",
-						minlength : "비밀번호는 최소 8자 이상입니다."
+						minlength : "비밀번호는 최소 8자 이상입니다.",
+						maxlength : "비밀번호는 최대 12자까지만 가능합니다."
 
 					},
 					mhp1 : {
-						required : "핸드폰번호를 입력해주세요."
+						required : "핸드폰번호를 입력해주세요.",
+						//regex : "핸드폰번호를 형식에 맞게 입력해주세요"
 					},
 					mid : {
 						required : "아이디를 입력해주세요.",
