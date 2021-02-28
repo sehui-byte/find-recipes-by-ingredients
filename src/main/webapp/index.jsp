@@ -84,9 +84,7 @@
 
 	<!-- content -->
 	
-	<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
-	<div id="socketAlarm"></div>
-
+	
 	<div id="wrapper">
 		<h3>공지사항 관련 URL</h3>
 		<ul>

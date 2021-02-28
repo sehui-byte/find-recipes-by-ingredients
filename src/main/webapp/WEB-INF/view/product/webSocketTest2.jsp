@@ -63,51 +63,8 @@
 			$("#data").append(toast);
 			 $(".toast").toast({"animation": true, "autohide": false});
 			$('.toast').toast('show');
-			timeBefore();
 			//socket.close();//소켓연결종료
 			
-			function timeBefore(){
-				 //현재시간
-				  var now = new Date(); 
-				 //기준시간 
-				 var writeDay = arriveTime;
-				 var minus;
-				 var time = '';
-				 if(now.getFullYear() > writeDay.getFullYear()){
-				    minus= now.getFullYear()-writeDay.getFullYear();
-				    time += minus+"년 ";
-				 }
-				if(now.getMonth() > writeDay.getMonth()){
-				   minus= now.getMonth()-writeDay.getMonth();
-				   time += minus+"달 ";
-				}
-				if(now.getDate() > writeDay.getDate()){
-				    minus= now.getDate()-writeDay.getDate();
-				   time +=  minus+"일 ";
-				}
-
-				 if(now.getHours() > writeDay.getHours()){
-				     minus = now.getHours() - writeDay.getHours();
-				    time +=  minus+"시간 ";
-				   }
-				  
-				 else if(now.getMinutes() > writeDay.getMinutes()){
-				     minus = now.getMinutes() - writeDay.getMinutes();
-				   time += minus+"분 ";
-				   }
-				  
-				 else{
-				     minus = now.getSeconds() - writeDay.getSeconds();
-				     time += "방금";
-				   }
-				  
-				  time += "전          ";
-				  document.getElementsByClassName("sub").innerHTML = time;
-				      
-				        
-				    }
-
-				  setInterval(timeBefore,1000);
 		}
 		
 		
