@@ -236,6 +236,11 @@ div, h1, h2, h3, h4, h5, h6, p {
 			</div>
 		</div>
 	</nav>
+	
+	
+	<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
+	<div id="socketAlarm"></div>
+	
 	<!-- web socket 부분 -->
 	<script>
 		// 전역변수 설정
