@@ -4,6 +4,7 @@ import org.json.simple.JSONObject;
 
 public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이 
 {
+	private String mno; // 회원번호
 	private String ino;// 셰프번호
 	private String year;// 년
 	private String mon;// 월
@@ -18,14 +19,20 @@ public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이
 	}//Default Constructor
 
 
-	public SubscribeIncVO(String ino, String year, String mon, String inc, String start_yyyymm, String end_yyyymm) {
-		super();
+	public SubscribeIncVO(String mno, String ino, String year, String mon, String inc, String start_yyyymm,
+			String end_yyyymm) {
+		this.mno = mno;
 		this.ino = ino;
 		this.year = year;
 		this.mon = mon;
 		this.inc = inc;
 		this.start_yyyymm = start_yyyymm;
 		this.end_yyyymm = end_yyyymm;
+	}
+
+
+	public String getMno() {
+		return mno;
 	}
 
 
@@ -56,6 +63,11 @@ public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이
 
 	public String getEnd_yyyymm() {
 		return end_yyyymm;
+	}
+
+
+	public void setMno(String mno) {
+		this.mno = mno;
 	}
 
 
@@ -91,7 +103,7 @@ public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이
 
 	@Override
 	public String toString() {
-		return "SubscribeIncVO [ino=" + ino + ", year=" + year + ", mon=" + mon + ", inc=" + inc + ", start_yyyymm="
+		return "SubscribeIncVO [mno= " + mno + ", ino=" + ino + ", year=" + year + ", mon=" + mon + ", inc=" + inc + ", start_yyyymm="
 				+ start_yyyymm + ", end_yyyymm=" + end_yyyymm + "]";
 	}
 	

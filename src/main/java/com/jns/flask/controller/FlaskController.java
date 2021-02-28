@@ -41,8 +41,10 @@ public class FlaskController
 		NutrientVO nvo = flaskService.getNutrient(recipeService.recipeSelect(rvo));
 		String jsonStr = FlaskUtil.getNutrientJSON(nvo).toJSONString();
 		redirectAttributes.addAttribute("nutrient", jsonStr);
-		
-		logger.info("flask로 데이터 전송 >>> ");
+		redirectAttributes.addAttribute("rcp_seq", rvo.getRcp_seq());
+
+		String url = FlaskUtil.FLASK_SERVER_URL; 
+		logger.info("flask로 데이터 전송 >>> "+ url);
 		
 		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
 	}
@@ -63,6 +65,7 @@ public class FlaskController
 		logger.info("jsonStr >>> : " + jsonStr);
 		
 		redirectAttributes.addAttribute("subscribeInc", jsonStr);
+		redirectAttributes.addAttribute("mno", ssvo.getMno());
 
 		logger.info("flask로 데이터 전송 >>> ");
 		

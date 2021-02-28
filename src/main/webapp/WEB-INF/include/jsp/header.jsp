@@ -207,7 +207,14 @@ div, h1, h2, h3, h4, h5, h6, p {
 									class="dropdown-item" href="#">나의 Q&A</a>
 									<a class="dropdown-item" href="likeProduct.do">나의 관심상품</a> 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">로그아웃</a>
+								<s:authorize access="isAuthenticated()">
+									<!-- 로그아웃 버튼 -->
+									<a class="dropdown-item" style="cursor:pointer;"onclick="sendLogout();">로그아웃</a>
+									<form id="logoutForm">
+										<input type="hidden" id="logoutbtn" name="logoutbtn" value="로그아웃"
+											style="color: white; font-family: FontAwesome; border: none; background: transparent;" />
+									</form>
+								</s:authorize>
 							</div>
 						</s:authorize>
 					</div>
@@ -219,11 +226,6 @@ div, h1, h2, h3, h4, h5, h6, p {
 								class="icon-button__badge" id="msgCount">0</span>
 						</button>
 
-						<form id="logoutForm">
-							<!-- 로그아웃 버튼 -->
-							<input type="button" id="logoutbtn" name="logoutbtn" value="로그아웃"
-								style="color: white; font-family: FontAwesome; border: none; background: transparent;" />
-						</form>
 						<br>
 					</s:authorize>
 					<s:authorize access="hasRole('ROLE_A')">
@@ -326,27 +328,19 @@ div, h1, h2, h3, h4, h5, h6, p {
 		}
 	</script>
 	<script>
-		$(document)
-				.ready(
-						function() {
-							// Spring Scurity logout >> post 요청만 가능
-							$("#logoutbtn")
-									.click(
-											
-											function() {
-												socket.close();
-												sock.close();
-												$("#logoutForm")
-														.attr("action",
-																"<c:url value='/j_spring_security_logout' />");
-												$("#logoutForm").attr("method",
-														"POST");
-												$("#logoutForm")
-														.attr("enctype",
-																"application/x-www-form-urlencoded");
-												$("#logoutForm").submit();
-											})
-						})
+		function sendLogout(){
+				socket.close();
+				sock.close();
+				$("#logoutForm")
+						.attr("action",
+								"<c:url value='/j_spring_security_logout' />");
+				$("#logoutForm").attr("method",
+						"POST");
+				$("#logoutForm")
+						.attr("enctype",
+								"application/x-www-form-urlencoded");
+				$("#logoutForm").submit();
+		}
 	</script>
 	<!-- bootstrap js -->
 

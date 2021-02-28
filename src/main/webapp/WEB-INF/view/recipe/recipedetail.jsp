@@ -2,8 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/jsp/loginSession.jsp" %>
-
-
+	
+<%
+	RecipeVO rvo = (RecipeVO)request.getAttribute("data");
+%>
+	
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,8 +14,9 @@
 		<title>레시피 상세정보</title>
 		<script type="text/javascript">
 			$(document).ready(function(){
-					var mno = "<%= mno %>";
+				
 					var rcp_seq = $("#rcp_seq").val();
+					var mno = "<%= mno %>";
 					var recipeType = "API";
 					var url = "/kosmoJns/favorites/favRecipeCheck.do";
 					var data = {
@@ -80,13 +84,17 @@
 					}
 				})
 			})	
+
+		function requestGraph(){
+			var status = location.search;
+			if(status.indexOf("redirect") != -1){
+				return;	
+			}
+			var rcp_seq = <%= rvo.getRcp_seq()%>;
+			location.href="/kosmoJns/sendNutrient.do?rcp_seq="+rcp_seq;
+		}
 		</script>
 	</head>
-	
-	<%
-		RecipeVO rvo = (RecipeVO)request.getAttribute("data");
-	%>
-	
 	<body>
 		<table border="1" style="margin: auto;">
 			<tr>
@@ -549,6 +557,18 @@
 				<td>등록일</td>
 				<td><%=rvo.getRcp_insertdate()%></td>
 			</tr>
+			<s:authorize access="isAnonymous()">
+				<input type="hidden" name="rcp_seq" id="rcp_seq" value="<%=	rvo.getRcp_seq() %>" />
+			</s:authorize>
+			<tr>
+				<td>
+					영양소
+				</td>
+				<td>
+				<!-- flask 이미지 자원 경로 지정  test -->
+					<img src="http://localhost:5000/static/nutrient/<%= rvo.getRcp_seq() %>.png" onError="requestGraph()">	
+				</td>	
+			</tr>
 			<s:authorize access="isAuthenticated()">
 			<tr>
 				<td colspan="2">
@@ -557,12 +577,6 @@
 				</td>
 			</tr>
 			</s:authorize>
-			<tr>
-				<td colspan="2">
-				<!-- flask 이미지 자원 경로 지정  test -->
-					<img src="http://localhost:5000/static/image/nutrient.png">	
-				</td>	
-			</tr>
 		</table>
 	</body>
 </html>

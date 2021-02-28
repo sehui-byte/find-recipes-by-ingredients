@@ -48,6 +48,17 @@ div, h1, h2, h3, h4, h5, h6, p {
 			}
 		})
 	})
+	
+	$(document).ready(function(){
+		var mlevel = "<%= mlevel %>";
+		var status = location.search;
+		if(status.indexOf("redirect") != -1){
+			return;	
+		}
+		if (mlevel == 'C'){
+			location.href="sendSubscribeInc?start_yyyymm=202004&end_yyyymm=202104&mno=<%=mno%>";
+		}
+	})
 
 </script>
 </head>
@@ -57,16 +68,10 @@ div, h1, h2, h3, h4, h5, h6, p {
 <% 
 	if(mlevel.equals("C")){
 %>
-	<table>
-		<tr>
-			<td>현재 내 구독자 수 증가 추이</td>	
-		</tr>
-		<tr>
-			<td>
-				<img src="http://loacalhost:5000/static/image/subscribeInc">
-			</td>	
-		</tr>	
-	</table>
+	<div>
+		<p>현재 내 구독자 수 증가 추이</p>	
+		<img src="http://localhost:5000/static/subscribeInc/<%= mno %>_subscribeInc.png">
+	</div>
 <% 
 	}
 %>
