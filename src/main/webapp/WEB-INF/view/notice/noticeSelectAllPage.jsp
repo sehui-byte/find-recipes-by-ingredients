@@ -83,21 +83,6 @@
 		<td colspan="10" align="center"><h2>공지사항 목록 게시판</h2></td>
 	</tr>
 	<tr>
-		<td colspan="10" align="left">
-			<select id="keyfilter" name="keyfilter">
-				<option value="key1">제목</option>
-				<option value="key2">내용</option>
-				<option value="key3">글제목+글내용</option>
-				<option value="key4">작성자</option>
-				<option value="key5">글번호</option>
-			</select>
-			<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
-			<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
-			~<input type="text" id="enddate" name="enddate" size="12" placeholder="종료일">
-			<button type="button" id="searchBtn">검색</button>
-		</td>
-	</tr>
-	<tr>
 		<td class="tt"><input type="checkbox" name="chkAll" id="chkAll"></td>
 		<td class="tt">글번호</td>
 		<td class="tt">글유형</td>
@@ -152,6 +137,52 @@
 	</tr>
 	</tbody>
 </table>
+	<div class="container-fluid">
+		<div class="row">
+		  <div class="col-6 col-md-4"></div>
+		  <div class="col-6 col-md-4">
+		  	<div class="row row-cols-2">
+		  		<div class="col-4">
+		  			<select class="form-select" id="keyfilter" name="keyfilter">
+						<option value="key1">제목</option>
+						<option value="key2">내용</option>
+						<option value="key3">제목+내용</option>
+						<option value="key4">작성자</option>
+						<option value="key5">글번호</option>
+					</select>
+		  		</div>
+			    <div class="col-8">
+			    	<div class="input-group">
+			    		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어 입력">
+				    	<span class="input-group-btn">
+				    		<button class="btn btn-orange" type="button" id="searchBtn">검색</button>
+				    	</span>			    			    	
+			    	</div>
+			    </div>
+		  	</div>
+		  </div>
+		  <div class="col-6 col-md-4"></div>
+		</div>
+		<div class="row">
+		  <div class="col-6 col-md-4"></div>
+		  <div class="col-6 col-md-4">
+		  	<div class="row row-cols-4">
+		  		<div class="col-4">
+		  			<input type="text" class="form-control" id="startdate" name="startdate" size="12" placeholder="시작일">
+		  		</div>
+		  		<div class="col-1">
+		  			<p>~</p>
+		  		</div>
+		  		<div class="col-4">
+		  			<input type="text" class="form-control" id="enddate" name="enddate" size="12" placeholder="종료일">
+		  		</div>
+		  		<div class="col-3">
+		  		</div>
+		  	</div>
+		  </div>
+		  <div class="col-6 col-md-4"></div>
+		</div>	
+	</div>
 <br>
 	<div class="paging">
 		<jsp:include page="../../include/jsp/paging.jsp" flush="true">
