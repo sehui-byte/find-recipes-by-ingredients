@@ -63,6 +63,7 @@
 			$("#data").append(toast);
 			 $(".toast").toast({"animation": true, "autohide": false});
 			$('.toast').toast('show');
+			timeBefore();
 			//socket.close();//소켓연결종료
 			
 			function timeBefore(){
@@ -95,13 +96,13 @@
 				   time += minus+"분 ";
 				   }
 				  
-				 else if(now.getSeconds() > writeDay.getSeconds()){
+				 else{
 				     minus = now.getSeconds() - writeDay.getSeconds();
 				     time += "방금";
 				   }
 				  
-				   time += "전          ";
-				  document.getElementsByClassName("sub")[0].innerHTML = time;
+				  time += "전          ";
+				  document.getElementsByClassName("sub").innerHTML = time;
 				      
 				        
 				    }

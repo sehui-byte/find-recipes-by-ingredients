@@ -16,7 +16,7 @@
 .carousel, .carousel-item img {
 	height: 350px;
 	width: auto;
-	/*overflow: hidden;*/
+	overflow: hidden;
 	object-fit: cover;
 	object-position: 50% 15%;
 }
