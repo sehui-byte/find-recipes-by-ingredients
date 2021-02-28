@@ -75,9 +75,6 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List<MemberVO> checkID(MemberVO mvo) {
 		// TODO Auto-generated method stub
-		logger.info("memberDAOIMpl >>> : checkID  함수 시작 ");
-		logger.info("mvo >>> : " + mvo);
-
 		return sqlSession.selectList("checkID", mvo);
 	}
 
