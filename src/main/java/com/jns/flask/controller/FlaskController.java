@@ -53,11 +53,11 @@ public class FlaskController
 	{
 		logger.info("ssvo >>> : " + ssvo.toString());
 		
-		List<SubscribeIncVO> voList = FlaskUtil.divSsvoYYYYMM(ssvo);
+		List<SubscribeIncVO> voList = FlaskUtil.divSsvoYYYYMM(ssvo); //startYYYYMM ~ endYYYYMM 값을 기준으로 1달 단위로 vo를 쪼개서 List로 리턴
 		
 		for(int i=0; i<voList.size(); i++)
 		{
-			voList.set(i, flaskService.getSubscribeInc(voList.get(i))); //날짜만 들어있는 vo를 증가값까지 set된 vo로 교체
+			voList.set(i, flaskService.getSubscribeInc(voList.get(i))); //날짜만 들어있는 vo를 증가값(Inc)까지 set된 vo로 교체
 		}
 		
 		String jsonStr = FlaskUtil.getSubscribeInc(voList).toJSONString();

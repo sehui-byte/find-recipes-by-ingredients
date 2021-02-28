@@ -181,8 +181,8 @@
 		<ul>
 			<li><a href="sendNutrient.do?rcp_seq=1">플라스크 테스트 - 영양소</a></li>
 			<li><a
-				href="sendSubscribeInc?start_yyyymm=201102&end_yyyymm=202102">플라스크
-					테스트 - 월별구독자증가추이(파라미터 : 201102 ~ 202102)</a></li>
+				href="sendSubscribeInc?ino=I202102220001&start_yyyymm=201102&end_yyyymm=202102">플라스크
+					테스트 - 셰프번호:I202102220001의 월별구독자증가추이(파라미터 : 201102 ~ 202102)</a></li>
 			<li><a
 				href="sendSignupInc?start_yyyymm=201102&end_yyyymm=202102">플라스크
 					테스트 - 월별회원가입증가추이(파라미터 : 201102 ~ 202102)</a></li>
