@@ -87,7 +87,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 .fas {
 	margin-top: 9px;
 	margin-right: 8px;
-	color: white;
+	color: black;
 }
 
 .fas:hover {
@@ -111,7 +111,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 	justify-content: center;
 	width: 32px;
 	height: 32px;
-	color: white;
+	color: black;
 	background: none;
 	border: none;
 	outline: none;
@@ -147,7 +147,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 	<div id="socketAlarm"></div>
 
 	<!-- navbar -->
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+	<nav class="navbar navbar-expand-md navbar-light bg-transparent shadow-sm">
 		<div class="container-fluid">
 			<!-- 사이트 아이콘 넣기 -->
 			<a class="navbar-brand" href="http://localhost:8080/kosmoJns"> <img
