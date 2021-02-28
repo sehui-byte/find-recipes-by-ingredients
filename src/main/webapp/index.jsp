@@ -32,9 +32,9 @@
 #searchRecipeForm {
 	z-index: 1;
 	width: 400px;
-	 display: inline-block;
-	 text-align: center;
-	 margin-top: 15px;
+	display: inline-block;
+	text-align: center;
+	margin-top: 15px;
 }
 </style>
 </head>
@@ -55,13 +55,13 @@
 					<h3>냉장고 시점에서 바라본 오늘의 레시피 찾기!</h3>
 					<!--  검색창 -->
 					<div id="searchRecipeForm">
-					<form class="d-flex" method="get" action="searchRecipe.do"
-						id="searchRecipeForm">
-						<input id="keyword" name="keyword" class="form-control me-2"
-							type="search" placeholder="내 냉장고 속 재료 입력!" aria-label="Search"
-							onclick="enterKey()">
-						<button type="submit" class="btn btn-warning">Search</button>
-					</form>
+						<form class="d-flex" method="get" action="searchRecipe.do"
+							id="searchRecipeForm">
+							<input id="keyword" name="keyword" class="form-control me-2"
+								type="search" placeholder="내 냉장고 속 재료 입력!" aria-label="Search"
+								onclick="enterKey()">
+							<button type="submit" class="btn btn-warning">Search</button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -174,14 +174,14 @@
 	<!-- wrapper end -->
 
 	<script>
-			//input에서 엔터키 눌렀을 때도 검색 실행
-			function enterKey() {
-				if (window.event.keyCode == 13) {
-					find();
-					recentSearch();
-					clearInput();
-				}
+		//input에서 엔터키 눌렀을 때도 검색 실행
+		function enterKey() {
+			if (window.event.keyCode == 13) {
+				find();
+				recentSearch();
+				clearInput();
 			}
-		</script>
+		}
+	</script>
 </body>
 </html>

@@ -35,38 +35,46 @@
 	right: 40px;
 	top: 100px;
 }
+
+#searchForm {
+	width: 400px;
+	display: inline-block;
+	text-align: center;
+}
 </style>
 
 </head>
 <body>
 	<div id="wrapper">
-	<!-- 검색 -->
-	<div class="jns_wrap">
-	<h3>상품 검색</h3>
-	<br>
-	<form>
-		<input class="form-control" list="datalistOptions" name="keyword"
-			onkeydown="return captureReturnKey(event)" onkeyup="enterKey();"
-			id="keyword" placeholder="Type to search..." "style="width: 300px" />
-		<button type="button" class="btn btn-outline-primary"
-			onclick="find(); recentSearch(); clearInput();">검색</button>
-	</form>
+		<!-- 검색 -->
+		<div class="jns_wrap">
+			<h3>상품 검색</h3>
+			<br>
+			<div id="searchForm">
+				<form class="d-flex">
+					<input class="form-control me-2" type="search"
+						placeholder="식재료 검색하기" aria-label="Search" id="keyword"
+						name="keyword" onkeydown="return captureReturnKey(event)"
+						onkeyup="enterKey();">
+					<button class="btn btn-outline-success" type="button"
+						onclick="find(); recentSearch(); clearInput();">Search</button>
+				</form>
+			</div>
+			<!-- 최근 검색어  -->
+			<%@ include file="/WEB-INF/view/product/recentKeyword.jsp"%>
+			<!-- 최근 본 상품 -->
+			<%@ include file="./recentProduct.jsp"%>
+			<!-- 검색결과 -->
+			<div id="result"></div>
+		</div>
 
-	<!-- 최근 검색어  -->
-	<%@ include file="/WEB-INF/view/product/recentKeyword.jsp"%>
-	<!-- 최근 본 상품 -->
-	<%@ include file="./recentProduct.jsp"%>
-	<!-- 검색결과 -->
-	<div id="result"></div>
+		<!-- 유저의 관심상품 최저가 비교 -->
+		<%@ include file="./lpriceProduct.jsp"%>
 	</div>
-	
-	<!-- 유저의 관심상품 최저가 비교 -->
-	<%@ include file="./lpriceProduct.jsp"%>
-</div>	
 	<script>
 		var piArray = new Array();//유저의 관심상품 productId값이 들어가는 배열
 		chkLikeProductId();
-		function chkLikeProductId(){
+		function chkLikeProductId() {
 			//유저가 이미 저장한 관심상품의 productId 가져오기
 			$.ajax({
 				url : "chkLikeProductId.do",
@@ -88,7 +96,6 @@
 				}
 			});
 		}
-		
 
 		//enter키 눌렀을 때 페이지 재로딩 되는 것 방지
 		function captureReturnKey(e) {
@@ -140,7 +147,7 @@
 								var category1 = item[i].category1; //식품만 검색되게.
 								if (true) {
 									var title = item[i].title;//상품명
-									title = title.replace(/,/gi,'');
+									title = title.replace(/,/gi, '');
 									var image = item[i].image;//상품이미지
 									var link = item[i].link;//상품구매링크
 									var lprice = item[i].lprice;//최저가
@@ -150,6 +157,10 @@
 									var maker = item[i].maker;//제조사
 									var brand = item[i].brand;//브랜드명
 									var mallName = item[i].mallName;//쇼핑몰상호
+									
+									if(hprice == '0'){
+										hprice = lprice;
+									}
 
 									//onclick시 보낼 매개변수 문자열 : str (,로 구분)
 									var str = productId
@@ -161,32 +172,32 @@
 											+ ',' + hprice;
 
 									// 최근 본 상품 목록 필요한 매개변수 문자열
-									var recentPro = title + '^^' + image
-											+ '^^' + link;
-									
+									var recentPro = title + '^^' + image + '^^'
+											+ link;
+				
 									html += '<div class="col">';
-									html += '<div class="card" style="width: 18rem;">';
-									html += '<img src="' + image + '" alt="..." class="card-img-top"">';
+									html += '<div class="card h-100" style="width: 18rem;">';
+									html += '<img src="' + image + '" alt="상품이미지" class="card-img-top"">';
 									html += '<div class="card-body">';
 									html += '<h5 class="card-title">' + title
 											+ '</h5>'
 									html += '<ul class="list-group list-group-flush">';
-									//상품코드는 테스트용으로 적어둔 것 (추후 삭제)
-									html += '<li class="list-group-item"> 상품코드 : '
-											+ productId + '</li>';
 									html += '<li class="list-group-item"> 최저가 : '
 											+ lprice + '원</li>';
+											html += '<li class="list-group-item"> 최고가 : '
+												+ hprice + '원</li>';
 									html += '<li class="list-group-item"> 제조사 : '
 											+ maker + '</li>';
 									html += '<li class="list-group-item"> 브랜드 : '
 											+ brand + '</li>';
 									html += '</ul>';
-									html += '<a href="' + link +'" class="btn btn-primary" id="purchaseBtn" target="_blank" onclick="return clickpurchase(\''
-											+ recentPro
-											+'\');">구매하기</a> ';
+									html += '<a href="'
+											+ link
+											+ '" class="btn btn-success btn-sm" id="purchaseBtn" target="_blank" onclick="return clickpurchase(\''
+											+ recentPro + '\');">구매하기</a> ';
 
 									//관심 상품 버튼 추가
-									html += '<input type="button" class="heartBtn" value="관심상품 추가" id='
+									html += '<input type="button" class="btn btn-danger btn-sm" value="관심상품 추가" id='
 											+ productId
 											+ ' onclick="clickProductId(\''
 											+ str + '\')"';
@@ -211,7 +222,7 @@
 							} else {
 								html += '</div>';
 							}
-			
+
 							//html코드 넣어주기
 							$("#result").append(html);
 
@@ -219,8 +230,6 @@
 					});
 		}
 
-		
-		
 		//관심상품 버튼 이벤트 //동적 태그에 이벤트 주기
 		function clickProductId(productStr) {
 			console.log("관심상품 등록 버튼 클릭");
@@ -233,7 +242,7 @@
 			var hprice = strArr[5];
 			var btn = document.getElementById(productId);
 			var isChecked = true;
-			
+
 			for ( var i in piArray) {
 				if (productId == piArray[i]) {
 					console.log("piArray[i] >> " + piArray[i]

@@ -99,7 +99,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 	display: flex;
 	margin: 10px auto;
 	width: 90%;
-	margin-right: 50px;
+	margin-right: 80px;
 }
 
 /*알림 버튼 */
