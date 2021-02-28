@@ -50,7 +50,7 @@ public class RecipeController
 		logger.info("[RecipeController] recipeDetail() 호출");
 	
 		// 해당 레피시 영양소를 flask에 보낸다
-		flaskController.sendNutrient(rvo, redirectAttributes);
+		//flaskController.sendNutrient(rvo, redirectAttributes);
 		
 		logger.info("rcp_seq >>> : " + rvo.getRcp_seq());
 		logger.info("recipeService.recipeSelect(rvo) >>> : " + recipeService.recipeSelect(rvo));
