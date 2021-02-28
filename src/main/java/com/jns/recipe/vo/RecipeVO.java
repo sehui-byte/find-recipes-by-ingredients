@@ -75,7 +75,6 @@ public class RecipeVO
 	private String enddate;
 	
 	
-	
 	public int getPageSize() {
 		return pageSize;
 	}

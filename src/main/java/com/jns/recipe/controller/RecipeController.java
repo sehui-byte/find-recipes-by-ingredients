@@ -7,9 +7,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jns.flask.controller.FlaskController;
@@ -83,6 +85,18 @@ public class RecipeController
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
 		result.put("cnt", recipeService.recipeJsonInsert());
 		return result;
+	}
+	
+	//레시피 검색
+	//jsp에서 keyword 받아서 검색
+	@RequestMapping(value="searchRecipe.do", method=RequestMethod.GET)
+	public ModelAndView searchRecipe(RecipeVO rvo) {
+		logger.info("Recipe Controller >>  searchRecipe.do");
+		logger.info("keyword >> " + rvo.getKeyword());
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", recipeService.searchRecipe(rvo));
+		mav.setViewName("recipe/recipelist");
+		return mav;
 	}
 
 	

@@ -147,4 +147,8 @@
 
 	</insert>
 	
+	<select id="searchRecipe" parameterType="rvo" resultType="rvo">
+	SELECT * FROM RECIPE
+	WHERE RCP_NM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%'
+	</select>
 </mapper>

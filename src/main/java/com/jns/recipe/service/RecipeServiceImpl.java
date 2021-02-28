@@ -149,6 +149,11 @@ public class RecipeServiceImpl implements RecipeService
 		return cnt;
 	}
 
+	@Override
+	public List<RecipeVO> searchRecipe(RecipeVO rvo) {
+		return recipeDAO.searchRecipe(rvo);
+	}
+
 //	@Override
 //	public boolean recipeInsert(RecipeVO rvo) {
 //		// TODO Auto-generated method stub
