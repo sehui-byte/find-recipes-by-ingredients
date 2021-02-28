@@ -51,8 +51,9 @@ h2 {
 	position: relative;
 	max-width: 800px;
 	margin: 0 auto 100px;
-	padding-top: 30px;
+	padding-top: 60px;
 	padding-bottom : 20px;
+	align: center;
 }
 
 form {
@@ -256,7 +257,6 @@ i {
 
 	<script>
 		$(document).ready(function() {
-
 			//버튼 클릭시 회원가입 처리 
 			$(document).on("click", "#membtn", function() {
 				console.log("membtn >>> : ");
@@ -282,14 +282,12 @@ i {
 
 				function whenSuccess(data) {
 					alert("회원가입에 성공하였습니다. 로그인 후 이용해주시기 바랍니다");
-					location.href = "main.do";
+					location.href = "login.do";
 				}
-				;
 
 				function whenError(data) {
 					alert("회원가입에 실패하셨습니다. 다시 시도해주세요.");
 				}
-				;
 			});
 
 			$(document).on("change", "#memail3", function() {
