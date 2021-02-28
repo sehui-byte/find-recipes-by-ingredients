@@ -141,6 +141,9 @@ div, h1, h2, h3, h4, h5, h6, p {
 </style>
 </head>
 <body>
+	<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
+	<div id="socketAlarm"></div>
+
 	<!-- navbar -->
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
 		<div class="container-fluid">
@@ -203,14 +206,16 @@ div, h1, h2, h3, h4, h5, h6, p {
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="/kosmoJns/myinfo.do?mno=<%=mno%>">마이페이지</a>
 								<a class="dropdown-item" href="#">나의 레시피</a> <a
-									class="dropdown-item" href="#">나의 Q&A</a>
-									<a class="dropdown-item" href="likeProduct.do">나의 관심상품</a> 
+									class="dropdown-item" href="#">나의 Q&A</a> <a
+									class="dropdown-item" href="likeProduct.do">나의 관심상품</a>
 								<div class="dropdown-divider"></div>
 								<s:authorize access="isAuthenticated()">
 									<!-- 로그아웃 버튼 -->
-									<a class="dropdown-item" style="cursor:pointer;"onclick="sendLogout();">로그아웃</a>
+									<a class="dropdown-item" style="cursor: pointer;"
+										onclick="sendLogout();">로그아웃</a>
 									<form id="logoutForm">
-										<input type="hidden" id="logoutbtn" name="logoutbtn" value="로그아웃"
+										<input type="hidden" id="logoutbtn" name="logoutbtn"
+											value="로그아웃"
 											style="color: white; font-family: FontAwesome; border: none; background: transparent;" />
 									</form>
 								</s:authorize>
@@ -220,7 +225,8 @@ div, h1, h2, h3, h4, h5, h6, p {
 					<s:authorize access="isAuthenticated()">
 						<!-- mnick 님 반갑습니다.<br /> -->
 						<!-- 알람 모양 아이콘 -->
-						<button type="button" class="icon-button" onclick="location.href='alarmList.do'">
+						<button type="button" class="icon-button"
+							onclick="location.href='alarmList.do'">
 							<span class="material-icons">notifications</span> <span
 								class="icon-button__badge" id="msgCount">0</span>
 						</button>
@@ -236,11 +242,10 @@ div, h1, h2, h3, h4, h5, h6, p {
 			</div>
 		</div>
 	</nav>
-	
-	
-	<!-- 웹소켓 알림 띄워줄 곳 (위치 이동시킬 수 있음)-->
-	<div id="socketAlarm"></div>
-	
+
+
+
+
 	<!-- web socket 부분 -->
 	<script>
 		// 전역변수 설정
@@ -258,8 +263,9 @@ div, h1, h2, h3, h4, h5, h6, p {
 		console.log("mid >> " + mid);
 
 		var count = 0;//로그아웃시 왔던 메세지 개수
-		var toast = '';
+		
 		function onMessage(evt) {//evt파라미터는 웹소켓이 보내준 데이터 의미
+			var toast = '';
 			console.log("서버로부터 메세지 받음");
 			var arriveTime = new Date();
 			var data = evt.data;
@@ -272,11 +278,11 @@ div, h1, h2, h3, h4, h5, h6, p {
 				console.log("count >> " + count);
 				var alert = '<div class="alert alert-primary" role="alert">미확인 알람이 있습니다!</div>';
 				$("#socketAlarm").append(alert);
-				
+
 			} else {
 				toast += '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
 				toast += '<div class="toast-header"><class="rounded me-2">';
-				toast += '<strong class="me-auto">Bootstrap</strong>';
+				toast += '<strong class="me-auto">알림</strong>';
 				toast += '<small class="sub"></small>';
 				toast += '<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
 				toast += '</div><div class="toast-body">';
@@ -288,62 +294,20 @@ div, h1, h2, h3, h4, h5, h6, p {
 					"autohide" : false
 				});
 				$('.toast').toast('show');
-				
-				function timeBefore() {
-					//현재시간
-					var now = new Date();
-					//기준시간 
-					var writeDay = arriveTime;
-					var minus;
-					var time = '';
-					if (now.getFullYear() > writeDay.getFullYear()) {
-						minus = now.getFullYear() - writeDay.getFullYear();
-						time += minus + "년 ";
-					}
-					if (now.getMonth() > writeDay.getMonth()) {
-						minus = now.getMonth() - writeDay.getMonth();
-						time += minus + "달 ";
-					}
-					if (now.getDate() > writeDay.getDate()) {
-						minus = now.getDate() - writeDay.getDate();
-						time += minus + "일 ";
-					}
 
-					if (now.getHours() > writeDay.getHours()) {
-						minus = now.getHours() - writeDay.getHours();
-						time += minus + "시간 ";
-					}
-
-					else if (now.getMinutes() > writeDay.getMinutes()) {
-						minus = now.getMinutes() - writeDay.getMinutes();
-						time += minus + "분 ";
-					}
-
-					else if (now.getSeconds() > writeDay.getSeconds()) {
-						minus = now.getSeconds() - writeDay.getSeconds();
-						time += "방금";
-					}
-
-					time += "전          ";
-					document.getElementsByClassName("sub")[0].innerHTML = time;
-				}
-				setInterval(timeBefore, 1000);
 			}
 		}
 	</script>
 	<script>
-		function sendLogout(){
-				socket.close();
-				sock.close();
-				$("#logoutForm")
-						.attr("action",
-								"<c:url value='/j_spring_security_logout' />");
-				$("#logoutForm").attr("method",
-						"POST");
-				$("#logoutForm")
-						.attr("enctype",
-								"application/x-www-form-urlencoded");
-				$("#logoutForm").submit();
+		function sendLogout() {
+			socket.close();
+			sock.close();
+			$("#logoutForm").attr("action",
+					"<c:url value='/j_spring_security_logout' />");
+			$("#logoutForm").attr("method", "POST");
+			$("#logoutForm").attr("enctype",
+					"application/x-www-form-urlencoded");
+			$("#logoutForm").submit();
 		}
 	</script>
 	<!-- bootstrap js -->
