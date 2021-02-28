@@ -70,7 +70,7 @@ public class MyinfoServiceImpl implements MyinfoService {
 		int hits = myinfoDAO.myLevelUpdateCheckHits(bvo);
 		logger.info("해당 회원의 게시글 추천수 총합 >>> : " + hits);
 
-		if (count > 0 && hits >= 0) {
+		if (count > 50 && hits >= 100) {
 			return myinfoDAO.myLevelUpdate(bvo);
 
 		} else {

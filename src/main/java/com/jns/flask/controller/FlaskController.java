@@ -65,6 +65,7 @@ public class FlaskController
 		logger.info("jsonStr >>> : " + jsonStr);
 		
 		redirectAttributes.addAttribute("subscribeInc", jsonStr);
+		redirectAttributes.addAttribute("mno", ssvo.getMno());
 
 		logger.info("flask로 데이터 전송 >>> ");
 		
