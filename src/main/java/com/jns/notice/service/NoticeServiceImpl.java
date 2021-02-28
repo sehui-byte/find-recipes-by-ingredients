@@ -71,4 +71,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDAO.NoticeHITS(nvo);
 	}
 
+	@Override
+	public List<BoardVO> BrandNewNotice(BoardVO nvo) {
+		// TODO Auto-generated method stub
+		return noticeDAO.BrandNewNotice(nvo);
+	}
+
 }

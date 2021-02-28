@@ -186,4 +186,13 @@
 		WHERE PAGENO = #{curPage}
 		ORDER BY BNO DESC	
 	</select>
+	
+	<select id="BrandNewNotice" resultType="nvo">
+			SELECT *
+			FROM 
+				( SELECT *
+				  FROM BOARD
+				  ORDER BY BINSERTDATE DESC)
+			WHERE ROWNUM = 1
+	</select>
 </mapper>
