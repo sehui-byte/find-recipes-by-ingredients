@@ -7,7 +7,7 @@
 		<meta charset="UTF-8">
 		<title>레시피 게시판 글쓰기</title>
 		<style type="text/css">
-			/* 02/28 재민: 디자인 작업 */
+			/* 02/28 재민: 페이지 디자인 완료 */
 			.btn-orange { 
 				background-color: #F9A781; 
 				font-weight: bold;
@@ -112,6 +112,7 @@
 	<body>
 		<div id ="wrapper">
 		<form id="rbwriteForm" name="rbwriteForm" enctype="multipart/form-data" method="POST">
+			<span style="font-size: 14px">Cook Board</span>
 			<input type="hidden" name="mno" id="mno" value="<%=mno%>">
 			<table class="table">
 				<thead>

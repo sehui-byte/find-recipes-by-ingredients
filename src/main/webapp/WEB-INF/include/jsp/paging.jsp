@@ -123,7 +123,6 @@
 %>
 	<li class="page-item disabled">
 		<a class="page-link" href="#" tabindex="-1" aria-disabled="true">¢º</a>
-		¢º
 	</li>
 	<li class="page-item disabled">
 		<a class="page-link" href="#" tabindex="-1" aria-disabled="true">¢¹¢¹</a>		
