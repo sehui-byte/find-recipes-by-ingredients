@@ -80,7 +80,8 @@
 
 				//체크된 row의 모든 값을 배열에 담는다
 				rowData.push(tr.text());
-				
+				var productId = td.eq(1).text();
+				console.log("productID >> " + productId);
 				var title = td.eq(2).text();
 				var image = td.eq(3).text();
 				var lprice = td.eq(4).text();
