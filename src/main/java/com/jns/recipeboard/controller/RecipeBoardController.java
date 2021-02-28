@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import com.jns.chabun.service.ChabunService;
 import com.jns.common.DateFormatUtil;
 import com.jns.common.FileLoadUtil;
 import com.jns.common.FileUploadUtil;
+import com.jns.common.Paging;
 import com.jns.recipe.service.RecipeService;
 import com.jns.recipeboard.service.RecipeBoardService;import com.jns.recipeboard.service.RecipeBoardServiceImpl;
 import com.jns.recipeboard.vo.RecipeBoardVO;
@@ -44,13 +47,40 @@ public class RecipeBoardController
 	}//생성자
 	
 	//================================= move =================================//
-	@RequestMapping(value = "recipeboard", method = RequestMethod.GET)
-	public String recipeboard(Model model)
+//	@RequestMapping(value = "recipeboard", method = RequestMethod.GET)
+//	public String recipeboard(Model model)
+//	{
+//		logger.info("[RecipeBoardController] recipeboard.do 호출됨");
+//		model.addAttribute("list", recipeBoardService.recipeBoardSelectAll());
+//		return "recipeboard/recipeboard";
+//	}//레시피 게시판으로 이동(전체 조회)
+	
+	@RequestMapping(value = "recipeboard_list", method = RequestMethod.GET)
+	public String recipeboard(RecipeBoardVO rbvo, HttpServletRequest request, Model model)
 	{
-		logger.info("[RecipeBoardController] recipeboard.do 호출됨");
-		model.addAttribute("list", recipeBoardService.recipeBoardSelectAll());
-		return "recipeboard/recipeboard";
-	}//레시피 게시판으로 이동
+		//============================= 페이징 =============================//
+		int totalCnt = 0;
+		String curPage = request.getParameter("curPage");
+		String sizeCtrl = request.getParameter("sizeCtrl");
+		
+		Paging.setPage(rbvo, curPage, sizeCtrl); //페이징 변수 초기화
+		logger.info("rbvo >>> : " + rbvo.toString());
+		
+		List<RecipeBoardVO> pageList = recipeBoardService.recipeBoardSelectAllPage(rbvo);
+		if(pageList.size() != 0)
+		{
+			totalCnt = pageList.get(0).getTotalCount();
+			rbvo.setTotalCount(totalCnt);
+		}
+		
+		logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+		logger.info("pageList.size >>> : " + pageList.size());
+		
+		model.addAttribute("rbvo", rbvo);
+		model.addAttribute("pageList", pageList);
+		
+		return "recipeboard/recipeboard_list";
+	}
 	
 	@RequestMapping(value = "rbdetail", method = RequestMethod.GET)
 	public String rbdetail(RecipeBoardVO rbvo, Model model)
