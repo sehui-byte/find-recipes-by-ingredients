@@ -166,7 +166,7 @@
 		
 		// 취소
 		$(document).on("click", "#C", function(){
-			location.href="/kosmoJns/chefboard/boardselectall.do";
+			location.href="/kosmoJns/chefboard/boardselectallpage.do";
 		});
 		
 		// 구독
@@ -296,7 +296,7 @@
 					<input type="hidden" id="mnick" name="mnick" value="<%=cbvo.getMnick()%>">
 					<input type="hidden" id="ino" name="ino" value="<%=cbvo.getIno()%>">
 					<input type="hidden" id="rbno" name="rbno" value="<%=cbvo.getRbno()%>">
-					<input type="button" class="btn btn-warning" id="Subs" value="구독하기">				
+					<input type="button" class="btn btn-warning btn-sm" id="Subs" value="구독하기">				
 					</td>
 				</tr>
 				<tr>
