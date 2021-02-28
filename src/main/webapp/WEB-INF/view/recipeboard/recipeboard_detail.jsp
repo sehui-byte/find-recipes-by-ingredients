@@ -3,7 +3,7 @@
 <%@page import="com.jns.recipeboard.vo.RecipeBoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/include/jsp/loginSession.jsp" %>
+<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +12,21 @@
 		RecipeBoardVO rbvo = (RecipeBoardVO)request.getAttribute("rbvo");
 	%>
 	<title><%=rbvo.getRcp_nm()%></title>
+	<style type="text/css">
+	
+		/* 02/28 재민: 페이지 디자인 완료 */
+		.btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;		
+		}
+		
+		.tt{
+		text-align: center;
+		vertical-align: middle;
+		}
+		
+		
+	</style>
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript">
 		$(document).ready(()=>
@@ -33,6 +48,11 @@
 					type:"GET",
 					dataType:"json"
 				}).always((data)=>{console.log(data); alert("추천하였습니다")});
+			});
+			
+			// 취소
+			$(document).on("click", "#C", function(){
+				location.href="/kosmoJns/recipeboard.do";
 			});
 			
 	//=======================즐겨찾기==========================
@@ -126,55 +146,53 @@
 	</script>
 </head>
 <body>
+<div id ="wrapper">
 	<form>
-		<table border="1" style="margin: auto;">
+		<span style="font-size: 14px">Cook Board</span>
+		<table class="table">
+			<thead>
+				<tr>
+					<td colspan="2"><h2><%=rbvo.getRcp_nm()%></h2></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="vertical-align: middle;"><%=rbvo.getMno()%>&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="hidden" id="mno" name="mno" value="<%=rbvo.getMno()%>">
+					<input type="hidden" id="rbno" name="rbno" value="<%=rbvo.getRbno()%>">			
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+					<span style="font-size: 14px">조회: <%=rbvo.getViews() + 1 %> 추천: <%=rbvo.getHits()%></span>
+				</tr>
+			</thead>
+			<tbody>
 			<tr>
-				<td colspan="2"><%=rbvo.getRcp_nm()%> |
-					<small>
-						작성자 : <%=rbvo.getMno()%>
-						조회수 : <%=rbvo.getViews()%>
-						추천수 : <%=rbvo.getHits()%>
-						등록일 : <%=rbvo.getRb_insertdate() %>
-					</small>
-				</td>
-			<%	
-				if(rbvo.getRb_updatedate() != null && rbvo.getRb_updatedate().length() > 0)
-				{
-			%>
-					<td>수정일 : <%=rbvo.getRb_updatedate()%></td>
-			<%
-				}
-			%>	
-			
+				<td class="tt"><span style="font-size: 14px">조리방법</span></td>
+				<td><span style="font-size: 14px"><%=rbvo.getRcp_way2()%></span></td>
 			</tr>
 			<tr>
-				<td>조리방법 : </td>
-				<td><%=rbvo.getRcp_way2()%></td>
+				<td class="tt"><span style="font-size: 14px">요리종류</span></td>
+				<td><span style="font-size: 14px"><%=rbvo.getRcp_pat2()%></span></td>
 			</tr>
 			<tr>
-				<td>요리종류 : </td>
-				<td><%=rbvo.getRcp_pat2()%></td>
+				<td class="tt" width="20%"><span style="font-size: 14px">해시태그</span></td>
+				<td><span style="font-size: 14px"><%=rbvo.getHash_tag() == null ? "--" : "#" + rbvo.getHash_tag()%></span></td>
 			</tr>
 			<tr>
-				<td>해쉬태그 : </td>
-				<td><%=rbvo.getHash_tag()%></td>
-			</tr>
-			<tr>
-				<td>메인 이미지 : </td>			
+				<td class="tt">메인 이미지</td>			
 				<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getMain_img())%>"></td>
 			</tr>
 			<tr>
-				<td>재료정보 : </td>
+				<td class="tt">재료정보 : </td>
 				<td><%=rbvo.getRcp_parts_dtls()%></td>
-			</tr>
-			
+			</tr>		
 			<!-- 만드는 법 -->
 		<%
 			if(Validation.strValidation(rbvo.getManual01()))
 			{
 		%>
 				<tr>
-					<td>만드는법 01</td>
+					<td class="tt">만드는법 01</td>
 					<td><%=rbvo.getManual01()%></td>
 				</tr>
 		<%
@@ -183,7 +201,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 01</td>
+					<td class="tt">만드는법 이미지 01</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img01())%>"></td>
 				</tr>
 		<%
@@ -198,7 +216,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 02</td>
+					<td class="tt">만드는법 02</td>
 					<td><%=rbvo.getManual02()%></td>
 				</tr>
 		<%
@@ -207,7 +225,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 02</td>
+					<td class="tt">만드는법 이미지 02</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img02())%>"></td>
 				</tr>
 		<%
@@ -222,7 +240,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 03</td>
+					<td class="tt">만드는법 03</td>
 					<td><%=rbvo.getManual03()%></td>
 				</tr>
 		<%
@@ -231,7 +249,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 03</td>
+					<td class="tt">만드는법 이미지 03</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img03())%>"></td>
 				</tr>
 		<%
@@ -246,7 +264,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 04</td>
+					<td class="tt">만드는법 04</td>
 					<td><%=rbvo.getManual04()%></td>
 				</tr>
 		<%
@@ -255,7 +273,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 04</td>
+					<td class="tt">만드는법 이미지 04</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img04())%>"></td>
 				</tr>
 		<%
@@ -270,7 +288,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 05</td>
+					<td class="tt">만드는법 05</td>
 					<td><%=rbvo.getManual05()%></td>
 				</tr>
 		<%
@@ -279,7 +297,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 05</td>
+					<td class="tt">만드는법 이미지 05</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img05())%>"></td>
 				</tr>
 		<%
@@ -294,7 +312,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 06</td>
+					<td class="tt">만드는법 06</td>
 					<td><%=rbvo.getManual06()%></td>
 				</tr>
 		<%
@@ -303,7 +321,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 06</td>
+					<td class="tt">만드는법 이미지 06</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img06())%>"></td>
 				</tr>
 		<%
@@ -318,7 +336,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 07</td>
+					<td class="tt">만드는법 07</td>
 					<td><%=rbvo.getManual07()%></td>
 				</tr>
 		<%
@@ -327,7 +345,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 07</td>
+					<td class="tt">만드는법 이미지 07</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img07())%>"></td>
 				</tr>
 		<%
@@ -342,7 +360,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 08</td>
+					<td class="tt">만드는법 08</td>
 					<td><%=rbvo.getManual08()%></td>
 				</tr>
 		<%
@@ -351,7 +369,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 08</td>
+					<td class="tt">만드는법 이미지 08</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img08())%>"></td>
 				</tr>
 		<%
@@ -366,7 +384,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 09</td>
+					<td class="tt">만드는법 09</td>
 					<td><%=rbvo.getManual09()%></td>
 				</tr>
 		<%
@@ -375,7 +393,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 09</td>
+					<td class="tt">만드는법 이미지 09</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img09())%>"></td>
 				</tr>
 		<%
@@ -390,7 +408,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 10</td>
+					<td class="tt">만드는법 10</td>
 					<td><%=rbvo.getManual10()%></td>
 				</tr>
 		<%
@@ -399,7 +417,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 10</td>
+					<td class="tt">만드는법 이미지 10</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img10())%>"></td>
 				</tr>
 		<%
@@ -414,7 +432,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 11</td>
+					<td class="tt">만드는법 11</td>
 					<td><%=rbvo.getManual11()%></td>
 				</tr>
 		<%
@@ -423,7 +441,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 11</td>
+					<td class="tt">만드는법 이미지 11</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img11())%>"></td>
 				</tr>
 		<%
@@ -438,7 +456,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 12</td>
+					<td class="tt">만드는법 12</td>
 					<td><%=rbvo.getManual12()%></td>
 				</tr>
 		<%
@@ -447,7 +465,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 12</td>
+					<td class="tt">만드는법 이미지 12</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img12())%>"></td>
 				</tr>
 		<%
@@ -462,7 +480,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 13</td>
+					<td class="tt">만드는법 13</td>
 					<td><%=rbvo.getManual13()%></td>
 				</tr>
 		<%
@@ -471,7 +489,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 13</td>
+					<td class="tt">만드는법 이미지 13</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img13())%>"></td>
 				</tr>
 		<%
@@ -486,7 +504,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 14</td>
+					<td class="tt">만드는법 14</td>
 					<td><%=rbvo.getManual14()%></td>
 				</tr>
 		<%
@@ -495,7 +513,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 14</td>
+					<td class="tt">만드는법 이미지 14</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img14())%>"></td>
 				</tr>
 		<%
@@ -510,7 +528,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 15</td>
+					<td class="tt">만드는법 15</td>
 					<td><%=rbvo.getManual15()%></td>
 				</tr>
 		<%
@@ -519,7 +537,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 15</td>
+					<td class="tt">만드는법 이미지 15</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img15())%>"></td>
 				</tr>
 		<%
@@ -534,7 +552,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 16</td>
+					<td class="tt">만드는법 16</td>
 					<td><%=rbvo.getManual16()%></td>
 				</tr>
 		<%
@@ -543,7 +561,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 16</td>
+					<td class="tt">만드는법 이미지 16</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img16())%>"></td>
 				</tr>
 		<%
@@ -559,7 +577,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 17</td>
+					<td class="tt">만드는법 17</td>
 					<td><%=rbvo.getManual17()%></td>
 				</tr>
 		<%
@@ -568,7 +586,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 17</td>
+					<td class="tt">만드는법 이미지 17</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img17())%>"></td>
 				</tr>
 		<%
@@ -583,7 +601,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 18</td>
+					<td class="tt">만드는법 18</td>
 					<td><%=rbvo.getManual18()%></td>
 				</tr>
 		<%
@@ -592,7 +610,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 18</td>
+					<td class="tt">만드는법 이미지 18</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img18())%>"></td>
 				</tr>
 		<%
@@ -608,7 +626,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 19</td>
+					<td class="tt">만드는법 19</td>
 					<td><%=rbvo.getManual19()%></td>
 				</tr>
 		<%
@@ -617,7 +635,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 19</td>
+					<td class="tt">만드는법 이미지 19</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img19())%>"></td>
 				</tr>
 		<%
@@ -633,7 +651,7 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 20</td>
+					<td class="tt">만드는법 20</td>
 					<td><%=rbvo.getManual20()%></td>
 				</tr>
 		<%
@@ -642,20 +660,38 @@
 			{
 		%>
 				<tr>
-					<td>만드는법 이미지 20</td>
+					<td class="tt">만드는법 이미지 20</td>
 					<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getManual_img20())%>"></td>
 				</tr>
 		<%
 			}
 		%>
-		
+			<tr>
+				<td colspan="2" align="right">
+					<span style="font-size: 12px;">등록일 : <%=rbvo.getRb_insertdate() %>
+						<%	
+							if(rbvo.getRb_updatedate() != null && rbvo.getRb_updatedate().length() > 0)
+							{
+						%>
+								수정일 : <%=rbvo.getRb_updatedate()%>
+						<%
+							}
+						%>											
+					</span>	
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">
+					<input type="button" class="btn btn-orange" id="hitsBtn" value="추천">
+					<input type="button" class="btn btn-orange" name="favRecipeUser" id="favRecipeUser" value="즐겨찾기">
+					<input type="button" class="btn btn-orange" id="C" value="목록">
+				</td>
+			</tr>
 		</table>
-		
-		<input type="button" id="hitsBtn" value="추천">
-		<button type="button" class="" name="favRecipeUser" id="favRecipeUser">즐겨찾기</button>
-		<input type="hidden" id="rbno" value="<%= rbvo.getRbno()%>">
 	</form>
-	
+		<c:import url="/reply/rbreply.do">
+		</c:import>
+</div>	
 </body>
 </html>
 
