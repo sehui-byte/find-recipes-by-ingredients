@@ -41,7 +41,6 @@ if (principal != null && principal instanceof MemberVO) {
 <html>
 <head>
 <meta charset="UTF-8">
-<title>navbar</title>
 <!-- socketJS -->
 <script
 	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
