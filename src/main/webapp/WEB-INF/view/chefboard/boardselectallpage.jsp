@@ -69,7 +69,7 @@
 	}
 	
 	.btn-orange { 
-		background-color: #FF7F00; 
+		background-color: #F9A781; 
 		font-weight: bold;
 	}
 

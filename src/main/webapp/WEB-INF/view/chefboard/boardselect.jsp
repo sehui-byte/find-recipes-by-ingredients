@@ -7,15 +7,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<% request.setCharacterEncoding("UTF-8"); %>
-<%
-	Object obj = request.getAttribute("listS");
-	List<ChefBoardVO> list = (List)obj;
-	ChefBoardVO cbvo = null;
-	if(list.size() == 1){
-		cbvo = list.get(0);
-	};
-%>
 <meta charset="UTF-8">
 <title>세프레시피 상세보기</title>
 <style type="text/css">
@@ -43,10 +34,19 @@
 	}
 	
 	.btn-orange { 
-		background-color: #FF7F00; 
+		background-color: #F9A781; 
 		font-weight: bold;
 	}
 </style>
+<% request.setCharacterEncoding("UTF-8"); %>
+<%
+	Object obj = request.getAttribute("listS");
+	List<ChefBoardVO> list = (List)obj;
+	ChefBoardVO cbvo = null;
+	if(list.size() == 1){
+		cbvo = list.get(0);
+	};
+%>
 <script type="text/javascript">
 
 	$(document).ready(function(){
@@ -114,7 +114,7 @@
 		function subCheckSuccess(resultData){
 			if(resultData=="ALREADY"){
 				console.log("이미 구독중");
-				$('#Subs').attr('style', 'background-color:red;');
+				$('#Subs').attr('style', 'background-color:#F9A781;');
 				$('#Subs').attr('value', '구독중');
 				$('#Subs').attr('disabled', true);
 				
@@ -732,11 +732,11 @@
 			</tr>			
 			<tr>
 				<td colspan="2" align="right">
-					<button type="button" class="btn btn-orange" id="U" disabled="disabled">수정</button>
-					<button type="button" class="btn btn-orange" id="D" disabled="disabled">삭제</button>
-					<button type="button" class="btn btn-orange" id="hits" @click="hitPlus">추천</button>
-					<button type="button" class="btn btn-orange" name="favRecipeUser" id="favRecipeUser">즐겨찾기</button>
-					<button type="button" class="btn btn-orange" id="C">목록</button>
+					<input type="button" class="btn btn-orange" id="U" disabled="disabled" value="수정">
+					<input type="button" class="btn btn-orange" id="D" disabled="disabled" value="삭제">
+					<input type="button" class="btn btn-orange" id="hits" @click="hitPlus" value="추천">
+					<input type="button" class="btn btn-orange" name="favRecipeUser" id="favRecipeUser" value="즐겨찾기">
+					<input type="button" class="btn btn-orange" id="C" value="목록">
 				</td>
 			</tr>
 			</tbody>

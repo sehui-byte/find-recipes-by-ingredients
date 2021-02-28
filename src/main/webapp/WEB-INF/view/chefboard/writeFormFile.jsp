@@ -27,12 +27,8 @@
 		vertical-align: middle;
 	}
 	
-	.tb{
-		vertical-align: bottom;
-	}
-	
 	.btn-orange { 
-		background-color: #FF7F00; 
+		background-color: #F9A781; 
 		font-weight: bold;
 	}
 </style>
@@ -131,7 +127,7 @@
 				<td><textarea class="form-control" name="manual01" id="manual01" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img01f" id="manual_img01f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -141,7 +137,7 @@
 				<td><textarea class="form-control" name="manual02" id="manual02" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img02f" id="manual_img02f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -151,7 +147,7 @@
 				<td><textarea class="form-control" name="manual03" id="manual03" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img03f" id="manual_img03f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -161,7 +157,7 @@
 				<td><textarea class="form-control" name="manual04" id="manual04" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img04f" id="manual_img04f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -171,7 +167,7 @@
 				<td><textarea class="form-control" name="manual05" id="manual05" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img05f" id="manual_img05f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -181,7 +177,7 @@
 				<td><textarea class="form-control" name="manual06" id="manual06" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img06f" id="manual_img06f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -191,7 +187,7 @@
 				<td><textarea class="form-control" name="manual07" id="manual07" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img07f" id="manual_img07f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -201,7 +197,7 @@
 				<td><textarea class="form-control" name="manual08" id="manual08" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img08f" id="manual_img08f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -211,7 +207,7 @@
 				<td><textarea class="form-control" name="manual09" id="manual09" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img09f" id="manual_img09f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -221,7 +217,7 @@
 				<td><textarea class="form-control" name="manual10" id="manual10" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img10f" id="manual_img10f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -231,7 +227,7 @@
 				<td><textarea class="form-control" name="manual11" id="manual11" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img11f" id="manual_img11f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -241,7 +237,7 @@
 				<td><textarea class="form-control" name="manual12" id="manual12" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img12f" id="manual_img12f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -251,7 +247,7 @@
 				<td><textarea class="form-control" name="manual13" id="manual13" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img13f" id="manual_img13f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -261,7 +257,7 @@
 				<td><textarea class="form-control" name="manual14" id="manual14" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img14f" id="manual_img14f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -271,7 +267,7 @@
 				<td><textarea class="form-control" name="manual15" id="manual15" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img15f" id="manual_img15f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -281,7 +277,7 @@
 				<td><textarea class="form-control" name="manual16" id="manual16" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img16f" id="manual_img16f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -291,7 +287,7 @@
 				<td><textarea class="form-control" name="manual17" id="manual17" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img17f" id="manual_img17f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -301,7 +297,7 @@
 				<td><textarea class="form-control" name="manual18" id="manual18" rows="10" cols="70"></textarea>
 					<input type="file" class="form-control" name="manual_img18f" id="manual_img18f">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -326,8 +322,8 @@
 		</table>
 	</form>
 <div id="boardBut">
-	<input type="button" class="btn btn-orange" value="저장" class="but" id="boardInsert">
-	<input type="button" class="btn btn-orange" value="목록" class="but" id="boardList">
+	<input type="button" class="btn btn-orange" value="저장" id="boardInsert">
+	<input type="button" class="btn btn-orange" value="목록" id="boardList">
 </div>
 <div>Icons made by <a href="https://www.flaticon.com/kr/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
 </div>
