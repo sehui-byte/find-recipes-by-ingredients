@@ -153,8 +153,8 @@
 	</tbody>
 </table>
 <br>
-	<div class="paging" style="position: absolute; left: 900px; top: 600px;">
-		<jsp:include page="paging.jsp" flush="true">
+	<div class="paging">
+		<jsp:include page="../../include/jsp/paging.jsp" flush="true">
 		<jsp:param name="url" value="noticeSelectAllPage.do"/>
 		<jsp:param name="str" value=""/>
 		<jsp:param name="pageSize" value="<%=pageSize%>"/>
