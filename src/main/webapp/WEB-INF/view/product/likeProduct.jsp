@@ -20,20 +20,22 @@
 	<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 	
 	<div id="wrapper">	<h3>My Favorite Products</h3>
-	<button type="button" id="deleteAllBtn" class="btn btn-primary"
-		onclick="checkAll()">전체선택</button>
-	<button type="button" id="deleteBtn" class="btn btn-primary">삭제</button>
 	<br>
-	<h4>
+	<h5>
 		총 관심상품 :
 		<c:out value="${size}" />
 		개
-	</h4>
+	</h5>
+	
+	<!-- 관심상품 삭제 버튼 -->
+	<button type="button" id="deleteAllBtn" class="btn btn-warning"
+		onclick="checkAll()">전체선택</button>
+	<button type="button" id="deleteBtn" class="btn btn-danger">삭제</button>
 	<br>
+	
 	<c:if test="${size eq 0}">
 			관심상품이 없습니다!
 			</c:if>
-	
 	<!-- size가 0이 아닐때는 아래 table 출력 -->
 	<c:if test="${size ne 0}">
 	<!--likeproduct db값 받기  -->
@@ -78,7 +80,8 @@
 
 				//체크된 row의 모든 값을 배열에 담는다
 				rowData.push(tr.text());
-				
+				var productId = td.eq(1).text();
+				console.log("productID >> " + productId);
 				var title = td.eq(2).text();
 				var image = td.eq(3).text();
 				var lprice = td.eq(4).text();

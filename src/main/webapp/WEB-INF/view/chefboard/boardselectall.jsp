@@ -29,8 +29,6 @@
 		
 		//datepicker
 		
-		
-		
 		//검색버튼
 		$(document).on("click", "#searchBtn", function(){
 			console.log("searchBtn >>> : ");
