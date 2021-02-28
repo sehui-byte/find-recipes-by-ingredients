@@ -16,6 +16,7 @@
 		AND		 C.MNO = D.MNO
 		AND 	 A.MNO = #{mno, jdbcType=VARCHAR}
 		AND		 B.SDELETEYN = 'Y'
+		AND 	 C.IDELETEYN = 'Y'
 	</select>
 
 
@@ -49,6 +50,7 @@
 		WHERE 	A.INO = B.INO
 		AND 	B.INO = #{ino, jdbcType=VARCHAR}
 		AND 	A.SDELETEYN = 'Y'
+		AND 	B.IDELETEYN = 'Y'
 	</select>
 	
 	<!-- 구독 취소하기 -->
@@ -70,7 +72,8 @@
 												 B.INO AS INO
 												,C.MNICK AS MNICK
 						      			  FROM 	 CHEF_INFO B, MEMBER C
-						      			  WHERE	 B.MNO = C.MNO) D
+						      			  WHERE	 B.MNO = C.MNO
+						      			  AND 	 C.IDELETEYN = 'Y') D
 			 	 WHERE		 A.INO = D.INO
 			 	 AND		 A.SDELETEYN = 'Y'
 			 	 GROUP BY 	 D.MNICK
@@ -88,6 +91,7 @@
 					   FROM 	RECIPE_BOARD A, CHEF_INFO B, MEMBER C
 					   WHERE 	C.MNO = B.MNO
 					   AND 		A.MNO = B.MNO
+					   AND		B.IDELETEYN = 'Y'
 					   AND 		A.RBNO = #{rbno, jdbcType=VARCHAR})
 		AND 	SDELETEYN = 'Y'
 	</select>

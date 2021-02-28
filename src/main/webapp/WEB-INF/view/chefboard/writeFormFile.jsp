@@ -85,6 +85,7 @@
 <body>
 <div id ="wrapper">
 	<form id="f_writeForm" name="f_writeForm" enctype="multipart/form-data">
+		<span style="font-size: 14px">Chef Board</span>
 		<table class="table">
 		<thead>
 			<tr>

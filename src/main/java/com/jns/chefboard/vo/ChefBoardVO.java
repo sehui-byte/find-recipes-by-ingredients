@@ -123,6 +123,7 @@ public class ChefBoardVO {
 
 	// CHEF JOIN ***************************************************
 	private String ino;
+	private String ideleteyn;
 	
 	public String getIno() {
 		return ino;
@@ -132,8 +133,17 @@ public class ChefBoardVO {
 		this.ino = ino;
 	}
 
-	//**************************************************************
+	public String getIdeleteyn() {
+		return ideleteyn;
+	}
+
+	public void setIdeleteyn(String ideleteyn) {
+		this.ideleteyn = ideleteyn;
+	}
 	
+	
+	//**************************************************************
+
 	//**************************
 	//검색 설정
 	private String keyfilter;
