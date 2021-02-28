@@ -4,6 +4,7 @@ import org.json.simple.JSONObject;
 
 public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이 
 {
+	private String ino;// 셰프번호
 	private String year;// 년
 	private String mon;// 월
 	private String inc;// 증가 수
@@ -15,10 +16,11 @@ public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이
 	{
 
 	}//Default Constructor
-	
-	
-	
-	public SubscribeIncVO(String year, String mon, String inc, String start_yyyymm, String end_yyyymm) {
+
+
+	public SubscribeIncVO(String ino, String year, String mon, String inc, String start_yyyymm, String end_yyyymm) {
+		super();
+		this.ino = ino;
 		this.year = year;
 		this.mon = mon;
 		this.inc = inc;
@@ -27,11 +29,14 @@ public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이
 	}
 
 
-	
+	public String getIno() {
+		return ino;
+	}
+
+
 	public String getYear() {
 		return year;
 	}
-
 
 
 	public String getMon() {
@@ -39,11 +44,9 @@ public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이
 	}
 
 
-
 	public String getInc() {
 		return inc;
 	}
-
 
 
 	public String getStart_yyyymm() {
@@ -51,11 +54,14 @@ public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이
 	}
 
 
-
 	public String getEnd_yyyymm() {
 		return end_yyyymm;
 	}
 
+
+	public void setIno(String ino) {
+		this.ino = ino;
+	}
 
 
 	public void setYear(String year) {
@@ -63,11 +69,9 @@ public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이
 	}
 
 
-
 	public void setMon(String mon) {
 		this.mon = mon;
 	}
-
 
 
 	public void setInc(String inc) {
@@ -75,11 +79,9 @@ public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이
 	}
 
 
-
 	public void setStart_yyyymm(String start_yyyymm) {
 		this.start_yyyymm = start_yyyymm;
 	}
-
 
 
 	public void setEnd_yyyymm(String end_yyyymm) {
@@ -87,12 +89,13 @@ public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이
 	}
 
 
-
 	@Override
 	public String toString() {
-		return "SignupIncVO [year=" + year + ", mon=" + mon + ", inc=" + inc + ", start_yyyymm=" + start_yyyymm
-				+ ", end_yyyymm=" + end_yyyymm + "]";
+		return "SubscribeIncVO [ino=" + ino + ", year=" + year + ", mon=" + mon + ", inc=" + inc + ", start_yyyymm="
+				+ start_yyyymm + ", end_yyyymm=" + end_yyyymm + "]";
 	}
+	
+	
 	
 	@SuppressWarnings("unchecked")
 	public JSONObject toJSONObject()

@@ -25,7 +25,8 @@
 		FROM
 			SUB_INFO S
 		WHERE
-			TO_CHAR(S.SINSERTDATE, 'YYYY') = #{year}
+			S.INO = #{ino}
+			AND TO_CHAR(S.SINSERTDATE, 'YYYY') = #{year}
 			AND TO_CHAR(S.SINSERTDATE, 'MM') = LPAD(#{mon}, 2, '0')
 	</select>
 	

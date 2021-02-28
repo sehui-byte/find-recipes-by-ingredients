@@ -21,6 +21,7 @@ public abstract class FlaskUtil
 	
 	public static List<SubscribeIncVO> divSsvoYYYYMM(SubscribeIncVO ssvo)
 	{
+		String ino = ssvo.getIno(); //셰프번호
 		List<SubscribeIncVO> list = new ArrayList<SubscribeIncVO>();
 		int start_yyyy = Integer.parseInt(ssvo.getStart_yyyymm().substring(0, 4));
 		int start_mm = Integer.parseInt(ssvo.getStart_yyyymm().substring(4));
@@ -50,7 +51,7 @@ public abstract class FlaskUtil
 			SubscribeIncVO tempVo = new SubscribeIncVO();
 			tempVo.setYear(String.valueOf(cal.getTime().getYear()+1900));
 			tempVo.setMon(String.valueOf(cal.getTime().getMonth()+1));
-			
+			tempVo.setIno(ino);
 			logger.info("tempVO >>> : " + tempVo.toString());
 			
 			list.add(tempVo);
