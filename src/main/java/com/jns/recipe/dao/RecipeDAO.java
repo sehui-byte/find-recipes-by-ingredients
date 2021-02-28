@@ -12,4 +12,5 @@ public interface RecipeDAO
 //	public boolean recipeInsert(RecipeVO rvo);
 //	public boolean recipeUpdate(RecipeVO rvo);
 //	public boolean recipeDelete(RecipeVO rvo);
+	public List<RecipeVO> searchRecipe(RecipeVO rvo);
 }

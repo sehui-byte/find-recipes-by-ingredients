@@ -40,6 +40,11 @@ public class RecipeDAOImpl implements RecipeDAO
 	{
 		return sqlSession.insert("recipeJsonInsert", rvo);
 	}
+
+	@Override
+	public List<RecipeVO> searchRecipe(RecipeVO rvo) {
+		return sqlSession.selectList("searchRecipe",rvo);
+	}
 	
 //
 //	

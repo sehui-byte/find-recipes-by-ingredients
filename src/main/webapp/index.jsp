@@ -187,6 +187,10 @@
 		</ul>
 	</div>
 	<!-- wrapper end -->
+	
+	<!-- 검색 -->
+	<%@ include file="/WEB-INF/view/recipe/searchRecipe.jsp"%>   
+	
 
 </body>
 </html>
