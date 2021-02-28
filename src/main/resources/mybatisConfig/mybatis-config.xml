@@ -21,6 +21,7 @@
  		<typeAlias type="com.jns.flask.vo.NutrientVO" alias="nuvo"/>
  		<typeAlias type="com.jns.flask.vo.SignupIncVO" alias="suvo"/>
  		<typeAlias type="com.jns.flask.vo.SubscribeIncVO" alias="ssvo"/>
+ 		<typeAlias type="com.jns.flask.vo.LikeProductInfoVO" alias="lpvo"/>
  		<typeAlias type="com.jns.alarm.vo.AlarmVO" alias="avo"/>
 	</typeAliases>
 </configuration>
