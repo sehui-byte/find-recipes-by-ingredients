@@ -1,8 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %> 
 <%@ page import="com.jns.board.vo.BoardVO" %>
 <%@page import="com.jns.common.FileLoadUtil"%>
+<%@ include file="/WEB-INF/include/jsp/header.jsp" %>
+<%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +23,8 @@
 	   curPage = Integer.parseInt(request.getParameter("curPage"));
 	}
 %>
-<meta charset="EUC-KR">
-<title>QnA °Ô½ÃÆÇ</title>
+<meta charset="UTF-8">
+<title>QnA ê²Œì‹œíŒ</title>
 <style type="text/css">
 	.tt{
 		text-align: center;
@@ -34,20 +36,19 @@
 
 	$(document).ready(function(){
 		
-		//°Ë»ö¹öÆ°
+		//ê²€ìƒ‰ë²„íŠ¼
 		$(document).on("click", "#searchBtn", function(){
 			console.log("searchBtn >>> : ");
 			$("#boardList").attr({"method":"GET"
 								 ,"action":"qnaSelectAllPage.do"}).submit();
 		});
 		
-		// ÀÔ·Â
+		// ìž…ë ¥
 		$(document).on("click", "#I", function(){
 			location.href="qnaForm.do";
 		});	
 		
 		$(document).on("click", "#S", function(){
-			alert("S >>> :");
 			$("#QnAList").attr({
 				"method":"GET",
 				"action":"qnaSelect.do"}).submit();			
@@ -80,34 +81,34 @@
 <table border="1" align="center">
 	<thead>
 	<tr>
-		<td colspan="10" align="center"><h2>QnA °Ô½ÃÆÇ</h2></td>
+		<td colspan="10" align="center"><h2>QnA ê²Œì‹œíŒ</h2></td>
 	</tr>
 	<tr>
 		<td colspan="10" align="left">
 			<select id="keyfilter" name="keyfilter">
-				<option value="key1">Á¦¸ñ</option>
-				<option value="key2">³»¿ë</option>
-				<option value="key3">Á¦¸ñ+³»¿ë</option>
-				<option value="key4">ÀÛ¼ºÀÚ</option>
-				<option value="key5">±Û¹øÈ£</option>
+				<option value="key1">ì œëª©</option>
+				<option value="key2">ë‚´ìš©</option>
+				<option value="key3">ì œëª©+ë‚´ìš©</option>
+				<option value="key4">ìž‘ì„±ìž</option>
+				<option value="key5">ê¸€ë²ˆí˜¸</option>
 			</select>
-			<input type="text" id="keyword" name="keyword" placeholder="°Ë»ö¾î ÀÔ·Â"><br>
-			<input type="text" id="startdate" name="startdate" size="12" placeholder="½ÃÀÛÀÏ">
-			~<input type="text" id="enddate" name="enddate" size="12" placeholder="Á¾·áÀÏ">
-			<button type="button" id="searchBtn">°Ë»ö</button>
+			<input type="text" id="keyword" name="keyword" placeholder="ê²€ìƒ‰ì–´ ìž…ë ¥"><br>
+			<input type="text" id="startdate" name="startdate" size="12" placeholder="ì‹œìž‘ì¼">
+			~<input type="text" id="enddate" name="enddate" size="12" placeholder="ì¢…ë£Œì¼">
+			<button type="button" id="searchBtn">ê²€ìƒ‰</button>
 		</td>
 	</tr>
 	<tr>
 		<td class="tt"><input type="checkbox" name="chkAll" id="chkAll"></td>
-		<td class="tt">±Û¹øÈ£</td>
-		<td class="tt">±ÛÀ¯Çü</td>
-		<td class="tt">±ÛÁ¦¸ñ</td>
-		<td class="tt">±Û³»¿ë</td>
-		<td class="tt">ÀÛ¼ºÀÚ</td>
-		<td class="tt">»çÁø</td>
-		<td class="tt">ÀÔ·Â³¯Â¥</td>
-		<td class="tt">Á¶È¸¼ö</td>
-		<td class="tt">ÁÁ¾Æ¿ä ¼ö</td>
+		<td class="tt">ê¸€ë²ˆí˜¸</td>
+		<td class="tt">ê¸€ìœ í˜•</td>
+		<td class="tt">ê¸€ì œëª©</td>
+		<td class="tt">ê¸€ë‚´ìš©</td>
+		<td class="tt">ìž‘ì„±ìž</td>
+		<td class="tt">ì‚¬ì§„</td>
+		<td class="tt">ìž…ë ¥ë‚ ì§œ</td>
+		<td class="tt">ì¡°íšŒìˆ˜</td>
+		<td class="tt">ì¢‹ì•„ìš” ìˆ˜</td>
 	</tr>
 	</thead>
 <%
@@ -137,7 +138,7 @@
 %>
 	<tbody>
 	<tr>
-		<td colspan="10" align="center">µî·ÏµÈ °Ô½Ã¹°ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.</td>
+		<td colspan="10" align="center">ë“±ë¡ëœ ê²Œì‹œë¬¼ì´ ì¡´ìž¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.</td>
 	</tr>	
 <%		
 		
@@ -145,15 +146,15 @@
 %>
 	<tr>
 		<td colspan="10" align="right">
-			<input type="button" value="±Û¾²±â" id="I">
-			<input type="button" value="±Ûº¸±â" id="S">
-			<input type="button" value="ÀüÃ¼¸ñ·Ï" id="A">
+			<input type="button" value="ê¸€ì“°ê¸°" id="I">
+			<input type="button" value="ê¸€ë³´ê¸°" id="S">
+			<input type="button" value="ì „ì²´ëª©ë¡" id="A">
 		</td>
 	</tr>
 	</tbody>
 </table>
 <br>
-	<div class="paging" style="position: absolute; left: 900px; top: 500px;">
+	<div class="paging" style="position: absolute; left: 900px; top: 600px;">
 		<jsp:include page="paging.jsp" flush="true">
 		<jsp:param name="url" value="qnaSelectAllPage.do"/>
 		<jsp:param name="str" value=""/>

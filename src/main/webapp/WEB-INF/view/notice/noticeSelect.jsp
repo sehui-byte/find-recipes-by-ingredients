@@ -67,7 +67,6 @@
 		
 		// U
 		$(document).on("click", "#U", function(){
-			alert("U >>> :");
 			$("#NoticeUpdateForm").attr({
 				"method":"GET",
 				"action":"noticeUpdate.do"
@@ -76,7 +75,6 @@
 		
 		// D
 		$(document).on("click", "#D", function(){
-			alert("D >>> : ");
 			$("#NoticeUpdateForm").attr({
 				"method":"GET",
 				"action":"noticeDelete.do"
