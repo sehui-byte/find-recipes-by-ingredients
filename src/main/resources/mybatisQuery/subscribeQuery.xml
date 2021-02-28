@@ -73,7 +73,7 @@
 												,C.MNICK AS MNICK
 						      			  FROM 	 CHEF_INFO B, MEMBER C
 						      			  WHERE	 B.MNO = C.MNO
-						      			  AND 	 C.IDELETEYN = 'Y') D
+						      			  AND 	 B.IDELETEYN = 'Y') D
 			 	 WHERE		 A.INO = D.INO
 			 	 AND		 A.SDELETEYN = 'Y'
 			 	 GROUP BY 	 D.MNICK
