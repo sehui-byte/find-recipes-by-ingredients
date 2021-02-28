@@ -20,6 +20,7 @@ public abstract class FlaskUtil
 	public static String FLASK_SERVER_URL = "http://127.0.0.1:5000/test";
 	//public static String FLASK_SERVER_URL = "http://54.180.83.249:5000/graph";
 	
+	@SuppressWarnings("deprecation")
 	public static List<SubscribeIncVO> divSsvoYYYYMM(SubscribeIncVO ssvo)
 	{
 		String ino = ssvo.getIno(); //셰프번호
@@ -33,7 +34,6 @@ public abstract class FlaskUtil
 		logger.info("start_mm >>> : " + start_mm);
 		logger.info("end_yyyy >>> : " + end_yyyy);
 		logger.info("end_mm >>> : " + end_mm);
-		
 		Date startDate = new Date(start_yyyy-1900, start_mm-1, 1);
 		Date endDate = new Date(end_yyyy-1900, end_mm-1, 1);
 		
@@ -62,6 +62,7 @@ public abstract class FlaskUtil
 		return list;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static List<SignupIncVO> divSuvoYYYYMM(SignupIncVO suvo)
 	{
 		List<SignupIncVO> list = new ArrayList<SignupIncVO>();

@@ -8,6 +8,7 @@ import com.jns.recipeboard.vo.RecipeBoardVO;
 public interface RecipeBoardDAO 
 {
 	public List<RecipeBoardVO> recipeBoardSelectAll();
+	public List<RecipeBoardVO> recipeBoardSelectAllPage(RecipeBoardVO rbvo);
 	public RecipeBoardVO recipeBoardSelect(RecipeBoardVO rbvo);
 	public boolean recipeBoardInsert(RecipeBoardVO rbvo);
 	public boolean recipeBoardUpdate(RecipeBoardVO rbvo);

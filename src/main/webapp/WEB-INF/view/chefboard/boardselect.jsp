@@ -97,34 +97,7 @@
 		}
 		
 		// 구독 여부 체크
-		var subCheckUrl = "/kosmoJns/subscribe/subCheck.do";
-		var subCheckType = "GET";
-		var subCheckData = {
-				"rbno": "<%=request.getParameter("rbno")%>",
-				"mno": sessionMno
-		};
-		$.ajax({
-			url: subCheckUrl,
-			type: subCheckType,
-			data: subCheckData,
-			success: subCheckSuccess,
-			error: subCheckError
-		});
-
-		function subCheckSuccess(resultData){
-			if(resultData=="ALREADY"){
-				console.log("이미 구독중");
-				$('#Subs').attr('style', 'background-color:#F9A781;');
-				$('#Subs').attr('value', '구독중');
-				$('#Subs').attr('disabled', true);
-				
-			}else{
-				console.log("아직 구독하지 않음");
-			}
-		}
-		function subCheckError(){
-			alert("[구독] 시스템 오류입니다. 관리자에게 문의하세요.");
-		}		
+		checkSubscribe();		
 		
 		
 		// 추천
@@ -198,8 +171,7 @@
 			function whenSuccess(resultData){
 				if(resultData=="GOOD"){
 					alert("구독 완료!");
-					dataReset();
-					listAll(rbno);
+					checkSubscribe();
 				}
 			}
 			function whenError(){
@@ -277,8 +249,39 @@
 						alert("서비스에 문제가 발생하였습니다. 담당자에게 문의하시기 바랍니다.");
 					}
 				})
-	});
+				
+		function checkSubscribe(){
+			var subCheckUrl = "/kosmoJns/subscribe/subCheck.do";
+			var subCheckType = "GET";
+			var subCheckData = {
+					"rbno": "<%=request.getParameter("rbno")%>",
+					"mno": sessionMno
+			};
+			$.ajax({
+				url: subCheckUrl,
+				type: subCheckType,
+				data: subCheckData,
+				success: subCheckSuccess,
+				error: subCheckError
+			});
 
+			function subCheckSuccess(resultData){
+				if(resultData=="ALREADY"){
+					console.log("이미 구독중");
+					$('#Subs').attr('style', 'background-color:#F9A781;');
+					$('#Subs').attr('value', '구독중');
+					$('#Subs').attr('disabled', true);
+					
+				}else{
+					console.log("아직 구독하지 않음");
+				}
+			}
+			function subCheckError(){
+				alert("[구독] 시스템 오류입니다. 관리자에게 문의하세요.");
+			}
+		}
+	});
+	
 </script>
 </head>
 <body>
@@ -314,7 +317,7 @@
 				<td><span style="font-size: 14px"><%=cbvo.getRcp_pat2()%></span></td>
 			</tr>
 			<tr>
-				<td class="tt" width="20%"><span style="font-size: 14px">해쉬태그</span></td>
+				<td class="tt" width="20%"><span style="font-size: 14px">해시태그</span></td>
 				<td><span style="font-size: 14px"><%=cbvo.getHash_tag() == null ? "--" : "#" + cbvo.getHash_tag()%></span></td>
 			</tr>
 			<tr>

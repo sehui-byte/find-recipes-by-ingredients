@@ -202,19 +202,18 @@ public class MemberController {
 	
 
 	// 아이디 중복 체크
-	@RequestMapping(value = "mem/checkID", method = RequestMethod.GET)
+	@RequestMapping(value = "mem/checkID.do", method = RequestMethod.GET)
 	@ResponseBody
-	public String checkID(MemberVO mvo) {
+	public boolean checkID(MemberVO mvo) {
 		logger.info("MemberController CheckID 함수 진입 >>> : ");
 		logger.info("MemberController CheckID mvo.getMid()  >>> : " + mvo.getMid());
 
 		List<MemberVO> listAll = memberService.checkID(mvo);
-
+		logger.info("아이디 중복체크 결과 >> " + listAll.size());
 		if (listAll.size() == 0) {
-			return "ID_GOOD";
+			return true;
 		} else {
-
-			return "";
+			return false;
 		}
 	}
 

@@ -175,7 +175,7 @@
 					<textarea class="form-control" name="manual01" id="manual01" rows="10" cols="70"><%=cbvo.getManual01()%></textarea>
 					<img id="thumb01" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img01())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img01" name="file01" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img01f" name="manual_img01f" onchange="setThumbnail(event);">
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
@@ -834,6 +834,7 @@
 		</tbody>
 	</table>
 </form>
+<div>Icons made by <a href="https://www.flaticon.com/kr/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
 </div>
 </body>
 </html>

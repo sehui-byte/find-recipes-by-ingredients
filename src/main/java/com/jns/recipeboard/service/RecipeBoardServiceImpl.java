@@ -27,6 +27,12 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	}
 
 	@Override
+	public List<RecipeBoardVO> recipeBoardSelectAllPage(RecipeBoardVO rbvo) {
+		// TODO Auto-generated method stub
+		return recipeBoardDAO.recipeBoardSelectAllPage(rbvo);
+	}
+	
+	@Override
 	public RecipeBoardVO recipeBoardSelect(RecipeBoardVO rbvo) {
 		// TODO Auto-generated method stub
 		return recipeBoardDAO.recipeBoardSelect(rbvo);

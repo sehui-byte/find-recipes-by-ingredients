@@ -16,4 +16,6 @@ public interface NoticeDAO {
 	
 	public int NoticeVIEWS(BoardVO nvo);
 	public int NoticeHITS(BoardVO nvo);
+	
+	public List<BoardVO> BrandNewNotice(BoardVO nvo);
 }

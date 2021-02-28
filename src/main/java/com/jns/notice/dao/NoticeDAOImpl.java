@@ -63,4 +63,10 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return (Integer)sqlSession.update("NoticeHITS", nvo);
 	}
 
+	@Override
+	public List<BoardVO> BrandNewNotice(BoardVO nvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("BrandNewNotice", nvo);
+	}
+
 }
