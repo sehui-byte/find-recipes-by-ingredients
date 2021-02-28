@@ -6,6 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+
+	.btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;
+	}
+</style>
 <script type="text/javascript">
 
 	$(function(){
@@ -237,7 +244,7 @@
 		date_span.html(" 등록:" + rinsertdate + " / 수정:" + rupdatedate + " ");
 		
 		// 수정하기 버튼
-		var up_input = $("<input class='btn btn-warning btn-sm'>");
+		var up_input = $("<input class='btn btn-orange btn-sm'>");
 		up_input.attr({"type" : "button", "value" : "수정"});
 		up_input.addClass("update_form");
 		
@@ -250,7 +257,7 @@
 		nbspM.html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 		
 		// 삭제하기 버튼
-		var del_input = $("<input class='btn btn-warning btn-sm'>");
+		var del_input = $("<input class='btn btn-orange btn-sm'>");
 		del_input.attr({"type" : "button", "value" : "삭제" });
 		del_input.addClass("delete_btn");
 		
@@ -357,7 +364,7 @@
 			</tr>
 			<tr>
 				<td align="right">
-					<input class="btn btn-warning" type="button" id="replyInsert" value="저장" 
+					<input class="btn btn-orange" type="button" id="replyInsert" value="저장" 
 						   onclick="sendMessage()">
 				</td>
 			</tr>

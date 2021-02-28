@@ -29,12 +29,8 @@
 		vertical-align: middle;
 	}
 	
-	.tb{
-		vertical-align: bottom;
-	}
-	
 	.btn-orange { 
-		background-color: #FF7F00; 
+		background-color: #F9A781; 
 		font-weight: bold;
 	}
 </style>
@@ -179,7 +175,7 @@
 					<img id="thumb01" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img01())%>"><br>
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img01" name="file01" onchange="setThumbnail(event);">
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -193,7 +189,7 @@
 					<td><textarea class="form-control" name="manual01" id="manual01" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img01f" id="manual_img01f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -213,7 +209,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img02f" name="manual_img02f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -226,7 +222,7 @@
 					<td><textarea class="form-control" name="manual02" id="manual02" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img02f" id="manual_img02f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -246,7 +242,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img03f" name="manual_img03f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -259,7 +255,7 @@
 					<td><textarea class="form-control" name="manual03" id="manual03" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img03f" id="manual_img03f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -279,7 +275,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img04f" name="manual_img04f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -292,7 +288,7 @@
 					<td><textarea class="form-control" name="manual04" id="manual04" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img04f" id="manual_img04f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -312,7 +308,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img05f" name="manual_img05f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -325,7 +321,7 @@
 					<td><textarea class="form-control" name="manual05" id="manual05" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img05f" id="manual_img05f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -345,7 +341,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img06f" name="manual_img06f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -358,7 +354,7 @@
 					<td><textarea class="form-control" name="manual06" id="manual06" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img06f" id="manual_img06f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -378,7 +374,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img07f" name="manual_img07f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -391,7 +387,7 @@
 					<td><textarea class="form-control" name="manual07" id="manual07" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img07f" id="manual_img07f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -411,7 +407,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img08f" name="manual_img08f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -424,7 +420,7 @@
 					<td><textarea class="form-control" name="manual08" id="manual08" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img08f" id="manual_img08f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -444,7 +440,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img09f" name="manual_img09f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -457,7 +453,7 @@
 					<td><textarea class="form-control" name="manual09" id="manual09" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img09f" id="manual_img09f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -477,7 +473,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img10f" name="manual_img10f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -490,7 +486,7 @@
 					<td><textarea class="form-control" name="manual10" id="manual10" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img10f" id="manual_img10f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -510,7 +506,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img11f" name="manual_img11f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -523,7 +519,7 @@
 					<td><textarea class="form-control" name="manual11" id="manual11" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img11f" id="manual_img11f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -543,7 +539,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img12f" name="manual_img12f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -556,7 +552,7 @@
 					<td><textarea class="form-control" name="manual12" id="manual12" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img12f" id="manual_img12f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -576,7 +572,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img13f" name="manual_img13f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -589,7 +585,7 @@
 					<td><textarea class="form-control" name="manual13" id="manual13" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img13f" id="manual_img13f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -609,7 +605,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img14f" name="manual_img14f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -622,7 +618,7 @@
 					<td><textarea class="form-control" name="manual14" id="manual14" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img14f" id="manual_img14f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -642,7 +638,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img15f" name="manual_img15f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -655,7 +651,7 @@
 					<td><textarea class="form-control" name="manual15" id="manual15" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img15f" id="manual_img15f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -675,7 +671,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img16f" name="manual_img16f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -688,7 +684,7 @@
 					<td><textarea class="form-control" name="manual16" id="manual16" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img16f" id="manual_img16f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -708,7 +704,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img17f" name="manual_img17f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -721,7 +717,7 @@
 					<td><textarea class="form-control" name="manual17" id="manual17" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img17f" id="manual_img17f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -741,7 +737,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img18f" name="manual_img18f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -754,7 +750,7 @@
 					<td><textarea class="form-control" name="manual18" id="manual18" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img18f" id="manual_img18f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -774,7 +770,7 @@
 					이미지 변경하기▼
 					<input type="file" class="form-control" id="manual_img19f" name="manual_img19f" onchange="setThumbnail(event);">
 				</td>
-				<td class="tb">				
+				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 				</td>
@@ -787,7 +783,7 @@
 					<td><textarea class="form-control" name="manual19" id="manual19" rows="10" cols="70"></textarea>
 						<input type="file" class="form-control" name="manual_img19f" id="manual_img19f">
 					</td>
-					<td class="tb">				
+					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
 	    		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
 					</td>
@@ -821,12 +817,12 @@
 			}		
 		%>
 		<tr>
-			<td>등록일</td>
-			<td><%=cbvo.getRb_insertdate()%></td>
+			<td><span style="font-size: 14px">등록일</span></td>
+			<td><span style="font-size: 14px"><%=cbvo.getRb_insertdate()%></span></td>
 		</tr>
 		<tr>
-			<td>수정일</td>
-			<td><%=cbvo.getRb_updatedate()%></td>
+			<td><span style="font-size: 14px">수정일</span></td>
+			<td><span style="font-size: 14px"><%=cbvo.getRb_updatedate()%></span></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="right">
