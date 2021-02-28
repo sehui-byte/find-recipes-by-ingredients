@@ -70,7 +70,6 @@
 		
 		// U
 		$(document).on("click", "#U", function(){
-			alert("U >>> ");
 			$("#QnAUpdateForm").attr({
 				"method":"GET",
 				"action":"qnaUpdate.do"
@@ -79,7 +78,6 @@
 		
 		// D
 		$(document).on("click", "#D", function(){
-			alert("D >>> : ");
 			$("#QnAUpdateForm").attr({
 				"method":"GET",
 				"action":"qnaDelete.do"
