@@ -17,6 +17,7 @@ public abstract class FlaskUtil
 {
 	private static Logger logger = Logger.getLogger(FlaskUtil.class);
 	public static String FLASK_SERVER_URL = "http://127.0.0.1:5000/test";
+	//public static String FLASK_SERVER_URL = "http://54.180.83.249:5000/graph";
 	
 	public static List<SubscribeIncVO> divSsvoYYYYMM(SubscribeIncVO ssvo)
 	{

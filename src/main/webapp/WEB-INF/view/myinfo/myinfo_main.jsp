@@ -63,7 +63,8 @@ div, h1, h2, h3, h4, h5, h6, p {
 		</tr>
 		<tr>
 			<td>
-				<img src="http://loacalhost:5000/static/image/subscribeInc">
+				<a></a>
+				<a href="sendSubscribeInc?start_yyyymm=202004&end_yyyymm=202104">내 구독자 </a>
 			</td>	
 		</tr>	
 	</table>

@@ -28,6 +28,8 @@ public class SubscribeIncVO //Subscribe Increase trend : 구독 증가 추이
 
 
 	
+
+
 	public String getYear() {
 		return year;
 	}

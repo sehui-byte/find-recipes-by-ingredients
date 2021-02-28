@@ -22,10 +22,10 @@
 	out.println(obj);
 
 %>
-<a href="/kosmoJns/testDownload.do">플라스크 테스트 다운로드</a><br>
+<!--  <a href="/kosmoJns/testDownload.do">플라스크 테스트 다운로드</a><br>-->
+<a href="/kosmoJns/sendNutrient.do?rcp_seq=1">플라스트 테스트</a><br>
+<a href="sendSignupInc?start_yyyymm=202004&end_yyyymm=202104">플라스크 테스트 - 월별회원가입증가추이(파라미터 : 202004 ~ 202104)</a>
 
-<img src="resources/graph/test.png"><br>
-<img src="resources/img/cal_0.gif">
 
 </body>
 </html>
