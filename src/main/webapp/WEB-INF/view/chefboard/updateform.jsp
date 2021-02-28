@@ -122,6 +122,7 @@
 	};
 %>
 <form name="f_updateForm" id="f_updateForm">
+	<span style="font-size: 14px">Chef Board</span>
 	<table class="table">
 		<thead>
 			<tr>
