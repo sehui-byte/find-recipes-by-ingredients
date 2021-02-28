@@ -80,6 +80,8 @@ div, h1, h2, h3, h4, h5, h6, p {
 	position: fixed;
 	right: 40px;
 	top: 100px;
+	/*가려지지 않게 맨 위로 배치*/
+	z-index: 1;
 }
 
 .fas {
