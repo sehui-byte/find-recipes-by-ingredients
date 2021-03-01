@@ -2,12 +2,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.jns.member.vo.MemberVO"%>
+<%@page import="com.jns.common.FileLoadUtil"%>
 <%@ page import="java.util.List"%>
+<%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
 <!-- header -->
 <%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
+<%
+	Object obj2 = request.getAttribute("p_mvo");
+	MemberVO mvoP =(MemberVO) obj2; 
+	
+	int Size = mvoP.getPageSize();
+	int pageSize = mvoP.getPageSize();
+	int groupSize = mvoP.getGroupSize();
+	int curPage = mvoP.getCurPage();
+	int totalCount = mvoP.getTotalCount();
+	
+	
+	if(request.getParameter("curPage") != null){
+	   curPage = Integer.parseInt(request.getParameter("curPage"));
+	}
+%>
 <meta charset="UTF-8">
 <title>JNS : 전지적 냉장고 시점 회원 전체 조회</title>
 <style type="text/css">
@@ -58,6 +75,13 @@ tbody td {
 				"action" : "memberSelect.do"
 			}).submit();
 		});
+		
+		$(document).on("click", "#searchBtn", function(){
+			console.log("searchBtn >>> : ");
+			$("#memberList").attr({
+				"method":"GET",
+				"action":"memberSelectAll.do"}).submit();
+		});
 	});
 </script>
 </head>
@@ -67,7 +91,7 @@ tbody td {
 	%>
 
 	<%
-	Object obj = request.getAttribute("listAll");
+	Object obj = request.getAttribute("listPage");
 	List<MemberVO> list = (List) obj;
 	int nCnt = list.size();
 	%>
@@ -96,45 +120,103 @@ tbody td {
 						<td class="tt">삭제여부</td>
 					</tr>
 				</thead>
-				<%
-				for (int i = 0; i < nCnt; i++) {
-					MemberVO mvo = (MemberVO) list.get(i);
-				%>
-				<tbody>
-					<tr>
-						<td class="tt"><input type="checkbox" name="mno"
-							id="chkInMnum" value=<%=mvo.getMno()%> onclick="checkOnly(this)"
-							class="chkbox"></td>
-						<td title="<%=mvo.getMno()%>"><%=mvo.getMno()%></td>
-						<td title="<%=mvo.getMlevel()%>"><%=mvo.getMlevel()%></td>
-						<td title="<%=mvo.getMid()%>"><%=mvo.getMid()%></td>
-						<td title="<%=mvo.getMpw()%>"><%=mvo.getMpw()%></td>
-						<td title="<%=mvo.getMname()%>"><%=mvo.getMname()%></td>
-						<td title="<%=mvo.getMnick()%>"><%=mvo.getMnick()%></td>
-						<td title="<%=mvo.getMhp()%>"><%=mvo.getMhp()%></td>
-						<td title="<%=mvo.getMemail()%>"><%=mvo.getMemail()%></td>
-						<td title="<%=mvo.getMaddr()%>"><%=mvo.getMaddr()%></td>
-						<td title="<%=mvo.getMzipcode()%>"><%=mvo.getMzipcode()%></td>
-						<td title="<%=mvo.getMaddrdetail()%>"><%=mvo.getMaddrdetail()%></td>
-						<td>
-							<%-- <img
-							src="<%=new FileLoadUtil().getFileSrc("member", mvo.getMphoto())%>"> --%>이미지
-						</td>
-						<td><%=mvo.getMinsertdate()%></td>
-						<td><%=mvo.getMupdatedate()%></td>
-						<td><%=mvo.getMdeleteyn()%></td>
-
-
-					</tr>
-					<%
-					} // end of if
-					%>
-
-				</tbody>
+<%
+	for (int i = 0; i < nCnt; i++) {
+	MemberVO mvo = (MemberVO) list.get(i);
+%>
+	<tbody>
+		<tr>
+			<td class="tt"><input type="checkbox" name="mno"
+				id="chkInMnum" value=<%=mvo.getMno()%> onclick="checkOnly(this)"
+				class="chkbox"></td>
+				<td title="<%=mvo.getMno()%>"><%=mvo.getMno()%></td>
+				<td title="<%=mvo.getMlevel()%>"><%=mvo.getMlevel()%></td>
+				<td title="<%=mvo.getMid()%>"><%=mvo.getMid()%></td>
+				<td title="<%=mvo.getMpw()%>"><%=mvo.getMpw()%></td>
+				<td title="<%=mvo.getMname()%>"><%=mvo.getMname()%></td>
+				<td title="<%=mvo.getMnick()%>"><%=mvo.getMnick()%></td>
+				<td title="<%=mvo.getMhp()%>"><%=mvo.getMhp()%></td>
+				<td title="<%=mvo.getMemail()%>"><%=mvo.getMemail()%></td>
+				<td title="<%=mvo.getMaddr()%>"><%=mvo.getMaddr()%></td>
+				<td title="<%=mvo.getMzipcode()%>"><%=mvo.getMzipcode()%></td>
+				<td title="<%=mvo.getMaddrdetail()%>"><%=mvo.getMaddrdetail()%></td>
+				<td>
+				<%-- <img src="<%=new FileLoadUtil().getFileSrc("member", mvo.getMphoto())%>"> --%>이미지</td>
+				<td><%=mvo.getMinsertdate()%></td>
+				<td><%=mvo.getMupdatedate()%></td>
+				<td><%=mvo.getMdeleteyn()%></td>
+				</tr>
+<%
+	} // end of if
+%>
+			<tr>
+				<td colspan="16" align="right">
+					<input type="button" value="회원 등록(관리자)" id="I"> 
+					<input type="button" value="회원정보 수정" id="U">
+				</td>
+			</tr>
+			</tbody>
 			</table>
-		</form>
-		<input type="button" value="회원 등록(관리자)" id="I"> <input
-			type="button" value="회원정보 수정" id="U">
+					<!-- =================  검색창 그리드 설정 ================= -->
+	<div class="container-fluid">
+		<div class="row">
+		  <div class="col-6 col-md-4"></div>
+		  <div class="col-6 col-md-4">
+		  	<div class="row row-cols-2">
+		  		<div class="col-4">
+		  			<select class="form-select" id="keyfilter" name="keyfilter">
+						<option value="key1">회원이름</option>
+						<option value="key2">회원ID</option>
+					</select>
+		  		</div>
+			    <div class="col-8">
+			    	<div class="input-group">
+			    		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어 입력">
+				    	<span class="input-group-btn">
+				    		<button class="btn btn-orange" type="button" id="searchBtn">검색</button>
+				    	</span>			    			    	
+			    	</div>
+			    </div>
+		  	</div>
+		  </div>
+		  <div class="col-6 col-md-4"></div>
+		</div>
+		<div class="row">
+		  <div class="col-6 col-md-4"></div>
+		  <div class="col-6 col-md-4">
+		  	<div class="row row-cols-4">
+		  		<div class="col-4">
+		  			<input type="text" class="form-control" id="startdate" name="startdate" size="12" placeholder="시작일">
+		  		</div>
+		  		<div class="col-1">
+		  			<p>~</p>
+		  		</div>
+		  		<div class="col-4">
+		  			<input type="text" class="form-control" id="enddate" name="enddate" size="12" placeholder="종료일">
+		  		</div>
+		  		<div class="col-3">
+		  		</div>
+		  	</div>
+		  </div>
+		  <div class="col-6 col-md-4"></div>
+		</div>	
+	</div>
+	<!-- =================  검색창 그리드 설정 ================= -->
+	
+
+	</form>
+
+
+<br>
+	<div class="paging">
+		<jsp:include page="../../include/jsp/paging.jsp" flush="true">
+		<jsp:param name="url" value="memberSelectAll.do"/>
+		<jsp:param name="str" value=""/>
+		<jsp:param name="pageSize" value="<%=pageSize%>"/>
+		<jsp:param name="groupSize" value="<%=groupSize%>"/>
+		<jsp:param name="curPage" value="<%=curPage%>"/>
+		<jsp:param name="totalCount" value="<%=totalCount%>"/>
+	</jsp:include>
 	</div>
 </body>
 </html>
