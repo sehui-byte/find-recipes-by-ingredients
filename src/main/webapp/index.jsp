@@ -48,17 +48,7 @@ header {
 	right: 0;
 }
 </style>
-<%
-Object obj = request.getAttribute("listS");
-List<BoardVO> list = (List) obj;
-BoardVO nvo = null;
 
-nvo = new BoardVO();
-
-nvo.setBtitle("공지");
-nvo.setMnick("관리자");
-nvo.setBinsertdate("2021-03-01");
-%>
 </head>
 <body>
 	<%
@@ -92,16 +82,6 @@ nvo.setBinsertdate("2021-03-01");
 		</div>
 	</div>
 
-	<script>
-		// 데이터 체크
-		function isEmpty(val) {
-			if (typeof val == "undefined" || val == null || val == "") {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	</script>
 	<form name="index" id="index" action="noticeSelect.do">
 		<input type="hidden" name="bno" id="bno"> <input type="hidden"
 			name="btitle" id="btitle"> <input type="hidden" name="mnick"
@@ -111,11 +91,11 @@ nvo.setBinsertdate("2021-03-01");
 
 	<!-- content -->
 	<div id="wrapper">
-
+		
+		<h3>공지사항</h3>
 		<!-- 공지사항 최신순 글 3개 표시 -->
 		<div id="brandNewNotice"></div>
 
-	</div>
 	<h3>공지사항 관련 URL</h3>
 	<ul>
 		<li><a href="noticeForm.do">공지사항 글쓰기</a></li>
@@ -242,15 +222,20 @@ nvo.setBinsertdate("2021-03-01");
 					console.log(data);
 					var html = '';
 					html += '<table class="table">';
-					
+					html += '<thead>';
+					html += '<th scope="col">제목</th>';
+					html += '<th scope="col">내용</th>';
+					html += '<th scope="col">날짜</th>';
+					html+='</thead>';
+					html+="<tbody>";
 					for(var i = 0; i<3; i++){
 						html += '<tr>';
-						html += '<td>' + data[i].ntitle + '</td>';
-						html += '<td>' + data[i].ncontent + '</td>';
-						html += '<td>' + data[i].ninsertdate + '</td>';
+						html += '<td>' + isEmpty(data[i].ntitle) + '</td>';
+						html += '<td>' + isEmpty(data[i].ncontent) + '</td>';
+						html += '<td>' + isEmpty(data[i].ninsertdate) + '</td>';
 						html += '</tr>';
 					}
-					
+					html+="</tbody>";
 					html += '</table>';
 					$("#brandNewNotice").append(html);
 				},
@@ -258,6 +243,16 @@ nvo.setBinsertdate("2021-03-01");
 					console.log("최신 공자사항 가져오기 에러!");
 				}
 			});
+		}
+		
+		// 데이터 체크
+		function isEmpty(val) {
+			if (typeof val == "undefined" || val == null || val == "") {
+				return "없음";
+			}
+			else{
+				return val;
+			}
 		}
 	</script>
 </body>
