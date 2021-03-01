@@ -95,7 +95,9 @@ public class EchoHandler extends TextWebSocketHandler {
 		//클라이언트와 연결이 해제되면 제거한다
 		logger.info("유저 세션 제거");
 		String mid = getMid(session);
-		users.remove(mid);
+		if(mid != null) {
+			users.remove(mid);
+		}
 	}
 
 	@Override
@@ -103,7 +105,9 @@ public class EchoHandler extends TextWebSocketHandler {
 		//메세지 전송 중 에러가 발생하면 실행되는 함수
 		logger.info("에러발생! 유저 세션 제거");
 		String mid = getMid(session);
-		users.remove(mid);
+		if(mid != null) {
+			users.remove(mid);
+		}
 	}
 
 	//클라이언트가 웹소켓 서버로 메세지를 전송했을 때 실행되는 메소드
