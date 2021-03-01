@@ -28,11 +28,10 @@ $(document).ready(function(){
 		alert("회원가입 페이지로 이동합니다 >>> ");
 		location.href="/kosmoJns/memberForm.do";
 	})
-	 */
 	// findidpw btn click
 	$('#findidpw').click(function(){
-		alert("아이디/비밀번호 찾기 페이지로 이동합니다 >>> ")
-		var url = "/kosmoJns/memberFindIDnPW.do";
+		alert("아이디/비밀번호 찾기 페이지로 이동합니다 >>> ");
+		var url = "/kosmoJns/memberFindIDnPW";
 		var title = "아이디/비밀번호 찾기";
 		var _width = "500";
 		var _height = "300";
@@ -46,7 +45,7 @@ $(document).ready(function(){
 		var option = "width ="+_width+", height ="+_height+", top ="+popupX+", left ="+popupY;//+", location = no";
 		window.open(url, title, option)	
 	})
-	
+	 */
 })
 
 	//enter키 눌렀을 때 페이지 재로딩 되는 것 방지
@@ -69,6 +68,23 @@ $(document).ready(function(){
 				$("#loginForm").submit();	
 			}	
 		}
+	}
+	
+	function memberFindIDnPW(){
+		var url = "/kosmoJns/memberFindIDnPW";
+		var title = "아이디/비밀번호 찾기";
+		var _width = "500";
+		var _height = "300";
+		
+		var popupX = (document.body.offsetWidth /2) - (_width/2);		
+		var popupY = (window.screen.height /2) - (_height/2);		
+		
+		// 가운데로 구하고 싶은데 잘 안된다.
+		//var _left = Math.ceil((window.screen.width - _width)/2);
+		//var _top = Math.ceil((window.screen.width - _height)/2);
+		var option = "width ="+_width+", height ="+_height+", top ="+popupX+", left ="+popupY;//+", location = no";
+		window.open(url, title, option)	
+		
 	}
 
 </script>
@@ -173,7 +189,7 @@ body {
 					<!-- <input
 					type="button" id="findidpw" name="findidpw" value="아이디/비밀번호 찾기"> -->
 					<p class="message">
-					Forget? <a href="memberFindIDnPw.do">Find ID/PW</a>
+					Forget? <a href="#/kosmoJns/memberFindIDnPW" onclick="memberFindIDnPW();">Find ID/PW</a>
 				</p>
 				<p class="message">
 					Not registered? <a href="memberForm.do">Create an account</a>
