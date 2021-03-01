@@ -8,6 +8,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>레시피 목록</title>
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+		<script src="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 		<script type="text/javascript">
 			
 		$(document).ready(()=>
@@ -39,7 +41,7 @@
 			//검색버튼
 			$(document).on("click", "#searchBtn", function(){
 				console.log("searchBtn >>> : ");
-				$("#rbForm").attr({"method":"GET"
+				$("#recipeForm").attr({"method":"GET"
 									 ,"action":"recipelist.do"}).submit();
 			});
 		});
@@ -58,7 +60,9 @@
           curPage = Integer.parseInt(request.getParameter("curPage"));
        	}
       	
-		List<RecipeVO> list = (List<RecipeVO>)request.getAttribute("pageList");      	
+		List<RecipeVO> list = (List<RecipeVO>)request.getAttribute("pageList");
+		
+		System.out.println("list.size() >>> : " + list.size());
 	%>
 	<style>
 		#searchRecipeForm{
@@ -68,34 +72,29 @@
 		}
 	</style>
 	<body>
-		<!--  검색창 -->
-		<form class="d-flex" method="get" action="searchRecipe.do" id="searchRecipeForm">
-			<input id="keyword" name="keyword" class="form-control me-2"
-				type="search" placeholder="레시피 검색" aria-label="Search">
-			<button class="btn btn-outline-success" type="submit">Search</button>
-		</form>
-		<table border="1" style="margin: auto;">
-			<tr>
-				<td>레시피 번호</td>
-				<td>레시피 이름</td>
-				<td>썸네일</td>
-			</tr>
-			<%					
-			for(int i=0; i<list.size(); i++)
-			{
-			%>
-			<tr>
-				<td style="text-align: center;"><%=list.get(i).getRcp_seq()%></td>
-				<td><a
-					href="recipedetail.do?rcp_seq=<%=list.get(i).getRcp_seq()%>"><%=list.get(i).getRcp_nm()%></a></td>
-				<td><img alt="" src="<%=list.get(i).getAtt_file_no_mk()%>"
-					width="60" height="60"></td>
-			</tr>
-			<%
-			}
-			%>
-		</table>
-		<!-- =================  검색창 그리드 설정 ================= -->
+		<form id="recipeForm" name="recipeForm">
+			<table border="1" style="margin: auto;">
+				<tr>
+					<td>레시피 번호</td>
+					<td>레시피 이름</td>
+					<td>썸네일</td>
+				</tr>
+				<%					
+				for(int i=0; i<list.size(); i++)
+				{
+				%>
+				<tr>
+					<td style="text-align: center;"><%=list.get(i).getRcp_seq()%></td>
+					<td><a
+						href="recipedetail.do?rcp_seq=<%=list.get(i).getRcp_seq()%>"><%=list.get(i).getRcp_nm()%></a></td>
+					<td><img alt="" src="<%=list.get(i).getAtt_file_no_mk()%>"
+						width="60" height="60"></td>
+				</tr>
+				<%
+				}
+				%>
+			</table>
+			<!-- =================  검색창 그리드 설정 ================= -->
 			<div class="container-fluid">
 				<div class="row">
 				  <div class="col-6 col-md-4"></div>
@@ -109,7 +108,7 @@
 				  		</div>
 					    <div class="col-8">
 					    	<div class="input-group">
-					    		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어 입력">
+					    		<input type="text" class="form-control" id="keyword" name="keyword" value="<%=rvo.getKeyword() != null ? rvo.getKeyword() : ""%>" placeholder="검색어 입력">
 						    	<span class="input-group-btn">
 						    		<button class="btn btn-orange" type="button" id="searchBtn">검색</button>
 						    	</span>			    			    	
@@ -151,5 +150,6 @@
 					<jsp:param name="totalCount" value="<%=totalCount%>"/>
 				</jsp:include>
 			</div>
+		</form>
 	</body>
 </html>
