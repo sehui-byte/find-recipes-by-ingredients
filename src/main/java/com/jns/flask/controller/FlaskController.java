@@ -5,8 +5,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jns.common.FlaskUtil;
@@ -19,6 +21,7 @@ import com.jns.product.vo.ProductVO;
 import com.jns.recipe.service.RecipeService;
 import com.jns.recipe.vo.RecipeVO;
 
+@CrossOrigin(origins="*")
 @Controller
 public class FlaskController 
 {
@@ -95,10 +98,12 @@ public class FlaskController
 	}
 	
 	@RequestMapping(value = "sendLikeProductInfo", method = RequestMethod.GET)
-	public String sendLikeProductInfo(ProductVO pvo, RedirectAttributes redirectAttributes)
+	public String sendLikeProductInfo(@RequestParam(value="productId") String productId,
+			ProductVO pvo, RedirectAttributes redirectAttributes)
 	{
+		logger.info("productId >>> : " + productId.toString());
 		logger.info("pvo >>> : " + pvo.toString());
-		LikeProductInfoVO lpvo2 = flaskService.getLikeProductInfo(pvo);
+		LikeProductInfoVO lpvo2 = flaskService.getLikeProductInfo(productId, pvo);
 		String jsonStr = FlaskUtil.getLikeProductInfo(lpvo2).toJSONString();
 		logger.info("jsonStr >>> : " + jsonStr);
 		
