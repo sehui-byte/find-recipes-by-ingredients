@@ -809,7 +809,8 @@ public class RecipeVO
 	public void setRcp_deleteyn(String rcp_deleteyn) {
 		this.rcp_deleteyn = rcp_deleteyn;
 	}
-	
+
+
 	@Override
 	public String toString() {
 		return "RecipeVO [rcp_seq=" + rcp_seq + ", rcp_nm=" + rcp_nm + ", rcp_way2=" + rcp_way2 + ", rcp_pat2="
@@ -830,6 +831,10 @@ public class RecipeVO
 				+ ", manual17=" + manual17 + ", manual_img17=" + manual_img17 + ", manual18=" + manual18
 				+ ", manual_img18=" + manual_img18 + ", manual19=" + manual19 + ", manual_img19=" + manual_img19
 				+ ", manual20=" + manual20 + ", manual_img20=" + manual_img20 + ", rcp_insertdate=" + rcp_insertdate
-				+ ", rcp_updatedate=" + rcp_updatedate + ", rcp_deleteyn=" + rcp_deleteyn + "]";
+				+ ", rcp_updatedate=" + rcp_updatedate + ", rcp_deleteyn=" + rcp_deleteyn + ", pageSize=" + pageSize
+				+ ", groupSize=" + groupSize + ", curPage=" + curPage + ", totalCount=" + totalCount + ", keyfilter="
+				+ keyfilter + ", keyword=" + keyword + ", startdate=" + startdate + ", enddate=" + enddate + "]";
 	}
+	
+	
 }

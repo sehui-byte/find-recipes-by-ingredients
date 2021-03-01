@@ -45,6 +45,12 @@ public class RecipeServiceImpl implements RecipeService
 	
 		return result;
 	}
+	
+	@Override
+	public List<RecipeVO> recipeSelectAllPage(RecipeVO rvo) 
+	{
+		return recipeDAO.recipeSelectAllPage(rvo);
+	}
 
 	@Override
 	public RecipeVO recipeSelect(RecipeVO rvo) 
