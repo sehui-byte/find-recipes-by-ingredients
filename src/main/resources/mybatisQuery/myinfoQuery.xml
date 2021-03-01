@@ -294,7 +294,7 @@
 	
 	<select id="myLevelUpdateCheckHits" parameterType="mvo" resultType="java.lang.Integer">
 		SELECT
-			SUM(A.HITS)
+			NVL(SUM(A.HITS), 0)
 		FROM
 			RECIPE_BOARD A
 		WHERE A.MNO = #{mno, jdbcType=VARCHAR}
