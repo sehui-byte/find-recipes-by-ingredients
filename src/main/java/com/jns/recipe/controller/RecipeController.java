@@ -1,7 +1,9 @@
 package com.jns.recipe.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -134,6 +136,22 @@ public class RecipeController
 	{
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
 		result.put("cnt", recipeService.recipeJsonInsert());
+		return result;
+	}
+	
+	//랜덤하게 3개의 레시피를 가져와서 jsp로 넘겨주기
+	@RequestMapping(method = RequestMethod.GET, value = "randomRecipe.do")
+	public @ResponseBody List<Map<String,String>> randomRecipeSelect(RecipeVO rvo)
+	{
+		List<Map<String,String>> result = new ArrayList<Map<String,String>>();
+		List<RecipeVO> list = recipeService.randomRecipeSelect(rvo);
+		for(int i = 0; i<list.size(); i++) {
+			Map<String, String> map = new HashMap<String,String>();
+			map.put("rptitle", list.get(i).getRcp_nm());//레시피 이름
+			map.put("rpimage", list.get(i).getAtt_file_no_main()); //레시피 이미지
+			System.out.println("map >> " + map);
+			result.add(map);
+		}
 		return result;
 	}
 }

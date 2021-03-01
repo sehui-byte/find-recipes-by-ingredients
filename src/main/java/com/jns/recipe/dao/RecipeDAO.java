@@ -14,4 +14,5 @@ public interface RecipeDAO
 //	public boolean recipeUpdate(RecipeVO rvo);
 //	public boolean recipeDelete(RecipeVO rvo);
 	public List<RecipeVO> searchRecipe(RecipeVO rvo);
+	public List<RecipeVO> randomRecipeSelect(RecipeVO rvo);
 }

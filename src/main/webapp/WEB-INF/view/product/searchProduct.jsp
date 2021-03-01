@@ -34,10 +34,19 @@
 	right: 40px;
 	top: 100px;
 }
+
 #searchForm {
 	width: 400px;
 	display: inline-block;
 	text-align: center;
+}
+
+.card-title {
+	overflow: hidden;
+	/*말줄임표 */
+	text-overflow: ellipsis;
+	/*줄바꿈 막기*/
+	white-space: nowrap;
 }
 </style>
 
@@ -150,8 +159,8 @@
 									var maker = item[i].maker;//제조사
 									var brand = item[i].brand;//브랜드명
 									var mallName = item[i].mallName;//쇼핑몰상호
-									
-									if(hprice == '0'){
+
+									if (hprice == '0') {
 										hprice = lprice;
 									}
 									//onclick시 보낼 매개변수 문자열 : str (,로 구분)
@@ -165,18 +174,18 @@
 									// 최근 본 상품 목록 필요한 매개변수 문자열
 									var recentPro = title + '^^' + image + '^^'
 											+ link;
-				
+
 									html += '<div class="col">';
 									html += '<div class="card h-100" style="width: 18rem;">';
 									html += '<img src="' + image + '" alt="상품이미지" class="card-img-top"">';
 									html += '<div class="card-body">';
-									html += '<h5 class="card-title">' + title
+									html += '<h5 class="card-title" title="' + title.replace(/<b>/gi, '').replace(/<\/b>/gi, '')+ '">' + title
 											+ '</h5>'
 									html += '<ul class="list-group list-group-flush">';
 									html += '<li class="list-group-item"> 최저가 : '
 											+ lprice + '원</li>';
-											html += '<li class="list-group-item"> 최고가 : '
-												+ hprice + '원</li>';
+									html += '<li class="list-group-item"> 최고가 : '
+											+ hprice + '원</li>';
 									html += '<li class="list-group-item"> 제조사 : '
 											+ maker + '</li>';
 									html += '<li class="list-group-item"> 브랜드 : '
@@ -196,8 +205,7 @@
 									$('#keyword').empty();
 									//검색결과값 증가
 									count++;
-								}
-								else {//식품이 아닐 경우
+								} else {//식품이 아닐 경우
 									continue;
 								}
 							}

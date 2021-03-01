@@ -233,8 +233,20 @@
 
 	</insert>
 	
+	<!-- 레시피 검색 -->
 	<select id="searchRecipe" parameterType="rvo" resultType="rvo">
 	SELECT * FROM RECIPE
 	WHERE RCP_NM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%'
+	</select>
+	
+	<!-- 레시피 랜덤하게 3개 가져오기 -->
+	<select id="randomRecipeSelect" parameterType="rvo" resultType="rvo">
+		SELECT 
+			* 
+		FROM 
+			(SELECT * FROM RECIPE ORDER BY DBMS_RANDOM.RANDOM)
+		WHERE 
+			<![CDATA[ROWNUM <= 3]]>
+			AND RCP_DELETEYN = 'N'
 	</select>
 </mapper>
