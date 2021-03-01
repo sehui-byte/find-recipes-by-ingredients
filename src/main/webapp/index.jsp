@@ -242,11 +242,15 @@ nvo.setBinsertdate("2021-03-01");
 					console.log(data);
 					var html = '';
 					html += '<table class="table">';
-					html += '<tr>';
-					html += '<td>' + data.ntitle + '</td>';
-					html += '<td>' + data.ncontent + '</td>';
-					html += '<td>' + data.ninsertdate + '</td>';
-					html += '</tr>';
+					
+					for(var i = 0; i<3; i++){
+						html += '<tr>';
+						html += '<td>' + data[i].ntitle + '</td>';
+						html += '<td>' + data[i].ncontent + '</td>';
+						html += '<td>' + data[i].ninsertdate + '</td>';
+						html += '</tr>';
+					}
+					
 					html += '</table>';
 					$("#brandNewNotice").append(html);
 				},
