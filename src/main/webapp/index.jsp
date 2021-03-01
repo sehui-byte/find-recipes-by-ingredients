@@ -91,7 +91,8 @@ header {
 
 	<!-- content -->
 	<div id="wrapper">
-
+		
+		<h3>공지사항</h3>
 		<!-- 공지사항 최신순 글 3개 표시 -->
 		<div id="brandNewNotice"></div>
 
@@ -221,15 +222,20 @@ header {
 					console.log(data);
 					var html = '';
 					html += '<table class="table">';
-					
+					html += '<thead>';
+					html += '<th scope="col">제목</th>';
+					html += '<th scope="col">내용</th>';
+					html += '<th scope="col">날짜</th>';
+					html+='</thead>';
+					html+="<tbody>";
 					for(var i = 0; i<3; i++){
 						html += '<tr>';
-						html += '<td>' + data[i].ntitle + '</td>';
-						html += '<td>' + data[i].ncontent + '</td>';
-						html += '<td>' + data[i].ninsertdate + '</td>';
+						html += '<td>' + isEmpty(data[i].ntitle) + '</td>';
+						html += '<td>' + isEmpty(data[i].ncontent) + '</td>';
+						html += '<td>' + isEmpty(data[i].ninsertdate) + '</td>';
 						html += '</tr>';
 					}
-					
+					html+="</tbody>";
 					html += '</table>';
 					$("#brandNewNotice").append(html);
 				},
@@ -242,9 +248,10 @@ header {
 		// 데이터 체크
 		function isEmpty(val) {
 			if (typeof val == "undefined" || val == null || val == "") {
-				return true;
-			} else {
-				return false;
+				return "없음";
+			}
+			else{
+				return val;
 			}
 		}
 	</script>
