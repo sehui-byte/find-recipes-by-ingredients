@@ -14,21 +14,7 @@
 		WHERE
 			RCP_SEQ = #{rcp_seq}
 	</select>
-	
-	
-	
-	<select id="getSubscribeInc1" parameterType="ssvo" resultType="ssvo">
-		SELECT
-			#{year} AS YEAR,
-			#{mon} AS MON,
-			COUNT(*) AS INC
-		FROM
-			SUB_INFO S
-		WHERE
-			S.INO = #{ino}
-			AND TO_CHAR(S.SINSERTDATE, 'YYYY') = #{year}
-			AND TO_CHAR(S.SINSERTDATE, 'MM') = LPAD(#{mon}, 2, '0')
-	</select>
+
 	
 	<select id="getSubscribeInc" parameterType="ssvo" resultType="ssvo">
 		select

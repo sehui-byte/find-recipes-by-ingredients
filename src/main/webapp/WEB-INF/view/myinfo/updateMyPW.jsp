@@ -21,7 +21,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 			var mid = "<%= mid %>";
 			var mpw = $("#mpw").val();
 			var nMpw = $("#nMpw").val();
-			var url = "/kosmoJns/myinfo/myPWUpdate.do";
+			var url = "/kosmoJns/myinfo/myPWUpdate";
 			var data = {"mid" : mid, 
 						"mpw" : mpw,
 						"nMpw" : nMpw};
@@ -37,7 +37,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 			function whenSuccess(data){
 				if (data == "OK"){
 					alert("비밀번호가 정상적으로 변경되었습니다. 감사합니다.");
-					location.href="/kosmoJns/main.do";	
+					location.href="/kosmoJns/main";	
 				}else{
 					alert("비밀번호 변경에 실패하였습니다. 잠시 후에 다시 시도하시기 바랍니다.");
 				}

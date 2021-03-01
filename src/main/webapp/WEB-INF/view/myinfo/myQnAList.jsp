@@ -56,7 +56,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 				chkVal.push(chk);
 			}
 			
-			var url = "/kosmoJns/myinfo/myQnADelete.do";
+			var url = "/kosmoJns/myinfo/myQnADelete";
 			var data = {'chkVal' : chkVal};
 
 			$.ajax({
@@ -110,12 +110,12 @@ div, h1, h2, h3, h4, h5, h6, p {
 			$(document).on("click", "#searchBtn", function(){
 				console.log("searchBtn >>> : ");
 				$("#myQnAList").attr({"method":"GET"
-									 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
+									 ,"action":"/kosmoJns/myinfo/myQnAList"}).submit();
 			});
 			// 검색 초기화	
 			$(document).on("click", "#searchReset", function(){
 				$("#myQnAList").attr({"method":"GET"
-									 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
+									 ,"action":"/kosmoJns/myinfo/myQnAList"}).submit();
 				})	
 				
 			})
@@ -133,7 +133,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 						alert("검색 조건을 입력해주세요");
 					}else{
 					$("#myQnAList").attr({"method":"GET"
-									 ,"action":"/kosmoJns/myinfo/myQnAList.do"}).submit();
+									 ,"action":"/kosmoJns/myinfo/myQnAList"}).submit();
 					}	
 				}
 			}
@@ -199,7 +199,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 	}else{
  %>		
 		<tr>
-			<td colspan="4">현재 문의하신 게시글이 존재하지 않습니다.</td>	
+			<td colspan="4">현재 조회된 문의글이 존재하지 않습니다.</td>	
 		</tr>
 <% 
 	}	
@@ -207,7 +207,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 	<tr>
 		<td class="paging" colspan="6">
 			<jsp:include page="./page/paging.jsp" flush="true">
-				<jsp:param name="url" value="myQnAList.do"/>
+				<jsp:param name="url" value="myQnAList"/>
 				<jsp:param name="str" value=""/>
 				<jsp:param name="pageSize" value="<%=pageSize%>"/>
 				<jsp:param name="groupSize" value="<%=groupSize%>"/>

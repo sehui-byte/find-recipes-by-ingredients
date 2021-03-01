@@ -135,8 +135,8 @@
 
 		<h3>권한 & 로그인 관련 URL</h3>
 		<ul>
-			<li><a href="/kosmoJns/main.do">일반 접속</a></li>
-			<li><a href="/kosmoJns/admin/main.do">admin 접속</a></li>
+			<li><a href="/kosmoJns/main">일반 접속</a></li>
+			<li><a href="/kosmoJns/admin/main">admin 접속</a></li>
 		</ul>
 
 		<hr>
