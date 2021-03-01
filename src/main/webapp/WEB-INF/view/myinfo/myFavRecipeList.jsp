@@ -43,7 +43,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 			var recipeTable = $("#recipeTable option:selected").val();	
 			console.log(recipeTable);
 			if(recipeTable == 'user'){
-				location.href="/kosmoJns/myinfo/myFavReciepBoardList.do?mno=<%=mno%>";				
+				location.href="/kosmoJns/myinfo/myFavReciepBoardList?mno=<%=mno%>";				
 			}
 		})	
 	})
@@ -61,7 +61,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 				alert("검색 조건을 입력해주세요");
 			}else{
 			$("#myFavRecipeList").attr({"method":"GET"
-						 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
+						 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe"}).submit();
 			}	
 		}
 	}
@@ -92,7 +92,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 				chkVal.push(chk);
 			}
 			
-			var url = "/kosmoJns/favorites/myFavRecipeDelete.do";
+			var url = "/kosmoJns/favorites/myFavRecipeDelete";
 			var data = {'chkVal' : chkVal,
 					'recipeType' : 'API',
 					'mno' : '<%= mno %>'
@@ -149,13 +149,13 @@ div, h1, h2, h3, h4, h5, h6, p {
 		$(document).on("click", "#searchBtnAPIRecipe", function(){
 			console.log("searchBtn >>> : ");
 			$("#myFavRecipeList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
+								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe"}).submit();
 		});
 		
 		// 검색 버튼 초기화
 		$(document).on("click", "#searchReset", function(){
 			$("#myFavRecipeList").attr({"method":"GET"
-							 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
+							 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe"}).submit();
 			})	
 			
 		
@@ -209,7 +209,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 				<input type="hidden" name="rcp_seq" value="<%= rvo.getRcp_seq()%>">	
 			</td>	
 			<td>
-				<a href="/kosmoJns/recipedetail.do?rcp_seq=<%= rvo.getRcp_seq() %>"><%= rvo.getRcp_nm() %></a>
+				<a href="/kosmoJns/recipedetail?rcp_seq=<%= rvo.getRcp_seq() %>"><%= rvo.getRcp_nm() %></a>
 			</td>	
 			<td><%= rvo.getRcp_insertdate() %></td>	
 			<td>조회수</td>	
@@ -227,7 +227,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 		<tr>
 			<td class="paging" colspan="6">
 				<jsp:include page="./page/paging.jsp" flush="true">
-					<jsp:param name="url" value="myFavRecipeList.do"/>
+					<jsp:param name="url" value="myFavRecipeList"/>
 					<jsp:param name="str" value=""/>
 					<jsp:param name="pageSize" value="<%=pageSize%>"/>
 					<jsp:param name="groupSize" value="<%=groupSize%>"/>
@@ -241,7 +241,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 		}else{
  %>		
 		<tr>
-			<td colspan="6">현재 추천한 레시피가 없습니다.</td>	
+			<td colspan="6">현재 조회된 레시피가 없습니다.</td>	
 		</tr>
 <% 
 		}	
