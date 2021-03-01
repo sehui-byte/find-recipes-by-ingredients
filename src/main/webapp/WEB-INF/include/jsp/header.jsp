@@ -212,17 +212,28 @@ div, h1, h2, h3, h4, h5, h6, p {
 								<a class="dropdown-item" href="/kosmoJns/myinfo/myQnAList?mno=<%= mno %>">나의 Q&A</a>
 								<a class="dropdown-item" href="likeProduct.do">나의 관심상품</a>
 								<div class="dropdown-divider"></div>
-								<s:authorize access="isAuthenticated()">
 									<!-- 로그아웃 버튼 -->
-									<a class="dropdown-item" style="cursor: pointer;"
-										onclick="sendLogout();">로그아웃</a>
-									<form id="logoutForm">
-										<input type="hidden" id="logoutbtn" name="logoutbtn"
-											value="로그아웃"
-											style="color: white; font-family: FontAwesome; border: none; background: transparent;" />
-									</form>
-								</s:authorize>
+								<a class="dropdown-item" style="cursor: pointer;"
+									onclick="sendLogout();">로그아웃</a>
+								<form id="logoutForm">
+									<input type="hidden" id="logoutbtn" name="logoutbtn"
+										value="로그아웃"
+										style="color: white; font-family: FontAwesome; border: none; background: transparent;" />
+								</form>
 							</div>
+						</s:authorize>
+						<s:authorize access="hasRole('ROLE_A')">
+						<!--  관리자 메뉴 -->
+						<a data-toggle="dropdown"><i class="fas fa-user-circle fa-lg"></i></a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="/kosmoJns/admin/main">admin 페이지 접속</a>
+								<a class="dropdown-item" style="cursor: pointer;"onclick="sendLogout();">로그아웃</a>
+								<form id="logoutForm">
+									<input type="hidden" id="logoutbtn" name="logoutbtn"value="로그아웃"
+										style="color: white; font-family: FontAwesome; border: none; background: transparent;" />
+								</form>
+							</div>
+						<br>
 						</s:authorize>
 					</div>
 					<s:authorize access="isAuthenticated()">
@@ -233,14 +244,8 @@ div, h1, h2, h3, h4, h5, h6, p {
 							<span class="material-icons">notifications</span> <span
 								class="icon-button__badge" id="msgCount">0</span>
 						</button>
-
 						<br>
 					</s:authorize>
-					<s:authorize access="hasRole('ROLE_A')">
-						<a href="/kosmoJns/admin/main">admin 접속</a>
-						<br>
-					</s:authorize>
-
 				</div>
 			</div>
 		</div>
