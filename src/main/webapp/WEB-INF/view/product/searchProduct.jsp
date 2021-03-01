@@ -28,14 +28,12 @@
 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
 	crossorigin="anonymous"></script>
 <style>
-
 /*최근 본 상품 오른쪽에 위치*/
 #recentbox {
 	position: fixed;
 	right: 40px;
 	top: 100px;
 }
-
 #searchForm {
 	width: 400px;
 	display: inline-block;
@@ -96,13 +94,11 @@
 				}
 			});
 		}
-
 		//enter키 눌렀을 때 페이지 재로딩 되는 것 방지
 		function captureReturnKey(e) {
 			if (e.keyCode == 13 && e.srcElement.type != 'textarea')
 				return false;
 		}
-
 		//input에서 엔터키 눌렀을 때도 검색 실행
 		function enterKey() {
 			if (window.event.keyCode == 13) {
@@ -111,7 +107,6 @@
 				clearInput();
 			}
 		}
-
 		// 검색 후 검색창의 텍스트 지우기
 		function clearInput() {
 			var keyword = document.getElementsByClassName('form-control');
@@ -119,7 +114,6 @@
 				keyword[i].value = '';
 			}
 		}
-
 		//검색결과 
 		function find() {
 			var keyword = $('#keyword').val();
@@ -138,7 +132,6 @@
 						success : function(data) {
 							$("#result").empty();
 							console.log("success");
-
 							var html = "";
 							var item = data.items;
 							var count = 0;//식품 검색결과 총개수
@@ -161,7 +154,6 @@
 									if(hprice == '0'){
 										hprice = lprice;
 									}
-
 									//onclick시 보낼 매개변수 문자열 : str (,로 구분)
 									var str = productId
 											+ ','
@@ -170,7 +162,6 @@
 											+ ',' //html<br>태그 지워주기
 											+ image + ',' + link + ',' + lprice
 											+ ',' + hprice;
-
 									// 최근 본 상품 목록 필요한 매개변수 문자열
 									var recentPro = title + '^^' + image + '^^'
 											+ link;
@@ -195,41 +186,32 @@
 											+ link
 											+ '" class="btn btn-success btn-sm" id="purchaseBtn" target="_blank" onclick="return clickpurchase(\''
 											+ recentPro + '\');">구매하기</a> ';
-
 									//관심 상품 버튼 추가
 									html += '<input type="button" class="btn btn-danger btn-sm" value="관심상품 추가" id='
 											+ productId
 											+ ' onclick="clickProductId(\''
 											+ str + '\')"';
-
 									html += '/></div></div></div>';
-
 									//비워주기
 									$('#keyword').empty();
-
 									//검색결과값 증가
 									count++;
 								}
-
 								else {//식품이 아닐 경우
 									continue;
 								}
 							}
-
 							if (count === 0) {
 								//검색결과가 없을 때
 								html = "<h3>검색결과가 없습니다</h3>";
 							} else {
 								html += '</div>';
 							}
-
 							//html코드 넣어주기
 							$("#result").append(html);
-
 						}
 					});
 		}
-
 		//관심상품 버튼 이벤트 //동적 태그에 이벤트 주기
 		function clickProductId(productStr) {
 			console.log("관심상품 등록 버튼 클릭");
@@ -242,7 +224,6 @@
 			var hprice = strArr[5];
 			var btn = document.getElementById(productId);
 			var isChecked = true;
-
 			for ( var i in piArray) {
 				if (productId == piArray[i]) {
 					console.log("piArray[i] >> " + piArray[i]
@@ -251,10 +232,8 @@
 					isChecked = false;
 				}
 			}
-
 			//true이면 관심상품 inser, false이면 이미 등록된 관심상품
 			console.log("isChecked >> " + isChecked);
-
 			//json형태로 만들어준다
 			var param = {
 				"productId" : productId,
@@ -264,7 +243,6 @@
 				"lprice" : lprice,
 				"hprice" : hprice
 			};
-
 			if (isChecked) {
 				$.ajax({
 					url : 'likeProductInsert.do',
@@ -280,7 +258,6 @@
 				});
 				alert("관심 상품을 저장했습니다!");
 				chkLikeProductId();
-
 			} else {
 				alert("이미 등록된 상품입니다");
 			}
