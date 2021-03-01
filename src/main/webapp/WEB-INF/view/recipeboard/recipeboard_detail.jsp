@@ -154,7 +154,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-					<span style="font-size: 14px">조회: <%=rbvo.getViews() + 1 %> 추천: <%=rbvo.getHits()%></span>
+					<span style="font-size: 14px">조회: <%=rbvo.getViews()%> 추천: <%=rbvo.getHits()%></span>
 				</tr>
 			</thead>
 			<tbody>

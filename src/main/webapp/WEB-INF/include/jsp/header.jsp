@@ -213,7 +213,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 								<a class="dropdown-item" href="/kosmoJns/myinfo/myRecipeListPage?mno=<%= mno %>">나의 레시피</a>
 								<a class="dropdown-item" href="/kosmoJns/myinfo/myFavRecipeList?mno=<%= mno %>">내 즐겨찾기 레시피</a>
 								<a class="dropdown-item" href="/kosmoJns/myinfo/myQnAList?mno=<%= mno %>">나의 Q&A</a>
-								<a class="dropdown-item" href="likeProduct.do">나의 관심상품</a>
+								<a class="dropdown-item" href="http://localhost:8080/kosmoJns/likeProduct.do">나의 관심상품</a>
 								<div class="dropdown-divider"></div>
 									<!-- 로그아웃 버튼 -->
 								<a class="dropdown-item" style="cursor: pointer;"
