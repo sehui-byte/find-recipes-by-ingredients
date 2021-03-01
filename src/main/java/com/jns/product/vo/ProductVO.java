@@ -59,6 +59,11 @@ public class ProductVO {
 	public void setHprice(String hprice) {
 		this.hprice = hprice;
 	}
+	@Override
+	public String toString() {
+		return "ProductVO [lpno=" + lpno + ", productId=" + productId + ", link=" + link + ", image=" + image
+				+ ", lprice=" + lprice + ", hprice=" + hprice + ", title=" + title + ", mno=" + mno + "]";
+	}
 	
 	
 

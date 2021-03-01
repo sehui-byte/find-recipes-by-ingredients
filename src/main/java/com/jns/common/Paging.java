@@ -4,6 +4,7 @@ import com.jns.board.vo.BoardVO;
 import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.qna.vo.QnAVO;
+import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
 
 public class Paging {
@@ -45,6 +46,24 @@ public class Paging {
 			cbvo.setPageSize(ctrl);
 		}
 		
+	}
+	
+	public static void setPage(RecipeVO rvo, String curpage, String sizeCtrl)
+	{
+		if(curpage==null) rvo.setCurPage(1);
+
+		if(curpage!=null){
+			int curnum=Integer.parseInt(curpage);
+			rvo.setCurPage(curnum);
+		}
+		
+		rvo.setGroupSize(10);
+		
+		if(sizeCtrl==null) rvo.setPageSize(10);
+		if(sizeCtrl!=null){
+			int ctrl=Integer.parseInt(sizeCtrl);
+			rvo.setPageSize(ctrl);
+		}
 	}
 	
 	public static void setPage(RecipeBoardVO rbvo, String curpage, String sizeCtrl) {
