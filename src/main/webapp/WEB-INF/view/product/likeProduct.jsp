@@ -59,10 +59,11 @@
 		<button type="button" id="deleteAllBtn" class="btn btn-warning"
 			onclick="checkAll()">전체선택</button>
 		<button type="button" id="deleteBtn" class="btn btn-danger">삭제</button>
-		
+		<h3><br>
 		<c:if test="${size eq 0}">
 			관심상품이 없습니다!
 			</c:if>
+			</h3>
 		<!-- size가 0이 아닐때는 아래 table 출력 -->
 		<c:if test="${size ne 0}">
 			<!--likeproduct db값 받기  -->

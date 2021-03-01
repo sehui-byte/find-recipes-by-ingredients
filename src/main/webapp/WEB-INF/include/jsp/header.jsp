@@ -41,6 +41,9 @@ if (principal != null && principal instanceof MemberVO) {
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- favicon -->
+<link rel="shortcut icon" href="/kosmoJns/resources/img/favicon.ico">
+<link rel="icon" href="/kosmoJns/resources/img/favicon.ico">
 <!-- socketJS -->
 <script
 	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
@@ -151,8 +154,8 @@ div, h1, h2, h3, h4, h5, h6, p {
 		<div class="container-fluid">
 			<!-- 사이트 아이콘 넣기 -->
 			<a class="navbar-brand" href="http://localhost:8080/kosmoJns"> <img
-				src="/kosmoJns/resources/img/jns_logo.png" alt="" width="40"
-				height="40"> 전지적 냉장고 시점
+				src="/kosmoJns/resources/img/jns_logo.png" alt="" width="70"
+				> 전지적 냉장고 시점
 			</a>
 
 			<button class="navbar-toggler" type="button"
