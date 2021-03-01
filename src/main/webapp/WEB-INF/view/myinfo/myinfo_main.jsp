@@ -48,8 +48,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 			}
 		})
 	})
-
-<%--	 >> 셰프 마이페이지 진입시 플라스크 서버에서 자동으로 데이터 연동
+<%-- 
 	$(document).ready(function(){
 		var mlevel = "<%= mlevel %>";
 		var status = location.search;
@@ -60,7 +59,6 @@ div, h1, h2, h3, h4, h5, h6, p {
 			location.href="sendSubscribeInc?start_yyyymm=202004&end_yyyymm=202104&mno=<%=mno%>";
 		}
 	})
-	
  --%>
  </script>
 </head>
