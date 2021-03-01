@@ -19,6 +19,7 @@ import com.jns.common.ChabunUtil;
 import com.jns.common.FileUploadUtil;
 import com.jns.common.Paging;
 import com.jns.notice.service.NoticeService;
+import com.jns.reply.vo.ReplyVO;
 
 @Controller
 public class NoticeController {
@@ -44,30 +45,29 @@ public class NoticeController {
 		return "notice/noticeForm";
 	}	
 	
+	@ResponseBody
 	@RequestMapping(value="brandnewNotice", method = RequestMethod.GET)
 	public String BrandNewNotice(BoardVO nvo, Model model) throws Exception{
 	         
 	        List<BoardVO> nlist = noticeService.BrandNewNotice(nvo);
 	         
 	        System.out.println(nlist);
+	        System.out.println("NoticeController >> brandnewNotice >> nlist.size() >>> : " + nlist.size());
 	        
-	        String bno = nlist.get(0).getBno();
-	        String btitle = nlist.get(0).getBtitle();
-	        String mnick = nlist.get(0).getMnick();
-	        String binsertdate = (nlist.get(0).getBinsertdate()).toString();
+	        String ss = "";
+			String listStr = "";
+			
+			for(int i=0; i < nlist.size(); i++) {
+				BoardVO _nvo = nlist.get(i);
+				String s0 = _nvo.getBno();
+				String s1 = _nvo.getBtitle();
+				String s2 = _nvo.getMnick();
+				String s3 = _nvo.getBinsertdate();
+				ss = s0 + "," + s1 + "," + s2 + "," + s3;
+				listStr += ss + "&";
+			}
 	         
-	        System.out.println(bno);
-	        System.out.println(btitle);
-	        System.out.println(mnick);
-	        System.out.println(binsertdate);
-	        
-	        model.addAttribute("bno", bno);
-	        model.addAttribute("btitle", btitle);
-	        model.addAttribute("mnick", mnick);
-	        model.addAttribute("binsertdate", binsertdate);
-	        
-	         
-	        return "notice/noticeSelect";
+	        return listStr;
 	    }
 	
 	@RequestMapping(value="noticeSelectAllPage", method=RequestMethod.GET)

@@ -88,22 +88,99 @@ header {
 
 <script>
 	
-	function fn_goBoardDtl(btitle, mnick, binsertdate){
-		$('#btitle').val(btitle);
-		$('mnick').val(mnick);
-		$('binsertdate').val(binsertdate);
-		$('#index').submit();
+	$(document).ready(function(){
+		
+		// 공지 호출
+		noticeIndex();
+		
+	});
+	
+	//공지 요청 함수
+	function noticeIndex(){
+		$("#youth-notice").html("");
+		console.log("index.jsp >> noticeIndex()");
+		var noticeIndexURL = "brandnewNotice.do";
+		var method = "GET";
+		var dataParam = {};
+		console.log("dataParam >>> : " + dataParam);
+		
+		$.ajax({
+			url: noticeIndexURL,
+			type: method,
+			data: dataParam,
+			success: whenSuccess,
+			error: whenError
+		});
+		
+		function whenSuccess(resData){
+			console.log("whenSuccess noticeIndex >>> : " + resData);
+			
+			if(isEmpty(resData)){
+				return false;
+			}
+			
+			let v = resData.split("&");
+			for(let i = 0; i< v.length; i++){
+				console.log(v[i]);
+				let vv = v[i].split(",");
+				let j = 0;
+				for(; j < vv.length-1; j++){
+					console.log("vv[0] >>> : " + vv[0]);
+					console.log("vv[1] >>> : " + vv[1]);
+					console.log("vv[2] >>> : " + vv[2]);
+					console.log("vv[3] >>> : " + vv[3]);   
+				}
+				addNewItem(vv[0], vv[1], vv[2], vv[3]);
+			}
+			
+		}
+		function whenError(e){
+			alert("오류 >>> : " + e.responseText);
+		}
 	}
 	
-	function fn_goNoticeDtl(btitle, mnick, binsertdate){
-		document.location = 'noticeSelect.do?bno=N202102262334';
+	
+	/* 새로운 글을 화면에 추가하기 위한 함수 */
+	function addNewItem(bno, btitle, mnick, binsertdate){
+		
+		//데이터 체크
+		if(isEmpty(bno)) return false;
+		
+		// 새로운 글이 추가될tr 태그 객체
+		var new_tr = $("<tr>");
+		
+		// 글번호 지정될 <td> 태그
+		var td01 = $("<td>");
+		td01.html(bno);
+		
+		// 글제목 지정될 <td> 태그
+		var td02 = $("<td>");
+		td02.html(btitle);
+		
+		// 작성자 지정될 <td> 태그
+		var td03 = $("<td>");
+		td03.html(mnick);
+		
+		// 등록일 지정될 <td> 태그
+		var td04 = $("<td>");
+		td04.html(binsertdate);
+		
+		// 조립하기
+		new_tr.append(td01).append(td02).append(td03).append(td04);
+		$('#notice_list').append(new_tr)
+		
 	}
-	function fn_goNoticeDtl2(btitle, mnick, binsertdate){
-		document.location = 'noticeSelect.do?bno=N202102262333';
+	
+	
+	// 데이터 체크
+	function isEmpty(val){
+		if(typeof val == "undefined" || val == null || val == ""){
+			return true;
+		}else{
+			return false;
+		}
 	}
-	function fn_goNoticeDtl3(btitle, mnick, binsertdate){
-		document.location = 'noticeSelect.do?bno=N202102262332';
-	}
+	
 </script>
 <form name="index" id="index" action="noticeSelect.do">
 	<input type="hidden" name="bno" id="bno">
@@ -117,6 +194,9 @@ header {
 
 	<div class="youth-notice">
 			<h2>공지사항 안내</h2>
+			<table id="notice_list">
+				<!-- 여기에 동적 생성 요소가 들어가게 됩니다. -->
+			</table>
 		<ul>
 			<li>
 			<a href="#index" onclick="fn_goNoticeDtl('nvo.getBno');return false;"><%= nvo.getBtitle() %></a>

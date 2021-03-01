@@ -187,6 +187,7 @@
 		ORDER BY BNO DESC	
 	</select>
 	
+	<!-- 
 	<select id="BrandNewNotice" resultType="nvo">
 			SELECT *
 			FROM 
@@ -195,4 +196,31 @@
 				  ORDER BY BINSERTDATE DESC)
 			WHERE BTYPE ='N'
 	</select>
+	 -->
+	
+	<select id="BrandNewNotice" parameterType="nvo" resultType="nvo">
+		
+		SELECT 
+	        	*
+	    FROM
+	            (SELECT
+	                   BNO
+	                  ,BTYPE
+	                  ,BTITLE
+	                  ,BCONTENT
+	                  ,MNICK
+	                  ,BFILE
+	                  ,TO_CHAR(BINSERTDATE, 'YYYY-MM-DD HH24:MI:SS') BINSERTDATE
+	                  ,TO_CHAR(BUPDATEDATE, 'YYYY-MM-DD HH24:MI:SS') BUPDATEDATE
+	                  ,BVIEWS
+	                  ,BDELETEYN
+	                  ,BHITS
+	            FROM     BOARD A
+	            WHERE    BDELETEYN = 'Y'
+	            ORDER BY BINSERTDATE DESC
+	            )            		
+		WHERE <![CDATA[ROWNUM <= 3]]>		
+	</select>
+	
+	
 </mapper>
