@@ -50,9 +50,18 @@
 				}).always((data)=>{console.log(data); alert("추천하였습니다")});
 			});
 			
+			
+			// 수정
+			$(document).on("click", "#updateBtn", function(){
+				$("#rb_detail").attr("action", "rbupdateform.do");	
+				$("#rb_detail").attr("method", "GET");	
+				$("#rb_detail").attr('enctype','multipart/form-data');	
+				$("#rb_detail").submit();	
+			});
+			
 			// 취소
 			$(document).on("click", "#C", function(){
-				location.href="/kosmoJns/recipeboard.do";
+				location.href="/kosmoJns/recipeboard_list.do";
 			});
 			
 	//=======================즐겨찾기==========================
@@ -130,7 +139,7 @@
 </head>
 <body>
 <div id ="wrapper">
-	<form>
+	<form id="rb_detail">
 		<span style="font-size: 14px">Cook Board</span>
 		<table class="table">
 			<thead>
@@ -665,6 +674,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="right">
+					<input type="button" class="btn btn-orange" id="updateBtn" value="수정">
 					<input type="button" class="btn btn-orange" id="hitsBtn" value="추천">
 					<input type="button" class="btn btn-orange" name="favRecipeUser" id="favRecipeUser" value="즐겨찾기">
 					<input type="button" class="btn btn-orange" id="C" value="목록">
