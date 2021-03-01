@@ -166,7 +166,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="http://localhost:8080/kosmoJns">Home</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="http://localhost:8080/kosmoJns/recipeboard.do">레시피 일반</a></li>
+						href="http://localhost:8080/kosmoJns/recipeboard_list.do">레시피 일반</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="http://localhost:8080/kosmoJns/chefboard/boardselectall.do">셰프
 							게시판</a></li>

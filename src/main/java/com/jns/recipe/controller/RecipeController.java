@@ -71,7 +71,7 @@ public class RecipeController
 	
 	//레시피 검색
 	//jsp에서 keyword 받아서 검색
-	@RequestMapping(value="searchRecipe", method=RequestMethod.GET)
+	@RequestMapping(value="searchRecipe.do", method=RequestMethod.GET)
 	public String searchRecipe(RecipeVO rvo, HttpServletRequest request, Model model) {
 		int totalCnt = 0;
 		String curPage = request.getParameter("curPage");
