@@ -69,6 +69,33 @@ public class RecipeController
 		return "recipe/recipelist";
 	}
 	
+	//레시피 검색
+	//jsp에서 keyword 받아서 검색
+	@RequestMapping(value="searchRecipe", method=RequestMethod.GET)
+	public String searchRecipe(RecipeVO rvo, HttpServletRequest request, Model model) {
+		int totalCnt = 0;
+		String curPage = request.getParameter("curPage");
+		String sizeCtrl = request.getParameter("sizeCtrl");
+		
+		Paging.setPage(rvo, curPage, sizeCtrl);
+		logger.info("rvo >>> : " + rvo.toString());
+		
+		List<RecipeVO> pageList = recipeService.recipeSelectAllPage(rvo);
+		if(pageList.size() > 0)
+		{
+			totalCnt = pageList.get(0).getTotalCount();
+			rvo.setTotalCount(totalCnt);
+		}
+		
+		logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+		logger.info("pageList.size >>> : " + pageList.size());
+		
+		model.addAttribute("rvo", rvo);
+		model.addAttribute("pageList", pageList);
+				
+		return "recipe/recipelist";
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, value = "recipedetail")
 	public String recipedetail(RecipeVO rvo, Model model, RedirectAttributes redirectAttributes )
 	{
@@ -109,32 +136,4 @@ public class RecipeController
 		result.put("cnt", recipeService.recipeJsonInsert());
 		return result;
 	}
-	
-	//레시피 검색
-	//jsp에서 keyword 받아서 검색
-	@RequestMapping(value="searchRecipe.do", method=RequestMethod.GET)
-	public ModelAndView searchRecipe(RecipeVO rvo) {
-		logger.info("Recipe Controller >>  searchRecipe.do");
-		logger.info("keyword >> " + rvo.getKeyword());
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", recipeService.searchRecipe(rvo));
-		mav.setViewName("recipe/recipelist");
-		return mav;
-	}
-
-	
-//	public String recipeInsert(RecipeVO rvo)
-//	{
-//		return null;
-//	}
-//	
-//	public String recipeUpdate(RecipeVO rvo)
-//	{
-//		return null;
-//	}
-//	
-//	public String recipeDelete(RecipeVO rvo)
-//	{
-//		return null;
-//	}
 }
