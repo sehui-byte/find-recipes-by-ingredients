@@ -3,6 +3,8 @@ package com.jns.recipe.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jns.common.Paging;
 import com.jns.flask.controller.FlaskController;
 import com.jns.recipe.service.RecipeService;
 import com.jns.recipe.vo.RecipeVO;
@@ -39,10 +42,30 @@ public class RecipeController
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "recipelist")
-	public String recipelist(Model model)
+	public String recipelist(RecipeVO rvo, HttpServletRequest request, Model model)
 	{
 		logger.info("[RecipeController] recipeList() 호출");
-		model.addAttribute("list", recipeService.recipeSelectAll());
+		
+		int totalCnt = 0;
+		String curPage = request.getParameter("curPage");
+		String sizeCtrl = request.getParameter("sizeCtrl");
+		
+		Paging.setPage(rvo, curPage, sizeCtrl);
+		logger.info("rvo >>> : " + rvo.toString());
+		
+		List<RecipeVO> pageList = recipeService.recipeSelectAllPage(rvo);
+		if(pageList.size() > 0)
+		{
+			totalCnt = pageList.get(0).getTotalCount();
+			rvo.setTotalCount(totalCnt);
+		}
+		
+		logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+		logger.info("pageList.size >>> : " + pageList.size());
+		
+		model.addAttribute("rvo", rvo);
+		model.addAttribute("pageList", pageList);
+				
 		return "recipe/recipelist";
 	}
 	
