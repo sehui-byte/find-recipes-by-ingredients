@@ -1,7 +1,5 @@
 package com.jns.flask.dao;
 
-import java.util.List;
-
 import com.jns.flask.vo.LikeProductInfoVO;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
