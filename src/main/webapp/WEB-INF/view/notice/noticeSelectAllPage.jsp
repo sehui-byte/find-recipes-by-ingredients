@@ -26,10 +26,46 @@
 <meta charset="UTF-8">
 <title>공지사항 목록 게시판</title>
 <style type="text/css">
+	
+	/* 03/01 재민: 페이지 디자인 완료 */
 	.tt{
 		text-align: center;
-		font-weight: bole;
 	}
+	
+	.section-header {
+		position: relative;
+		margin-bottom: 40px;
+		font-size: 26px;
+		font-weight: 400;
+		color: #333;
+		text-align: Center;
+		line-height: 60px;
+		letter-spacing: 1px;
+	}
+	
+	.section-header:after {
+		content: "";
+		display: block;
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		width: 70px;
+		height: 2px;
+		background: #ff7f00;
+		transform: translate(-50%, 0);
+		transform: translate3d(-50%, 0, 0);
+	}
+	
+	
+	.table.table-hover tbody tr:hover {
+    	background-color: #F9A781; 
+	}
+	
+	.btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;
+	}
+	
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
@@ -68,6 +104,10 @@
 </script>
 </head>
 <body>
+<div id="wrapper">
+<img src="/kosmoJns/resources/img/notice.png"
+    		alt="notice_main" class="img-fluid">
+<div class="section-header">Notice</div>
 <% request.setCharacterEncoding("UTF-8");%> 
 <%
 	Object obj = request.getAttribute("listPage");
@@ -77,50 +117,37 @@
 	System.out.println("noticeSelectAllPage.jsp nCnt >>> : " + nCnt);
 %>
 <form name="NoticeList" id="NoticeList">
-<table border="1" align="center">
+<table class="table table-hover">
 	<thead>
 	<tr>
-		<td colspan="10" align="center"><h2>공지사항 목록 게시판</h2></td>
-	</tr>
-	<tr>
-		<td class="tt"><input type="checkbox" name="chkAll" id="chkAll"></td>
-		<td class="tt">글번호</td>
-		<td class="tt">글유형</td>
-		<td class="tt">글제목</td>
-		<td class="tt">글내용</td>
-		<td class="tt">작성자</td>
-		<td class="tt">사진</td>
-		<td class="tt">입력날짜</td>
-		<td class="tt">조회수</td>
-		<td class="tt">좋아요 수</td>
+		<td class="tt" style="font-weight: bold">글번호</td>
+		<td class="tt" style="width:50%; font-weight: bold">제목</td>
+		<td class="tt" style="font-weight: bold">이름</td>
+		<td class="tt" style="font-weight: bold">조회</td>
+		<td class="tt" style="font-weight: bold">추천</td>
+		<td class="tt" style="font-weight: bold">작성일</td>
+		<td class="tt" style="font-weight: bold">수정일</td>
 	</tr>
 	</thead>
+	<tbody>
 <%
 	if (nCnt > 0) {
 		for(int i=0; i<nCnt; i++){
 			BoardVO nvo = list.get(i);
 %>
-<tbody>
-<tr>	
-		<td>
-			<input type="checkbox" name="bno" id="chkInMnum"
-					value=<%= nvo.getBno() %> onclick="checkOnly(this)">
-		</td>	
-		<td class="tt"><%=nvo.getBno()%></td>
-		<td class="tt"><%=nvo.getBtype() %></td>
-		<td class="tt"><%=nvo.getBtitle() %></td>
-		<td class="tt"><%=nvo.getBcontent() %></td>
-		<td class="tt"><%=nvo.getMnick() %></td>
-		<td class="tt"><img src="<%=new FileLoadUtil().getFileSrc("noticeboard", nvo.getBfile())%>"></td>
-		<td class="tt"><%=nvo.getBinsertdate() %></td>
-		<td class="tt"><%=nvo.getBviews() %></td>
-		<td class="tt"><%=nvo.getBhits() %></td>
-</tr>
+	<tr onclick="location.href='/kosmoJns/noticeSelect.do?bno=<%= nvo.getBno() %>'">	
+		<td class="tt"  style="font-size: 12px"><%= nvo.getBno() %> </td>
+		<td class="left"><span style="font-weight: bold;"><%= nvo.getBtitle() %></span></td>
+		<td class="tt"><%= nvo.getMnick() %> </td>
+		<td class="tt"><%= nvo.getBviews() %> </td>
+		<td class="tt"><%= nvo.getBhits() %> </td>
+		<td class="tt" style="font-size: 12px"><%= nvo.getBinsertdate() %> </td>
+		<td class="tt" style="font-size: 12px"><%= nvo.getBupdatedate() %> </td>
+	</tr>
 <%
 		} // end of for
 	}else{
 %>
-	<tbody>
 	<tr>
 		<td colspan="10" align="center">등록된 게시물이 존재하지 않습니다.</td>
 	</tr>	
@@ -128,15 +155,12 @@
 		
 	} // end of if
 %>
-	<tr>
-		<td colspan="10" align="right">
-			<input type="button" value="글쓰기" id="I">
-			<input type="button" value="글보기" id="S">
-			<input type="button" value="전체목록" id="A">
-		</td>
-	</tr>
 	</tbody>
 </table>
+	<div align="right">
+		<input class="btn btn-orange" type="button" value="글쓰기" id="I">
+	</div>
+
 	<div class="container-fluid">
 		<div class="row">
 		  <div class="col-6 col-md-4"></div>
@@ -155,7 +179,7 @@
 			    	<div class="input-group">
 			    		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어 입력">
 				    	<span class="input-group-btn">
-				    		<button class="btn btn-orange" type="button" id="searchBtn">검색</button>
+				    		<input type="button" class="btn btn-orange" id="searchBtn" value="검색">
 				    	</span>			    			    	
 			    	</div>
 			    </div>
@@ -195,5 +219,7 @@
 	</jsp:include>
 	</div>
 </form>
+<div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+</div>
 </body>
 </html>
