@@ -149,7 +149,7 @@ public class RecipeController
 			Map<String, String> map = new HashMap<String,String>();
 			map.put("rptitle", list.get(i).getRcp_nm());//레시피 이름
 			map.put("rpimage", list.get(i).getAtt_file_no_main()); //레시피 이미지
-			System.out.println("map >> " + map);
+			//System.out.println("map >> " + map);
 			result.add(map);
 		}
 		return result;
