@@ -193,6 +193,6 @@
 				( SELECT *
 				  FROM BOARD
 				  ORDER BY BINSERTDATE DESC)
-			WHERE ROWNUM = 1
+			WHERE BTYPE ='N'
 	</select>
 </mapper>

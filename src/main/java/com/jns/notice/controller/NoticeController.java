@@ -45,27 +45,29 @@ public class NoticeController {
 	}	
 	
 	@RequestMapping(value="brandnewNotice", method = RequestMethod.GET)
-	@ResponseBody 
 	public String BrandNewNotice(BoardVO nvo, Model model) throws Exception{
 	         
 	        List<BoardVO> nlist = noticeService.BrandNewNotice(nvo);
 	         
 	        System.out.println(nlist);
-	         
+	        
+	        String bno = nlist.get(0).getBno();
 	        String btitle = nlist.get(0).getBtitle();
 	        String mnick = nlist.get(0).getMnick();
 	        String binsertdate = (nlist.get(0).getBinsertdate()).toString();
 	         
+	        System.out.println(bno);
 	        System.out.println(btitle);
 	        System.out.println(mnick);
 	        System.out.println(binsertdate);
-	         
+	        
+	        model.addAttribute("bno", bno);
 	        model.addAttribute("btitle", btitle);
 	        model.addAttribute("mnick", mnick);
 	        model.addAttribute("binsertdate", binsertdate);
 	        
 	         
-	        return "notice/brandnewNotice.do";
+	        return "notice/noticeSelect";
 	    }
 	
 	@RequestMapping(value="noticeSelectAllPage", method=RequestMethod.GET)
