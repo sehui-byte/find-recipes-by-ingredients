@@ -47,6 +47,12 @@ header {
 	left: 0;
 	right: 0;
 }
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
 </style>
 
 </head>
@@ -91,11 +97,16 @@ header {
 
 	<!-- content -->
 	<div id="wrapper">
-		
-		<h3>공지사항</h3>
+	
+		<!-- 오늘의 추천 레시피 3개 보여주기 -->
+		<h3>오늘의 추천 레시피</h3>
+		<div id="randomRecipe"></div>
+	
+	
 		<!-- 공지사항 최신순 글 3개 표시 -->
+		<h3>공지사항</h3>
 		<div id="brandNewNotice"></div>
-
+	
 	<h3>공지사항 관련 URL</h3>
 	<ul>
 		<li><a href="noticeForm.do">공지사항 글쓰기</a></li>
@@ -209,6 +220,7 @@ header {
 		//공지사항 최신순 글 3개 ajax로 가져오기
 		$(document).ready(function() {
 			brandNewNotice();
+			randomRecipe();
 		});
 
 		function brandNewNotice() {
@@ -243,6 +255,36 @@ header {
 					console.log("최신 공자사항 가져오기 에러!");
 				}
 			});
+		}
+		
+		function randomRecipe(){
+			console.log("randomRecipe 함수 시작");
+			$.ajax({
+				dataType : "json",
+				url : 'randomRecipe.do',
+				type : 'get',
+				success : function(data) {
+					console.log("randomRecipe success");
+					console.log(data);
+					var html2 = '';
+					html2 += '<div class="card-deck">';
+					
+					for(var i = 0; i<3; i++){
+						html2 += '<div class="card h-100" style="width: 18rem;">';
+						html2 += '<img class="card-img-top" src="'+ data[i].rpimage +'" alt="Card image cap">'
+						html2 += '<div class="card-body">';
+						html2 += '<h6 class="card-title">' + data[i].rptitle + '</h6>';
+						html2 += '</div></div>';
+					}
+					html2 += '</div>';
+					
+					$("#randomRecipe").append(html2);
+				},
+				error : function() {
+					console.log("randomRecipe 에러!");
+				}
+			});
+			
 		}
 		
 		// 데이터 체크

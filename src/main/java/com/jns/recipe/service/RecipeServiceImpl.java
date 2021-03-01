@@ -160,6 +160,12 @@ public class RecipeServiceImpl implements RecipeService
 		return recipeDAO.searchRecipe(rvo);
 	}
 
+	//레시피 랜덤하게 가져오기
+	@Override
+	public List<RecipeVO> randomRecipeSelect(RecipeVO rvo) {
+		return recipeDAO.randomRecipeSelect(rvo);
+	}
+
 //	@Override
 //	public boolean recipeInsert(RecipeVO rvo) {
 //		// TODO Auto-generated method stub
