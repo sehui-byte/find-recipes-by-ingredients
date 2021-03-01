@@ -48,17 +48,7 @@ header {
 	right: 0;
 }
 </style>
-<%
-Object obj = request.getAttribute("listS");
-List<BoardVO> list = (List) obj;
-BoardVO nvo = null;
 
-nvo = new BoardVO();
-
-nvo.setBtitle("공지");
-nvo.setMnick("관리자");
-nvo.setBinsertdate("2021-03-01");
-%>
 </head>
 <body>
 	<%
@@ -92,16 +82,6 @@ nvo.setBinsertdate("2021-03-01");
 		</div>
 	</div>
 
-	<script>
-		// 데이터 체크
-		function isEmpty(val) {
-			if (typeof val == "undefined" || val == null || val == "") {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	</script>
 	<form name="index" id="index" action="noticeSelect.do">
 		<input type="hidden" name="bno" id="bno"> <input type="hidden"
 			name="btitle" id="btitle"> <input type="hidden" name="mnick"
@@ -115,7 +95,6 @@ nvo.setBinsertdate("2021-03-01");
 		<!-- 공지사항 최신순 글 3개 표시 -->
 		<div id="brandNewNotice"></div>
 
-	</div>
 	<h3>공지사항 관련 URL</h3>
 	<ul>
 		<li><a href="noticeForm.do">공지사항 글쓰기</a></li>
@@ -258,6 +237,15 @@ nvo.setBinsertdate("2021-03-01");
 					console.log("최신 공자사항 가져오기 에러!");
 				}
 			});
+		}
+		
+		// 데이터 체크
+		function isEmpty(val) {
+			if (typeof val == "undefined" || val == null || val == "") {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	</script>
 </body>
