@@ -197,7 +197,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 			<!-- 로그인 버튼 -->
 			<div class="loginInfo" style='text-align: right;'>
 				<s:authorize access="isAnonymous()">
-					<a href="/kosmoJns/login">로그인</a>
+					<a href="/kosmoJns/login.do">로그인</a>
 				</s:authorize>
 				<div class="userInfo">
 					<div class="dropdown">
