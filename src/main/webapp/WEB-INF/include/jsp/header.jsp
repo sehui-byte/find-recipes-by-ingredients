@@ -197,7 +197,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 			<!-- 로그인 버튼 -->
 			<div class="loginInfo" style='text-align: right;'>
 				<s:authorize access="isAnonymous()">
-					<a href="/kosmoJns/login.do">로그인</a>
+					<a href="/kosmoJns/login">로그인</a>
 				</s:authorize>
 				<div class="userInfo">
 					<div class="dropdown">
@@ -207,9 +207,10 @@ div, h1, h2, h3, h4, h5, h6, p {
 							</a>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="/kosmoJns/myinfo?mno=<%=mno%>">마이페이지</a>
-								<a class="dropdown-item" href="#">나의 레시피</a> <a
-									class="dropdown-item" href="#">나의 Q&A</a> <a
-									class="dropdown-item" href="likeProduct.do">나의 관심상품</a>
+								<a class="dropdown-item" href="/kosmoJns/myinfo/myRecipeListPage?mno=<%= mno %>">나의 레시피</a>
+								<a class="dropdown-item" href="/kosmoJns/myinfo/myFavRecipeList?mno=<%= mno %>">내 즐겨찾기 레시피</a>
+								<a class="dropdown-item" href="/kosmoJns/myinfo/myQnAList?mno=<%= mno %>">나의 Q&A</a>
+								<a class="dropdown-item" href="likeProduct.do">나의 관심상품</a>
 								<div class="dropdown-divider"></div>
 								<s:authorize access="isAuthenticated()">
 									<!-- 로그아웃 버튼 -->

@@ -124,24 +124,7 @@
 						alert("서비스에 문제가 발생하였습니다. 담당자에게 문의하시기 바랍니다.");
 					}
 				})
-			//================================방사형 그래프를 레시피 하단부분에 노출	
 			
-
-			$.ajax({
-				url : "/kosmoJns/sendNutrient.do",
-				method : "GET",
-				data : rbno,
-				success : whenSuccess1,
-				error : whenError1
-			})	
-			
-			function whenSuccess1(data){
-				alert("성공");	
-			}
-				
-			function whenError(data){
-				alert("실패");	
-			}
 		});
 	</script>
 </head>

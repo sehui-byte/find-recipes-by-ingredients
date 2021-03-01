@@ -218,12 +218,12 @@ public class MemberController {
 	}
 
 	// 로그인 페이지
-	@RequestMapping(value = "login.do", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "login", method = {RequestMethod.POST, RequestMethod.GET})
 	public String memberLogin(HttpServletRequest request) {
 		logger.info("memberLogin page 진입 >>> ");
 		
 		String uri = request.getHeader("Referer");
-		if(!uri.contains("/login.do")){
+		if(!uri.contains("/login")){
 			request.getSession().setAttribute("prevPage", request.getHeader("Refer"));
 		}
 
