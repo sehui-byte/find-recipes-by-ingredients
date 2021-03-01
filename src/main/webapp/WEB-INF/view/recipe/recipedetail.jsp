@@ -84,7 +84,7 @@
 					}
 				})
 			})	
-
+	/* >> 플라스크 연동시 주석 해제 
 		function requestGraph(){
 			var status = location.search;
 			if(status.indexOf("redirect") != -1){
@@ -93,6 +93,7 @@
 			var rcp_seq = <%= rvo.getRcp_seq()%>;
 			location.href="/kosmoJns/sendNutrient.do?rcp_seq="+rcp_seq;
 		}
+	*/
 		</script>
 	</head>
 	<body>

@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+	/* >> 플라스크 연동시 주석 해제 
 	$(document).ready(function(){
 		var status = location.search;
 		if(status.indexOf("redirect") != -1){
@@ -15,6 +16,7 @@
 		}
 		location.href="/kosmoJns/sendSignupInc.do?start_yyyymm=202004&end_yyyymm=202104";
 	})
+	/*
 </script>
 
 </head>
