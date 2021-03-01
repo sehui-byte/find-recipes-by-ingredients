@@ -8,6 +8,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- favicon -->
+<link rel="shortcut icon" href="/kosmoJns/resources/img/favicon.ico">
+<link rel="icon" href="/kosmoJns/resources/img/favicon.ico">
 <meta charset="UTF-8">
 <title>메인 페이지 테스트</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
