@@ -14,85 +14,82 @@
 	</select>
 		
 	<select id="recipeBoardSelectAllPage" parameterType="rbvo" resultType="rbvo">
-		SELECT 
-			* 
-		FROM
-		(
-			SELECT
-				RBNO,
-				MNO,
-				RCP_NM,
-				VIEWS,
-				HITS,
-				RCP_WAY2,
-				RCP_PAT2,
-				HASH_TAG,
-				MAIN_IMG,
-				RCP_PARTS_DTLS,
-				MANUAL01,
-				MANUAL_IMG01,
-				MANUAL02,
-				MANUAL_IMG02,
-				MANUAL03,
-				MANUAL_IMG03,
-				MANUAL04,
-				MANUAL_IMG04,
-				MANUAL05,
-				MANUAL_IMG05,
-				MANUAL06,
-				MANUAL_IMG06,
-				MANUAL07,
-				MANUAL_IMG07,
-				MANUAL08,
-				MANUAL_IMG08,
-				MANUAL09,
-				MANUAL_IMG09,
-				MANUAL10,
-				MANUAL_IMG10,
-				MANUAL11,
-				MANUAL_IMG11,
-				MANUAL12,
-				MANUAL_IMG12,
-				MANUAL13,
-				MANUAL_IMG13,
-				MANUAL14,
-				MANUAL_IMG14,
-				MANUAL15,
-				MANUAL_IMG15,
-				MANUAL16,
-				MANUAL_IMG16,
-				MANUAL17,
-				MANUAL_IMG17,
-				MANUAL18,
-				MANUAL_IMG18,
-				MANUAL19,
-				MANUAL_IMG19,
-				MANUAL20,
-				MANUAL_IMG20,
-				RB_INSERTDATE,
-				RB_UPDATEDATE,
-				RB_DELETEYN,
-				CEIL(ROW_NUMBER() OVER(ORDER BY RBNO DESC)/ #{pageSize}) PAGENO,
-				COUNT(RBNO) OVER() AS TOTALCOUNT
+		
+		SELECT * FROM
+			(SELECT
+					A.RBNO,
+					A.MNO,
+					B.MNICK,
+					A.RCP_NM,
+					A.VIEWS,
+					A.HITS,
+					A.RCP_WAY2,
+					A.RCP_PAT2,
+					A.HASH_TAG,
+					A.MAIN_IMG,
+					A.RCP_PARTS_DTLS,
+					A.MANUAL01,
+					A.MANUAL_IMG01,
+					A.MANUAL02,
+					A.MANUAL_IMG02,
+					A.MANUAL03,
+					A.MANUAL_IMG03,
+					A.MANUAL04,
+					A.MANUAL_IMG04,
+					A.MANUAL05,
+					A.MANUAL_IMG05,
+					A.MANUAL06,
+					A.MANUAL_IMG06,
+					A.MANUAL07,
+					A.MANUAL_IMG07,
+					A.MANUAL08,
+					A.MANUAL_IMG08,
+					A.MANUAL09,
+					A.MANUAL_IMG09,
+					A.MANUAL10,
+					A.MANUAL_IMG10,
+					A.MANUAL11,
+					A.MANUAL_IMG11,
+					A.MANUAL12,
+					A.MANUAL_IMG12,
+					A.MANUAL13,
+					A.MANUAL_IMG13,
+					A.MANUAL14,
+					A.MANUAL_IMG14,
+					A.MANUAL15,
+					A.MANUAL_IMG15,
+					A.MANUAL16,
+					A.MANUAL_IMG16,
+					A.MANUAL17,
+					A.MANUAL_IMG17,
+					A.MANUAL18,
+					A.MANUAL_IMG18,
+					A.MANUAL19,
+					A.MANUAL_IMG19,
+					A.MANUAL20,
+					A.MANUAL_IMG20,
+					TO_CHAR(A.RB_INSERTDATE, 'YYYY-MM-DD') AS RB_INSERTDATE,
+					TO_CHAR(A.RB_UPDATEDATE, 'YYYY-MM-DD') AS RB_UPDATEDATE,
+					A.RB_DELETEYN,
+					CEIL(ROW_NUMBER() OVER(ORDER BY A.RBNO DESC)/ #{pageSize}) PAGENO,
+					COUNT(A.RBNO) OVER() AS TOTALCOUNT
 			FROM
-				RECIPE_BOARD
-			WHERE
-				RB_DELETEYN = 'Y'
-				<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
-				<![CDATA[AND TO_CHAR(RB_INSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-				<![CDATA[AND TO_CHAR(RB_INSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
-				</if>
-				<if test="keyfilter=='key1'">
-					<![CDATA[AND RCP_NM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-				</if>
-				<if test="keyfilter=='key2'">
-					<![CDATA[AND RBNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-				</if>
-			)
-		WHERE
-			PAGENO = #{curPage}
-		ORDER BY 
-			RBNO DESC	
+					RECIPE_BOARD A, MEMBER B
+			WHERE	A.MNO = B.MNO
+			AND		A.RB_DELETEYN = 'Y'
+					<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+					<![CDATA[AND TO_CHAR(A.RB_INSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					<![CDATA[AND TO_CHAR(A.RB_INSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					</if>
+					<if test="keyfilter=='key1'">
+						<![CDATA[AND A.RCP_NM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+					<if test="keyfilter=='key2'">
+						<![CDATA[AND A.RBNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+			) RB
+		WHERE PAGENO = #{curPage}
+		ORDER BY RBNO DESC	
 			
 	</select>
 	
