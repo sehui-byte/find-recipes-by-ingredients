@@ -11,10 +11,22 @@
 <meta charset="UTF-8">
 <title>NOTICE SELECT</title>
 <style type="text/css">
-	div {
-			margin: 50px 0px 0px 100px;
-		}
-	.mem{ text-align: center;}
+
+	/* 03/01 재민: 페이지 디자인 완료 */
+	.mem{
+		text-align: center;
+		vertical-align: middle;
+	}
+
+	.btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;
+	}
+	
+	.scrolldiv {   
+        height:500px;
+        overflow:scroll;
+    }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
@@ -65,7 +77,7 @@
 			}
 		});
 		
-		// U
+		// U <== 수정폼으로 이동하여 수정하게끔 개발 부탁드립니다.(재민 03/01)
 		$(document).on("click", "#U", function(){
 			$("#NoticeUpdateForm").attr({
 				"method":"GET",
@@ -90,7 +102,8 @@
 </script>
 </head>
 <body>
-<hr>
+<div id ="wrapper">
+	<div>
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
 	Object obj = request.getAttribute("listS");
@@ -101,66 +114,56 @@
 		nvo = list.get(0);
 	};
 %>
-<div>
-<form name="NoticeUpdateForm" id="NoticeUpdateForm">
-<table border="1">
-<tr>
-<td colspan="2" align="center">공지</td>
-</tr>
-<tr>
-<td class="mem">글번호</td>
-<td><input type="text" name="bno" id="bno" value="<%= nvo.getBno() %>" readonly></td>
-</tr>
-<tr>
-<td class="mem">글유형</td>
-<td><input type="text" name="btype" id="btype" value="<%= nvo.getBtype() %>" readonly></td>
-</tr>
-<tr>
-<td class="mem">글제목</td>
-<td><input type="text" name="btitle" id="btitle" value="<%= nvo.getBtitle() %>"></td>
-</tr>
-<tr>
-<td class="mem">글내용</td>
-<td><textarea name="bcontent" id="bcontent" rows="5" cols="50"><%= nvo.getBcontent() %></textarea>
-</td>
-</tr>
-<tr>
-<td class="mem">글작성자</td>
-<td><input type="text" name="mnick" id="mnick" value="<%= nvo.getMnick() %>"></td>
-</tr>
-<tr>
-<td class="mem">첨부파일</td>
-<td><img src="<%=new FileLoadUtil().getFileSrc("noticeboard", nvo.getBfile()) %>" border="1" width="40" height="50" alt="image">
-</td>
-</tr>
-<tr>
-<td class="mem">입력날짜</td>
-<td><input type="text" name="binsertdate" id="binsertdate" value="<%= nvo.getBinsertdate() %>" readonly></td>
-</tr>
-<tr>
-<td class="mem">수정날짜</td>
-<td><input type="text" name="bupdatedate" id="bupdatedate" value="<%= nvo.getBupdatedate() %>" readonly></td>
-</tr>
-<tr>
-<td class="mem">조회수</td>
-<td><input type="text" name="bviews" id="bviews" value="<%= nvo.getBviews() %>" readonly></td>
-</tr>
-<tr>
-<td class="mem">좋아요 수</td>
-<td><input type="text" name="bhits" id="bhits" value="<%= nvo.getBhits() %>" readonly></td>
-</tr>
-<tr>
-	<td colspan="7" align="right">
-		<input type="button" value="좋아요" id="Hitsbtn">
-		<input type="button" value="수정하기" id="U">
-		<input type="button" value="삭제하기" id="D">
-		<input type="button" value="돌아가기" id="C">
-	</td>
-</tr>
-</table>
-</form>
-</div>
+
+	<form name="NoticeUpdateForm" id="NoticeUpdateForm">
+	<span style="font-size: 14px">Notice</span>
+	<table class="table">
+		<thead>
+			<tr>
+				<td colspan="2"><h2><%=nvo.getBtitle()%></h2></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="vertical-align: middle;"><%=nvo.getMnick()%>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="hidden" id="mnick" name="mnick" value="<%=nvo.getMnick()%>">
+				<input type="hidden" id="bno" name="bno" value="<%=nvo.getBno()%>">		
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<span style="font-size: 14px">조회: <%=nvo.getBviews() %> 추천: <%=nvo.getBhits() %></span>	
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan="2">
+					<div class="scrolldiv"><%= nvo.getBcontent() %></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="mem" width="20%">첨부파일</td>
+				<td><img src="<%=new FileLoadUtil().getFileSrc("noticeboard", nvo.getBfile()) %>" border="1" width="40" height="50" alt="image">
+			</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">
+					<span style="font-size: 12px;">등록: <%=nvo.getBinsertdate()%> 수정: <%=nvo.getBupdatedate()%></span>
+				</td>
+			</tr>				
+			<tr>
+				<td colspan="7" align="right">
+					<input type="button" class="btn btn-orange" value="좋아요" id="Hitsbtn">
+					<input type="button" class="btn btn-orange" value="수정하기" id="U">
+					<input type="button" class="btn btn-orange" value="삭제하기" id="D">
+					<input type="button" class="btn btn-orange" value="돌아가기" id="C">
+				</td>
+			</tr>
+	</tbody>
+	</table>
+	</form>
+	</div>
 		<c:import url="/reply/reply.do">
 		</c:import>
+</div>
 </body>
 </html>

@@ -7,6 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+
+	.btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;
+	}
+</style>
 <script type="text/javascript">
 
 	$(function(){
@@ -238,8 +245,8 @@
 		date_span.html(" 등록:" + rinsertdate + " / 수정:" + rupdatedate + " ");
 		
 		// 수정하기 버튼
-		var up_input = $("<input class='btn btn-warning btn-sm'>");
-		up_input.attr({"type" : "button", "value" : "수정하기"});
+		var up_input = $("<input class='btn btn-orange btn-sm'>");
+		up_input.attr({"type" : "button", "value" : "수정"});
 		up_input.addClass("update_form");
 		
 		// 여백 1칸
@@ -251,8 +258,8 @@
 		nbspM.html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 		
 		// 삭제하기 버튼
-		var del_input = $("<input class='btn btn-warning btn-sm'>");
-		del_input.attr({"type" : "button", "value" : "삭제하기"});
+		var del_input = $("<input class='btn btn-orange btn-sm'>");
+		del_input.attr({"type" : "button", "value" : "삭제"});
 		del_input.addClass("delete_btn");
 		
 		// 내용
@@ -335,7 +342,7 @@
 	
 %>
 <div id="replyContainer">
-	<div id="comment_write">
+	<div id="comment_write" v-cloak>
 		<!-- ========== 댓글 입력 폼 ==========-->
 		<form id="comment_form">
 		<br>
@@ -343,10 +350,9 @@
 		<div v-if="sessionWriter !== ''">
 		<table>
 			<tr>
-				<td>작성자</td>
 				<td>
 					<p class="fw-bold fs-5">{{sessionWriter}}</p>
-					<input type="hidden" name="bno" id="bno" value="<%=bno%>">
+					<input type="hidden" name="rbno" id="rbno" value="<%=bno%>">
 					<input type="hidden" name="mno" id="mno" value="<%=mno%>">
 				</td>
 			</tr>
@@ -358,7 +364,7 @@
 			</tr>
 			<tr>
 				<td align="right">
-					<input class="btn btn-warning" type="button" id="replyInsert" value="저장" 
+					<input class="btn btn-orange" type="button" id="replyInsert" value="저장" 
 						   onclick="sendMessage()">
 				</td>
 			</tr>

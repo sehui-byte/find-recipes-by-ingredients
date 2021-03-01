@@ -12,10 +12,22 @@
 <meta charset="UTF-8">
 <title>QnA Select</title>
 <style type="text/css">
-	div {
-			margin: 50px 0px 0px 100ox;
-		}
-	.mem{ text-align: center;}
+
+	/* 03/01 재민: 페이지 디자인 완료 */
+	.mem{
+		text-align: center;
+		vertical-align: middle;
+	}
+
+	.btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;
+	}
+	
+	.scrolldiv {   
+        height:500px;
+        overflow:scroll;
+    }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
@@ -68,7 +80,7 @@
 		});
 		
 		
-		// U
+		// U <== 수정폼으로 이동하여 수정하게끔 개발 부탁드립니다.(재민 03/01)
 		$(document).on("click", "#U", function(){
 			$("#QnAUpdateForm").attr({
 				"method":"GET",
@@ -94,8 +106,7 @@
 </script>
 </head>
 <body>
-QnA Select
-<hr>
+<div id ="wrapper">
 <%request.setCharacterEncoding("UTF-8"); %>
 <%
 	Object obj = request.getAttribute("listS");
@@ -106,67 +117,56 @@ QnA Select
 		bvo = list.get(0);
 	};
 %>
-<div>
-<form name="QnAUpdateForm" id="QnAUpdateForm">
-<table border="1">
-<tr>
-<td colspan="2" align="center">QnA 글 보기 </td>
-</tr>
-<tr>
-<td class="mem">글 번호</td>
-<td><input type="text" name="bno" id="bno" value="<%= bvo.getBno() %>" readonly></td>
-</tr>
-<tr>
-<td class="mem">글유형</td>
-<td><input type="text" name="btype" id="btype" value="<%= bvo.getBtype() %>" readonly></td>
-</tr>
-<tr>
-<td class="mem">글제목</td>
-<td><input type="text" name="btitle" id="btitle" value="<%= bvo.getBtitle() %>"></td>
-</tr>
-<tr>
-<td class="mem">글내용</td>
-<td><textarea name="bcontent" id="bcontent" rows="5" cols="50"><%= bvo.getBcontent() %></textarea>
-</td>
-</tr>
-<tr>
-<td class="mem">글 작성자</td>
-<td><input type="text" name="mnick" id="mnick" value="<%= bvo.getMnick() %>"></td>
-</tr>
-<tr>
-<td class="mem">사진</td>
-<td> 
-<img src="<%=new FileLoadUtil().getFileSrc("qnaboard", bvo.getBfile()) %>" border="1" width="40" height="50" alt="image">
-</td>
-</tr>
-<tr>
-<td class="mem">입력 날짜</td>
-<td><input type="text" name="binsertdate" id="binsertdate" value="<%= bvo.getBinsertdate() %>" readonly></td>
-</tr>
-<tr>
-<td class="mem">수정 날짜</td>
-<td><input type="text" name="bupdatedate" id="bupdatedate" value="<%= bvo.getBupdatedate() %>" readonly></td>
-</tr>
-<tr>
-<td class="mem">조회수</td>
-<td><input type="text" name="bviews" id="bviews" value="<%= bvo.getBviews() %>" readonly></td>
-</tr>
-<tr>
-<td class="mem">좋아요 수</td>
-<td><input type="text" name="bhits" id="bhits" value="<%= bvo.getBhits() %>" readonly></td>
-</tr>
-<tr>
-	<td colspan="7" align="right">
-		<input type="button" value="좋아요" id="hitsbtn">
-		<input type="button" value="수정하기" id="U">
-		<input type="button" value="삭제하기" id="D">
-		<input type="button" value="돌아가기" id="C">
-	</td>
-</tr>
-</table>
-</form>
-</div>
+	<div>
+	<form name="QnAUpdateForm" id="QnAUpdateForm">
+	<span style="font-size: 14px">Q&A</span>
+	<table class="table">
+		<thead>
+			<tr>
+				<td colspan="2"><h2><%=bvo.getBtitle()%></h2></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="vertical-align: middle;"><%=bvo.getMnick()%>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="hidden" id="mnick" name="mnick" value="<%=bvo.getMnick()%>">
+				<input type="hidden" id="bno" name="bno" value="<%=bvo.getBno()%>">		
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<span style="font-size: 14px">조회: <%=bvo.getBviews() %> 추천: <%=bvo.getBhits() %></span>	
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan="2">
+					<div class="scrolldiv"><%= bvo.getBcontent() %></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="mem" width="20%">첨부파일</td>
+				<td><img src="<%=new FileLoadUtil().getFileSrc("qnaboard", bvo.getBfile()) %>" border="1" width="40" height="50" alt="image">
+			</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">
+					<span style="font-size: 12px;">등록: <%=bvo.getBinsertdate()%> 수정: <%=bvo.getBupdatedate()%></span>
+				</td>
+			</tr>				
+			<tr>
+				<td colspan="7" align="right">
+					<input type="button" class="btn btn-orange" value="좋아요" id="Hitsbtn">
+					<input type="button" class="btn btn-orange" value="수정하기" id="U">
+					<input type="button" class="btn btn-orange" value="삭제하기" id="D">
+					<input type="button" class="btn btn-orange" value="돌아가기" id="C">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</form>
+	</div>
 		<c:import url="/reply/reply.do">
 		</c:import>
+</div>
 </body>
 </html>
