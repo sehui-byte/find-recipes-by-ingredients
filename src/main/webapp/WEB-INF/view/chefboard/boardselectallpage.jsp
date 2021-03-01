@@ -72,7 +72,11 @@
 		background-color: #F9A781; 
 		font-weight: bold;
 	}
-
+	
+	.table.table-hover tbody tr:hover {
+    	background-color: #F9A781; 
+	}
+	
 </style>
 <link rel="stylesheet" href="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.css">
 <script src="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
@@ -123,8 +127,7 @@
 			location.href="/kosmoJns/chefboard/writeFormFile.do";
 		});	
 		
-	});	
-	
+	});		
 	
 </script>
 </head>
@@ -222,7 +225,7 @@
 	System.out.println("boardselectallpage.jsp nCnt >>> : " + nCnt);
 %>
 <form name="boardList" id="boardList">
-<table class="table">
+<table class="table table-hover">
 	<thead>
 	<tr>
 		<td class="tt" style="font-weight: bold">글번호</td>
@@ -240,13 +243,9 @@
 		for(int i=0; i<nCnt; i++){
 			ChefBoardVO cbvo = list.get(i);
 %>
-	<tr>
+	<tr onclick="location.href='/kosmoJns/chefboard/boardselect.do?rbno=<%= cbvo.getRbno() %>'">
 		<td class="tt"  style="font-size: 12px"><%= cbvo.getRbno() %> </td>
-		<td class="left">
-			<a href="/kosmoJns/chefboard/boardselect.do?rbno=<%= cbvo.getRbno() %>">
-			<%= cbvo.getRcp_nm() %>
-			</a>
-		</td>
+		<td class="left"><span style="font-weight: bold;"><%= cbvo.getRcp_nm() %></span></td>
 		<td class="tt"><%= cbvo.getMnick() %> </td>
 		<td class="tt"><%= cbvo.getViews() %> </td>
 		<td class="tt"><%= cbvo.getHits() %> </td>
@@ -264,13 +263,12 @@
 		
 	} // end of if
 %>
-	<tr>
-		<td colspan="10" align="right">
-			<input class="btn btn-orange" type="button" value="글쓰기" id="I" disabled="disabled">
-		</td>
-	</tr>
 	</tbody>
 </table>
+	<div align="right">
+		<input class="btn btn-orange" type="button" value="글쓰기" id="I" disabled="disabled">
+	</div>
+
 	<!-- =================  검색창 그리드 설정 ================= -->
 	<div class="container-fluid">
 		<div class="row">

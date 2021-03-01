@@ -137,6 +137,28 @@ public class RecipeBoardVO
 	
 	//**************************************************************
 	
+	// MEMBER JOIN *************************************************
+		private String mlevel;
+		private String mnick;
+		
+		public String getMlevel() {
+			return mlevel;
+		}
+
+		public void setMlevel(String mlevel) {
+			this.mlevel = mlevel;
+		}
+		
+		public String getMnick() {
+			return mnick;
+		}
+
+		public void setMnick(String mnick) {
+			this.mnick = mnick;
+		}
+		
+	//**************************************************************
+	
 	
 	public RecipeBoardVO()
 	{
