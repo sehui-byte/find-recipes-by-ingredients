@@ -1,5 +1,7 @@
 package com.jns.flask.service;
 
+import java.util.List;
+
 import com.jns.flask.vo.LikeProductInfoVO;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
@@ -12,5 +14,5 @@ public interface FlaskService
 	public NutrientVO getNutrient(RecipeVO rvo);
 	public SubscribeIncVO getSubscribeInc(SubscribeIncVO ssvo);
 	public SignupIncVO getSignupInc(SignupIncVO suvo);
-	public LikeProductInfoVO getLikeProductInfo(ProductVO pvo);
+	public LikeProductInfoVO getLikeProductInfo(String productId, ProductVO pvo);
 }

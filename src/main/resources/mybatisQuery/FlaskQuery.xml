@@ -70,7 +70,10 @@
 			PRODUCTID,
 			TITLE,
 			LPRICE
-		FROM LIKEPRODUCT WHERE MNO=#{mno}
+		FROM LIKEPRODUCT
+		WHERE
+			MNO=#{mno}
+			AND PRODUCTID=#{productId}
 	</select>
 	
 </mapper>

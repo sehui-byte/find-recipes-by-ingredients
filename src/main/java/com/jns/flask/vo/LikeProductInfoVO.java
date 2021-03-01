@@ -6,7 +6,7 @@ public class LikeProductInfoVO { // 관심 상품 최저가 검색
 	
 	private String productId;	// 상품번호	
 	private String title;		// 상품명
-	private String lprice;			// 최저가
+	private String lprice;		// 최저가
 	
 	public LikeProductInfoVO() {
 		
@@ -56,9 +56,9 @@ public class LikeProductInfoVO { // 관심 상품 최저가 검색
 	public JSONObject toJSONObject()
 	{
 		JSONObject json = new JSONObject();
-		json.put("productId", Integer.parseInt(productId));
+		json.put("productId", productId);
 		json.put("title", title);
-		json.put("lprice", Integer.parseInt(lprice));
+		json.put("lprice", lprice);
 		
 		return json;
 	}
