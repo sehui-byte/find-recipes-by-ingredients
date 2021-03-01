@@ -90,7 +90,6 @@
 </script>
 </head>
 <body>
-공지 수정
 <hr>
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
@@ -106,7 +105,7 @@
 <form name="NoticeUpdateForm" id="NoticeUpdateForm">
 <table border="1">
 <tr>
-<td colspan="2" align="center">공지글 수정하기</td>
+<td colspan="2" align="center">공지</td>
 </tr>
 <tr>
 <td class="mem">글번호</td>
@@ -122,7 +121,7 @@
 </tr>
 <tr>
 <td class="mem">글내용</td>
-<td><textarea name="bcontent" id="bcontent" cols="50" rows="5" <%= nvo.getBcontent() %>></textarea>
+<td><textarea name="bcontent" id="bcontent" rows="5" cols="50"><%= nvo.getBcontent() %></textarea>
 </td>
 </tr>
 <tr>

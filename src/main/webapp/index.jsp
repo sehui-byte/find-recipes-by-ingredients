@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ page import="com.jns.board.vo.BoardVO" %>
 <head>
 <!-- jquery -->
 <script type="text/javascript"
@@ -36,12 +36,30 @@
 	text-align: center;
 	margin-top: 15px;
 }
+header {
+	position: fixed;
+	top: 0;
+	/* width: 100% */
+	left: 0;
+	right: 0;
+}
 </style>
+<%
+	Object obj = request.getAttribute("listS");
+	List<BoardVO> list = (List)obj;
+	BoardVO nvo = null;
+	
+	nvo = new BoardVO();
+	
+	nvo.setBtitle("공지");
+	nvo.setMnick("관리자");
+	nvo.setBinsertdate("2021-03-01");
+%>
 </head>
 <body>
+<% request.setCharacterEncoding("UTF-8");%>
 	<!-- navbar -->
 	<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
-
 
 	<!-- carousel -->
 	<div id="carouselExampleDark" class="carousel carousel-dark slide"
@@ -68,9 +86,63 @@
 		</div>
 	</div>
 
+<script>
+	
+	function fn_goBoardDtl(btitle, mnick, binsertdate){
+		$('#btitle').val(btitle);
+		$('mnick').val(mnick);
+		$('binsertdate').val(binsertdate);
+		$('#index').submit();
+	}
+	
+	function fn_goNoticeDtl(btitle, mnick, binsertdate){
+		document.location = 'noticeSelect.do?bno=N202102262334';
+	}
+	function fn_goNoticeDtl2(btitle, mnick, binsertdate){
+		document.location = 'noticeSelect.do?bno=N202102262333';
+	}
+	function fn_goNoticeDtl3(btitle, mnick, binsertdate){
+		document.location = 'noticeSelect.do?bno=N202102262332';
+	}
+</script>
+<form name="index" id="index" action="noticeSelect.do">
+	<input type="hidden" name="bno" id="bno">
+	<input type="hidden" name="btitle" id="btitle">
+	<input type="hidden" name="mnick" id="mnick">
+	<input type="hidden" name="binsertdate" id="binsertdate">
+</form>
 	<!-- content -->
 	<!-- 추후 아래 링크들 삭제 -->
 	<div id="wrapper">
+
+	<div class="youth-notice">
+			<h2>공지사항 안내</h2>
+		<ul>
+			<li>
+			<a href="#index" onclick="fn_goNoticeDtl('nvo.getBno');return false;"><%= nvo.getBtitle() %></a>
+			<i class="i-new"::before>
+			<em><%= nvo.getMnick() %></em>
+			</i>
+			<span class="date" name="binsertdate" id="binsertdate"><%= nvo.getBinsertdate() %></span>
+			</li>
+			
+			<li>
+			<a href="#index" onclick="fn_goNoticeDtl2('nvo.getBno');return false;"><%= nvo.getBtitle() %></a>
+			<i class="i-new"::before>
+			<em><%= nvo.getMnick() %></em>
+			</i>
+			<span class="date" name="binsertdate" id="binsertdate"><%= nvo.getBinsertdate() %></span>
+			</li>
+			
+			<li>
+			<a href="#index" onclick="fn_goNoticeDtl3('nvo.getBno');return false;"><%= nvo.getBtitle() %></a>
+			<i class="i-new"::before>
+			<em><%= nvo.getMnick() %></em>
+			</i>
+			<span class="date" name="binsertdate" id="binsertdate"><%= nvo.getBinsertdate() %></span>
+			</li>
+		</ul>
+	</div>
 		<h3>공지사항 관련 URL</h3>
 		<ul>
 			<li><a href="noticeForm.do">공지사항 글쓰기</a></li>
