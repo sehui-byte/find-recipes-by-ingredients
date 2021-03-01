@@ -59,7 +59,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 			}
 			
 			var data = {'chkVal' : chkVal};
-			var url = "/kosmoJns/myinfo/myRecipeDelete.do";
+			var url = "/kosmoJns/myinfo/myRecipeDelete";
 			
 			$.ajax({
 				url : url,
@@ -111,14 +111,14 @@ div, h1, h2, h3, h4, h5, h6, p {
 		$(document).on("click", "#searchBtn", function(){
 			console.log("searchBtn >>> : ");
 			$("#myRecipeList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/myinfo/myRecipeListPage.do"}).submit();
+								 ,"action":"/kosmoJns/myinfo/myRecipeListPage"}).submit();
 			});
 		
 		})
 
 		$(document).on("click", "#searchReset", function(){
 			$("#myRecipeList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/myinfo/myRecipeListPage.do"}).submit();
+								 ,"action":"/kosmoJns/myinfo/myRecipeListPage"}).submit();
 
 		})	
 	
@@ -135,7 +135,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 					alert("검색 조건을 입력해주세요");
 				}else{
 				$("#myRecipeList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/myinfo/myRecipeListPage.do"}).submit();
+								 ,"action":"/kosmoJns/myinfo/myRecipeListPage"}).submit();
 				}	
 			}
 		}
@@ -185,7 +185,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 				<input type="checkbox" name="rbno" value="<%= rbvo.getRbno()%>" class="checkbox">	
 			</td>	
 			<td>
-				<a href="/kosmoJns/rbdetail.do?rbno=<%= rbvo.getRbno()%>"><%= rbvo.getRcp_nm() %></a>
+				<a href="/kosmoJns/rbdetail?rbno=<%= rbvo.getRbno()%>"><%= rbvo.getRcp_nm() %></a>
 			</td>	
 			<!-- 댓글을 가져오려면 어떻게 해야 하지?? -->
 			<td>댓글</td>	
@@ -193,28 +193,28 @@ div, h1, h2, h3, h4, h5, h6, p {
 			<td><%= rbvo.getViews() %></td>	
 			<td><%= rbvo.getRb_updatedate() %></td>	
 		</tr>
-<%
-		}
-%>
 		<tr>
 			<td colspan="6">
 				<input type="button" name="deleteQnA" id="deleteQnA" value="게시글 삭제">
 			</td>
 		</tr>	
+<%
+		}
+%>
+		<tr>
+			<td colspan="6">현재 조회된 레시피 게시글이 존재하지 않습니다.	
+			</td>
+		</tr>
 <% 
 	}else{
 %>
-		<tr>
-			<td colspan="6">현재 게시한 레시피 게시글이 존재하지 않습니다.	
-			</td>
-		</tr>
 <%
 	}
 %>
 	<tr>
 		<td class="paging" colspan="6">
 			<jsp:include page="./page/paging.jsp" flush="true">
-				<jsp:param name="url" value="myRecipeListPage.do"/>
+				<jsp:param name="url" value="myRecipeListPage"/>
 				<jsp:param name="str" value=""/>
 				<jsp:param name="pageSize" value="<%=pageSize%>"/>
 				<jsp:param name="groupSize" value="<%=groupSize%>"/>

@@ -42,7 +42,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 			var recipeTable = $("#recipeTable option:selected").val();	
 			console.log(recipeTable);
 			if(recipeTable == 'API'){
-				location.href="/kosmoJns/myinfo/myFavRecipeList.do?mno=<%=mno%>";				
+				location.href="/kosmoJns/myinfo/myFavRecipeList?mno=<%=mno%>";				
 			}
 			
 		})	
@@ -61,7 +61,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 				alert("검색 조건을 입력해주세요");
 			}else{
 			$("#myFavRecipeBoardList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
+								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe"}).submit();
 			}	
 		}
 	}
@@ -90,7 +90,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 					chkVal.push(chk);
 				}
 				
-				var url = "/kosmoJns/favorites/myFavRecipeDelete.do";
+				var url = "/kosmoJns/favorites/myFavRecipeDelete";
 				var data = {'chkVal' : chkVal,
 						'recipeType' : 'user',
 						'mno' : '<%= mno %>'
@@ -150,13 +150,13 @@ div, h1, h2, h3, h4, h5, h6, p {
 		$(document).on("click", "#searchBtnUserRecipe", function(){
 			console.log("searchBtn >>> : ");
 			$("#myFavRecipeBoardList").attr({"method":"GET"
-								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
+								 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe"}).submit();
 		});
 		
 		// 검색 초기화	
 		$(document).on("click", "#searchReset", function(){
 			$("#myFavRecipeBoardList").attr({"method":"GET"
-							 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe.do"}).submit();
+							 ,"action":"/kosmoJns/myinfo/myFavRecipeList/SelectRecipe"}).submit();
 			})	
 </script>
 
@@ -209,7 +209,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 				<input type="checkbox" name="rbno" value="<%= rbvo.getRbno() %>" class="checkbox_RecipeBoard">	
 			</td>	
 			<td>
-				<a href="/kosmoJns/chefboard/boardselect.do?rbno=<%= rbvo.getRbno() %>"><%= rbvo.getRcp_nm() %></a>
+				<a href="/kosmoJns/chefboard/boardselect?rbno=<%= rbvo.getRbno() %>"><%= rbvo.getRcp_nm() %></a>
 			</td>	
 			<td><%= rbvo.getRb_insertdate() %></td>	
 			<td><%= rbvo.getViews() %></td>	
@@ -227,7 +227,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 		<tr>
 			<td class="paging" colspan="6">
 				<jsp:include page="./page/paging.jsp" flush="true">
-					<jsp:param name="url" value="myFavReciepBoardList.do"/>
+					<jsp:param name="url" value="myFavReciepBoardList"/>
 					<jsp:param name="str" value=""/>
 					<jsp:param name="pageSize" value="<%=pageSize%>"/>
 					<jsp:param name="groupSize" value="<%=groupSize%>"/>
@@ -241,7 +241,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 		} else{
  %>		
 		<tr>
-			<td colspan="6">현재 추천한 레시피가 없습니다.</td>	
+			<td colspan="6">현재 조회된 레시피가 없습니다.</td>	
 		</tr>
 <% 
 		} 

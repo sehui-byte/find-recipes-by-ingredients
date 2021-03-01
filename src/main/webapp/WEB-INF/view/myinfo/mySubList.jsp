@@ -21,7 +21,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 		
 		// 구독 취소
 		$(document).on("click", "#subCancel", function(){
-			var subCancelUrl = "/kosmoJns/subscribe/subDelete.do";
+			var subCancelUrl = "/kosmoJns/subscribe/subDelete";
 			var subCancelType = "POST";
 			var subCancelData = {"sno": $("#sno").val()};
 			$.ajax({
@@ -91,7 +91,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 	%>
 		<tbody>
 		<tr>
-			<td colspan="10" align="center">구독한 세프가 존재하지 않습니다.</td>
+			<td colspan="10" align="center">조회된 세프가 존재하지 않습니다.</td>
 		</tr>	
 	<%		
 			
