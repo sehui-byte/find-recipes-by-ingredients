@@ -70,23 +70,67 @@
 			margin-top: 50px;
 			margin-left: 40%;
 		}
+		
+		/* 03/01 재민: 페이지 디자인 완료 */
+		.tt{
+		text-align: center;
+		font-weight: bold;
+		}
+		
+		.section-header {
+			position: relative;
+			margin-bottom: 40px;
+			font-size: 26px;
+			font-weight: 400;
+			color: #333;
+			text-align: Center;
+			line-height: 60px;
+			letter-spacing: 1px;
+		}
+		
+		.section-header:after {
+			content: "";
+			display: block;
+			position: absolute;
+			left: 50%;
+			bottom: 0;
+			width: 70px;
+			height: 2px;
+			background: #ff7f00;
+			transform: translate(-50%, 0);
+			transform: translate3d(-50%, 0, 0);
+		}
+		
+		.btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;
+		}
+		
+		.table.table-hover tbody tr:hover {
+	    	background-color: #F9A781; 
+		}
 	</style>
 	<body>
+	<div id ="wrapper">
+	<img src="/kosmoJns/resources/img/cooking.png"
+    		 alt="basic_cooking_main" class="img-fluid">
+	<div class="section-header">Basic Cooking</div>
 		<form id="recipeForm" name="recipeForm">
-			<table border="1" style="margin: auto;">
+			<table class="table table-hover">
+				<thead>
 				<tr>
-					<td>레시피 번호</td>
-					<td>레시피 이름</td>
-					<td>썸네일</td>
+					<td class="tt">레시피 번호</td>
+					<td class="tt">레시피 이름</td>
+					<td class="tt">썸네일</td>
 				</tr>
+				</thead>
 				<%					
 				for(int i=0; i<list.size(); i++)
 				{
 				%>
-				<tr>
-					<td style="text-align: center;"><%=list.get(i).getRcp_seq()%></td>
-					<td><a
-						href="recipedetail.do?rcp_seq=<%=list.get(i).getRcp_seq()%>"><%=list.get(i).getRcp_nm()%></a></td>
+				<tr onclick="location.href='/kosmoJns/recipedetail.do?rcp_seq=<%= list.get(i).getRcp_seq() %>'">
+					<td class="align-middle" style="text-align: center;"><%=list.get(i).getRcp_seq()%></td>
+					<td class="align-middle" ><%=list.get(i).getRcp_nm()%></td>
 					<td><img alt="" src="<%=list.get(i).getAtt_file_no_mk()%>"
 						width="60" height="60"></td>
 				</tr>
@@ -151,5 +195,7 @@
 				</jsp:include>
 			</div>
 		</form>
+	<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+	</div>
 	</body>
 </html>
