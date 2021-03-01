@@ -1,7 +1,7 @@
 <%@page import="com.jns.recipe.vo.RecipeVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/include/jsp/loginSession.jsp" %>
+<%@ include file="/WEB-INF/include/jsp/header.jsp"%>  
 	
 <%
 	RecipeVO rvo = (RecipeVO)request.getAttribute("data");
@@ -12,6 +12,23 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>레시피 상세정보</title>
+		<style type="text/css">
+		
+			/* 03/01 재민: 페이지 디자인 완료 */
+			.tt{
+				text-align: center;
+				vertical-align: middle;
+			}
+			
+			.tb{
+				vertical-align: bottom;
+			}
+			
+			.btn-orange { 
+				background-color: #F9A781; 
+				font-weight: bold;
+			}
+		</style>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				
@@ -97,60 +114,60 @@
 		</script>
 	</head>
 	<body>
-		<table border="1" style="margin: auto;">
+	<div id ="wrapper">
+		<span style="font-size: 14px">Basic Cooking</span>
+		<table class="table">
+			<thead>
+				<tr>
+					<td colspan="2"><h2><%=rvo.getRcp_nm()%></h2></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="vertical-align: middle;"><%=rvo.getRcp_seq()%>	
+					</td>
+				</tr>	
+			</thead>
+				<tr>
+					<td class="tt" width="20%"><span style="font-size: 14px">조리방법</span></td>
+					<td><span style="font-size: 14px"><%=rvo.getRcp_way2()%></span></td>
+				</tr>
+				<tr>
+					<td class="tt"><span style="font-size: 14px">요리종류</span></td>
+					<td><span style="font-size: 14px"><%=rvo.getRcp_pat2()%></span></td>
+				</tr>
+				<tr>
+					<td class="tt"><span style="font-size: 14px">중량(1인분)</span></td>
+					<td><span style="font-size: 14px"><%=rvo.getInfo_wgt() == null ? "--" : rvo.getInfo_wgt()%></span></td>
+				</tr>
+				<tr>
+					<td class="tt"><span style="font-size: 14px">열량</span></td>
+					<td><%=rvo.getInfo_eng()%></td>
+				</tr>
+				<tr>
+					<td class="tt"><span style="font-size: 14px">탄수화물</span></td>
+					<td><%=rvo.getInfo_car()%></td>
+				</tr>
+				<tr>
+					<td class="tt"><span style="font-size: 14px">단백질</span></td>
+					<td><%=rvo.getInfo_pro()%></td>
+				</tr>
+				<tr>
+					<td class="tt"><span style="font-size: 14px">지방</span></td>
+					<td><%=rvo.getInfo_fat()%></td>
+				</tr>
+				<tr>
+					<td class="tt"><span style="font-size: 14px">나트륨</span></td>
+					<td><%=rvo.getInfo_na()%></td>
+				</tr>
+				<tr>
+					<td class="tt"><span style="font-size: 14px">해시태그</span></td>
+					<td><span style="font-size: 14px"><%=rvo.getHash_tag() == null ? "--" : "#" + rvo.getHash_tag()%></span></td>
+				</tr>
 			<tr>
-				<td colspan="2"><p style="text-align: center;">상세정보</p></td>
-			</tr>
-			<tr>
-				<td>일련번호</td>
-				<td><%=rvo.getRcp_seq()%></td>
-			</tr>
-			<tr>
-				<td>메뉴명</td>
-				<td><%=rvo.getRcp_nm()%></td>
-			</tr>
-			<tr>
-				<td>조리방법</td>
-				<td><%=rvo.getRcp_way2()%></td>
-			</tr>
-			<tr>
-				<td>요리종류</td>
-				<td><%=rvo.getRcp_pat2()%></td>
-			</tr>
-			<tr>
-				<td>중량(1인분)</td>
-				<td><%=rvo.getInfo_wgt() == null ? "--" : rvo.getInfo_wgt()%></td>
-			</tr>
-			<tr>
-				<td>열량</td>
-				<td><%=rvo.getInfo_eng()%></td>
-			</tr>
-			<tr>
-				<td>탄수화물</td>
-				<td><%=rvo.getInfo_car()%></td>
-			</tr>
-			<tr>
-				<td>단백질</td>
-				<td><%=rvo.getInfo_pro()%></td>
-			</tr>
-			<tr>
-				<td>지방</td>
-				<td><%=rvo.getInfo_fat()%></td>
-			</tr>
-			<tr>
-				<td>나트륨</td>
-				<td><%=rvo.getInfo_na()%></td>
-			</tr>
-			<tr>
-				<td>해쉬태그</td>
-				<td><%=rvo.getHash_tag() == null ? "--" : "#" + rvo.getHash_tag()%></td>
-			</tr>
-			<tr>
-				<td>이미지</td>
+				<td class="align-middle text-center">이미지</td>
 				<td><img src="<%=rvo.getAtt_file_no_main()%>" width="300" height="300"></td>
 			</tr>
 			<tr>
-				<td>재료정보</td>
+				<td class="align-middle text-center">재료정보</td>
 				<td><%=rvo.getRcp_parts_dtls()%></td>
 			</tr>
 			
@@ -159,7 +176,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 1</td>
+						<td class="align-middle text-center">만드는법 1</td>
 						<td><%=rvo.getManual01()%>></td>
 					</tr>
 			<%
@@ -167,7 +184,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법1_이미지</td>
+							<td class="align-middle text-center">만드는법1_이미지</td>
 							<td><img src="<%=rvo.getManual_img01()%>"></td>
 						</tr>
 			<%		}
@@ -179,7 +196,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 2</td>
+						<td class="align-middle text-center">만드는법 2</td>
 						<td><%=rvo.getManual02()%>></td>
 					</tr>
 			<%
@@ -187,7 +204,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법2_이미지</td>
+							<td class="align-middle text-center">만드는법2_이미지</td>
 							<td><img src="<%=rvo.getManual_img02()%>"></td>
 						</tr>
 			<%		}
@@ -199,7 +216,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 3</td>
+						<td class="align-middle text-center">만드는법 3</td>
 						<td><%=rvo.getManual03()%>></td>
 					</tr>
 			<%
@@ -207,7 +224,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법3_이미지</td>
+							<td class="align-middle text-center">만드는법3_이미지</td>
 							<td><img src="<%=rvo.getManual_img03()%>"></td>
 						</tr>
 			<%		}
@@ -219,7 +236,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 4</td>
+						<td class="align-middle text-center">만드는법 4</td>
 						<td><%=rvo.getManual04()%>></td>
 					</tr>
 			<%
@@ -227,7 +244,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법4_이미지</td>
+							<td class="align-middle text-center">만드는법4_이미지</td>
 							<td><img src="<%=rvo.getManual_img04()%>"></td>
 						</tr>
 			<%		}
@@ -239,7 +256,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 5</td>
+						<td class="align-middle text-center">만드는법 5</td>
 						<td><%=rvo.getManual05()%>></td>
 					</tr>
 			<%
@@ -247,7 +264,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법5_이미지</td>
+							<td class="align-middle text-center">만드는법5_이미지</td>
 							<td><img src="<%=rvo.getManual_img05()%>"></td>
 						</tr>
 			<%		}
@@ -259,7 +276,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 6</td>
+						<td class="align-middle text-center">만드는법 6</td>
 						<td><%=rvo.getManual06()%>></td>
 					</tr>
 			<%
@@ -267,7 +284,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법6_이미지</td>
+							<td class="align-middle text-center">만드는법6_이미지</td>
 							<td><img src="<%=rvo.getManual_img06()%>"></td>
 						</tr>
 			<%		}
@@ -279,7 +296,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 7</td>
+						<td class="align-middle text-center">만드는법 7</td>
 						<td><%=rvo.getManual07()%>></td>
 					</tr>
 			<%
@@ -287,7 +304,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법7_이미지</td>
+							<td class="align-middle text-center">만드는법7_이미지</td>
 							<td><img src="<%=rvo.getManual_img07()%>"></td>
 						</tr>
 			<%		}
@@ -299,7 +316,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 8</td>
+						<td class="align-middle text-center">만드는법 8</td>
 						<td><%=rvo.getManual08()%>></td>
 					</tr>
 			<%
@@ -307,7 +324,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법8_이미지</td>
+							<td class="align-middle text-center">만드는법8_이미지</td>
 							<td><img src="<%=rvo.getManual_img08()%>"></td>
 						</tr>
 			<%		}
@@ -319,7 +336,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 9</td>
+						<td class="align-middle text-center">만드는법 9</td>
 						<td><%=rvo.getManual09()%>></td>
 					</tr>
 			<%
@@ -327,7 +344,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법9_이미지</td>
+							<td class="align-middle text-center">만드는법9_이미지</td>
 							<td><img src="<%=rvo.getManual_img09()%>"></td>
 						</tr>
 			<%		}
@@ -339,7 +356,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 10</td>
+						<td class="align-middle text-center">만드는법 10</td>
 						<td><%=rvo.getManual10()%>></td>
 					</tr>
 			<%
@@ -347,7 +364,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법10_이미지</td>
+							<td class="align-middle text-center">만드는법10_이미지</td>
 							<td><img src="<%=rvo.getManual_img10()%>"></td>
 						</tr>
 			<%		}
@@ -359,7 +376,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 11</td>
+						<td class="align-middle text-center">만드는법 11</td>
 						<td><%=rvo.getManual11()%>></td>
 					</tr>
 			<%
@@ -367,7 +384,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법11_이미지</td>
+							<td class="align-middle text-center">만드는법11_이미지</td>
 							<td><img src="<%=rvo.getManual_img11()%>"></td>
 						</tr>
 			<%		}
@@ -379,7 +396,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 12</td>
+						<td class="align-middle text-center">만드는법 12</td>
 						<td><%=rvo.getManual12()%>></td>
 					</tr>
 			<%
@@ -387,7 +404,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법12_이미지</td>
+							<td class="align-middle text-center">만드는법12_이미지</td>
 							<td><img src="<%=rvo.getManual_img12()%>"></td>
 						</tr>
 			<%		}
@@ -399,7 +416,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 13</td>
+						<td class="align-middle text-center">만드는법 13</td>
 						<td><%=rvo.getManual13()%>></td>
 					</tr>
 			<%
@@ -407,7 +424,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법13_이미지</td>
+							<td class="align-middle text-center">만드는법13_이미지</td>
 							<td><img src="<%=rvo.getManual_img13()%>"></td>
 						</tr>
 			<%		}
@@ -419,7 +436,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 14</td>
+						<td class="align-middle text-center">만드는법 14</td>
 						<td><%=rvo.getManual14()%>></td>
 					</tr>
 			<%
@@ -427,7 +444,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법14_이미지</td>
+							<td class="align-middle text-center">만드는법14_이미지</td>
 							<td><img src="<%=rvo.getManual_img14()%>"></td>
 						</tr>
 			<%		}
@@ -439,7 +456,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법15</td>
+						<td class="align-middle text-center">만드는법15</td>
 						<td><%=rvo.getManual15()%>></td>
 					</tr>
 			<%
@@ -447,7 +464,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법15_이미지</td>
+							<td class="align-middle text-center">만드는법15_이미지</td>
 							<td><img src="<%=rvo.getManual_img15()%>"></td>
 						</tr>
 			<%		}
@@ -459,7 +476,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 16</td>
+						<td class="align-middle text-center">만드는법 16</td>
 						<td><%=rvo.getManual16()%>></td>
 					</tr>
 			<%
@@ -467,7 +484,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법16_이미지</td>
+							<td class="align-middle text-center">만드는법16_이미지</td>
 							<td><img src="<%=rvo.getManual_img16()%>"></td>
 						</tr>
 			<%		}
@@ -479,7 +496,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 17</td>
+						<td class="align-middle text-center">만드는법 17</td>
 						<td><%=rvo.getManual17()%>></td>
 					</tr>
 			<%
@@ -487,7 +504,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법17_이미지</td>
+							<td class="align-middle text-center">만드는법17_이미지</td>
 							<td><img src="<%=rvo.getManual_img17()%>"></td>
 						</tr>
 			<%		}
@@ -499,7 +516,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 18</td>
+						<td class="align-middle text-center">만드는법 18</td>
 						<td><%=rvo.getManual18()%>></td>
 					</tr>
 			<%
@@ -507,7 +524,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법18_이미지</td>
+							<td class="align-middle text-center">만드는법18_이미지</td>
 							<td><img src="<%=rvo.getManual_img18()%>"></td>
 						</tr>
 			<%		}
@@ -519,7 +536,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법19</td>
+						<td class="align-middle text-center">만드는법19</td>
 						<td><%=rvo.getManual19()%>></td>
 					</tr>
 			<%
@@ -527,7 +544,7 @@
 					{
 			%>
 						<tr>
-							<td>만드는법19_이미지</td>
+							<td class="align-middle text-center">만드는법19_이미지</td>
 							<td><img src="<%=rvo.getManual_img19()%>"></td>
 						</tr>
 			<%		}
@@ -539,7 +556,7 @@
 				{
 			%>
 					<tr>
-						<td>만드는법 20</td>
+						<td class="align-middle text-center">만드는법 20</td>
 						<td><%=rvo.getManual20()%>></td>
 					</tr>
 			<%
@@ -547,22 +564,22 @@
 					{
 			%>
 						<tr>
-							<td>만드는법20_이미지</td>
+							<td class="align-middle text-center">만드는법20_이미지</td>
 							<td><img src="<%=rvo.getManual_img20()%>"></td>
 						</tr>
 			<%		}
 				}
 			%>
-			
 			<tr>
-				<td>등록일</td>
-				<td><%=rvo.getRcp_insertdate()%></td>
+				<td colspan="2" align="right">
+					<span style="font-size: 12px;">등록: <%=rvo.getRcp_insertdate()%></span>
+				</td>
 			</tr>
 			<s:authorize access="isAnonymous()">
 				<input type="hidden" name="rcp_seq" id="rcp_seq" value="<%=	rvo.getRcp_seq() %>" />
 			</s:authorize>
 			<tr>
-				<td>
+				<td class="align-middle text-center">
 					영양소
 				</td>
 				<td>
@@ -573,11 +590,12 @@
 			<s:authorize access="isAuthenticated()">
 			<tr>
 				<td colspan="2">
-					<button type="button" class="" name="favRecipeAPI" id="favRecipeAPI">즐겨찾기</button>
+					<button type="button" class="btn btn-orange" name="favRecipeAPI" id="favRecipeAPI">즐겨찾기</button>
 					<input type="hidden" name="rcp_seq" id="rcp_seq" value="<%=	rvo.getRcp_seq() %>" />
 				</td>
 			</tr>
 			</s:authorize>
 		</table>
+	</div>
 	</body>
 </html>
