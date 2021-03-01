@@ -21,7 +21,64 @@
 div, h1, h2, h3, h4, h5, h6, p {
    font-family: 'Noto Serif KR', serif;
 }
+
+body {
+	background: #F9A781;
+}
+/* 사이드바 스타일 */
+	.sidenav {
+			height:100%;
+			width: 0;
+			position: fixed;
+			z-index:1;
+			top: 0;
+			left: 0;
+			background-color: rgb(0,154,200);
+			overflow-x: hidden;
+			transition:0.5s ease-in-out;
+			padding-top: 60px;
+		}
+		.sidenav a {
+			padding: 8px 8px 8px 32px;
+			text-decoration: none;
+			font-size: 25px;
+			color: #fff;
+			display: block;
+			transition: 0.2s ease-in-out;
+		}
+		.sidenav a:hover, .offcanvas a:focus {
+			color: #000;
+		}
+		.closebtn {
+			position: absolute;
+			top: 0;
+			right: 25px;
+			font-size: 36px !important;
+			margin-left: 50px;
+		}
+		.openmenu:hover {
+			color:rgb(0,154,200);
+			transition:0.5s ease-in-out;
+		}
+		.openmenu {
+			font-size: 25px;
+			cursor:pointer;
+			transition:0.5s ease-in-out;
+		}
+		.openmenu > i {
+			font-size: 30px;
+		}
+		/* 미디어쿼리 적용 */
+		@media screen and (max-height:450px) {
+			.sidenav {
+				padding-top:15px;
+			}
+			.sidenav a {
+				font-size: 18px;
+			}
+		}
 </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#myLevelUpdate").click(function(){
@@ -64,53 +121,61 @@ div, h1, h2, h3, h4, h5, h6, p {
 </script>
 </head>
 <body>
-	<h3>myinfo default page...</h3>
+
+	<h3 align="center">마이페이지</h3>
+
 	<!-- 셰프인 경우에 구독자 증가 추이를 그린 그래프를 삽입 -->	
 <% 
 	if(mlevel.equals("C")){
 %>
-	<div>
+	<div align="center">
 		<p>현재 내 구독자 수 증가 추이</p>	
 		<img src="http://localhost:5000/static/subscribeInc/<%= mno %>_subscribeInc.png">
 	</div>
 <% 
 	}
 %>
-	
-	<ul>
-		<li>
-			<a href="myinfo/updateMyPW">내 비밀번호 수정</a>
-		</li>
-<% 
+
+
+
+	<div id="myinfosidenav" class="sidenav" >
+	<% 
 			if (mlevel.equals("U")){
 %>
-		<li>
-			<button type="button" class="" id="myLevelUpdate">내 등급 올리기</button>	
-		</li>
+	
+		
+			<button type="button"  class="btn btn-primary btn-xs" id="myLevelUpdate" >내 등급 올리기</button>	
+		
 <% 
 			}	
 %>
+		<a href="#" class="closebtn" onclick='closeNav()'>x</a>
+		<a href="myinfo/updateMyPW">비밀번호 수정</a>
+		<a href="myinfo/myRecipeListPage?mno=<%= mno %>">내가 쓴 레시피 조회하기</a>
+		<a href="myinfo/mySubList?mno=<%= mno %>">내가 구독한 셰프 조회하기</a>			
+		<a href="myinfo/myFavRecipeList?mno=<%= mno %>">내 즐겨찾기 레시피</a>
+		<a href="myinfo/myQnAList?mno=<%= mno %>">내 Q&A 조회하기</a>
+		<a href="/kosmoJns/myinfo/myFavReciepBoardList?mno=<%=mno%>">내 즐겨찾기 레시피 - 유저</a>			
+		<a href="index.jsp">인덱스 페이지로</a>
+	</div>
+	<p align="center">  오픈  버튼을 클릭하면 메뉴가 열립니다.</p>
+	<span class="openmenu" onclick='openNav()'><i class="fa fa-angle-double-left fa-5" aria-hidden="true"></i> open</span>
+
+	<script>
+		function openNav() {
+			document.getElementById('myinfosidenav').style.width = '250px';
+		}
+		function closeNav() {
+			document.getElementById('myinfosidenav').style.width = '10px';
+		}
+	</script>
+	
+	
+<!-- 	
 		<li>
 			아래 데이터들을 시각화해서 그래프로 보여주면 좋을 듯	
 		</li>
-		<li>
-			<a href="myinfo/myRecipeListPage?mno=<%= mno %>">내가 쓴 레시피 조회하기</a>
-		</li>
-		<li>
-			<a href="myinfo/mySubList?mno=<%= mno %>">내가 구독한 셰프 조회하기</a>
-		</li>
-		<li>
-			<a href="myinfo/myFavRecipeList?mno=<%= mno %>">내 즐겨찾기 레시피</a>
-		</li>
-		<li>
-			<a href="myinfo/myQnAList?mno=<%= mno %>">내 Q&A 조회하기</a>
-		</li>
-		<li>
-			<a href="/kosmoJns/myinfo/myFavReciepBoardList?mno=<%=mno%>">내 즐겨찾기 레시피 - 유저</a>
-		</li>
-		<li>
-			<a href="index.jsp">인덱스 페이지로</a>
-		</li>
-	</ul>
+ -->
+
 </body>
 </html>
