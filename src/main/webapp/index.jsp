@@ -99,7 +99,8 @@ header {
 	<div id="wrapper">
 	
 		<!-- 오늘의 추천 레시피 3개 보여주기 -->
-		<h3>오늘의 추천 레시피</h3>
+		<h3>추천 레시피</h3>
+		<p>오늘은 이런 요리를 만들어보시는 것 어떨까요?</p>
 		<div id="randomRecipe"></div>
 	
 	
@@ -274,6 +275,7 @@ header {
 						html2 += '<img class="card-img-top" src="'+ data[i].rpimage +'" alt="Card image cap">'
 						html2 += '<div class="card-body">';
 						html2 += '<h6 class="card-title">' + data[i].rptitle + '</h6>';
+						html2 += '<a href="/kosmoJns/recipedetail.do?rcp_seq=' + data[i].rpno + '" class="btn btn-primary">레시피 보러가기</a>'
 						html2 += '</div></div>';
 					}
 					html2 += '</div>';
