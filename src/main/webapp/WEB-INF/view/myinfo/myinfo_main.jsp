@@ -112,14 +112,16 @@ body {
 			}
 		})
 	})
-<%-- 	$(document).ready(function(){
-		var mlevel = "<%= mlevel %>";
-		var status = location.search;
-		if(status.indexOf("redirect") != -1){
-			return;	
-		}
-		if (mlevel == 'C'){
-			location.href="sendSubscribeInc?start_yyyymm=202004&end_yyyymm=202104&mno=<%=mno%>";
+<%-- 	
+		flask 로 데이터 요청	
+		$(document).ready(function(){
+			var mlevel = "<%= mlevel %>";
+			var status = location.search;
+			if(status.indexOf("redirect") != -1){
+				return;	
+			}
+			if (mlevel == 'C'){
+				location.href="sendSubscribeInc?start_yyyymm=202004&end_yyyymm=202104&mno=<%=mno%>";
 		}
 	})
  --%> </script>
@@ -173,13 +175,5 @@ body {
 			document.getElementById('myinfosidenav').style.width = '10px';
 		}
 	</script>
-	
-	
-<!-- 	
-		<li>
-			아래 데이터들을 시각화해서 그래프로 보여주면 좋을 듯	
-		</li>
- -->
-
 </body>
 </html>

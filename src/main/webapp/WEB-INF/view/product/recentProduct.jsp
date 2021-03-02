@@ -229,8 +229,6 @@
 					console.log("info >> " + info);
 					console.log("image >> " + image);
 					console.log("link >> " + link);
-					// Spring Secutiry 더블 슬래시 허용 필요
-					
 					
 					var recentProduct = '<a href="'+link+'" target="_blank"><img src="'+image+'" class="rounded_2" title="'+title+'" style="width: 150px; height: 150px;"></a>';
 						        	

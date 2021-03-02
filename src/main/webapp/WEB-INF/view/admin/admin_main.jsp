@@ -14,7 +14,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-/* 	$(document).ready(function(){
+/* 	
+ 	flask로 데이터 요청 
+	 $(document).ready(function(){
 		var status = location.search;
 		if(status.indexOf("redirect") != -1){
 			return;	
