@@ -32,56 +32,21 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		
-		// 조회수 증가
-		var viewsUrl = "noticeViews.do";
-		var viewsType = "GET";
-		var viewsData = {"bno": $("#bno").val()};
-		$.ajax({
-			url: viewsUrl,
-			type: viewsType,
-			data: viewsData,
-			success: viewsSuccess,
-			error: viewsError
-		});
-
-		function viewsSuccess(resultData){
-			if(resultData=="GOOD"){
-				console.log("조회 수 +1 증가");
-			}
-		}
-		function viewsError(){
-			alert("시스템 오류입니다. 관리자에게 문의하세요.");
-		}
-		
-		// 좋아요
-		$(document).on("click", "#Hitsbtn", function(){
-			var hitsUrl = "noticeHits.do";
-			var hitsType = "GET";
-			var hitsData = {"bno": $("#bno").val()};
-			$.ajax({
-				url: hitsUrl,
-				type: hitsType,
-				data: hitsData,
-				success: hitsSuccess,
-				error: hitsError
-			});
-
-			function hitsSuccess(resultData){
-				if(resultData=="GOOD"){
-					console.log("좋아요 수 +1 증가");
-				}
-			}
-			function hitsError(){
-				alert("시스템 오류입니다. 관리자에게 문의하세요.");
-			}
-		});
-		
-		// U <== 수정폼으로 이동하여 수정하게끔 개발 부탁드립니다.(재민 03/01)
+				
+		// U 
 		$(document).on("click", "#U", function(){
 			$("#NoticeUpdateForm").attr({
 				"method":"POST",
-				"action":"noticeUpdate.do"
+				"action":"noticeUpdateForm.do",
+				"enctype": "multipart/form-data"
+			}).submit();
+		});
+		
+		// D
+		$(document).on("click", "#D", function(){
+			$("#NoticeUpdateForm").attr({
+				"method":"POST",
+				"action":"noticeDelete.do"
 			}).submit();
 		});
 		
@@ -89,12 +54,6 @@
 		$(document).on("click", "#C", function(){
 			location.href="noticeSelectAllPage.do";
 		});
-		
-		// 관리자가 작성하는거라 조건이 달라야할듯 해요
-		if ( sessionWriter == boardWriter){
-			$('#U').attr('disabled', false);
-			$('#D').attr('disabled', false);
-		}
 		
 	});
 </script>
@@ -150,8 +109,8 @@
 			</tr>				
 			<tr>
 				<td colspan="7" align="right">
-					<input type="button" class="btn btn-orange" value="좋아요" id="Hitsbtn">
-					<input type="button" class="btn btn-orange" disabled=disabled value="수정하기" id="U">
+					<input type="button" class="btn btn-orange" value="수정하기" id="U">
+					<input type="button" class="btn btn-orange" value="삭제하기" id="D">
 					<input type="button" class="btn btn-orange" value="돌아가기" id="C">
 				</td>
 			</tr>
