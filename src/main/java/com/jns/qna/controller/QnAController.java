@@ -1,6 +1,7 @@
 package com.jns.qna.controller;
 
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -172,7 +173,7 @@ public class QnAController {
 		logger.info("QnAController QnASelect bvo.getBno() " + bvo.getBno());
 		
 		List<BoardVO> listS = qnaService.QnASelect(bvo);
-		logger.info("QnAController boardSelect listS.size >>>:: " + listS.size());
+		logger.info("QnAController QnASelect listS.size >>>:: " + listS.size());
 		
 		// ������ �Խù��� �ִٸ� �Խù��� �ҷ��´�.
 		if(listS.size() == 1) {
@@ -184,26 +185,47 @@ public class QnAController {
 		
 	}
 	
-	@RequestMapping(value="qnaUpdate",method=RequestMethod.GET)
+	@RequestMapping(value="qnaUpdate",method=RequestMethod.POST)
 	public String BoardUpdate(BoardVO bvo ,Model model) {
 		logger.info("QnAController QnAUpdate 함수 시작 >> ");
 		
-		int nCnt = qnaService.QnAUpdate(bvo);
+		List<BoardVO> listS = qnaService.QnASelect(bvo);
 		
-		logger.info("QnAController QnAUpdate bvo.getBtitle() >>> : " + bvo.getBtitle());
-		logger.info("QnAController QnAUpdate bvo.getBcontent() >>> : " + bvo.getBcontent());
-		logger.info("QnAController QnAUpdate bvo.getMnick() >>> : " + bvo.getMnick());
+		model.addAttribute("listS", listS);
 		
-		logger.info("QnAController QnAUpdate nCnt >>> " + nCnt);
-		
-		
-		if(nCnt > 0) {
-			return "QnA/qnaUpdate";
-		}
-		
-		return "QnA/qnaSelectAll";
+			return "QnA/qnaUpdateForm";
 				
 	}	
+	
+	// 수정 폼
+	@RequestMapping(value="qnaUpdateForm", method=RequestMethod.POST)
+	public String QnAUpdate(@ModelAttribute BoardVO bvo, MultipartHttpServletRequest request)
+							throws IllegalStateException, IOException{		
+		logger.info("QnAUpdate 호출 성공");
+		logger.info("QnAUpdate bvo.getBno() >>> : " + bvo.getBno());
+		
+		int nCnt = 0;
+		String url = "";
+		
+		//단일파일 업로드
+		String key = new FileUploadUtil().uploadFile(request, "qnaboard");  
+		logger.info("key >>> : " + key);
+		bvo.setBfile(key);
+				
+		bvo.setBviews("0");
+		bvo.setBhits("0");
+		
+		logger.info("bvo >>> : " + bvo.toString());
+		
+		nCnt = qnaService.QnAUpdate(bvo);
+		logger.info("QnAdUpdate nCnt >>> : " + nCnt);
+		
+		if(nCnt == 1) {
+			url = "qnaSelectAllPage.do?bno=" + bvo.getBno();
+		}
+		
+		return "redirect:" + url;
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="qnaViews", method=RequestMethod.GET)
@@ -239,19 +261,21 @@ public class QnAController {
 		}
 	}
 	
-	@RequestMapping(value="qnaDelete", method=RequestMethod.GET)
-	public String QnADelete(BoardVO bvo, Model model) {
+	@RequestMapping(value="qnaDelete", method=RequestMethod.POST)
+	public String QnADelete(@ModelAttribute BoardVO bvo, HttpServletRequest request) throws IOException {
 		logger.info("QnAController QnADelete start >>> :");
+		logger.info("QnAController QnADelete bvo.getBno() >>> : " + bvo.getBno());
 		
-		logger.info("QnAController QnADelete bvo.getSno() >>> : " + bvo.getBno());		
-		int nCnt = qnaService.QnADelete(bvo);
+		int nCnt = 0;
+		String url = "";
+		
+		nCnt = qnaService.QnADelete(bvo);
 		logger.info("QnAController QnADelete nCnt >>> : " + nCnt);
 		
-		if (nCnt > 0) {
-			return "QnA/qnaDelete";
+		if (nCnt ==1 ) {
+			url = "qnaSelectAllPage";
 		}
-		
-		return "QnA/qnaSelectAll";
+		return "redirect:" + url;
 	}
 
 }

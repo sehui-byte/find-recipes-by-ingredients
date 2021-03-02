@@ -83,12 +83,6 @@
 			location.href="qnaForm.do";
 		});	
 		
-		$(document).on("click", "#S", function(){
-			$("#QnAList").attr({
-				"method":"GET",
-				"action":"qnaSelect.do"}).submit();			
-		}); 
-		
 		$(document).on("click", "#A", function(){
 			location.href="qnaSelectAllPage.do";
 		});
@@ -160,6 +154,7 @@
 	</table>
 		<div align="right">
 			<input class="btn btn-orange" type="button" value="글쓰기" id="I">
+			<input class="btn btn-orange" type="button" value="전체목록" id="A">
 		</div>
 	
 		<div class="container-fluid">
