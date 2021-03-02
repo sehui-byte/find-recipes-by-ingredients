@@ -1,5 +1,6 @@
 package com.jns.notice.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -218,27 +220,47 @@ public class NoticeController {
 
 	}
 
-	@RequestMapping(value="noticeUpdate",method=RequestMethod.GET)
+	@RequestMapping(value="noticeUpdate",method=RequestMethod.POST)
 	public String NoticeUpdate(BoardVO nvo ,Model model) {
 		logger.info("NoticeController NoticeUpdate start >> ");
 
-		int nCnt = noticeService.NoticeUpdate(nvo);
-		logger.info("NoticeController NoticeUpdate nvo.getBno() >>> : " + nvo.getBno());
-		logger.info("NoticeController NoticeUpdate nvo.getBtitle() >>> : " + nvo.getBtitle());
-		logger.info("NoticeController NoticeUpdate nvo.getBcontent() >>> : " + nvo.getBcontent());
-		logger.info("NoticeController NoticeUpdate nvo.getMnick() >>> : " + nvo.getMnick());
+		List<BoardVO> listS = noticeService.NoticeSelect(nvo);
+		
+		model.addAttribute("listS", listS);
 
-		logger.info("NoticeController NoticeUpdate nCnt >>> " + nCnt);
-
-
-		if(nCnt > 0) {
-			return "notice/noticeUpdate";
-		}
-
-		return "notice/noticeSelectAll";
-
+			return "notice/noticeUpdateForm";
 	}	
 
+	// 수정 폼
+		@RequestMapping(value="noticeUpdateForm", method=RequestMethod.POST)
+		public String QnAUpdate(@ModelAttribute BoardVO nvo, MultipartHttpServletRequest request)
+								throws IllegalStateException, IOException{		
+			logger.info("QnAUpdate 호출 성공");
+			logger.info("QnAUpdate nvo.getBno() >>> : " + nvo.getBno());
+			
+			int nCnt = 0;
+			String url = "";
+			
+			//단일파일 업로드
+			String key = new FileUploadUtil().uploadFile(request, "noticeboard");  
+			logger.info("key >>> : " + key);
+			nvo.setBfile(key);
+					
+			nvo.setBviews("0");
+			nvo.setBhits("0");
+			
+			logger.info("nvo >>> : " + nvo.toString());
+			
+			nCnt = noticeService.NoticeUpdate(nvo);
+			logger.info("NoticedUpdate nCnt >>> : " + nCnt);
+			
+			if(nCnt == 1) {
+				url = "noticeSelectAllPage.do?bno=" + nvo.getBno();
+			}
+			
+			return "redirect:" + url;
+		}
+	
 	@ResponseBody
 	@RequestMapping(value="noticeViews", method=RequestMethod.GET)
 	public String NoticeVIEWS(BoardVO nvo) {
@@ -274,18 +296,21 @@ public class NoticeController {
 	}
 
 
-	@RequestMapping(value="noticeDelete", method=RequestMethod.GET)
+	@RequestMapping(value="noticeDelete", method=RequestMethod.POST)
 	public String NoticeDelete(BoardVO nvo, Model model) {
 		logger.info("NoticeController NoticeDelete start >>> :");
-
 		logger.info("NoticeController NoticeDelete nvo.getBno() >>> : " + nvo.getBno());		
-		int nCnt = noticeService.NoticeDelete(nvo);
+		
+		int nCnt = 0;
+		String url = "";
+		
+		nCnt = noticeService.NoticeDelete(nvo);
 		logger.info("NoticeController NoticeDelete nCnt >>> : " + nCnt);
 
-		if (nCnt > 0) {
-			return "notice/noticeDelete";
+		if (nCnt == 1) {
+			url = "noticeSelectAllPage";
 		}
 
-		return "notice/noticeSelectAll";
+		return "redirect:" + url;
 	}
 }
