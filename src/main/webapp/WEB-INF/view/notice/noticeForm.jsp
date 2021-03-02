@@ -24,7 +24,7 @@
 		$(document).on("click", "#nbtn", function(){
 			console.log("nbtn >>> : ");					
 			$('#NoticeForm').attr({
-				'action':'noticeInsert.do',
+				'action':'/kosmoJns/noticeInsert.do',
 				'method':'POST',
 				'enctype':'multipart/form-data'
 			}).submit();
@@ -52,6 +52,7 @@
 			<td class="align-middle" colspan="2">
 				<h5><%=mnick%></h5>
 				<input type="hidden" name="mno" id="mno" value="<%=mno%>">
+				<input type="hidden" name="mnick" id="mnick" value="<%=mnick%>">
 			</td>
 		</tr>
 		<tr>

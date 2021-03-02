@@ -338,4 +338,12 @@ public class MemberController {
 		}
 	}
 
+	
+	// admin 페이지에서 가입자 현황 페이지 호출
+	@RequestMapping(value = "aboutNewMember", method = RequestMethod.GET)
+	public String aboutNewMember() {
+		logger.info("aboutNewMember 진입 >>> ");
+
+		return "admin/aboutNewMember";
+	}
 }

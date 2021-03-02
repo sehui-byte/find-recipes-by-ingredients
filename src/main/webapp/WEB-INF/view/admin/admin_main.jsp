@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 <script>
 	/*
 	>> 플라스크 연동시 주석 해제 
@@ -108,68 +109,80 @@
 		padding: 15px 0px 0px 5px;
 	}
 </style>
+<script type="text/javascript">
+	
+	// 페이지 호출 함수
+	function btnclick(_url){
+        $.ajax({
+            url : _url,
+            type : 'get',
+            success: function(data) {
+                $('#include_page').html(data);
+            },
+                error: function() {
+                $('#include_page').text('페이지 오류입니다.');
+            }
+        });
+    }
+</script>
 </head>
 <body>
 <div id="wrapper">
 	<div class="container-fluid">
 	   <div class="row">
-	     <!-- 3단길이의 첫번째 열 -->
-	      <div class="col-md-3">
+	     <!-- 1단길이의 첫번째 열 -->
+	      <div class="col-md-1">
 	      <!-- side bar  -->
 	      <span class="openmenu" onclick='openNav()'><i class="fa fa-angle-double-left fa-5" aria-hidden="true"></i> open</span>
 			<div id="adminsidenav" class="sidenav" >
-				<div class="panel panel-info">
-					<div class="panel-heading">
-					  <h5 class="panel-title">
-					  <span style="font-size: 10px; vertical-align: middle;">▶</span>
-					  공지사항 관리</h5>
-				    </div>				
-					<ul class="list-group">
-						<li class="list-group-item"><a href="../noticeSelectAllPage.do">공지 조회</a></li>
-						<li class="list-group-item"><a href="../noticeForm.do">공지 등록</a></li>
-					</ul>
-				</div>
-				<div class="panel panel-info">
-					<div class="panel-heading">
-					  <h5 class="panel-title"><span style="font-size: 10px; vertical-align: middle;">▶</span>
-					  회원 관리</h5>
-				    </div>				
-					<ul class="list-group">
-						<li class="list-group-item"><a href="../memberSelectAll.do">회원 조회</a></li>
-						<li class="list-group-item"><a href="../memberForm.do">회원 등록</a></li>
-					</ul>				
-				</div>
-				<div class="panel panel-info">
-					<div class="panel-heading">
-					  <h5 class="panel-title"><span style="font-size: 10px; vertical-align: middle;">▶</span>
-					  게시판 관리</h5>
-				    </div>				
-					<ul class="list-group">
-						<li class="list-group-item"><a href="../qnaSelectAllPage.do">QnA</a></li>
-						<li class="list-group-item"><a href="../recipelist.do">Basic Cooking</a></li>
-						<li class="list-group-item"><a href="../recipeboard_list.do">Cook Board</a></li>
-						<li class="list-group-item"><a href="/kosmoJns/chefboard/boardselectallpage.do">Chef Board</a></li>
-					</ul>				
-				</div>
-				<div class="panel panel-info">
-					<div class="panel-heading">
-					  <h5 class="panel-title"><span style="font-size: 10px; vertical-align: middle;">▶</span>
-					  댓글 관리</h5>
-				    </div>				
-					<ul class="list-group">
-						<li class="list-group-item"><a href="../reply/reply.do">댓글 조회</a></li>
-					</ul>				
-				</div>		
+				<ul class="nav flex-column">
+				  <li class="nav-item">
+		            <a href="#" class="closebtn" onclick='closeNav()'>x</a>
+		          </li>	
+		          <li class="nav-item">
+		            <a class="nav-link active" aria-current="page" href="#">
+		              <i class="bi bi-house-door-fill"></i>
+		              Main
+		            </a>
+		          </li>
+		          <li class="nav-item">
+		            <a class="nav-link" href="javascript:void(0);" onclick="btnclick('/kosmoJns/noticeForm.do')">
+		              <i class="bi bi-pencil-square"></i>
+		              공지 등록
+		            </a>
+		          </li>
+		          <li class="nav-item">
+		            <a class="nav-link" href="javascript:void(0);" onclick="btnclick('/kosmoJns/aboutNewMember.do')">
+		              <i class="bi bi-file-bar-graph"></i>
+		              가입자 현황
+		            </a>
+		          </li>
+		          <li class="nav-item">
+		            <a class="nav-link" href="../memberSelectAll.do">
+		              <i class="bi bi-collection"></i>
+		              회원 관리
+		            </a>
+		          </li>
+		          <li class="nav-item">
+		            <a class="nav-link" href="#">
+		              <i class="bi bi-chat-left-text"></i>
+		              댓글 관리
+		            </a>
+		          </li>
+		        </ul>		
 			</div>
 	      </div>
-	      <!-- 9단길이의 첫번째 열 -->
-	      <div class="col-md-9">
+	      <!-- 11단길이의 첫번째 열 -->
+	      <div class="col-md-11">
 	      	<div class="jumbotron">
 	      		<div class="section-header">Admin Page</div>
-	      	<hr>
-	      	<!-- admin 페이지 메인 부분에다가 회원 유입 현황 그래프  -->
-			<img src="http://localhost:5000/static/signupInc/signupInc.png">
-	      	<p>Open 버튼을 클릭하면 메뉴가 열립니다.</p>
+	      		<p>반갑습니다. 관리자 님<br>
+	      		   Open 버튼을 클릭하여 원하는 메뉴를 선택하세요.
+	      		</p>
+	      		<hr>
+	      		<div id="include_page">
+	      			<!-- 여기에 페이지 불러오기 -->
+	      		</div>	      	
 	      	</div>
 	      </div>
      	</div>
