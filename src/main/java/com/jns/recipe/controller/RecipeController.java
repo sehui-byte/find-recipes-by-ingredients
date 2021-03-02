@@ -47,6 +47,7 @@ public class RecipeController
 	public String recipelist(RecipeVO rvo, HttpServletRequest request, Model model)
 	{
 		logger.info("[RecipeController] recipeList() 호출");
+		logger.info("origin rvo >>> : " + rvo.toString());
 		
 		int totalCnt = 0;
 		String curPage = request.getParameter("curPage");
@@ -71,32 +72,32 @@ public class RecipeController
 		return "recipe/recipelist";
 	}
 	
-	//레시피 검색
-	//jsp에서 keyword 받아서 검색
-	@RequestMapping(value="searchRecipe.do", method=RequestMethod.GET)
-	public String searchRecipe(RecipeVO rvo, HttpServletRequest request, Model model) {
-		int totalCnt = 0;
-		String curPage = request.getParameter("curPage");
-		String sizeCtrl = request.getParameter("sizeCtrl");
-		
-		Paging.setPage(rvo, curPage, sizeCtrl);
-		logger.info("rvo >>> : " + rvo.toString());
-		
-		List<RecipeVO> pageList = recipeService.recipeSelectAllPage(rvo);
-		if(pageList.size() > 0)
-		{
-			totalCnt = pageList.get(0).getTotalCount();
-			rvo.setTotalCount(totalCnt);
-		}
-		
-		logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
-		logger.info("pageList.size >>> : " + pageList.size());
-		
-		model.addAttribute("rvo", rvo);
-		model.addAttribute("pageList", pageList);
-				
-		return "recipe/recipelist";
-	}
+//	//레시피 검색
+//	//jsp에서 keyword 받아서 검색
+//	@RequestMapping(value="searchRecipe.do", method=RequestMethod.GET)
+//	public String searchRecipe(RecipeVO rvo, HttpServletRequest request, Model model) {
+//		int totalCnt = 0;
+//		String curPage = request.getParameter("curPage");
+//		String sizeCtrl = request.getParameter("sizeCtrl");
+//		
+//		Paging.setPage(rvo, curPage, sizeCtrl);
+//		logger.info("rvo >>> : " + rvo.toString());
+//		
+//		List<RecipeVO> pageList = recipeService.recipeSelectAllPage(rvo);
+//		if(pageList.size() > 0)
+//		{
+//			totalCnt = pageList.get(0).getTotalCount();
+//			rvo.setTotalCount(totalCnt);
+//		}
+//		
+//		logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+//		logger.info("pageList.size >>> : " + pageList.size());
+//		
+//		model.addAttribute("rvo", rvo);
+//		model.addAttribute("pageList", pageList);
+//				
+//		return "recipe/recipelist";
+//	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "recipedetail")
 	public String recipedetail(RecipeVO rvo, Model model, RedirectAttributes redirectAttributes )
