@@ -101,7 +101,9 @@
 					}
 				})
 			})	
-<%-- 		function requestGraph(){
+<%-- 	
+		flask로 데이터 요청	
+		function requestGraph(){
 			var status = location.search;
 			if(status.indexOf("redirect") != -1){
 				return;	

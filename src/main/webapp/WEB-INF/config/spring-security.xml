@@ -33,6 +33,8 @@
 		<s:csrf disabled="true"/>
 	</s:http>
 	
+	<!--  방화벽 설정  -->
+	<s:http-firewall ref="defaultHttpFirewall"/>
 
 	<!--  db로 접속할 수 있도록 -->
 	<s:authentication-manager>
@@ -56,9 +58,6 @@
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 	
 	<!-- security 더블 슬래시 허용 확인중 -->	
-<!-- 	<bean id="allowUrlEncodedSlashHttpFirewall" class="org.springframework.security.web.firewall.DefaultHttpFirewall">
-		<property name="allowUrlEncodedSlash" value="true"/>
-	</bean>
-	<s:http-firewall ref="allowUrlEncodedSlashHttpFirewall"/>
- -->	
+	<bean id="defaultHttpFirewall" class="org.springframework.security.web.firewall.DefaultHttpFirewall"/>
+      
 </beans>
