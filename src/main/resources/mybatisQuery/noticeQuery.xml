@@ -217,6 +217,7 @@
 	                  ,BHITS
 	            FROM     BOARD A
 	            WHERE    BDELETEYN = 'Y'
+	            AND 	 BTYPE='N'
 	            ORDER BY BINSERTDATE DESC
 	            )            		
 		WHERE <![CDATA[ROWNUM <= 3]]>		
