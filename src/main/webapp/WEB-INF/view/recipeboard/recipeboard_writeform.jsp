@@ -113,7 +113,6 @@
 		<div id ="wrapper">
 		<form id="rbwriteForm" name="rbwriteForm" enctype="multipart/form-data" method="POST">
 			<span style="font-size: 14px">Cook Board</span>
-			<input type="hidden" name="mno" id="mno" value="<%=mno%>">
 			<table class="table">
 				<thead>
 					<tr>
@@ -234,7 +233,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 09</td>
 					<td><textarea class="form-control" name="manual09" id="manual09" rows="10" cols="70"></textarea>
-						<input class="form-control" id="manual_img09" name="file02" type="file">
+						<input class="form-control" id="manual_img09" name="file09" type="file">
 					</td>
 					<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
