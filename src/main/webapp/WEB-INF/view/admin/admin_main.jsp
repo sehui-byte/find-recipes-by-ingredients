@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/jsp/header.jsp" %>
+<%-- cache 적용 x --%>
+<%
+ response.setHeader("Cache-Control","no-cache");
+ response.setHeader("Pragma","no-cache");
+ response.setDateHeader("Expires",0);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -8,7 +14,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-	/* >> 플라스크 연동시 주석 해제 
 	$(document).ready(function(){
 		var status = location.search;
 		if(status.indexOf("redirect") != -1){
@@ -16,7 +21,6 @@
 		}
 		location.href="/kosmoJns/sendSignupInc.do?start_yyyymm=202004&end_yyyymm=202104";
 	})
-	/*
 </script>
 
 </head>
@@ -24,7 +28,7 @@
 <h3>admin 페이지</h3>
 
 <!-- admin 페이지 메인 부분에다가 회원 유입 현황 그래프  -->
-<img src="http://localhost:5000/static/signupInc/signupInc.png">
+<img src="http://54.180.83.249:5000/static/signupInc/signupInc.png">
 
 <ul>
 	<li><a href="../noticeSelectAll.do">공지사항 </a>

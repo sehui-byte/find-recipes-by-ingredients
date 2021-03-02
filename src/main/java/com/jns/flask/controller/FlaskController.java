@@ -43,10 +43,10 @@ public class FlaskController
 		redirectAttributes.addAttribute("nutrient", jsonStr);
 		redirectAttributes.addAttribute("rcp_seq", rvo.getRcp_seq());
 
-		String url = FlaskUtil.FLASK_SERVER_URL; 
-		logger.info("flask로 데이터 전송 >>> "+ url);
+		String flaskUrl = FlaskUtil.FLASK_SERVER_URL+"visualization"; 
+		logger.info("flask로 데이터 전송 >>> "+ flaskUrl);
 		
-		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
+		return "redirect:" + flaskUrl;
 	}
 	
 	@RequestMapping(value = "sendSubscribeInc", method = RequestMethod.GET)
@@ -67,9 +67,10 @@ public class FlaskController
 		redirectAttributes.addAttribute("subscribeInc", jsonStr);
 		redirectAttributes.addAttribute("mno", ssvo.getMno());
 
-		logger.info("flask로 데이터 전송 >>> ");
+		String flaskUrl = FlaskUtil.FLASK_SERVER_URL+"visualization"; 
+		logger.info("flask로 데이터 전송 >>> "+ flaskUrl);
 		
-		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
+		return "redirect:" + flaskUrl;
 	}
 	
 	@RequestMapping(value = "sendSignupInc", method = RequestMethod.GET)
@@ -89,9 +90,10 @@ public class FlaskController
 		
 		redirectAttributes.addAttribute("signupInc", jsonStr);
 
-		logger.info("flask로 데이터 전송 >>> ");
+		String flaskUrl = FlaskUtil.FLASK_SERVER_URL+"visualization"; 
+		logger.info("flask로 데이터 전송 >>> "+ flaskUrl);
 		
-		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
+		return "redirect:" + flaskUrl;
 	}
 	
 	@RequestMapping(value = "sendLikeProductInfo", method = RequestMethod.GET)
@@ -103,7 +105,10 @@ public class FlaskController
 		logger.info("jsonStr >>> : " + jsonStr);
 		
 		redirectAttributes.addAttribute("likeProductInfo", jsonStr);
+
+		String flaskUrl = FlaskUtil.FLASK_SERVER_URL+"lprice"; 
+		logger.info("flask로 데이터 전송 >>> "+ flaskUrl);
 		
-		return "redirect:http://127.0.0.1:5001/lprice";
+		return "redirect:" + flaskUrl;
 	}
 }
