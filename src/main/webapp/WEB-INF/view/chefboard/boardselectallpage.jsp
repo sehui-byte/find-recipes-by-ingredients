@@ -133,7 +133,6 @@
 </head>
 <body>
 <div id ="wrapper">
-<div class="section-header">Chef Board</div>
 <% request.setCharacterEncoding("UTF-8");%> 
 <%
 	Object objR = request.getAttribute("subRank");
@@ -157,63 +156,115 @@
 	}
 %>
 <!-- 랭킹 그리드 시작 -->
-<div class="container marketing">
-	<div class="row">
-      <div class="col-lg-4">
-      	<img src="/kosmoJns/resources/img/gold-medal.png"
-    		 alt="gold" style="width:100px; height:100px">
+<div class="card-deck">
+	<div class="card h-100" style="width: 18rem;">
 		<%
 			if( svo0 != null){		
 		%>
-			<h2><%=svo0.getChefnick()%></h2>
-			<p>구독자 <%=svo0.getSubCount()%>명<br>전냉시 주방장</p>
-			<p><a class="btn btn-warning" href="#">View details &raquo;</a></p>
+		    
 		<%
+		    	if(svo0.getMphoto() == null){   	
+		%>
+		    	<div style="text-align: center;">
+		    	<img src="/kosmoJns/resources/img/user.png" class="card-img-top" alt="기본 이미지"
+		    		style="width:150px; height:150px">
+		    	</div>
+		<%
+				}else{
+		%>
+		    	<img src="..." class="card-img-top" alt="회원 이미지...">
+		<%
+				}
+		%>
+		    <div class="card-body">	
+		    <h5 class="card-title"><img src="/kosmoJns/resources/img/gold-medal.png"
+	    		 alt="gold" style="width:30px; height:30px"><%=svo0.getChefnick()%></h5>
+		    <p class="card-text">구독자 <%=svo0.getSubCount()%>명<br>전냉시 주방장</p>
+		    <a class="btn btn-warning" href="#">View details &raquo;</a>
+		    </div>
+	 	<%
 			} // end of if 
 			else{
 		%>
-			<p>NO DATA</p>
+			<div class="card-body">
+			<p class="card-title">NO DATA</p>
+			</div>
 		<%
 			} // end of else
-		%>          
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <img src="/kosmoJns/resources/img/silver-medal.png"
-    		 alt="silver" style="width:100px; height:100px">
-    	<%
+		%>   
+	</div>
+	<div class="card h-100" style="width: 18rem;">
+		<%
 			if( svo1 != null){		
 		%>
-			<h2><%=svo1.getChefnick()%></h2>
-			<p>구독자 <%=svo1.getSubCount()%>명<br>전냉시 수석 조리장</p>
-			<p><a class="btn btn-warning" href="#">View details &raquo;</a></p>
+		    
 		<%
+		    	if(svo1.getMphoto() == null){   	
+		%>
+		    	<div style="text-align: center;">
+		    	<img src="/kosmoJns/resources/img/user.png" class="card-img-top" alt="기본 이미지"
+		    		style="width:150px; height:150px">
+		    	</div>
+		<%
+				}else{
+		%>
+		    	<img src="..." class="card-img-top" alt="회원 이미지...">
+		<%
+				}
+		%>  
+		    <h5 class="card-title"><img src="/kosmoJns/resources/img/silver-medal.png"
+	    		 alt="gold" style="width:30px; height:30px"><%=svo1.getChefnick()%></h5>
+		    <p class="card-text">구독자 <%=svo1.getSubCount()%>명<br>전냉시 주방장</p>
+		    <a class="btn btn-warning" href="#">View details &raquo;</a>
+		    </div>
+	 	<%
 			} // end of if 
 			else{
 		%>
-			<p>NO DATA</p>
+			<div class="card-body">
+			<p class="card-title">NO DATA</p>
+			</div>
 		<%
 			} // end of else
-		%>  	 
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-		<img src="/kosmoJns/resources/img/bronze-medal.png"
-    		 alt="bronze" style="width:100px; height:100px">
+		%>
+	</div>
+	<div class="card h-100" style="width: 18rem;">
 		<%
 			if( svo2 != null){		
 		%>
-			<h2><%=svo2.getChefnick()%></h2>
-			<p>구독자 <%=svo2.getSubCount()%>명<br>전냉시 1급 요리사</p>
-        	<p><a class="btn btn-warning" href="#">View details &raquo;</a></p>			
+		    
 		<%
+		    	if(svo2.getMphoto() == null){   	
+		%>
+		    	<div style="text-align: center;">
+		    	<img src="/kosmoJns/resources/img/user.png" class="card-img-top" alt="기본 이미지"
+		    		style="width:150px; height:150px">
+		    	</div>
+		<%
+				}else{
+		%>
+		    	<img src="..." class="card-img-top" alt="회원 이미지...">
+		<%
+				}
+		%>
+		    <img src="..." class="card-img-top" alt="회원 이미지...">
+		    <div class="card-body">
+		    <h5 class="card-title"><img src="/kosmoJns/resources/img/bronze-medal.png"
+	    		 alt="gold" style="width:30px; height:30px"><%=svo2.getChefnick()%></h5>
+		    <p class="card-text">구독자 <%=svo2.getSubCount()%>명<br>전냉시 주방장</p>
+		    <a class="btn btn-warning" href="#">View details &raquo;</a>
+		    </div>
+	 	<%
 			} // end of if 
 			else{
 		%>
-			<p>NO DATA</p>
+			<div class="card-body">
+			<p class="card-title">NO DATA</p>
+			</div>
 		<%
 			} // end of else
-		%>     	
-      </div><!-- /.col-lg-4 -->
-    </div>
+		%>
+	</div>
 </div>
 <!-- 랭킹 그리드 종료 -->
 
@@ -224,6 +275,8 @@
 	int nCnt = list.size();
 	System.out.println("boardselectallpage.jsp nCnt >>> : " + nCnt);
 %>
+
+<div class="section-header">Chef Board</div>
 <form name="boardList" id="boardList">
 <table class="table table-hover">
 	<thead>
@@ -326,6 +379,7 @@
 	</jsp:include>
 	</div>
 </form>
+<div>Icons made by <a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 <div>Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 </div>
