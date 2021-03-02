@@ -112,8 +112,8 @@ body {
 			}
 		})
 	})
-<%-- 	
-		flask 로 데이터 요청	
+		
+		// 플라스크로 리다이렉트 할 때 분기	
 		$(document).ready(function(){
 			var mlevel = "<%= mlevel %>";
 			var status = location.search;
@@ -124,7 +124,7 @@ body {
 				location.href="sendSubscribeInc?start_yyyymm=202004&end_yyyymm=202104&mno=<%=mno%>";
 		}
 	})
- --%> </script>
+</script>
 </head>
 <body>
 
