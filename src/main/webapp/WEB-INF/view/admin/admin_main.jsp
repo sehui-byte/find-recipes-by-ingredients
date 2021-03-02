@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/jsp/header.jsp" %>
+<%-- cache 적용 x --%>
+<%
+ response.setHeader("Cache-Control","no-cache");
+ response.setHeader("Pragma","no-cache");
+ response.setDateHeader("Expires",0);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -9,8 +15,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 <script>
-	/*
-	>> 플라스크 연동시 주석 해제 
+	// 플라스크 이미지 요청 
 	$(document).ready(function(){
 		var status = location.search;
 		if(status.indexOf("redirect") != -1){
@@ -18,7 +23,6 @@
 		}
 		location.href="/kosmoJns/sendSignupInc.do?start_yyyymm=202004&end_yyyymm=202104";
 	})
-	*/
 </script>
 <style type="text/css">
 	/*google 웹폰트 */

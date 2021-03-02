@@ -101,8 +101,8 @@
 					}
 				})
 			})	
-<%-- 	
-		flask로 데이터 요청	
+
+		//flask로 이미지 null 값인 경우 요청
 		function requestGraph(){
 			var status = location.search;
 			if(status.indexOf("redirect") != -1){
@@ -111,7 +111,7 @@
 			var rcp_seq = <%= rvo.getRcp_seq()%>;
 			location.href="/kosmoJns/sendNutrient.do?rcp_seq="+rcp_seq;
 		}
- --%>		</script>
+</script>
 	</head>
 	<body>
 	<div id ="wrapper">
