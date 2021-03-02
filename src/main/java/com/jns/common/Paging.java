@@ -1,8 +1,10 @@
 package com.jns.common;
 
+import com.jns.alarm.vo.AlarmVO;
 import com.jns.board.vo.BoardVO;
 import com.jns.chefboard.vo.ChefBoardVO;
 import com.jns.member.vo.MemberVO;
+import com.jns.product.vo.ProductVO;
 import com.jns.qna.vo.QnAVO;
 import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
@@ -140,7 +142,42 @@ public class Paging {
 		
 	}
 	
+	public static void setPage(ProductVO pvo, String curpage, String sizeCtrl) {
+		
+		if(curpage==null) pvo.setCurPage(1);
+
+		if(curpage!=null){
+			int curnum=Integer.parseInt(curpage);
+			pvo.setCurPage(curnum);
+		}
+		
+		pvo.setGroupSize(10);
+		
+		if(sizeCtrl==null) pvo.setPageSize(10);
+		if(sizeCtrl!=null){
+			int ctrl=Integer.parseInt(sizeCtrl);
+			pvo.setPageSize(ctrl);
+		}
+		
+	}
 	
-	
+	public static void setPage(AlarmVO avo, String curpage, String sizeCtrl) {
+		
+		if(curpage == null) avo.setCurPage(1);
+		
+		if(curpage !=null) {
+			int curnum=Integer.parseInt(curpage);
+			avo.setCurPage(curnum);
+		}
+		
+		avo.setGroupSize(10);
+		
+		if(sizeCtrl==null) avo.setPageSize(10);
+		if(sizeCtrl!=null) {
+			int ctrl = Integer.parseInt(sizeCtrl);
+			avo.setCurPage(ctrl);
+		}
+		
+	}
 }
 

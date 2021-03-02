@@ -34,9 +34,9 @@ public interface MemberDAO {
 
 	// 임시 비밀번호로 변경
 	public int memberTempPWOK(MemberVO mvo);
-	
+/*	
 	// 페이징
 	public List<MemberVO> memberSelectAllpage(MemberVO mvo);
-	
+*/	
 
 }

@@ -33,8 +33,9 @@ public interface MemberService {
 	// 임시 비밀번호 발급
 	public int memberTempPWOK(MemberVO mvo);
 	
-
-
+/*
 	// 페이징
 	public List<MemberVO> memberSelectAllPage(MemberVO mvo);
+	
+*/
 }

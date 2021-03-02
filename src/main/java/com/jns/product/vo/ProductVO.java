@@ -11,6 +11,54 @@ public class ProductVO {
 	private String title;
 	private String mno;
 	
+	
+	// 페이징 **
+	private int pageSize;
+	private int groupSize;
+	private int curPage;
+	private int totalCount;
+	
+	
+	public ProductVO() {}
+	
+	public ProductVO(int pageSize, int groupSize, int curPage, int totalCount) {
+	
+		this.pageSize = pageSize;
+		this.groupSize = groupSize;
+		this.curPage = curPage;
+		this.totalCount = totalCount;
+	}
+	
+	
+	//페이징
+	public int getPageSize() {
+		return pageSize;
+	}
+	
+	public int getGroupSize() {
+		return groupSize;
+	}
+	public int getCurPage() {
+		return curPage;
+	}
+	public int getTotalCount() {
+		return totalCount;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	public void setGroupSize(int groupSize) {
+		this.groupSize = groupSize;
+	}
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
+	}
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+	
+	
+	
 	public String getLpno() {
 		return lpno;
 	}

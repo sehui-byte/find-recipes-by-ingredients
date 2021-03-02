@@ -18,4 +18,6 @@ public interface AlarmDAO {
 	public List<AlarmVO> selectFiveAlarm(AlarmVO avo);
 	//알람 확인 여부 변경
 	public int updateReadYN(AlarmVO avo);
+	//알람 페이지 처리
+	public List<AlarmVO> AlarmPage(AlarmVO avo);
 }

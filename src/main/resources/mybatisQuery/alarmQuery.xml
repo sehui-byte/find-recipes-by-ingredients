@@ -7,6 +7,26 @@
 		SELECT * FROM ALARM WHERE RECEIVER = #{receiver, jdbcType=VARCHAR}
 		ORDER BY INSERTDATE DESC
 	</select>
+	
+	
+	<select id="AlarmPage" resultType="avo" parameterType="avo">
+		SELECT 	* 
+		FROM
+				(SELECT 
+					 A.ANO
+					,A.RECEIVER
+					,A.SENDER
+					,A.TYPE
+				    ,A.INSERTDATE
+				    ,A.READYN
+				    ,CEIL(ROW_NUMBER() OVER(ORDER BY A.ANO DESC)/ 10) PAGENO
+				    ,COUNT(A.ANO) OVER() AS TOTALCOUNT
+				FROM ALARM A
+				WHERE RECEIVER = 'user0001' 
+				) B
+		WHERE PAGENO = 1
+		ORDER BY ANO DESC	
+	</select>
 
 	<!-- 안읽은 데이터만 센다 - 확인 여부 Y : 확인 , N: 미확인 -->
 	<select id="countAlarm" resultType="String" parameterType="avo">

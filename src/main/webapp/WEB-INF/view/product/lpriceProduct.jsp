@@ -44,8 +44,6 @@
 						if(result == 1){
 							var sendMessage = "관심 상품 < " + title + " > 의 최저가를 지금 만나보세요 !";
 							alert(sendMessage);
-						}else{
-							alert("최저가 변동 없음");
 						}
 						
 					}

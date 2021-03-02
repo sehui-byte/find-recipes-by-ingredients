@@ -44,4 +44,10 @@ public class AlarmDAOImpl implements AlarmDAO{
 		return sqlSession.update("updateReadYN",avo);
 	}
 
+	@Override
+	public List<AlarmVO> AlarmPage(AlarmVO avo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("AlarmPage", avo);
+	}
+
 }

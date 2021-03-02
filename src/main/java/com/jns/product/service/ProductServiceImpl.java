@@ -35,6 +35,8 @@ import com.jns.product.vo.ProductVO;
 @Transactional
 public class ProductServiceImpl implements ProductService{
 
+
+
 	private Logger logger = Logger.getLogger(ProductServiceImpl.class);
 	private ProductDAO pdao;
 
@@ -124,6 +126,7 @@ public class ProductServiceImpl implements ProductService{
 
 		List<ProductVO> result = pdao.LikeProductSelectAll(pvo);
 		logger.info("관심상품 개수 >> " + result.size());
+		
 		return result;
 	}
 
@@ -181,4 +184,19 @@ public class ProductServiceImpl implements ProductService{
 		List<ProductVO> result = pdao.getlikeProInfoSelectAll(pvo);
 		return result;
 	}
+	
+	//관심상품 페이징 
+	@Override
+	public List<ProductVO> likeProductpaging(ProductVO pvo) {
+		// TODO Auto-generated method stub
+		
+		pvo.setMno(getLoginMno(pvo));
+
+		List<ProductVO> result = pdao.likeProductpaging(pvo);
+		
+		logger.info("관심상품 개수 >> " + result.size());
+		
+		return result;
+	}
+
 }

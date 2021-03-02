@@ -164,10 +164,41 @@
 	
 	<!-- 회원 전체 조회  -->	
 	<select id="memberSelectAll" resultType="mvo">
-	SELECT *
-	FROM  MEMBER A
-	WHERE A.MDELETEYN='Y'
-	
+		
+		SELECT * FROM
+		 	(SELECT
+		 			A.MNO	
+		 		   ,A.MLEVEL 
+		 		   ,A.MID	
+	 	 	       ,A.MPW  	
+		 		   ,A.MNAME	
+		 		   ,A.MNICK 
+		 		   ,A.MHP	
+		 		   ,A.MEMAIL	
+		 		   ,A.MADDR		
+		 		   ,A.MZIPCODE	
+		 		   ,A.MADDRDETAIL	
+		 		   ,A.MPHOTO	MPHOTO
+		 		   ,TO_CHAR(A.MINSERTDATE,'YYYY-MM-DD') MINSERTDATE
+		 		   ,TO_CHAR(A.MUPDATEDATE,'YYYY-MM-DD') MUPDATEDATE
+		 		   ,MDELETEYN
+		 		   ,CEIL(ROW_NUMBER() OVER(ORDER BY A.MNO DESC)/ #{pageSize}) PAGENO
+				   ,COUNT(A.MNO) OVER() AS TOTALCOUNT
+		 	FROM	MEMBER A
+		 	WHERE A.MDELETEYN = 'Y'
+		 			<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+					<![CDATA[AND TO_CHAR(MINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					<![CDATA[AND TO_CHAR(MINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					</if>
+					<if test="keyfilter=='key1'">
+						<![CDATA[AND MNAME LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+					<if test="keyfilter=='key2'">
+						<![CDATA[AND MID LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+		 	)
+		 	WHERE PAGENO = #{curPage}
+		 	ORDER BY MNO DESC	
 	</select>
 	
 	<!-- 회원 정보 수정  -->
@@ -198,7 +229,7 @@
 	WHERE	A.MID = #{mid, jdbcType=VARCHAR}
 	
 	</select>
-	
+<!--	
 	<select id="memberSelectAllpage" resultType="mvo">
 		
 		SELECT * FROM
@@ -236,7 +267,7 @@
 		 	WHERE PAGENO = #{curPage}
 		 	ORDER BY MNO DESC	
 	</select>
-
+-->
    
 	
 

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
+import com.jns.common.Paging;
 import com.jns.member.controller.MemberController;
 import com.jns.member.vo.MemberVO;
 import com.jns.product.service.ProductService;
@@ -68,11 +69,27 @@ public class ProductController {
 
 	//관심상품 정보 조회
 	@RequestMapping(value="likeProduct.do", method=RequestMethod.GET)
-	public String likeList(Model model) {
-		ProductVO pvo = new ProductVO();
-		List<ProductVO> list = service.likeProductSelectAll(pvo);
-		model.addAttribute("list",list);
-		model.addAttribute("size", list.size());
+	public String likeList(ProductVO pvo,Model model,HttpServletRequest request) {
+		
+		//페이징 세팅	
+		int totalCnt = 0;
+		String curPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
+				
+		Paging.setPage(pvo, curPage, pageCtrl);
+			
+		List<ProductVO> listPage = service.likeProductpaging(pvo);
+		logger.info("product page >>> likeProductpaging listPage.size() "+listPage.size());
+				
+		if( listPage.size() > 0) {
+				totalCnt = listPage.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+				pvo.setTotalCount(totalCnt);				// vo에 담기
+			}
+
+		model.addAttribute("listPage", listPage);
+		model.addAttribute("p_pvo", pvo);
+
+		
 		return "product/likeProduct";
 	}
 
@@ -106,6 +123,35 @@ public class ProductController {
 		//service.lpriceChk(pvo,mid);
 		return "product/webSocketTest2";
 	}
+/*
+	// 관심상품 조회 페이징 
+	@RequestMapping(value="likeProduct.do", method=RequestMethod.GET)
+	public String likeProductpaging(ProductVO pvo,Model model,HttpServletRequest request) {
+	
+		
+		logger.info("페이징 시작 >>> :: ");		
+		logger.info("회원 번호 >>> : " + pvo.getMno());
+		
+		//페이징 세팅	
+		int totalCnt = 0;
+		String pPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
+		
+		Paging.setPage(pvo, pPage, pageCtrl);
+		
+		List<ProductVO> listPage = service.likeProductpaging(pvo);
+		logger.info("product page >>> likeProductpaging listPage.size() "+listPage.size());
+		
+		if( listPage.size() != 0) {
+			totalCnt = listPage.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+			pvo.setTotalCount(totalCnt);				// vo에 담기
+		}
 
+		model.addAttribute("listPage", listPage);
+		model.addAttribute("p_pvo", pvo);
 
+		return "product/likeProduct";	
+		
+		}
+*/
 }
