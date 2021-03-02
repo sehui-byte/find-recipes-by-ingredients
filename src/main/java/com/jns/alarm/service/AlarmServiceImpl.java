@@ -30,4 +30,10 @@ public class AlarmServiceImpl implements AlarmService{
 		return adao.updateReadYN(avo);
 	}
 
+	@Override
+	public List<AlarmVO> AlarmPage(AlarmVO avo) {
+		// TODO Auto-generated method stub
+		return adao.AlarmPage(avo);
+	}
+
 }

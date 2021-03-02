@@ -2,35 +2,77 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jns.product.dao.ProductDAO">
 
+<!-- 
 <select id="LikeProductSelectAll" resultType="pvo">
-SELECT *
-FROM LIKEPRODUCT
-WHERE MNO = #{mno}
-ORDER BY INSERTDATE DESC
+	SELECT * FROM			
+		(SELECT 	
+				 LPNO
+				,PRODUCTID
+				,TITLE
+				,IMAGE
+				,LINK
+				,LPRICE
+				,HPRICE
+				,INSERTDATE
+				,MNO
+			    ,CEIL(ROW_NUMBER() OVER(ORDER BY LPNO DESC)/ #{pageSize}) PAGENO
+			    ,COUNT(LPNO) OVER() AS TOTALCOUNT
+		FROM LIKEPRODUCT
+		WHERE MNO = #{mno, jdbcType=VARCHAR}
+		ORDER BY INSERTDATE DESC	
+		) 
+
+	 	WHERE PAGENO = #{curPage}
+	 	ORDER BY INSERTDATE DESC	
 </select>
+ -->
+
+<select id="likeProductpaging" resultType="pvo">
+	SELECT * FROM			
+		(SELECT 	
+				 LPNO
+				,PRODUCTID
+				,TITLE
+				,IMAGE
+				,LINK
+				,LPRICE
+				,HPRICE
+				,INSERTDATE
+				,MNO
+			    ,CEIL(ROW_NUMBER() OVER(ORDER BY LPNO DESC)/ #{pageSize}) PAGENO
+			    ,COUNT(LPNO) OVER() AS TOTALCOUNT
+		FROM LIKEPRODUCT
+		WHERE MNO = #{mno, jdbcType=VARCHAR}
+		ORDER BY INSERTDATE DESC)
+		
+	 	WHERE PAGENO = #{curPage}
+	 	ORDER BY LPNO DESC	
+</select>
+
+  
 
 <insert id="likeProductInsert" parameterType="pvo">
 INSERT INTO LIKEPRODUCT(
-	LPNO,
-	PRODUCTID,
-	TITLE,
-	IMAGE,
-	LINK,
-	LPRICE,
-	HPRICE,
-	INSERTDATE,
-	MNO
-)VALUES(
-	#{lpno, jdbcType=VARCHAR},
-	#{productId, jdbcType=VARCHAR},
-	#{title, jdbcType=VARCHAR},
-	#{image, jdbcType=VARCHAR},
-	#{link, jdbcType=VARCHAR},
-	#{lprice, jdbcType=INTEGER},
-	#{hprice, jdbcType=INTEGER},
-	SYSDATE,
-	#{mno, jdbcType=VARCHAR}
-)
+		LPNO,
+		PRODUCTID,
+		TITLE,
+		IMAGE,
+		LINK,
+		LPRICE,
+		HPRICE,
+		INSERTDATE,
+		MNO
+	)VALUES(
+		#{lpno, jdbcType=VARCHAR},
+		#{productId, jdbcType=VARCHAR},
+		#{title, jdbcType=VARCHAR},
+		#{image, jdbcType=VARCHAR},
+		#{link, jdbcType=VARCHAR},
+		#{lprice, jdbcType=INTEGER},
+		#{hprice, jdbcType=INTEGER},
+		SYSDATE,
+		#{mno, jdbcType=VARCHAR}
+	)
 </insert>
 
 <delete id="likeProductDelete" parameterType="pvo">

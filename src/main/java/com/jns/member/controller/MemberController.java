@@ -99,7 +99,7 @@ public class MemberController {
 		
 		Paging.setPage(mvo, mPage, pageCtrl);
 		
-		List<MemberVO> listPage = memberService.memberSelectAllPage(mvo);
+		List<MemberVO> listPage = memberService.memberSelectAll(mvo);
 		logger.info("member page >>> memberSelectAll listPage.size() "+listPage.size());
 		
 		if( listPage.size() != 0) {

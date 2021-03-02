@@ -44,5 +44,14 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<ProductVO> getlikeProInfoSelectAll(ProductVO pvo) {
 		return sqlSession.selectList("getlikeProInfoSelectAll",pvo);
 	}
+
+
+	//관심상품 페이징
+	
+	@Override
+	public List<ProductVO> likeProductpaging(ProductVO pvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("likeProductpaging", pvo);
+	}
 	
 }

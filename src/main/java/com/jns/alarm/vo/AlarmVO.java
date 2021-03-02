@@ -9,7 +9,24 @@ public class AlarmVO {
 	private String insertdate;
 	private String readyn;
 	
+	private int pageSize;
+	private int groupSize;
+	private int curPage;
+	private int totalCount;
 	
+	
+	
+	public AlarmVO() {
+		
+	}
+	
+	public AlarmVO(int pageSize, int groupSize, int curPage, int totalCount) {
+	
+		this.pageSize = pageSize;
+		this.groupSize = groupSize;
+		this.curPage = curPage;
+		this.totalCount = totalCount;
+	}
 	public String getReadyn() {
 		return readyn;
 	}
@@ -46,4 +63,30 @@ public class AlarmVO {
 	public void setType(String type) {
 		this.type = type;
 	}
+	public int getPageSize() {
+		return pageSize;
+	}
+	public int getGroupSize() {
+		return groupSize;
+	}
+	public int getCurPage() {
+		return curPage;
+	}
+	public int getTotalCount() {
+		return totalCount;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	public void setGroupSize(int groupSize) {
+		this.groupSize = groupSize;
+	}
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
+	}
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+	
+	
 }
