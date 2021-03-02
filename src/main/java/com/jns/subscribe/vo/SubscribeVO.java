@@ -13,6 +13,7 @@ public class SubscribeVO {
 	private String mid;
 	private String chefnick;
 	private String rbno;
+	private String mphoto;
 	
 	public String getMid() {
 		return mid;
@@ -36,6 +37,14 @@ public class SubscribeVO {
 
 	public void setRbno(String rbno) {
 		this.rbno = rbno;
+	}
+
+	public String getMphoto() {
+		return mphoto;
+	}
+
+	public void setMphoto(String mphoto) {
+		this.mphoto = mphoto;
 	}
 
 	

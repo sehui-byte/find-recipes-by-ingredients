@@ -68,15 +68,17 @@
 		FROM	(
 				 SELECT 	 COUNT(A.SNO) AS SUBCOUNT
 							,D.MNICK AS CHEFNICK
+							,D.MPHOTO AS MPHOTO
 				 FROM 		 SUB_INFO A, (SELECT 
 												 B.INO AS INO
 												,C.MNICK AS MNICK
+												,C.MPHOTO AS MPHOTO
 						      			  FROM 	 CHEF_INFO B, MEMBER C
 						      			  WHERE	 B.MNO = C.MNO
 						      			  AND 	 B.IDELETEYN = 'Y') D
 			 	 WHERE		 A.INO = D.INO
 			 	 AND		 A.SDELETEYN = 'Y'
-			 	 GROUP BY 	 D.MNICK
+			 	 GROUP BY 	 D.MNICK, D.MPHOTO
 			 	 ORDER BY 	 1 DESC
 				)
 		WHERE <![CDATA[ROWNUM <= 3]]>
