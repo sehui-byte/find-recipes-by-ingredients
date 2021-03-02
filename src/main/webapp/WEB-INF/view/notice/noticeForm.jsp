@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
 <%@ include file="/WEB-INF/include/jsp/header.jsp" %>
+<%@ include file="/WEB-INF/include/jsp/adminSide.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,9 +45,18 @@
 		
 	});
 </script>
+<script>
+	function openNav() {
+		document.getElementById('adminsidenav').style.width = '250px';
+	}
+	function closeNav() {
+		document.getElementById('adminsidenav').style.width = '10px';
+	}
+</script>
 </head>
 <body>
 <div id ="wrapper">
+<div class="jumbotron">
 <form action="noticeInsert.do" method="POST" enctype="multipart/form-data" name="NoticeForm" id="NoticeForm">
 <span style="font-size: 14px">Notice</span>
 	<table class="table">
@@ -96,6 +106,7 @@
 		<input type="button" class="btn btn-orange" value="목록" id="cancel">
 	</div>
 </form>
+</div>
 </div>
 </body>
 </html>

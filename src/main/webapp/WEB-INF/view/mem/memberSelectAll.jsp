@@ -7,6 +7,8 @@
 <%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
 <!-- header -->
 <%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+<%@ include file="/WEB-INF/include/jsp/adminSide.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +50,14 @@ tbody td {
 </style>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+	function openNav() {
+		document.getElementById('adminsidenav').style.width = '250px';
+	}
+	function closeNav() {
+		document.getElementById('adminsidenav').style.width = '10px';
+	}
+</script>	
 <script type="text/javascript">
 	//체크박스 체크 확인하기 
 	function checkOnly(chk) {
@@ -96,6 +106,7 @@ tbody td {
 	int nCnt = list.size();
 	%>
 	<div id="wrapper">
+	<div class="jumbotron">
 		<h2>회원 정보</h2>
 		<form name="memberList" id="memberList">
 			<table id="memberListTable"  class="table">
@@ -218,5 +229,7 @@ tbody td {
 		<jsp:param name="totalCount" value="<%=totalCount%>"/>
 	</jsp:include>
 	</div>
+</div>
+</div>
 </body>
 </html>
