@@ -94,13 +94,15 @@
 		AND		 BDELETEYN = 'Y'
 	</update>
 	
-	<delete id="QnADelete" parameterType="bvo">
-		UPDATE	 BOARD
-		SET		 BDELETEYN = 'N'
+	<update id="QnADelete" parameterType="bvo">
+		UPDATE	
+				 BOARD
+			SET		 
+				 BDELETEYN = 'N'
 				,BUPDATEDATE = SYSDATE
-		WHERE	 BNO = #{bno, jdbcType=VARCHAR}
-		AND		 BDELETEYN = 'Y'
-	</delete>
+		WHERE	
+			 BNO = #{bno, jdbcType=VARCHAR}
+	</update>
 	
 	<update id="QnAVIEWS" parameterType="bvo">
 		UPDATE

@@ -34,69 +34,27 @@
 
 	$(document).ready(function(){
 	
-		
-		// 조회수 증가
-		var viewsUrl = "qnaViews.do";
-		var viewsType = "GET";
-		var viewsData = {"bno": $("#bno").val()};
-		$.ajax({
-			url: viewsUrl,
-			type: viewsType,
-			data: viewsData,
-			success: viewsSuccess,
-			error: viewsError
-		});
-
-		function viewsSuccess(resultData){
-			if(resultData=="GOOD"){
-				console.log("조회 수 +1 증가");
-			}
-		}
-		function viewsError(){
-			alert("시스템 오류입니다. 관리자에게 문의하세요.");
-		}
-		
-		// 좋아요
-		$(document).on("click", "#Hitsbtn", function(){
-			var hitsUrl = "qnaHits.do";
-			var hitsType = "GET";
-			var hitsData = {"bno": $("#bno").val()};
-			$.ajax({
-				url: hitsUrl,
-				type: hitsType,
-				data: hitsData,
-				success: hitsSuccess,
-				error: hitsError
-			});
-
-			function hitsSuccess(resultData){
-				if(resultData=="GOOD"){
-					console.log("좋아요 수 +1 증가");
-				}
-			}
-			function hitsError(){
-				alert("시스템 오류입니다. 관리자에게 문의하세요.");
-			}
-		});
-		
-		// 수정
+		// U 
 		$(document).on("click", "#U", function(){
 			$("#QnAUpdateForm").attr({
 				"method":"POST",
-				"action":"qnaUpdate.do"
+				"action":"qnaUpdateForm.do",
+				"enctype": "multipart/form-data"
 			}).submit();
 		});
 		
+		// D
+		$(document).on("click", "#D", function(){
+			$("#QnAUpdateForm").attr({
+				"method":"POST",
+				"action":"qnaDelete.do"
+			}).submit();
+		});	
+		
 		// C
 		$(document).on("click", "#C", function(){
-				location.href="qnaSelectAllPage.do";
+			location.href="qnaSelectAllPage.do";
 		});
-		
-		// 로그인 유저와 작성자가 일치할 경우 수정/삭제 버튼 생성
-		if ( sessionWriter == boardWriter){
-			$('#U').attr('disabled', false);
-			$('#D').attr('disabled', false);
-		}
 		
 	});
 	
@@ -152,8 +110,8 @@
 			</tr>				
 			<tr>
 				<td colspan="7" align="right">
-					<input type="button" class="btn btn-orange" value="좋아요" id="Hitsbtn">
-					<input type="button" class="btn btn-orange" disabled=disabled value="수정하기" id="U">
+					<input type="button" class="btn btn-orange" value="수정하기" id="U">
+					<input type="button" class="btn btn-orange" value="삭제하기" id="D">
 					<input type="button" class="btn btn-orange" value="돌아가기" id="C">
 				</td>
 			</tr>
