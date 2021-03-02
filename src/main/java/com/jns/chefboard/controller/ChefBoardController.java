@@ -155,7 +155,7 @@ public class ChefBoardController {
 		logger.info("[chefC] >> boardSelectAll listPage.size() >>> : " + listPage.size());
 		
 		if( listPage.size() != 0) {
-			totalCnt = listPage.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+			totalCnt = listPage.get(0).getTotalCount(); // 쿼리 조회한 리스트의 인덱스에 담긴 totalCount값
 			cbvo.setTotalCount(totalCnt);				// vo에 담기
 		}
 		

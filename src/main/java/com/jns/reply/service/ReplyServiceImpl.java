@@ -65,4 +65,11 @@ public class ReplyServiceImpl implements ReplyService {
 		return result;
 	}
 
+	@Override
+	public List<ReplyVO> replyListAll(ReplyVO rvo) {
+		// TODO Auto-generated method stub
+		return replyDAO.replyListAll(rvo);
+	}
+
+	
 }

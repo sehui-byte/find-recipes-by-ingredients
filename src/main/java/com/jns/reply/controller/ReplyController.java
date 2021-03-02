@@ -2,15 +2,19 @@ package com.jns.reply.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jns.chabun.service.ChabunService;
 import com.jns.common.ChabunUtil;
+import com.jns.common.Paging;
 import com.jns.reply.service.ReplyService;
 import com.jns.reply.vo.ReplyVO;
 
@@ -169,4 +173,34 @@ public class ReplyController {
 		if (1 == result) { return "GOOD"; }
 		else{ return "BAD"; }
 	}
+	
+	
+	/********************************************************************************************
+	* 댓글 전체조회
+	********************************************************************************************/
+	@RequestMapping(value="/reply/replyListAll", method=RequestMethod.GET)
+	public String replyListAll(ReplyVO rvo, Model model, HttpServletRequest request) {
+		logger.info("ReplyC >> replyListAll 호출 성공");
+		
+		
+		// 페이징		
+		int totalCnt = 0;
+		String cPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
+		
+		Paging.setPage(rvo, cPage, pageCtrl); //페이징할 정보를 Paging클래스에 보내줍니다
+		
+		List<ReplyVO> listR = replyService.replyListAll(rvo);
+		
+		if( listR.size() != 0) {
+			totalCnt = listR.get(0).getTotalCount(); // 쿼리 조회한 리스트의 인덱스에 담긴 totalCount값
+			rvo.setTotalCount(totalCnt);			 // vo에 담기
+		}	
+		
+		model.addAttribute("listR", listR);
+		model.addAttribute("p_rvo", rvo);
+		
+		return "reply/replyListAll";
+	}
+	
 }
