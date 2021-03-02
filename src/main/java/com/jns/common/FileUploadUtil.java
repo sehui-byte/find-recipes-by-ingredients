@@ -112,7 +112,7 @@ public class FileUploadUtil
 				Map<String, MultipartFile> map = request.getFileMap();
 				List<String> keyList = new ArrayList<String>();
 				
-				logger.info("단일 파일 업로드 메소드 호출, 길이 >>> : " + map.size());
+				logger.info("다중 파일 업로드 메소드 호출, 길이 >>> : " + map.size());
 				
 				while(names.hasNext())
 				{

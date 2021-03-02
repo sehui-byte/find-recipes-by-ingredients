@@ -149,8 +149,28 @@ public class RecipeBoardController
 		
 		logger.info("insert >>> : " + recipeBoardService.recipeBoardInsert(rbvo));
 		
-		model.addAttribute("list", recipeBoardService.recipeBoardSelectAll());
-		return "recipeboard/recipeboard";
+		//============================= 페이징 =============================//
+		int totalCnt = 0;
+		String curPage = request.getParameter("curPage");
+		String sizeCtrl = request.getParameter("sizeCtrl");
+		
+		Paging.setPage(rbvo, curPage, sizeCtrl); //페이징 변수 초기화
+		logger.info("rbvo >>> : " + rbvo.toString());
+		
+		List<RecipeBoardVO> pageList = recipeBoardService.recipeBoardSelectAllPage(rbvo);
+		if(pageList.size() != 0)
+		{
+			totalCnt = pageList.get(0).getTotalCount();
+			rbvo.setTotalCount(totalCnt);
+		}
+		
+		logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+		logger.info("pageList.size >>> : " + pageList.size());
+		
+		model.addAttribute("rbvo", rbvo);
+		model.addAttribute("pageList", pageList);
+		
+		return "recipeboard/recipeboard_list";
 	}
 	
 	@RequestMapping(value = "rbupdate", method = RequestMethod.POST)
