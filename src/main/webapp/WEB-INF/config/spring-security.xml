@@ -14,7 +14,6 @@
 	<s:http pattern="/images/*" security="none" />
 	<s:http auto-config="true" use-expressions="true">
 		<s:intercept-url pattern="/admin/**" access="hasRole('ROLE_A')"/>
-		<s:intercept-url pattern="/chefboard/**" access="hasRole('ROLE_C')"/>
 		<s:intercept-url pattern="/login" access="isAnonymous()"/>
 		<s:intercept-url pattern="/join" access="isAnonymous()"/>
 		<s:intercept-url pattern="/**" access="permitAll"/> 
@@ -33,6 +32,7 @@
 		<s:access-denied-handler error-page="/login/accessDenied"/>
 		<s:csrf disabled="true"/>
 	</s:http>
+	
 
 	<!--  db로 접속할 수 있도록 -->
 	<s:authentication-manager>
@@ -54,4 +54,11 @@
 
 	<!-- password 암호화 -->	
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
+	<!-- security 더블 슬래시 허용 확인중 -->	
+<!-- 	<bean id="allowUrlEncodedSlashHttpFirewall" class="org.springframework.security.web.firewall.DefaultHttpFirewall">
+		<property name="allowUrlEncodedSlash" value="true"/>
+	</bean>
+	<s:http-firewall ref="allowUrlEncodedSlashHttpFirewall"/>
+ -->	
 </beans>

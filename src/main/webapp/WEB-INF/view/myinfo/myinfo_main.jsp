@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/jsp/header.jsp" %>
+<%-- cache 적용 x --%>
+<%
+ response.setHeader("Cache-Control","no-cache");
+ response.setHeader("Pragma","no-cache");
+ response.setDateHeader("Expires",0);
+%>
+
 <%
 	// pricipal 객체는 로그인 후의 권한을 획득
 	// 등급 변환을 바로 반영하려면 셰프 권한 획득시 바로 DB에서 꺼내와야 한다
@@ -105,8 +112,7 @@ body {
 			}
 		})
 	})
-<%-- 
-	$(document).ready(function(){
+<%-- 	$(document).ready(function(){
 		var mlevel = "<%= mlevel %>";
 		var status = location.search;
 		if(status.indexOf("redirect") != -1){
@@ -116,8 +122,7 @@ body {
 			location.href="sendSubscribeInc?start_yyyymm=202004&end_yyyymm=202104&mno=<%=mno%>";
 		}
 	})
- --%>
- </script>
+ --%> </script>
 </head>
 <body>
 
@@ -129,7 +134,7 @@ body {
 %>
 	<div align="center">
 		<p>현재 내 구독자 수 증가 추이</p>	
-		<img src="http://localhost:5000/static/subscribeInc/<%= mno %>_subscribeInc.png">
+		<img src="http://54.180.83.249:5000/static/subscribeInc/<%= mno %>_subscribeInc.png">
 	</div>
 <% 
 	}

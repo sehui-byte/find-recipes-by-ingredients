@@ -101,8 +101,7 @@
 					}
 				})
 			})	
-	/* >> 플라스크 연동시 주석 해제 
-		function requestGraph(){
+<%-- 		function requestGraph(){
 			var status = location.search;
 			if(status.indexOf("redirect") != -1){
 				return;	
@@ -110,8 +109,7 @@
 			var rcp_seq = <%= rvo.getRcp_seq()%>;
 			location.href="/kosmoJns/sendNutrient.do?rcp_seq="+rcp_seq;
 		}
-	*/
-		</script>
+ --%>		</script>
 	</head>
 	<body>
 	<div id ="wrapper">
@@ -584,7 +582,7 @@
 				</td>
 				<td>
 				<!-- flask 이미지 자원 경로 지정  test -->
-					<img src="http://localhost:5000/static/nutrient/<%= rvo.getRcp_seq() %>.png" onError="requestGraph()">	
+					<img src="http://54.180.83.249:5000/static/nutrient/<%= rvo.getRcp_seq() %>.png" onError="requestGraph()">	
 				</td>	
 			</tr>
 			<s:authorize access="isAuthenticated()">

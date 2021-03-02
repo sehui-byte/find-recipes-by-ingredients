@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/jsp/header.jsp" %>
+<%-- cache 적용 x --%>
+<%
+ response.setHeader("Cache-Control","no-cache");
+ response.setHeader("Pragma","no-cache");
+ response.setDateHeader("Expires",0);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -8,17 +14,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-	/*
-	>> 플라스크 연동시 주석 해제 
-	$(document).ready(function(){
+/* 	$(document).ready(function(){
 		var status = location.search;
 		if(status.indexOf("redirect") != -1){
 			return;	
 		}
 		location.href="/kosmoJns/sendSignupInc.do?start_yyyymm=202004&end_yyyymm=202104";
 	})
-	*/
-</script>
+ */</script>
 <style type="text/css">
 /*google 웹폰트 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
@@ -91,7 +94,7 @@ body {
 <h3>admin 페이지</h3>
 
 <!-- admin 페이지 메인 부분에다가 회원 유입 현황 그래프  -->
-<img src="http://localhost:5000/static/signupInc/signupInc.png">
+<img src="http://54.180.83.249:5000/static/signupInc/signupInc.png">
 
 	<div id="adminsidenav" class="sidenav" >
 	
