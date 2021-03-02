@@ -157,9 +157,6 @@
 %>
 	</tbody>
 </table>
-	<div align="right">
-		<input class="btn btn-orange" type="button" value="글쓰기" id="I">
-	</div>
 
 	<div class="container-fluid">
 		<div class="row">
