@@ -12,7 +12,7 @@
 <title>NOTICE SELECT</title>
 <style type="text/css">
 
-	/* 03/01 재민: 페이지 디자인 완료 */
+	/* 03/02 재민: 페이지 디자인 완료 */
 	.mem{
 		text-align: center;
 		vertical-align: middle;
@@ -42,20 +42,26 @@
 			}).submit();
 		});
 		
-		// D
-		$(document).on("click", "#D", function(){
-			$("#NoticeUpdateForm").attr({
-				"method":"POST",
-				"action":"noticeDelete.do"
-			}).submit();
-		});
-		
 		// C
 		$(document).on("click", "#C", function(){
 			location.href="noticeSelectAllPage.do";
 		});
 		
 	});
+	
+	//썸네일
+	function setThumbnail(e){
+		console.log(e);
+		no = e.target.name.slice(-2);
+		
+		var reader = new FileReader();
+		reader.onload = function(e)
+		{
+			console.log("thumb+no >>> : " + "thumb"+no);
+			$("#thumb"+no).attr("src", e.target.result);
+		}
+		reader.readAsDataURL(event.target.files[0]);
+	}
 </script>
 </head>
 <body>
@@ -77,7 +83,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<td colspan="2"><h2><%=nvo.getBtitle()%></h2></td>
+				<td colspan="2"><h2>공지 수정하기</h2></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="vertical-align: middle;"><%=nvo.getMnick()%>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -85,22 +91,24 @@
 				<input type="hidden" id="bno" name="bno" value="<%=nvo.getBno()%>">		
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2">
-				<span style="font-size: 14px">조회: <%=nvo.getBviews() %> 추천: <%=nvo.getBhits() %></span>	
-				</td>
-			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="2">
-					<div class="scrolldiv"><%= nvo.getBcontent() %></div>
+				<td class="align-middle">제목</td>
+				<td><input type="text" class="form-control" name="btitle" id="btitle" value="<%=nvo.getBtitle()%>"></td>
+			</tr>
+			<tr>
+				<td class="align-middle">내용</td>
+				<td>
+				<textarea class="form-control" name="bcontent" id="bcontent" rows="10" cols="70"><%=nvo.getBcontent()%></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td class="mem" width="20%">첨부파일</td>
-				<td><img src="<%=new FileLoadUtil().getFileSrc("noticeboard", nvo.getBfile()) %>" border="1" width="40" height="50" alt="image">
-			</td>
+				<td><img id="thumb00" src="<%=new FileLoadUtil().getFileSrc("noticeboard", nvo.getBfile())%>"><br>
+					이미지 변경하기▼ 
+					<input type="file" class="form-control" id="file02" name="file02" onchange="setThumbnail(event);">				
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right">
@@ -110,7 +118,6 @@
 			<tr>
 				<td colspan="7" align="right">
 					<input type="button" class="btn btn-orange" value="수정하기" id="U">
-					<input type="button" class="btn btn-orange" value="삭제하기" id="D">
 					<input type="button" class="btn btn-orange" value="돌아가기" id="C">
 				</td>
 			</tr>

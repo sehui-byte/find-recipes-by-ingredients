@@ -13,7 +13,7 @@
 <title>QnA Select</title>
 <style type="text/css">
 
-	/* 03/01 재민: 페이지 디자인 완료 */
+	/* 03/02 재민: 페이지 디자인 완료 */
 	.mem{
 		text-align: center;
 		vertical-align: middle;
@@ -58,6 +58,20 @@
 		
 	});
 	
+	//썸네일
+	function setThumbnail(e){
+		console.log(e);
+		no = e.target.name.slice(-2);
+		
+		var reader = new FileReader();
+		reader.onload = function(e)
+		{
+			console.log("thumb+no >>> : " + "thumb"+no);
+			$("#thumb"+no).attr("src", e.target.result);
+		}
+		reader.readAsDataURL(event.target.files[0]);
+	}
+	
 </script>
 </head>
 <body>
@@ -78,7 +92,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<td colspan="2"><h2><%=bvo.getBtitle()%></h2></td>
+				<td colspan="2"><h2>공지 수정하기</h2></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="vertical-align: middle;"><%=bvo.getMnick()%>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -86,26 +100,23 @@
 				<input type="hidden" id="bno" name="bno" value="<%=bvo.getBno()%>">		
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2">
-				<span style="font-size: 14px">조회: <%=bvo.getBviews() %> 추천: <%=bvo.getBhits() %></span>	
-				</td>
-			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="2">
-					<div class="scrolldiv"><%= bvo.getBcontent() %></div>
+				<td class="align-middle">제목</td>
+				<td><input type="text" class="form-control" name="btitle" id="btitle" value="<%=bvo.getBtitle()%>"></td>
+			</tr>
+			<tr>
+				<td class="align-middle">내용</td>
+				<td>
+				<textarea class="form-control" name="bcontent" id="bcontent" rows="10" cols="70"><%=bvo.getBcontent()%></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td class="mem" width="20%">첨부파일</td>
-				<td><img src="<%=new FileLoadUtil().getFileSrc("qnaboard", bvo.getBfile()) %>" border="1" width="40" height="50" alt="image">
-			</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="right">
-					<span style="font-size: 12px;">등록: <%=bvo.getBinsertdate()%> 수정: <%=bvo.getBupdatedate()%></span>
+				<td><img id="thumb00" src="<%=new FileLoadUtil().getFileSrc("qnaboard", bvo.getBfile())%>"><br>
+					이미지 변경하기▼ 
+					<input type="file" class="form-control" id="file01" name="file01" onchange="setThumbnail(event);">				
 				</td>
 			</tr>				
 			<tr>
