@@ -34,6 +34,14 @@
 			console.log("cancel >>> : ");					
 			location.href="/kosmoJns/noticeSelectAllPage.do";
 		});
+		
+		// 글쓰기 관리자 제한.
+		sessionMlevel = "<%=mlevel%>"
+			
+		if ( sessionMlevel == 'A'){
+			$('#nbtn').attr('disabled', false);
+		}
+		
 	});
 </script>
 </head>
@@ -84,7 +92,7 @@
 		</tbody>
 	</table>
 	<div id="boardBut">
-		<input type="button" class="btn btn-orange" value="저장" id="nbtn">
+		<input type="button" class="btn btn-orange" disabled=disabled value="저장" id="nbtn">
 		<input type="button" class="btn btn-orange" value="목록" id="cancel">
 	</div>
 </form>
