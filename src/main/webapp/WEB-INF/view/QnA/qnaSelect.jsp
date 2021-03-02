@@ -153,7 +153,8 @@
 			<tr>
 				<td colspan="7" align="right">
 					<input type="button" class="btn btn-orange" value="좋아요" id="Hitsbtn">
-					<input type="button" class="btn btn-orange" disabled=disabled value="수정하기" id="U">
+					<input type="button" class="btn btn-orange" disabled=disabled value="수정" id="U">
+					<input type="button" class="btn btn-orange" disabled=disabled value="삭제" id="D">
 					<input type="button" class="btn btn-orange" value="돌아가기" id="C">
 				</td>
 			</tr>

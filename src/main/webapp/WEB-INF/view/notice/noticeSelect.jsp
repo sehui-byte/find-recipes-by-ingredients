@@ -33,6 +33,14 @@
 
 	$(document).ready(function(){
 		
+		sessionMlevel = "<%=mlevel%>"
+			
+		// 로그인 유저가 관리자일 경우 수정버튼 활성화
+		if ( sessionMlevel == 'A'){
+			$('#U').attr('disabled', false);
+			$('#D').attr('disabled', false);
+		}
+		
 		// 조회수 증가
 		var viewsUrl = "noticeViews.do";
 		var viewsType = "GET";
@@ -77,7 +85,7 @@
 			}
 		});
 		
-		// U <== 수정폼으로 이동하여 수정하게끔 개발 부탁드립니다.(재민 03/01)
+		// U
 		$(document).on("click", "#U", function(){
 			$("#NoticeUpdateForm").attr({
 				"method":"POST",
@@ -85,16 +93,18 @@
 			}).submit();
 		});
 		
+		// D
+		$(document).on("click", "#D", function(){
+			$("#NoticeUpdateForm").attr({
+				"method":"POST",
+				"action":"noticeDelete.do"
+			}).submit();
+		});
+		
 		// C
 		$(document).on("click", "#C", function(){
 			location.href="noticeSelectAllPage.do";
 		});
-		
-		// 관리자가 작성하는거라 조건이 달라야할듯 해요
-		if ( sessionWriter == boardWriter){
-			$('#U').attr('disabled', false);
-			$('#D').attr('disabled', false);
-		}
 		
 	});
 </script>
@@ -151,7 +161,8 @@
 			<tr>
 				<td colspan="7" align="right">
 					<input type="button" class="btn btn-orange" value="좋아요" id="Hitsbtn">
-					<input type="button" class="btn btn-orange" disabled=disabled value="수정하기" id="U">
+					<input type="button" class="btn btn-orange" disabled=disabled value="수정" id="U">
+					<input type="button" class="btn btn-orange" disabled=disabled value="삭제" id="D">
 					<input type="button" class="btn btn-orange" value="돌아가기" id="C">
 				</td>
 			</tr>

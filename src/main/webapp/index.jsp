@@ -75,11 +75,12 @@ header {
 					<h3>냉장고 시점에서 바라본 오늘의 레시피 찾기!</h3>
 					<!--  검색창 -->
 					<div id="searchRecipeForm">
-						<form class="d-flex" method="get" action="searchRecipe.do"
+						<form class="d-flex" method="get" action="recipelist.do"
 							id="searchRecipeForm">
 							<input id="keyword" name="keyword" class="form-control me-2"
 								type="search" placeholder="내 냉장고 속 재료 입력!" aria-label="Search"
 								onclick="enterKey()">
+							<input type="hidden" name="keyfilter" value="key1">
 							<button type="submit" class="btn btn-warning">Search</button>
 						</form>
 					</div>
