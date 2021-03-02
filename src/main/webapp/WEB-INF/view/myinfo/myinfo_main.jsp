@@ -112,7 +112,7 @@ body {
 			}
 		})
 	})
-	$(document).ready(function(){
+<%-- 	$(document).ready(function(){
 		var mlevel = "<%= mlevel %>";
 		var status = location.search;
 		if(status.indexOf("redirect") != -1){
@@ -122,7 +122,7 @@ body {
 			location.href="sendSubscribeInc?start_yyyymm=202004&end_yyyymm=202104&mno=<%=mno%>";
 		}
 	})
- </script>
+ --%> </script>
 </head>
 <body>
 

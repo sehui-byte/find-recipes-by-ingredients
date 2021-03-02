@@ -101,7 +101,7 @@
 					}
 				})
 			})	
-		function requestGraph(){
+<%-- 		function requestGraph(){
 			var status = location.search;
 			if(status.indexOf("redirect") != -1){
 				return;	
@@ -109,7 +109,7 @@
 			var rcp_seq = <%= rvo.getRcp_seq()%>;
 			location.href="/kosmoJns/sendNutrient.do?rcp_seq="+rcp_seq;
 		}
-		</script>
+ --%>		</script>
 	</head>
 	<body>
 	<div id ="wrapper">
