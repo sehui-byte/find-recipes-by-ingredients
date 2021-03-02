@@ -8,6 +8,7 @@ import com.jns.product.vo.ProductVO;
 import com.jns.qna.vo.QnAVO;
 import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
+import com.jns.reply.vo.ReplyVO;
 
 public class Paging {
 
@@ -179,5 +180,25 @@ public class Paging {
 		}
 		
 	}
+	
+	public static void setPage(ReplyVO rvo, String curpage, String sizeCtrl) {
+		
+		if(curpage==null) rvo.setCurPage(1);
+
+		if(curpage!=null){
+			int curnum=Integer.parseInt(curpage);
+			rvo.setCurPage(curnum);
+		}
+		
+		rvo.setGroupSize(10);
+		
+		if(sizeCtrl==null) rvo.setPageSize(10);
+		if(sizeCtrl!=null){
+			int ctrl=Integer.parseInt(sizeCtrl);
+			rvo.setPageSize(ctrl);
+		}
+		
+	}
+	
 }
 

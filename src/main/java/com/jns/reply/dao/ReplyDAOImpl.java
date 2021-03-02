@@ -47,4 +47,9 @@ public class ReplyDAOImpl implements ReplyDAO {
 		return sqlsession.update("replyDelete");
 	}
 
+	@Override
+	public List<ReplyVO> replyListAll(ReplyVO rvo) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList("replyListAll", rvo);
+	}
 }

@@ -141,10 +141,10 @@
 			<div id="adminsidenav" class="sidenav" >
 				<ul class="nav flex-column">
 				  <li class="nav-item">
-		            <a href="#" class="closebtn" onclick='closeNav()'>x</a>
+		            <a href="#" class="closebtn" onclick='closeNav()'><i class="bi bi-x-square"></i></a>
 		          </li>	
 		          <li class="nav-item">
-		            <a class="nav-link active" aria-current="page" href="#">
+		            <a class="nav-link" href="/kosmoJns/admin/main">
 		              <i class="bi bi-house-door-fill"></i>
 		              Main
 		            </a>
@@ -168,7 +168,7 @@
 		            </a>
 		          </li>
 		          <li class="nav-item">
-		            <a class="nav-link" href="#">
+		            <a class="nav-link" href="/kosmoJns/reply/replyListAll.do">
 		              <i class="bi bi-chat-left-text"></i>
 		              댓글 관리
 		            </a>
@@ -180,12 +180,12 @@
 	      <div class="col-md-11">
 	      	<div class="jumbotron">
 	      		<div class="section-header">Admin Page</div>
-	      		<p>반갑습니다. 관리자 님<br>
-	      		   Open 버튼을 클릭하여 원하는 메뉴를 선택하세요.
-	      		</p>
 	      		<hr>
 	      		<div id="include_page">
 	      			<!-- 여기에 페이지 불러오기 -->
+	      			<p>반갑습니다. 관리자 님<br>
+	      		       Open 버튼을 클릭하여 원하는 메뉴를 선택하세요.
+	      		    </p>
 	      		</div>	      	
 	      	</div>
 	      </div>

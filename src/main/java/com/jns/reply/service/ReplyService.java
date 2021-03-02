@@ -11,4 +11,6 @@ public interface ReplyService {
 	public int replyInsert(ReplyVO rvo);
 	public int replyUpdate(ReplyVO rvo);
 	public int replyDelete(ReplyVO rvo);
+	
+	public List<ReplyVO> replyListAll(ReplyVO rvo);
 }

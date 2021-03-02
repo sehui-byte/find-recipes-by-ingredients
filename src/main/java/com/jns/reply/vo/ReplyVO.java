@@ -11,6 +11,90 @@ public class ReplyVO {
 	private String rupdatedate;
 	private String rdeleteyn;
 	
+	//**************************
+	//검색 설정
+	private String keyfilter;
+	private String keyword;
+	private String startdate;
+	private String enddate;	
+	
+	// 페이징 *************************************************
+	private int pageSize;
+	private int groupSize;
+	private int curPage;
+	private int totalCount;
+
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public int getGroupSize() {
+		return groupSize;
+	}
+
+	public void setGroupSize(int groupSize) {
+		this.groupSize = groupSize;
+	}
+
+	public int getCurPage() {
+		return curPage;
+	}
+
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
+	}
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+	
+	
+	//**************************************************************
+	
+	
+	public String getKeyfilter() {
+		return keyfilter;
+	}
+
+	public void setKeyfilter(String keyfilter) {
+		this.keyfilter = keyfilter;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getStartdate() {
+		return startdate;
+	}
+
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+
+	public String getEnddate() {
+		return enddate;
+	}
+
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+	//**************************************************************	
+	
+	
 	public ReplyVO() {}
 	
 	public ReplyVO(String rno, String mno, String bno, String rbno

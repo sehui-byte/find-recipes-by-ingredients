@@ -84,4 +84,40 @@
 		AND		 RDELETEYN = 'Y'		 
 	</update>
 	
+	
+	<!-- 댓글 전체 조회 -->
+	<select id="replyListAll" parameterType="reply" resultType="reply">
+		
+		SELECT * FROM	
+			(SELECT 
+			         RNO
+			        ,MNO
+			        ,BNO
+			        ,RBNO
+			        ,RWRITER
+			        ,RCONTENT
+			        ,TO_CHAR(RINSERTDATE, 'YYYY-MM-DD') AS RINSERTDATE
+			        ,TO_CHAR(RUPDATEDATE, 'YYYY-MM-DD') AS RUPDATEDATE
+			        ,RDELETEYN
+			        ,CEIL(ROW_NUMBER() OVER(ORDER BY RNO DESC)/ #{pageSize}) PAGENO
+					,COUNT(RNO) OVER() AS TOTALCOUNT
+			 FROM REPLY
+			 WHERE RDELETEYN = 'Y'
+					<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+					<![CDATA[AND TO_CHAR(RINSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					<![CDATA[AND TO_CHAR(RINSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+					</if>
+					<if test="keyfilter=='key1'">
+						<![CDATA[AND RWRITER LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+					<if test="keyfilter=='key2'">
+						<![CDATA[AND RCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+					<if test="keyfilter=='key3'">
+						<![CDATA[AND RNO LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+					</if>
+			 ) A	
+		WHERE 	 	PAGENO = #{curPage}
+		ORDER BY	RNO DESC	
+	</select>
 </mapper>

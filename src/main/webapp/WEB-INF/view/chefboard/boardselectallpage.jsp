@@ -218,6 +218,7 @@
 		<%
 				}
 		%>  
+		    <div class="card-body">	
 		    <h5 class="card-title"><img src="/kosmoJns/resources/img/silver-medal.png"
 	    		 alt="gold" style="width:30px; height:30px"><%=svo1.getChefnick()%></h5>
 		    <p class="card-text">구독자 <%=svo1.getSubCount()%>명<br>전냉시 주방장</p>
@@ -256,7 +257,6 @@
 		<%
 				}
 		%>
-		    <img src="..." class="card-img-top" alt="회원 이미지...">
 		    <div class="card-body">
 		    <h5 class="card-title"><img src="/kosmoJns/resources/img/bronze-medal.png"
 	    		 alt="gold" style="width:30px; height:30px"><%=svo2.getChefnick()%></h5>
