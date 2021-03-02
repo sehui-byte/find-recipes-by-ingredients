@@ -33,6 +33,13 @@
 
 	$(document).ready(function(){
 		
+		sessionMlevel = "<%=mlevel%>"
+			
+		// 로그인 유저가 관리자일 경우 수정버튼 활성화
+		if ( sessionMlevel == 'A'){
+			$('#U').attr('disabled', false);
+		}
+		
 		// 조회수 증가
 		var viewsUrl = "noticeViews.do";
 		var viewsType = "GET";
@@ -89,12 +96,6 @@
 		$(document).on("click", "#C", function(){
 			location.href="noticeSelectAllPage.do";
 		});
-		
-		// 관리자가 작성하는거라 조건이 달라야할듯 해요
-		if ( sessionWriter == boardWriter){
-			$('#U').attr('disabled', false);
-			$('#D').attr('disabled', false);
-		}
 		
 	});
 </script>
