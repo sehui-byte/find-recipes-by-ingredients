@@ -172,7 +172,10 @@
 		<%
 				}else{
 		%>
-		    	<img src="..." class="card-img-top" alt="회원 이미지...">
+		    	<div style="text-align: center;">
+		    	<img src="..." class="card-img-top" alt="회원 이미지..."
+		    		style="width:150px; height:150px">
+		    	</div>
 		<%
 				}
 		%>
@@ -208,7 +211,10 @@
 		<%
 				}else{
 		%>
-		    	<img src="..." class="card-img-top" alt="회원 이미지...">
+		    	<div style="text-align: center;">
+		    	<img src="..." class="card-img-top" alt="회원 이미지..."
+		    		style="width:150px; height:150px">
+		    	</div>
 		<%
 				}
 		%>  
@@ -243,7 +249,10 @@
 		<%
 				}else{
 		%>
-		    	<img src="..." class="card-img-top" alt="회원 이미지...">
+		    	<div style="text-align: center;">
+		    	<img src="..." class="card-img-top" alt="회원 이미지..."
+		    		style="width:150px; height:150px">
+		    	</div>
 		<%
 				}
 		%>
