@@ -35,7 +35,7 @@ if (principal != null && principal instanceof MemberVO) {
 		session.setAttribute("mid", mid);
 		String loginSession = (String) session.getAttribute("mid");
 	}
-	
+
 	if (session.getAttribute(mno) != null) {
 		String loginSession2 = (String) session.getAttribute("mno");
 	} else {
@@ -161,8 +161,8 @@ div, h1, h2, h3, h4, h5, h6, p {
 		<div class="container-fluid">
 			<!-- 사이트 아이콘 넣기 -->
 			<a class="navbar-brand" href="/kosmoJns"> <img
-				src="/kosmoJns/resources/img/jns_logo.png" alt="" width="70"
-				> 전지적 냉장고 시점
+				src="/kosmoJns/resources/img/jns_logo.png" alt="" width="70">
+				전지적 냉장고 시점
 			</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -175,10 +175,11 @@ div, h1, h2, h3, h4, h5, h6, p {
 					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="/kosmoJns">Home</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
+						href="/kosmoJns/recipelist.do">레시피리스트</a></li>
+					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="/kosmoJns/recipeboard_list.do">레시피 일반</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="/kosmoJns/chefboard/boardselectallpage.do">셰프
-							게시판</a></li>
+						href="/kosmoJns/chefboard/boardselectallpage.do">셰프 게시판</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="/kosmoJns/searchPage.do">식재료 구매</a></li>
 					<li class="nav-item dropdown"><a
@@ -216,12 +217,16 @@ div, h1, h2, h3, h4, h5, h6, p {
 							</a>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="/kosmoJns/myinfo?mno=<%=mno%>">마이페이지</a>
-								<a class="dropdown-item" href="/kosmoJns/myinfo/myRecipeListPage?mno=<%= mno %>">나의 레시피</a>
-								<a class="dropdown-item" href="/kosmoJns/myinfo/myFavRecipeList?mno=<%= mno %>">내 즐겨찾기 레시피</a>
-								<a class="dropdown-item" href="/kosmoJns/myinfo/myQnAList?mno=<%= mno %>">나의 Q&A</a>
-								<a class="dropdown-item" href="/kosmoJns/likeProduct.do">나의 관심상품</a>
+								<a class="dropdown-item"
+									href="/kosmoJns/myinfo/myRecipeListPage?mno=<%=mno%>">나의
+									레시피</a> <a class="dropdown-item"
+									href="/kosmoJns/myinfo/myFavRecipeList?mno=<%=mno%>">내
+									즐겨찾기 레시피</a> <a class="dropdown-item"
+									href="/kosmoJns/myinfo/myQnAList?mno=<%=mno%>">나의 Q&A</a> <a
+									class="dropdown-item" href="/kosmoJns/likeProduct.do">나의
+									관심상품</a>
 								<div class="dropdown-divider"></div>
-									<!-- 로그아웃 버튼 -->
+								<!-- 로그아웃 버튼 -->
 								<a class="dropdown-item" style="cursor: pointer;"
 									onclick="sendLogout();">로그아웃</a>
 								<form id="logoutForm">
@@ -232,17 +237,19 @@ div, h1, h2, h3, h4, h5, h6, p {
 							</div>
 						</s:authorize>
 						<s:authorize access="hasRole('ROLE_A')">
-						<!--  관리자 메뉴 -->
-						<a data-toggle="dropdown"><i class="fas fa-user-circle fa-lg"></i></a>
+							<!--  관리자 메뉴 -->
+							<a data-toggle="dropdown"><i class="fas fa-user-circle fa-lg"></i></a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="/kosmoJns/admin/main">admin 페이지 접속</a>
-								<a class="dropdown-item" style="cursor: pointer;"onclick="sendLogout();">로그아웃</a>
+								<a class="dropdown-item" href="/kosmoJns/admin/main">admin
+									페이지 접속</a> <a class="dropdown-item" style="cursor: pointer;"
+									onclick="sendLogout();">로그아웃</a>
 								<form id="logoutForm">
-									<input type="hidden" id="logoutbtn" name="logoutbtn"value="로그아웃"
+									<input type="hidden" id="logoutbtn" name="logoutbtn"
+										value="로그아웃"
 										style="color: white; font-family: FontAwesome; border: none; background: transparent;" />
 								</form>
 							</div>
-						<br>
+							<br>
 						</s:authorize>
 					</div>
 					<s:authorize access="isAuthenticated()">
@@ -276,11 +283,12 @@ div, h1, h2, h3, h4, h5, h6, p {
 		console.log("웹소켓 연결");
 		//웹소켓 서버에서 메세지를 보내면 자동으로 실행된다
 		socket.onmessage = onMessage;
-		var mid = "<%=mid%>";
+		var mid = "<%=mid%>
+		";
 		console.log("mid >> " + mid);
 
 		var count = 0;//로그아웃시 왔던 메세지 개수
-		
+
 		function onMessage(evt) {//evt파라미터는 웹소켓이 보내준 데이터 의미
 			var toast = '';
 			console.log("서버로부터 메세지 받음");
