@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +32,7 @@
 	<script type="text/javascript">
 		$(document).ready(()=>
 		{
+
 			$.ajax
 			({
 				url:"recipeBoardViewsPP.do",
@@ -38,7 +40,8 @@
 				type:"GET",
 				dataType:"json"
 			}).always((data)=>{console.log(data)});
-			
+		
+			/* 즐겨찾기와 통합
 			$("#hitsBtn").click(()=>
 			{
 				$.ajax
@@ -49,7 +52,7 @@
 					dataType:"json"
 				}).always((data)=>{console.log(data); alert("추천하였습니다")});
 			});
-			
+			*/
 			
 			// 수정
 			$(document).on("click", "#updateBtn", function(){
@@ -63,78 +66,103 @@
 			$(document).on("click", "#C", function(){
 				location.href="/kosmoJns/recipeboard_list.do";
 			});
-			
-	//=======================즐겨찾기==========================
-					var mno = "<%= mno %>";
-					var rbno = $("#rbno").val();
-					var recipeType = "user";
-					var url = "/kosmoJns/favorites/favRecipeCheck.do";
-					var data = {
-							"mno" : mno,
-							"rbno" : rbno,
-							"recipeType" : recipeType};
-					$.ajax({
-						url : url,
-						method : "GET",
-						data : data,
-						success : whenSuccess,
-						error : whenError
-					});
-					
-					function whenSuccess(data){
-						if (data == "CHECK"){
-							$("#favRecipeUser").text("즐겨찾기 취소하기");
-						}else{
-							$("#favRecipeUser").text("즐겨찾기");
-						}
-					}
 
-					function whenError(data){
-						alert("실패");
+			//===============================Vue로 추천수을 프론트단에서 변경
+			var vm = new Vue({
+				el : "#rb_detail",
+				data : {
+					hitsPoint : "<%=rbvo.getHits()%>",
+					plus : "1"	
+				},
+				methods : {
+					hitPlus: function(){
+							var hitStatus = $("#favRecipeUser").val();
+							alert(hitStatus);
+							if (hitStatus == '추천하기'){
+								this.hitsPoint = parseInt(this.hitsPoint) + parseInt(this.plus);
+							}else{
+								this.hitsPoint = parseInt(this.hitsPoint) - parseInt(this.plus);
+							}
 					}
+				}
+			})	
+			
+			//=======================추천==========================
+			// 추천 체크
+			checkFav()
+			
+			$("#favRecipeUser").on("click", function(){
+				var mno = "<%= mno %>";
+				if (mno == null && mno.length == 0){
+					alert("비회원을 추천를 할 수 없습니다. 회원 가입 후에 이용해주시기 바랍니다.");
+					return;
+				}
+				var rbno = $("#rbno").val();
+				var recipeType = "user";
+				var data = {
+						"mno" : mno,
+						"rbno" : rbno,
+						"recipeType" : recipeType};
+
+				var url = "/kosmoJns/favorites/favRecipe.do";
+
+				$.ajax({
+					url : url,
+					method : "GET",
+					data : data,
+					success : whenSuccess,
+					error : whenError
+				});
 				
-				$("#favRecipeUser").on("click", function(){
-					var mno = "<%= mno %>";
-					if (mno == null && mno.length == 0){
-						alert("비회원을 즐겨찾기를 할 수 없습니다. 회원 가입 후에 이용해주시기 바랍니다.");
-						return;
+				function whenSuccess(data){
+					if (data == "OK"){
+						$("#favRecipeUser").val("추천 취소하기");
+						alert("해당 레시피를 추천했습니다. 추천 레시피는 나의 추천 레시피에서 확인하실 수 있습니다");
+					}else if(data == "DeleteOK"){
+						$("#favRecipeUser").val("추천하기");
+						alert("해당 레시피 추천를 취소하였습니다.");
+					}else{
+						alert("서버에 문제가 발생하였습니다. 잠시 후에 다시 시도해주십시오.");
 					}
-					var rbno = $("#rbno").val();
-					var recipeType = "user";
-					var data = {
-							"mno" : mno,
-							"rbno" : rbno,
-							"recipeType" : recipeType};
-
-					var url = "/kosmoJns/favorites/favRecipe.do";
-
-					$.ajax({
-						url : url,
-						method : "GET",
-						data : data,
-						success : whenSuccess,
-						error : whenError
-					});
 					
-					function whenSuccess(data){
-						if (data == "OK"){
-							alert("해당 레시피를 즐겨찾기했습니다. 즐겨찾기 레시피는 나의 즐겨찾기 레시피에서 확인하실 수 있습니다");
-							$("#favRecipeUser").text("즐겨찾기 취소하기");
-						}else if(data == "DeleteOK"){
-							alert("해당 레시피 즐겨찾기를 취소하였습니다.");
-							$("#favRecipeUser").text("즐겨찾기");
-						}else{
-							alert("서버에 문제가 발생하였습니다. 잠시 후에 다시 시도해주십시오.");
-						}
-						
-					}
+				}
 
-					function whenError(data){
-						alert("서비스에 문제가 발생하였습니다. 담당자에게 문의하시기 바랍니다.");
-					}
-				})
+			function whenError(data){
+				alert("서비스에 문제가 발생하였습니다. 담당자에게 문의하시기 바랍니다.");
+			}
+		})
+	});
 			
+	function checkFav(){
+		var mno = "<%= mno %>";
+		var rbno = $("#rbno").val();
+		var recipeType = "user";
+		var url = "/kosmoJns/favorites/favRecipeCheck";
+		var data = {
+				"mno" : mno,
+				"rbno" : rbno,
+				"recipeType" : recipeType};
+		$.ajax({
+			url : url,
+			method : "GET",
+			data : data,
+			success : whenSuccess,
+			error : whenError
 		});
+		
+		function whenSuccess(data){
+			if (data == "CHECK"){
+				$("#favRecipeUser").val("추천 취소하기");
+			}else{
+				$("#favRecipeUser").val("추천하기");
+			}
+		}
+
+		function whenError(data){
+			alert("실패");
+		}
+	}	
+		
 	</script>
 </head>
 <body>
@@ -154,7 +182,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-					<span style="font-size: 14px">조회: <%=rbvo.getViews()%> 추천: <%=rbvo.getHits()%></span>
+					<span style="font-size: 14px">조회: <%=rbvo.getViews()%> 추천: {{hitsPoint}}</span>
 				</tr>
 			</thead>
 			<tbody>
@@ -675,8 +703,7 @@
 			<tr>
 				<td colspan="2" align="right">
 					<input type="button" class="btn btn-orange" id="updateBtn" value="수정">
-					<input type="button" class="btn btn-orange" id="hitsBtn" value="추천">
-					<input type="button" class="btn btn-orange" name="favRecipeUser" id="favRecipeUser" value="즐겨찾기">
+ 					<input type="button" class="btn btn-orange" name="favRecipeUser" id="favRecipeUser" v-on:click="hitPlus()" value="추천하기">
 					<input type="button" class="btn btn-orange" id="C" value="목록">
 				</td>
 			</tr>

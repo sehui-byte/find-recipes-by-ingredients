@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.jns.flask.vo.HitsVO;
 import com.jns.flask.vo.LikeProductInfoVO;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
@@ -104,6 +105,51 @@ public abstract class FlaskUtil
 		logger.info("list.size >>> : " + list.size());
 		return list;
 	}
+
+	
+	@SuppressWarnings("deprecation")
+	public static List<HitsVO> divHvoYYYYMM(HitsVO hvo)
+	{
+		String mno = hvo.getMno(); // 회원번호 >> 조인
+		List<HitsVO> list = new ArrayList<HitsVO>();
+		int start_yyyy = Integer.parseInt(hvo.getStart_yyyymm().substring(0, 4));
+		int start_mm = Integer.parseInt(hvo.getStart_yyyymm().substring(4));
+		int end_yyyy = Integer.parseInt(hvo.getEnd_yyyymm().substring(0, 4));
+		int end_mm = Integer.parseInt(hvo.getEnd_yyyymm().substring(4));
+		
+		logger.info("start_yyyy >>> : " + start_yyyy);
+		logger.info("start_mm >>> : " + start_mm);
+		logger.info("end_yyyy >>> : " + end_yyyy);
+		logger.info("end_mm >>> : " + end_mm);
+		Date startDate = new Date(start_yyyy-1900, start_mm-1, 1);
+		Date endDate = new Date(end_yyyy-1900, end_mm-1, 1);
+		
+		logger.info("startDate >>> : " + startDate);
+		logger.info("endDate >>> : " + endDate);
+		
+		int monDiff = (end_yyyy * 12 + end_mm) -(start_yyyy * 12 + start_mm); //시작 ~ 끝 개월 차이 : 예)2001.04, 2002.04 = 12
+		logger.info("monDiff >>> : " + monDiff);
+		
+		for(int i=0; i<=monDiff; i++)
+		{
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(startDate);
+			cal.add(Calendar.MONTH, i);
+			
+			HitsVO tempVo = new HitsVO();
+			tempVo.setYear(String.valueOf(cal.getTime().getYear()+1900));
+			tempVo.setMon(String.valueOf(cal.getTime().getMonth()+1));
+			tempVo.setMno(mno);
+			logger.info("tempVO >>> : " + tempVo.toString());
+			
+			list.add(tempVo);
+		}
+		
+		logger.info("list.size >>> : " + list.size());
+		return list;
+	}
+	
+	
 	
 	
 	@SuppressWarnings("unchecked")
@@ -142,6 +188,22 @@ public abstract class FlaskUtil
 			jArr.add(svoList.get(i).toJSONObject());
 		}
 		json.put("signupInc", jArr); 
+		logger.info("json >>> : " + json.toJSONString());
+		
+		return json;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static JSONObject getHitsInc(List<HitsVO> hvoList)
+	{
+		JSONObject json = new JSONObject();// result
+		JSONArray jArr = new JSONArray();// array
+		
+		for(int i=0; i<hvoList.size(); i++)
+		{
+			jArr.add((hvoList.get(i)).toJSONObject());
+		}
+		json.put("hitsInc", jArr); 
 		logger.info("json >>> : " + json.toJSONString());
 		
 		return json;

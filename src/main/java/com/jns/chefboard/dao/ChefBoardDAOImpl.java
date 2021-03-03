@@ -15,12 +15,6 @@ public class ChefBoardDAOImpl implements ChefBoardDAO {
 	public SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<ChefBoardVO> chefBoardSelectAll(ChefBoardVO cbvo) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("chefBoardSelectAll");
-	}
-
-	@Override
 	public List<ChefBoardVO> chefBoardSelect(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("chefBoardSelect");

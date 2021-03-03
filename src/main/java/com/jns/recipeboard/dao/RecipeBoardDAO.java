@@ -15,4 +15,5 @@ public interface RecipeBoardDAO
 	public boolean recipeBoardDelete(RecipeBoardVO rbvo);
 	public boolean recipeBoardViewsPP(RecipeBoardVO rbvo);
 	public boolean recipeBoardHitsPP(RecipeBoardVO rbvo);
+	public int recipeBoardHitsCount(FavoritesVO fvo);
 }

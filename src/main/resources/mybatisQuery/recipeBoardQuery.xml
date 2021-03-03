@@ -324,4 +324,16 @@
 			AND RB_DELETEYN = 'Y'
 	</update>
 	
+	<select id="recipeBoardHitsCount" parameterType="fvo" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			FAVORITES	
+		WHERE
+			RBNO = #{rbno, jdbcType=VARCHAR}
+
+	
+	
+	</select>
+	
 </mapper>
