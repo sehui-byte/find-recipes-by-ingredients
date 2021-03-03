@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jns.board.vo.BoardVO;
+import com.jns.favorites.vo.FavoritesVO;
 import com.jns.member.security.password.PasswordEncoder;
 import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.dao.MyinfoDAO;
@@ -133,8 +134,26 @@ public class MyinfoServiceImpl implements MyinfoService {
 
 	@Override
 	public List<RecipeBoardVO> myRecipeListPage(RecipeBoardVO rbvo) {
-	
-		return myinfoDAO.myRecipeListPage(rbvo);
+
+		List<RecipeBoardVO> list = myinfoDAO.myRecipeListPage(rbvo);
+
+		int nCnt = list.size();
+
+		for (int i = 0; i < nCnt; i++) {
+			FavoritesVO fvo = null;
+			fvo = new FavoritesVO();
+			// 게시판 번호 추출
+			fvo.setRbno(list.get(0).getRbno());
+			// 추천 조회
+			int hitCount = myinfoDAO.myRecipeListHitsCount(fvo);
+
+			logger.info("추천 수는 >>> " + hitCount);
+
+			String sHitCount = String.valueOf(hitCount);
+
+			list.get(0).setHits(sHitCount);
+		}
+		return list;
 	}
 
 }

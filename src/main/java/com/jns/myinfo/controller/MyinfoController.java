@@ -86,6 +86,7 @@ public class MyinfoController {
 
 		logger.info(rbvo.getMno());
 		logger.info(myRecipeList.size());
+		logger.info(myRecipeList.get(0).getHits());
 
 		model.addAttribute("myRecipeList", myRecipeList);
 		model.addAttribute("p_rbvo", rbvo);
