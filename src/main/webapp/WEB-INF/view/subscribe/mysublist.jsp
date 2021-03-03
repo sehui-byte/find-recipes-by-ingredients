@@ -9,6 +9,45 @@
 <head>
 <meta charset="UTF-8">
 <title>내 구독 리스트</title>
+<style type="text/css">
+		
+			.tt{
+				text-align: center;
+			}
+			
+			.section-header {
+				position: relative;
+				margin-bottom: 40px;
+				font-size: 26px;
+				font-weight: 400;
+				color: #333;
+				text-align: Center;
+				line-height: 60px;
+				letter-spacing: 1px;
+			}
+			
+			.section-header:after {
+				content: "";
+				display: block;
+				position: absolute;
+				left: 50%;
+				bottom: 0;
+				width: 70px;
+				height: 2px;
+				background: #ff7f00;
+				transform: translate(-50%, 0);
+				transform: translate3d(-50%, 0, 0);
+			}
+			
+			.btn-orange { 
+				background-color: #F9A781; 
+				font-weight: bold;
+			}
+			
+			.table.table-hover tbody tr:hover {
+		    	background-color: #F9A781; 
+			}
+</style>
 <script type="text/javascript">
 
 	$(document).ready(function(){
@@ -42,6 +81,7 @@
 </script>
 </head>
 <body>
+<div>
 <% request.setCharacterEncoding("UTF-8");%> 
 <%
 	Object obj = request.getAttribute("subList");
@@ -50,16 +90,14 @@
 	int nCnt = list.size();
 	System.out.println("mysublist.jsp nCnt >>> : " + nCnt);
 %>
+	<div class="section-header">My Subscribe</div>
 	<form name="subscribeList" id="subscribeList">
-	<table border="1">
+	<table class="table table-hover">
 		<thead>
 		<tr>
-			<td colspan="10" align="center"><h2>구독 목록</h2></td>
-		</tr>
-		<tr>
-			<td class="tt">구독번호</td>
-			<td class="tt">셰프이름</td>
-			<td class="tt">등록일</td>
+			<td class="tt" style="font-weight: bold">구독번호</td>
+			<td class="tt" style="font-weight: bold">셰프이름</td>
+			<td class="tt" style="font-weight: bold">등록일</td>
 			<td><td>
 		</tr>
 		</thead>
@@ -94,6 +132,7 @@
 		</tbody>
 	</table>
 	</form>
+</div>
 	<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
 </html>

@@ -48,7 +48,7 @@
 						 ,BHITS
 						 )
 		VALUES			 (
-						  #{mno. jdbcType=VARCHAR}
+						  #{mno, jdbcType=VARCHAR}
 						 ,#{bno, jdbcType=VARCHAR}
 						 ,'Q'
 						 ,#{btitle, jdbcType=VARCHAR}

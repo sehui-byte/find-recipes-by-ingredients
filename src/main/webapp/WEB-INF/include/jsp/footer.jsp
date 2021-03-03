@@ -24,9 +24,11 @@
 <body>
 <footer class="footer mt-auto py-3 bg-light">
   <div class="container">
-    <span class="text-muted">
-    Place sticky footer content here.
+    <span class="text-muted" style="font-size: 14px;">
+    한국소프트웨어인재개발원(KOSMO) 72기 프로젝트<br>
+    전냉시(전지적 냉장고 시점) 2021.02.08 ~ 2021.03.08
     </span>
+    <!-- 아이콘 저작권 -->
     <div style="font-size: 10px;">
 	Icons made by <a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a>,
 	<a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a>,

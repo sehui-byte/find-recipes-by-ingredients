@@ -15,6 +15,7 @@
 		FROM MEMBER A, CHEF_INFO B
 		WHERE A.MNO = B.MNO
 		AND B.IDELETEYN = 'Y'
+		ORDER BY B.INO DESC
 	</select>
 	
 	<!-- 세프 조회 -->

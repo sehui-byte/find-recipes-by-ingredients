@@ -28,12 +28,50 @@
 <title>Insert title here</title>
 </head>
 <style type="text/css">
-/*google 웹폰트 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
-
-div, h1, h2, h3, h4, h5, h6, p {
-   font-family: 'Noto Serif KR', serif;
-}
+	/*google 웹폰트 */
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
+	
+	div, h1, h2, h3, h4, h5, h6, p {
+	   font-family: 'Noto Serif KR', serif;
+	}
+	
+	.tt{
+		text-align: center;
+	}
+	
+	.section-header {
+		position: relative;
+		margin-bottom: 40px;
+		font-size: 26px;
+		font-weight: 400;
+		color: #333;
+		text-align: Center;
+		line-height: 60px;
+		letter-spacing: 1px;
+	}
+	
+	.section-header:after {
+		content: "";
+		display: block;
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		width: 70px;
+		height: 2px;
+		background: #ff7f00;
+		transform: translate(-50%, 0);
+		transform: translate3d(-50%, 0, 0);
+	}
+	
+	
+	.table.table-hover tbody tr:hover {
+    	background-color: #F9A781; 
+	}
+	
+	.btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;
+	}
 </style>
 <link rel="stylesheet" href="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.css">
 <script src="/kosmoJns/resources/datepiker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
@@ -67,10 +105,18 @@ div, h1, h2, h3, h4, h5, h6, p {
 	}
 </script>
 <body>
-<select name="recipeTable" id="recipeTable">
-	<option value="API" selected="selected">식약처 레시피</option>
-	<option value="user">유저 레시피</option>
-</select>
+<div id="wrapper">
+<div class="jumbotron">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-3">
+			<select class="form-select" name="recipeTable" id="recipeTable">
+				<option value="API" selected="selected">식약처 레시피</option>
+				<option value="user">유저 레시피</option>
+			</select>
+		</div>
+	</div>
+</div>
 <script>
 	$(document).ready(function(){
 		$("#checkAll_APIRecipe").click(function(){
@@ -163,38 +209,55 @@ div, h1, h2, h3, h4, h5, h6, p {
 	})	
 
 </script>
+<div class="section-header">내 즐겨찾기 레시피 - 식약처 API</div>
 <form id="myFavRecipeList" name="myFavRecipeList" >
-	<table border="1" style="text-align:center; margin-left:auto; margin-right:auto;">
+	<!-- 검색창 그리드 시작 -->
+	<div class="container-fluid">
+		<div class="row">
+		  <div class="col-2">
+		  	<select class="form-select" id="keyfilter" name="keyfilter">
+				<option value="key1">메뉴명</option>
+				<option value="key2">재료</option>
+				<option value="key3">메뉴명+재료</option>
+			</select>
+  		  </div>
+	      <div class="col-6">
+	    	<div class="input-group">
+	    		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어 입력" onkeydown="enterKey()">
+		    	<span class="input-group-btn">
+		    		<button class="btn btn-orange" type="button" id="searchBtnAPIRecipe">검색</button>
+		    	</span>&nbsp;&nbsp;					    	
+		    		<button class="btn btn-orange" type="button" id="searchReset">검색 초기화</button>	    			    	
+	    	</div>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-2">
+		  	<input type="text" class="form-control" id="startdate" name="startdate" size="12" placeholder="시작일">
+		  </div>
+		  <div class="col-1">
+		  	<p>~</p>
+		  </div>
+		  <div class="col-2">
+		  	<input type="text" class="form-control" id="enddate" name="enddate" size="12" placeholder="종료일">
+		  </div>	  
+		</div>	
+	</div>
+	<!-- 검색창 그리드 종료 -->
+	<table class="table table-hover">
 		<thead>
-			<tr>
-				<td colspan="10" align="center"><h2>내 즐겨찾기 레시피 - 식약처 API</h2></td>
-			</tr>
-			<tr>
-				<td colspan="10" align="left">
-					<select id="keyfilter" name="keyfilter">
-						<option value="key1">메뉴명</option>
-						<option value="key2">재료</option>
-						<option value="key3">메뉴명+재료</option>
-					</select>
-					<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" onkeydown="enterKey()"><br>
-					<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일">
-					~<input type="text" id="enddate" name="enddate" size="12" placeholder="종료일">
-					<button type="button" id="searchBtnAPIRecipe">검색</button>
-					<button type="button" id="searchReset">검색 초기화</button>
-				</td>	
-			</tr>
-		</thead>
-		<tr>
+		<tr>	
 			<td>
-				<input type="checkbox" id="checkAll_APIRecipe">	
+			<input type="checkbox" id="checkAll_APIRecipe">	
 			</td>	
-			<td>제목 </td>	
-			<td>레시피 등록 날짜</td>	
-			<td>레시피 조회수</td>	
-			<td>레시피 추천수</td>	
-			<td>기타</td>	
+			<td class="tt" style="width:50%; font-weight: bold">제목 </td>	
+			<td class="tt" style="font-weight: bold">레시피 등록 날짜</td>	
+			<td class="tt" style="font-weight: bold">레시피 조회수</td>	
+			<td class="tt" style="font-weight: bold">레시피 추천수</td>	
+			<td class="tt" style="font-weight: bold">기타</td>	
 		</tr>
-
+		</thead>
+		<tbody>
 <% 
 	if (recipeList != null){
 		int nCnt = recipeList.size();
@@ -211,32 +274,14 @@ div, h1, h2, h3, h4, h5, h6, p {
 			<td>
 				<a href="/kosmoJns/recipedetail?rcp_seq=<%= rvo.getRcp_seq() %>"><%= rvo.getRcp_nm() %></a>
 			</td>	
-			<td><%= rvo.getRcp_insertdate() %></td>	
-			<td>조회수</td>	
-			<td>추천수</td>	
-			<td>기타</td>	
+			<td class="tt" style="font-size: 12px"><%= rvo.getRcp_insertdate() %></td>	
+			<td class="tt">조회수</td>	
+			<td class="tt">추천수</td>	
+			<td class="tt">기타</td>	
 		</tr>
 <%
 			} // end of for
 %>
-		<tr>
-			<td colspan="6">
-				<input type="button" name="deleteMyFavRecipeAPI" id="deleteMyFavRecipeAPI" value="즐겨찾기 삭제">
-			</td>
-		</tr>	
-		<tr>
-			<td class="paging" colspan="6">
-				<jsp:include page="./page/paging.jsp" flush="true">
-					<jsp:param name="url" value="myFavRecipeList"/>
-					<jsp:param name="str" value=""/>
-					<jsp:param name="pageSize" value="<%=pageSize%>"/>
-					<jsp:param name="groupSize" value="<%=groupSize%>"/>
-					<jsp:param name="curPage" value="<%=curPage%>"/>
-					<jsp:param name="totalCount" value="<%=totalCount%>"/>
-					<jsp:param name="mno" value="<%=mno %>"/>
-				</jsp:include>
-			</td>
-		</tr>
 <%
 		}else{
  %>		
@@ -247,10 +292,26 @@ div, h1, h2, h3, h4, h5, h6, p {
 		}	
 	}
 %>
+		</tbody>
 	</table>
+	<input type="button" class="btn btn-orange" name="deleteMyFavRecipeAPI" id="deleteMyFavRecipeAPI" value="즐겨찾기 삭제">
+	<br>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 	<input type="hidden" id="recipeType" name="recipeType" value="API">
+	<div class="paging">
+		<jsp:include page="./page/paging.jsp" flush="true">
+			<jsp:param name="url" value="myFavRecipeList"/>
+			<jsp:param name="str" value=""/>
+			<jsp:param name="pageSize" value="<%=pageSize%>"/>
+			<jsp:param name="groupSize" value="<%=groupSize%>"/>
+			<jsp:param name="curPage" value="<%=curPage%>"/>
+			<jsp:param name="totalCount" value="<%=totalCount%>"/>
+			<jsp:param name="mno" value="<%=mno %>"/>
+		</jsp:include>
+	</div>
 </form>
+</div>
+</div>
 <%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
 </html>
