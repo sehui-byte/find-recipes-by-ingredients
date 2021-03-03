@@ -4,7 +4,6 @@
 <%@ page import="com.jns.board.vo.BoardVO" %>
 <%@page import="com.jns.common.FileLoadUtil"%>
 <%@ include file="/WEB-INF/include/jsp/header.jsp" %>
-<%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
