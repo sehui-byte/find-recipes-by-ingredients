@@ -145,6 +145,8 @@
 			}               
 		});
 		
+		
+		
 		//검색버튼
 		$(document).on("click", "#searchBtn", function(){
 			console.log("searchBtn >>> : ");
@@ -177,13 +179,32 @@
 				}	
 			}
 		}
-	
+
+	// 플라스크 데이터 요청 		
+	$(document).ready(function(){
+		var mlevel = "<%= mlevel %>";
+		var status = location.search;
+		if(status.indexOf("redirect") != -1){
+			return;	
+		}
+		location.href="/kosmoJns/sendHitsInc?start_yyyymm=202004&end_yyyymm=202104&mno=<%=mno%>";
+	})
+		
+		
 </script>
 </head>
 <body>
+
+<%-- 내 게시글 추천수 통계 그래프 노출 --%>
+<div align="center">
+	<p>현재 내 레시피 추천수 증가 추이</p>	
+	<img src="http://54.180.83.249:5000/static/hitsInc/<%= mno %>_hitsInc.png">
+</div>
+
 <div id="wrapper">
 <div class="jumbotron">
 <div class="section-header">나의 레시피</div>
+
 <form id="myRecipeList" name="myRecipeList">
 	<!-- 검색창 그리드 시작 -->
 	<div class="container-fluid">

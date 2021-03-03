@@ -27,6 +27,10 @@
 <a href="sendSignupInc?start_yyyymm=202004&end_yyyymm=202104">플라스크 테스트 - 월별회원가입증가추이(파라미터 : 202004 ~ 202104)</a><br>
 
 <a href="sendSubscribeInc?mno=M202102221177&start_yyyymm=202004&end_yyyymm=202104">내 구독자 </a>
+<hr>
+
+<a href="/kosmoJns/sendHitsInc.do?mno=M202102221174&start_yyyymm=202004&end_yyyymm=202104">월별 내 레시피 추천</a>
+
 
 
 </body>

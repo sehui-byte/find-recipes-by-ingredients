@@ -8,7 +8,6 @@ import com.jns.recipeboard.vo.RecipeBoardVO;
 
 public interface ChefBoardDAO {
 
-	public List<ChefBoardVO> chefBoardSelectAll(ChefBoardVO cbvo);
 	public List<ChefBoardVO> chefBoardSelect(ChefBoardVO cbvo);
 	public int boardInsert(ChefBoardVO cbvo);
 	public int boardUpdate(ChefBoardVO cbvo);

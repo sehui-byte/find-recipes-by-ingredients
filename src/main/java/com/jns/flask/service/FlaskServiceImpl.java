@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jns.flask.dao.FlaskDAO;
+import com.jns.flask.vo.HitsVO;
 import com.jns.flask.vo.LikeProductInfoVO;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
@@ -18,19 +19,16 @@ import com.jns.recipe.vo.RecipeVO;
 
 @Service
 @Transactional
-public class FlaskServiceImpl implements FlaskService 
-{
+public class FlaskServiceImpl implements FlaskService {
 	private Logger logger = Logger.getLogger(FlaskServiceImpl.class);
-	
+
 	private FlaskDAO flaskDAO;
-	
+
 	@Autowired(required = false)
-	public FlaskServiceImpl(FlaskDAO flaskDAO) 
-	{
+	public FlaskServiceImpl(FlaskDAO flaskDAO) {
 		this.flaskDAO = flaskDAO;
 	}
-	
-	
+
 	@Override
 	public NutrientVO getNutrient(RecipeVO rvo) {
 		// TODO Auto-generated method stub
@@ -48,7 +46,7 @@ public class FlaskServiceImpl implements FlaskService
 		// TODO Auto-generated method stub
 		return flaskDAO.getSignupInc(suvo);
 	}
-	
+
 	@Override
 	public LikeProductInfoVO getLikeProductInfo(String productId, ProductVO pvo) {
 		// TODO Auto-generated method stub
@@ -57,14 +55,21 @@ public class FlaskServiceImpl implements FlaskService
 		LikeProductInfoVO result = flaskDAO.getLikeProductInfo(pvo);
 		return result;
 	}
-	//로그인한 사용자 mno가져오기
+
+	// 로그인한 사용자 mno가져오기
 	private String getLoginMno(ProductVO pvo) {
-		//로그인 사용자 mno 가져오기
+		// 로그인 사용자 mno 가져오기
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Object principal = auth.getPrincipal();
-		String mno = ((MemberVO)principal).getMno();
-		//System.out.println("mno >>" + mno);
+		String mno = ((MemberVO) principal).getMno();
+		// System.out.println("mno >>" + mno);
 		return mno;
+	}
+
+	@Override
+	public HitsVO getHitsInc(HitsVO hvo) {
+	
+		return flaskDAO.getHitsInc(hvo);
 	}
 
 }

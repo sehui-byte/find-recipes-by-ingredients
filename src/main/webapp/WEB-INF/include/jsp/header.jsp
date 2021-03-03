@@ -164,7 +164,6 @@ div, h1, h2, h3, h4, h5, h6, p {
 				src="/kosmoJns/resources/img/jns_logo.png" alt="" width="70"
 				> 전지적 냉장고 시점
 			</a>
-
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"

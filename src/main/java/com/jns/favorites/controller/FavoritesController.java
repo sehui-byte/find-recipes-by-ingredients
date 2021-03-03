@@ -63,7 +63,7 @@ public class FavoritesController {
 		fvo.setFno(fno);
 
 		int check = favoritesService.myFavRecipeCheck(fvo);
-
+		
 		// 0 >> 해당 레시피가 추천되지 않았을 때
 		if (check == 0) {
 			int result = favoritesService.myFavRecipeInsert(fvo);

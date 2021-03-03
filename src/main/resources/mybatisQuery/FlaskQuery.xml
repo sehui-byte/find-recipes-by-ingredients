@@ -62,4 +62,21 @@
 			AND PRODUCTID=#{productId}
 	</select>
 	
+	
+	<select id="getHitsInc" parameterType="hvo" resultType="hvo">
+			SELECT
+				#{year, jdbcType=VARCHAR} AS YEAR,
+				#{mon, jdbcType=VARCHAR} AS MON,
+				COUNT(*) AS INC
+			FROM
+				RECIPE_BOARD R, FAVORITES F
+			WHERE
+				R.MNO = #{mno}
+			AND
+				R.RBNO = F.RBNO
+			AND TO_CHAR(F.FINSERTDATE, 'YYYY') = #{year, jdbcType=VARCHAR}
+			AND TO_CHAR(F.FINSERTDATE, 'MM') = LPAD(#{mon, jdbcType=VARCHAR}, 2, '0')
+	
+	</select>
+	
 </mapper>

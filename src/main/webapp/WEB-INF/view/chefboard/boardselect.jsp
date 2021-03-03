@@ -63,12 +63,19 @@
 			},
 			methods: {
 				hitPlus:function(){
-					this.hitsPoint = parseInt(this.hitsPoint) + parseInt(this.plus);
+						var favStatus = $("#favRecipeUser").val();
+						if (favStatus == '추천하기'){
+							this.hitsPoint = parseInt(this.hitsPoint) + parseInt(this.plus);
+						}else{
+							this.hitsPoint = parseInt(this.hitsPoint) - parseInt(this.plus);
+						}
+
+					}
+
 				}
-			}
 		});
 		
-		
+	
 		// 로그인 유저와 작성자가 일치할 경우 수정/삭제 버튼 생성
 		if ( sessionWriter == boardWriter){
 			$('#U').attr('disabled', false);
@@ -100,7 +107,8 @@
 		checkSubscribe();		
 		
 		
-		// 추천
+		// 추천 ====== 즐겨찾기랑 통합 >> 삭제 예정, 일단은 버튼만 삭제
+	/*
 		$(document).on("click", "#hits", function(){
 			var hitsUrl = "/kosmoJns/chefboard/chefBoardHitsPP.do";
 			var hitsType = "GET";
@@ -122,7 +130,7 @@
 				alert("시스템 오류입니다. 관리자에게 문의하세요.");
 			}
 		});
-		
+	*/
 		// 수정
 		$(document).on("click", "#U", function(){
 			$("#b_data").attr({"method":"POST"
@@ -179,7 +187,7 @@
 			}
 		});
 		
-		//========================즐겨찾기===============================
+		//========================즐겨찾기&추천 노출은 추천으로===============================
 		
 					var mno = "<%= mno %>";
 					var rbno = $("#rbno").val();
@@ -199,9 +207,9 @@
 					
 					function whenSuccess(data){
 						if (data == "CHECK"){
-							$("#favRecipeUser").text("즐겨찾기 취소하기");
+							$("#favRecipeUser").val("추천 취소하기");
 						}else{
-							$("#favRecipeUser").text("즐겨찾기");
+							$("#favRecipeUser").val("추천하기");
 						}
 					}
 
@@ -212,7 +220,7 @@
 				$("#favRecipeUser").on("click", function(){
 					var mno = "<%= mno %>";
 					if (mno == null && mno.length == 0){
-						alert("비회원을 즐겨찾기를 할 수 없습니다. 회원 가입 후에 이용해주시기 바랍니다.");
+						alert("비회원을 추천을 할 수 없습니다. 회원 가입 후에 이용해주시기 바랍니다.");
 						return;
 					}
 					var rbno = $("#rbno").val();
@@ -234,11 +242,11 @@
 					
 					function whenSuccess(data){
 						if (data == "OK"){
-							alert("해당 레시피를 즐겨찾기했습니다. 즐겨찾기 레시피는 나의 즐겨찾기 레시피에서 확인하실 수 있습니다");
-							$("#favRecipeUser").text("즐겨찾기 취소하기");
+							$("#favRecipeUser").val("추천 취소하기");
+							alert("해당 레시피를 추천했습니다. 추천 레시피는 나의 추천 레시피에서 확인하실 수 있습니다");
 						}else if(data == "DeleteOK"){
-							alert("해당 레시피 즐겨찾기를 취소하였습니다.");
-							$("#favRecipeUser").text("즐겨찾기");
+							$("#favRecipeUser").val("추천하기");
+							alert("해당 레시피  추천을 취소하였습니다.");
 						}else{
 							alert("서버에 문제가 발생하였습니다. 잠시 후에 다시 시도해주십시오.");
 						}
@@ -737,8 +745,7 @@
 				<td colspan="2" align="right">
 					<input type="button" class="btn btn-orange" id="U" disabled="disabled" value="수정">
 					<input type="button" class="btn btn-orange" id="D" disabled="disabled" value="삭제">
-					<input type="button" class="btn btn-orange" id="hits" @click="hitPlus" value="추천">
-					<input type="button" class="btn btn-orange" name="favRecipeUser" id="favRecipeUser" value="즐겨찾기">
+					<input type="button" class="btn btn-orange" name="favRecipeUser" id="favRecipeUser" v-on:click="hitPlus()" value="추천하기">
 					<input type="button" class="btn btn-orange" id="C" value="목록">
 				</td>
 			</tr>

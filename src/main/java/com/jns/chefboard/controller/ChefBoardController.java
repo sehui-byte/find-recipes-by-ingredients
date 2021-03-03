@@ -171,28 +171,6 @@ public class ChefBoardController {
 	}
 	
 	
-	
-	/********************************************************************************************
-	* 글 전체 조회
-	********************************************************************************************/
-	@RequestMapping(value="/chefboard/boardselectall", method=RequestMethod.GET)
-	public String boardSelectAll(ChefBoardVO cbvo, Model model, SubscribeVO svo) {
-		logger.info("[chefC] >> boardSelectAll 호출 성공");
-			
-		List<ChefBoardVO> listAll = chefBoardService.chefBoardSelectAll(cbvo);
-		
-		model.addAttribute("listAll", listAll);
-		logger.info("[chefC] >> boardSelectAll listAll.size() >>> : " + listAll.size());
-		
-		// 랭킹
-		List<SubscribeVO> subRank = subscribeService.subRank(svo);
-		model.addAttribute("subRank", subRank);
-		logger.info("[chefC] >> boardSelectAll subRank.size() >>> : " + subRank.size());
-		
-		return "chefboard/boardselectall";
-	}
-	
-	
 	/********************************************************************************************
 	* 글 상세 조회
 	********************************************************************************************/
