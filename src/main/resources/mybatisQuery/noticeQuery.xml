@@ -35,7 +35,8 @@
 
 	<insert id="NoticeInsert" parameterType="nvo">
 		INSERT INTO BOARD(
-						  BNO
+						  MNO
+						 ,BNO
 						 ,BTYPE
 						 ,BTITLE
 						 ,BCONTENT
@@ -48,7 +49,8 @@
 						 ,BHITS
 						 )
 		VALUES			 (
-						  #{bno, jdbcType=VARCHAR}
+						  #{mno, jdbcType=VARCHAR}
+						 ,#{bno, jdbcType=VARCHAR}
 						 ,'N'
 						 ,#{btitle, jdbcType=VARCHAR}
 						 ,#{bcontent, jdbcType=VARCHAR}
