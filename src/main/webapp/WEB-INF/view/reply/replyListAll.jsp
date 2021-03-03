@@ -167,7 +167,6 @@
 <div id ="wrapper">
 	<div class="jumbotron">
   	<div class="section-header">Reply List</div>
-  	<hr>
   	<form name="replyList" id="replyList">
 	<!-- =================  검색창 그리드 설정 ================= -->
 		<div class="container-fluid">
@@ -300,5 +299,6 @@
 	</form>	      	
    	</div>
 </div>
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
 </html>
