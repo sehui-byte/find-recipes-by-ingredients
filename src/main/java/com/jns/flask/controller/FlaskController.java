@@ -97,7 +97,7 @@ public class FlaskController
 		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
 	}
 	
-	@RequestMapping(value = "sendLikeProductInfo", method = RequestMethod.GET)
+	@RequestMapping(value = "/lprice/sendLikeProductInfo", method = RequestMethod.GET)
 	public String sendLikeProductInfo(@RequestParam(value="productId") String productId,
 			ProductVO pvo, RedirectAttributes redirectAttributes)
 	{
@@ -109,6 +109,6 @@ public class FlaskController
 		
 		redirectAttributes.addAttribute("likeProductInfo", jsonStr);
 		
-		return "redirect:http://127.0.0.1:5001/lprice";
+		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
 	}
 }

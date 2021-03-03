@@ -69,7 +69,7 @@
 				"productId" : productId
 			};
 			$.ajax({
-				url : 'sendLikeProductInfo.do',
+				url : '/lprice/sendLikeProductInfo.do',
 				type : 'get',
 				data : param,
 				success : function(data) {
