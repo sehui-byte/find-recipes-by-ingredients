@@ -109,6 +109,6 @@ public class FlaskController
 		
 		redirectAttributes.addAttribute("likeProductInfo", jsonStr);
 		
-		return "redirect:" + FlaskUtil.FLASK_SERVER_URL;
+		return "redirect:http://127.0.0.1:5001/lprice";
 	}
 }
