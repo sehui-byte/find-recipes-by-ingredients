@@ -217,8 +217,8 @@
 	<div class="row">
 		<div class="col-3">
 			<select class="form-select" name="recipeTable" id="recipeTable">
-				<option value="API" selected="selected">식약처 레시피</option>
-				<option value="user">유저 레시피</option>
+				<option value="API">식약처 레시피</option>
+				<option value="user" selected="selected">유저 레시피</option>
 			</select>
 		</div>
 	</div>

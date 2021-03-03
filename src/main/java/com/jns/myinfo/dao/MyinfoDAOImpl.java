@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jns.board.vo.BoardVO;
+import com.jns.favorites.vo.FavoritesVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
@@ -94,4 +95,11 @@ public class MyinfoDAOImpl implements MyinfoDAO {
 
 		return sqlSession.selectList("myRecipeListPage", rbvo);
 	}
+
+	@Override
+	public int myRecipeListHitsCount(FavoritesVO fvo) {
+	
+		return sqlSession.selectOne("myRecipeListHitsCount", fvo);
+	}
+
 }

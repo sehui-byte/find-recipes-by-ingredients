@@ -3,6 +3,7 @@ package com.jns.myinfo.dao;
 import java.util.List;
 
 import com.jns.board.vo.BoardVO;
+import com.jns.favorites.vo.FavoritesVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
@@ -34,5 +35,7 @@ public interface MyinfoDAO {
 	public List<MemberVO> myinfoSelect(MemberVO mvo);	
 	
 	public List<RecipeBoardVO> myRecipeListPage(RecipeBoardVO rbvo);
+	
+	public int myRecipeListHitsCount(FavoritesVO fvo);
 
 }
