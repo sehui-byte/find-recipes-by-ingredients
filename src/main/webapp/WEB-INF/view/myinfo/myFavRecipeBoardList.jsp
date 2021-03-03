@@ -105,8 +105,22 @@
 	}
 	
 </script>
+<script>
+	function openNav() {
+		document.getElementById('myinfosidenav').style.width = '250px';
+	}
+	function closeNav() {
+		document.getElementById('myinfosidenav').style.width = '10px';
+	}
+</script>
 </head>
 <body>
+<!-- myinfo 사이드바 호출 -->
+<div class="sidebar">
+	<jsp:include page="../../include/jsp/myinfoSide.jsp" flush="true">
+		<jsp:param name="mno" value="<%=mno%>"/>
+	</jsp:include>
+</div>
 <script>
 	$(document).ready(function(){
 		// 체크박스 전체 선택	
@@ -251,9 +265,9 @@
 				<input type="checkbox" id="checkAll_RecipeBoard">	
 			</td>	
 			<td class="tt" style="width:50%; font-weight: bold">제목 </td>	
-			<td class="tt" style="font-weight: bold">레시피 등록 날짜</td>	
-			<td class="tt" style="font-weight: bold">레시피 조회수</td>	
-			<td class="tt" style="font-weight: bold">레시피 추천수</td>	
+			<td class="tt" style="font-weight: bold">등록일</td>	
+			<td class="tt" style="font-weight: bold">조회</td>	
+			<td class="tt" style="font-weight: bold">추천</td>	
 			<td class="tt" style="font-weight: bold">기타</td>
 		</tr>
 		</thead>
