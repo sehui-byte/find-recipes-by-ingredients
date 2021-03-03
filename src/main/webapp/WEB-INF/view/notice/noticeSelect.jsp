@@ -173,5 +173,6 @@
 		<c:import url="/reply/reply.do">
 		</c:import>
 </div>
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
 </html>

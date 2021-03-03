@@ -684,7 +684,8 @@
 	</form>
 		<c:import url="/reply/rbreply.do">
 		</c:import>
-</div>	
+</div>
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>	
 </body>
 </html>
 

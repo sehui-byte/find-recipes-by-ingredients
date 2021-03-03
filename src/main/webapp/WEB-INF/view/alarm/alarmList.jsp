@@ -138,6 +138,6 @@
 		<jsp:param name="totalCount" value="<%=totalCount%>"/>
 	</jsp:include>
 	</div>
-	
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>	
 </body>
 </html>

@@ -125,5 +125,6 @@ for(int i=0; i<nCnt; i++){
 </tbody>
 </table>
 </form>
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
 </html>

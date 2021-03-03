@@ -89,5 +89,6 @@
 	</div>
 	</form>
 </div>
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
 </html>

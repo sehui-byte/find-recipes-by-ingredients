@@ -175,5 +175,6 @@ body {
 			document.getElementById('myinfosidenav').style.width = '10px';
 		}
 	</script>
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>	
 </body>
 </html>

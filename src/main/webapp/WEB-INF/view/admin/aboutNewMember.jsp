@@ -25,5 +25,6 @@
 		 <p>회원 유입 현황 및 그래프 설명</p>	
 </div>
 </div>
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
 </html>
