@@ -134,6 +134,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/kosmoJns/chef/chefselectall.do">
+              <i class="bi bi-clipboard-check"></i>
+              셰프 관리
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/kosmoJns/reply/replyListAll.do">
               <i class="bi bi-chat-left-text"></i>
               댓글 관리

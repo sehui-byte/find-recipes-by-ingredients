@@ -163,6 +163,7 @@
 	</form>
 	</div>
 		<c:import url="/reply/reply.do">
+			<c:param name="selectMno" value="<%=bvo.getMno()%>"></c:param>
 		</c:import>
 </div>
 <%@ include file="/WEB-INF/include/jsp/footer.jsp"%>

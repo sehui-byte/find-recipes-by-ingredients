@@ -683,6 +683,7 @@
 		</table>
 	</form>
 		<c:import url="/reply/rbreply.do">
+			<c:param name="selectMno" value="<%=rbvo.getMno()%>"></c:param>
 		</c:import>
 </div>
 <%@ include file="/WEB-INF/include/jsp/footer.jsp"%>	
