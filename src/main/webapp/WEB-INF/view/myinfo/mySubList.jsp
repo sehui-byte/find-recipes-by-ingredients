@@ -8,12 +8,50 @@
 <meta charset="UTF-8">
 <title>내 구독 리스트</title>
 <style type="text/css">
-/*google 웹폰트 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
+	/*google 웹폰트 */
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
+	
+	div, h1, h2, h3, h4, h5, h6, p {
+	   font-family: 'Noto Serif KR', serif;
+	}
 
-div, h1, h2, h3, h4, h5, h6, p {
-   font-family: 'Noto Serif KR', serif;
-}
+	.tt{
+		text-align: center;
+	}
+	
+	.section-header {
+		position: relative;
+		margin-bottom: 40px;
+		font-size: 26px;
+		font-weight: 400;
+		color: #333;
+		text-align: Center;
+		line-height: 60px;
+		letter-spacing: 1px;
+	}
+	
+	.section-header:after {
+		content: "";
+		display: block;
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		width: 70px;
+		height: 2px;
+		background: #ff7f00;
+		transform: translate(-50%, 0);
+		transform: translate3d(-50%, 0, 0);
+	}
+	
+	
+	.table.table-hover tbody tr:hover {
+    	background-color: #F9A781; 
+	}
+	
+	.btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;
+	}
 </style>
 <script type="text/javascript">
 
@@ -48,6 +86,8 @@ div, h1, h2, h3, h4, h5, h6, p {
 </script>
 </head>
 <body>
+<div id="wrapper">
+<div class="jumbotron">
 <% request.setCharacterEncoding("UTF-8");%> 
 <%
 	Object obj = request.getAttribute("mySubList");
@@ -56,16 +96,14 @@ div, h1, h2, h3, h4, h5, h6, p {
 	int nCnt = list.size();
 	System.out.println("mysublist.jsp nCnt >>> : " + nCnt);
 %>
+	<div class="section-header">My Subscribe</div>
 	<form name="subscribeList" id="subscribeList">
-	<table border="1">
+	<table class="table table-hover">
 		<thead>
 		<tr>
-			<td colspan="10" align="center"><h2>구독 목록</h2></td>
-		</tr>
-		<tr>
-			<td class="tt">구독번호</td>
-			<td class="tt">셰프이름</td>
-			<td class="tt">등록일</td>
+			<td class="tt" style="font-weight: bold">구독번호</td>
+			<td class="tt" style="font-weight: bold">셰프이름</td>
+			<td class="tt" style="font-weight: bold">등록일</td>
 			<td><td>
 		</tr>
 		</thead>
@@ -76,13 +114,13 @@ div, h1, h2, h3, h4, h5, h6, p {
 	%>
 		<tbody>
 		<tr>
-			<td class="tt"><%= svo.getSno() %> 
+			<td class="tt" style="font-size: 12px"><%= svo.getSno() %> 
 				<input type="hidden" id="sno" name="sno" value="<%= svo.getSno() %>">
 			</td>
 			<td class="tt"><%= svo.getChefnick() %> </td>
 			<td class="tt"><%= svo.getSinsertdate() %> </td>
 			<td>
-				<input type="button" id="subCancel" value="구독 취소">
+				<input type="button" class="btn btn-orange" id="subCancel" value="구독 취소">
 			</td>
 		</tr>
 	<%
@@ -91,7 +129,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 	%>
 		<tbody>
 		<tr>
-			<td colspan="10" align="center">조회된 세프가 존재하지 않습니다.</td>
+			<td colspan="10" align="center">구독한 세프가 존재하지 않습니다.</td>
 		</tr>	
 	<%		
 			
@@ -100,6 +138,8 @@ div, h1, h2, h3, h4, h5, h6, p {
 		</tbody>
 	</table>
 	</form>
+</div>
+</div>
 <%@ include file="/WEB-INF/include/jsp/footer.jsp"%>	
 </body>
 </html>

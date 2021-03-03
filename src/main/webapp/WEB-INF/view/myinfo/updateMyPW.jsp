@@ -8,12 +8,50 @@
 <meta charset="UTF-8">
 <title>임시 비밀번호 발급받기</title>
 <style type="text/css">
-/*google 웹폰트 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
+	/*google 웹폰트 */
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap');
+	
+	div, h1, h2, h3, h4, h5, h6, p {
+	   font-family: 'Noto Serif KR', serif;
+	}
 
-div, h1, h2, h3, h4, h5, h6, p {
-   font-family: 'Noto Serif KR', serif;
-}
+	.tt{
+		text-align: center;
+	}
+	
+	.section-header {
+		position: relative;
+		margin-bottom: 40px;
+		font-size: 26px;
+		font-weight: 400;
+		color: #333;
+		text-align: Center;
+		line-height: 60px;
+		letter-spacing: 1px;
+	}
+	
+	.section-header:after {
+		content: "";
+		display: block;
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		width: 70px;
+		height: 2px;
+		background: #ff7f00;
+		transform: translate(-50%, 0);
+		transform: translate3d(-50%, 0, 0);
+	}
+	
+	
+	.table.table-hover tbody tr:hover {
+    	background-color: #F9A781; 
+	}
+	
+	.btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -92,14 +130,17 @@ div, h1, h2, h3, h4, h5, h6, p {
 </script>
 </head>
 <body>
+<div id="wrapper">
+<div class="jumbotron">
+<div class="section-header">비밀번호 변경하기</div>
 	<form id="myPWUpdateForm">
-		<table border="1" id="myPWUpdateTable" style='text-align:center;'>
+		<table class="table">
 			<tr>
 				<td>
 					<label>기존 비밀번호</label>
 				</td>
 				<td>
-					<input type="password" name="mpw" id="mpw">	
+					<input type="password" class="form-control" name="mpw" id="mpw">	
 				</td>	
 			</tr>	
 			<tr>
@@ -107,7 +148,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 					<label> 변경할 비밀번호 </label>
 				</td>
 				<td>
-					<input type="password" name="nMpw" id="nMpw">
+					<input type="password" class="form-control" name="nMpw" id="nMpw">
 				</td>	
 			</tr>	
 			<tr>
@@ -115,20 +156,22 @@ div, h1, h2, h3, h4, h5, h6, p {
 					<label> 변경할 비밀번호 확인 </label>
 				</td>
 				<td>
-					<input type="password" name="nMpw_r" id="nMpw_r">
+					<input type="password" class="form-control" name="nMpw_r" id="nMpw_r">
 				</td>	
 				<td>
-					<input type="button" name="checkpw" id="checkpw" value="비밀번호 체크">
+					<input type="button" class="btn btn-orange" name="checkpw" id="checkpw" value="비밀번호 체크">
 				</td>
 			</tr>	
 			<tr>
 				<td colspan="2">
-					<input type="button" name="changePW" id="changePW" value="비밀번호 변경하기" disabled>
-					<input type="button" name="back" id="back" value="뒤로">
+					<input type="button" class="btn btn-orange" name="changePW" id="changePW" value="비밀번호 변경하기" disabled>
+					<input type="button" class="btn btn-orange" name="back" id="back" value="뒤로">
 				</td>	
 			</tr>
 		</table>
 	</form>
+</div>
+</div>	
 <%@ include file="/WEB-INF/include/jsp/footer.jsp"%>	
 </body>
 </html>

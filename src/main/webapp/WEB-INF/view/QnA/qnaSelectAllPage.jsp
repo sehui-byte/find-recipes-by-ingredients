@@ -129,8 +129,7 @@
 			for(int i=0; i<nCnt; i++){
 				BoardVO bvo = list.get(i);
 	%>
-	<tr>
-		<tr onclick="location.href='/kosmoJns/qnaSelect.do?bno=<%= bvo.getBno() %>'">	
+	<tr onclick="location.href='/kosmoJns/qnaSelect.do?bno=<%= bvo.getBno() %>'">	
 		<td class="tt"  style="font-size: 12px"><%= bvo.getBno() %> </td>
 		<td class="left"><span style="font-weight: bold;"><%= bvo.getBtitle() %></span></td>
 		<td class="tt"><%= bvo.getMnick() %> </td>

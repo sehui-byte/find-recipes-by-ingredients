@@ -168,52 +168,38 @@
 	<div class="jumbotron">
   	<div class="section-header">Reply List</div>
   	<form name="replyList" id="replyList">
-	<!-- =================  검색창 그리드 설정 ================= -->
-		<div class="container-fluid">
-			<div class="row">
-			  <div class="col-6 col-md-4"></div>
-			  <div class="col-6 col-md-4">
-			  	<div class="row row-cols-2">
-			  		<div class="col-4">
-			  			<select class="form-select" id="keyfilter" name="keyfilter">
-							<option value="key1">작성자</option>
-							<option value="key2">글내용</option>
-							<option value="key3">글번호</option>
-						</select>
-			  		</div>
-				    <div class="col-8">
-				    	<div class="input-group">
-				    		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어 입력">
-					    	<span class="input-group-btn">
-					    		<button class="btn btn-orange" type="button" id="searchBtn">검색</button>
-					    	</span>			    			    	
-				    	</div>
-				    </div>
-			  	</div>
-			  </div>
-			  <div class="col-6 col-md-4"></div>
-			</div>
-			<div class="row">
-			  <div class="col-6 col-md-4"></div>
-			  <div class="col-6 col-md-4">
-			  	<div class="row row-cols-4">
-			  		<div class="col-4">
-			  			<input type="text" class="form-control" id="startdate" name="startdate" size="12" placeholder="시작일">
-			  		</div>
-			  		<div class="col-1">
-			  			<p>~</p>
-			  		</div>
-			  		<div class="col-4">
-			  			<input type="text" class="form-control" id="enddate" name="enddate" size="12" placeholder="종료일">
-			  		</div>
-			  		<div class="col-3">
-			  		</div>
-			  	</div>
-			  </div>
-			  <div class="col-6 col-md-4"></div>
-			</div>	
+  	<!-- 검색창 그리드 시작 -->
+	<div class="container-fluid">
+		<div class="row">
+		  <div class="col-2">
+		  	<select class="form-select" id="keyfilter" name="keyfilter">
+				<option value="key1">작성자</option>
+				<option value="key2">글내용</option>
+				<option value="key3">글번호</option>
+			</select>
+  		  </div>
+	      <div class="col-6">
+	    	<div class="input-group">
+	    		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어 입력" onkeydown="enterKey()">
+		    	<span class="input-group-btn">
+		    		<button class="btn btn-orange" type="button" id="searchBtn">검색</button>
+		    	</span>  			    	
+	    	</div>
+		  </div>
 		</div>
-		<!-- =================  검색창 그리드 설정 ================= -->
+		<div class="row">
+		  <div class="col-2">
+		  	<input type="text" class="form-control" id="startdate" name="startdate" size="12" placeholder="시작일">
+		  </div>
+		  <div class="col-1">
+		  	<p>~</p>
+		  </div>
+		  <div class="col-2">
+		  	<input type="text" class="form-control" id="enddate" name="enddate" size="12" placeholder="종료일">
+		  </div>	  
+		</div>	
+	</div>
+	<!-- 검색창 그리드 종료 -->
 		<%
 			Object obj = request.getAttribute("listR");
 			List<ReplyVO> list = (List)obj;
@@ -221,9 +207,6 @@
 			int nCnt = list.size();
 			System.out.println("replyListAll.jsp nCnt >>> : " + nCnt);
 		%>
-		<div align="right">
-			<input class="btn btn-orange" type="button" value="삭제" id="D">
-		</div>
 		<table class="table table-hover">
 			<thead>
 			<tr>
@@ -286,6 +269,10 @@
 		%>
 		</tbody>
 		</table>
+		<div align="left">
+			<input class="btn btn-orange" type="button" value="삭제" id="D">
+		</div>
+		<br>
 		<div class="paging">
 			<jsp:include page="../../include/jsp/paging.jsp" flush="true">
 			<jsp:param name="url" value="replyListAll.do"/>
