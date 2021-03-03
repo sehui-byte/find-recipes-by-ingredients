@@ -60,6 +60,7 @@ public class NoticeController {
 
 		for(int i = 0; i<nList.size(); i++) {
 			Map<String, String> map = new HashMap<String,String>();
+			map.put("nbno", nList.get(i).getBno());
 			map.put("ntitle", nList.get(i).getBtitle());
 			map.put("ncontent", nList.get(i).getBcontent());
 			map.put("ninsertdate", nList.get(i).getBinsertdate());
