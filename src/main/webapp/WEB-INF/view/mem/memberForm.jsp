@@ -505,8 +505,6 @@ i {
 	</script>
 	<script
 		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
-
-</body>
-</html>
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
 </html>

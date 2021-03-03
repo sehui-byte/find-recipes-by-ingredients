@@ -231,5 +231,6 @@ tbody td {
 	</div>
 </div>
 </div>
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
 </html>

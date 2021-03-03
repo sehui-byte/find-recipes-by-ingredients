@@ -227,5 +227,6 @@ div, h1, h2, h3, h4, h5, h6, p {
 	</table>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 </form>
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
 </html>

@@ -251,5 +251,6 @@ div, h1, h2, h3, h4, h5, h6, p {
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 	<input type="hidden" id="recipeType" name="recipeType" value="API">
 </form>
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
 </html>

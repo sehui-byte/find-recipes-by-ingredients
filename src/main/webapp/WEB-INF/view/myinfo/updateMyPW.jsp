@@ -129,5 +129,6 @@ div, h1, h2, h3, h4, h5, h6, p {
 			</tr>
 		</table>
 	</form>
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>	
 </body>
 </html>
