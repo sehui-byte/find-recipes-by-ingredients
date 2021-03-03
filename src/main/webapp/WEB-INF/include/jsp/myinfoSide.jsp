@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+    pageEncoding="UTF-8"%>     
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +53,6 @@
 		font-size: 25px;
 		cursor:pointer;
 		transition:0.5s ease-in-out;
-		background-color: #F9A781;
 	}
 	.openmenu > i {
 		font-size: 20px;
@@ -101,48 +100,60 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+	String mno = "";
+	mno = request.getParameter("mno");
+	System.out.println("mno >>> : " + mno);
+
+%>
 <div>
 <!-- side bar  -->
-    <span class="openmenu" onclick='openNav()'><i class="fa fa-angle-double-left fa-5" aria-hidden="true"></i> 관리 메뉴</span>
-	<div id="adminsidenav" class="sidenav" >
+    <span class="openmenu" onclick='openNav()'><i class="fa fa-angle-double-left fa-5" aria-hidden="true"></i> 메뉴 Open</span>
+	<div id="myinfosidenav" class="sidenav" >
 		<ul class="nav flex-column">
 		  <li class="nav-item">
             <a href="#" class="closebtn" onclick='closeNav()'><i class="bi bi-x-square"></i></a>
           </li>	
           <li class="nav-item">
-            <a class="nav-link" href="/kosmoJns/admin/main">
+            <a class="nav-link" href="/kosmoJns/myinfo?mno=<%= mno %>">
               <i class="bi bi-house-door-fill"></i>
               Main
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/kosmoJns/noticeForm.do">
-              <i class="bi bi-pencil-square"></i>
-              공지 등록
+            <a class="nav-link" href="/kosmoJns/myinfo/updateMyPW">
+              <i class="bi bi-arrow-repeat"></i>
+              비밀번호 수정
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/kosmoJns/aboutNewMember.do">
-              <i class="bi bi-file-bar-graph"></i>
-              가입자 현황
+            <a class="nav-link" href="/kosmoJns/myinfo/myRecipeListPage?mno=<%= mno %>">
+              <i class="bi bi-back"></i>
+              내가 쓴 레시피 조회
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/kosmoJns/memberSelectAll.do">
-              <i class="bi bi-collection"></i>
-              회원 관리
+            <a class="nav-link" href="/kosmoJns/myinfo/mySubList?mno=<%= mno %>">
+              <i class="bi bi-heart-fill"></i>
+              내가 구독한 셰프 조회
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/kosmoJns/chef/chefselectall.do">
-              <i class="bi bi-clipboard-check"></i>
-              셰프 관리
+            <a class="nav-link" href="/kosmoJns/myinfo/myQnAList?mno=<%= mno %>">
+              <i class="bi bi-question-circle"></i>
+              내 Q&A
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/kosmoJns/reply/replyListAll.do">
-              <i class="bi bi-chat-left-text"></i>
-              댓글 관리
+            <a class="nav-link" href="/kosmoJns/myinfo/myFavRecipeList?mno=<%= mno %>">
+              <i class="bi bi-cursor"></i>
+              내 즐겨찾기(레시피)
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/kosmoJns/myinfo/myFavReciepBoardList?mno=<%=mno%>">
+              <i class="bi bi-cursor-fill"></i>
+              내 즐겨찾기(유저)
             </a>
           </li>
         </ul>		

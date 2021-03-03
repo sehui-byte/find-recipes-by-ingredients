@@ -181,8 +181,22 @@
 				}
 			}
 </script>
+<script>
+	function openNav() {
+		document.getElementById('myinfosidenav').style.width = '250px';
+	}
+	function closeNav() {
+		document.getElementById('myinfosidenav').style.width = '10px';
+	}
+</script>
 </head>
 <body>
+<!-- myinfo 사이드바 호출 -->
+<div class="sidebar">
+	<jsp:include page="../../include/jsp/myinfoSide.jsp" flush="true">
+		<jsp:param name="mno" value="<%=mno%>"/>
+	</jsp:include>
+</div>
 <div id="wrapper">
 <div class="jumbotron">
 <div class="section-header">내 문의 내역</div>
