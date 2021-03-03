@@ -61,8 +61,8 @@
 						,BCONTENT                 
 						,MNICK                    
 						,BFILE                    
-						,BINSERTDATE              
-						,BUPDATEDATE              
+						,TO_CHAR(BINSERTDATE, 'YYYY-MM-DD') AS BINSERTDATE              
+						,TO_CHAR(BUPDATEDATE, 'YYYY-MM-DD') AS BUPDATEDATE              
 						,BVIEWS                   
 						,BDELETEYN                
 						,BHITS                    
@@ -392,8 +392,8 @@
 					A.MANUAL_IMG19,
 					A.MANUAL20,
 					A.MANUAL_IMG20,
-					A.RB_INSERTDATE,
-					A.RB_UPDATEDATE,
+					TO_CHAR(A.RB_INSERTDATE, 'YYYY-MM-DD') AS RB_INSERTDATE,
+					TO_CHAR(A.RB_UPDATEDATE, 'YYYY-MM-DD') AS RB_UPDATEDATE,
 					A.RB_DELETEYN,
 					CEIL(ROW_NUMBER() OVER(ORDER BY A.RBNO DESC) / 10) PAGENO,
 					COUNT(A.RBNO) OVER() AS TOTALCOUNT
@@ -421,16 +421,44 @@
 		ORDER BY 1
 	
 	</select>	
-	
-	<select id="myRecipeListHitsCount" parameterType="fvo" resultType="java.lang.Integer">
 
-	SELECT
-		COUNT(*)
-	FROM
-		FAVORITES
-	WHERE
-		RBNO = #{rbno, jdbcType=VARCHAR} 	
+	<!-- 추천수 조회 -->	
+	<select id="recipeHitsCount" parameterType="fvo" resultType="java.lang.Integer">
+
+		SELECT
+			COUNT(*)
+		FROM
+			FAVORITES
+		<if test="rbno != null and rbno != ''">
+		WHERE
+			RBNO = #{rbno, jdbcType=VARCHAR} 	
+		</if>
+		<if test="rcp_seq != null and rcp_seq != ''">
+		WHERE
+			RCP_SEQ = #{rcp_seq, jdbcType=VARCHAR}	
+		</if>
+
+	</select>
+
+	<!-- 댓글 조회 레시피 -->	
+	<select id="myRecipeReplyCount" parameterType="fvo" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*)
+		FROM 
+			REPLY A
+		WHERE
+			A.RBNO = #{rbno, jdbcType=VARCHAR}
+	
 	</select>
 	
+	<!--  댓글 조회 Q&A -->
+	<select id="myQnAReplyCount" parameterType="rvo" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			REPLY A
+		WHERE
+			A.BNO = #{bno, jdbcType=VARCHAR}	
+	</select>
 	
 </mapper>

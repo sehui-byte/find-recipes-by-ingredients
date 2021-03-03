@@ -75,10 +75,24 @@ public class RecipeVO
 	private String enddate;
 	
 	
+	// 추천 **************************************************
+	private String rcpHits;
+	
+	
+	public String getRcpHits() {
+		return rcpHits;
+	}
+
+
+	public void setRcpHits(String rcpHits) {
+		this.rcpHits = rcpHits;
+	}
+
+
 	public int getPageSize() {
 		return pageSize;
 	}
-
+	//******************************************************
 
 	public int getGroupSize() {
 		return groupSize;
@@ -172,7 +186,7 @@ public class RecipeVO
 			String manual_img17, String manual18, String manual_img18, String manual19, String manual_img19,
 			String manual20, String manual_img20, String rcp_insertdate, String rcp_updatedate, String rcp_deleteyn,
 			int pageSize, int groupSize, int curPage, int totalCount, String keyfilter, String keyword,
-			String startdate, String enddate) {
+			String startdate, String enddate, String rcpHits) {
 		this.rcp_seq = rcp_seq;
 		this.rcp_nm = rcp_nm;
 		this.rcp_way2 = rcp_way2;
@@ -238,6 +252,7 @@ public class RecipeVO
 		this.keyword = keyword;
 		this.startdate = startdate;
 		this.enddate = enddate;
+		this.rcpHits = rcpHits;
 	}
 
 

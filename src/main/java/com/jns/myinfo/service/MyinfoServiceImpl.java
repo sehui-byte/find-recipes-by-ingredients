@@ -14,6 +14,7 @@ import com.jns.member.vo.MemberVO;
 import com.jns.myinfo.dao.MyinfoDAO;
 import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
+import com.jns.reply.vo.ReplyVO;
 
 @Service
 @Transactional
@@ -40,8 +41,28 @@ public class MyinfoServiceImpl implements MyinfoService {
 	@Override
 	public List<BoardVO> myQnAList(BoardVO bvo) {
 		logger.info("myQnAList() 진입 >>> ");
+		List<BoardVO> list = myinfoDAO.myQnAList(bvo);
 
-		return myinfoDAO.myQnAList(bvo);
+		int nCnt = list.size();
+
+		if (nCnt != 0) {
+			for (int i = 0; i < nCnt; i++) {
+				ReplyVO rvo = null;
+				rvo = new ReplyVO();
+				rvo.setBno(list.get(i).getBno());
+
+				// 답변 개수 체크 로직
+				int replyCount = myinfoDAO.myQnAReplyCount(rvo);
+
+				String sReplyCount = String.valueOf(replyCount);
+
+				list.get(i).setBhits(sReplyCount);
+
+			}
+
+		}
+
+		return list;
 	}
 
 	@Override
@@ -84,14 +105,59 @@ public class MyinfoServiceImpl implements MyinfoService {
 	public List<RecipeVO> myFavRecipeList(MemberVO mvo) {
 		logger.info("myFavRecipeList() 진입 >>> ");
 
-		return myinfoDAO.myFavRecipeList(mvo);
+		List<RecipeVO> list = myinfoDAO.myFavRecipeList(mvo);
+
+		int nCnt = list.size();
+
+		if (nCnt != 0) {
+			for (int i = 0; i < nCnt; i++) {
+
+				FavoritesVO fvo = null;
+				fvo = new FavoritesVO();
+
+				fvo.setRcp_seq(list.get(i).getRcp_seq());
+
+				// 추천수 확인하기
+				int hitsCount = myinfoDAO.recipeHitsCount(fvo);
+
+				logger.info("추천수는 >>> " + hitsCount);
+
+				String sHitsCount = String.valueOf(hitsCount);
+
+				list.get(i).setRcpHits(sHitsCount);
+			}
+		}
+		return list;
 	}
 
 	@Override
 	public List<RecipeBoardVO> myFavRecipeBoardList(MemberVO mvo) {
 		logger.info("myFavRecipeList2() 진입 >>> ");
 
-		return myinfoDAO.myFavRecipeBoardList(mvo);
+		List<RecipeBoardVO> list = myinfoDAO.myFavRecipeBoardList(mvo);
+
+		int nCnt = list.size();
+
+		if (nCnt != 0) {
+			for (int i = 0; i < nCnt; i++) {
+
+				FavoritesVO fvo = null;
+				fvo = new FavoritesVO();
+
+				fvo.setRbno(list.get(i).getRbno());
+
+				// 추천수 확인하기
+				int hitsCount = myinfoDAO.recipeHitsCount(fvo);
+
+				logger.info("추천수는 >>> " + hitsCount);
+
+				String sHitsCount = String.valueOf(hitsCount);
+
+				list.get(i).setHits(sHitsCount);
+			}
+		}
+
+		return list;
 	}
 
 	@Override
@@ -140,18 +206,30 @@ public class MyinfoServiceImpl implements MyinfoService {
 		int nCnt = list.size();
 
 		for (int i = 0; i < nCnt; i++) {
+			// 추천 삽입 로직
 			FavoritesVO fvo = null;
 			fvo = new FavoritesVO();
 			// 게시판 번호 추출
-			fvo.setRbno(list.get(0).getRbno());
+			fvo.setRbno(list.get(i).getRbno());
 			// 추천 조회
-			int hitCount = myinfoDAO.myRecipeListHitsCount(fvo);
+			int hitCount = myinfoDAO.recipeHitsCount(fvo);
+
+			// 댓글 삽입 로직
+			ReplyVO rvo = null;
+			rvo = new ReplyVO();
+
+			rvo.setRbno(list.get(i).getRbno());
+
+			int replyCount = myinfoDAO.myRecipeReplyCount(rvo);
 
 			logger.info("추천 수는 >>> " + hitCount);
+			logger.info("댓글 수는 >>> " + replyCount);
 
 			String sHitCount = String.valueOf(hitCount);
+			String sReplyCount = String.valueOf(replyCount);
 
-			list.get(0).setHits(sHitCount);
+			list.get(i).setHits(sHitCount);
+			list.get(i).setRb_reply(sReplyCount);
 		}
 		return list;
 	}

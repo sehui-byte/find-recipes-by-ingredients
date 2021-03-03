@@ -279,7 +279,7 @@
 				<a href="/kosmoJns/rbdetail?rbno=<%= rbvo.getRbno()%>"><%= rbvo.getRcp_nm() %></a>
 			</td>	
 			<!-- 댓글을 가져오려면 어떻게 해야 하지?? -->
-			<td class="tt">댓글</td>	
+			<td class="tt"><%= rbvo.getRb_reply() %></td>	
 			<td class="tt"><%= rbvo.getViews() %></td>	
 			<td class="tt"><%= rbvo.getHits() %></td>	
 			<td class="tt" style="font-size: 12px"><%= rbvo.getRb_updatedate() %></td>	
