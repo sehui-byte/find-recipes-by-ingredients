@@ -32,7 +32,7 @@ public class AlarmController {
 
 
 	@RequestMapping("alarmList.do")
-	public String alarmList(Model model, HttpServletRequest request, AlarmVO _avo) {
+	public String alarmList(Model model) {
 		AlarmVO avo = new AlarmVO();
 		//로그인 사용자 mno 가져오기
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -45,26 +45,7 @@ public class AlarmController {
 		model.addAttribute("list", list);
 		model.addAttribute("size", size);
 		System.out.println("size >> " + size);
-		
-		// 알람 list 페이징
-		int totalCount = 0;
-		String Page = request.getParameter("curPage");
-		String pageCtrl = request.getParameter("pageCtrl");
-		
-		Paging.setPage(_avo, Page, pageCtrl);
-		
-		List<AlarmVO> listPage = service.AlarmPage(_avo);
-		logger.info("alarm page >>> AlarmPage listPage.size() >>> : " + listPage.size());
-		
-		if(listPage.size() > 0) {
-			totalCount = listPage.get(0).getTotalCount();
-			avo.setTotalCount(totalCount);
-		}
-		
-		model.addAttribute("listPage", listPage);
-		model.addAttribute("p_avo", _avo);	
-		
-		
+	
 		return "alarm/alarmList";
 	}
 	
