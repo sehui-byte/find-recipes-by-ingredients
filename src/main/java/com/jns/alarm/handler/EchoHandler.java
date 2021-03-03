@@ -61,14 +61,14 @@ public class EchoHandler extends TextWebSocketHandler {
 	//클라이언트가 서버로 연결시
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception{
-		String userId = getMid(session);//세션으로 유저 아이디 얻어옴
-		if(userId != null) {
-			logger.info(userId + "서버 연결됨.");
-			users.put(userId,session); //로그인중인 개별 유저 저장
-			WebSocketSession user = users.get(userId);
+		String userMno = getMno(session);//세션으로 유저 mno 얻어옴
+		if(userMno != null) {
+			logger.info(userMno + "서버 연결됨.");
+			users.put(userMno,session); //로그인중인 개별 유저 저장
+			WebSocketSession user = users.get(userMno);
 			
 			AlarmVO avo = new AlarmVO();
-			avo.setReceiver(userId);
+			avo.setReceiver(userMno);
 			if(adao.countAlarm(avo) == null) {
 				logger.info("쌓인 알람 없음!");
 				count = 0; 
@@ -76,27 +76,27 @@ public class EchoHandler extends TextWebSocketHandler {
 			else {//쌓인 알람이 존재할 경우
 				count = Integer.valueOf(adao.countAlarm(avo));
 				logger.info("쌓인 알람수 >> " + count);
-				user.sendMessage(new TextMessage("null,"+userId +",count"+count));//쌓인 알림 개수 보내줌
+				user.sendMessage(new TextMessage("null,"+userMno +",count"+count));//쌓인 알림 개수 보내줌
 				
 			}
 		}
 	}
 
-	//세션을 통해 로그인한 유저의 id 얻는 함수
-	private String getMid(WebSocketSession session) {
+	//세션을 통해 로그인한 유저의 mno 얻는 함수
+	private String getMno(WebSocketSession session) {
 		Map<String, Object> httpSession = session.getAttributes();
-		String mid = (String) httpSession.get("mid");
-		logger.info("로그인한 유저 mid >> " + mid);
-		return mid == null?null:mid;
+		String mno = (String) httpSession.get("mno");
+		logger.info("로그인한 유저 mno >> " + mno);
+		return mno == null?null:mno;
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
 		//클라이언트와 연결이 해제되면 제거한다
 		logger.info("유저 세션 제거");
-		String mid = getMid(session);
-		if(mid != null) {
-			users.remove(mid);
+		String mno = getMno(session);
+		if(mno != null) {
+			users.remove(mno);
 		}
 	}
 
@@ -104,14 +104,14 @@ public class EchoHandler extends TextWebSocketHandler {
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception{
 		//메세지 전송 중 에러가 발생하면 실행되는 함수
 		logger.info("에러발생! 유저 세션 제거");
-		String mid = getMid(session);
-		if(mid != null) {
-			users.remove(mid);
+		String mno = getMno(session);
+		if(mno != null) {
+			users.remove(mno);
 		}
 	}
 
 	//클라이언트가 웹소켓 서버로 메세지를 전송했을 때 실행되는 메소드
-	//프로토콜 : 보낸사람id , 받는사람id , 유형(댓글,구독,개수count)
+	//프로토콜 : 보낸사람mno , 받는사람mno , 유형(댓글,구독,개수count)
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message)throws Exception{
 		String msg = message.getPayload();

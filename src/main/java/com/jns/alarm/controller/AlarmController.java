@@ -34,12 +34,12 @@ public class AlarmController {
 	@RequestMapping("alarmList.do")
 	public String alarmList(Model model, HttpServletRequest request, AlarmVO _avo) {
 		AlarmVO avo = new AlarmVO();
-		//로그인 사용자 mid 가져오기
+		//로그인 사용자 mno 가져오기
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Object principal = auth.getPrincipal();
-		String mid = ((MemberVO)principal).getMid();
+		String mno = ((MemberVO)principal).getMno();
 		
-		avo.setReceiver(mid);
+		avo.setReceiver(mno);
 		List<AlarmVO> list = service.selectAlarm(avo);
 		int size = list.size();
 		model.addAttribute("list", list);
