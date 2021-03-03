@@ -105,11 +105,11 @@
 			//productId=productImage&&productLink;
 			
 			// 2. 쿠키값 배열로 저장 : 최대 4개
-			var cookieArr = setCookieArray(title);
+			var arr = setCookieArray(title, cookievalue);
 			// 최근 본 상품 쿠키 배열 return
 			
 			// 3. 쿠키 배열로 데이터 가져오기
-			getCookieArray(cookieArr);
+			getCookieArray(arr);
 			
 			return true;
 		}
@@ -138,13 +138,15 @@
 		function getRecentCookie(cookieName) {
 			cookieName = cookieName + '=';
 			var cookieData = document.cookie;
-			var start = cookieData.indexOf(cookieName);
+			//console.log(" ##cookieData## " + cookieData);
+			var start = cookieData.indexOf('=');
 			var cookieName = '';
 			if(start != -1){
 				start += cookieName.length;
 				var end = cookieData.indexOf(';', start);
 				if(end == -1)end = cookieData.length;
-				cookieValue = cookieData.substring(start, end);
+				cookieValue = cookieData.substring(start+1, end);
+				//console.log(" ##cookieValue## " + cookieValue);
 			}
 			return unescape(cookieValue);
 		}
@@ -156,13 +158,13 @@
 		*/
 		var cookieArr_name = [];
 		var cookieArr_value = [];
-		function setCookieArray(cookieName){ // title1
+		function setCookieArray(cookieName, cookievalue){ // title1
 			
 			// 배열 맨 앞에 요소 추가, 배열의 크기 리턴
 	        cookieArr_name.unshift(cookieName);		// [title4, ..., title1]
-		 	cookieArr_value.unshift(getRecentCookie(cookieName));	// [productImage4&&productLink4, ...]
-	        //console.log(">>> cookieArr_name 쿠키명 배열 >>> " + cookieArr_name);
-	        //console.log(">>> cookieArr_value 쿠키값 배열 >>> " + cookieArr_value);
+		 	cookieArr_value.unshift(cookievalue);	// [productImage4&&productLink4, ...]
+	        console.log(">>> cookieArr_name 쿠키명 배열 >>> " + cookieArr_name);
+	        console.log(">>> cookieArr_value 쿠키값 배열 >>> " + cookieArr_value);
 		 	
 	        
 		 	// 중복된 쿠키 제거 (뒷쪽에 있는 쿠키 삭제됨)
@@ -183,13 +185,13 @@
 	        	recentArr_value = recentArr_value.slice(undefined, 4);
 	        }
 	        
-	        //console.log("최근본상품 쿠키명 배열 : " + recentArr_name);	        
-	        //console.log("최근본상품 쿠키값 배열 : " + recentArr_value);	
+	        console.log(">> 최근본상품 쿠키명 배열 : " + recentArr_name);	        
+	        console.log(">> 최근본상품 쿠키값 배열 : " + recentArr_value);	
 	        
 	        var cookieArr= new Array(recentArr_name, recentArr_value);
-	        //console.log("cookieArr[0] >>>> " + cookieArr[0])
-	        //console.log("cookieArr[1] >>>> " + cookieArr[1])
-	        //console.log("cookieArr >>>> " + cookieArr)
+	        console.log("## cookieArr[0] >>>> " + cookieArr[0])
+	        console.log("## cookieArr[1] >>>> " + cookieArr[1])
+	        console.log("## cookieArr >>>> " + cookieArr)
  	        
 	        return cookieArr;
 	        // [{title4, ..., title1},{productImage4&&productLink4, ..., productImage1&&productLink1}]
@@ -225,13 +227,14 @@
 					var info = product.split("&&"); // [productImage, productLink]
 					var image = info[0]	// productImage4
 					var link = info[1]	// productLink4
-					console.log("product >> " + product);
-					console.log("info >> " + info);
+					//console.log("product >> " + product);
+					//console.log("info >> " + info);
 					console.log("image >> " + image);
 					console.log("link >> " + link);
 					
 					var recentProduct = '<a href="'+link+'" target="_blank"><img src="'+image+'" class="rounded_2" title="'+title+'" style="width: 150px; height: 150px;"></a>';
-						        	
+					console.log(">>> recentProduct >>> " + recentProduct);
+					
 		        	var id = "product"+(i+1);
 		            var a = document.getElementById(id);
 		            if (a != null){
