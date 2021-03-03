@@ -86,8 +86,9 @@ public class ProductController {
 				pvo.setTotalCount(totalCnt);				// vo에 담기
 			}
 
-		model.addAttribute("listPage", listPage);
-		model.addAttribute("p_pvo", pvo);
+		model.addAttribute("list", listPage);
+		model.addAttribute("size", listPage.size());
+		//model.addAttribute("p_pvo", pvo);
 
 		
 		return "product/likeProduct";

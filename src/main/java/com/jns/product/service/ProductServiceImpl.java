@@ -119,16 +119,17 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
-	//관심상품 전체조회
-	@Override
-	public List<ProductVO> likeProductSelectAll(ProductVO pvo) {
-		pvo.setMno(getLoginMno(pvo));
-
-		List<ProductVO> result = pdao.LikeProductSelectAll(pvo);
-		logger.info("관심상품 개수 >> " + result.size());
-		
-		return result;
-	}
+	/*
+	 * //관심상품 전체조회
+	 * 
+	 * @Override public List<ProductVO> likeProductSelectAll(ProductVO pvo) {
+	 * pvo.setMno(getLoginMno(pvo));
+	 * 
+	 * List<ProductVO> result = pdao.LikeProductSelectAll(pvo);
+	 * logger.info("관심상품 개수 >> " + result.size());
+	 * 
+	 * return result; }
+	 */
 
 	//관심상품 등록
 	@Override

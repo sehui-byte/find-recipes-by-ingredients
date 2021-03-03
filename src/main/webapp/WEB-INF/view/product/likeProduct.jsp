@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"  %>
 
 <!DOCTYPE html>
 <html>
@@ -51,7 +52,7 @@
 		
 		<h5>
 			총 관심상품 :
-			<c:out value="${size}" />
+		${size}
 			개
 		</h5>
 
