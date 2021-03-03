@@ -1,5 +1,7 @@
 package com.jns.flask.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jns.common.FlaskUtil;
 import com.jns.flask.service.FlaskService;
+import com.jns.flask.vo.HitsVO;
 import com.jns.flask.vo.LikeProductInfoVO;
 import com.jns.flask.vo.NutrientVO;
 import com.jns.flask.vo.SignupIncVO;
@@ -116,4 +119,29 @@ public class FlaskController
 		
 		return "redirect:" + flaskUrl;
 	}
+	
+	// 월별 내 레시피 추천수 그래프 코드 
+	@RequestMapping(value="sendHitsInc", method = RequestMethod.GET)
+	public String sendHitsInc(HitsVO hvo, RedirectAttributes redirectAttributes) {
+		
+		List<HitsVO> voList = FlaskUtil.divHvoYYYYMM(hvo);
+		
+		for(int i=0; i<voList.size(); i++)
+		{
+			voList.set(i, flaskService.getHitsInc(voList.get(i)));
+		}
+		
+		String jsonStr = FlaskUtil.getHitsInc(voList).toJSONString();
+		logger.info("jsonStr >>> : " + jsonStr);
+		
+		redirectAttributes.addAttribute("hitsInc", jsonStr);
+		redirectAttributes.addAttribute("mno", hvo.getMno());
+
+		String flaskUrl = FlaskUtil.FLASK_SERVER_URL+"visualization"; 
+		logger.info("flask로 데이터 전송 >>> "+ flaskUrl);
+		
+		return "redirect:" + flaskUrl;
+	}
+	
+	
 }

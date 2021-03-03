@@ -25,38 +25,24 @@ public class ChefBoardServiceImpl implements ChefBoardService {
 	}
 
 	@Override
-	public List<ChefBoardVO> chefBoardSelectAll(ChefBoardVO cbvo) {
-		// TODO Auto-generated method stub
-		
-		List<ChefBoardVO> list = chefBoardDAO.chefBoardSelectAll(cbvo);
-		
-		int nCnt = list.size();
-
-		if(nCnt > 0 ) {
-			for (int i = 0 ; i < nCnt; i++) {
-				FavoritesVO fvo = null;
-				fvo = new FavoritesVO();
-				// 게시판 번호 추출
-				fvo.setRbno(list.get(i).getRbno());
-				
-				// 즐겨찾기 수 조회
-				int hitCount = chefBoardDAO.chefBoardHitsCount(fvo);
-				
-				logger.info("즐겨찾기 수는 >>> "  + hitCount);
-				
-				list.get(i).setHits(hitCount);
-				
-			}
-			
-		}
-		//return chefBoardDAO.chefBoardSelectAll(cbvo);
-		return list;
-	}
-
-	@Override
 	public List<ChefBoardVO> chefBoardSelect(ChefBoardVO cbvo) {
 		// TODO Auto-generated method stub
-		return chefBoardDAO.chefBoardSelect(cbvo);
+		
+		List<ChefBoardVO> list = chefBoardDAO.chefBoardSelect(cbvo);
+
+		FavoritesVO fvo = null;
+		fvo = new FavoritesVO();
+		// 게시판 번호 추출
+		fvo.setRbno(list.get(0).getRbno());
+		
+		// 추천 조회
+		int hitCount = chefBoardDAO.chefBoardHitsCount(fvo);
+		
+		logger.info("추천 수는 >>> "  + hitCount);
+		
+		list.get(0).setHits(hitCount);
+		
+		return list;
 	}
 
 	@Override
@@ -91,8 +77,27 @@ public class ChefBoardServiceImpl implements ChefBoardService {
 
 	@Override
 	public List<ChefBoardVO> chefBoardSelectAllPage(ChefBoardVO cbvo) {
-		// TODO Auto-generated method stub
-		return chefBoardDAO.chefBoardSelectAllPage(cbvo);
+		List<ChefBoardVO> list = chefBoardDAO.chefBoardSelectAllPage(cbvo);
+
+		int nCnt = list.size();
+
+		if(nCnt > 0 ) {
+			for (int i = 0 ; i < nCnt; i++) {
+				FavoritesVO fvo = null;
+				fvo = new FavoritesVO();
+				// 게시판 번호 추출
+				fvo.setRbno(list.get(i).getRbno());
+				
+				// 추천수 조회
+				int hitCount = chefBoardDAO.chefBoardHitsCount(fvo);
+				
+				logger.info("추천 수는 >>> "  + hitCount);
+				
+				list.get(i).setHits(hitCount);
+				
+			}
+		}
+		return list;
 	}
 	
 	

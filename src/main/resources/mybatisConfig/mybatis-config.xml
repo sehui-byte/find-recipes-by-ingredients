@@ -18,10 +18,13 @@
  		<typeAlias type="com.jns.chef.vo.ChefVO" alias="cvo"/>
  		<typeAlias type="com.jns.favorites.vo.FavoritesVO" alias="fvo"/>
  		<typeAlias type="com.jns.subscribe.vo.SubscribeVO" alias="svo"/>
+
  		<typeAlias type="com.jns.flask.vo.NutrientVO" alias="nuvo"/>
  		<typeAlias type="com.jns.flask.vo.SignupIncVO" alias="suvo"/>
  		<typeAlias type="com.jns.flask.vo.SubscribeIncVO" alias="ssvo"/>
  		<typeAlias type="com.jns.flask.vo.LikeProductInfoVO" alias="lpvo"/>
+ 		<typeAlias type="com.jns.flask.vo.HitsVO" alias="hvo"/>
+
  		<typeAlias type="com.jns.alarm.vo.AlarmVO" alias="avo"/>
 	</typeAliases>
 </configuration>

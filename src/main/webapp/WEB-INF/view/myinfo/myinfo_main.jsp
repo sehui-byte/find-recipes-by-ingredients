@@ -122,15 +122,15 @@ body {
 			}
 			if (mlevel == 'C'){
 				location.href="sendSubscribeInc?start_yyyymm=202004&end_yyyymm=202104&mno=<%=mno%>";
-		}
-	})
+			}
+		})
 </script>
 </head>
 <body>
 
 	<h3 align="center">마이페이지</h3>
 
-	<!-- 셰프인 경우에 구독자 증가 추이를 그린 그래프를 삽입 -->	
+	<!-- 셰프인 경우에 구독자 증가 추이를 그린 그래프를 삽입 // 아니면 셰프로 등급 올리기 -->
 <% 
 	if(mlevel.equals("C")){
 %>
@@ -139,21 +139,11 @@ body {
 		<img src="http://54.180.83.249:5000/static/subscribeInc/<%= mno %>_subscribeInc.png">
 	</div>
 <% 
-	}
+	}else{
 %>
-
-
-
-	<div id="myinfosidenav" class="sidenav" >
-	<% 
-			if (mlevel.equals("U")){
-%>
-	
-		
-			<button type="button"  class="btn btn-primary btn-xs" id="myLevelUpdate" >내 등급 올리기</button>	
-		
+	<button type="button"  class="btn btn-primary btn-xs" id="myLevelUpdate" >내 등급 올리기</button>	
 <% 
-			}	
+	}	
 %>
 		<a href="#" class="closebtn" onclick='closeNav()'>x</a>
 		<a href="myinfo/updateMyPW">비밀번호 수정</a>

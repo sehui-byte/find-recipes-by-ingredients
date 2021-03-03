@@ -153,7 +153,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 	<nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
 		<div class="container-fluid">
 			<!-- 사이트 아이콘 넣기 -->
-			<a class="navbar-brand" href="http://localhost:8080/kosmoJns"> <img
+			<a class="navbar-brand" href="http://localhost:8088/kosmoJns"> <img
 				src="/kosmoJns/resources/img/jns_logo.png" alt="" width="70"
 				> 전지적 냉장고 시점
 			</a>
@@ -167,22 +167,22 @@ div, h1, h2, h3, h4, h5, h6, p {
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="http://localhost:8080/kosmoJns">Home</a></li>
+						href="http://localhost:8088/kosmoJns">Home</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="http://localhost:8080/kosmoJns/recipeboard_list.do">레시피 일반</a></li>
+						href="http://localhost:8088/kosmoJns/recipeboard_list.do">레시피 일반</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="http://localhost:8080/kosmoJns/chefboard/boardselectall.do">셰프
+						href="http://localhost:8088/kosmoJns/chefboard/boardselectallpage.do">셰프
 							게시판</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="http://localhost:8080/kosmoJns/searchPage.do">식재료 구매</a></li>
+						href="http://localhost:8088/kosmoJns/searchPage.do">식재료 구매</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
 						data-bs-toggle="dropdown" aria-expanded="true"> 공지 </a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item"
-								href="http://localhost:8080/kosmoJns/noticeSelectAllPage.do">공지사항</a></li>
+								href="http://localhost:8088/kosmoJns/noticeSelectAllPage.do">공지사항</a></li>
 							<li><a class="dropdown-item"
-								href="http://localhost:8080/kosmoJns/qnaSelectAllPage.do">Q&A</a></li>
+								href="http://localhost:8088/kosmoJns/qnaSelectAllPage.do">Q&A</a></li>
 						</ul></li>
 				</ul>
 
@@ -213,7 +213,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 								<a class="dropdown-item" href="/kosmoJns/myinfo/myRecipeListPage?mno=<%= mno %>">나의 레시피</a>
 								<a class="dropdown-item" href="/kosmoJns/myinfo/myFavRecipeList?mno=<%= mno %>">내 즐겨찾기 레시피</a>
 								<a class="dropdown-item" href="/kosmoJns/myinfo/myQnAList?mno=<%= mno %>">나의 Q&A</a>
-								<a class="dropdown-item" href="http://localhost:8080/kosmoJns/likeProduct.do">나의 관심상품</a>
+								<a class="dropdown-item" href="http://localhost:8088/kosmoJns/likeProduct.do">나의 관심상품</a>
 								<div class="dropdown-divider"></div>
 									<!-- 로그아웃 버튼 -->
 								<a class="dropdown-item" style="cursor: pointer;"
