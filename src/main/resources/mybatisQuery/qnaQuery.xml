@@ -34,7 +34,8 @@
 	
 	<insert id="QnAInsert" parameterType="bvo">
 		INSERT INTO BOARD(
-						  BNO
+						  MNO
+						 ,BNO
 						 ,BTYPE
 						 ,BTITLE
 						 ,BCONTENT
@@ -47,7 +48,8 @@
 						 ,BHITS
 						 )
 		VALUES			 (
-						  #{bno, jdbcType=VARCHAR}
+						  #{mno. jdbcType=VARCHAR}
+						 ,#{bno, jdbcType=VARCHAR}
 						 ,'Q'
 						 ,#{btitle, jdbcType=VARCHAR}
 						 ,#{bcontent, jdbcType=VARCHAR}
