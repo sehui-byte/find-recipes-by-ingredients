@@ -7,6 +7,7 @@ import com.jns.favorites.vo.FavoritesVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
+import com.jns.reply.vo.ReplyVO;
 
 public interface MyinfoDAO {
 
@@ -36,6 +37,9 @@ public interface MyinfoDAO {
 	
 	public List<RecipeBoardVO> myRecipeListPage(RecipeBoardVO rbvo);
 	
-	public int myRecipeListHitsCount(FavoritesVO fvo);
+	public int recipeHitsCount(FavoritesVO fvo);
 
+	public int myRecipeReplyCount(ReplyVO rvo);
+	
+	public int myQnAReplyCount(ReplyVO rvo);
 }

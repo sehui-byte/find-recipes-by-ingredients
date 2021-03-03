@@ -268,7 +268,6 @@
 			<td class="tt" style="font-weight: bold">등록일</td>	
 			<td class="tt" style="font-weight: bold">조회</td>	
 			<td class="tt" style="font-weight: bold">추천</td>	
-			<td class="tt" style="font-weight: bold">기타</td>
 		</tr>
 		</thead>
 <% 
@@ -289,7 +288,6 @@
 			<td class="tt" style="font-size: 12px"><%= rbvo.getRb_insertdate() %></td>	
 			<td class="tt"><%= rbvo.getViews() %></td>	
 			<td class="tt"><%= rbvo.getHits() %></td>	
-			<td class="tt">기타</td>	
 		</tr>
 <%
 			} // end for

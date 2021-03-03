@@ -159,6 +159,7 @@
 			MANUAL20,
 			MANUAL_IMG20,
 			RB_INSERTDATE,
+			RB_UPDATEDATE,
 			RB_DELETEYN
 		)
 		VALUES
@@ -213,6 +214,7 @@
 			#{manual_img19, jdbcType=VARCHAR},
 			#{manual20, jdbcType=VARCHAR},
 			#{manual_img20, jdbcType=VARCHAR},
+			SYSDATE,
 			SYSDATE,
 			'Y'
 		)

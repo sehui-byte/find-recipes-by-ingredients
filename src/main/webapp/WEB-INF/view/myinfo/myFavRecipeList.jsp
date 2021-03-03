@@ -266,9 +266,7 @@
 			</td>	
 			<td class="tt" style="width:50%; font-weight: bold">제목 </td>	
 			<td class="tt" style="font-weight: bold">등록일</td>	
-			<td class="tt" style="font-weight: bold">조회</td>	
 			<td class="tt" style="font-weight: bold">추천</td>	
-			<td class="tt" style="font-weight: bold">기타</td>	
 		</tr>
 		</thead>
 		<tbody>
@@ -289,9 +287,7 @@
 				<a href="/kosmoJns/recipedetail?rcp_seq=<%= rvo.getRcp_seq() %>"><%= rvo.getRcp_nm() %></a>
 			</td>	
 			<td class="tt" style="font-size: 12px"><%= rvo.getRcp_insertdate() %></td>	
-			<td class="tt">조회수</td>	
-			<td class="tt">추천수</td>	
-			<td class="tt">기타</td>	
+			<td class="tt" style="font-size: 12px"><%= rvo.getRcpHits() %></td>	
 		</tr>
 <%
 			} // end of for

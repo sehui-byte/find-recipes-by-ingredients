@@ -69,6 +69,19 @@ public class RecipeBoardVO
 	private String startdate;
 	private String enddate;
 	
+	// 댓글 변수 ***********************************************
+	private String rb_reply;
+	
+	public String getRb_reply() {
+		return rb_reply;
+	}
+
+	public void setRb_reply(String rb_reply) {
+		this.rb_reply = rb_reply;
+	}
+
+	// ***********************************************댓글 변수 end
+
 	public String getKeyfilter() {
 		return keyfilter;
 	}
@@ -176,7 +189,7 @@ public class RecipeBoardVO
 			String manual_img16, String manual17, String manual_img17, String manual18, String manual_img18,
 			String manual19, String manual_img19, String manual20, String manual_img20, String rb_insertdate,
 			String rb_updatedate, String rb_deleteyn, int pageSize, int groupSize, int curPage, int totalCount,
-			String keyfilter, String keyword, String startdate, String enddate) {
+			String keyfilter, String keyword, String startdate, String enddate, String rb_reply) {
 		this.rbno = rbno;
 		this.mno = mno;
 		this.rcp_nm = rcp_nm;
@@ -238,6 +251,7 @@ public class RecipeBoardVO
 		this.keyword = keyword;
 		this.startdate = startdate;
 		this.enddate = enddate;
+		this.rb_reply = rb_reply;
 	}
 
 	public String getRbno() {

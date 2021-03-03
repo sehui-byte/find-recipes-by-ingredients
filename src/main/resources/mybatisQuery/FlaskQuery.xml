@@ -76,6 +76,7 @@
 				R.RBNO = F.RBNO
 			AND TO_CHAR(F.FINSERTDATE, 'YYYY') = #{year, jdbcType=VARCHAR}
 			AND TO_CHAR(F.FINSERTDATE, 'MM') = LPAD(#{mon, jdbcType=VARCHAR}, 2, '0')
+			AND R.RB_DELETEYN = 'Y'
 	
 	</select>
 	
