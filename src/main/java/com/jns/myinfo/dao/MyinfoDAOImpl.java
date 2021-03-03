@@ -11,6 +11,7 @@ import com.jns.favorites.vo.FavoritesVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
+import com.jns.reply.vo.ReplyVO;
 
 @Repository
 public class MyinfoDAOImpl implements MyinfoDAO {
@@ -97,9 +98,21 @@ public class MyinfoDAOImpl implements MyinfoDAO {
 	}
 
 	@Override
-	public int myRecipeListHitsCount(FavoritesVO fvo) {
+	public int recipeHitsCount(FavoritesVO fvo) {
+
+		return sqlSession.selectOne("recipeHitsCount", fvo);
+	}
+
+	@Override
+	public int myRecipeReplyCount(ReplyVO rvo) {
+
+		return sqlSession.selectOne("myRecipeReplyCount", rvo);
+	}
+
+	@Override
+	public int myQnAReplyCount(ReplyVO rvo) {
 	
-		return sqlSession.selectOne("myRecipeListHitsCount", fvo);
+		return sqlSession.selectOne("myQnAReplyCount", rvo);
 	}
 
 }

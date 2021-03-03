@@ -6,6 +6,7 @@ import com.jns.board.vo.BoardVO;
 import com.jns.member.vo.MemberVO;
 import com.jns.recipe.vo.RecipeVO;
 import com.jns.recipeboard.vo.RecipeBoardVO;
+import com.jns.reply.vo.ReplyVO;
 
 public interface MyinfoService {
 

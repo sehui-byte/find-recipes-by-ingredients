@@ -261,7 +261,7 @@
 				<div class="scrolldiv"><a href="qnaSelect?mno=<%= bvo.getMno() %>"><%= bvo.getBcontent() %></a></div>
 			</td>	
 			<td class="tt" style="font-size: 12px"><%= bvo.getBinsertdate() %></td>	
-			<td class="tt" >해당 게시글 관련 답변 개수 보여주기</td>	
+			<td class="tt" style="font-size: 12px"><%= bvo.getBhits() %></td>	
 		</tr>
 <%
 		} // end of for
