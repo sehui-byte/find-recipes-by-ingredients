@@ -747,7 +747,7 @@
 	</form>
 	</div>
 		<c:import url="/reply/rbreply.do">
-			<c:param name="selectMno" value="<%=cbvo.getMno()%>"></c:param>
+			<c:param name="BoardWriterMno" value="<%=cbvo.getMno()%>"></c:param>
 		</c:import>
 
 </div>

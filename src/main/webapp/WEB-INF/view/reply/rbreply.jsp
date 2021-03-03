@@ -380,19 +380,18 @@
 
 	//파라미터로 넘긴 mno 값 받기
 <%
-	String selectMno = request.getParameter("selectMno");
-	System.out.println("selectMno >>> : " + selectMno);
+	String BoardWriterMno = request.getParameter("BoardWriterMno");
+	System.out.println("게시물 글 작성자 >>> : " + BoardWriterMno);
 %>
 
 function sendMessage() {
 	
-	//웹소켓으로 메세지 전달(프로토콜 : "댓글 작성자 id, 글작성 id, reply")
-	var mid = '<%=mid%>';//댓글 작성자 아이디
+	//웹소켓으로 메세지 전달(프로토콜 : "댓글 작성자 mno, 글작성 mno, reply")
+	var mno = '<%=mno%>'; 
 	var msg = ''; 
-	msg += mid;//댓글 작성자 id
+	msg += mno;//댓글 작성자 mno
 	msg += ',';
-	///////////test값 -> 글작성자 id로 수정해야함////////
-	msg += 'user0001'; //글 작성자 id 넣어야 된다 (현재 글 작성자 없어서 test값 넣어둠)
+	msg += '<%=BoardWriterMno%>'; //글 작성자 mno 
 	msg += ',';
 	msg += 'reply';
 	sock.send(msg);//웹소켓 서버로 프로토콜 보낸다

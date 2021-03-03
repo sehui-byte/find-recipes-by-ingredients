@@ -35,6 +35,13 @@ if (principal != null && principal instanceof MemberVO) {
 		session.setAttribute("mid", mid);
 		String loginSession = (String) session.getAttribute("mid");
 	}
+	
+	if (session.getAttribute(mno) != null) {
+		String loginSession2 = (String) session.getAttribute("mno");
+	} else {
+		session.setAttribute("mno", mno);
+		String loginSession2 = (String) session.getAttribute("mno");
+	}
 }
 %>
 <!DOCTYPE html>
