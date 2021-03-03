@@ -9,6 +9,13 @@
 <head>
 <meta charset="UTF-8">
 <title>셰프 화면</title>
+<style type="text/css">
+
+	.btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;
+	}
+</style>
 <script type="text/javascript">
 
 	$(document).ready(function(){
@@ -67,8 +74,6 @@
 		
 	} // end of if
 %>
-<br>
-<hr>
-
+<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
 </html>

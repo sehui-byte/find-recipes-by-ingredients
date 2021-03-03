@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
-<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
+<%@ include file="/WEB-INF/include/jsp/headerForReply.jsp"%>
     
 <!DOCTYPE html>
 <html>
@@ -358,7 +358,7 @@
 			</tr>
 			<tr>
 				<td>
-					<textarea class="form-control" name="rcontent" id="rcontent" rows="3" cols="80" style="resize:none"></textarea>
+					<textarea class="form-control" name="rcontent" id="rcontent" rows="3" cols="110" style="resize:none"></textarea>
 					<div style="font-size: 12px;"><span class="bytes">0</span>bytes</div>
 				</td>
 			</tr>
@@ -376,6 +376,13 @@
 	</ul>
 </div>
 <script>
+
+	//파라미터로 넘긴 mno 값 받기
+<%
+	String selectMno = request.getParameter("selectMno");
+	System.out.println("selectMno >>> : " + selectMno);
+%>
+
 function sendMessage() {
 	//웹소켓으로 메세지 전달(프로토콜 : "댓글 작성자 id, 글작성 id, reply")
 	var mid = '<%=mid%>';//댓글 작성자 아이디
