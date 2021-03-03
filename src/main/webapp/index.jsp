@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.jns.board.vo.BoardVO"%>
+<%@ page import="java.util.List" %>
 <head>
 <!-- jquery -->
 <script type="text/javascript"
@@ -60,6 +61,12 @@ header {
 	<%
 	request.setCharacterEncoding("UTF-8");
 	%>
+
+<%
+	Object obj = request.getAttribute("listS");
+	List<BoardVO> list = (List)obj;
+	BoardVO nvo = null;
+%>
 	<!-- navbar -->
 	<%@ include file="/WEB-INF/include/jsp/header.jsp"%>
 
@@ -106,8 +113,9 @@ header {
 	
 	
 		<!-- 공지사항 최신순 글 3개 표시 -->
+		<div class="breadcrumb" id="brandNewNotice">
 		<h3>공지사항</h3>
-		<div id="brandNewNotice"></div>
+		</div>
 	
 	<h3>공지사항 관련 URL</h3>
 	<ul>
@@ -237,6 +245,7 @@ header {
 					var html = '';
 					html += '<table class="table">';
 					html += '<thead>';
+					html += '<th scope="col">번호</th>';
 					html += '<th scope="col">제목</th>';
 					html += '<th scope="col">내용</th>';
 					html += '<th scope="col">날짜</th>';
@@ -244,7 +253,8 @@ header {
 					html+="<tbody>";
 					for(var i = 0; i<3; i++){
 						html += '<tr>';
-						html += '<td>' + isEmpty(data[i].ntitle) + '</td>';
+						html += '<td>' + isEmpty(data[i].nbno) + '</td>';
+						html += '<td>' + "<a href='noticeSelect.do?bno=" + isEmpty(data[i].nbno) +"'>" + isEmpty(data[i].ntitle) +  '</a>' + '</td>';
 						html += '<td>' + isEmpty(data[i].ncontent) + '</td>';
 						html += '<td>' + isEmpty(data[i].ninsertdate) + '</td>';
 						html += '</tr>';
