@@ -2,14 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.jns.alarm.vo.AlarmVO" %>
 <%@page import="java.util.List" %>
-<%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>알림 전체조회</title>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
 </head>
 <%
 	Object obj2 = request.getAttribute("p_avo");
