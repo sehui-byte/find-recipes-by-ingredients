@@ -192,20 +192,32 @@
 		
 		
 </script>
+<script>
+	function openNav() {
+		document.getElementById('myinfosidenav').style.width = '250px';
+	}
+	function closeNav() {
+		document.getElementById('myinfosidenav').style.width = '10px';
+	}
+</script>
 </head>
 <body>
-
-<%-- 내 게시글 추천수 통계 그래프 노출 --%>
-<div align="center">
-	<p>현재 내 레시피 추천수 증가 추이</p>	
-	<img src="http://54.180.83.249:5000/static/hitsInc/<%= mno %>_hitsInc.png">
+<!-- myinfo 사이드바 호출 -->
+<div class="sidebar">
+	<jsp:include page="../../include/jsp/myinfoSide.jsp" flush="true">
+		<jsp:param name="mno" value="<%=mno%>"/>
+	</jsp:include>
 </div>
-
 <div id="wrapper">
 <div class="jumbotron">
+	<%-- 내 게시글 추천수 통계 그래프 노출 --%>
+	<div class="section-header">내 레시피 추천수</div>
+	<div align="center">
+		<img src="http://54.180.83.249:5000/static/hitsInc/<%= mno %>_hitsInc.png">
+	</div>
+	<hr>
 <div class="section-header">나의 레시피</div>
-
-<form id="myRecipeList" name="myRecipeList">
+	<form id="myRecipeList" name="myRecipeList">
 	<!-- 검색창 그리드 시작 -->
 	<div class="container-fluid">
 		<div class="row">
