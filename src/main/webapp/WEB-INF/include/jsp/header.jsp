@@ -177,7 +177,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="/kosmoJns/recipeboard_list.do">레시피 일반</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="/kosmoJns/chefboard/boardselectall.do">셰프
+						href="/kosmoJns/chefboard/boardselectallpage.do">셰프
 							게시판</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="/kosmoJns/searchPage.do">식재료 구매</a></li>
