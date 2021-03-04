@@ -11,10 +11,11 @@ public class SubscribeVO {
 	
 	// 구독 관련 JOIN *************************************************
 	private String mid;
+	private String chefmno;
 	private String chefnick;
 	private String rbno;
 	private String mphoto;
-	
+
 	public String getMid() {
 		return mid;
 	}
@@ -22,7 +23,15 @@ public class SubscribeVO {
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
+	
+	public String getChefmno() {
+		return chefmno;
+	}
 
+	public void setChefmno(String chefmno) {
+		this.chefmno = chefmno;
+	}
+	
 	public String getChefnick() {
 		return chefnick;
 	}

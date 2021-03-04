@@ -69,8 +69,10 @@
 				 SELECT 	 COUNT(A.SNO) AS SUBCOUNT
 							,D.MNICK AS CHEFNICK
 							,D.MPHOTO AS MPHOTO
+							,D.MNO AS CHEFMNO
 				 FROM 		 SUB_INFO A, (SELECT 
 												 B.INO AS INO
+												,C.MNO AS MNO 
 												,C.MNICK AS MNICK
 												,C.MPHOTO AS MPHOTO
 						      			  FROM 	 CHEF_INFO B, MEMBER C
@@ -78,7 +80,7 @@
 						      			  AND 	 B.IDELETEYN = 'Y') D
 			 	 WHERE		 A.INO = D.INO
 			 	 AND		 A.SDELETEYN = 'Y'
-			 	 GROUP BY 	 D.MNICK, D.MPHOTO
+			 	 GROUP BY 	 D.MNICK, D.MPHOTO, D.MNO
 			 	 ORDER BY 	 1 DESC
 				)
 		WHERE <![CDATA[ROWNUM <= 3]]>
