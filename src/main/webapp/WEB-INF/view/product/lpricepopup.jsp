@@ -11,8 +11,7 @@
 	@import
 		url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap')
 		;
-	
-	/*font 적용*/
+		/*font 적용*/
 	div, h1, h2, h3, h4, h5, h6, p {
 		font-family: 'Noto Serif KR', serif;
 	}
@@ -25,13 +24,12 @@
 	  background-color: #F9A781;
 	}
 		
-	.container {
+	.container { 
 	  color: black;
 	  background-color: #ffffff;
 	  padding: 20px;
 	  height: 290px;
 	}
-	
 	
 	img {
 	  display: block;
@@ -43,7 +41,6 @@
 	  border: 1px solid #000000;
 	}
 		
-	
 	.footer {
 		position: fixed;
 		bottom: 7px;
@@ -80,9 +77,29 @@
 	</div>
 	
 	<div class="footer">
-		<span>오늘 하루 보지 않기  </span><button id="nomoretoday">X</button>
+		<span>오늘 하루 보지 않기  </span><button id="nomoretoday" onclick="onedayPopup();">X</button>
 		<span>창 닫기  </span><button id="close" onclick="window.close();">X</button>
 	</div>
+	
+	
+	
+	<script>
+	
+		// 쿠키 생성 함수
+		function setCookie(name, value, expiredays) {
+		    var date = new Date();
+		    date.setDate(date.getDate() + expiredays);
+		    document.cookie = escape(name) + "=" + escape(value) + "; path=/; expires=" + date.toUTCString();
+		}
+		
+		// 팝업창 '오늘 하루 보지 않기' 쿠키 설정
+		function onedayPopup(){
+			setCookie("close", "close", 1);
+			window.close();
+		}
+	
+	
+	</script>
 
 </body>
 </html>
