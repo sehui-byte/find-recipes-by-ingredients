@@ -283,7 +283,6 @@
 	// 초기화 함수 
 	function dataReset(){
 		var len = 0;
-		$("#rno").val("");
 		$("#rcontent").val("");
 		$(".bytes").text(len);
 	}

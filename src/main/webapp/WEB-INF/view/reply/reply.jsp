@@ -283,7 +283,6 @@
 	// 초기화 함수 
 	function dataReset(){
 		var len = 0;
-		$("#rno").val("");
 		$("#rcontent").val("");
 		$(".bytes").text(len);
 	}
@@ -352,7 +351,7 @@
 			<tr>
 				<td>
 					<p class="fw-bold fs-5">{{sessionWriter}}</p>
-					<input type="hidden" name="rbno" id="rbno" value="<%=bno%>">
+					<input type="hidden" name="bno" id="bno" value="<%=bno%>">
 					<input type="hidden" name="mno" id="mno" value="<%=mno%>">
 				</td>
 			</tr>
