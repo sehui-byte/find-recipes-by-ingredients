@@ -45,6 +45,9 @@
 							var sendMessage = "관심 상품 < " + title + " > 의 최저가를 지금 만나보세요 !";
 							alert(sendMessage);
 						}
+						/* if(result ==0){
+							popup();
+						} */
 						
 					}
 					console.log(">>>>>> getLikeProLprice() >> END");
@@ -83,6 +86,16 @@
 				}
 			});
 			return flaskresult;
+		}
+		
+		
+		// 최저가 변동시 팝업창 띄우기
+		function popup(){
+			var url = "popup.do";
+			var name = "lpricepopup";
+			var option = "width=300, height=300, toolbar=no, status=no, location=no, scrollbar=no, menubar=no, resizable=yes, left=50, right=50";
+			window.open(url, name, option);
+			
 		}
 		
 		
