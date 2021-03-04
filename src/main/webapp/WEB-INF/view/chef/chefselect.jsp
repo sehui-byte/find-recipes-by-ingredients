@@ -127,6 +127,8 @@
 %>
 <body>
 <div id="wrapper">
+<img src="/kosmoJns/resources/img/chef-hat.png"
+    		alt="chef-hat" class="img-fluid">
 <%
 	if (nCnt > 0) {
 		for(int i=0; i<nCnt; i++){
