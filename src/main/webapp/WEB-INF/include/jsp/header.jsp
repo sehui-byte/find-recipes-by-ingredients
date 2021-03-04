@@ -256,7 +256,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 						<!-- mnick 님 반갑습니다.<br /> -->
 						<!-- 알람 모양 아이콘 -->
 						<button type="button" class="icon-button"
-							onclick="location.href='alarmList.do'">
+							onclick="location.href='/kosmoJns/alarmList.do'">
 							<span class="material-icons">notifications</span> <span
 								class="icon-button__badge" id="msgCount">0</span>
 						</button>
@@ -283,8 +283,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 		console.log("웹소켓 연결");
 		//웹소켓 서버에서 메세지를 보내면 자동으로 실행된다
 		socket.onmessage = onMessage;
-		var mid = "<%=mid%>
-		";
+		var mid = "<%=mid%>";
 		console.log("mid >> " + mid);
 
 		var count = 0;//로그아웃시 왔던 메세지 개수

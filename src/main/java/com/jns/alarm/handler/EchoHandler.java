@@ -151,6 +151,12 @@ public class EchoHandler extends TextWebSocketHandler {
 				else if(type.equals("reply")) {
 					user.sendMessage(new TextMessage(",," +sender +"님이 회원님 게시물에 댓글을 달았습니다."));
 				}
+				else if(type.equals("recommend")) {
+					user.sendMessage(new TextMessage(",," +sender +"님이 회원님 게시물을 추천하였습니다."));
+				}
+				else if(type.equals("norecommend")) {
+					user.sendMessage(new TextMessage(",," +sender +"님이 회원님 게시물에 대한 추천을 취소했습니다"));
+				}
 				else if(type.equals("count")) {
 					user.sendMessage(new TextMessage(Integer.toString(count)));
 				}

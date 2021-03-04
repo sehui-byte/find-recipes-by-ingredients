@@ -395,6 +395,22 @@ function sendMessage() {
 	msg += ',';
 	msg += 'reply';
 	sock.send(msg);//웹소켓 서버로 프로토콜 보낸다
+	console.log("msg >> " + msg);
+	
+}
+
+function sendMessage(type) {
+	
+	//웹소켓으로 메세지 전달(프로토콜 : "댓글 작성자 mno, 글작성 mno, reply")
+	var mno = '<%=mno%>'; 
+	var msg = ''; 
+	msg += mno;//댓글 작성자 mno
+	msg += ',';
+	msg += '<%=BoardWriterMno%>'; //글 작성자 mno 
+	msg += ',';
+	msg += type;
+	sock.send(msg);//웹소켓 서버로 프로토콜 보낸다
+	console.log("msg >> " + msg);
 	
 }
 </script>

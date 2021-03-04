@@ -243,8 +243,11 @@
 					function whenSuccess(data){
 						if (data == "OK"){
 							$("#favRecipeUser").val("추천 취소하기");
+							sendMessage("recommend");
 							alert("해당 레시피를 추천했습니다. 추천 레시피는 나의 추천 레시피에서 확인하실 수 있습니다");
+							
 						}else if(data == "DeleteOK"){
+							sendMessage("norecommend");
 							$("#favRecipeUser").val("추천하기");
 							alert("해당 레시피  추천을 취소하였습니다.");
 						}else{
