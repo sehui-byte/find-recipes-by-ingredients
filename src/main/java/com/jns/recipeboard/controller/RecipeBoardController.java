@@ -23,6 +23,8 @@ import com.jns.common.DateFormatUtil;
 import com.jns.common.FileLoadUtil;
 import com.jns.common.FileUploadUtil;
 import com.jns.common.Paging;
+import com.jns.member.service.MemberService;
+import com.jns.member.vo.MemberVO;
 import com.jns.recipe.service.RecipeService;
 import com.jns.recipeboard.service.RecipeBoardService;import com.jns.recipeboard.service.RecipeBoardServiceImpl;
 import com.jns.recipeboard.vo.RecipeBoardVO;
@@ -31,6 +33,7 @@ import com.jns.recipeboard.vo.RecipeBoardVO;
 public class RecipeBoardController 
 {
 	private RecipeBoardService recipeBoardService;
+	private MemberService memberService;
 	private ChabunService chabunService;
 	private Logger logger = Logger.getLogger(RecipeBoardController.class);
 	
@@ -40,9 +43,10 @@ public class RecipeBoardController
 	}//Default Constructor
 	
 	@Autowired(required = false)
-	public RecipeBoardController(RecipeBoardService recipeBoardService, ChabunService chabunService) 
+	public RecipeBoardController(RecipeBoardService recipeBoardService, MemberService memberService, ChabunService chabunService) 
 	{
 		this.recipeBoardService = recipeBoardService;
+		this.memberService = memberService;
 		this.chabunService = chabunService;
 	}//생성자
 	
@@ -291,6 +295,18 @@ public class RecipeBoardController
 		
 		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("ok", recipeBoardService.recipeBoardHitsPP(rbvo));
+		return map;
+	}
+	
+	@RequestMapping(value = "recipeBoardGetMnick", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, String> recipeBoardGetMnick(MemberVO mvo)
+	{
+		logger.info("recipeBoardGetMnick.do 호출됨");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("mnick", memberService.memberSelect(mvo).get(0).getMnick());
+		logger.info("mnick >>> : "  + map.get("mnick"));
 		return map;
 	}
 	

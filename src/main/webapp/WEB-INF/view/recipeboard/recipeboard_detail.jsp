@@ -31,8 +31,8 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript">
 		$(document).ready(()=>
-		{
-
+		{	
+			//조회수 증가
 			$.ajax
 			({
 				url:"recipeBoardViewsPP.do",
@@ -41,18 +41,13 @@
 				dataType:"json"
 			}).always((data)=>{console.log(data)});
 		
-			/* 즐겨찾기와 통합
-			$("#hitsBtn").click(()=>
-			{
-				$.ajax
-				({
-					url:"recipeBoardHitsPP.do",
-					data:{rbno:"<%=rbvo.getRbno()%>"},
-					type:"GET",
-					dataType:"json"
-				}).always((data)=>{console.log(data); alert("추천하였습니다")});
-			});
-			*/
+			$.ajax
+			({
+				url:"recipeBoardGetMnick.do",
+				data:{mno:"<%=rbvo.getMno()%>"},
+				type:"GET",
+				dataType:"json"
+			}).done((data)=>{$("#mnick").text(data.mnick)})
 			
 			// 수정
 			$(document).on("click", "#updateBtn", function(){
@@ -177,9 +172,9 @@
 					<td colspan="2"><h2><%=rbvo.getRcp_nm()%></h2></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="vertical-align: middle;"><%=rbvo.getMno()%>&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="hidden" id="mno" name="mno" value="<%=rbvo.getMno()%>">
-					<input type="hidden" id="rbno" name="rbno" value="<%=rbvo.getRbno()%>">			
+					<td colspan="2" style="vertical-align: middle;"><div id="mnick"></div>
+						<input type="hidden" id="mno" name="mno" value="<%=rbvo.getMno()%>">
+						<input type="hidden" id="rbno" name="rbno" value="<%=rbvo.getRbno()%>">			
 					</td>
 				</tr>
 				<tr>
