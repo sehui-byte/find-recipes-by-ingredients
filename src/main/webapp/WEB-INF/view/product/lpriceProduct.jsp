@@ -46,9 +46,9 @@
 							//alert(sendMessage);
 							popup();
 						}
-						if(result ==0){
+						/* if(result ==0){
 							popup();
-						}
+						} */
 						
 					}
 					console.log(">>>>>> getLikeProLprice() >> END");
