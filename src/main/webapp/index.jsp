@@ -54,6 +54,14 @@ header {
     height: 15vw;
     object-fit: cover;
 }
+
+#recommedRecipe{
+	text-align: center;
+}
+
+hr{
+	background-color: orange;
+}
 </style>
 
 </head>
@@ -106,16 +114,28 @@ header {
 	<!-- content -->
 	<div id="wrapper">
 	
+		
 		<!-- 오늘의 추천 레시피 3개 보여주기 -->
-		<h3>추천 레시피</h3>
+		<section id="recommedRecipe">
+		<img src="/kosmoJns/resources/img/TodaysRecipe (4).png" class="card-img-top" alt="기본 이미지"
+		    		style="width:200; height:auto">
+		<h2>추천 레시피</h2>
 		<p>오늘은 이런 요리를 만들어보시는 것 어떨까요?</p>
 		<div id="randomRecipe"></div>
-	
+		<br>
+		</section>
+		
+		<br><hr>
 	
 		<!-- 공지사항 최신순 글 3개 표시 -->
+		<section id="noticeSection">
 		<div class="breadcrumb" id="brandNewNotice">
 		<h3>공지사항</h3>
 		</div>
+		<button type="button" class="btn btn-primary"  style="float: right;">공지사항 더보기</button>
+		</section>
+		
+		<br><br><br>
 	
 	<h3>공지사항 관련 URL</h3>
 	<ul>
