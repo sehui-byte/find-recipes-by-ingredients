@@ -62,6 +62,10 @@ header {
 hr{
 	background-color: orange;
 }
+
+.table.table-hover tbody tr:hover {
+   	background-color: #F9A781; 
+}
 </style>
 
 </head>
@@ -132,7 +136,7 @@ hr{
 		<div class="breadcrumb" id="brandNewNotice">
 		<h3>공지사항</h3>
 		</div>
-		<button type="button" class="btn btn-primary"  style="float: right;">공지사항 더보기</button>
+		<button type="button" class="btn btn-primary"  style="float: right;" id="M">공지사항 더보기</button>
 		</section>
 		
 		<br><br><br>
@@ -247,6 +251,11 @@ hr{
 			}
 		}
 
+		// 공지사항 더 보기
+		$(document).on("click","#M",function(){
+			location.href="noticeSelectAllPage.do";
+		})
+		
 		//공지사항 최신순 글 3개 ajax로 가져오기
 		$(document).ready(function() {
 			brandNewNotice();
@@ -263,18 +272,18 @@ hr{
 					console.log("최신공지사항 데이터 가져오기 success");
 					console.log(data);
 					var html = '';
-					html += '<table class="table">';
+					html += '<table class="table table-hover">';
 					html += '<thead>';
-					html += '<th scope="col">번호</th>';
+					//html += '<th scope="col">번호</th>';
 					html += '<th scope="col">제목</th>';
 					html += '<th scope="col">내용</th>';
 					html += '<th scope="col">날짜</th>';
 					html+='</thead>';
 					html+="<tbody>";
 					for(var i = 0; i<3; i++){
-						html += '<tr>';
-						html += '<td>' + isEmpty(data[i].nbno) + '</td>';
-						html += '<td>' + "<a href='noticeSelect.do?bno=" + isEmpty(data[i].nbno) +"'>" + isEmpty(data[i].ntitle) +  '</a>' + '</td>';
+						html += "<tr onclick=\"location.href='noticeSelect.do?bno=" + isEmpty(data[i].nbno) + "'\">";
+						//html += '<td style=\"font-size: 12px\">' + isEmpty(data[i].nbno) + '</td>';
+						html += '<td>' + isEmpty(data[i].ntitle) +  '</td>';
 						html += '<td>' + isEmpty(data[i].ncontent) + '</td>';
 						html += '<td>' + isEmpty(data[i].ninsertdate) + '</td>';
 						html += '</tr>';
