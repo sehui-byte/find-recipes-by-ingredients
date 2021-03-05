@@ -34,7 +34,8 @@
 	<a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a>,
 	<a href="https://www.freepik.com" title="Freepik">Freepik</a>,
 	<a href="https://www.flaticon.com/authors/ultimatearm" title="ultimatearm">ultimatearm</a>,
-	<a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a>
+	<a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a>,
+	<a href="" title="Vitaly Gorbachev">Vitaly Gorbachev</a>
 	from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
     </div>
   </div>
