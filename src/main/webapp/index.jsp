@@ -16,6 +16,7 @@
 <title>메인 페이지 테스트</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">	
 <style>
 .carousel, .carousel-item img {
 	height: 350px;
@@ -66,6 +67,33 @@ hr{
 .table.table-hover tbody tr:hover {
    	background-color: #F9A781; 
 }
+
+/* 하단 그리드 CSS 시작 ============================ */
+.featurette-divider {
+  margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  /* rtl:remove */
+  letter-spacing: -.05rem;
+}
+
+@media (min-width: 40em) {
+  .featurette-heading {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 62em) {
+  .featurette-heading {
+    margin-top: 7rem;
+  }
+}
+/* 하단 그리드 CSS 종료 ============================ */
+
 </style>
 
 </head>
@@ -141,6 +169,55 @@ hr{
 		
 		<br><br><br>
 	
+		<!-- 하단 그리드 시작 -->
+	    <hr class="featurette-divider">
+	
+	    <div class="row featurette">
+	      <div class="col-md-7">
+	        <h2 class="featurette-heading">당신의 요리 실력을 뽐내주세요!<span class="text-muted"><br>Show off your cooking skills!</span></h2>
+	        <p class="lead"><br>추전수 00 이상이면 자동 등업 <i class="bi bi-arrow-right-circle-fill"></i></p>
+	      </div>
+	      <div class="col-md-5">
+      		<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" 
+      			 src="/kosmoJns/resources/img/whisk.png" 
+      			 alt="toRecipeBoard" id="toRecipeBoard">
+	      </div>
+	    </div>
+	
+	    <hr class="featurette-divider">
+	
+	    <div class="row featurette" style="background-color: #F9A781;">
+	      <div class="col-md-7 order-md-2">
+	        <h2 class="featurette-heading">전냉시 최고의 셰프는 누구?<span class="text-muted"><br>Who is the best chef?</span></h2>
+	        <p class="lead"><br><i class="bi bi-arrow-left-circle-fill"></i> 셰프님들 레시피 확인하기</p>
+	      </div>
+	      <div class="col-md-5 order-md-1">
+			<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" 
+      			 src="/kosmoJns/resources/img/trophy.png" 
+      			 alt="toChefBoard" id="toChefBoard">
+	      </div>
+	    </div>
+	
+	    <hr class="featurette-divider">
+	
+	    <div class="row featurette">
+	      <div class="col-md-7">
+	        <h2 class="featurette-heading">아 맞다! 양파...<span class="text-muted"><br>Oh, my onions...</span></h2>
+	        <p class="lead"><br>부족한 식재료 구매하기 <i class="bi bi-arrow-right-circle-fill"></i></p>
+	      </div>
+	      <div class="col-md-5">
+			<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" 
+      			 src="/kosmoJns/resources/img/harvest.png" 
+      			 alt="toProduct" id="toProduct">
+	      </div>
+	    </div>
+	
+	    <hr class="featurette-divider">
+	
+	    <!-- 하단 그리드 종료 -->
+	
+	<!-- 테스트용 URL -->
+	<!-- 
 	<h3>공지사항 관련 URL</h3>
 	<ul>
 		<li><a href="noticeForm.do">공지사항 글쓰기</a></li>
@@ -228,7 +305,7 @@ hr{
 	<ul>
 		<li><a href="/kosmoJns/subscribe/test.do">테스트</a></li>
 	</ul>
-
+	 -->
 	<h3>플라스크 테스트</h3>
 	<ul>
 		<li><a href="sendNutrient.do?rcp_seq=1">플라스크 테스트 - 영양소</a></li>
@@ -338,6 +415,24 @@ hr{
 				return val;
 			}
 		}
+		
+		$(document).ready(function(){
+			
+			// 일반 레시피 이동
+			$(document).on("click", "#toRecipeBoard", function(){		
+				location.href="/kosmoJns/recipeboard_list.do";
+			});
+			
+			// 셰프 레시피 이동
+			$(document).on("click", "#toChefBoard", function(){		
+				location.href="/kosmoJns/chefboard/boardselectallpage.do";
+			});
+			
+			// 구매 페이지 이동
+			$(document).on("click", "#toProduct", function(){		
+				location.href="/kosmoJns/searchPage.do";
+			});
+		});
 	</script>
 	<%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
