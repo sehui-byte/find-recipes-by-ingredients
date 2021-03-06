@@ -2,6 +2,20 @@
 냉장고 속 식자재를 이용하여 만들 수 있는 레시피를 알려주는 서비스
 
 - 팀원 : 김세희, 김예빈, 김정우, 김재민, 박병율, 정상우, 정희찬 
+- 프로젝트 기한 : 2021.02.08 ~2021.03.08
+
+-------
+
+## 프로젝트 사용기술
+- **Database** : Oracle 11g
+- **Service System** : Apache Tomcat 8.5, Spring4(Security, WebSocket), MyBatis, RESTful API, Maven
+- **Language** : Java8, jsp, html5, css3, Javascript, python 3.7.7, SQL, Jquery(ajax)
+- **Tool** : Eclipse202006, SQL Developer, Pycharm, Django, Flask
+- **open API** : 네이버 검색 api, 다음 우편검색 api, 식품의약안천처 데이터활용서비스
+- **형상관리** : Git/Github
+- **UI/UX Framework** : Bootstrap 5.0
+
+
 
 ------
 
