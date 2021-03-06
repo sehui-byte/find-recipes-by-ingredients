@@ -53,7 +53,7 @@
 		
 		var sessionMno = "<%=mno%>";
 		var sessionWriter = "<%=mnick%>";
-		var boardWriter = $("#mnick").val();
+		var boardMno = $("#mno").val();
 		
 		var vm = new Vue({
 			el: "#selectForm",
@@ -77,7 +77,7 @@
 		
 	
 		// 로그인 유저와 작성자가 일치할 경우 수정/삭제 버튼 생성
-		if ( sessionWriter == boardWriter){
+		if ( sessionMno == boardMno){
 			$('#U').attr('disabled', false);
 			$('#D').attr('disabled', false);
 		}
@@ -310,6 +310,7 @@
 					<input type="hidden" id="mnick" name="mnick" value="<%=cbvo.getMnick()%>">
 					<input type="hidden" id="ino" name="ino" value="<%=cbvo.getIno()%>">
 					<input type="hidden" id="rbno" name="rbno" value="<%=cbvo.getRbno()%>">
+					<input type="hidden" id="mno" name="mno" value="<%=cbvo.getMno()%>">
 					<input type="button" class="btn btn-warning btn-sm" id="Subs" value="구독하기">				
 					</td>
 				</tr>

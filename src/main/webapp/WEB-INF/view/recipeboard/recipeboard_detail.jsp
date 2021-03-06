@@ -30,8 +30,13 @@
 	</style>
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript">
+	
 		$(document).ready(()=>
-		{	
+		{		
+			var sessionMno = "<%=mno%>";
+			var sessionWriter = "<%=mnick%>";
+			console.log("sessionWriter >>> : " + sessionWriter);
+			
 			//조회수 증가
 			$.ajax
 			({
@@ -40,7 +45,8 @@
 				type:"GET",
 				dataType:"json"
 			}).always((data)=>{console.log(data)});
-		
+			
+			//게시글 작성자 확인
 			$.ajax
 			({
 				url:"recipeBoardGetMnick.do",
@@ -49,6 +55,13 @@
 				dataType:"json"
 			}).done((data)=>{$("#mnick").text(data.mnick)})
 			
+			// 로그인 유저와 작성자가 일치할 경우 수정/삭제 버튼 생성
+			var boardMno = $("#mno").val();
+			if ( sessionMno == boardMno){
+				$('#updateBtn').attr('disabled', false);
+				$('#D').attr('disabled', false);
+			}
+
 			// 수정
 			$(document).on("click", "#updateBtn", function(){
 				$("#rb_detail").attr("action", "rbupdateform.do");	
@@ -61,6 +74,10 @@
 			$(document).on("click", "#C", function(){
 				location.href="/kosmoJns/recipeboard_list.do";
 			});
+			
+			
+			// 삭제
+			
 
 			//===============================Vue로 추천수을 프론트단에서 변경
 			var vm = new Vue({
@@ -699,7 +716,8 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="right">
-					<input type="button" class="btn btn-orange" id="updateBtn" value="수정">
+					<input type="button" class="btn btn-orange" id="updateBtn" disabled="disabled" value="수정">
+					<input type="button" class="btn btn-orange" id="D" disabled="disabled" value="삭제">
  					<input type="button" class="btn btn-orange" name="favRecipeUser" id="favRecipeUser" v-on:click="hitPlus()" value="추천하기">
 					<input type="button" class="btn btn-orange" id="C" value="목록">
 				</td>
