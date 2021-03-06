@@ -82,7 +82,7 @@
 				$("#rb_detail").attr("method", "GET");	
 				$("#rb_detail").attr('enctype','multipart/form-data');	
 				$("#rb_detail").submit();
-			};
+			});
 
 			//===============================Vue로 추천수을 프론트단에서 변경
 			var vm = new Vue({
