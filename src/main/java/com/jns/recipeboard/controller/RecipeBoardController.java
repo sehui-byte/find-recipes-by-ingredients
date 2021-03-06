@@ -75,10 +75,10 @@ public class RecipeBoardController
 		{
 			totalCnt = pageList.get(0).getTotalCount();
 			rbvo.setTotalCount(totalCnt);
+			
+			logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+			logger.info("pageList.size >>> : " + pageList.size());
 		}
-		
-		logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
-		logger.info("pageList.size >>> : " + pageList.size());
 		
 		model.addAttribute("rbvo", rbvo);
 		model.addAttribute("pageList", pageList);
@@ -166,10 +166,10 @@ public class RecipeBoardController
 		{
 			totalCnt = pageList.get(0).getTotalCount();
 			rbvo.setTotalCount(totalCnt);
+
+			logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+			logger.info("pageList.size >>> : " + pageList.size());
 		}
-		
-		logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
-		logger.info("pageList.size >>> : " + pageList.size());
 		
 		model.addAttribute("rbvo", rbvo);
 		model.addAttribute("pageList", pageList);
@@ -232,10 +232,10 @@ public class RecipeBoardController
 		{
 			totalCnt = pageList.get(0).getTotalCount();
 			rbvo.setTotalCount(totalCnt);
+			
+			logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+			logger.info("pageList.size >>> : " + pageList.size());
 		}
-		
-		logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
-		logger.info("pageList.size >>> : " + pageList.size());
 		
 		model.addAttribute("rbvo", rbvo);
 		model.addAttribute("pageList", pageList);
@@ -263,10 +263,10 @@ public class RecipeBoardController
 		{
 			totalCnt = pageList.get(0).getTotalCount();
 			rbvo.setTotalCount(totalCnt);
+			
+			logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+			logger.info("pageList.size >>> : " + pageList.size());
 		}
-		
-		logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
-		logger.info("pageList.size >>> : " + pageList.size());
 		
 		model.addAttribute("rbvo", rbvo);
 		model.addAttribute("pageList", pageList);
