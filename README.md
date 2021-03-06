@@ -4,7 +4,8 @@
 - 팀원 : 김세희, 김예빈, 김정우, 김재민, 박병율, 정상우, 정희찬 
 - 프로젝트 기한 : 2021.02.08 ~2021.03.08
 <img src="https://user-images.githubusercontent.com/64109506/110205423-30582800-7ebb-11eb-8f1b-e535d0b1584f.png" width="200">
--------
+  
+    
 
 ## 프로젝트 사용기술
 - **Database** : Oracle 11g
