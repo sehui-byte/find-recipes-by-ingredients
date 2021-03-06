@@ -75,7 +75,7 @@
 			function whenSuccess(data){
 				if (data == "OK"){
 					alert("비밀번호가 정상적으로 변경되었습니다. 감사합니다.");
-					location.href="/kosmoJns/main";	
+					location.href="/kosmoJns/index.jsp";	
 				}else{
 					alert("비밀번호 변경에 실패하였습니다. 잠시 후에 다시 시도하시기 바랍니다.");
 				}
