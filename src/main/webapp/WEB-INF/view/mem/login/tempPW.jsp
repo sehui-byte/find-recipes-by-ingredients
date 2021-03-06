@@ -7,6 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>임시 비밀번호 발급받기</title>
+<style type="text/css">
+	
+	.btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;
+	}	
+</style>
 <script type="text/javascript">
 
 	$(document).ready(function(){
@@ -84,35 +91,49 @@
 </script>
 </head>
 <body>
+<br>
 	<form id="TempPWForm">
-		<table border="1" id="TempPWtable" style='text-align:center;'>
+		<table class="table" id="TempPWtable">
 			<tr>
 				<td>
 					<label>아이디</label>
 				</td>
 				<td>
-					<input type="text" name="mid" id="mid">	
+					<div class="col-6">
+					<input type="text" class="form-control" name="mid" id="mid">	
+					</div>
 				</td>	
 			</tr>	
 			<tr>
-				<td>
+				<td style="width: 15%">
 					<label>이메일 </label>
 				</td>
 				<td>
-					<input type="text" name="memail1" id="memail1">@
-					<input type="text" name="memail2" id="memail2">
-					<select name="memail3" id="memail3">
-						<option value="1" selected="selected">직접입력</option> 
-						<option value="naver.com">naver.com</option>	
-						<option value="daum.com">daum.com</option>	
-						<option value="google.com">google.com</option>	
-					</select>
+					<div class="container-fluid">
+					<div class="row">
+						<div class="col-5">
+						<input type="text" class="form-control"  name="memail1" id="memail1">
+						</div>
+						<div class="col-1">
+							<p>@</p>
+						</div>
+						<div class="col-6">
+						<input type="text" class="form-control"  name="memail2" id="memail2">
+						<select class="form-select" name="memail3" id="memail3">
+							<option value="1" selected="selected">직접입력</option> 
+							<option value="naver.com">naver.com</option>	
+							<option value="daum.com">daum.com</option>	
+							<option value="google.com">google.com</option>	
+						</select>
+						</div>
+					</div>
+					</div>
 				</td>	
 			</tr>	
 			<tr>
 				<td colspan="2">
-					<input type="button" name="TempPW" id="TempPW" value="임시 비밀번호 발급받기">
-					<input type="button" name="back" id="back" value="뒤로가기">
+					<input type="button" class="btn btn-orange" name="TempPW" id="TempPW" value="임시 비밀번호 발급받기">
+					<input type="button" class="btn btn-orange" name="back" id="back" value="뒤로가기">
 				</td>	
 			</tr>
 		</table>
