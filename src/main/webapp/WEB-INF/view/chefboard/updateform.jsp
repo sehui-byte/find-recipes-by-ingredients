@@ -175,7 +175,7 @@
 					<textarea class="form-control" name="manual01" id="manual01" rows="10" cols="70"><%=cbvo.getManual01()%></textarea>
 					<img id="thumb01" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img01())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img01f" name="manual_img01f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img01f" name="file01" onchange="setThumbnail(event);">
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
     		 			 alt="down-arrow" style="width:30px; height:30px" id="downArrow">
@@ -187,7 +187,7 @@
 				<tr>
 					<td class="align-middle">만드는법 1</td>
 					<td><textarea class="form-control" name="manual01" id="manual01" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img01f" id="manual_img01f">
+						<input type="file" class="form-control" name="manual_img01f" id="file01">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -207,7 +207,7 @@
 					<textarea class="form-control" name="manual02" id="manual02" rows="10" cols="70"><%=cbvo.getManual02()%></textarea>
 					<img id="thumb02" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img02())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img02f" name="manual_img02f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img02f" name="file02" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -220,7 +220,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 2</td>
 					<td><textarea class="form-control" name="manual02" id="manual02" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img02f" id="manual_img02f">
+						<input type="file" class="form-control" name="manual_img02f" id="file02">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -240,7 +240,7 @@
 					<textarea class="form-control" name="manual03" id="manual03" rows="10" cols="70"><%=cbvo.getManual03()%></textarea>
 					<img id="thumb03" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img03())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img03f" name="manual_img03f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img03f" name="file03" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -253,7 +253,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 3</td>
 					<td><textarea class="form-control" name="manual03" id="manual03" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img03f" id="manual_img03f">
+						<input type="file" class="form-control" name="manual_img03f" id="file03">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -273,7 +273,7 @@
 					<textarea class="form-control" name="manual04" id="manual04" rows="10" cols="70"><%=cbvo.getManual04()%></textarea>
 					<img id="thumb04" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img04())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img04f" name="manual_img04f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img04f" name="file04" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -286,7 +286,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 4</td>
 					<td><textarea class="form-control" name="manual04" id="manual04" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img04f" id="manual_img04f">
+						<input type="file" class="form-control" name="manual_img04f" id="file04">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -306,7 +306,7 @@
 					<textarea class="form-control" name="manual05" id="manual05" rows="10" cols="70"><%=cbvo.getManual05()%></textarea>
 					<img id="thumb05" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img05())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img05f" name="manual_img05f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img05f" name="file05" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -319,7 +319,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 5</td>
 					<td><textarea class="form-control" name="manual05" id="manual05" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img05f" id="manual_img05f">
+						<input type="file" class="form-control" name="manual_img05f" id="file05">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -339,7 +339,7 @@
 					<textarea class="form-control" name="manual06" id="manual06" rows="10" cols="70"><%=cbvo.getManual06()%></textarea>
 					<img id="thumb06" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img06())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img06f" name="manual_img06f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img06f" name="file06" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -352,7 +352,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 6</td>
 					<td><textarea class="form-control" name="manual06" id="manual06" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img06f" id="manual_img06f">
+						<input type="file" class="form-control" name="manual_img06f" id="file06">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -372,7 +372,7 @@
 					<textarea class="form-control" name="manual07" id="manual07" rows="10" cols="70"><%=cbvo.getManual07()%></textarea>
 					<img id="thumb07" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img07())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img07f" name="manual_img07f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img07f" name="file07" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -385,7 +385,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 7</td>
 					<td><textarea class="form-control" name="manual07" id="manual07" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img07f" id="manual_img07f">
+						<input type="file" class="form-control" name="manual_img07f" id="file07">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -405,7 +405,7 @@
 					<textarea class="form-control" name="manual08" id="manual08" rows="10" cols="70"><%=cbvo.getManual08()%></textarea>
 					<img id="thumb08" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img08())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img08f" name="manual_img08f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img08f" name="file08" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -418,7 +418,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 8</td>
 					<td><textarea class="form-control" name="manual08" id="manual08" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img08f" id="manual_img08f">
+						<input type="file" class="form-control" name="manual_img08f" id="file08">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -438,7 +438,7 @@
 					<textarea class="form-control" name="manual09" id="manual09" rows="10" cols="70"><%=cbvo.getManual09()%></textarea>
 					<img id="thumb09" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img09())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img09f" name="manual_img09f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img09f" name="file09" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -451,7 +451,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 9</td>
 					<td><textarea class="form-control" name="manual09" id="manual09" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img09f" id="manual_img09f">
+						<input type="file" class="form-control" name="manual_img09f" id="file09">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -471,7 +471,7 @@
 					<textarea class="form-control" name="manual10" id="manual10" rows="10" cols="70"><%=cbvo.getManual10()%></textarea>
 					<img id="thumb10" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img10())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img10f" name="manual_img10f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img10f" name="file10" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -484,7 +484,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 10</td>
 					<td><textarea class="form-control" name="manual10" id="manual10" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img10f" id="manual_img10f">
+						<input type="file" class="form-control" name="manual_img10f" id="file10">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -504,7 +504,7 @@
 					<textarea class="form-control" name="manual11" id="manual11" rows="10" cols="70"><%=cbvo.getManual11()%></textarea>
 					<img id="thumb11" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img11())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img11f" name="manual_img11f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img11f" name="file11" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -517,7 +517,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 11</td>
 					<td><textarea class="form-control" name="manual11" id="manual11" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img11f" id="manual_img11f">
+						<input type="file" class="form-control" name="manual_img11f" id="file11">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -537,7 +537,7 @@
 					<textarea class="form-control" name="manual12" id="manual12" rows="10" cols="70"><%=cbvo.getManual12()%></textarea>
 					<img id="thumb12" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img12())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img12f" name="manual_img12f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img12f" name="file12" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -550,7 +550,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 12</td>
 					<td><textarea class="form-control" name="manual12" id="manual12" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img12f" id="manual_img12f">
+						<input type="file" class="form-control" name="manual_img12f" id="file12">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -570,7 +570,7 @@
 					<textarea class="form-control" name="manual13" id="manual13" rows="10" cols="70"><%=cbvo.getManual13()%></textarea>
 					<img id="thumb13" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img13())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img13f" name="manual_img13f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img13f" name="file13" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -583,7 +583,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 13</td>
 					<td><textarea class="form-control" name="manual13" id="manual13" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img13f" id="manual_img13f">
+						<input type="file" class="form-control" name="manual_img13f" id="file13">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -603,7 +603,7 @@
 					<textarea class="form-control" name="manual14" id="manual14" rows="10" cols="70"><%=cbvo.getManual14()%></textarea>
 					<img id="thumb14" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img14())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img14f" name="manual_img14f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img14f" name="file14" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -616,7 +616,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 14</td>
 					<td><textarea class="form-control" name="manual14" id="manual14" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img14f" id="manual_img14f">
+						<input type="file" class="form-control" name="manual_img14f" id="file14">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -636,7 +636,7 @@
 					<textarea class="form-control" name="manual15" id="manual15" rows="10" cols="70"><%=cbvo.getManual15()%></textarea>
 					<img id="thumb15" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img15())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img15f" name="manual_img15f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img15f" name="file15" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -649,7 +649,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 15</td>
 					<td><textarea class="form-control" name="manual15" id="manual15" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img15f" id="manual_img15f">
+						<input type="file" class="form-control" name="manual_img15f" id="file15">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -669,7 +669,7 @@
 					<textarea class="form-control" name="manual16" id="manual16" rows="10" cols="70"><%=cbvo.getManual16()%></textarea>
 					<img id="thumb16" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img16())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img16f" name="manual_img16f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img16f" name="file16" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -682,7 +682,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 16</td>
 					<td><textarea class="form-control" name="manual16" id="manual16" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img16f" id="manual_img16f">
+						<input type="file" class="form-control" name="manual_img16f" id="file16">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -702,7 +702,7 @@
 					<textarea class="form-control" name="manual17" id="manual17" rows="10" cols="70"><%=cbvo.getManual17()%></textarea>
 					<img id="thumb17" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img17())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img17f" name="manual_img17f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img17f" name="file17" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -715,7 +715,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 17</td>
 					<td><textarea class="form-control" name="manual17" id="manual17" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img17f" id="manual_img17f">
+						<input type="file" class="form-control" name="manual_img17f" id="file17">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -735,7 +735,7 @@
 					<textarea class="form-control" name="manual17" id="manual17" rows="10" cols="70"><%=cbvo.getManual18()%></textarea>
 					<img id="thumb18" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img18())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img18f" name="manual_img18f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img18f" name="file18" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -748,7 +748,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 18</td>
 					<td><textarea class="form-control" name="manual18" id="manual18" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img18f" id="manual_img18f">
+						<input type="file" class="form-control" name="manual_img18f" id="file18">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -768,7 +768,7 @@
 					<textarea class="form-control" name="manual19" id="manual19" rows="10" cols="70"><%=cbvo.getManual19()%></textarea>
 					<img id="thumb19" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img19())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img19f" name="manual_img19f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img19f" name="file19" onchange="setThumbnail(event);">
 				</td>
 				<td style="vertical-align: bottom;">				
 					<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -781,7 +781,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 19</td>
 					<td><textarea class="form-control" name="manual19" id="manual19" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img19f" id="manual_img19f">
+						<input type="file" class="form-control" name="manual_img19f" id="file19">
 					</td>
 					<td style="vertical-align: bottom;">				
 						<img src="/kosmoJns/resources/img/down-arrow.png"
@@ -801,7 +801,7 @@
 					<textarea class="form-control" name="manual20" id="manual20" rows="10" cols="70"><%=cbvo.getManual20()%></textarea>
 					<img id="thumb20" src="../<%=new FileLoadUtil().getFileSrc("chefboard", cbvo.getManual_img20())%>"><br>
 					이미지 변경하기▼
-					<input type="file" class="form-control" id="manual_img20f" name="manual_img20f" onchange="setThumbnail(event);">
+					<input type="file" class="form-control" id="manual_img20f" name="file20" onchange="setThumbnail(event);">
 				</td>
 			</tr>
 		<%		
@@ -810,7 +810,7 @@
 				<tr id="ta" style="display: none;">
 					<td class="align-middle">만드는법 20</td>
 					<td><textarea class="form-control" name="manual20" id="manual20" rows="10" cols="70"></textarea>
-						<input type="file" class="form-control" name="manual_img20f" id="manual_img20f">
+						<input type="file" class="form-control" name="manual_img20f" id="file20">
 					</td>
 				</tr>
 		<%
