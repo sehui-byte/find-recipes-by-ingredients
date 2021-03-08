@@ -213,7 +213,7 @@
 	<%-- 내 게시글 추천수 통계 그래프 노출 --%>
 	<div class="section-header">내 레시피 추천수</div>
 	<div align="center">
-		<img src="http://54.180.83.249:5000/static/hitsInc/<%= mno %>_hitsInc.png">
+		<img src="http://54.180.83.249:5000/static/hitsInc/<%= mno %>_hitsInc.png" width="950px" height="500px">
 	</div>
 	<hr>
 <div class="section-header">나의 레시피</div>

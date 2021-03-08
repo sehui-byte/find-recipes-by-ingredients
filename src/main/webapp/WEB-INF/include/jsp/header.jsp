@@ -213,7 +213,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 					<div class="dropdown">
 						<s:authorize access="hasAnyRole('ROLE_U', 'ROLE_C')">
 							<!-- 마이페이지 -->
-							<a data-toggle="dropdown"><i class="fas fa-user-circle fa-lg"></i>
+							<a data-toggle="dropdown"><i class="fas fa-user-circle fa-lg" style="cursor:pointer;"></i>
 							</a>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="/kosmoJns/myinfo?mno=<%=mno%>">마이페이지</a>
