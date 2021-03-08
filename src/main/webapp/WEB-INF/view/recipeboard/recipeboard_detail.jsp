@@ -219,7 +219,7 @@
 			</tr>
 			<tr>
 				<td class="tt">메인 이미지</td>			
-				<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getMain_img())%>"></td>
+				<td><img src="<%=new FileLoadUtil().getFileSrc(request, rbvo.getMain_img())%>"></td>
 			</tr>
 			<tr>
 				<td class="tt">재료정보 : </td>
