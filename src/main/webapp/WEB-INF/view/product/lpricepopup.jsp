@@ -37,7 +37,7 @@
 	  border-radius: 20px;
 	}
 	
-	.prodtitle {
+	.poptitle {
 	  border: 1px solid #000000;
 	}
 		
@@ -62,16 +62,29 @@
 </style>
 </head>
 <body>
+
+	<%
+		request.setCharacterEncoding("UTF-8");
+		String info = request.getParameter("info");
+		System.out.println("info >> " + info);
+		String[] popinfo = info.split("==");
+		String title = popinfo[0];
+		System.out.println("title >> " + title);
+		String image = popinfo[1];
+		System.out.println("image >> " + image);
+	%>
+
+
 	<div>
 		<i class="bi bi-alarm"></i>
 		<h1 align="center">관심 상품 최저가 알림</h1>
 	</div>
 	
 	<div class="container">
-	  <img src="https://cdn.pixabay.com/photo/2018/05/18/15/30/webdesign-3411373_960_720.jpg" width="305" height="218">
+	  <img src="<%= image %>" width="305" height="218">
 	  <p class="text-area" align="center">
 	  	<span>관심 상품  </span>
-	  	<span class="prodtitle">title</span>
+	  	<span class="poptitle"><%= title %></span>
 	  	<span>의 최저가를 지금 만나보세요 !</span>
 	  </p>
 	</div>
