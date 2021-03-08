@@ -173,8 +173,8 @@ public class MemberController {
 
 
 	// 회원 수정
-	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
-	public String memberUpdate(MemberVO mvo, Model model) {
+	@RequestMapping(value = "memberUpdate", method = {RequestMethod.POST, RequestMethod.GET})
+	public String memberUpdate(MemberVO mvo, Model model, MultipartHttpServletRequest request) {
 
 		logger.info("MemberController MemberUpdate 함수 시작 >>> :: ");
 		logger.info("mvo >>> :: " + mvo);
@@ -182,6 +182,10 @@ public class MemberController {
 		logger.info("mvo.getMno()" + mvo.getMno());
 		logger.info("mvo.getMnick()" + mvo.getMnick());
 		logger.info("mvo.getMlevel()"+mvo.getMlevel());
+		
+		String key = new FileUploadUtil().uploadFile(request, "member");
+		logger.info("key >>> : " + key);
+		mvo.setMphoto(key);
 
 		int nCnt = memberService.memberUpdate(mvo);
 		logger.info("MemberController MemberUpdate nCnt >>> : " + nCnt);

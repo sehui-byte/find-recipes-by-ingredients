@@ -11,18 +11,53 @@
 
 <title>JNS : 전지적 냉장고 시점  회원  조회</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript">
-	
+<style type="text/css">
 
+	.tt{
+		text-align: center;
+	}
+    
+    .btn-orange { 
+		background-color: #F9A781; 
+		font-weight: bold;
+	}
 	
-$(document).ready(function(){
+	.section-header {
+		position: relative;
+		margin-bottom: 40px;
+		font-size: 26px;
+		font-weight: 400;
+		color: #333;
+		text-align: Center;
+		line-height: 60px;
+		letter-spacing: 1px;
+	}
+	
+	.section-header:after {
+		content: "";
+		display: block;
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		width: 70px;
+		height: 2px;
+		background: #ff7f00;
+		transform: translate(-50%, 0);
+		transform: translate3d(-50%, 0, 0);
+	}
+	
+</style>
+<script type="text/javascript">
+		
+	$(document).ready(function(){
 	
 
 			// U
 			$(document).on("click", "#U", function(){
 				alert("U >>> :");
 				$("#memUpdateForm").attr({
-					"method":"GET",
+					"method":"POST",
+					"enctype":"multipart/form-data",
 					"action":"memberUpdate.do"
 				}).submit();
 			});
@@ -42,9 +77,19 @@ $(document).ready(function(){
 			});
 		});
 
-
-
-
+	//썸네일
+	function setThumbnail(e){
+		console.log(e);
+		no = e.target.name.slice(-2);
+		
+		var reader = new FileReader();
+		reader.onload = function(e)
+		{
+			console.log("thumb+no >>> : " + "thumb"+no);
+			$("#thumb"+no).attr("src", e.target.result);
+		}
+		reader.readAsDataURL(event.target.files[0]);
+	}
 </script>
 </head>
 <body>
@@ -54,9 +99,7 @@ $(document).ready(function(){
 
 
 	List<MemberVO> aList = (List)obj;
-	int nCnt = aList.size();
-	out.println( "nCnt >>> : " +nCnt );
-	
+	int nCnt = aList.size();	
 	
 	String no = "";	
 	String level = "";
@@ -95,74 +138,70 @@ $(document).ready(function(){
 	deleteyn = mvo.getMdeleteyn(); 
 	}
 %>
-<div>
-<form name ="memUpdateForm" id="memUpdateForm">
-<h2><font size="4" style="color:Blue;">전지적 냉장고 시점 : 회원 조회</font>			</h2>
-<hr>
-<table border="1">
-<tr>
-<td colspan="2" align="center">
-	<font size="4" style="color:Blue;">전지적냉장고시점</font>
-</td>
-</tr>
-<tr>
-<td class="mem">회원 번호 </td>
-<td><input type="text" name="mno" id="mno" value="<%= no %>" readonly/></td>
-</tr>
-<tr>
-<td class="mem"> 아이디 </td>
-<td><input type="text" name="mid" id="mid" value="<%= id %>" /></td>
-</tr>
-<tr>
-<td class="mem"> 비밀 번호 </td>
-<td><input type="text" name="mpw" id="mpw" value="<%= pw %>" /></td>
-</tr>
-<tr>
-<td class="mem"> 이름 </td>
-<td><input type="text" name="mname" id="mname" value="<%= name %>" /></td>
-</tr>
-<tr>
-<td class="mem"> 닉네임 </td>
-<td><input type="text" name="mnick" id="mnick" value="<%= nick %>" /></td>
-</tr>
-<tr>
-<td class="mem">전화 번호 </td>
-<td><input type="text" name="mhp" id="mhp" value="<%= hp %>" /></td>
-</tr>
-<tr>
-<td class="mem">이메일 </td>
-<td><input type="text" name="memail" id ="memail" value="<%= email %>" /></td>
-</tr>
-<tr>
-<td class="mem">도로명주소 </td>
-<td><input type="text" name="maddr" id="maddr" placeholder="도로명주소" value="<%= addr %>" /></td>
-</tr>
-<tr>
-<td class="mem">사진  </td>
-<td>
-<img src="<%= new FileLoadUtil().getFileSrc("member",  photo) %>" border="1" width="40" height="50" alt="image">
-</td>
-</tr>
-<tr>
-<td class="mem">등록일</td>
-<td><input type="text" name="minsertdate" id="minsertdate" value="<%=insertdate %>" readonly></td>
-</tr>
-<tr>
-<td class="mem">수정일</td>
-<td><input type="text" name="mupdatedate" id="mupdatedate" value="<%=updatedate %>" readonly></td>
-</tr>
-
-<tr>
-	<td colspan="2">
-		<input type="button" value="수정" id="U">
-		<input type="button" value="삭제" id="D">
-		<input type="reset" value="취소">
-		 &nbsp;&nbsp;&nbsp;&nbsp;
-	    <input type="button" value="목록" id="SALL">
-	</td>
-</tr>
-</table>
-</form>
+<div id ="wrapper">
+<div class="jumbotron">
+<div class="section-header">회원 조회</div>
+	<form name ="memUpdateForm" id="memUpdateForm">
+	<table class="table">
+		<tr>
+			<td class="tt">회원 번호 </td>
+			<td><input type="text" class="form-control" name="mno" id="mno" value="<%= no %>" readonly/></td>
+		</tr>
+		<tr>
+			<td class="tt"> 아이디 </td>
+			<td><input type="text" class="form-control" name="mid" id="mid" value="<%= id %>" readonly/></td>
+		</tr>
+		<tr>
+			<td class="tt"> 비밀 번호 </td>
+			<td><input type="text" class="form-control" name="mpw" id="mpw" value="<%= pw %>" readonly/></td>
+		</tr>
+		<tr>
+			<td class="tt"> 이름 </td>
+			<td><input type="text" class="form-control" name="mname" id="mname" value="<%= name %>" readonly/></td>
+		</tr>
+		<tr>
+			<td class="tt"> 닉네임 </td>
+			<td><input type="text" class="form-control" name="mnick" id="mnick" value="<%= nick %>" /></td>
+		</tr>
+		<tr>
+			<td class="tt">전화 번호 </td>
+			<td><input type="text" class="form-control" name="mhp" id="mhp" value="<%= hp %>" /></td>
+		</tr>
+		<tr>
+			<td class="tt">이메일 </td>
+			<td><input type="text" class="form-control" name="memail" id ="memail" value="<%= email %>" /></td>
+		</tr>
+		<tr>
+			<td class="tt">도로명주소 </td>
+			<td><input type="text" class="form-control"  name="maddr" id="maddr" placeholder="도로명주소" value="<%= addr %>" /></td>
+		</tr>
+		<tr>
+		<td class="tt">사진  </td>
+		<td><img id="thumb00" src="<%=new FileLoadUtil().getFileSrc("member",  photo)%>"><br>
+			이미지 변경하기▼ 
+			<input type="file" class="form-control" id="inputGroupFile02" name="file00" onchange="setThumbnail(event);">	
+		</td>
+		</tr>
+		<tr>
+			<td class="tt">등록일</td>
+			<td><input type="text" class="form-control" name="minsertdate" id="minsertdate" value="<%=insertdate %>" readonly></td>
+		</tr>
+		<tr>
+			<td class="tt">수정일</td>
+			<td><input type="text" class="form-control" name="mupdatedate" id="mupdatedate" value="<%=updatedate %>" readonly></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" class="btn btn-orange" value="수정" id="U">
+				<input type="button" class="btn btn-orange" value="삭제" id="D">
+				<input type="reset" class="btn btn-orange" value="취소">
+				 &nbsp;&nbsp;&nbsp;&nbsp;
+			    <input type="button" class="btn btn-orange" value="목록" id="SALL">
+			</td>
+		</tr>
+	</table>
+	</form>
+</div>
 </div>
 <%@ include file="/WEB-INF/include/jsp/footer.jsp"%>
 </body>
