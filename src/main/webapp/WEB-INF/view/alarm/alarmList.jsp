@@ -38,13 +38,21 @@
 							<fmt:formatDate value="${insertdate}" var="insertdate2"
 								type="DATE" pattern="yyyy-MM-dd" />
 							<td><c:out value="${insertdate2}" /></td>
-							<td><c:if test="${alarmList.type eq 'reply'}">
+						<td>
+							<c:if test="${alarmList.type eq 'reply'}">
 									<c:out value="${alarmList.sender}" />님이 회원님의 게시물에
 								댓글을 달았습니다.
-						</c:if> <c:if test="${alarmList.type eq 'subscribe'}">
-
-									<c:out value="${alarmList.sender}" />님이 회원님의 글을 구독하기 시작했습니다.
-						</c:if></td>
+							</c:if> 
+							<c:if test="${alarmList.type eq 'subscribe'}">
+								<c:out value="${alarmList.sender}" />님이 회원님의 글을 구독하기 시작했습니다.
+							</c:if>
+							<c:if test="${alarmList.type eq 'recommend'}">
+								<c:out value="${alarmList.sender}" />님이 회원님의 글을 추천했습니다.
+							</c:if>
+							<c:if test="${alarmList.type eq 'norecommend'}">
+								<c:out value="${alarmList.sender}" />님이 회원님의 글에 대한 추천을 취소했습니다.
+							</c:if>
+						</td>
 						</tr>
 					</c:forEach>
 				</tbody>

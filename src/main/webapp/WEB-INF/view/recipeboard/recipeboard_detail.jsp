@@ -30,9 +30,14 @@
 	</style>
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript">
+	
 		$(document).ready(()=>
-		{
-
+		{		
+			var sessionMno = "<%=mno%>";
+			var sessionWriter = "<%=mnick%>";
+			console.log("sessionWriter >>> : " + sessionWriter);
+			
+			//조회수 증가
 			$.ajax
 			({
 				url:"recipeBoardViewsPP.do",
@@ -40,20 +45,23 @@
 				type:"GET",
 				dataType:"json"
 			}).always((data)=>{console.log(data)});
-		
-			/* 즐겨찾기와 통합
-			$("#hitsBtn").click(()=>
-			{
-				$.ajax
-				({
-					url:"recipeBoardHitsPP.do",
-					data:{rbno:"<%=rbvo.getRbno()%>"},
-					type:"GET",
-					dataType:"json"
-				}).always((data)=>{console.log(data); alert("추천하였습니다")});
-			});
-			*/
 			
+			//게시글 작성자 확인
+			$.ajax
+			({
+				url:"recipeBoardGetMnick.do",
+				data:{mno:"<%=rbvo.getMno()%>"},
+				type:"GET",
+				dataType:"json"
+			}).done((data)=>{$("#mnick").text(data.mnick)})
+			
+			// 로그인 유저와 작성자가 일치할 경우 수정/삭제 버튼 생성
+			var boardMno = $("#mno").val();
+			if ( sessionMno == boardMno){
+				$('#updateBtn').attr('disabled', false);
+				$('#D').attr('disabled', false);
+			}
+
 			// 수정
 			$(document).on("click", "#updateBtn", function(){
 				$("#rb_detail").attr("action", "rbupdateform.do");	
@@ -65,6 +73,15 @@
 			// 취소
 			$(document).on("click", "#C", function(){
 				location.href="/kosmoJns/recipeboard_list.do";
+			});
+			
+			
+			// 삭제
+			$(document).on("click", "#D", function(){
+				$("#rb_detail").attr("action", "rbdelete.do");	
+				$("#rb_detail").attr("method", "GET");	
+				$("#rb_detail").attr('enctype','multipart/form-data');	
+				$("#rb_detail").submit();
 			});
 
 			//===============================Vue로 추천수을 프론트단에서 변경
@@ -117,8 +134,10 @@
 				function whenSuccess(data){
 					if (data == "OK"){
 						$("#favRecipeUser").val("추천 취소하기");
+						sendMessage("recommend");
 						alert("해당 레시피를 추천했습니다. 추천 레시피는 나의 추천 레시피에서 확인하실 수 있습니다");
 					}else if(data == "DeleteOK"){
+						sendMessage("norecommend");
 						$("#favRecipeUser").val("추천하기");
 						alert("해당 레시피 추천를 취소하였습니다.");
 					}else{
@@ -175,9 +194,9 @@
 					<td colspan="2"><h2><%=rbvo.getRcp_nm()%></h2></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="vertical-align: middle;"><%=rbvo.getMno()%>&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="hidden" id="mno" name="mno" value="<%=rbvo.getMno()%>">
-					<input type="hidden" id="rbno" name="rbno" value="<%=rbvo.getRbno()%>">			
+					<td colspan="2" style="vertical-align: middle;"><div id="mnick"></div>
+						<input type="hidden" id="mno" name="mno" value="<%=rbvo.getMno()%>">
+						<input type="hidden" id="rbno" name="rbno" value="<%=rbvo.getRbno()%>">			
 					</td>
 				</tr>
 				<tr>
@@ -200,7 +219,7 @@
 			</tr>
 			<tr>
 				<td class="tt">메인 이미지</td>			
-				<td><img src="<%=new FileLoadUtil().getFileSrc("recipeboard", rbvo.getMain_img())%>"></td>
+				<td><img src="<%=new FileLoadUtil().getFileSrc(request, rbvo.getMain_img())%>"></td>
 			</tr>
 			<tr>
 				<td class="tt">재료정보 : </td>
@@ -702,7 +721,8 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="right">
-					<input type="button" class="btn btn-orange" id="updateBtn" value="수정">
+					<input type="button" class="btn btn-orange" id="updateBtn" disabled="disabled" value="수정">
+					<input type="button" class="btn btn-orange" id="D" disabled="disabled" value="삭제">
  					<input type="button" class="btn btn-orange" name="favRecipeUser" id="favRecipeUser" v-on:click="hitPlus()" value="추천하기">
 					<input type="button" class="btn btn-orange" id="C" value="목록">
 				</td>

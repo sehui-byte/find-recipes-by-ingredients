@@ -2,6 +2,8 @@ package com.jns.chef.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,9 @@ import com.jns.chabun.service.ChabunService;
 import com.jns.chef.service.ChefService;
 import com.jns.chef.vo.ChefVO;
 import com.jns.common.ChabunUtil;
+import com.jns.common.Paging;
+import com.jns.myinfo.service.MyinfoService;
+import com.jns.recipeboard.vo.RecipeBoardVO;
 
 @Controller
 public class ChefController {
@@ -20,12 +25,15 @@ public class ChefController {
 		
 	private ChefService chefService;
 	private ChabunService chabunService;
+	private MyinfoService myinfoService;
 	
 	@Autowired(required=false)
 	public ChefController(ChefService chefService
-						 ,ChabunService chabunService) {
+						 ,ChabunService chabunService
+						 ,MyinfoService myinfoService) {
 		this.chefService = chefService;
 		this.chabunService = chabunService;
+		this.myinfoService = myinfoService;
 	}
 	
 	// 테스트
@@ -85,16 +93,34 @@ public class ChefController {
 	* 세프 조회
 	********************************************************************************************/
 	@RequestMapping(value="chef/chefselect", method=RequestMethod.GET)
-	public String chefSelect(ChefVO cvo, Model model) {
+	public String chefSelect(ChefVO cvo, RecipeBoardVO rbvo, Model model, HttpServletRequest request) {
 		logger.info("[ChefController] >> chefSelect 호출 성공");
 		logger.info("[ChefController] >> chefSelect >> cvo.getMno()>>> :" + cvo.getMno());
 		
-		List<ChefVO> list = chefService.chefSelect(cvo);
+		rbvo.setMno(cvo.getMno());
+		logger.info("[ChefController] >> chefSelect >> rbvo.getMno()>>> :" + rbvo.getMno());
 		
+		List<ChefVO> list = chefService.chefSelect(cvo);
 		logger.info("[ChefController] >> chefSelect list.size() >>> : " + list.size());
+		
+		int totalCnt = 0;
+		String cPage = request.getParameter("curPage");
+		String pageCtrl = request.getParameter("pageCtrl");
+
+		Paging.setPage(rbvo, cPage, pageCtrl); // 페이징할 정보를 Paging클래스에 보내줍니다
+
+		List<RecipeBoardVO> chefRecipeList = myinfoService.myRecipeListPage(rbvo);
+		logger.info("[ChefController] >> chefSelect chefRecipeList.size() >>> : " + chefRecipeList.size());
+
+		if (chefRecipeList.size() != 0) {
+			totalCnt = chefRecipeList.get(0).getTotalCount(); // 쿼리 조회한 리스트의 0번 인덱스에 담긴 totalCount값
+			rbvo.setTotalCount(totalCnt); // vo에 담기
+		}
 		
 		if(list.size() == 1) {
 			model.addAttribute("list", list);
+			model.addAttribute("chefRecipeList", chefRecipeList);
+			model.addAttribute("p_rbvo", rbvo);
 			return "chef/chefselect";
 		}
 		

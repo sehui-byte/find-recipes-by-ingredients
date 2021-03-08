@@ -173,7 +173,7 @@
 				}else{
 		%>
 		    	<div style="text-align: center;">
-		    	<img src="..." class="card-img-top" alt="회원 이미지..."
+		    	<img src="../<%= new FileLoadUtil().getFileSrc("member", svo0.getMphoto()) %>" class="card-img-top" alt="회원 이미지..."
 		    		style="width:150px; height:150px">
 		    	</div>
 		<%
@@ -183,7 +183,7 @@
 		    <h5 class="card-title"><img src="/kosmoJns/resources/img/gold-medal.png"
 	    		 alt="gold" style="width:30px; height:30px"><%=svo0.getChefnick()%></h5>
 		    <p class="card-text">구독자 <%=svo0.getSubCount()%>명<br>전냉시 주방장</p>
-		    <a class="btn btn-warning" href="#">View details &raquo;</a>
+		    <a class="btn btn-warning" href="/kosmoJns/chef/chefselect.do?mno=<%=svo0.getChefmno()%>">View details &raquo;</a>
 		    </div>
 	 	<%
 			} // end of if 
@@ -212,7 +212,7 @@
 				}else{
 		%>
 		    	<div style="text-align: center;">
-		    	<img src="..." class="card-img-top" alt="회원 이미지..."
+		    	<img src="../<%= new FileLoadUtil().getFileSrc("member", svo1.getMphoto()) %>" class="card-img-top" alt="회원 이미지..."
 		    		style="width:150px; height:150px">
 		    	</div>
 		<%
@@ -222,7 +222,7 @@
 		    <h5 class="card-title"><img src="/kosmoJns/resources/img/silver-medal.png"
 	    		 alt="gold" style="width:30px; height:30px"><%=svo1.getChefnick()%></h5>
 		    <p class="card-text">구독자 <%=svo1.getSubCount()%>명<br>수석 조리장</p>
-		    <a class="btn btn-warning" href="#">View details &raquo;</a>
+		    <a class="btn btn-warning" href="/kosmoJns/chef/chefselect.do?mno=<%=svo1.getChefmno()%>">View details &raquo;</a>
 		    </div>
 	 	<%
 			} // end of if 
@@ -251,7 +251,7 @@
 				}else{
 		%>
 		    	<div style="text-align: center;">
-		    	<img src="..." class="card-img-top" alt="회원 이미지..."
+		    	<img src="../<%= new FileLoadUtil().getFileSrc("member", svo2.getMphoto()) %>" class="card-img-top" alt="회원 이미지..."
 		    		style="width:150px; height:150px">
 		    	</div>
 		<%
@@ -261,7 +261,7 @@
 		    <h5 class="card-title"><img src="/kosmoJns/resources/img/bronze-medal.png"
 	    		 alt="gold" style="width:30px; height:30px"><%=svo2.getChefnick()%></h5>
 		    <p class="card-text">구독자 <%=svo2.getSubCount()%>명<br>1급 요리사</p>
-		    <a class="btn btn-warning" href="#">View details &raquo;</a>
+		    <a class="btn btn-warning" href="/kosmoJns/chef/chefselect.do?mno=<%=svo2.getChefmno()%>">View details &raquo;</a>
 		    </div>
 	 	<%
 			} // end of if 

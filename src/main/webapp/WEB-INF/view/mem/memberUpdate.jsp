@@ -9,7 +9,7 @@
 <body>
 <hr>
 <script>
-		location.href="main.do";
+		location.href="/kosmoJns/memberSelectAll.do";
 </script>
 </body>
 </html>

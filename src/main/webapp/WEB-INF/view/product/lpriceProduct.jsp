@@ -33,6 +33,9 @@
 						//console.log("title >> " + title);
 						var lprice = item[i].lprice;
 						//console.log("lprice >> " + lprice);
+						var image = item[i].image;
+						image = image.replace(/http:\\/gi,'');
+						console.log("image >> " + image)
 						
 						// 최저가 비교 결과
 						var result = sendFlask(productId);
@@ -42,9 +45,13 @@
 						// 1 : 최저가 변동 있음 -> 알림
 						// 0 : 최저가 변동 없음
 						if(result == 1){
-							var sendMessage = "관심 상품 < " + title + " > 의 최저가를 지금 만나보세요 !";
-							alert(sendMessage);
+							//var sendMessage = "관심 상품 < " + title + " > 의 최저가를 지금 만나보세요 !";
+							//alert(sendMessage);
+							popup(title, image);
 						}
+						/* if(result ==0){
+							popup(title, image);
+						} */
 						
 					}
 					console.log(">>>>>> getLikeProLprice() >> END");
@@ -83,6 +90,37 @@
 				}
 			});
 			return flaskresult;
+		}
+		
+		
+		// 최저가 변동시 팝업창 띄우기
+		function popup(title, image) {
+			// '오늘 하루 보지 않기' 설정 이미 되어 있는지 확인
+			var cookieCheck = getCookie("close");
+		    // 설정 되어 있지 않은 경우, 팝업창 열기
+			if (cookieCheck != "close"){
+		    	var url = "popup.do?info=";
+		    	url += title;
+		    	url += "==";
+		    	url += image;
+		    	console.log("url >> " + url);
+		    	var name = "lpricepopup";
+				var option = "width=300, height=300, toolbar=no, status=no, location=no, scrollbar=no, menubar=no, resizable=yes, left=50, right=50";
+				window.open(url, name, option);
+		     }
+		}
+		// 쿠키값 가져오기
+		function getCookie(name) {
+		     var cookie = document.cookie;
+		     if (document.cookie != "") {
+		          var cookieArray = cookie.split("; ");
+		          for ( var index in cookieArray) {
+		              var cookieName = cookieArray[index].split("=");
+		              if (cookieName[0] == "close") {
+		                   return cookieName[1];
+		              }
+		          }
+		     } return ;    
 		}
 		
 		

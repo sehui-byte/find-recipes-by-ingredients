@@ -105,7 +105,7 @@
 			</tr>
 			<tr>
 				<td class="mem" width="20%">첨부파일</td>
-				<td><img id="thumb00" src="<%=new FileLoadUtil().getFileSrc("noticeboard", nvo.getBfile())%>"><br>
+				<td><img id="thumb02" src="<%=new FileLoadUtil().getFileSrc("noticeboard", nvo.getBfile())%>"><br>
 					이미지 변경하기▼ 
 					<input type="file" class="form-control" id="file02" name="file02" onchange="setThumbnail(event);">				
 				</td>

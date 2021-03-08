@@ -23,6 +23,8 @@ import com.jns.common.DateFormatUtil;
 import com.jns.common.FileLoadUtil;
 import com.jns.common.FileUploadUtil;
 import com.jns.common.Paging;
+import com.jns.member.service.MemberService;
+import com.jns.member.vo.MemberVO;
 import com.jns.recipe.service.RecipeService;
 import com.jns.recipeboard.service.RecipeBoardService;import com.jns.recipeboard.service.RecipeBoardServiceImpl;
 import com.jns.recipeboard.vo.RecipeBoardVO;
@@ -31,6 +33,7 @@ import com.jns.recipeboard.vo.RecipeBoardVO;
 public class RecipeBoardController 
 {
 	private RecipeBoardService recipeBoardService;
+	private MemberService memberService;
 	private ChabunService chabunService;
 	private Logger logger = Logger.getLogger(RecipeBoardController.class);
 	
@@ -40,9 +43,10 @@ public class RecipeBoardController
 	}//Default Constructor
 	
 	@Autowired(required = false)
-	public RecipeBoardController(RecipeBoardService recipeBoardService, ChabunService chabunService) 
+	public RecipeBoardController(RecipeBoardService recipeBoardService, MemberService memberService, ChabunService chabunService) 
 	{
 		this.recipeBoardService = recipeBoardService;
+		this.memberService = memberService;
 		this.chabunService = chabunService;
 	}//생성자
 	
@@ -71,10 +75,10 @@ public class RecipeBoardController
 		{
 			totalCnt = pageList.get(0).getTotalCount();
 			rbvo.setTotalCount(totalCnt);
+			
+			logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+			logger.info("pageList.size >>> : " + pageList.size());
 		}
-		
-		logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
-		logger.info("pageList.size >>> : " + pageList.size());
 		
 		model.addAttribute("rbvo", rbvo);
 		model.addAttribute("pageList", pageList);
@@ -162,10 +166,10 @@ public class RecipeBoardController
 		{
 			totalCnt = pageList.get(0).getTotalCount();
 			rbvo.setTotalCount(totalCnt);
+
+			logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+			logger.info("pageList.size >>> : " + pageList.size());
 		}
-		
-		logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
-		logger.info("pageList.size >>> : " + pageList.size());
 		
 		model.addAttribute("rbvo", rbvo);
 		model.addAttribute("pageList", pageList);
@@ -215,10 +219,62 @@ public class RecipeBoardController
 
 		recipeBoardService.recipeBoardUpdate(rbvo);
 		
-		model.addAttribute("list", recipeBoardService.recipeBoardSelectAll());
-		return "recipeboard/recipeboard";
+		//============================= 페이징 =============================//
+		int totalCnt = 0;
+		String curPage = request.getParameter("curPage");
+		String sizeCtrl = request.getParameter("sizeCtrl");
+		
+		Paging.setPage(rbvo, curPage, sizeCtrl); //페이징 변수 초기화
+		logger.info("rbvo >>> : " + rbvo.toString());
+		
+		List<RecipeBoardVO> pageList = recipeBoardService.recipeBoardSelectAllPage(rbvo);
+		if(pageList.size() != 0)
+		{
+			totalCnt = pageList.get(0).getTotalCount();
+			rbvo.setTotalCount(totalCnt);
+			
+			logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+			logger.info("pageList.size >>> : " + pageList.size());
+		}
+		
+		model.addAttribute("rbvo", rbvo);
+		model.addAttribute("pageList", pageList);
+		
+		return "recipeboard/recipeboard_list";
 	}
 	
+	@RequestMapping(value = "rbdelete.do", method = RequestMethod.GET)
+	public String rbdelete(RecipeBoardVO rbvo, Model model)
+	{
+		logger.info("[RecipeBoardController] rbdelete.do 호출됨");
+
+		recipeBoardService.recipeBoardDelete(rbvo);
+		
+		//============================= 페이징 =============================//
+		int totalCnt = 0;
+		String curPage = null;
+		String sizeCtrl = null;
+		
+		Paging.setPage(rbvo, curPage, sizeCtrl); //페이징 변수 초기화
+		logger.info("rbvo >>> : " + rbvo.toString());
+		
+		List<RecipeBoardVO> pageList = recipeBoardService.recipeBoardSelectAllPage(rbvo);
+		if(pageList.size() != 0)
+		{
+			totalCnt = pageList.get(0).getTotalCount();
+			rbvo.setTotalCount(totalCnt);
+			
+			logger.info("pageList.get(0).toString()" + pageList.get(0).toString());
+			logger.info("pageList.size >>> : " + pageList.size());
+		}
+		
+		model.addAttribute("rbvo", rbvo);
+		model.addAttribute("pageList", pageList);
+		
+		return "recipeboard/recipeboard_list";
+	}
+
+		
 //	@RequestMapping(value = "filetest", method = RequestMethod.POST)
 //	public String filetest(RecipeBoardVO rbvo, MultipartHttpServletRequest request)
 //	{
@@ -291,6 +347,18 @@ public class RecipeBoardController
 		
 		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("ok", recipeBoardService.recipeBoardHitsPP(rbvo));
+		return map;
+	}
+	
+	@RequestMapping(value = "recipeBoardGetMnick", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, String> recipeBoardGetMnick(MemberVO mvo)
+	{
+		logger.info("recipeBoardGetMnick.do 호출됨");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("mnick", memberService.memberSelect(mvo).get(0).getMnick());
+		logger.info("mnick >>> : "  + map.get("mnick"));
 		return map;
 	}
 	

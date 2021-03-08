@@ -155,4 +155,10 @@ public class ProductController {
 		
 		}
 */
+	
+	// 최저가 변동 팝업창 띄우기
+	@RequestMapping(value="popup.do", method=RequestMethod.GET)
+	public String lpricepopup() {
+		return "product/lpricepopup";
+	}
 }
