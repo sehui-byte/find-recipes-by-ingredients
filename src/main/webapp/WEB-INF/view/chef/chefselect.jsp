@@ -122,6 +122,7 @@
 	Object obj = request.getAttribute("list");
 	List<ChefVO> list = (List)obj;
 	
+	String chefMno = "";
 	int nCnt = list.size();
 	System.out.println("chefselect.jsp nCnt >>> : " + nCnt);
 %>
@@ -133,6 +134,7 @@
 	if (nCnt > 0) {
 		for(int i=0; i<nCnt; i++){
 			ChefVO cvo = list.get(i);
+			chefMno = cvo.getMno();
 %>
 	<div class="section-header"><%=cvo.getMnick() %> Recipe</div>
 	셰프 번호 : <%=cvo.getIno() %>
@@ -256,7 +258,6 @@
 	<!-- =================  검색창 그리드 설정 ================= -->	
 	
 	<br>
-	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 	<div class="paging">
 		<jsp:include page="../myinfo/page/paging.jsp" flush="true">
 			<jsp:param name="url" value="chefselect"/>
@@ -265,7 +266,7 @@
 			<jsp:param name="groupSize" value="<%=groupSize%>"/>
 			<jsp:param name="curPage" value="<%=curPage%>"/>
 			<jsp:param name="totalCount" value="<%=totalCount%>"/>
-			<jsp:param name="mno" value="<%=mno %>"/>
+			<jsp:param name="mno" value="<%=chefMno %>"/>
 		</jsp:include>
 	</div>
 </form>

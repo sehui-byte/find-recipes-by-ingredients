@@ -22,6 +22,7 @@
 	<select id="chefSelect" parameterType="cvo" resultType="cvo">
 		SELECT 
 				 B.INO
+				,B.MNO 
 		        ,A.MID
 		        ,A.MNAME
 		        ,A.MNICK
