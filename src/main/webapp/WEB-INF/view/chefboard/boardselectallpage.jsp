@@ -173,7 +173,7 @@
 				}else{
 		%>
 		    	<div style="text-align: center;">
-		    	<img src="<%= new FileLoadUtil().getFileSrc("member", svo0.getMphoto()) %>" class="card-img-top" alt="회원 이미지..."
+		    	<img src="../<%= new FileLoadUtil().getFileSrc("member", svo0.getMphoto()) %>" class="card-img-top" alt="회원 이미지..."
 		    		style="width:150px; height:150px">
 		    	</div>
 		<%
@@ -212,7 +212,7 @@
 				}else{
 		%>
 		    	<div style="text-align: center;">
-		    	<img src="<%= new FileLoadUtil().getFileSrc("member", svo1.getMphoto()) %>" class="card-img-top" alt="회원 이미지..."
+		    	<img src="../<%= new FileLoadUtil().getFileSrc("member", svo1.getMphoto()) %>" class="card-img-top" alt="회원 이미지..."
 		    		style="width:150px; height:150px">
 		    	</div>
 		<%
@@ -251,7 +251,7 @@
 				}else{
 		%>
 		    	<div style="text-align: center;">
-		    	<img src="<%= new FileLoadUtil().getFileSrc("member", svo2.getMphoto()) %>" class="card-img-top" alt="회원 이미지..."
+		    	<img src="../<%= new FileLoadUtil().getFileSrc("member", svo2.getMphoto()) %>" class="card-img-top" alt="회원 이미지..."
 		    		style="width:150px; height:150px">
 		    	</div>
 		<%
