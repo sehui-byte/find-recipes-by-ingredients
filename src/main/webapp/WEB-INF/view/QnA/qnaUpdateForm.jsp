@@ -114,7 +114,7 @@
 			</tr>
 			<tr>
 				<td class="mem" width="20%">첨부파일</td>
-				<td><img id="thumb00" src="<%=new FileLoadUtil().getFileSrc("qnaboard", bvo.getBfile())%>"><br>
+				<td><img id="thumb01" src="<%=new FileLoadUtil().getFileSrc("qnaboard", bvo.getBfile())%>"><br>
 					이미지 변경하기▼ 
 					<input type="file" class="form-control" id="file01" name="file01" onchange="setThumbnail(event);">				
 				</td>

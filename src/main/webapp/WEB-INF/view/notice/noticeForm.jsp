@@ -79,7 +79,6 @@
 	      <select class="form-select" name=btype id=btype>
 	         <option>글 유형을 선택하세요</option>
 	         <option>공지사항</option>
-	         <option>QnA</option>
 	      </select>
 	      </td>
 		</tr>
