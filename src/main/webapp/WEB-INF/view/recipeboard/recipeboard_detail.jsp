@@ -96,7 +96,6 @@
 							var hitStatus = $("#favRecipeUser").val();
 							if (hitStatus == '추천하기'){
 								if(sessionMno != null && sessionMno.length != 0){
-									alert(sessionMno);
 									this.hitsPoint = parseInt(this.hitsPoint) + parseInt(this.plus);
 								}
 							}else{
