@@ -134,6 +134,8 @@ public class EchoHandler extends TextWebSocketHandler {
 		avo.setReceiver(receiver);
 		avo.setSender(sender);
 		avo.setType(type);
+		
+		
 
 		boolean isLogin = false;
 		for(String tmpKey : users.keySet()) {
@@ -144,18 +146,20 @@ public class EchoHandler extends TextWebSocketHandler {
 				System.out.println("로그인 상태");
 				avo.setReadyn("Y");//로그인 상태시엔 읽은 걸로 처리
 				adao.insertAlarm(avo);
+				avo = (AlarmVO) adao.selectOneAlarm(avo);
+				String mnick = avo.getMnick();
 				
 				if(type.equals("subscribe")) {
-					user.sendMessage(new TextMessage(",," +sender +"님이 회원님을 구독하기 시작했습니다."));
+					user.sendMessage(new TextMessage(",," +mnick +"님이 회원님을 구독하기 시작했습니다."));
 				}
 				else if(type.equals("reply")) {
-					user.sendMessage(new TextMessage(",," +sender +"님이 회원님 게시물에 댓글을 달았습니다."));
+					user.sendMessage(new TextMessage(",," +mnick +"님이 회원님 게시물에 댓글을 달았습니다."));
 				}
 				else if(type.equals("recommend")) {
-					user.sendMessage(new TextMessage(",," +sender +"님이 회원님 게시물을 추천하였습니다."));
+					user.sendMessage(new TextMessage(",," +mnick +"님이 회원님 게시물을 추천하였습니다."));
 				}
 				else if(type.equals("norecommend")) {
-					user.sendMessage(new TextMessage(",," +sender +"님이 회원님 게시물에 대한 추천을 취소했습니다"));
+					user.sendMessage(new TextMessage(",," +mnick +"님이 회원님 게시물에 대한 추천을 취소했습니다"));
 				}
 				else if(type.equals("count")) {
 					user.sendMessage(new TextMessage(Integer.toString(count)));

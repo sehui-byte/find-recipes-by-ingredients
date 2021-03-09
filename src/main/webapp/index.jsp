@@ -174,7 +174,7 @@ hr{
 	    <div class="row featurette">
 	      <div class="col-md-7">
 	        <h2 class="featurette-heading">당신의 요리 실력을 뽐내주세요!<span class="text-muted"><br>Show off your cooking skills!</span></h2>
-	        <p class="lead"><br>추전수 00 이상이면 자동 등업 <i class="bi bi-arrow-right-circle-fill"></i></p>
+	        <p class="lead"><br>게시글 50개, 추전수 100 이상이면 자동 등업 <i class="bi bi-arrow-right-circle-fill"></i></p>
 	      </div>
 	      <div class="col-md-5">
       		<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" 

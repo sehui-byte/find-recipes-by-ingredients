@@ -25,6 +25,13 @@ public class AlarmServiceImpl implements AlarmService{
 		return adao.selectAlarm(avo);
 	}
 
+	
+	@Override
+	public AlarmVO selectOneAlarm(AlarmVO avo) {
+		// TODO Auto-generated method stub
+		return adao.selectOneAlarm(avo);
+	}
+
 	@Override
 	public int updateReadYN(AlarmVO avo) {
 		return adao.updateReadYN(avo);
