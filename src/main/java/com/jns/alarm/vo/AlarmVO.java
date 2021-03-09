@@ -8,6 +8,7 @@ public class AlarmVO {
 	private String type;
 	private String insertdate;
 	private String readyn;
+	private String mnick;
 	
 	private int pageSize;
 	private int groupSize;
@@ -20,6 +21,7 @@ public class AlarmVO {
 		
 	}
 	
+
 	public AlarmVO(int pageSize, int groupSize, int curPage, int totalCount) {
 	
 		this.pageSize = pageSize;
@@ -27,6 +29,15 @@ public class AlarmVO {
 		this.curPage = curPage;
 		this.totalCount = totalCount;
 	}
+	
+	public String getMnick() {
+		return mnick;
+	}
+
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
+	}
+
 	public String getReadyn() {
 		return readyn;
 	}

@@ -50,4 +50,11 @@ public class AlarmDAOImpl implements AlarmDAO{
 		return sqlSession.selectList("AlarmPage", avo);
 	}
 
+	@Override
+	public AlarmVO selectOneAlarm(AlarmVO avo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("selectOneAlarm", avo);
+	}
+
+	
 }

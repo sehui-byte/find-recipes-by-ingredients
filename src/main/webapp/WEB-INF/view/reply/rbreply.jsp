@@ -364,7 +364,7 @@
 			<tr>
 				<td align="right">
 					<input class="btn btn-orange" type="button" id="replyInsert" value="저장" 
-						   onclick="sendMessage()">
+						   onclick="sendMessage2()">
 				</td>
 			</tr>
 		</table>
@@ -383,7 +383,7 @@
 	System.out.println("게시물 글 작성자 >>> : " + BoardWriterMno);
 %>
 
-function sendMessage() {
+function sendMessage2() {
 	
 	//웹소켓으로 메세지 전달(프로토콜 : "댓글 작성자 mno, 글작성 mno, reply")
 	var mno = '<%=mno%>'; 
