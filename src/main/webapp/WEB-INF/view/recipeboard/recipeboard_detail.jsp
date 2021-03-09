@@ -95,7 +95,10 @@
 					hitPlus: function(){
 							var hitStatus = $("#favRecipeUser").val();
 							if (hitStatus == '추천하기'){
-								this.hitsPoint = parseInt(this.hitsPoint) + parseInt(this.plus);
+								if(sessionMno != null && sessionMno.length != 0){
+									alert(sessionMno);
+									this.hitsPoint = parseInt(this.hitsPoint) + parseInt(this.plus);
+								}
 							}else{
 								this.hitsPoint = parseInt(this.hitsPoint) - parseInt(this.plus);
 							}
@@ -109,7 +112,7 @@
 			
 			$("#favRecipeUser").on("click", function(){
 				var mno = "<%= mno %>";
-				if (mno == null && mno.length == 0){
+				if (mno == null || mno.length == 0){
 					alert("비회원을 추천를 할 수 없습니다. 회원 가입 후에 이용해주시기 바랍니다.");
 					return;
 				}
