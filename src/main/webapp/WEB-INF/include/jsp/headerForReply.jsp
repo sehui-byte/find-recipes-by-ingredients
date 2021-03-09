@@ -154,18 +154,6 @@ div, h1, h2, h3, h4, h5, h6, p {
 </head>
 <body>
 
-	<script>
-		function sendLogout() {
-			socket.close();
-			sock.close();
-			$("#logoutForm").attr("action",
-					"<c:url value='/j_spring_security_logout' />");
-			$("#logoutForm").attr("method", "POST");
-			$("#logoutForm").attr("enctype",
-					"application/x-www-form-urlencoded");
-			$("#logoutForm").submit();
-		}
-	</script>
 	<!-- bootstrap js -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"

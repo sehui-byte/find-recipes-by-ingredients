@@ -327,7 +327,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 			socket.close();
 			sock.close();
 			$("#logoutForm").attr("action",
-					"<c:url value='/j_spring_security_logout' />");
+					"<c:url value='/j_spring_security_logout'/>");
 			$("#logoutForm").attr("method", "POST");
 			$("#logoutForm").attr("enctype",
 					"application/x-www-form-urlencoded");
