@@ -187,8 +187,10 @@ public class MyinfoServiceImpl implements MyinfoService {
 			mvo.setMpw(nMpw_encoded);
 
 			result = myinfoDAO.myPWUpdate(mvo);
+			logger.info(result);
 		}
 		// 불일치
+		logger.info(result);
 		return result;
 	}
 

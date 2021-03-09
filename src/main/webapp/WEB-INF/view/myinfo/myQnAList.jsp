@@ -258,7 +258,7 @@
 				<input type="checkbox" name="bno" value="<%= bvo.getBno()%>" class="checkbox">	
 			</td>	
 			<td>
-				<div class="scrolldiv"><a href="/kosmoJns/qnaSelect?bno=<%= bvo.getBno() %>"><%= bvo.getBcontent() %></a></div>
+				<a href="/kosmoJns/qnaSelect?bno=<%= bvo.getBno() %>"><%= bvo.getBcontent() %></a>
 			</td>	
 			<td class="tt" style="font-size: 12px"><%= bvo.getBinsertdate() %></td>	
 			<td class="tt" style="font-size: 12px"><%= bvo.getBhits() %></td>	
