@@ -20,4 +20,6 @@ public interface AlarmDAO {
 	public int updateReadYN(AlarmVO avo);
 	//알람 페이지 처리
 	public List<AlarmVO> AlarmPage(AlarmVO avo);
+	
+	public AlarmVO selectOneAlarm(AlarmVO avo);
 }

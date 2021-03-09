@@ -4,8 +4,30 @@
 
 
 	<select id="selectAlarm" resultType="avo" parameterType="avo">
-		SELECT * FROM ALARM WHERE RECEIVER = #{receiver, jdbcType=VARCHAR}
+		SELECT  
+				 A.ANO 			AS ANO				
+				,A.RECEIVER		AS RECEIVER
+				,A.TYPE			AS TYPE
+			    ,A.INSERTDATE	AS INSERTDATE
+			    ,A.READYN		AS READYN
+			    ,B.MNICK 		AS MNICK
+		FROM ALARM A, MEMBER B
+		WHERE A.RECEIVER = B.MNO
+		AND A.RECEIVER = #{receiver, jdbcType=VARCHAR}
 		ORDER BY INSERTDATE DESC
+	</select>
+	
+	<select id="selectOneAlarm" resultType="avo" parameterType="avo">
+		SELECT  
+				 A.ANO 			AS ANO				
+				,A.RECEIVER		AS RECEIVER
+				,A.TYPE			AS TYPE
+			    ,A.INSERTDATE	AS INSERTDATE
+			    ,A.READYN		AS READYN
+			    ,B.MNICK 		AS MNICK
+		FROM ALARM A, MEMBER B
+		WHERE A.RECEIVER = B.MNO
+		AND A.ANO = #{ano, jdbcType=VARCHAR}
 	</select>
 	
 	

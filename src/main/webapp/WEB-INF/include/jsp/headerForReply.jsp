@@ -154,58 +154,6 @@ div, h1, h2, h3, h4, h5, h6, p {
 </head>
 <body>
 
-	<!-- web socket 부분 -->
-	<script>
-		// 전역변수 설정
-		var socket = null;
-		$(document).ready(function() {
-		});
-
-		// 웹소켓 연결
-		sock = new SockJS("<c:url value="/echo"/>");
-		socket = sock;
-		console.log("웹소켓 연결");
-		//웹소켓 서버에서 메세지를 보내면 자동으로 실행된다
-		socket.onmessage = onMessage;
-		var mid = "<%=mid%>";
-		console.log("mid >> " + mid);
-
-		var count = 0;//로그아웃시 왔던 메세지 개수
-		
-		function onMessage(evt) {//evt파라미터는 웹소켓이 보내준 데이터 의미
-			var toast = '';
-			console.log("서버로부터 메세지 받음");
-			var arriveTime = new Date();
-			var data = evt.data;
-			var dataArr = data.split(",");
-			console.log("dataArr[2]>> " + dataArr[2]);
-			//type이 count이면 
-			if (dataArr[2].substring(0, 5) == 'count') {
-				count = dataArr[2].substring(5, 6);
-				$("#msgCount").text(count);
-				console.log("count >> " + count);
-				var alert = '<div class="alert alert-primary" role="alert">미확인 알람이 있습니다!</div>';
-				$("#socketAlarm").append(alert);
-
-			} else {
-				toast += '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">';
-				toast += '<div class="toast-header"><class="rounded me-2">';
-				toast += '<strong class="me-auto">알림</strong>';
-				toast += '<small class="sub"></small>';
-				toast += '<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
-				toast += '</div><div class="toast-body">';
-				toast += dataArr[2];
-				toast += '</div></div>';
-				$("#socketAlarm").append(toast);
-				$(".toast").toast({
-					"animation" : true,
-					"autohide" : false
-				});
-				$('.toast').toast('show');
-
-			}
-		}
-	</script>
 	<script>
 		function sendLogout() {
 			socket.close();
