@@ -94,7 +94,6 @@
 				methods : {
 					hitPlus: function(){
 							var hitStatus = $("#favRecipeUser").val();
-							alert(hitStatus);
 							if (hitStatus == '추천하기'){
 								this.hitsPoint = parseInt(this.hitsPoint) + parseInt(this.plus);
 							}else{

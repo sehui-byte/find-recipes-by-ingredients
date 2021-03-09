@@ -20,7 +20,9 @@ public class MemberSecurityServiceImpl implements UserDetailsService {
 
 	private MemberDAO memberdao;
 
-	public MemberSecurityServiceImpl() {}
+	public MemberSecurityServiceImpl() {
+		
+	}
 	
 	@Autowired(required = false)
 	public MemberSecurityServiceImpl(MemberDAO memberdao) {

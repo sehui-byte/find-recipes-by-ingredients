@@ -127,7 +127,7 @@
 		   새로운 요리에 도전해 보세요!</p>
 		<hr>  
 		<div class="section-header">월별 구독자 증가수</div>
-		<img src="http://54.180.83.249:5000/static/subscribeInc/<%= mno %>_subscribeInc.png">
+		<img src="http://54.180.83.249:5000/static/subscribeInc/<%= mno %>_subscribeInc.png" width="950px" height="500px">
 	</div>
 <% 
 	}else{

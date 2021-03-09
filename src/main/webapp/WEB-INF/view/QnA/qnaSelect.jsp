@@ -4,7 +4,9 @@
 <%@ page import="java.util.List" %>
 <%@page import="com.jns.common.FileLoadUtil"%>
 <%@page import="com.jns.common.Validation"%>
+<%-- 
 <%@ include file="/WEB-INF/include/jsp/jspinclude.jsp"%>
+--%>
 <%@ include file="/WEB-INF/include/jsp/header.jsp" %>
 <!DOCTYPE html>
 <html>
