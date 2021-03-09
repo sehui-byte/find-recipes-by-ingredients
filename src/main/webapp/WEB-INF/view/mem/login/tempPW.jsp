@@ -18,7 +18,6 @@
 
 	$(document).ready(function(){
 		$("#TempPW").click(function(){
-			alert("TempPW 클릭");
 
 			if(!chkSubmit($("#mid"), "아이디를 ")){
 				return;

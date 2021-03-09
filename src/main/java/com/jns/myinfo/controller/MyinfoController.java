@@ -219,7 +219,7 @@ public class MyinfoController {
 		// 변경할 비밀번호
 		logger.info("mid >>> :" + mvo.getMid());
 		logger.info("mpw >>> :" + mvo.getMpw());
-		logger.info(nMpw);
+		logger.info("변경할 비밀번호"+nMpw);
 
 		MemberVO _mvo = null;
 		_mvo = new MemberVO();

@@ -18,7 +18,6 @@
 
 	$(document).ready(function(){
 		$("#findID").click(function(){
-			alert("findID 클릭");
 
 			if(!chkSubmit($("#mname"), "이름을 ")){
 				return;
