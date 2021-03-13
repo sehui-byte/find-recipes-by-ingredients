@@ -223,7 +223,7 @@
 		</div>
 	</div>
 </div>
-<div class="section-header">내 즐겨찾기 레시피 - USER</div>
+<div class="section-header">내 추천 레시피 - USER</div>
 <form id="myFavRecipeBoardList" name="myFavRecipeBoardList" >
 	<!-- 검색창 그리드 시작 -->
 	<div class="container-fluid">
@@ -303,7 +303,7 @@
 	}
 %>
 	</table>
-	<input type="button" class="btn btn-orange" name="deleteMyFavRecipeBoard" id="deleteMyFavRecipeBoard" value="즐겨찾기 삭제">
+	<input type="button" class="btn btn-orange" name="deleteMyFavRecipeBoard" id="deleteMyFavRecipeBoard" value="추천 삭제">
 	<br>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 	<input type="hidden" id="recipeType" name="recipeType" value="user">

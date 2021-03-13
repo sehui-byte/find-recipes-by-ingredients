@@ -147,13 +147,13 @@
           <li class="nav-item">
             <a class="nav-link" href="/kosmoJns/myinfo/myFavRecipeList?mno=<%= mno %>">
               <i class="bi bi-cursor"></i>
-              내 즐겨찾기(레시피)
+              내 추천(레시피)
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/kosmoJns/myinfo/myFavReciepBoardList?mno=<%=mno%>">
               <i class="bi bi-cursor-fill"></i>
-              내 즐겨찾기(유저)
+              내 추천(유저)
             </a>
           </li>
         </ul>		
