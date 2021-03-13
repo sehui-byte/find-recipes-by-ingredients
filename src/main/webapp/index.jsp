@@ -179,7 +179,7 @@ hr{
 	      <div class="col-md-5">
       		<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" 
       			 src="/kosmoJns/resources/img/whisk.png" 
-      			 alt="toRecipeBoard" id="toRecipeBoard">
+      			 alt="toRecipeBoard" id="toRecipeBoard" style="cursor:pointer;">
 	      </div>
 	    </div>
 	
@@ -193,7 +193,7 @@ hr{
 	      <div class="col-md-5 order-md-1">
 			<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" 
       			 src="/kosmoJns/resources/img/trophy.png" 
-      			 alt="toChefBoard" id="toChefBoard">
+      			 alt="toChefBoard" id="toChefBoard" style="cursor:pointer;">
 	      </div>
 	    </div>
 	
@@ -207,7 +207,7 @@ hr{
 	      <div class="col-md-5">
 			<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" 
       			 src="/kosmoJns/resources/img/harvest.png" 
-      			 alt="toProduct" id="toProduct">
+      			 alt="toProduct" id="toProduct" style="cursor:pointer;">
 	      </div>
 	    </div>
 	
@@ -360,9 +360,9 @@ hr{
 					for(var i = 0; i<3; i++){
 						html += "<tr onclick=\"location.href='noticeSelect.do?bno=" + isEmpty(data[i].nbno) + "'\">";
 						//html += '<td style=\"font-size: 12px\">' + isEmpty(data[i].nbno) + '</td>';
-						html += '<td>' + isEmpty(data[i].ntitle) +  '</td>';
-						html += '<td>' + isEmpty(data[i].ncontent) + '</td>';
-						html += '<td>' + isEmpty(data[i].ninsertdate) + '</td>';
+						html += '<td style="cursor:pointer;">' + isEmpty(data[i].ntitle) +  '</td>';
+						html += '<td style="cursor:pointer;">' + isEmpty(data[i].ncontent) + '</td>';
+						html += '<td style="cursor:pointer;">' + isEmpty(data[i].ninsertdate) + '</td>';
 						html += '</tr>';
 					}
 					html+="</tbody>";

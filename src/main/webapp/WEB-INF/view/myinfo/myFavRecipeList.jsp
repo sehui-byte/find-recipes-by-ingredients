@@ -223,7 +223,7 @@
 	})	
 
 </script>
-<div class="section-header">내 즐겨찾기 레시피 - 식약처 API</div>
+<div class="section-header">내 추천 레시피 - 식약처 API</div>
 <form id="myFavRecipeList" name="myFavRecipeList" >
 	<!-- 검색창 그리드 시작 -->
 	<div class="container-fluid">
@@ -304,7 +304,7 @@
 %>
 		</tbody>
 	</table>
-	<input type="button" class="btn btn-orange" name="deleteMyFavRecipeAPI" id="deleteMyFavRecipeAPI" value="즐겨찾기 삭제">
+	<input type="button" class="btn btn-orange" name="deleteMyFavRecipeAPI" id="deleteMyFavRecipeAPI" value="추천 삭제">
 	<br>
 	<input type="hidden" id="mno" name="mno" value="<%= mno %>">
 	<input type="hidden" id="recipeType" name="recipeType" value="API">

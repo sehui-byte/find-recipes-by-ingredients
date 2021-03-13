@@ -221,7 +221,7 @@ div, h1, h2, h3, h4, h5, h6, p {
 									href="/kosmoJns/myinfo/myRecipeListPage?mno=<%=mno%>">나의
 									레시피</a> <a class="dropdown-item"
 									href="/kosmoJns/myinfo/myFavRecipeList?mno=<%=mno%>">내
-									즐겨찾기 레시피</a> <a class="dropdown-item"
+									추천 레시피</a> <a class="dropdown-item"
 									href="/kosmoJns/myinfo/myQnAList?mno=<%=mno%>">나의 Q&A</a> <a
 									class="dropdown-item" href="/kosmoJns/likeProduct.do">나의
 									관심상품</a>
