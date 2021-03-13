@@ -114,7 +114,7 @@
 					)
 				VALUES(
 					 #{mno, jdbcType=VARCHAR}        
-					,#{mlevel, jdbcType=VARCHAR}        
+					,'U'        
 					,#{mid, jdbcType=VARCHAR}        
 					,#{mpw, jdbcType=VARCHAR}        
 					,#{mname, jdbcType=VARCHAR}       
