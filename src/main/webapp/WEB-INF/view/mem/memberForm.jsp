@@ -127,6 +127,7 @@ i {
 		<h2>Registration</h2>
 		<form class="form-horizontal" role="form" id="memberForm"
 			class="memberForm" name="memberForm">
+			<%-- 
 			<div class="form-group">
 				<label for="level" class="col-sm-3 control-label">등급*</label>
 				<div class="col-sm-9">
@@ -137,6 +138,7 @@ i {
 					</select>
 				</div>
 			</div>
+			--%>
 			<!-- 아이디 -->
 			<div class="form-group">
 				<label for="id" class="col-sm-3 control-label">아이디*</label>
@@ -422,9 +424,11 @@ i {
 				},
 			//유효성검사규칙
 				rules : {
+					/*
 					mlevel : {
 						required : true
 					},
+					*/
 					mname : {
 						required : true
 					},
@@ -463,7 +467,7 @@ i {
 				},
 				//규칙실패시 출력되는 메세지
 				messages : {
-					name : {
+					mname : {
 						required : "이름을 입력해주세요."
 					},
 					mpw2 : {
