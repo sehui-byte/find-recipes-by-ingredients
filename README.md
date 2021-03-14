@@ -5,7 +5,7 @@
 - 프로젝트 기한 : 2021.02.08 ~2021.03.08 (약 4주)
 <img src="https://user-images.githubusercontent.com/64109506/110205423-30582800-7ebb-11eb-8f1b-e535d0b1584f.png" width="200">
   
-### 프로젝트 목표 
+## 프로젝트 목표 
 - spring을 기반으로 한 웹서비스 구현. 
 - 각 조원 모두가 스프링 기본 구조에 대해 이해하고 게시판 ISUD를 구현할 수 있도록 한다.
 - spring websocket, spring security를 이용하여 보다 확장된 spring 기능에 대해 공부할 수 있도록 한다.
@@ -26,7 +26,7 @@
 
 
    
-### 역할분담
+## 역할분담
 - 김세희(조장) : 개발환경구축(git, maven), 네이버 open api를 활용한 식재료 상품검색 기능, 관심상품 등록 및 삭제 기능, 스프링 웹소켓을 이용한 실시간 알림 기능, 화면설계 구현
 - 김정우(부조장) : 개발환경구축(linux, ubuntu, flask), DBA, Database 설계 및 구축, Spring Security를 활용한 관리자 페이지 및 로그인 기능 구현
 - 김예빈 : 자바스크립트 쿠키를 활용한 식재료 최근 검색어 기능, 식재료 최근 본 상품 기능, 파이썬 크롤링을 이용한 관심상품 최저가 비교 및 최저가 비교 팝업창 기능 구현
@@ -37,12 +37,12 @@
 
 ------
 
-### 개발일정
+## 개발일정
 ![image](https://user-images.githubusercontent.com/64109506/111066643-63299e00-8503-11eb-8da2-7d3ba6663537.png)
   
 
 
-### ERD
+## ERD
 ![image](https://user-images.githubusercontent.com/64109506/111067113-ee0b9800-8505-11eb-97d8-3b8ebad5a65b.png)
 
 
