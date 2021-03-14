@@ -45,6 +45,12 @@
 ## ERD
 ![image](https://user-images.githubusercontent.com/64109506/111067113-ee0b9800-8505-11eb-97d8-3b8ebad5a65b.png)
 
+## 시스템 아키텍처
+![image](https://user-images.githubusercontent.com/64109506/111067256-cf59d100-8506-11eb-80da-ab310c38c148.png)
+
+## 사이트 맵
+![image](https://user-images.githubusercontent.com/64109506/111067276-e00a4700-8506-11eb-8c13-79174faa05cc.png)
+
 
 ----------------
 
