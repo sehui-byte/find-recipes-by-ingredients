@@ -5,7 +5,7 @@
 - 프로젝트 기한 : 2021.02.08 ~2021.03.08 (약 4주)
 <img src="https://user-images.githubusercontent.com/64109506/110205423-30582800-7ebb-11eb-8f1b-e535d0b1584f.png" width="200">
   
-#### 프로젝트 목표 
+### 프로젝트 목표 
 - spring을 기반으로 한 웹서비스 구현. 
 - 각 조원 모두가 스프링 기본 구조에 대해 이해하고 게시판 ISUD를 구현할 수 있도록 한다.
 - spring websocket, spring security를 이용하여 보다 확장된 spring 기능에 대해 공부할 수 있도록 한다.
